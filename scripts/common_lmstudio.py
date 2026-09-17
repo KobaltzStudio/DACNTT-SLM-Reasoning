@@ -5,7 +5,7 @@ LM_STUDIO_BASE_URL = "http://localhost:1234/v1"
 CHAT_ENDPOINT = f"{LM_STUDIO_BASE_URL}/chat/completions"
 
 TEACHER_MODEL = "qwen2.5-3b-instruct"
-STUDENT_MODEL = "qwen2.5-0.5b-instruct"
+STUDENT_MODEL = "qwen2.5-1.5b-instruct"
 
 
 def chat(

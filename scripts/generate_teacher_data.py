@@ -17,7 +17,7 @@ MODEL = "qwen2.5-3b-instruct"
 DATASET_NAME = "openai/gsm8k"
 DATASET_CONFIG = "main"
 
-NUM_SAMPLES = 20
+NUM_SAMPLES = 100
 
 OUTPUT_FILE = Path(
     "outputs/teacher_gsm8k_smoke_test.jsonl"
