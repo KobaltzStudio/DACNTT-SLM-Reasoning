@@ -1,0 +1,62 @@
+{
+  "graph_id": "example_student_ckpt_000",
+  "student_checkpoint": "ckpt_000",
+  "nodes": [
+    {
+      "node_id": "addition",
+      "capability": "addition",
+      "mastery": 0.80,
+      "deficit": 0.20
+    },
+    {
+      "node_id": "subtraction",
+      "capability": "subtraction",
+      "mastery": 0.65,
+      "deficit": 0.35
+    },
+    {
+      "node_id": "multiplication",
+      "capability": "multiplication",
+      "mastery": 0.42,
+      "deficit": 0.58
+    },
+    {
+      "node_id": "division",
+      "capability": "division",
+      "mastery": 0.35,
+      "deficit": 0.65
+    },
+    {
+      "node_id": "fraction",
+      "capability": "fraction",
+      "mastery": 0.25,
+      "deficit": 0.75
+    },
+    {
+      "node_id": "percentage",
+      "capability": "percentage",
+      "mastery": 0.30,
+      "deficit": 0.70
+    }
+  ],
+  "edges": [
+    {
+      "source": "multiplication",
+      "target": "fraction",
+      "type": "transfer",
+      "score": 0.31
+    },
+    {
+      "source": "fraction",
+      "target": "division",
+      "type": "prerequisite",
+      "score": null
+    },
+    {
+      "source": "fraction",
+      "target": "percentage",
+      "type": "transfer",
+      "score": 0.24
+    }
+  ]
+}
