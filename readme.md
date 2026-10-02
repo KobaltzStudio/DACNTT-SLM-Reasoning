@@ -1,299 +1,307 @@
-# Proposal 2 — Dynamic Learnability-Aware Teacher Trajectory Protocol
-
 ## 1. Objective
 
-The protocol studies whether Teacher reasoning trajectories differ in learnability for a Student and whether trajectory learnability changes as the Student evolves.
+Proposal 2 studies whether different Teacher reasoning trajectories have different levels of learnability for a Student and whether trajectory learnability changes as the Student evolves.
 
 The central object is:
 
-L(tau | S_t)
+$$
+L(\tau \mid S_t)
+$$
 
 where:
 
-- tau is a Teacher reasoning trajectory
-- S_t is the Student at checkpoint t
+- $\tau$ = Teacher reasoning trajectory
+- $S_t$ = Student checkpoint
 
-The core research question is:
+Learnability is therefore conditioned on the current Student state.
 
-> Does the learnability of the same Teacher reasoning trajectory change as the Student acquires new reasoning capabilities?
+The protocol does not assume:
 
-The protocol therefore treats learnability as a Student-dependent property rather than an intrinsic and permanently fixed property of a trajectory.
+- longer trajectory = better trajectory
+- higher-quality trajectory = more learnable trajectory
 
-The protocol has four main goals:
+The objective is to determine experimentally whether trajectory characteristics interact with Student state.
 
-1. Generate multiple valid reasoning trajectories for the same problem.
-2. Characterize the structural and capability-level differences among trajectories.
-3. Estimate how learnable each trajectory is for the current Student state.
-4. Re-estimate trajectory learnability as the Student evolves and use the updated estimates for dynamic trajectory selection.
+Proposal 2 is designed to complement Proposal 1.
 
-The protocol does not assume that longer, more detailed, or otherwise higher-quality trajectories are necessarily more learnable for the Student.
+Proposal 1 characterizes the Student's learning state through:
 
-The central experimental hypothesis is:
+- capability mastery
+- capability dependencies
+- prerequisite relationships
+- transfer between capabilities
+- capability-level learning dynamics
+- bottleneck capability identification
 
-L(tau | S_t) != L(tau | S_{t+1})
+Proposal 2 uses this evolving Student state to study which Teacher trajectories are learnable at different stages of Student training.
 
-for at least a meaningful subset of trajectories under controlled experimental conditions.
+The core research question is therefore:
 
-A null result is also valid. If trajectory learnability remains approximately stable across Student checkpoints, the dynamic learnability hypothesis is not supported under the experimental setting.
+> Given the same Student model and the same Teacher-generated trajectory pool, does the learnability of a trajectory depend on the current Student checkpoint?
 
+The experiment must distinguish between:
 
-## 2. Research Scope and Conceptual Framework
-
-Proposal 2 focuses on the relationship between:
-
-- Teacher reasoning trajectories
-- Student capability state
+- trajectory validity
+- trajectory quality
 - trajectory learnability
-- trajectory selection
-- Student evolution
+- empirical learning gain
+- Student capability state
 
-The conceptual process is:
+A trajectory being correct or high-quality does not by itself imply that it is learnable for the current Student.
 
-Teacher
-    |
-    v
-Generate multiple trajectories
-    |
-    v
-Verify trajectories
-    |
-    v
-Candidate trajectory pool
-    |
-    v
-Estimate learnability for S_t
-    |
-    v
-Select trajectories
-    |
-    v
-Train Student
-    |
-    v
-S_{t+1}
-    |
-    v
-Re-estimate learnability
-    |
-    +--------------------+
-    |                    |
-    +---- next round ----+
+---
 
-The same candidate trajectory may therefore have different learnability values at different Student checkpoints.
-
-For example:
-
-L(tau | S_0) = 0.21
-L(tau | S_1) = 0.47
-L(tau | S_2) = 0.73
-
-These values are illustrative only.
-
-The protocol does not assume that the trajectory becomes progressively easier to learn. Other possible behaviors include:
-
-- increasing learnability
-- decreasing learnability
-- approximately stable learnability
-- non-monotonic learnability
-
-The experiment determines which behavior is observed.
-
-
-## 3. Teacher and Student
-
-### 3.1 Teacher
+## 2. Teacher and Student
 
 Teacher:
 
-Qwen2.5-3B-Instruct
-
-The Teacher is used to generate reasoning trajectories for problems in the candidate trajectory pool.
-
-For each problem, multiple candidate trajectories are generated rather than relying on a single Teacher output.
-
-The Teacher trajectory is treated as a candidate reasoning artifact that must pass verification before it can be considered for Student training.
-
-The protocol does not assume that every Teacher-generated trajectory is valid.
-
-### 3.2 Student
+`Qwen2.5-3B-Instruct`
 
 Student:
 
-Qwen2.5-1.5B-Instruct
+`Qwen2.5-1.5B-Instruct`
 
-The Student is the model whose learning behavior is investigated.
+The Teacher receives a problem and generates multiple candidate reasoning trajectories for that problem.
+
+The Student is evaluated at explicit checkpoints during controlled training.
+
+The checkpoint must be recorded because the same Teacher trajectory may have different learnability depending on the current Student state.
+
+The same trajectory may therefore be evaluated under:
+
+$$
+L(\tau \mid S_0)
+$$
+
+$$
+L(\tau \mid S_1)
+$$
+
+$$
+L(\tau \mid S_2)
+$$
+
+The Student state is determined by the controlled training schedule defined later in the protocol.
 
 The initial Student state is:
 
-S_0
+$$
+S_0 = \text{Qwen2.5-1.5B-Instruct}
+$$
 
-where S_0 is the untuned Student before the Proposal 2 training procedure begins.
+before Student fine-tuning.
 
-The Student evolves through repeated training rounds:
+Subsequent Student states are produced by training on selected Teacher trajectories:
 
-S_0 -> S_1 -> S_2 -> ... -> S_M
+$$
+S_{t+1} = \text{Train}(S_t, B_t)
+$$
 
-Each Student state represents a distinct training checkpoint.
+where $B_t$ is the trajectory set selected at training round $t$.
 
-### 3.3 Student-Dependent Learnability
+The Teacher remains fixed for the corresponding experiment unless a separate experimental condition explicitly specifies otherwise.
 
-The same trajectory may have different learnability values for different Student states.
+---
 
-Therefore:
+## 3. Relationship to Proposal 1
 
-L(tau | S_0)
+Proposal 1 and Proposal 2 study different but connected aspects of Student learning.
 
-does not imply:
+Proposal 1 focuses on the Student-side learning state:
 
-L(tau | S_1)
+- capability mastery
+- capability dependency
+- prerequisite relationships
+- transfer between capabilities
+- capability-level learning dynamics
+- identification of bottleneck capabilities
 
-and the two values must be independently estimated or derived according to the frozen learnability protocol.
+Proposal 2 focuses on the Teacher-trajectory side:
 
-This conditioning is essential to the dynamic learnability hypothesis.
+- Teacher reasoning trajectories
+- trajectory properties
+- trajectory validity
+- trajectory quality
+- Student-dependent trajectory learnability
+- changes in trajectory learnability across Student checkpoints
+- dynamic trajectory selection
 
+The two proposals therefore operate at different levels of the same learning process.
+
+Conceptually:
+
+```text
+Proposal 1
+    |
+    | Student capability state
+    | mastery / dependency / transfer
+    v
+Current Student state S_t
+    |
+    v
+Proposal 2
+    |
+    | Evaluate candidate Teacher trajectories
+    | conditioned on S_t
+    v
+L(tau | S_t)
+    |
+    v
+Trajectory selection
+    |
+    v
+Student training
+    |
+    v
+New Student state S_(t+1)
+    |
+    +--------------------+
+    |                    |
+    v                    |
+Proposal 1              |
+re-evaluates             |
+capability state         |
+    |                    |
+    +--------------------+
+```
+
+Proposal 1 can therefore provide information about which capabilities are currently weak or represent bottlenecks for the Student.
+
+Proposal 2 can use the current Student state as a conditioning variable when evaluating Teacher trajectories.
+
+In the integrated setting:
+
+$$
+\text{Student capability state}
+\rightarrow
+\text{trajectory learnability}
+\rightarrow
+\text{trajectory selection}
+\rightarrow
+\text{Student training}
+\rightarrow
+\text{new capability state}
+$$
+
+The two proposals must nevertheless be evaluated according to their respective experimental objectives.
+
+Proposal 1 asks questions about capability-level learning and transfer.
+
+Proposal 2 asks questions about trajectory-level learnability and whether that learnability changes with the Student state.
+
+---
 
 ## 4. Candidate Trajectory Pool
 
-For a problem x, the Teacher generates multiple candidate trajectories:
+For a problem $x$, the Teacher generates multiple candidate reasoning trajectories:
 
+$$
 x
- |
- +-- trajectory 1
- +-- trajectory 2
- +-- trajectory 3
- +-- trajectory 4
- +-- trajectory K
+\rightarrow
+\{\tau_1,\tau_2,\ldots,\tau_K\}
+$$
 
-The candidate trajectory pool is denoted by:
+Conceptually:
 
-P = {tau_1, tau_2, ..., tau_N}
+```text
+Problem x
+    |
+    +-- trajectory 1
+    +-- trajectory 2
+    +-- trajectory 3
+    +-- trajectory 4
+    +-- ...
+    +-- trajectory K
+```
 
-where each trajectory is associated with a problem and Teacher generation metadata.
+The purpose of generating multiple trajectories for the same problem is to expose variation in reasoning behavior while keeping the underlying problem fixed.
 
-The purpose of generating multiple trajectories for the same problem is to expose meaningful variation in reasoning behavior.
-
-Relevant trajectory variation includes:
+Relevant trajectory properties include:
 
 - reasoning length
 - number of reasoning steps
 - token length
 - reasoning structure
-- capability composition
 - abstraction level
+- capability composition
 - solution style
+- intermediate reasoning organization
 
-The exact number of generated trajectories per problem is an experimental hyperparameter.
+Two trajectories generated for the same problem may therefore differ in their reasoning characteristics and capability composition.
 
-The current generation configuration uses:
+The capability labels describe the capabilities actually used in the trajectory:
 
-K = 5
+$$
+C(\tau)
+$$
 
-with the generation budget and configuration recorded explicitly in the experiment configuration.
+rather than only the capabilities that the problem itself may admit:
 
-The pool is constructed before dynamic selection.
+$$
+C(q)
+$$
 
-The pool must not be silently changed between checkpoints because changing the candidate population can confound the measurement of learnability dynamics.
+Consequently, two trajectories generated for the same problem may receive different capability labels.
 
-Unless explicitly specified by an experiment, the candidate pool P remains fixed across Student checkpoints:
+The exact number of generated trajectories $K$ is an experimental hyperparameter and must be recorded in the experiment configuration.
 
-P(S_0) = P(S_1) = ... = P(S_M)
+Only trajectories that pass the verification procedure defined later in the protocol are eligible for the Student training candidate pool.
 
-Only the estimated learnability of trajectories changes with the Student state.
+Invalid trajectories may still be retained in generation logs for reproducibility and failure analysis.
 
-Invalid trajectories are excluded from the eligible training pool but should remain in generation logs when practical for reproducibility and failure analysis.
+---
 
+## 4.1 Trajectory Object
 
-### 4.1 Trajectory-Level Capability Representation
+Each trajectory must have a unique trajectory identifier and must contain sufficient information to reproduce and analyze its origin and properties.
 
-Each trajectory is associated with a capability set:
+The minimum trajectory object contains:
 
-C(tau)
-
-where the labels represent capabilities actually used in the reasoning trace.
-
-The frozen capability taxonomy is:
-
-- addition
-- subtraction
-- multiplication
-- division
-- percentage
-- fraction
-- ratio
-
-Capability labels are assigned at the trajectory level rather than inferred only from the original problem.
-
-Therefore, for two trajectories tau_1 and tau_2 generated for the same problem:
-
-C(tau_1) != C(tau_2)
-
-is allowed.
-
-This distinction is important because different reasoning trajectories for the same problem may use different intermediate operations or reasoning capabilities.
-
-Capability labeling follows the frozen manual annotation guideline and taxonomy used in the manual phase.
-
-
-### 4.2 Trajectory Identity
-
-Every trajectory must have a unique trajectory_id.
-
-A trajectory identity must remain stable across all Student checkpoints.
-
-For example:
-
-gsm8k_train_00000_traj_001
-
-The same trajectory_id refers to the same Teacher-generated reasoning trace when its learnability is evaluated at different checkpoints.
-
-Checkpoint-specific information is recorded separately.
-
-Therefore:
-
-trajectory_id
-
-identifies the reasoning artifact, while:
-
-checkpoint
-
-identifies the Student state under which that artifact is evaluated.
-
-This separation is required to measure:
-
-L(tau | S_0)
-
-versus:
-
-L(tau | S_1)
-
-for the same tau.
-
-
-### 4.3 Candidate Pool Immutability
-
-The candidate pool should be frozen before the Student training experiment.
-
-The following properties should remain fixed:
-
-- problem membership
-- trajectory membership
-- trajectory_id
-- Teacher model
-- generation configuration
-- verification status
-- capability labels
+- `problem_id`
+- `teacher_model`
+- `trajectory_id`
+- `checkpoint`
+- `reasoning_trace`
+- `answer`
+- `capabilities`
 - trajectory metadata
 
-Student-dependent quantities such as:
+Example:
 
-- L_proxy(tau | S_t)
-- selection score
-- selected/not-selected status
-- checkpoint-specific ranking
+```json
+{
+  "problem_id": "gsm8k_train_00000",
+  "teacher_model": "Qwen2.5-3B-Instruct",
+  "trajectory_id": "gsm8k_train_00000_traj_001",
+  "checkpoint": "student_ckpt_000",
+  "reasoning_trace": "...",
+  "answer": "16",
+  "capabilities": [
+    "multiplication",
+    "division",
+    "fraction"
+  ],
+  "metadata": {
+    "num_steps": 5,
+    "token_length": 87
+  }
+}
+```
 
-may change across checkpoints.
+The `checkpoint` field identifies the Student state under which the trajectory is evaluated or selected.
 
-This distinction separates static trajectory properties from dynamic Student-dependent measurements.
+A trajectory generated once may therefore have multiple learnability measurements across Student checkpoints without changing its underlying trajectory:
+
+$$
+\tau
+\rightarrow
+\{L(\tau \mid S_0),L(\tau \mid S_1),L(\tau \mid S_2),\ldots\}
+$$
+
+This distinction is important because the trajectory itself does not change when the Student checkpoint changes; the measured learnability is conditioned on the Student state.
+
+The trajectory pool therefore represents the available Teacher reasoning data, while the Student checkpoint determines the state under which its learnability is evaluated.
+
 ## 5. Checkpoint Conditioning
 
 The Student checkpoint must be explicitly recorded.
