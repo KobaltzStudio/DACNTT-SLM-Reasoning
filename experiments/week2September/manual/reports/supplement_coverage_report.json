@@ -1,0 +1,55 @@
+{
+  "schema_version": "v1",
+  "task": "README Task 4 section 4.2 - supplement ratio/percentage/fraction",
+  "created": "2026-10-12",
+  "file": "data/supplement/supplement_annotations.jsonl",
+  "validation": {
+    "script": "scripts/validate_annotation.py",
+    "result": [
+      "VALID: data/supplement/supplement_annotations.jsonl",
+      "Records validated: 85"
+    ]
+  },
+  "supplement_problems": 85,
+  "unique_problem_ids": true,
+  "annotator_ids": {
+    "A1": 85
+  },
+  "overlap_with_batch_100": 0,
+  "overlap_with_pilot_30": 0,
+  "positive_counts": {
+    "batch_100": {
+      "addition": 51,
+      "subtraction": 51,
+      "multiplication": 71,
+      "division": 47,
+      "percentage": 12,
+      "fraction": 18,
+      "ratio": 0
+    },
+    "supplement": {
+      "addition": 27,
+      "subtraction": 55,
+      "multiplication": 84,
+      "division": 48,
+      "percentage": 29,
+      "fraction": 31,
+      "ratio": 30
+    },
+    "batch_100_plus_supplement": {
+      "addition": 78,
+      "subtraction": 106,
+      "multiplication": 155,
+      "division": 95,
+      "percentage": 41,
+      "fraction": 49,
+      "ratio": 30
+    }
+  },
+  "readme_expected": {
+    "ratio_gt_0": true,
+    "percentage_gt_12": true,
+    "fraction_gt_18": true
+  },
+  "note": "Counts are problems with the capability in capabilities_manual (same definition as batch_100). Overlap with frozen splits must be re-checked in Task 5."
+}
