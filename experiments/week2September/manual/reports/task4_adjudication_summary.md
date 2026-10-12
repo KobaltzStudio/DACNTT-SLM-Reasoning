@@ -1,5 +1,7 @@
 # Task 4 — Adjudication, độ tin cậy nhãn, kết luận gold/rules
 
+> **Cập nhật 2026-10-12 (lần 2):** D1–D3 đã chốt, rules v2 (A+B) đã duyệt, gold v2 đã tạo và extractor đã chạy lại. Các mục 2, 3, 5 bên dưới là trạng thái *trước* khi chốt. Trạng thái hiện tại và lý do: `../task4_decisions.md`; số liệu: `task4_reruns/metrics_summary.csv`.
+
 Ngày: 2026-10-12. Làm theo README.txt mục 3 (Bước 4.1–4.9) và mục 4 (4.1–4.3).
 Phạm vi: 480 trajectory hợp lệ của batch_100, gold cấp problem.
 

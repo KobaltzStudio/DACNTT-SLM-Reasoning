@@ -1,6 +1,38 @@
 CHANGELOG — experiments/week2September/manual
 ================================================
 
+[2026-10-12, lần 2] Task 4 — chốt D1–D3, gold v2, rules v2, chạy lại extractor
+Quyết định và lý do: task4_decisions.md. Việc còn lại: task4_todo.txt (chỉ còn A2, BLOCKED).
+
+A. FILE MỚI
+- config/guideline_v3.md: v2 + mục "Changes from v2". D1: phân số của N chỉ là fraction; Rule 2 Division
+  liệt kê 5 trường hợp cần chia; sửa calibration case 00004 (mâu thuẫn với 00006); mục 15 gold cấp bài (D2/D3).
+- data/batch_100/batch_100_annotations_v2.jsonl: bỏ division ở 00000, 00004, 00059, 00066, 00074.
+  validate_annotation.py -> VALID 100.
+- reports/error_analysis/gold_change_log.csv: 5 dòng audit.
+- config/capability_rules_v2.json: đề xuất part A+B đã duyệt (chỉ khác schema_version và notes).
+- scripts/test_capability_rules_v2.py: PASS 44.
+- reports/task4_reruns/{rulesv1_goldv1,rulesv1_goldv2,rulesv2_goldv1,rulesv2_goldv2}/: predictions + report.
+  metrics_summary.csv, SHA256SUMS.txt (20 file OK).
+  rulesv1_goldv1 giống baseline từng byte (JSON, predictions); CSV chỉ khác ký tự xuống dòng.
+  Division chính thức (rules v2 + gold v2): P 0.7950 R 0.9744 F1 0.8756, TP/FP/FN 190/49/5.
+- task4_decisions.md, task4_todo.txt.
+
+B. FILE ĐÃ SỬA
+- reports/error_analysis/manual_adjudication.csv: 7 dòng needs_discussion -> reviewed / KEEP_GOLD
+  (00006, 00041, 00049, 00072 -> FALSE_LEXICAL_TRIGGER; 00071, 00089, 00097 giữ DEFINITION_AMBIGUITY).
+  validate_manual_adjudication.py -> 34 reviewed, PASS.
+- scripts/run_task4_extractor_batch100.py: thêm --rules, --tag (output vào reports/task4_reruns/<tag>/).
+  Không truyền tham số mới thì chạy như cũ.
+- reports/error_analysis/baseline_backup/SHA256SUMS_ambiguous_cases.txt: trỏ sang ambiguous_cases_before.jsonl.
+- README.txt: trạng thái Task 4, mục 1 dòng manual_adjudication.csv, checklist 4, 8, 11.
+
+C. KHÔNG SỬA
+- Gold v1, rules v1, guideline v2, baseline reports/predictions, raw pool, pilot A1/A2, đề xuất rule_change_proposal/.
+  sha256sum -c baseline_backup/SHA256SUMS.txt -> 7/7 OK.
+
+----------------------------------------------------------------------
+
 [2026-10-12] Task 4 — Extractor: adjudication, độ tin cậy nhãn, kết luận gold/rules
 Căn cứ: README.txt mục 3 (Bước 4.1–4.9) và mục 4 (4.1–4.3).
 Báo cáo đầy đủ: reports/task4_adjudication_summary.md
