@@ -1,10 +1,10 @@
 # Task 4 — Các quyết định đã đưa ra và lý do
 
-Ngày: 2026-10-12. Người quyết định: Claude (theo yêu cầu "hoàn tất luôn Task 4" của chủ dự án).
+Ngày: 2026-10-12.
 Phạm vi: các việc còn mở trong `task4_todo.txt`. File này ghi **quyết định gì, vì sao, đổi file nào**.
 Mọi quyết định đều có thể đảo ngược: bản cũ (gold v1, rules v1, guideline v2, baseline report) được giữ nguyên.
 
-Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại trong phiên này · [SUY RA] kết luận từ việc đọc đề/trace/guideline.
+Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại từ dữ liệu trong repo · [SUY RA] kết luận từ việc đọc đề/trace/guideline.
 
 ## Tóm tắt
 
@@ -27,7 +27,7 @@ Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại trong phi
    
    Quyết định theo phía đa số nên phải sửa ít gold hơn.
 2. Guideline v2 tự mâu thuẫn [TRÍCH]. Calibration case 00004 ("half", `50 / 2`) cho gán cả fraction và division; case 00006 ("half" của 50) thì không. Hai bài cùng dạng "half of 50". Rule 3 lại viết: *"do not add `division` merely because a fraction could theoretically be represented using division"*. Quyết định này giữ Rule 3 và bỏ ngoại lệ 00004.
-3. Lựa chọn khác là lấy cách viết trong lời giải gốc GSM8K làm chuẩn, tức thấy `N / k` thì gán division. Đây là gợi ý trước đó của tôi, nhưng tôi đã bỏ sau khi rà toàn bộ [TÍNH]. Lời giải gốc dùng ký hiệu tùy tiện: bài 00022 viết `572 x 1/4` và `286/2` cho cùng một loại bước. Nếu theo cách viết, phải sửa 9 gold, trong đó đảo ngược 3 case đã reviewed (00022, 00030, 00063), và nhãn phụ thuộc vào thói quen viết của người soạn GSM8K chứ không phụ thuộc capability.
+3. Lựa chọn khác là lấy cách viết trong lời giải gốc GSM8K làm chuẩn, tức thấy `N / k` thì gán division. Phương án này đã được cân nhắc trước, nhưng bị loại sau khi rà toàn bộ [TÍNH]. Lời giải gốc dùng ký hiệu tùy tiện: bài 00022 viết `572 x 1/4` và `286/2` cho cùng một loại bước. Nếu theo cách viết, phải sửa 9 gold, trong đó đảo ngược 3 case đã reviewed (00022, 00030, 00063), và nhãn phụ thuộc vào thói quen viết của người soạn GSM8K chứ không phụ thuộc capability.
 4. Rule 1 của guideline gán theo capability mà bài **cần**. "Half of 50" cần hiểu phân số. Việc tính bằng `÷ 2` hay `× 0.5` là cách tính, không phải một capability riêng.
 
 **Kiểm tra từng bài gold có division mà đề có từ chỉ phân số hoặc % [SUY RA]:**
@@ -82,7 +82,7 @@ Nhãn adjudication giữ `DEFINITION_AMBIGUITY`: bản chất case là câu hỏ
 
 **Lý do:**
 - Phần A (bỏ `per`, thêm rule cho dạng `210 points / 5 games`, ratio bỏ qua `proportion of`): đúng với 18 case đã adjudicate và không mất TP.
-- Phần B (bỏ `a / b` khi là hệ số nhân, như `2 / 5 times 400`): trước đây tôi đề xuất hoãn vì làm mất TP ở 00000 và 00074. Với quyết định D1, hai bài này không còn division trong gold, nên các "TP bị mất" thực ra là dự đoán đúng. Phần B nay khớp với guideline_v3.
+- Phần B (bỏ `a / b` khi là hệ số nhân, như `2 / 5 times 400`): trước đây được đề xuất hoãn vì làm mất TP ở 00000 và 00074. Với quyết định D1, hai bài này không còn division trong gold, nên các "TP bị mất" thực ra là dự đoán đúng. Phần B nay khớp với guideline_v3.
 
 **Kết quả chạy lại** trên đúng 480 trajectory (`--raw trajectory/pool/batch_100_teacher_raw_recovered_v2.jsonl`) [TÍNH], xem `reports/task4_reruns/metrics_summary.csv`:
 
@@ -105,11 +105,11 @@ Nhãn adjudication giữ `DEFINITION_AMBIGUITY`: bản chất case là câu hỏ
 | Phép tính phân số/% viết bằng `/` (`6 / 4 = 3 / 2`, `20 / 2` cho 50%) | 8 | 00007, 00016, 00067 |
 | Trace đi đường vòng (D3) | 3 | 00071, 00097 |
 
-Nhóm 38 FP không sửa được bằng regex trên trace, vì `50 / 2` trong "half of that is 50 / 2" và trong "split between 2" giống hệt nhau. Muốn xử lý cần đọc thêm ngữ cảnh đề bài, nên tôi để thành hướng cải tiến, không sửa vội trong Task 4.
+Nhóm 38 FP không sửa được bằng regex trên trace, vì `50 / 2` trong "half of that is 50 / 2" và trong "split between 2" giống hệt nhau. Muốn xử lý cần đọc thêm ngữ cảnh đề bài, nên để thành hướng cải tiến, không sửa trong Task 4.
 
 ## A2 — Chưa giải quyết được (BLOCKED)
 
-`pilot_30_annotations_A2.jsonl` trùng A1 30/30 cả danh sách capability (kể cả thứ tự) và difficulty; chỉ khác phần `notes` [TÍNH]. Không thể xác minh A2 có annotate độc lập không nếu không hỏi người làm. Tôi không tự tạo nhãn A2 vì như vậy là giả mạo nhãn người.
+`pilot_30_annotations_A2.jsonl` trùng A1 30/30 cả danh sách capability (kể cả thứ tự) và difficulty; chỉ khác phần `notes` [TÍNH]. Không thể xác minh A2 có annotate độc lập không nếu không hỏi người làm. Không tự tạo nhãn A2 thay người annotate.
 
 Cần làm:
 1. Hỏi người annotate A2.

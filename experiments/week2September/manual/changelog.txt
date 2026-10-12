@@ -1,151 +1,138 @@
 CHANGELOG — experiments/week2September/manual
 ================================================
 
-[2026-10-12, lần 3] Task 4 — rà soát lại D1–D3 và sửa chỗ chưa nhất quán
-Chi tiết: task4_decisions.md mục "Rà soát lần 2".
+Mốc so sánh: commit 3f7dce4 (TrinhNghi, 2026-10-12, "Add trajectory pool with 500 trajectories...")
+trên GitHub, branch origin/v1.4-trajectory-pool.
+Nội dung dưới đây là chênh lệch thực tế giữa 3f7dce4 và bản hiện tại (git diff 3f7dce4 HEAD).
+Kiểm tra: git diff --name-status 3f7dce4 HEAD -- experiments/week2September/manual
 
-- data/supplement/supplement_annotations_v2.jsonl (mới): bỏ division ở 02893 theo D1 (bài duy nhất bị ảnh hưởng
-  trong 85 bài supplement). validate_annotation.py -> VALID 85. Bản cũ giữ nguyên.
-- reports/error_analysis/gold_change_log.csv: thêm dòng 02893 (tổng 6).
-- reports/supplement_coverage_report.json: thêm positive_counts_gold_v2 (division batch 47->42, supplement 48->47).
-- config/guideline_v3.md: cuối Rule 4 thêm định nghĩa "occurs in the reasoning" theo v3; mục 14 ghi chú
-  pilot division 15/30 -> 13/30 theo gold v2.
-- reports/error_analysis/manual_adjudication.csv: 26 rationale "pending approval" -> "approved 2026-10-12".
-- trajectory/pool/README.md: thêm lệnh chạy chính thức Task 4 (rules v2 + gold v2, --raw recovered_v2).
-- task4_decisions.md: thêm mục rà soát lần 2, sửa hướng dẫn đảo ngược D1.
-- reports/task4_reruns/SHA256SUMS.txt: tạo lại.
-Đã kiểm tra: 42/42 bài batch_100 có division thuộc 5 trường hợp cần chia của v3; 00029 và 00090 không mâu thuẫn.
+Phạm vi: Task 4 (README.txt mục 3 và mục 4).
+Trạng thái: DONE, trừ việc xác minh A2 annotate độc lập (BLOCKED, cần người annotate A2).
+Quyết định và lý do: task4_decisions.md. Danh sách việc: task4_todo.txt.
 
-----------------------------------------------------------------------
+======================================================================
+1. KẾT QUẢ CHÍNH
+======================================================================
 
-[2026-10-12, lần 2] Task 4 — chốt D1–D3, gold v2, rules v2, chạy lại extractor
-Quyết định và lý do: task4_decisions.md. Việc còn lại: task4_todo.txt (chỉ còn A2, BLOCKED).
+- Adjudication: 34/34 case reviewed (31 FALSE_LEXICAL_TRIGGER, 3 DEFINITION_AMBIGUITY; 0 pending).
+- D1–D3 chốt trong config/guideline_v3.md:
+  D1: phân số của một đại lượng ("half of N") chỉ là fraction, không gán division.
+  D2: 00089 không gán ratio.
+  D3: gold giữ ở cấp bài; FP do trace đi đường vòng báo cáo riêng.
+- Gold v2: bỏ division ở 6 bài (batch_100: 00000, 00004, 00059, 00066, 00074; supplement: 02893).
+- Rules v2: duyệt đề xuất phần A + B.
+- Extractor chạy lại trên 480 trajectory hợp lệ, division (rules v2 + gold v2):
+  P 0.7950  R 0.9744  F1 0.8756  TP/FP/FN 190/49/5   (baseline: F1 0.7831, 213/113/5).
+  Ratio FP 2 -> 1. 5 capability còn lại không đổi.
 
-A. FILE MỚI
-- config/guideline_v3.md: v2 + mục "Changes from v2". D1: phân số của N chỉ là fraction; Rule 2 Division
-  liệt kê 5 trường hợp cần chia; sửa calibration case 00004 (mâu thuẫn với 00006); mục 15 gold cấp bài (D2/D3).
-- data/batch_100/batch_100_annotations_v2.jsonl: bỏ division ở 00000, 00004, 00059, 00066, 00074.
-  validate_annotation.py -> VALID 100.
-- reports/error_analysis/gold_change_log.csv: 5 dòng audit.
-- config/capability_rules_v2.json: đề xuất part A+B đã duyệt (chỉ khác schema_version và notes).
-- scripts/test_capability_rules_v2.py: PASS 44.
-- reports/task4_reruns/{rulesv1_goldv1,rulesv1_goldv2,rulesv2_goldv1,rulesv2_goldv2}/: predictions + report.
-  metrics_summary.csv, SHA256SUMS.txt (20 file OK).
-  rulesv1_goldv1 giống baseline từng byte (JSON, predictions); CSV chỉ khác ký tự xuống dòng.
-  Division chính thức (rules v2 + gold v2): P 0.7950 R 0.9744 F1 0.8756, TP/FP/FN 190/49/5.
-- task4_decisions.md, task4_todo.txt.
+======================================================================
+2. FILE ĐÃ SỬA (6)
+======================================================================
 
-B. FILE ĐÃ SỬA
-- reports/error_analysis/manual_adjudication.csv: 7 dòng needs_discussion -> reviewed / KEEP_GOLD
-  (00006, 00041, 00049, 00072 -> FALSE_LEXICAL_TRIGGER; 00071, 00089, 00097 giữ DEFINITION_AMBIGUITY).
-  validate_manual_adjudication.py -> 34 reviewed, PASS.
-- scripts/run_task4_extractor_batch100.py: thêm --rules, --tag (output vào reports/task4_reruns/<tag>/).
-  Không truyền tham số mới thì chạy như cũ.
-- reports/error_analysis/baseline_backup/SHA256SUMS_ambiguous_cases.txt: trỏ sang ambiguous_cases_before.jsonl.
-- README.txt: trạng thái Task 4, mục 1 dòng manual_adjudication.csv, checklist 4, 8, 11.
-
-C. KHÔNG SỬA
-- Gold v1, rules v1, guideline v2, baseline reports/predictions, raw pool, pilot A1/A2, đề xuất rule_change_proposal/.
-  sha256sum -c baseline_backup/SHA256SUMS.txt -> 7/7 OK.
-
-----------------------------------------------------------------------
-
-[2026-10-12] Task 4 — Extractor: adjudication, độ tin cậy nhãn, kết luận gold/rules
-Căn cứ: README.txt mục 3 (Bước 4.1–4.9) và mục 4 (4.1–4.3).
-Báo cáo đầy đủ: reports/task4_adjudication_summary.md
-
-Trạng thái cuối: gold KHÔNG đổi, rules v1 KHÔNG đổi, metrics chính thức = baseline.
-Đề xuất sửa rule nằm trong reports/error_analysis/rule_change_proposal/, chờ duyệt.
-
-----------------------------------------------------------------------
-A. FILE ĐÃ SỬA
-----------------------------------------------------------------------
-
-1. reports/error_analysis/manual_adjudication.csv
-   Thay đổi: thêm 34 dòng (trước đó chỉ có header). Giữ nguyên header 10 cột và UTF-8 BOM.
-   Lý do: README Bước 4.5.
-   Kết quả: 27 reviewed, 7 needs_discussion, 0 pending.
-     FALSE_LEXICAL_TRIGGER 27 (PROPOSE_RULE_CHANGE) / DEFINITION_AMBIGUITY 7 (NEEDS_DISCUSSION) /
-     TRUE_CAPABILITY_OMITTED_FROM_GOLD 0.
-   Chỉ dùng 3 giá trị adjudication và 4 giá trị decision của README.
-   Case 00087/ratio kết luận FALSE_LEXICAL_TRIGGER (README gợi ý DEFINITION_AMBIGUITY), vì
-   guideline_v2 Rule 6 (dòng 307) đã đủ rõ; README cho phép cập nhật khi có bằng chứng.
+1. README.txt
+   - Dòng trạng thái Task 4 (mục 0): DONE trừ A2.
+   - Mục 1, file 9 (manual_adjudication.csv): bỏ ghi chú "chỉ có header".
+   - Checklist mục 11: đánh dấu 1–7, 9–11 xong; 8 (A2) BLOCKED.
 
 2. data/issues/ambiguous_cases.jsonl
-   Thay đổi: thêm 4 trường cho cả 5 record: rationale, evidence, verification_source, verified_on.
-   Viết lại final_interpretation của 00073 thành cách hiểu cụ thể (x4 -> 58).
-   Không đổi status, decision, ground_truth_consistent của record nào.
-   Lý do: README 4.3 yêu cầu mỗi record có rationale và evidence, ghi nguồn/cách kiểm tra
-   ground truth (00029, 00056, 00082) và cách hiểu wording cuối cùng (00023, 00073).
-   Nguồn kiểm tra: Hugging Face openai/gsm8k (config main, split train), lấy theo source_index.
-   Kết quả: cả 5 ground truth trùng với nhãn gốc. Riêng 00056: nhãn 50 là lỗi có sẵn trong lời giải
-   tham chiếu của GSM8K (bỏ qua chữ "dozen"), nên giữ nguyên và tiếp tục gắn cờ.
-   Backup: reports/error_analysis/baseline_backup/ambiguous_cases_before.jsonl + SHA256SUMS_ambiguous_cases.txt
-   Kiểm tra: scripts/check_ambiguous_cases.py -> PASS (5 resolved, 0 open).
-   Ghi chú: data/issues/ambiguous_cases_audited.jsonl (bản sao cũ) không bị sửa.
+   - Thêm 4 trường cho cả 5 record: rationale, evidence, verification_source, verified_on.
+   - 00073: viết lại final_interpretation thành cách hiểu cụ thể (x4 -> 58).
+   - Không đổi status, decision, ground_truth_consistent.
+   - Nguồn kiểm tra: Hugging Face openai/gsm8k (main, train), theo source_index. Cả 5 ground truth trùng.
+     00056: nhãn 50 là lỗi có sẵn trong lời giải gốc GSM8K (bỏ qua "dozen"); giữ nguyên và gắn cờ.
 
-----------------------------------------------------------------------
-B. FILE MỚI
-----------------------------------------------------------------------
+3. reports/error_analysis/manual_adjudication.csv
+   - Từ chỉ có header -> 34 dòng. Giữ header 10 cột, UTF-8 BOM, CRLF.
+   - 27 dòng FALSE_LEXICAL_TRIGGER / PROPOSE_RULE_CHANGE (17 'per', 9 phân số/% làm hệ số nhân, 1 'proportion of').
+   - 7 dòng D1–D3 -> KEEP_GOLD / reviewed.
+   - 00087/ratio: FALSE_LEXICAL_TRIGGER (README gợi ý DEFINITION_AMBIGUITY), vì guideline Rule 6 đã đủ rõ.
 
-3. reports/error_analysis/baseline_backup/
-   - batch_100_annotations_before.jsonl, capability_rules_v1_before.json,
-     capability_extractor_batch100_report_before.{csv,json}, batch_100_capability_predictions_before.jsonl
-   - SHA256SUMS.txt (7 file), ambiguous_cases_before.jsonl, SHA256SUMS_ambiguous_cases.txt
-   Lý do: README Bước 4.7 và cảnh báo 3 (phải backup + hash trước khi sửa).
+4. scripts/run_task4_extractor_batch100.py
+   - Thêm --rules (file rules) và --tag (ghi output vào reports/task4_reruns/<tag>/).
+   - Không truyền tham số mới thì chạy như cũ.
 
-4. reports/error_analysis/rule_change_proposal/   (ĐỀ XUẤT — chưa duyệt, chưa áp dụng)
-   - capability_rules_v2_proposed_partA.json: bỏ 'per' khỏi division rule_2; thêm rule_3 cho dạng
-     "số + đơn vị / số"; ratio bỏ qua cụm 'proportion of'. Không phụ thuộc D1.
-   - capability_rules_v2_proposed_partAB.json: phần A + bỏ qua a / b khi là hệ số nhân phân số/%. Liên quan D1.
-   - test_rules_v2_proposed.py: partA PASS 38, partAB PASS 44.
-   Lý do: README định nghĩa PROPOSE_RULE_CHANGE là "đề xuất sửa rule, chưa tự sửa rule";
-   chỉ chạy lại extractor sau khi được duyệt (Bước 4.9).
-   Dry-run (không lưu output): division F1 0.7831 -> A 0.8730 (FP 113->57, không mất TP) -> A+B 0.9059.
+5. trajectory/pool/README.md
+   - Thêm mục "Task-4 official run": lệnh chạy rules v2 + gold v2; phải truyền
+     --raw batch_100_teacher_raw_recovered_v2.jsonl (mặc định chỉ cho 402 trajectory).
 
-5. scripts/validate_manual_adjudication.py
-   Tự động hóa các kiểm tra của README Bước 4.6 (header, trường trống, cặp trùng, enum của README,
-   đủ 34 case, trajectory_id có tồn tại, không pending). Kết quả: PASS.
+6. changelog.txt (file này; trước 3f7dce4 chưa có).
 
-6. reports/supplement_coverage_report.json
-   Lý do: README 4.2 "báo cáo số problem thêm và số positive mỗi capability".
-   Kết quả: validate_annotation.py VALID 85; 85 problem, không trùng batch_100/pilot;
-   ratio 30, percentage 29, fraction 31 (đạt kỳ vọng > 0, > 12, > 18).
-   (validate_annotation.py cần jsonschema; đã chạy bằng venv tạm /tmp/task4_venv, không cài vào repo.)
+======================================================================
+3. FILE MỚI
+======================================================================
 
-7. reports/task4_adjudication_summary.md — tổng hợp theo đúng các bước của README.
+Guideline, gold, rules
+- config/guideline_v3.md: v2 + mục "Changes from v2"; Rule 2 Division (5 trường hợp cần chia);
+  Rule 3 Fraction + Division; Rule 4 định nghĩa lại "occurs in the reasoning"; sửa calibration case 00004
+  (mâu thuẫn với 00006); mục 14 ghi chú pilot division 15/30 -> 13/30; mục 15 gold cấp bài (D2/D3).
+- config/capability_rules_v2.json: đề xuất part A+B đã duyệt (chỉ khác schema_version và notes).
+- data/batch_100/batch_100_annotations_v2.jsonl: bỏ division ở 5 bài. validate_annotation.py -> VALID 100.
+- data/supplement/supplement_annotations_v2.jsonl: bỏ division ở 02893. validate_annotation.py -> VALID 85.
+- reports/error_analysis/gold_change_log.csv: 6 dòng audit (trước, sau, lý do, căn cứ, ngày).
 
-8. changelog.txt (file này).
+Backup baseline (README Bước 4.7)
+- reports/error_analysis/baseline_backup/:
+  batch_100_annotations_before.jsonl, capability_rules_v1_before.json,
+  capability_extractor_batch100_report_before.{csv,json}, batch_100_capability_predictions_before.jsonl,
+  ambiguous_cases_before.jsonl, SHA256SUMS.txt (7 file), SHA256SUMS_ambiguous_cases.txt.
 
-----------------------------------------------------------------------
-C. KHÔNG SỬA
-----------------------------------------------------------------------
-- data/batch_100/batch_100_annotations.jsonl (không có case TRUE_CAPABILITY_OMITTED_FROM_GOLD).
-- config/capability_rules_v1.json, config/guideline_v2.md, baseline reports, predictions v1, raw pool.
-- scripts/run_task4_extractor_batch100.py, scripts/test_capability_extractor.py.
-- trajectory/pool/batch_100_teacher_verified.jsonl (được tạo lại một lần, hash không đổi 777d0b27...).
+Đề xuất sửa rule (giữ làm lịch sử)
+- reports/error_analysis/rule_change_proposal/:
+  capability_rules_v2_proposed_partA.json, capability_rules_v2_proposed_partAB.json,
+  test_rules_v2_proposed.py (partA PASS 38, partAB PASS 44).
 
-----------------------------------------------------------------------
-D. ĐÃ HOÀN TÁC ĐỂ KHỚP README (cùng ngày)
-----------------------------------------------------------------------
-Bản làm đầu tiên có một số chỗ khác README. Đã sửa như sau:
-- Giá trị enum tự thêm TRAJECTORY_ROUTE_VARIATION (00071, 00097) -> đổi thành DEFINITION_AMBIGUITY /
-  NEEDS_DISCUSSION (issue D3), đúng enum của README.
-- config/capability_rules_v2.json đã được tạo và chạy chính thức khi chưa được duyệt -> đã xóa khỏi config/
-  và chuyển thành đề xuất trong rule_change_proposal/.
-- trajectory/pool/batch_100_capability_predictions_rules_v2.jsonl và
-  reports/capability_extractor_batch100_report_rules_v2.{json,csv} -> đã xóa (chạy trước khi được duyệt).
-- scripts/test_capability_extractor_v2.py -> chuyển thành rule_change_proposal/test_rules_v2_proposed.py.
-- scripts/run_task4_extractor_batch100.py (đã thêm --rules/--tag, đổi raw mặc định) -> hoàn tác về bản gốc
-  bằng git checkout. Lưu ý cho lần chạy lại sau khi duyệt: phải truyền
-  --raw trajectory/pool/batch_100_teacher_raw_recovered_v2.jsonl (mặc định chỉ cho 402 trajectory).
-  Runner chưa nhận file rules và luôn ghi vào đường dẫn baseline report.
+Kết quả chạy lại extractor
+- reports/task4_reruns/{rulesv1_goldv1, rulesv1_goldv2, rulesv2_goldv1, rulesv2_goldv2}/:
+  predictions + report JSON/CSV cho từng cấu hình.
+  rulesv1_goldv1 giống baseline từng byte (JSON, predictions); CSV chỉ khác ký tự xuống dòng.
+- reports/task4_reruns/metrics_summary.csv: bảng P/R/F1 của 4 cấu hình x 7 capability.
+- reports/task4_reruns/SHA256SUMS.txt: 21 file.
 
-----------------------------------------------------------------------
-E. CẦN QUYẾT ĐỊNH (7 case NEEDS_DISCUSSION + duyệt đề xuất)
-----------------------------------------------------------------------
-- D1: "half/one-third of N" có gán division không (00006, 00041, 00049, 00072; gold mâu thuẫn với
-  00000, 00004, 00043, 00059, 00066, 00074).
-- D2: 00089 có tính là ratio không.
-- D3: trace dùng phép chia mà bài không cần (00071, 00097) thì tính thế nào khi chấm với gold cấp problem.
-- Duyệt đề xuất sửa rule: phần A, phần B, hay cả hai.
+Script
+- scripts/validate_manual_adjudication.py: kiểm tra README Bước 4.6 (header, trường trống, cặp trùng,
+  enum, đủ 34 case, trajectory_id tồn tại, không pending).
+- scripts/test_capability_rules_v2.py: unit test cho config/capability_rules_v2.json (PASS 44).
+
+Báo cáo
+- reports/supplement_coverage_report.json: README 4.2. 85 bài, không trùng batch_100/pilot;
+  ratio 30, percentage 29, fraction 31. Có thêm số đếm theo gold v2 (division batch 47 -> 42, supplement 48 -> 47).
+- reports/task4_adjudication_summary.md: tổng hợp theo các bước README (trạng thái trước khi chốt D1–D3).
+- task4_decisions.md: các quyết định, lý do, kết quả rà soát, cách đảo ngược.
+- task4_todo.txt: danh sách việc Task 4 và trạng thái.
+
+======================================================================
+4. KHÔNG SỬA
+======================================================================
+
+- data/batch_100/batch_100_annotations.jsonl (gold v1), data/supplement/supplement_annotations.jsonl,
+  data/pilot/* (A1, A2), config/capability_rules_v1.json, config/guideline_v2.md.
+- Baseline: reports/capability_extractor_batch100_report.{csv,json},
+  trajectory/pool/batch_100_capability_predictions.jsonl.
+- Raw pool và file verified trong trajectory/pool/.
+- scripts/test_capability_extractor.py, extract_capabilities_rule_based.py, evaluate_capability_extractor.py.
+Kiểm tra: sha256sum -c reports/error_analysis/baseline_backup/SHA256SUMS.txt -> 7/7 OK.
+
+======================================================================
+5. CÒN LẠI
+======================================================================
+
+- A2: A1 và A2 trùng 30/30 (capability, thứ tự, difficulty); cần hỏi người annotate A2 có xem A1 không.
+  Nếu có: annotate lại A2 theo guideline_v3 và tính lại kappa.
+- 38/49 FP division còn lại là "phân số của N" viết thành N / k; cần ngữ cảnh đề bài để xử lý (hướng cải tiến).
+
+======================================================================
+6. CÁCH KIỂM TRA
+======================================================================
+
+cd experiments/week2September/manual
+python3 scripts/test_capability_extractor.py          # PASS 28
+python3 scripts/test_capability_rules_v2.py           # PASS 44
+python3 scripts/validate_manual_adjudication.py       # 34 reviewed, PASS
+python3 scripts/check_ambiguous_cases.py data/issues/ambiguous_cases.jsonl   # PASS
+python3 scripts/validate_annotation.py data/batch_100/batch_100_annotations_v2.jsonl      # cần jsonschema
+python3 scripts/validate_annotation.py data/supplement/supplement_annotations_v2.jsonl
+sha256sum -c reports/error_analysis/baseline_backup/SHA256SUMS.txt
+sha256sum -c reports/error_analysis/baseline_backup/SHA256SUMS_ambiguous_cases.txt
+sha256sum -c reports/task4_reruns/SHA256SUMS.txt
+
+Ngoài thư mục manual/: commit a08100a thêm notes/methodology_formulas.md (không thuộc Task 4).

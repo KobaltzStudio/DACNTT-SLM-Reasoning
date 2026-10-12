@@ -5,7 +5,7 @@
 Ngày: 2026-10-12. Làm theo README.txt mục 3 (Bước 4.1–4.9) và mục 4 (4.1–4.3).
 Phạm vi: 480 trajectory hợp lệ của batch_100, gold cấp problem.
 
-Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại trong phiên này · [SUY RA] kết luận từ việc đọc trace/guideline.
+Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại từ dữ liệu trong repo · [SUY RA] kết luận từ việc đọc trace/guideline.
 
 ## 1. README mục 3 — Manual adjudication
 
@@ -72,7 +72,7 @@ Sau khi được duyệt (README 4.9): đưa file đã duyệt vào `config/`, c
 | 4.2 Supplement | `validate_annotation.py`: VALID 85 record; 85 problem, không trùng batch_100/pilot; ratio 30, percentage 29, fraction 31 (đều đạt kỳ vọng > 0, > 12, > 18) | [TÍNH] `reports/supplement_coverage_report.json` |
 | 4.3 Ambiguous | Đã đối chiếu cả 5 bài với GSM8K gốc (Hugging Face `openai/gsm8k`, theo source_index); mỗi record được bổ sung rationale, evidence, verification_source; 00073 được ghi rõ cách hiểu (×4 → 58); `check_ambiguous_cases.py` → PASS | [TÍNH] `data/issues/ambiguous_cases.jsonl` |
 
-Chi tiết 4.3 [SUY RA]: ground truth 50 của 00056 là nhãn gốc của GSM8K. Lời giải tham chiếu của GSM8K tính cho "200 cookies" và bỏ qua chữ "dozen", nên nhãn này mâu thuẫn với đề bài (theo nghĩa đen phải là 600). Tôi không sửa ground truth vì đó là nhãn nguồn; việc có loại bài này khỏi split hay không thuộc Task 5.
+Chi tiết 4.3 [SUY RA]: ground truth 50 của 00056 là nhãn gốc của GSM8K. Lời giải tham chiếu của GSM8K tính cho "200 cookies" và bỏ qua chữ "dozen", nên nhãn này mâu thuẫn với đề bài (theo nghĩa đen phải là 600). Không sửa ground truth vì đó là nhãn nguồn; việc có loại bài này khỏi split hay không thuộc Task 5.
 
 Giới hạn về độ tin cậy nhãn [SUY RA]: kappa = 1.0 không phát hiện được D1. Cả A1 và A2 đều gán 00004 có division và 00006 không có, cho cùng một dạng "half of N".
 
