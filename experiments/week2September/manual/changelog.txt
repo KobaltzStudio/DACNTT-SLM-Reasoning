@@ -1,6 +1,23 @@
 CHANGELOG — experiments/week2September/manual
 ================================================
 
+[2026-10-12, lần 3] Task 4 — rà soát lại D1–D3 và sửa chỗ chưa nhất quán
+Chi tiết: task4_decisions.md mục "Rà soát lần 2".
+
+- data/supplement/supplement_annotations_v2.jsonl (mới): bỏ division ở 02893 theo D1 (bài duy nhất bị ảnh hưởng
+  trong 85 bài supplement). validate_annotation.py -> VALID 85. Bản cũ giữ nguyên.
+- reports/error_analysis/gold_change_log.csv: thêm dòng 02893 (tổng 6).
+- reports/supplement_coverage_report.json: thêm positive_counts_gold_v2 (division batch 47->42, supplement 48->47).
+- config/guideline_v3.md: cuối Rule 4 thêm định nghĩa "occurs in the reasoning" theo v3; mục 14 ghi chú
+  pilot division 15/30 -> 13/30 theo gold v2.
+- reports/error_analysis/manual_adjudication.csv: 26 rationale "pending approval" -> "approved 2026-10-12".
+- trajectory/pool/README.md: thêm lệnh chạy chính thức Task 4 (rules v2 + gold v2, --raw recovered_v2).
+- task4_decisions.md: thêm mục rà soát lần 2, sửa hướng dẫn đảo ngược D1.
+- reports/task4_reruns/SHA256SUMS.txt: tạo lại.
+Đã kiểm tra: 42/42 bài batch_100 có division thuộc 5 trường hợp cần chia của v3; 00029 và 00090 không mâu thuẫn.
+
+----------------------------------------------------------------------
+
 [2026-10-12, lần 2] Task 4 — chốt D1–D3, gold v2, rules v2, chạy lại extractor
 Quyết định và lý do: task4_decisions.md. Việc còn lại: task4_todo.txt (chỉ còn A2, BLOCKED).
 

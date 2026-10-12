@@ -267,6 +267,10 @@ The final form of the answer does not determine whether division is required.
 
 The relevant question is whether division occurs in the reasoning.
 
+From v3, "occurs in the reasoning" means one of the cases listed under Rule 2 Division
+(sharing, grouping, unit value or rate, inverse, part-to-whole). A fraction of a quantity
+computed as `N / k` does not count (Rule 3, D1).
+
 ---
 
 # 6. Percentage
@@ -738,6 +742,10 @@ ratio            0 / 30
 ```
 
 These values describe the observed sample.
+
+v3 note: these counts use the v2 labels in `data/pilot/pilot_30_annotations.jsonl`. Under v3,
+00000 and 00004 lose `division` (D1), so the pilot count becomes `division 13 / 30` in
+`data/batch_100/batch_100_annotations_v2.jsonl`. The pilot files themselves are not changed.
 
 They must not be used as quotas for future annotation.
 

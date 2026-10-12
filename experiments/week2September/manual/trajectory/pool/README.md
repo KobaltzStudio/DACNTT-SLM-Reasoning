@@ -36,3 +36,19 @@ The project already contains an older file named `teacher_trajectories_50x5.json
    - `reports/capability_extractor_batch100_report.csv`
 
 The manual annotations remain the problem-level gold and are never modified by this pipeline.
+
+## Task-4 official run (2026-10-12)
+
+Steps 1–5 above produce the **baseline** (rules v1, gold v1); keep it unchanged for comparison.
+The official Task-4 result uses `config/capability_rules_v2.json` and
+`data/batch_100/batch_100_annotations_v2.jsonl` (guideline_v3; see `task4_decisions.md`):
+
+```bash
+python3 scripts/run_task4_extractor_batch100.py \
+  --raw trajectory/pool/batch_100_teacher_raw_recovered_v2.jsonl \
+  --rules config/capability_rules_v2.json \
+  --manual data/batch_100/batch_100_annotations_v2.jsonl --tag rulesv2_goldv2
+```
+
+Pass `--raw` explicitly: the default `batch_100_teacher_raw.jsonl` yields only 402 valid
+trajectories instead of 480. With `--tag`, outputs go to `reports/task4_reruns/<tag>/`.

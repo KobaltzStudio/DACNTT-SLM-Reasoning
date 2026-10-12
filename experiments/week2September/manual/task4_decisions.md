@@ -10,7 +10,7 @@ Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại trong phi
 
 | # | Vấn đề | Quyết định | Ảnh hưởng |
 |---|---|---|---|
-| D1 | "half / one-third of N" có gán `division` không | **Không.** Lấy phân số của một đại lượng chỉ là `fraction`, bất kể viết `N / k` hay `1/k × N` | Gold: bỏ `division` ở 5 bài (00000, 00004, 00059, 00066, 00074). 4 case D1 → `KEEP_GOLD` |
+| D1 | "half / one-third of N" có gán `division` không | **Không.** Lấy phân số của một đại lượng chỉ là `fraction`, bất kể viết `N / k` hay `1/k × N` | Gold: bỏ `division` ở 5 bài batch_100 (00000, 00004, 00059, 00066, 00074) và 1 bài supplement (02893). 4 case D1 → `KEEP_GOLD` |
 | D2 | 00089 có tính là `ratio` không | **Không.** Bài chỉ cần `60 / 4 = 15` nắm | Gold giữ nguyên; FP của traj 002 tính là FP do lộ trình trace |
 | D3 | Trace dùng phép chia mà bài không cần (00071, 00097) | **Gold giữ ở cấp bài**; báo cáo riêng loại FP này | Gold giữ nguyên |
 | R | Duyệt đề xuất rule v2 | **Duyệt phần A + B** → `config/capability_rules_v2.json` | Division F1 chính thức 0.7831 → 0.8756 |
@@ -52,7 +52,9 @@ Kiểm tra thêm: 00068 (`6/3` = giá mỗi cuốn) và 00023 (`11x = 286`) là 
 **File thay đổi:**
 - `config/guideline_v3.md` (mới; v2 giữ nguyên): mục "Changes from v2", Rule 2 Division (5 trường hợp cần chia), Rule 3 Fraction + Division (00043 là ví dụ đúng, 00004 là phản ví dụ), sửa calibration case 00004.
 - `data/batch_100/batch_100_annotations_v2.jsonl` (mới; v1 giữ nguyên): bỏ `division` ở 5 bài, ghi lý do vào `notes`. `validate_annotation.py` → VALID 100.
-- `reports/error_analysis/gold_change_log.csv`: 5 dòng audit (trước, sau, lý do, căn cứ, ngày).
+- `data/supplement/supplement_annotations_v2.jsonl` (mới; bản cũ giữ nguyên): bỏ `division` ở 02893 ("1/3 of the schools", "half of the schools"). `validate_annotation.py` → VALID 85. Đây là bài duy nhất trong 85 bài supplement bị ảnh hưởng; 10 bài supplement khác có cả fraction và division đều cần chia thật (tìm tổng từ một phần, chia nhóm, chia theo tỉ lệ).
+- `reports/error_analysis/gold_change_log.csv`: 6 dòng audit (trước, sau, lý do, căn cứ, ngày).
+- `reports/supplement_coverage_report.json`: thêm khối `positive_counts_gold_v2`. Division: batch_100 47 → 42, supplement 48 → 47; ratio/percentage/fraction không đổi.
 - `manual_adjudication.csv`: 00006, 00041, 00049, 00072 → `FALSE_LEXICAL_TRIGGER` / `KEEP_GOLD` / `reviewed`. Rule bắt toán tử `N / k`, nhưng theo định nghĩa v3 đây không phải capability division.
 
 **Không sửa:** `data/pilot/pilot_30_annotations*.jsonl`, vì đó là bản ghi gốc của từng annotator. Trong pilot, A1 và A2 đều gán division cho 00000 và 00004; gold v2 khác pilot ở 2 bài này và đã ghi trong gold_change_log.
@@ -123,6 +125,20 @@ Ngoài ra, supplement (85 bài) chỉ có A1 annotate; đây là giới hạn.
 - `reports/task4_reruns/SHA256SUMS.txt`: manifest cho guideline v3, rules v2, gold v2, change log, adjudication, input và 4 lần chạy lại.
 - Nguồn đối chiếu lời giải gốc: Hugging Face `openai/gsm8k`, config `main`, file `main/train-00000-of-00001.parquet`, SHA256 `ea82612e...419d`, tra theo `source_index`. Cả 7473 câu hỏi khớp với `data/raw/gsm8k_train.jsonl` sau khi chuẩn hóa khoảng trắng.
 
+## Rà soát lần 2 (cùng ngày)
+
+Đã rà lại toàn bộ sau khi áp dụng, kết quả:
+
+| Kiểm tra | Kết quả |
+|---|---|
+| Cả 42 bài batch_100 có division trong gold v2, đối chiếu với 5 trường hợp cần chia của v3 | 42/42 đúng [SUY RA] |
+| 00029 ("every 3rd floor", có division) và 00090 ("every other day", không có division) có mâu thuẫn không | Không. Division của 00029 đến từ `800 / 10` (tỉ suất); cả 5 trace của 00090 đều đếm ngày 2, 4, 6, không chia [TÍNH] |
+| Supplement (85 bài, gán theo v2) có bị D1 ảnh hưởng không | 1 bài (02893) → đã sửa như trên [TÍNH] |
+| Gold batch_100 v1 ở 30 bài đầu có trùng pilot A1 không | Trùng 30/30; gold v2 chỉ khác pilot ở 00000, 00004 [TÍNH] |
+| Guideline v3 còn câu nào hiểu division theo cách viết không | 2 chỗ, đã sửa: cuối Rule 4 thêm định nghĩa "occurs in the reasoning" theo v3; mục 14 thêm ghi chú pilot division 15/30 → 13/30 theo gold v2 |
+| Rationale trong `manual_adjudication.csv` còn ghi "pending approval" không | 26 dòng → đổi thành "approved 2026-10-12 in config/capability_rules_v2.json" |
+| Default runner `--raw` cho 402 trajectory | Đúng, 98 bị loại [TÍNH]; đã ghi vào `trajectory/pool/README.md` |
+
 ## Cách kiểm tra lại
 
 ```bash
@@ -131,6 +147,7 @@ python3 scripts/test_capability_extractor.py          # PASS 28 (rules v1)
 python3 scripts/test_capability_rules_v2.py           # PASS 44 (rules v2)
 python3 scripts/validate_manual_adjudication.py       # 34 reviewed, PASS
 python3 scripts/validate_annotation.py data/batch_100/batch_100_annotations_v2.jsonl   # cần jsonschema
+python3 scripts/validate_annotation.py data/supplement/supplement_annotations_v2.jsonl
 sha256sum -c reports/error_analysis/baseline_backup/SHA256SUMS.txt
 sha256sum -c reports/error_analysis/baseline_backup/SHA256SUMS_ambiguous_cases.txt
 sha256sum -c reports/task4_reruns/SHA256SUMS.txt
@@ -142,5 +159,5 @@ python3 scripts/run_task4_extractor_batch100.py \
 
 ## Khi nào đảo ngược
 
-- Nếu nhóm muốn "half of N" có division: chỉ cần dùng lại gold v1 cho 5 bài trong `gold_change_log.csv` và sửa ngược 4 bài D1. Khi đó nên dùng rules phần A thay vì A+B.
+- Nếu nhóm muốn "half of N" có division: khôi phục 6 bài trong `gold_change_log.csv` là chưa đủ. Để nhất quán phải **thêm** division cho mọi bài dạng "phân số của N" chưa có division: batch_100 gồm 00006, 00022, 00030, 00041, 00049, 00063, 00072; supplement cần rà lại 21 bài có fraction mà không có division (ví dụ 00155, 01280, 03734). Sửa 4 dòng D1 trong `manual_adjudication.csv` sang `TRUE_CAPABILITY_OMITTED_FROM_GOLD`, sửa guideline_v3 (Rule 2, Rule 3, case 00004), và dùng rules phần A thay vì A+B.
 - Nếu Đề xuất 2 cần capability cấp trajectory: thay quyết định D3 bằng nhãn cấp trajectory; các FP do đường vòng và nhóm `N / k` sẽ được chấm lại.
