@@ -211,7 +211,7 @@ def main():
     for i, test in enumerate(TESTS, start=1):
 
         print("\n" + "=" * 60)
-        print(f"{test['test_id']} — {test['category']}")
+        print(f"{test['test_id']} - {test['category']}")
         print("=" * 60)
 
         print("Ground truth:", test["ground_truth"])

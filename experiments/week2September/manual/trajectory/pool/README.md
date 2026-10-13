@@ -39,7 +39,7 @@ The manual annotations remain the problem-level gold and are never modified by t
 
 ## Task-4 official run (2026-10-12)
 
-Steps 1–5 above produce the **baseline** (rules v1, gold v1); keep it unchanged for comparison.
+Steps 1-5 above produce the **baseline** (rules v1, gold v1); keep it unchanged for comparison.
 The official Task-4 result uses `config/capability_rules_v2.json` and
 `data/batch_100/batch_100_annotations_v2.jsonl` (guideline_v3; see `task4_decisions.md`):
 

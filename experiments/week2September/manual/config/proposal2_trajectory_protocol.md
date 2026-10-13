@@ -1,4 +1,4 @@
-# Proposal 2 — Dynamic Learnability-Aware Teacher Trajectory Protocol
+# Proposal 2: Dynamic Learnability-Aware Teacher Trajectory Protocol
 
 ## 1. Objective
 
@@ -104,7 +104,7 @@ Example:
     "num_steps": 5,
     "token_length": 87
   }
-}# Proposal 2 — Dynamic Learnability-Aware Teacher Trajectory Protocol
+}# Proposal 2: Dynamic Learnability-Aware Teacher Trajectory Protocol
 
 ## 1. Objective
 

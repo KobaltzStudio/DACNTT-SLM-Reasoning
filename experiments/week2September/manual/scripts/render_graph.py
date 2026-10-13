@@ -107,7 +107,7 @@ def main():
     )
 
     plt.title(
-        f"Capability Graph — "
+        f"Capability Graph - "
         f"{data['student_checkpoint']}"
     )
 

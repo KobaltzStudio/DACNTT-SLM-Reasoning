@@ -1,4 +1,4 @@
-# Day 1 — Environment Setup & Student Smoke Test
+# Day 1: Environment Setup & Student Smoke Test
 
 **Date:** 2026-08-17
 

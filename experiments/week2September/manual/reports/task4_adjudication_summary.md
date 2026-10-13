@@ -1,13 +1,13 @@
-# Task 4 — Adjudication, độ tin cậy nhãn, kết luận gold/rules
+# Task 4: Adjudication, độ tin cậy nhãn, kết luận gold/rules
 
-> **Cập nhật 2026-10-12 (lần 2):** D1–D3 đã chốt, rules v2 (A+B) đã duyệt, gold v2 đã tạo và extractor đã chạy lại. Các mục 2, 3, 5 bên dưới là trạng thái *trước* khi chốt. Trạng thái hiện tại và lý do: `../task4_decisions.md`; số liệu: `task4_reruns/metrics_summary.csv`.
+> **Cập nhật 2026-10-12 (lần 2):** D1-D3 đã chốt, rules v2 (A+B) đã duyệt, gold v2 đã tạo và extractor đã chạy lại. Các mục 2, 3, 5 bên dưới là trạng thái *trước* khi chốt. Trạng thái hiện tại và lý do: `../task4_decisions.md`; số liệu: `task4_reruns/metrics_summary.csv`.
 
-Ngày: 2026-10-12. Làm theo README.txt mục 3 (Bước 4.1–4.9) và mục 4 (4.1–4.3).
+Ngày: 2026-10-12. Làm theo README.txt mục 3 (Bước 4.1-4.9) và mục 4 (4.1-4.3).
 Phạm vi: 480 trajectory hợp lệ của batch_100, gold cấp problem.
 
 Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại từ dữ liệu trong repo · [SUY RA] kết luận từ việc đọc trace/guideline.
 
-## 1. README mục 3 — Manual adjudication
+## 1. README mục 3: Manual adjudication
 
 | Bước | Kết quả | Nguồn |
 |---|---|---|
@@ -15,7 +15,7 @@ Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại từ dữ
 | 4.2 Số case | 34 = 32 division + 2 ratio | [TÍNH] `error_analysis/adjudication_review_cases.csv` |
 | 4.3 Đọc trace | Đọc đủ 5 trajectory hợp lệ của mỗi bài | [TÍNH] `trajectory/pool/batch_100_teacher_verified.jsonl` |
 | 4.4 Định nghĩa | Gold = capability bài cần (guideline Rule 1, Procedure Step 2); `per` và `proportion` không đủ để gán; phân số làm hệ số nhân là fraction (Rule 3); quy đổi % là percentage (Rule 5) | [TRÍCH] `config/guideline_v2.md` |
-| 4.5–4.6 Điền + kiểm tra | 34 dòng; 27 reviewed, 7 needs_discussion, 0 pending; không thiếu trường, không trùng, enum hợp lệ | [TÍNH] `scripts/validate_manual_adjudication.py` → PASS |
+| 4.5-4.6 Điền + kiểm tra | 34 dòng; 27 reviewed, 7 needs_discussion, 0 pending; không thiếu trường, không trùng, enum hợp lệ | [TÍNH] `scripts/validate_manual_adjudication.py` → PASS |
 | 4.7 Backup + hash | 5 file baseline + `SHA256SUMS.txt`; 7/7 OK, baseline không bị ghi đè | `error_analysis/baseline_backup/` |
 | 4.8 Số FP division | CSV 113 dòng = 113 trajectory = FP 113 trong report; không có sai lệch | [TÍNH] |
 | 4.9 Sau adjudicate | Không sửa gold, không áp dụng rule. Đề xuất sửa rule lưu riêng, chờ duyệt | Mục 3 bên dưới |
@@ -26,13 +26,13 @@ Input của baseline [TÍNH]: `recovered_v2` → `prepare_task4_trajectory_input
 
 | Adjudication | Decision | Số case | Problem |
 |---|---|---|---|
-| FALSE_LEXICAL_TRIGGER — `per` (đơn vị tỉ suất) | PROPOSE_RULE_CHANGE | 17 | 00015, 00021, 00042, 00048, 00057, 00058, 00061, 00064, 00065, 00079, 00080, 00084, 00085, 00088, 00090, 00096, 00099 |
-| FALSE_LEXICAL_TRIGGER — phân số/% làm hệ số nhân | PROPOSE_RULE_CHANGE | 9 | 00007, 00016, 00022, 00027, 00030, 00032, 00035, 00063, 00067 |
-| FALSE_LEXICAL_TRIGGER — ratio do `proportion of` | PROPOSE_RULE_CHANGE | 1 | 00087 |
-| DEFINITION_AMBIGUITY — D1 (`half of N` viết thành `N / 2`) | NEEDS_DISCUSSION | 4 | 00006, 00041, 00049, 00072 |
-| DEFINITION_AMBIGUITY — D2 (ratio 5:4) | NEEDS_DISCUSSION | 1 | 00089 |
-| DEFINITION_AMBIGUITY — D3 (trace dùng phép chia mà bài không cần) | NEEDS_DISCUSSION | 2 | 00071, 00097 |
-| TRUE_CAPABILITY_OMITTED_FROM_GOLD | — | 0 | — |
+| FALSE_LEXICAL_TRIGGER: `per` (đơn vị tỉ suất) | PROPOSE_RULE_CHANGE | 17 | 00015, 00021, 00042, 00048, 00057, 00058, 00061, 00064, 00065, 00079, 00080, 00084, 00085, 00088, 00090, 00096, 00099 |
+| FALSE_LEXICAL_TRIGGER: phân số/% làm hệ số nhân | PROPOSE_RULE_CHANGE | 9 | 00007, 00016, 00022, 00027, 00030, 00032, 00035, 00063, 00067 |
+| FALSE_LEXICAL_TRIGGER: ratio do `proportion of` | PROPOSE_RULE_CHANGE | 1 | 00087 |
+| DEFINITION_AMBIGUITY: D1 (`half of N` viết thành `N / 2`) | NEEDS_DISCUSSION | 4 | 00006, 00041, 00049, 00072 |
+| DEFINITION_AMBIGUITY: D2 (ratio 5:4) | NEEDS_DISCUSSION | 1 | 00089 |
+| DEFINITION_AMBIGUITY: D3 (trace dùng phép chia mà bài không cần) | NEEDS_DISCUSSION | 2 | 00071, 00097 |
+| TRUE_CAPABILITY_OMITTED_FROM_GOLD | - | 0 | - |
 
 Case 00087 khác case mẫu trong README (README gợi ý DEFINITION_AMBIGUITY). Lý do: guideline Rule 6 (dòng 307) đã loại trừ rõ trường hợp "division as ordinary arithmetic". README cho phép cập nhật khi có bằng chứng.
 
@@ -64,7 +64,7 @@ Ratio: FP 2 → 1 ở cả A và A+B. 5 capability còn lại không đổi.
 
 Sau khi được duyệt (README 4.9): đưa file đã duyệt vào `config/`, chạy lại trên cùng 480 trajectory với `--raw` đúng, và lưu report riêng, không ghi đè baseline.
 
-## 4. README mục 4 — Annotation tồn đọng
+## 4. README mục 4: Annotation tồn đọng
 
 | Mục | Kết quả | Nguồn |
 |---|---|---|
@@ -78,9 +78,9 @@ Giới hạn về độ tin cậy nhãn [SUY RA]: kappa = 1.0 không phát hiệ
 
 ## 5. Cần quyết định (NEEDS_DISCUSSION, 7 case)
 
-- **D1** — `half/one-third of N` có gán division không? Gold đang mâu thuẫn: 00000, 00004, 00043, 00059, 00066, 00074 có division; 00006, 00041, 00049, 00072 không có. Guideline mục 4 cũng tự mâu thuẫn ([TRÍCH] dòng 168–206). Nếu chọn gán division, đề xuất A+B đạt F1 = 0.9434 (dry-run với gold giả định).
-- **D2** — 00089 ("ăn 1 trong mỗi 5 quả") có tính là ratio không?
-- **D3** — khi trace dùng phép chia mà bài không cần (00071, 00097), nên tính trajectory đó như thế nào khi chấm với gold cấp problem?
+- **D1**: `half/one-third of N` có gán division không? Gold đang mâu thuẫn: 00000, 00004, 00043, 00059, 00066, 00074 có division; 00006, 00041, 00049, 00072 không có. Guideline mục 4 cũng tự mâu thuẫn ([TRÍCH] dòng 168-206). Nếu chọn gán division, đề xuất A+B đạt F1 = 0.9434 (dry-run với gold giả định).
+- **D2**: 00089 ("ăn 1 trong mỗi 5 quả") có tính là ratio không?
+- **D3**: khi trace dùng phép chia mà bài không cần (00071, 00097), nên tính trajectory đó như thế nào khi chấm với gold cấp problem?
 - **Duyệt đề xuất sửa rule**: phần A, phần B, hay cả hai.
 
 ## 6. Cách tái lập

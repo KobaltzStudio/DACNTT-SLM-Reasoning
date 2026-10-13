@@ -1,4 +1,4 @@
-CHANGELOG — experiments/week2September/manual
+CHANGELOG: experiments/week2September/manual
 ================================================
 
 Mốc so sánh: commit 3f7dce4 (TrinhNghi, 2026-10-12, "Add trajectory pool with 500 trajectories...")
@@ -15,7 +15,7 @@ Quyết định và lý do: task4_decisions.md. Danh sách việc: task4_todo.tx
 ======================================================================
 
 - Adjudication: 34/34 case reviewed (31 FALSE_LEXICAL_TRIGGER, 3 DEFINITION_AMBIGUITY; 0 pending).
-- D1–D3 chốt trong config/guideline_v3.md:
+- D1-D3 chốt trong config/guideline_v3.md:
   D1: phân số của một đại lượng ("half of N") chỉ là fraction, không gán division.
   D2: 00089 không gán ratio.
   D3: gold giữ ở cấp bài; FP do trace đi đường vòng báo cáo riêng.
@@ -32,7 +32,7 @@ Quyết định và lý do: task4_decisions.md. Danh sách việc: task4_todo.tx
 1. README.txt
    - Dòng trạng thái Task 4 (mục 0): DONE trừ A2.
    - Mục 1, file 9 (manual_adjudication.csv): bỏ ghi chú "chỉ có header".
-   - Checklist mục 11: đánh dấu 1–7, 9–11 xong; 8 (A2) BLOCKED.
+   - Checklist mục 11: đánh dấu 1-7, 9-11 xong; 8 (A2) BLOCKED.
 
 2. data/issues/ambiguous_cases.jsonl
    - Thêm 4 trường cho cả 5 record: rationale, evidence, verification_source, verified_on.
@@ -44,7 +44,7 @@ Quyết định và lý do: task4_decisions.md. Danh sách việc: task4_todo.tx
 3. reports/error_analysis/manual_adjudication.csv
    - Từ chỉ có header -> 34 dòng. Giữ header 10 cột, UTF-8 BOM, CRLF.
    - 27 dòng FALSE_LEXICAL_TRIGGER / PROPOSE_RULE_CHANGE (17 'per', 9 phân số/% làm hệ số nhân, 1 'proportion of').
-   - 7 dòng D1–D3 -> KEEP_GOLD / reviewed.
+   - 7 dòng D1-D3 -> KEEP_GOLD / reviewed.
    - 00087/ratio: FALSE_LEXICAL_TRIGGER (README gợi ý DEFINITION_AMBIGUITY), vì guideline Rule 6 đã đủ rõ.
 
 4. scripts/run_task4_extractor_batch100.py
@@ -96,7 +96,7 @@ Script
 Báo cáo
 - reports/supplement_coverage_report.json: README 4.2. 85 bài, không trùng batch_100/pilot;
   ratio 30, percentage 29, fraction 31. Có thêm số đếm theo gold v2 (division batch 47 -> 42, supplement 48 -> 47).
-- reports/task4_adjudication_summary.md: tổng hợp theo các bước README (trạng thái trước khi chốt D1–D3).
+- reports/task4_adjudication_summary.md: tổng hợp theo các bước README (trạng thái trước khi chốt D1-D3).
 - task4_decisions.md: các quyết định, lý do, kết quả rà soát, cách đảo ngược.
 - task4_todo.txt: danh sách việc Task 4 và trạng thái.
 

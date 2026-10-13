@@ -1,4 +1,4 @@
-TASK 4 — TODO (Extractor: adjudication, độ tin cậy nhãn, kết luận gold/rules)
+TASK 4: TODO (Extractor: adjudication, độ tin cậy nhãn, kết luận gold/rules)
 Ngày lập: 2026-10-12
 Trạng thái hiện tại (cập nhật 2026-10-12): DONE trừ mục 10 (A2, BLOCKED: cần người annotate A2).
 Quyết định và lý do: task4_decisions.md. Phần MÔ TẢ CHI TIẾT bên dưới giữ nguyên làm lịch sử.
@@ -10,7 +10,7 @@ DANH SÁCH VIỆC CẦN LÀM
 [x] 1. Chốt D1: "half / one-third of N" có gán division không (4 case: 00006, 00041, 00049, 00072).  -> XONG: gold: half/one-third of N = fraction only
 [x] 2. Chốt D2: 00089 có tính là ratio không (1 case).  -> XONG: không gán ratio
 [x] 3. Chốt D3: trace dùng phép chia mà bài không cần thì chấm thế nào (2 case: 00071, 00097).  -> XONG: gold giữ cấp bài, FP đường vòng báo cáo riêng
-[x] 4. Cập nhật guideline_v2 thành bản có version mới, ghi lại quyết định D1–D3.  -> XONG: config/guideline_v3.md
+[x] 4. Cập nhật guideline_v2 thành bản có version mới, ghi lại quyết định D1-D3.  -> XONG: config/guideline_v3.md
 [x] 5. Cập nhật 7 dòng needs_discussion trong manual_adjudication.csv theo quyết định đã chốt.  -> XONG: 34/34 reviewed
 [x] 6. Nếu quyết định D1 làm đổi gold: backup, sửa gold có audit trail, không ghi đè bản cũ.  -> XONG: batch_100_annotations_v2.jsonl + gold_change_log.csv
 [x] 7. Duyệt đề xuất rule v2: phần A, phần A+B, hay chỉnh lại.  -> XONG: duyệt A+B -> config/capability_rules_v2.json
@@ -25,18 +25,18 @@ MÔ TẢ CHI TIẾT
 ======================================================================
 
 ----------------------------------------------------------------------
-1. D1 — "half / one-third of N" có gán division không
+1. D1: "half / one-third of N" có gán division không
 ----------------------------------------------------------------------
 Vấn đề: gold đang mâu thuẫn cho cùng một dạng bài.
   - Gold CÓ division: 00000, 00004, 00043, 00059, 00066, 00074.
   - Gold KHÔNG có division: 00006, 00041, 00049, 00072 (4 case needs_discussion).
-  - guideline_v2.md mục 4 (khoảng dòng 168–206) cũng tự mâu thuẫn.
+  - guideline_v2.md mục 4 (khoảng dòng 168-206) cũng tự mâu thuẫn.
   - Cả A1 và A2 đều gán 00004 có division và 00006 không có, nên kappa = 1.0 không phát hiện được.
 Evidence trong trace:
   - 00006: 'half of that is 50 / 2 = 25 points' (cả 5 traj).
   - 00041: 'the number of women is 40 / 2 = 20' (cả 5 traj).
   - 00049: '4 / 2 = 2 times', '(3 hills * 4 times/hill) / 2 = 6'.
-  - 00072: 'he plays video games for 4 / 2 = 2 hours' (traj 001–003, 005).
+  - 00072: 'he plays video games for 4 / 2 = 2 hours' (traj 001-003, 005).
 Cần làm: nhóm chọn một quy ước, áp dụng cho cả 10 bài trên (không chỉ 4 case FP).
   - Phương án a: "half/one-third of N" = fraction + division -> sửa gold 00006, 00041, 00049, 00072.
   - Phương án b: chỉ là fraction -> sửa gold 00000, 00004, 00043, 00059, 00066, 00074.
@@ -44,11 +44,11 @@ Expected: một quy tắc duy nhất trong guideline; danh sách bài bị ảnh
 Lưu ý: nếu chọn phương án a, dry-run cho thấy đề xuất A+B đạt division F1 = 0.9434.
 
 ----------------------------------------------------------------------
-2. D2 — 00089 có tính là ratio không
+2. D2: 00089 có tính là ratio không
 ----------------------------------------------------------------------
 Đề: "out of every handful of 5 she eats one" (quan hệ 5:4).
   - traj 002 giải bằng tỉ lệ: '60 times 5 / 4 = 75' -> khớp Rule 6 "proportional relationship".
-  - traj 001, 003–005 giải bằng 60 / 4 = 15 nắm x 5 = 75 -> phép tính thông thường.
+  - traj 001, 003-005 giải bằng 60 / 4 = 15 nắm x 5 = 75 -> phép tính thông thường.
 Gold hiện tại: [division, multiplication].
 Cần làm: quyết định ratio là capability BÀI CẦN hay chỉ là một cách giải.
   Theo guideline Rule 1 (gold = capability bài cần), nếu có cách giải không cần ratio thì
@@ -56,7 +56,7 @@ Cần làm: quyết định ratio là capability BÀI CẦN hay chỉ là một 
 Expected: dòng 00089/ratio chuyển sang reviewed với decision cụ thể.
 
 ----------------------------------------------------------------------
-3. D3 — trace dùng phép chia mà bài không cần
+3. D3: trace dùng phép chia mà bài không cần
 ----------------------------------------------------------------------
 Case:
   - 00097: traj 001, 002 '60 / 5 = 12 flowers per hour'; mọi traj đều ra 60 x 6 = 360.
@@ -151,7 +151,7 @@ Ghi chú: supplement (85 bài) chỉ có A1 annotate; nên ghi là giới hạn 
 ----------------------------------------------------------------------
 11. Sửa điểm gây nhầm trong tài liệu
 ----------------------------------------------------------------------
-- README.txt mục 1 (dòng ~75–80) vẫn ghi manual_adjudication.csv "chỉ có header" -> cập nhật.
+- README.txt mục 1 (dòng ~75-80) vẫn ghi manual_adjudication.csv "chỉ có header" -> cập nhật.
 - README dùng lệnh PowerShell và đường dẫn C:\; bổ sung lệnh tương đương cho bash
   (đã có trong task4_adjudication_summary.md mục 6).
 - reports/error_analysis/baseline_backup/SHA256SUMS_ambiguous_cases.txt chứa hash bản TRƯỚC khi sửa

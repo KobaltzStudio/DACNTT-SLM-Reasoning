@@ -1,4 +1,4 @@
-# Task 4 — actual Teacher trajectory generation and extractor evaluation
+# Task 4: actual Teacher trajectory generation and extractor evaluation
 
 The current `batch_100` problem and annotation files are already the canonical inputs. No new manual annotation is needed.
 

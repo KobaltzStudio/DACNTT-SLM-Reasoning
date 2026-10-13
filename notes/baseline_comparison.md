@@ -1,4 +1,4 @@
-# Teacher–Student Baseline Comparison
+# Teacher-Student Baseline Comparison
 
 ## Overall Results
 

@@ -1,4 +1,4 @@
-# Task 4 — Các quyết định đã đưa ra và lý do
+# Task 4: Các quyết định đã đưa ra và lý do
 
 Ngày: 2026-10-12.
 Phạm vi: các việc còn mở trong `task4_todo.txt`. File này ghi **quyết định gì, vì sao, đổi file nào**.
@@ -16,7 +16,7 @@ Nhãn nguồn: [TRÍCH] lấy nguyên từ file · [TÍNH] tính lại từ dữ
 | R | Duyệt đề xuất rule v2 | **Duyệt phần A + B** → `config/capability_rules_v2.json` | Division F1 chính thức 0.7831 → 0.8756 |
 | A2 | A2 có annotate độc lập không | **Chưa giải quyết được (BLOCKED)**: cần hỏi người annotate A2 | Kappa = 1.0 được ghi là chưa đáng tin |
 
-## D1 — Phân số của một đại lượng
+## D1: Phân số của một đại lượng
 
 **Quyết định:** "half of N", "one-third of N", "1/4 the height of N" chỉ gán `fraction`. Chỉ gán `division` khi bài cần một phép chia riêng: chia đều, tìm số nhóm, tìm đơn giá/tỉ suất từ tổng, phép ngược (tìm tổng từ một phần, giải `11x = 286`), hoặc so sánh phần/tổng.
 
@@ -59,7 +59,7 @@ Kiểm tra thêm: 00068 (`6/3` = giá mỗi cuốn) và 00023 (`11x = 286`) là 
 
 **Không sửa:** `data/pilot/pilot_30_annotations*.jsonl`, vì đó là bản ghi gốc của từng annotator. Trong pilot, A1 và A2 đều gán division cho 00000 và 00004; gold v2 khác pilot ở 2 bài này và đã ghi trong gold_change_log.
 
-## D2 — 00089 không gán ratio
+## D2: 00089 không gán ratio
 
 **Quyết định:** giữ gold `[division, multiplication]`, đổi dòng 00089/ratio sang `KEEP_GOLD` / `reviewed`.
 
@@ -67,7 +67,7 @@ Kiểm tra thêm: 00068 (`6/3` = giá mỗi cuốn) và 00023 (`11x = 286`) là 
 
 Nhãn adjudication giữ `DEFINITION_AMBIGUITY`: bản chất case là câu hỏi gold thuộc cấp nào, nay đã chốt. README chỉ cho 3 giá trị nên không thêm enum mới.
 
-## D3 — Gold giữ ở cấp bài
+## D3: Gold giữ ở cấp bài
 
 **Quyết định:** gold ghi capability bài **cần**, không ghi mọi phép tính một trace dùng. Khi trace dùng thêm phép tính không cần thiết, giữ gold và báo cáo riêng loại FP này. Đã thêm vào guideline_v3 mục 15.
 
@@ -76,7 +76,7 @@ Nhãn adjudication giữ `DEFINITION_AMBIGUITY`: bản chất case là câu hỏ
 - 00071: "lớn nhanh gấp đôi" → `(36 − 24) × 2 = 24`. Riêng traj 003 đặt tốc độ `12 / t` rồi triệt tiêu.
 - Phương án gán nhãn cấp trajectory phải gán tay khoảng 480 trace, quá tốn so với lợi ích ở bước này. Nên làm sau nếu Đề xuất 2 thực sự cần capability theo từng trajectory.
 
-## R — Duyệt rule v2 (phần A + B)
+## R: Duyệt rule v2 (phần A + B)
 
 **Quyết định:** duyệt cả phần A và B, đưa vào `config/capability_rules_v2.json`. Bản này giống hệt đề xuất `partAB` trừ `schema_version` và `notes`; `scripts/test_capability_rules_v2.py` kiểm tra điều này qua 44 unit case.
 
@@ -107,7 +107,7 @@ Nhãn adjudication giữ `DEFINITION_AMBIGUITY`: bản chất case là câu hỏ
 
 Nhóm 38 FP không sửa được bằng regex trên trace, vì `50 / 2` trong "half of that is 50 / 2" và trong "split between 2" giống hệt nhau. Muốn xử lý cần đọc thêm ngữ cảnh đề bài, nên để thành hướng cải tiến, không sửa trong Task 4.
 
-## A2 — Chưa giải quyết được (BLOCKED)
+## A2: Chưa giải quyết được (BLOCKED)
 
 `pilot_30_annotations_A2.jsonl` trùng A1 30/30 cả danh sách capability (kể cả thứ tự) và difficulty; chỉ khác phần `notes` [TÍNH]. Không thể xác minh A2 có annotate độc lập không nếu không hỏi người làm. Không tự tạo nhãn A2 thay người annotate.
 

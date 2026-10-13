@@ -348,7 +348,7 @@ def main():
 
             print(
                 f"\n[{index + 1}/{NUM_SAMPLES}] "
-                f"{record_id} already exists — SKIP"
+                f"{record_id} already exists - SKIP"
             )
 
             if record.get("correct") is True:

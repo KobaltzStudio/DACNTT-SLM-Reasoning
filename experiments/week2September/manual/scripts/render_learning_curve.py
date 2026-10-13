@@ -156,7 +156,7 @@ def main():
     title = "Student Capability Learning Dynamics"
 
     if data.get("status") == "synthetic":
-        title += " — Synthetic Example"
+        title += " - Synthetic Example"
 
     plt.title(title)
 

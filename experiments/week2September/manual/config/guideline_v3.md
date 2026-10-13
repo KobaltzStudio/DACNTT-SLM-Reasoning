@@ -7,13 +7,13 @@
 ## Changes from v2
 
 v3 resolves three definition ambiguities found during the Task 4 adjudication
-(`reports/error_analysis/manual_adjudication.csv`, issues D1–D3). Reasons and affected
+(`reports/error_analysis/manual_adjudication.csv`, issues D1-D3). Reasons and affected
 cases: `task4_decisions.md`. Gold changes: `reports/error_analysis/gold_change_log.csv`.
 
-1. **D1 — fraction of a quantity.** Taking a fraction of a quantity ("half of 50",
+1. **D1: fraction of a quantity.** Taking a fraction of a quantity ("half of 50",
    "one-third of the shells", "1/4 the height") is `fraction` only. Do not add `division`
    because the value can be computed as `50 / 2`. See Rule 3 and the revised Rule 2 Division.
-2. **D2/D3 — gold is problem-level.** Gold records the capabilities the problem requires,
+2. **D2/D3: gold is problem-level.** Gold records the capabilities the problem requires,
    not every operation a particular solution happens to use. A trajectory that takes a route
    using an extra operation (e.g. computing a rate it does not need) does not change the gold.
    See Section 15.
@@ -44,7 +44,7 @@ The current capability taxonomy contains seven capabilities:
 
 # 2. General Annotation Principle
 
-## Rule 1 — Annotate capabilities actually used
+## Rule 1: Annotate capabilities actually used
 
 A capability must be annotated only when it is actually required by the reasoning needed to solve the problem.
 
@@ -87,7 +87,7 @@ ratio
 
 # 3. Arithmetic Operations
 
-## Rule 2 — Annotate required arithmetic operations
+## Rule 2: Annotate required arithmetic operations
 
 Annotate the corresponding capability when the reasoning requires an arithmetic operation:
 
@@ -172,7 +172,7 @@ Division should be annotated even when it is used to determine the number of com
 
 # 4. Fraction
 
-## Rule 3 — Fraction
+## Rule 3: Fraction
 
 Annotate `fraction` when fractional reasoning is explicitly required.
 
@@ -241,7 +241,7 @@ division = division operation
 
 # 5. Division and Remainders
 
-## Rule 4 — Division includes quotient/remainder reasoning
+## Rule 4: Division includes quotient/remainder reasoning
 
 Annotate `division` when division is required to determine a quotient, complete groups, or a remainder.
 
@@ -275,7 +275,7 @@ computed as `N / k` does not count (Rule 3, D1).
 
 # 6. Percentage
 
-## Rule 5 — Percentage
+## Rule 5: Percentage
 
 Annotate `percentage` when percentage reasoning is required.
 
@@ -304,7 +304,7 @@ A percentage-related capability should not be added when the problem does not re
 
 # 7. Ratio
 
-## Rule 6 — Ratio
+## Rule 6: Ratio
 
 Annotate `ratio` only when ratio or proportional reasoning is the primary mathematical object of the problem.
 
@@ -351,7 +351,7 @@ Do not modify annotations merely to obtain coverage of all seven capabilities.
 
 # 8. Multi-Capability
 
-## Rule 7 — Multi-capability
+## Rule 7: Multi-capability
 
 A problem is considered multi-capability when at least two capabilities are required.
 
@@ -401,7 +401,7 @@ Multi-capability is a derived property. It is not itself one of the seven capabi
 
 # 9. Difficulty
 
-## Rule 8 — Difficulty
+## Rule 8: Difficulty
 
 Each problem must receive exactly one difficulty label:
 
@@ -438,7 +438,7 @@ Ambiguity and difficulty are separate annotations.
 
 # 10. Ambiguity
 
-## Rule 9 — Ambiguous
+## Rule 9: Ambiguous
 
 A problem should be marked as ambiguous/review-required when there is a substantive issue that prevents the annotation from being treated as straightforward.
 
@@ -487,17 +487,17 @@ hard + ambiguous
 
 For every problem, follow this order.
 
-## Step 1 — Read the problem
+## Step 1: Read the problem
 
 Read the complete problem statement before assigning any labels.
 
 Do not assign capabilities based only on isolated keywords.
 
-## Step 2 — Inspect the required reasoning
+## Step 2: Inspect the required reasoning
 
 Determine the operations and mathematical concepts actually required to obtain the ground-truth answer.
 
-## Step 3 — Assign arithmetic capabilities
+## Step 3: Assign arithmetic capabilities
 
 Check independently:
 
@@ -508,7 +508,7 @@ multiplication
 division
 ```
 
-## Step 4 — Assign conceptual mathematical capabilities
+## Step 4: Assign conceptual mathematical capabilities
 
 Check independently:
 
@@ -518,7 +518,7 @@ fraction
 ratio
 ```
 
-## Step 5 — Check multi-capability
+## Step 5: Check multi-capability
 
 If at least two capabilities are assigned:
 
@@ -532,7 +532,7 @@ Otherwise:
 multi-capability = false
 ```
 
-## Step 6 — Assign difficulty
+## Step 6: Assign difficulty
 
 Choose exactly one:
 
@@ -544,7 +544,7 @@ hard
 
 based on reasoning complexity.
 
-## Step 7 — Check ambiguity
+## Step 7: Check ambiguity
 
 Determine whether the problem requires manual review because of:
 
@@ -556,7 +556,7 @@ taxonomy boundary
 unusual reasoning
 ```
 
-## Step 8 — Write notes when necessary
+## Step 8: Write notes when necessary
 
 Use `notes` to record the reasoning behind non-obvious decisions.
 
@@ -644,7 +644,7 @@ The first 30 manually annotated problems provide calibration examples for future
 
 Important examples include:
 
-### Case 00003 — Division with remainder
+### Case 00003: Division with remainder
 
 ```text
 44 / 5
@@ -652,7 +652,7 @@ Important examples include:
 
 `division` is required even though the final answer is the remainder.
 
-### Case 00004 — Fraction without division (corrected in v3)
+### Case 00004: Fraction without division (corrected in v3)
 
 The problem uses "half the full hike distance". v2 allowed `division` here because a
 solution computes `50 / 2`, which contradicted case 00006 below (same "half of 50").
@@ -664,7 +664,7 @@ fraction
 
 without `division` (Rule 3, D1).
 
-### Case 00006 — Fraction without division
+### Case 00006: Fraction without division
 
 The third dart is described as:
 
@@ -682,7 +682,7 @@ without automatically adding `division`.
 
 This establishes that fraction and division are distinct capabilities.
 
-### Case 00010 — Relationship is not automatically ratio
+### Case 00010: Relationship is not automatically ratio
 
 The problem describes a relationship between shopping bags, but the annotation is:
 
@@ -699,7 +699,7 @@ ratio
 
 This is a key calibration example for the ratio boundary.
 
-### Case 00014 — Percentage + arithmetic
+### Case 00014: Percentage + arithmetic
 
 The problem requires:
 
@@ -711,13 +711,13 @@ division
 
 because the total meal cost, percentage tip, and equal splitting are all part of the required reasoning.
 
-### Case 00023 — Complex relationship reasoning
+### Case 00023: Complex relationship reasoning
 
 The problem contains a linguistically awkward relationship between quantities and is retained as a review/calibration case.
 
 Do not use this case as a simple keyword-based rule for `ratio`.
 
-### Case 00029 — Review case
+### Case 00029: Review case
 
 The problem requires verification of the literal interpretation and supplied ground truth.
 

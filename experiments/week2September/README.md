@@ -122,7 +122,7 @@ Current results:
 Teacher accuracy: 87/100 = 87.00%
 Student accuracy: 71/100 = 71.00%
 
-Teacher–Student gap:
+Teacher-Student gap:
 87.00% - 71.00% = 16.00 percentage points
 
 The baseline also identifies examples where:
@@ -594,7 +594,7 @@ Teacher:
 Student:
 71/100 = 71.00%
 
-Teacher–Student gap:
+Teacher-Student gap:
 16.00 percentage points
 
 Teacher-correct / Student-wrong:
@@ -680,7 +680,7 @@ Completed:
 [✓] LM Studio inference setup
 [✓] Teacher baseline
 [✓] Student baseline
-[✓] Teacher–Student comparison
+[✓] Teacher-Student comparison
 [✓] Difficulty metadata
 [✓] Teacher multi-trajectory generation
 [✓] Multi-trajectory re-evaluation

@@ -1,4 +1,4 @@
-    TASK HANDOVER — DACNTT/KLTN: Reasoning Knowledge Distillation
+    TASK HANDOVER (DACNTT/KLTN): Reasoning Knowledge Distillation
     File đích dự kiến: experiments/week2September/manual/task.txt
     Ngày cập nhật: 2026-10-12
 
@@ -18,13 +18,13 @@
     Đề xuất 2: Dynamic Learnability-Aware CoT Distillation.
 
     Tình trạng tổng quát:
-    - Task 4 — Extractor: DONE trừ A2 (cập nhật 2026-10-12). 34/34 case reviewed; D1–D3 chốt trong config/guideline_v3.md; gold v2 (bỏ division ở 5 bài) + rules v2 (phần A+B); chạy lại 4 cấu hình, kết quả chính thức division F1 0.8756 (baseline 0.7831).
+    - Task 4 (Extractor): DONE trừ A2 (cập nhật 2026-10-12). 34/34 case reviewed; D1-D3 chốt trong config/guideline_v3.md; gold v2 (bỏ division ở 5 bài) + rules v2 (phần A+B); chạy lại 4 cấu hình, kết quả chính thức division F1 0.8756 (baseline 0.7831).
       BLOCKED: xác minh A2 annotate độc lập (A1/A2 trùng 30/30). Quyết định và lý do: task4_decisions.md. Việc còn lại: task4_todo.txt.
-    - Task 5 — Freeze: chưa xác nhận đủ split D_pool/D_dev/D_test + hashes, experiment_config.json, selection_log_schema.json và analysis_plan.md.
-    - Task 6 — Trajectory pool: đã sinh/recover pool sơ bộ 500 trajectory cho 100 problem; báo cáo trước ghi 480 valid và 20 invalid_answer. Chưa phải pool D_pool chính thức.
-    - Task 7 — S0 -> S1: chưa có bằng chứng về một vòng selection-training-evaluation hoàn chỉnh trên D_dev với số liệu thực.
-    - Task 8 — Docs/environment: chưa xác nhận protocol/README đồng bộ, dependency đủ và clean environment đã test.
-    - Task 9 — Cloud: chưa có job cloud thành công nào được xác nhận trong trạng thái bàn giao này.
+    - Task 5 (Freeze): chưa xác nhận đủ split D_pool/D_dev/D_test + hashes, experiment_config.json, selection_log_schema.json và analysis_plan.md.
+    - Task 6 (Trajectory pool): đã sinh/recover pool sơ bộ 500 trajectory cho 100 problem; báo cáo trước ghi 480 valid và 20 invalid_answer. Chưa phải pool D_pool chính thức.
+    - Task 7 (S0 -> S1): chưa có bằng chứng về một vòng selection-training-evaluation hoàn chỉnh trên D_dev với số liệu thực.
+    - Task 8 (Docs/environment): chưa xác nhận protocol/README đồng bộ, dependency đủ và clean environment đã test.
+    - Task 9 (Cloud): chưa có job cloud thành công nào được xác nhận trong trạng thái bàn giao này.
 
     Cảnh báo:
     1. “480 trajectory hợp lệ” chỉ là kết quả theo tiêu chí hiện có; không tự động chứng minh mọi đáp án đúng, schema chính thức đạt, hay dữ liệu được phép dùng cho training.
@@ -161,10 +161,10 @@
     Chỉ giữ kết luận này nếu sau khi đọc guideline vẫn chưa đủ rõ. Đây không phải kết luận cuối đã được adjudicate.
 
     ======================================================================
-    3. TASK 4 — MANUAL ADJUDICATION - HƯỚNG DẪN TIẾP TỤC
+    3. TASK 4: MANUAL ADJUDICATION - HƯỚNG DẪN TIẾP TỤC
     ======================================================================
 
-    Bước 4.1 — Khởi tạo biến và xác minh file
+    Bước 4.1: Khởi tạo biến và xác minh file
 
     Chạy tại PowerShell:
     $Repo = "C:\KLTN-SLM-Reasoning"
@@ -193,7 +193,7 @@
 
     Expected fields đã xác nhận: problem_id, teacher_model, trajectory_id, checkpoint, question, reasoning_trace, answer, ground_truth, metadata, raw_generation. Không dùng status làm trường bắt buộc.
 
-    Bước 4.2 — Xác minh 34 case
+    Bước 4.2: Xác minh 34 case
 
     $ReviewCases = Import-Csv $ReviewPath
     "Review rows: $($ReviewCases.Count)"
@@ -201,7 +201,7 @@
 
     Expected theo báo cáo trước: 34 case; 32 division và 2 ratio. Nếu khác, dừng và đối chiếu file/baseline trước khi review.
 
-    Bước 4.3 — Đọc trace đầy đủ
+    Bước 4.3: Đọc trace đầy đủ
     - Dùng problem_id + trajectory_id để lấy đúng record từ raw JSONL.
     - Đọc question, reasoning_trace, answer và ground_truth.
     - Không chỉ dựa trên evidence bị cắt ngắn trong CSV.
@@ -216,7 +216,7 @@
     $Target[0] | Select-Object problem_id, trajectory_id, question,
         reasoning_trace, answer, ground_truth | Format-List
 
-    Bước 4.4 — Chốt định nghĩa capability trước khi quyết định
+    Bước 4.4: Chốt định nghĩa capability trước khi quyết định
     Đọc guideline_v2.md. Xác định nhất quán:
     - Gold mô tả kỹ năng cần để giải bài hay mọi phép toán xuất hiện trong một trace?
     - Khi nào division được gán riêng, đặc biệt nếu phép chia là bước trung gian cho fraction/percentage?
@@ -225,7 +225,7 @@
     - Percentage, fraction và ratio được phân biệt thế nào trong guideline?
     Nếu guideline chưa rõ, ghi definition ambiguity và thống nhất quy tắc trước khi đổi gold/rule. Không đổi quy ước giữa chừng.
 
-    Bước 4.5 — Điền manual_adjudication.csv
+    Bước 4.5: Điền manual_adjudication.csv
 
     Header 10 cột:
     problem_id,capability,trajectory_ids_reviewed,gold_capabilities_before,trigger_type,trace_evidence,adjudication,decision,rationale,review_status
@@ -269,7 +269,7 @@
 
     Đây là mẫu minh họa, không phải kết luận chuyên môn cuối cùng. Sau khi đọc guideline, có thể cập nhật nếu có bằng chứng.
 
-    Bước 4.6 — Kiểm tra file CSV sau khi điền
+    Bước 4.6: Kiểm tra file CSV sau khi điền
 
     $Adjudication = Import-Csv $AdjudicationFile
     "Rows: $($Adjudication.Count)"
@@ -311,7 +311,7 @@
 
     Expected: không có dòng nào.
 
-    Bước 4.7 — Sao lưu trước mọi thay đổi gold/rule/report
+    Bước 4.7: Sao lưu trước mọi thay đổi gold/rule/report
     Kiểm tra thư mục trước:
     if (Test-Path $BackupDir) {
         Write-Host "Backup folder exists. Inspect it; do not overwrite."
@@ -326,7 +326,7 @@
     - reports\capability_extractor_batch100_report.json -> baseline_backup\capability_extractor_batch100_report_before.json
     Tạo SHA256 manifest cho raw JSONL, annotations, rules config và hai baseline reports. Không chỉnh sửa raw pool.
 
-    Bước 4.8 — Đối chiếu division FP discrepancy
+    Bước 4.8: Đối chiếu division FP discrepancy
     $DivisionFP = Import-Csv "$OutDir\division_false_positives.csv"
     $RatioFP = Import-Csv "$OutDir\ratio_false_positives.csv"
     "Division FP CSV rows: $($DivisionFP.Count)"
@@ -334,7 +334,7 @@
     "Ratio FP CSV rows: $($RatioFP.Count)"
     Đối chiếu số này với report JSON/CSV. Baseline từng ghi division FP=113. Nếu CSV được sinh từ run khác hoặc discrepancy chưa giải thích được, dừng và tái tạo error analysis từ đúng baseline input.
 
-    Bước 4.9 — Sau khi adjudicate
+    Bước 4.9: Sau khi adjudicate
     - TRUE_CAPABILITY_OMITTED_FROM_GOLD: đề xuất cập nhật gold theo guideline, có audit trail.
     - FALSE_LEXICAL_TRIGGER: đề xuất sửa rule dựa trên ngữ cảnh, không chỉ xóa từ khóa tùy tiện.
     - DEFINITION_AMBIGUITY: chốt guideline trước; giữ gold/rule nguyên trạng tới khi có quyết định.
@@ -351,13 +351,13 @@
     - Report phân biệt ảnh hưởng của thay đổi gold với thay đổi extractor.
 
     ======================================================================
-    4. TASK 4 — CÁC ANNOTATION CÒN TỒN ĐỌNG CẦN GIẢI QUYẾT
+    4. TASK 4: CÁC ANNOTATION CÒN TỒN ĐỌNG CẦN GIẢI QUYẾT
     ======================================================================
 
     4.1. Pilot 30, annotator A2, Cohen's kappa
     Tình trạng: chưa có kappa được xác nhận; trước đó mới có A1.
     Việc:
-    - Tìm guideline_v2.md và nguồn 30 problem gsm8k_train_00000–gsm8k_train_00029.
+    - Tìm guideline_v2.md và nguồn 30 problem gsm8k_train_00000-gsm8k_train_00029.
     - A2 annotate độc lập, không xem nhãn A1.
     - Tạo data\pilot\pilot_30_annotations_A2.jsonl.
     - Tính Cohen's kappa riêng cho 7 capability (binary label per problem/capability nếu phù hợp với format annotation).
@@ -391,7 +391,7 @@
     Expected: cả 5 case đóng hoặc còn open kèm lý do cụ thể và điều kiện để đóng. Không sửa âm thầm.
 
     ======================================================================
-    5. TASK 5 — FREEZE SETUP TRƯỚC TRAINING
+    5. TASK 5: FREEZE SETUP TRƯỚC TRAINING
     ======================================================================
 
     Cần có:
@@ -414,7 +414,7 @@
     - Không dùng D_dev/D_test làm training data.
 
     ======================================================================
-    6. TASK 6 — POOL CHÍNH THỨC TRÊN D_POOL
+    6. TASK 6: POOL CHÍNH THỨC TRÊN D_POOL
     ======================================================================
 
     Pool sơ bộ: 500 trajectory/100 problem, theo báo cáo 480 valid và 20 invalid_answer. Giữ raw file gốc.
@@ -435,7 +435,7 @@
     - Có report verification và manifest/hash.
 
     ======================================================================
-    7. TASK 7 — THỰC NGHIỆM S0 -> S1
+    7. TASK 7: THỰC NGHIỆM S0 -> S1
     ======================================================================
 
    Chỉ bắt đầu sau khi Task 5 freeze và Task 6 pool đã validate.
@@ -466,7 +466,7 @@
     - Truy nguyên được checkpoint -> config -> selected IDs -> pool/split.
 
     ======================================================================
-    8. TASK 8 — TÀI LIỆU VÀ MÔI TRƯỜNG
+    8. TASK 8: TÀI LIỆU VÀ MÔI TRƯỜNG
     ======================================================================
     Công việc:
     1. Đối chiếu proposal2_trajectory_protocol.md với README.md/readme.md.
@@ -482,7 +482,7 @@
     - Hạn chế hard-code đường dẫn tuyệt đối chỉ hoạt động trên một máy.
 
     ======================================================================
-    9. TASK 9 — CLOUD/AUTOMATION
+    9. TASK 9: CLOUD/AUTOMATION
     ======================================================================
     Cần chuẩn bị trước khi thuê:
     - Split/config/analysis plan đã freeze.
@@ -532,7 +532,7 @@
     [x] 1. Xác minh repo, branch, git status và file nguồn.
     [x] 2. Xác minh raw pool có 500 record/100 problem; giữ nguyên file.
     [x] 3. Xác minh review cases có 34; giải quyết discrepancy division FP=113.
-    [x] 4. Đọc guideline và chốt định nghĩa capability. (D1–D3 chốt trong config/guideline_v3.md)
+    [x] 4. Đọc guideline và chốt định nghĩa capability. (D1-D3 chốt trong config/guideline_v3.md)
     [x] 5. Đọc trace 34 case; điền manual_adjudication.csv.
     [x] 6. Kiểm tra Rows/Reviewed/Needs discussion/Pending/missing/duplicates/invalid values.
     [x] 7. Sao lưu annotation, rules, baseline reports và tạo SHA256 manifest.
