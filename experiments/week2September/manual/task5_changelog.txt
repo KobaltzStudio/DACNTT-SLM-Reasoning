@@ -1,0 +1,135 @@
+CHANGELOG TASK 5: experiments/week2September/manual
+================================================
+
+Mốc so sánh: commit 854db9c (branch v1.4-trajectory-pool, "re-format text files").
+Kiểm tra: git status -uall -- experiments/week2September/manual ; git diff 854db9c -- experiments/week2September/manual
+
+Phạm vi: Task 5 (README.txt mục 5, checklist 12): freeze split, config, selection schema, analysis plan.
+Trạng thái (2026-10-14): FROZEN v1. Mọi artifact đủ; experiment_config.json hết TBD (--frozen PASS).
+Đã chốt: #1, I1, I2, I6, I7, I8. Còn: smoke test để chốt I3, I4, I5.
+Quyết định, kết quả và lý do: task5_decisions.md. Danh sách việc: task5_todo.txt.
+
+======================================================================
+1. KẾT QUẢ CHÍNH
+======================================================================
+
+- Định nghĩa B0-B6, L_proxy, L_emp, split, seed, budget, kế hoạch thống kê: chỉ còn trong readme.md gốc trước
+  commit 3f7dce4 (git show 3f7dce4^:readme.md; bị xóa trong 3f7dce4, TrinhNghi, 2026-10-12). Dùng làm nguồn;
+  nhóm đã xác nhận còn hiệu lực (2026-10-14).
+- Split (seed 363636), validate_splits.py PASS 31/31, 3 lần chạy với PYTHONHASHSEED khác nhau cho hash giống hệt:
+    D_pool 6968 (gồm 100/100 bài batch_100)
+    D_dev   500 (85 supplement + 415 ngẫu nhiên)
+    D_test 1319 (GSM8K test chính thức, revision 740312add88f781978c0658806c59bc2815b9866)
+    5 bài bị loại khỏi D_pool do trùng 13-gram (4 trùng thật, 1 ca biên: gsm8k_train_00501).
+- gsm8k_train.jsonl khớp HF train ở cùng revision: 0/7473 khác biệt.
+- selection_log_schema.json: ví dụ hợp lệ PASS 4/4, ví dụ sai FAIL 4/4 đúng lỗi đã cài.
+- experiment_config.json: v1, hết TBD, validate --frozen PASS. 13 giá trị còn thiếu được điền theo đề xuất có lập luận
+  (task5_decisions.md mục I): answer_utils.py làm extractor/verifier; budget đếm token response (prompt mask khỏi
+  loss); n_round 200, beta_round 45.426 token/vòng (yêu cầu Task 6 pool >= 1000 bài); b = 7 step (1 epoch, nhóm 50);
+  LoRA mọi lớp linear, dropout 0.1, AdamW, lr cố định, batch 8 (theo QLoRA); seed B2/B3; retention chỉ B6.
+- r = 50% đối chiếu toàn văn TiC-LM: α_t = 1/2 được khuyến nghị (Sec. 6.1).
+- Token của pool dưới tokenizer Student (Qwen2.5-1.5B-Instruct @ 989aa79), 480 trajectory valid / 98 bài:
+    response:           tổng 109.022, trung bình 227.1, trung vị 215, min 75, max 484
+    prompt + response:  tổng 172.606, trung bình 359.6, trung vị 348, min 186, max 633
+    B3 (ngắn nhất/bài): tổng  16.957, trung bình 173.0
+  token_length của Teacher = response + 1 ở 478/480 trajectory.
+- Answer extractor/verifier ứng viên scripts/answer_utils.py (số cuối + chuẩn hóa Decimal): tái tạo đúng
+  480 valid / 20 invalid_answer của pool. Hai hàm cũ lệch 1 (generate) và 5 (regenerate) record. Chưa chốt.
+- Revision model (điền vào config): Teacher Qwen2.5-3B-Instruct aa8e725 (suy ra: repo HF không đổi từ
+  2024-09-25, trước khi sinh trajectory), Student Qwen2.5-1.5B-Instruct 989aa79 (ghim).
+- Phát hiện khác:
+  - Pool sơ bộ có trajectory valid ở 98 bài, không phải 100 (gsm8k_train_00029, gsm8k_train_00056 không có).
+  - extract_answer của scripts/re_evaluate_teacher_trajectories.py (gốc repo) không khớp 480/480 trajectory valid.
+  - scripts/select_traces_automatically.py (gốc repo) không dùng được cho B3.
+  - requirements.txt mã hóa UTF-16, chứa torch==2.13.0+cu126, thiếu jsonschema.
+
+======================================================================
+2. FILE ĐÃ SỬA (2)
+======================================================================
+
+1. README.txt
+   - Dòng trạng thái Task 5 (mục 0): DONE, số lượng split, nguồn B4/B5.
+   - Checklist mục 11, dòng 12: [ ] -> [x].
+
+2. config/proposal2_trajectory_protocol.md
+   - Bỏ phần lặp: file cũ gồm 2 bản giống hệt nối liền (dòng 107 bắt đầu bằng "}# Proposal 2").
+   - Giữ dòng 1-106 + "}" (dấu đóng JSON của nửa đầu). Đã diff: hai nửa giống hệt, không mất nội dung.
+
+======================================================================
+3. FILE MỚI (27)
+======================================================================
+
+Tài liệu (5):
+1. task5_todo.txt          10 việc + mô tả chi tiết, có trạng thái.
+2. task5_decisions.md      quyết định A-G, kết quả chạy (mục H), các mục còn mở.
+3. task5_changelog.txt     file này.
+4. analysis_plan.md        FROZEN v1. Mỗi mục ghi nguồn [README CŨ §x], [QĐ #x] hoặc [ĐX #Ix].
+5. config/proposal2_full_protocol.md   trích NGUYÊN VĂN §5.1, §9, §10.1, §11.1, §13.1-13.2, §16.1-16.2, §19-19.1
+                           từ 3f7dce4^:readme.md (đã diff khớp 100%), đầu file ghi nguồn và lệnh tái tạo.
+
+Dữ liệu (2):
+6. data/raw/gsm8k_test.jsonl         1319 bài; problem_id = gsm8k_test_{HF index:05d}.
+7. data/raw/gsm8k_test_source.json   dataset/config/split, revision, sha256.
+
+Split (5):
+8.  splits/d_pool_ids.txt
+9.  splits/d_dev_ids.txt
+10. splits/d_test_ids.txt
+11. splits/near_duplicates.jsonl     5 bài bị loại + id trùng + n-gram minh họa.
+12. splits/split_manifest.json       nguồn + sha256, seed, quy tắc, số lượng, sha256 từng file.
+
+Config/schema (5):
+13. config/experiment_config.json            v1, hết TBD (--frozen PASS).
+14. schemas/experiment_config_schema.json    cho phép "TBD" ở bản draft.
+15. schemas/selection_log_schema.json        record selection + record checkpoint.
+16. schemas/examples/selection_log_example_valid.jsonl    4 record hợp lệ (giá trị minh họa).
+17. schemas/examples/selection_log_example_invalid.jsonl  4 record sai có chủ đích.
+
+Script (8):
+18. scripts/download_gsm8k_test.py       tải GSM8K test, không ghi đè.
+19. scripts/create_splits.py             tạo split tất định, không ghi đè splits/.
+20. scripts/validate_splits.py           31 check độc lập.
+21. scripts/validate_selection_log.py    schema + problem_id thuộc D_pool + trajectory_id khớp problem_id.
+22. scripts/validate_experiment_config.py schema + B4/B5 bắt buộc + sha256 manifest; --frozen cấm "TBD".
+23. scripts/answer_utils.py              ứng viên extractor/verifier (chưa chốt).
+24. scripts/test_answer_utils.py         12 unit case + đối chiếu trạng thái pool + so với 2 hàm cũ.
+25. scripts/measure_pool_tokens.py       đếm token bằng tokenizer Student (chỉ tải tokenizer).
+
+Report (2):
+26. reports/task5/pool_token_stats.json
+27. reports/task5/SHA256SUMS_task5.txt   sha256 của 32 file (split, config, schema, analysis plan, dữ liệu
+                                         nguồn, pool, script). Phải tạo lại khi freeze.
+
+Môi trường (không commit, .venv/ có trong .gitignore):
+- .venv/ ở gốc repo: Python 3.14.6, cài theo requirements.txt (chuyển UTF-16 -> UTF-8,
+  --extra-index-url https://download.pytorch.org/whl/cu126) + jsonschema 4.26.0.
+  torch 2.13.0+cu126 (CUDA khả dụng), transformers 5.15.0, datasets 5.0.1.
+
+======================================================================
+4. LỖI ĐÃ SỬA TRONG QUÁ TRÌNH LÀM
+======================================================================
+
+- create_splits.py: near_duplicates.jsonl khác nhau giữa các lần chạy (example_ngram lấy từ set, thứ tự phụ
+  thuộc hash randomization). Sửa: n-gram theo thứ tự xuất hiện. splits/ tạo lại (chưa freeze).
+- measure_pool_tokens.py: transformers 5.x apply_chat_template(tokenize=True) trả về dict -> đếm ra 2.
+  Sửa: lấy text rồi tokenize.
+
+======================================================================
+5. CÒN LẠI
+======================================================================
+
+- Smoke test trên D_dev để chốt I3, I4, I5 (xem README.txt mục 0, Task 5 "Còn lại"). Đổi giá trị nào: config v2,
+  chạy lại --frozen, tạo lại reports/task5/SHA256SUMS_task5.txt.
+- Ràng buộc chuyển sang Task 6: pool chính thức >= 1000 bài D_pool, chấm bằng scripts/answer_utils.py.
+
+======================================================================
+6. LỆNH KIỂM TRA (chạy tại experiments/week2September/manual)
+======================================================================
+
+  PY=../../../.venv/bin/python
+  $PY scripts/validate_splits.py
+  $PY scripts/validate_selection_log.py schemas/examples/selection_log_example_valid.jsonl
+  $PY scripts/validate_selection_log.py schemas/examples/selection_log_example_invalid.jsonl   (phải FAIL)
+  $PY scripts/validate_experiment_config.py --frozen     (PASS)
+  python3 scripts/test_answer_utils.py
+  sha256sum -c reports/task5/SHA256SUMS_task5.txt

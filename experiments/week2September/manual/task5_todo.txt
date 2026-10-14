@@ -1,0 +1,152 @@
+TASK 5: TODO (Freeze setup trước training: split, config, selection schema, analysis plan)
+Ngày lập: 2026-10-13
+Trạng thái hiện tại (cập nhật 2026-10-14): FROZEN v1. Mọi artifact đủ; config --frozen PASS.
+  Đã chốt: nguồn README cũ (#1), đề xuất I1, I2, I6, I7, I8. Còn: smoke test để chốt I3, I4, I5 (README.txt mục 0). Quyết định và kết quả: task5_decisions.md. Thay đổi: task5_changelog.txt.
+Nguồn yêu cầu: README.txt mục 5 (dòng ~394-414) và checklist 12.
+
+======================================================================
+DANH SÁCH VIỆC CẦN LÀM
+======================================================================
+
+[x] 1. Tìm định nghĩa B4/B5 và L_proxy.  -> Trong 3f7dce4^:readme.md;
+[x] 2. Chốt nguồn dữ liệu cho D_test.  -> XONG: GSM8K test chính thức (1319 bài, revision 740312a)
+[x] 3. Chốt quy tắc chia split.  -> XONG: task5_decisions.md mục B (#4-9)
+[x] 4. Viết script tạo split; tạo splits/ + split_manifest.  -> XONG: D_pool 6968 / D_dev 500 / D_test 1319, 5 near-dup bị loại
+[x] 5. Kiểm tra split.  -> XONG: validate_splits.py PASS 31/31; 3 lần chạy cho hash giống hệt
+[x] 6. Tạo config/experiment_config.json.  -> XONG: hết TBD, --frozen PASS (giá trị đề xuất: decisions mục I)
+[x] 7. Tạo schemas/selection_log_schema.json + ví dụ; validate.  -> XONG: ví dụ hợp lệ PASS 4/4, ví dụ sai FAIL 4/4
+[x] 8. Viết analysis_plan.md.  -> XONG: không còn TBD; nguồn từng mục ghi rõ
+[x] 9. Tạo SHA256 manifest.  -> XONG: reports/task5/SHA256SUMS_task5.txt (tạo lại nếu đổi bất kỳ file nào)
+[x] 10. Cập nhật README/changelog; commit artifacts.  -> XONG
+
+======================================================================
+MÔ TẢ CHI TIẾT
+======================================================================
+
+----------------------------------------------------------------------
+1. Định nghĩa B4/B5 và L_proxy (BLOCKER)
+----------------------------------------------------------------------
+(Sửa 2026-10-14) Định nghĩa CÓ, nhưng chỉ còn trong lịch sử git: readme.md gốc trước commit 3f7dce4
+(bị xóa trong commit đó, TrinhNghi, 2026-10-12). Xem: git show 3f7dce4^:readme.md
+  - §9.1: L_proxy (NLL dưới Student + dải Gauss) và L_emp.
+  - §16.2: bảng B0-B6; B4 = static learnability (L_proxy tại S_0), B5 = dynamic (L_proxy tại S_t).
+  - §13.1, §13.2, §11.1, §19.1: split, seed, budget, kế hoạch thống kê.
+Đã chép vào analysis_plan.md kèm nguồn từng mục.
+Còn lại: nhóm xác nhận các định nghĩa này còn hiệu lực (task5_decisions.md "Còn mở" #1).
+Ghi chú: config/proposal2_trajectory_protocol.md bị lặp nội dung -> ĐÃ SỬA 2026-10-14 (QĐ #31).
+
+----------------------------------------------------------------------
+2. Nguồn dữ liệu D_test
+----------------------------------------------------------------------
+Hiện trạng: chỉ có data/raw/gsm8k_train.jsonl (7473 bài). Chưa tải GSM8K test (1319 bài).
+Phương án:
+  a. D_test = GSM8K test chính thức (khuyến nghị: so sánh được với các paper, không đụng dữ liệu đã dùng).
+     -> cần tải về data/raw/gsm8k_test.jsonl, ghi nguồn/version và hash.
+  b. D_test tách từ GSM8K train.
+Expected: quyết định ghi trong analysis_plan.md và split_manifest.
+
+----------------------------------------------------------------------
+3. Quy tắc chia split
+----------------------------------------------------------------------
+Dữ liệu hiện có (problem ID):
+  - batch_100: 100 bài (đã chứa toàn bộ pilot_30). Đã có 500 trajectory (480 valid) và nhãn capability.
+  - supplement_selected: 85 bài, không trùng batch_100.
+  - gsm8k_train: 7473 bài.
+Cần chốt:
+  - Kích thước D_pool, D_dev (và D_test nếu theo phương án 2b).
+  - batch_100 có bắt buộc vào D_pool không (để tái sử dụng pool 500 trajectory ở Task 6).
+    Nếu không, các trajectory của bài rơi vào D_dev/D_test KHÔNG được dùng để train.
+  - Supplement 85 bài thuộc split nào.
+  - Có stratify theo capability (dùng nhãn thủ công) không; bài chưa có nhãn xử lý thế nào.
+  - Seed chia split (ghi rõ, tách biệt với seed training).
+Nguyên tắc (README mục 5):
+  - Split ở mức problem ID, không ở mức trajectory; mọi trajectory của một bài theo cùng split.
+  - Không dùng D_dev/D_test làm training data.
+Expected: quy tắc viết được thành thuật toán tất định (cùng input + seed -> cùng split).
+
+----------------------------------------------------------------------
+4. Script tạo split và splits/
+----------------------------------------------------------------------
+Đề xuất:
+  - scripts/create_splits.py: input file nguồn + seed + kích thước; output:
+      splits/d_pool_ids.txt, splits/d_dev_ids.txt, splits/d_test_ids.txt (mỗi dòng 1 problem_id, đã sort)
+      splits/split_manifest.json: nguồn, hash file nguồn, seed, quy tắc, số lượng mỗi split, hash mỗi file split.
+  - Không ghi đè nếu splits/ đã tồn tại (tránh vô tình đổi split đã freeze).
+Expected: chạy lại script cho ra file giống hệt (hash khớp).
+
+----------------------------------------------------------------------
+5. Kiểm tra split
+----------------------------------------------------------------------
+Đề xuất scripts/validate_splits.py, kiểm tra:
+  - Ba tập đôi một không giao nhau; không có ID trùng trong từng tập.
+  - Mọi ID tồn tại trong file nguồn tương ứng.
+  - Số lượng khớp split_manifest.json.
+  - Hash từng file khớp manifest.
+  - (nếu D_test từ train) không có câu hỏi trùng nội dung giữa các split.
+Expected: PASS; số lượng mỗi split được ghi rõ trong manifest và README.
+
+----------------------------------------------------------------------
+6. config/experiment_config.json
+----------------------------------------------------------------------
+Giá trị Teacher hiện đang dùng (scripts/generate_teacher_trajectories_batch.py) để đối chiếu:
+  model Qwen/Qwen2.5-3B-Instruct, K=5, temperature=0.7, max_new_tokens=512,
+  generation_seed=20261009 (seed từng trajectory = seed + problem_index*K + k).
+Cần có:
+  - seed (split, training, generation), ghi riêng từng loại.
+  - Teacher/Student checkpoint (Student dự kiến Qwen2.5-1.5B-Instruct; ghi revision/commit HF nếu được).
+  - K, temperature, max_new_tokens.
+  - Checkpoint schedule (đặt tên theo protocol: student_ckpt_000, ...).
+  - Training budget (số step/epoch/số trajectory mỗi vòng), hyperparameters (lr, batch size, LoRA/full, ...).
+  - Selection parameters (theo định nghĩa L_proxy ở mục 1).
+  - Evaluation protocol (trên D_dev; cách trích đáp án, so khớp ground_truth, decoding khi eval).
+  - Đường dẫn tới splits/ và hash.
+Nên có thêm schemas/experiment_config_schema.json để validate.
+Expected: config validate PASS; mọi tham số dùng ở Task 6-7 đều lấy từ file này.
+
+----------------------------------------------------------------------
+7. schemas/selection_log_schema.json
+----------------------------------------------------------------------
+Mỗi record ghi (README mục 5):
+  - checkpoint nguồn (Student checkpoint dùng để tính L_proxy).
+  - problem_id, trajectory_id (problem_id phải thuộc D_pool).
+  - L_proxy (giá trị + version định nghĩa).
+  - tiêu chí/lý do chọn, selected (true/false).
+  - outcome (kết quả sau training, có thể null lúc ghi log).
+Cần làm: viết schema + 1 file ví dụ hợp lệ + 1 ví dụ sai; validate bằng jsonschema
+  (có thể theo mẫu scripts/validate_trajectory.py).
+Expected: ví dụ hợp lệ PASS, ví dụ sai FAIL đúng chỗ.
+
+----------------------------------------------------------------------
+8. analysis_plan.md
+----------------------------------------------------------------------
+Nội dung tối thiểu:
+  - Giả thuyết chính (theo Đề xuất 2: learnability phụ thuộc trạng thái Student).
+  - Định nghĩa B4, B5 (từ mục 1) và so sánh chính B5 vs B4.
+  - Metric chính (vd. accuracy trên D_dev/D_test) và metric phụ; chọn trước khi chạy.
+  - Protocol: S0 -> eval -> L_proxy -> selection -> train S1 -> eval.
+  - Seed/budget: bao nhiêu seed, budget bằng nhau giữa các baseline.
+  - Khi nào dùng D_test (chỉ đánh giá cuối, không dùng để chỉnh tham số).
+  - Giới hạn đã biết (A2 chưa độc lập ở Task 4, supplement chỉ có A1, ...).
+Expected: đọc analysis_plan.md là biết chạy gì, so sánh gì, kết luận dựa trên metric nào.
+
+----------------------------------------------------------------------
+9. Manifest hash
+----------------------------------------------------------------------
+Tạo SHA256SUMS (vd. splits/SHA256SUMS_freeze.txt, đường dẫn tương đối từ manual/) gồm:
+  - splits/*, config/experiment_config.json, schemas/selection_log_schema.json, analysis_plan.md.
+  - Dữ liệu nguồn: data/raw/gsm8k_train.jsonl (+ gsm8k_test nếu có), batch_100, supplement.
+  - Code quan trọng: create_splits.py, validate_splits.py, script generate/validate trajectory.
+Kiểm tra: cd experiments/week2September/manual && sha256sum -c splits/SHA256SUMS_freeze.txt
+Expected: OK toàn bộ.
+
+----------------------------------------------------------------------
+10. Đóng Task 5
+----------------------------------------------------------------------
+Chạy lại toàn bộ kiểm tra (validate_splits, validate config/schema, sha256sum -c).
+Cập nhật: changelog.txt, README.txt (dòng trạng thái Task 5, checklist 12).
+Commit artifacts trước training vòng đầu; ghi commit hash vào README/changelog.
+Điều kiện DONE (README mục 5 và 12):
+  - Đủ 4 artifacts; split disjoint; số lượng mỗi split ghi rõ; hash tái tính được.
+  - B4/B5 được định nghĩa chính xác trong analysis_plan.
+  - Không dùng D_dev/D_test làm training data.
+  - Sau freeze: mọi thay đổi phải tạo version mới + ghi lý do, không sửa âm thầm.

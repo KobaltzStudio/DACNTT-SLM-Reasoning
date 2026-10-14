@@ -675,21 +675,21 @@ Because Teacher generation uses local inference and temperature 0.7, regenerated
 
 Completed:
 
-[✓] Python virtual environment
-[✓] PyTorch / CUDA environment
-[✓] LM Studio inference setup
-[✓] Teacher baseline
-[✓] Student baseline
-[✓] Teacher-Student comparison
-[✓] Difficulty metadata
-[✓] Teacher multi-trajectory generation
-[✓] Multi-trajectory re-evaluation
-[✓] Multi-trajectory analysis
-[✓] Teacher-correct / Student-wrong extraction
-[✓] Student skill-gap analysis
-[✓] Candidate-pool validation
-[✓] Experimental data backup
-[✓] Week 2 experimental snapshot
+[x] Python virtual environment
+[x] PyTorch / CUDA environment
+[x] LM Studio inference setup
+[x] Teacher baseline
+[x] Student baseline
+[x] Teacher-Student comparison
+[x] Difficulty metadata
+[x] Teacher multi-trajectory generation
+[x] Multi-trajectory re-evaluation
+[x] Multi-trajectory analysis
+[x] Teacher-correct / Student-wrong extraction
+[x] Student skill-gap analysis
+[x] Candidate-pool validation
+[x] Experimental data backup
+[x] Week 2 experimental snapshot
 
 Deferred:
 

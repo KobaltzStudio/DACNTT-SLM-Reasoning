@@ -20,7 +20,16 @@
     Tình trạng tổng quát:
     - Task 4 (Extractor): DONE trừ A2 (cập nhật 2026-10-12). 34/34 case reviewed; D1-D3 chốt trong config/guideline_v3.md; gold v2 (bỏ division ở 5 bài) + rules v2 (phần A+B); chạy lại 4 cấu hình, kết quả chính thức division F1 0.8756 (baseline 0.7831).
       BLOCKED: xác minh A2 annotate độc lập (A1/A2 trùng 30/30). Quyết định và lý do: task4_decisions.md. Việc còn lại: task4_todo.txt.
-    - Task 5 (Freeze): chưa xác nhận đủ split D_pool/D_dev/D_test + hashes, experiment_config.json, selection_log_schema.json và analysis_plan.md.
+    - Task 5 (Freeze): DONE (cập nhật 2026-10-14). splits/ đã tạo và validate (D_pool 6968, D_dev 500, D_test 1319 = GSM8K test; 5 near-duplicate bị loại); selection_log_schema.json đã validate; experiment_config.json hết TBD (--frozen PASS); analysis_plan.md đầy đủ; manifest reports/task5/SHA256SUMS_task5.txt.
+      B4/B5, L_proxy: config/proposal2_full_protocol.md (nguyên văn từ readme.md trước commit 3f7dce4), nhóm đã xác nhận. Đề xuất task5_decisions.md mục I: I1, I2, I6, I7, I8 đã chốt; I3, I4, I5 là giá trị tạm, chờ smoke test.
+      Còn lại của Task 5:
+        1. Smoke test trên D_dev (không dùng D_test) để chốt I3 (n_round 200, beta_round 45.426 token/vòng), I4 (b = 7 step), I5 (LoRA, lr 2e-4 cố định, batch 8):
+           eval S_0 trên D_dev (đồng thời đo thời gian eval); train 1 vòng khoảng 200 trajectory chọn ngẫu nhiên từ pool sơ bộ; eval lại trên D_dev.
+           Accuracy thay đổi rõ và loss giảm ổn định -> giữ giá trị; gần như không đổi -> tăng n_round hoặc epoch; loss dao động/tăng -> giảm lr.
+           Đổi giá trị nào thì tạo config v2 kèm lý do, chạy lại validate_experiment_config.py --frozen, tạo lại reports/task5/SHA256SUMS_task5.txt. Phải xong trước thí nghiệm chính.
+        2. Ràng buộc chuyển sang Task 6: pool chính thức >= 1000 bài D_pool (khoảng 900 bài x K=5 = 4.500 lượt sinh thêm), chấm bằng scripts/answer_utils.py.
+           Nếu không đủ tài nguyên: giảm n_round tương ứng (vd. pool 500 bài -> n_round 100, khoảng 22.700 token/vòng), sửa I3 bằng config v2.
+        3. requirements.txt: chuyển sang UTF-8 và thêm jsonschema (các script validate cần); cài torch cần --extra-index-url https://download.pytorch.org/whl/cu126. Thuộc Task 8.
     - Task 6 (Trajectory pool): đã sinh/recover pool sơ bộ 500 trajectory cho 100 problem; báo cáo trước ghi 480 valid và 20 invalid_answer. Chưa phải pool D_pool chính thức.
     - Task 7 (S0 -> S1): chưa có bằng chứng về một vòng selection-training-evaluation hoàn chỉnh trên D_dev với số liệu thực.
     - Task 8 (Docs/environment): chưa xác nhận protocol/README đồng bộ, dependency đủ và clean environment đã test.
@@ -540,7 +549,7 @@
     [x] 9. Bổ sung ratio/percentage/fraction annotations.
     [x] 10. Đóng 5 ambiguous cases.
     [x] 11. Chạy extractor có kiểm soát; lưu report mới, không ghi đè baseline. (reports/task4_reruns/)
-    [ ] 12. Tạo/freeze split, config, selection schema, analysis plan; commit.
+    [x] 12. Tạo/freeze split, config, selection schema, analysis plan; commit. (--frozen PASS; I3, I4, I5 chờ smoke test, xem mục 0)
     [ ] 13. Validate pool chính thức trên D_pool.
     [ ] 14. Evaluate S0, tính L_proxy, selection, train S1, evaluate.
     [ ] 15. Render graph/learning curve từ số liệu thật.

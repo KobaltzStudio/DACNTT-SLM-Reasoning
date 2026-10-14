@@ -545,15 +545,15 @@ cov(τ) = tỉ lệ capability **chưa thành thạo** mà τ có chạm tới
 
 | Mục | Công thức | Trạng thái code |
 |---|---|---|
-| 3.1 | (1)(2)(3)(4) pool & correctness | ✅ đầy đủ |
-| 3.1 | (5) loss SFT, (7) policy động, (8) mục tiêu | ❌ chưa (chưa có training loop) |
-| 3.1 | (6) policy tĩnh + budget | ✅ có bản baseline (Top-K) |
-| 3.3 | (9) `d(q)` + metadata trajectory | ✅ đầy đủ |
-| 3.4 | (11)(12)(14) `h_c`, `C(q)`, `g_c` | ✅ đầy đủ |
-| 3.4 | (13) `m_c` mastery theo capability | ⚠️ mới có accuracy theo độ khó |
-| 3.5 | (15)(16)(17)(18) graph, transfer, bottleneck | ❌ chưa |
-| 3.6 | (19)(20)(21)(22)(23) learnability | ❌ chưa (cần logprob của Student) |
-| 3.6 | (24) composite score | ⚠️ có bản heuristic thay thế |
+| 3.1 | (1)(2)(3)(4) pool & correctness | Đủ |
+| 3.1 | (5) loss SFT, (7) policy động, (8) mục tiêu | Chưa (chưa có training loop) |
+| 3.1 | (6) policy tĩnh + budget | Có bản baseline (Top-K) |
+| 3.3 | (9) `d(q)` + metadata trajectory | Đủ |
+| 3.4 | (11)(12)(14) `h_c`, `C(q)`, `g_c` | Đủ |
+| 3.4 | (13) `m_c` mastery theo capability | Một phần: mới có accuracy theo độ khó |
+| 3.5 | (15)(16)(17)(18) graph, transfer, bottleneck | Chưa |
+| 3.6 | (19)(20)(21)(22)(23) learnability | Chưa (cần logprob của Student) |
+| 3.6 | (24) composite score | Một phần: có bản heuristic thay thế |
 
 **Hai thứ chặn phần còn lại:**
 1. **Truy cập logprob của Student**: mọi công thức 3.6 đều dựa vào `ℓ(τ|q,θ)`; backend LM Studio hiện tại trong `scripts/common_lmstudio.py` chỉ trả text.

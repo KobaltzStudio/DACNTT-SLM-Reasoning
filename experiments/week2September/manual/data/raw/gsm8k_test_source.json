@@ -1,0 +1,10 @@
+{
+  "dataset": "openai/gsm8k",
+  "config": "main",
+  "split": "test",
+  "revision": "740312add88f781978c0658806c59bc2815b9866",
+  "count": 1319,
+  "problem_id_rule": "gsm8k_test_{hf_index:05d}",
+  "output_file": "data/raw/gsm8k_test.jsonl",
+  "output_sha256": "96ec83f9afa01231e53a6c4371e0f15f547c6855aeeeddf8001dda146186acc4"
+}

@@ -1,0 +1,63 @@
+{
+  "split_version": "v1",
+  "created_by": "scripts/create_splits.py",
+  "script_sha256": "052635fa4891476e9ed284f33d372ccaf477fcb708ce5b2d2bf2abd6ac93f539",
+  "split_seed": 363636,
+  "rules": {
+    "level": "problem_id; all trajectories of a problem share its split",
+    "d_test": "all problems in gsm8k_test.jsonl (official GSM8K test)",
+    "d_dev": "all supplement_selected problems + random.Random(split_seed).sample(sorted(gsm8k_train - batch_100 - supplement), n_dev - |supplement|)",
+    "d_pool": "gsm8k_train - d_dev - near_duplicates",
+    "near_duplicate": "D_pool candidate shares >= 1 lowercase word 13-gram (regex \\w+) with any D_dev or D_test question; whole question used if shorter than 13 words",
+    "batch_100": "must be in d_pool"
+  },
+  "n_dev": 500,
+  "ngram": 13,
+  "sources": {
+    "gsm8k_train": {
+      "path": "data/raw/gsm8k_train.jsonl",
+      "sha256": "b49b58971a0083f7712ba564814de1b67574775b0f36e81d774f206bf5d99b81"
+    },
+    "gsm8k_test": {
+      "path": "data/raw/gsm8k_test.jsonl",
+      "sha256": "96ec83f9afa01231e53a6c4371e0f15f547c6855aeeeddf8001dda146186acc4"
+    },
+    "batch_100": {
+      "path": "data/batch_100/batch_100.jsonl",
+      "sha256": "e0eea15a5e21e3957644460fc9626683a1b6ed159cf343d982f2205128bd36a3"
+    },
+    "supplement_selected": {
+      "path": "data/raw/supplement_selected.jsonl",
+      "sha256": "8739fd5ba63fe9da4f77ea0a260fcd48d5c72fb6e3b44d0a225ad0479abc1a37"
+    }
+  },
+  "counts": {
+    "gsm8k_train": 7473,
+    "gsm8k_test": 1319,
+    "d_pool": 6968,
+    "d_dev": 500,
+    "d_dev_supplement": 85,
+    "d_dev_random": 415,
+    "d_test": 1319,
+    "near_duplicates_removed": 5,
+    "batch_100_in_pool": 100
+  },
+  "files": {
+    "d_pool": {
+      "path": "splits/d_pool_ids.txt",
+      "sha256": "6463d0ce8c159653d8b410c25d0751c6b0f37323d6e24e9391bd75ae0f7562cd"
+    },
+    "d_dev": {
+      "path": "splits/d_dev_ids.txt",
+      "sha256": "385ff56df2d5401b1ee7027fe2976b181c87b82bb13051293058df059cd06f0d"
+    },
+    "d_test": {
+      "path": "splits/d_test_ids.txt",
+      "sha256": "dc6a008ace96e743da18ad69091ba6b96fb2e8adb3fd48ae1afed05fdb203e99"
+    },
+    "near_duplicates": {
+      "path": "splits/near_duplicates.jsonl",
+      "sha256": "64dc235e17f1e12d23bfb04b9abadc5e377f550cf70603fa947faa358e86b7d4"
+    }
+  }
+}
