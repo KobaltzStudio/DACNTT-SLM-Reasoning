@@ -1,6 +1,6 @@
 {
   "config_version": "v1",
-  "status": "FROZEN v1 (2026-10-14): no TBD. task5_decisions.md section I: I1, I2, I6, I7, I8 approved by the group; I3 (budget), I4 (probe b), I5 (hyperparameters) are provisional pending a smoke test on D_dev. Changes require a new config version with rationale.",
+  "status": "FROZEN v1 (2026-10-14): no TBD. task5_decisions.md section I: I1, I2, I6, I7, I8 approved by the group; I3 (budget), I4 (probe b), I5 (hyperparameters) are provisional pending a smoke test on D_dev. Changes require a new config version with rationale. Update 2026-10-20 (status text only, no values changed): smoke test on D_dev done (reports/task5/smoke_test_report.md, task5_decisions.md section J; ran with this config at sha256 ba200e09...), decision keep. I3 and I5 approved; I4 (probe b = 7) remains provisional until the L_emp probe check (Task.md 2.2).",
   "sources": {
     "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
     "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14"
