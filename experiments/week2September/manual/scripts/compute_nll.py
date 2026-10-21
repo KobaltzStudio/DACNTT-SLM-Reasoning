@@ -12,10 +12,14 @@ Per trajectory tau (trajectory tokens only, the end-of-turn token excluded):
 L_proxy itself is not computed here: it needs ell over the whole pool (median / IQR rule) and
 is derived in the analysis step.
 
+--pool defaults to the official pool v1 (trajectory/pool/pool_v1_verified.jsonl). The Task 5 smoke test
+scored the preliminary pool; reproduce it with --pool trajectory/pool/batch_100_teacher_verified.jsonl.
+
 Usage (from experiments/week2September/manual/):
-  python scripts/compute_nll.py --tag S0 --out reports/task5/smoke_test/nll_pool_S0.jsonl
+  python scripts/compute_nll.py --tag S0 --out reports/task5/smoke_test/nll_pool_S0.jsonl \
+      --pool trajectory/pool/batch_100_teacher_verified.jsonl
   python scripts/compute_nll.py --tag S1_seed13 --adapter <adapter_dir> \
-      --out reports/task5/smoke_test/nll_pool_S1_seed13.jsonl
+      --out reports/task5/smoke_test/nll_pool_S1_seed13.jsonl --pool trajectory/pool/batch_100_teacher_verified.jsonl
 """
 import argparse
 import json
@@ -27,8 +31,8 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from student_common import (  # noqa: E402
-    IGNORE_INDEX, add_model_args, check_prompt_template, encode_example, environment_info,
-    load_config, load_model, load_pool, load_tokenizer, pick_dtype, student_from_args, write_json,
+    IGNORE_INDEX, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example, environment_info,
+    load_config, load_model, load_pool, load_tokenizer, pick_dtype, sha256_file, student_from_args, write_json,
 )
 
 
@@ -39,6 +43,7 @@ def main():
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--pool", type=Path, default=POOL_VERIFIED, help="verified pool to score (default: pool v1)")
     add_model_args(ap)
     args = ap.parse_args()
 
@@ -46,7 +51,7 @@ def main():
     cfg = load_config()
     model_name, revision = student_from_args(args, cfg)
     dtype = pick_dtype(torch, args.dtype)
-    pool = sorted(load_pool(), key=lambda r: r["trajectory_id"])
+    pool = sorted(load_pool(args.pool), key=lambda r: r["trajectory_id"])
     if args.limit:
         pool = pool[: args.limit]
 
@@ -89,6 +94,7 @@ def main():
     write_json(args.out.with_suffix(".summary.json"), {
         "checkpoint": args.tag, "adapter": args.adapter, "model": model_name, "revision": revision,
         "dtype": str(dtype).replace("torch.", ""), "n_trajectories": len(examples),
+        "pool": str(args.pool), "pool_sha256": sha256_file(args.pool),
         "forward_passes": len(examples), "elapsed_seconds": round(elapsed, 1),
         "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
         "environment": environment_info(torch),

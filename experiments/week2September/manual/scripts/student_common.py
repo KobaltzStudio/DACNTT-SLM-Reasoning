@@ -21,7 +21,11 @@ MANUAL_DIR = Path(__file__).resolve().parent.parent
 CONFIG_PATH = MANUAL_DIR / "config" / "experiment_config.json"
 GSM8K_TRAIN = MANUAL_DIR / "data" / "raw" / "gsm8k_train.jsonl"
 DEV_IDS = MANUAL_DIR / "splits" / "d_dev_ids.txt"
-POOL_VERIFIED = MANUAL_DIR / "trajectory" / "pool" / "batch_100_teacher_verified.jsonl"
+TEST_IDS = MANUAL_DIR / "splits" / "d_test_ids.txt"
+# Official pool (Task 6, task6_decisions.md): default for Task 7 onwards.
+POOL_VERIFIED = MANUAL_DIR / "trajectory" / "pool" / "pool_v1_verified.jsonl"
+# Preliminary pool (batch_100, HF): used by the Task 5 smoke test only; pass it explicitly to reproduce it.
+POOL_PRELIMINARY = MANUAL_DIR / "trajectory" / "pool" / "batch_100_teacher_verified.jsonl"
 SMOKE_DIR = MANUAL_DIR / "reports" / "task5" / "smoke_test"
 
 # Same template the Teacher was prompted with (prompt v1). Copied verbatim from
@@ -91,20 +95,20 @@ def load_dev_rows():
     return [by_id[i] for i in ids]
 
 
-def load_pool():
-    """Verified preliminary pool; every row must be verification_status == valid."""
-    rows = read_jsonl(POOL_VERIFIED)
+def load_pool(path=POOL_VERIFIED):
+    """Verified pool (default: official pool v1); every row must be verification_status == valid."""
+    rows = read_jsonl(path)
     for r in rows:
         meta = r["metadata"]
-        if isinstance(meta, str):  # some rows store metadata as a Python-repr string
+        if isinstance(meta, str):  # some preliminary-pool rows store metadata as a Python-repr string
             meta = ast.literal_eval(meta)
             r["metadata"] = meta
         if meta.get("verification_status") != "valid":
             raise ValueError(f"non-valid trajectory in pool: {r['trajectory_id']}")
-    dev = set(DEV_IDS.read_text(encoding="utf-8").split())
-    leaked = sorted({r["problem_id"] for r in rows} & dev)
+    held_out = set(DEV_IDS.read_text(encoding="utf-8").split()) | set(TEST_IDS.read_text(encoding="utf-8").split())
+    leaked = sorted({r["problem_id"] for r in rows} & held_out)
     if leaked:
-        raise ValueError(f"pool problems found in D_dev: {leaked[:5]}")
+        raise ValueError(f"pool problems found in D_dev/D_test: {leaked[:5]}")
     return rows
 
 

@@ -9,6 +9,10 @@ completion-only loss). Effective batch = --micro-batch x gradient accumulation.
 Loss: token-level mean over all supervised (response) tokens of the effective batch;
 prompt tokens are masked. Seeds: torch seed (LoRA init, dropout) = data order seed = --seed.
 
+Pool: the trajectories are looked up in the pool named by the train set ("pool", checked against
+"pool_sha256"), so the Task 5 smoke-test train sets still resolve to the preliminary pool; train sets
+without that field use --pool (default: official pool v1).
+
 Outputs:
   <adapter-dir>/                 LoRA adapter (safetensors) + tokenizer files
   <adapter-dir>/train_log.json   per-step loss, tokens, time; totals; config used
@@ -30,7 +34,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from student_common import (  # noqa: E402
-    CONFIG_PATH, IGNORE_INDEX, add_model_args, check_prompt_template, encode_example,
+    CONFIG_PATH, IGNORE_INDEX, MANUAL_DIR, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example,
     environment_info, load_config, load_pool, pick_dtype, sha256_file, student_from_args, write_json,
 )
 
@@ -56,6 +60,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=None, help="default: config training.epochs_per_round")
     ap.add_argument("--lr", type=float, default=None, help="default: config training.learning_rate")
     ap.add_argument("--no-gradient-checkpointing", action="store_true")
+    ap.add_argument("--pool", type=Path, default=None,
+                    help="pool for train sets without a 'pool' field (default: official pool v1)")
     add_model_args(ap)
     args = ap.parse_args()
 
@@ -77,7 +83,15 @@ def main():
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
-    by_id = {r["trajectory_id"]: r for r in load_pool()}
+    if "pool" in train_set:
+        pool_path = MANUAL_DIR / train_set["pool"]
+        if args.pool and args.pool.resolve() != pool_path.resolve():
+            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+        if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
+            raise ValueError(f"{pool_path} changed since the train set was drawn")
+    else:
+        pool_path = args.pool or POOL_VERIFIED
+    by_id = {r["trajectory_id"]: r for r in load_pool(pool_path)}
     rows = [by_id[t] for t in train_set["trajectory_ids"]]
 
     tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
@@ -148,6 +162,7 @@ def main():
         "checkpoint_parent": args.init_adapter or "student_ckpt_000",
         "seed": args.seed, "data_order_seed": args.seed,
         "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
+        "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
         "n_examples": len(examples), "epochs": epochs, "steps": step,
         "effective_batch": eff_batch, "micro_batch": args.micro_batch, "grad_accum": accum,
         "learning_rate": lr, "lr_from_config": lr == tc["learning_rate"],

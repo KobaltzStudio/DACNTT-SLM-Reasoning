@@ -126,6 +126,7 @@ Môi trường (không commit, .venv/ có trong .gitignore):
   ba200e09... -> 7c5aa72d..., task5_decisions.md 9db4837b... -> 689998fa... Smoke test chạy với config ba200e09...
   (cùng giá trị).
 - I4 (b = 7): chốt khi đo L_emp (Task.md 2.2).
+- [XONG 2026-10-20] Đo Teacher trên D_dev: giữ cặp 3B -> 1.5B (mục 8).
 - Ràng buộc chuyển sang Task 6: pool chính thức >= 1000 bài D_pool, chấm bằng scripts/answer_utils.py.
 
 ======================================================================
@@ -183,3 +184,32 @@ File đã sửa:
   README.txt           dòng trạng thái Task 5, Task 7; checklist 12
   config/experiment_config.json   chỉ trường status (I3, I5 đã chốt; I4 tạm), --frozen PASS
   reports/task5/SHA256SUMS_task5.txt   tạo lại, 33/33 OK
+
+======================================================================
+8. CẬP NHẬT 2026-10-20: ĐO TEACHER TRÊN D_DEV (TRẦN ACCURACY)
+======================================================================
+
+Lý do: S_1 đã 0,82-0,83 sau 1 vòng; cần biết Teacher còn hơn bao nhiêu trước khi sinh pool chính thức (Task 6).
+Quy tắc đặt trước khi xem kết quả: Teacher - S_1 (trung bình 2 seed) >= 5 điểm % thì giữ; 2-5 thảo luận; < 2 đổi Teacher.
+
+Chạy: eval_student.py --tag T3B --model Qwen/Qwen2.5-3B-Instruct --revision aa8e725... trên Colab (T4, bf16), cùng prompt v1,
+greedy, 512 token, answer_utils như khi đánh giá Student. Khoảng 65 phút. Không sửa code, dùng lại bundle smoke test.
+
+Kết quả:
+                     accuracy   lỏng    định dạng   Teacher đúng/Student sai   Student đúng/Teacher sai   McNemar p
+  Teacher 3B         0.886      0.904   0.968
+  S_1 seed 13        0.830      0.830   0.996       53                         25                         0.002
+  S_1 seed 42        0.818      0.830   0.966       57                         23                         0.0002
+
+Quyết định: GIỮ cặp Teacher Qwen2.5-3B-Instruct -> Student Qwen2.5-1.5B-Instruct (+6,2 điểm %), không config v2.
+Rủi ro: khoảng trống hẹp (khoảng 55/500 câu), khác biệt B5 so với B4 có thể chỉ 1-2 điểm %.
+
+Ghi nhận thêm (exploratory): nhiễu giữa seed của L_proxy trên 158 trajectory chưa huấn luyện: Spearman 0,855 (S_1 seed 13
+với seed 42), so với 0,62-0,69 giữa S_0 và S_1.
+
+File mới:
+  reports/task5/teacher_dev/eval_T3B_dev.jsonl, eval_T3B_dev.summary.json
+File đã sửa:
+  task5_decisions.md   mục K, bảng "Còn mở" (manifest tạo lại, 33/33 OK)
+  reports/task5/smoke_test_report.md   mục 1, 4.2, 4.3, 5, 7, 8
+  README.txt, ../../../Task.md   dòng trạng thái

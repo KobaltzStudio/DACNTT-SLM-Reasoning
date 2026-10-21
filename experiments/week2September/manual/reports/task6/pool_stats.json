@@ -1,0 +1,891 @@
+{
+  "inputs": {
+    "trajectory/pool/pool_v1_teacher_raw.jsonl": "90f391e96ee0bca4517c84887c6eb10f6148e86d2a42f542d39b7e3eb224233e",
+    "trajectory/pool/pool_v1_verified.jsonl": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e"
+  },
+  "status": {
+    "overall": {
+      "valid": 4355,
+      "invalid_format": 730,
+      "invalid_answer": 415
+    },
+    "by_source": {
+      "batch_100": {
+        "valid": 402,
+        "invalid_format": 59,
+        "invalid_answer": 39
+      },
+      "new": {
+        "valid": 3953,
+        "invalid_format": 671,
+        "invalid_answer": 376
+      }
+    },
+    "valid_per_problem": {
+      "0": 68,
+      "1": 53,
+      "2": 62,
+      "3": 115,
+      "4": 177,
+      "5": 625
+    }
+  },
+  "excluded_problems": {
+    "summary": {
+      "n": 68,
+      "by_source": {
+        "batch_100": 6,
+        "new": 62
+      },
+      "all_5_invalid_answer": 14,
+      "with_at_least_one_invalid_format": 54,
+      "with_lenient_correct_trajectory": 32,
+      "mean_teacher_tokens_excluded": 371.3,
+      "mean_teacher_tokens_all": 267.6
+    },
+    "problems": [
+      {
+        "problem_id": "gsm8k_train_00001",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_format": 3,
+          "invalid_answer": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 463.6
+      },
+      {
+        "problem_id": "gsm8k_train_00029",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 418
+      },
+      {
+        "problem_id": "gsm8k_train_00045",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 4,
+        "mean_teacher_tokens": 355.6
+      },
+      {
+        "problem_id": "gsm8k_train_00056",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 290
+      },
+      {
+        "problem_id": "gsm8k_train_00076",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_answer": 2,
+          "invalid_format": 3
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 407
+      },
+      {
+        "problem_id": "gsm8k_train_00078",
+        "source": "batch_100",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 493.8
+      },
+      {
+        "problem_id": "gsm8k_train_00263",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 293.2
+      },
+      {
+        "problem_id": "gsm8k_train_00499",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 512
+      },
+      {
+        "problem_id": "gsm8k_train_00500",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 256.2
+      },
+      {
+        "problem_id": "gsm8k_train_00751",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 359.6
+      },
+      {
+        "problem_id": "gsm8k_train_00838",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 4,
+        "mean_teacher_tokens": 472
+      },
+      {
+        "problem_id": "gsm8k_train_00897",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 1,
+          "invalid_answer": 4
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 474.6
+      },
+      {
+        "problem_id": "gsm8k_train_00928",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 241.4
+      },
+      {
+        "problem_id": "gsm8k_train_01003",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 310.8
+      },
+      {
+        "problem_id": "gsm8k_train_01107",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 267.8
+      },
+      {
+        "problem_id": "gsm8k_train_01174",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 175
+      },
+      {
+        "problem_id": "gsm8k_train_01400",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 352.4
+      },
+      {
+        "problem_id": "gsm8k_train_01419",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 420.8
+      },
+      {
+        "problem_id": "gsm8k_train_01720",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 273.8
+      },
+      {
+        "problem_id": "gsm8k_train_01866",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 370.2
+      },
+      {
+        "problem_id": "gsm8k_train_01911",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 400.8
+      },
+      {
+        "problem_id": "gsm8k_train_01921",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 4,
+        "mean_teacher_tokens": 472.2
+      },
+      {
+        "problem_id": "gsm8k_train_02045",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 2,
+          "invalid_format": 3
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 227.6
+      },
+      {
+        "problem_id": "gsm8k_train_02383",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 4,
+        "mean_teacher_tokens": 392.2
+      },
+      {
+        "problem_id": "gsm8k_train_02664",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 485.4
+      },
+      {
+        "problem_id": "gsm8k_train_02725",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 358.8
+      },
+      {
+        "problem_id": "gsm8k_train_02738",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 336.6
+      },
+      {
+        "problem_id": "gsm8k_train_02808",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 360.8
+      },
+      {
+        "problem_id": "gsm8k_train_03051",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 512
+      },
+      {
+        "problem_id": "gsm8k_train_03524",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 391
+      },
+      {
+        "problem_id": "gsm8k_train_03561",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 382.8
+      },
+      {
+        "problem_id": "gsm8k_train_04011",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 3,
+          "invalid_answer": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 457.2
+      },
+      {
+        "problem_id": "gsm8k_train_04026",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 1,
+          "invalid_format": 4
+        },
+        "lenient_correct": 2,
+        "mean_teacher_tokens": 337.8
+      },
+      {
+        "problem_id": "gsm8k_train_04045",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 266.2
+      },
+      {
+        "problem_id": "gsm8k_train_04153",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 183.8
+      },
+      {
+        "problem_id": "gsm8k_train_04342",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 2,
+          "invalid_answer": 3
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 404.8
+      },
+      {
+        "problem_id": "gsm8k_train_04356",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 343.6
+      },
+      {
+        "problem_id": "gsm8k_train_04542",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 1,
+          "invalid_answer": 4
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 307
+      },
+      {
+        "problem_id": "gsm8k_train_04549",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 476.6
+      },
+      {
+        "problem_id": "gsm8k_train_04588",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 2,
+        "mean_teacher_tokens": 499.6
+      },
+      {
+        "problem_id": "gsm8k_train_04829",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 3,
+        "mean_teacher_tokens": 488
+      },
+      {
+        "problem_id": "gsm8k_train_04832",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 319
+      },
+      {
+        "problem_id": "gsm8k_train_04835",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 416
+      },
+      {
+        "problem_id": "gsm8k_train_04978",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 488.8
+      },
+      {
+        "problem_id": "gsm8k_train_05058",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 4,
+          "invalid_format": 1
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 413.8
+      },
+      {
+        "problem_id": "gsm8k_train_05181",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 4,
+        "mean_teacher_tokens": 310
+      },
+      {
+        "problem_id": "gsm8k_train_05190",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 3,
+        "mean_teacher_tokens": 314.6
+      },
+      {
+        "problem_id": "gsm8k_train_05314",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 2,
+          "invalid_answer": 3
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 242.8
+      },
+      {
+        "problem_id": "gsm8k_train_05319",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 3,
+          "invalid_answer": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 251.4
+      },
+      {
+        "problem_id": "gsm8k_train_05412",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 337.4
+      },
+      {
+        "problem_id": "gsm8k_train_05422",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 421
+      },
+      {
+        "problem_id": "gsm8k_train_05482",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 484.4
+      },
+      {
+        "problem_id": "gsm8k_train_05490",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 2,
+          "invalid_format": 3
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 305
+      },
+      {
+        "problem_id": "gsm8k_train_05522",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 369.4
+      },
+      {
+        "problem_id": "gsm8k_train_05623",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 381.6
+      },
+      {
+        "problem_id": "gsm8k_train_05661",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 357.2
+      },
+      {
+        "problem_id": "gsm8k_train_05727",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 256.6
+      },
+      {
+        "problem_id": "gsm8k_train_05939",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 475.8
+      },
+      {
+        "problem_id": "gsm8k_train_06021",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 4,
+          "invalid_answer": 1
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 500.4
+      },
+      {
+        "problem_id": "gsm8k_train_06388",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 393.6
+      },
+      {
+        "problem_id": "gsm8k_train_06499",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 5,
+        "mean_teacher_tokens": 292.6
+      },
+      {
+        "problem_id": "gsm8k_train_06584",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 470.4
+      },
+      {
+        "problem_id": "gsm8k_train_06701",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 351.4
+      },
+      {
+        "problem_id": "gsm8k_train_06919",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 224.6
+      },
+      {
+        "problem_id": "gsm8k_train_07081",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 3,
+        "mean_teacher_tokens": 497
+      },
+      {
+        "problem_id": "gsm8k_train_07249",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 3,
+          "invalid_format": 2
+        },
+        "lenient_correct": 1,
+        "mean_teacher_tokens": 361.2
+      },
+      {
+        "problem_id": "gsm8k_train_07440",
+        "source": "new",
+        "statuses": {
+          "invalid_format": 5
+        },
+        "lenient_correct": 3,
+        "mean_teacher_tokens": 459.6
+      },
+      {
+        "problem_id": "gsm8k_train_07444",
+        "source": "new",
+        "statuses": {
+          "invalid_answer": 5
+        },
+        "lenient_correct": 0,
+        "mean_teacher_tokens": 257.8
+      }
+    ]
+  },
+  "capabilities_verified": {
+    "trajectory_level": {
+      "addition": {
+        "n": 2800,
+        "share": 0.6432
+      },
+      "subtraction": {
+        "n": 2202,
+        "share": 0.5059
+      },
+      "multiplication": {
+        "n": 3483,
+        "share": 0.8001
+      },
+      "division": {
+        "n": 1775,
+        "share": 0.4078
+      },
+      "percentage": {
+        "n": 525,
+        "share": 0.1206
+      },
+      "fraction": {
+        "n": 829,
+        "share": 0.1904
+      },
+      "ratio": {
+        "n": 37,
+        "share": 0.0085
+      }
+    },
+    "problem_level_any_trajectory": {
+      "addition": {
+        "n": 720,
+        "share": 0.6977
+      },
+      "subtraction": {
+        "n": 579,
+        "share": 0.561
+      },
+      "multiplication": {
+        "n": 855,
+        "share": 0.8285
+      },
+      "division": {
+        "n": 492,
+        "share": 0.4767
+      },
+      "percentage": {
+        "n": 128,
+        "share": 0.124
+      },
+      "fraction": {
+        "n": 224,
+        "share": 0.2171
+      },
+      "ratio": {
+        "n": 19,
+        "share": 0.0184
+      }
+    },
+    "capabilities_per_trajectory": {
+      "1": 342,
+      "2": 1741,
+      "3": 1463,
+      "4": 610,
+      "5": 184,
+      "6": 13
+    },
+    "top_combinations": [
+      [
+        "addition+multiplication",
+        675
+      ],
+      [
+        "addition+subtraction+multiplication",
+        408
+      ],
+      [
+        "addition+subtraction",
+        307
+      ],
+      [
+        "subtraction+multiplication",
+        252
+      ],
+      [
+        "multiplication+division",
+        234
+      ],
+      [
+        "subtraction+multiplication+division",
+        212
+      ],
+      [
+        "addition+multiplication+division",
+        211
+      ],
+      [
+        "multiplication",
+        198
+      ],
+      [
+        "addition+multiplication+percentage",
+        140
+      ],
+      [
+        "addition+subtraction+multiplication+division",
+        136
+      ]
+    ],
+    "problems_where_trajectories_disagree": 311
+  },
+  "invalid_format": {
+    "n": 730,
+    "share": 0.1327,
+    "by_cause": {
+      "missing_reasoning_marker": {
+        "n": 403,
+        "lenient_correct": 352
+      },
+      "truncated_at_max_tokens": {
+        "n": 157,
+        "lenient_correct": 25
+      },
+      "answer_before_reasoning": {
+        "n": 76,
+        "lenient_correct": 45
+      },
+      "boxed_only": {
+        "n": 59,
+        "lenient_correct": 48
+      },
+      "no_answer_marker": {
+        "n": 18,
+        "lenient_correct": 12
+      },
+      "decorated_answer_marker": {
+        "n": 17,
+        "lenient_correct": 14
+      }
+    },
+    "lenient_correct_total": 496,
+    "backend_check_batch_100": {
+      "hf_first_pass": 59,
+      "vllm": 59,
+      "n": 500
+    },
+    "batch_100_vs_new": {
+      "batch_100": [
+        59,
+        500
+      ],
+      "new": [
+        671,
+        5000
+      ],
+      "two_proportion_p": 0.309
+    },
+    "problems_with_any": 318,
+    "trajectories_per_problem": {
+      "1": 113,
+      "2": 91,
+      "3": 51,
+      "4": 33,
+      "5": 30
+    },
+    "finish_reason_length_total": 168,
+    "finish_reason_length_by_status": {
+      "invalid_format": 157,
+      "valid": 3,
+      "invalid_answer": 8
+    },
+    "examples": {
+      "truncated_at_max_tokens": [
+        "gsm8k_train_00001_traj_001",
+        "gsm8k_train_00001_traj_003",
+        "gsm8k_train_00001_traj_004"
+      ],
+      "boxed_only": [
+        "gsm8k_train_00002_traj_002",
+        "gsm8k_train_00048_traj_004",
+        "gsm8k_train_00071_traj_002"
+      ],
+      "decorated_answer_marker": [
+        "gsm8k_train_00003_traj_002",
+        "gsm8k_train_00045_traj_002",
+        "gsm8k_train_01419_traj_002"
+      ],
+      "missing_reasoning_marker": [
+        "gsm8k_train_00005_traj_004",
+        "gsm8k_train_00005_traj_005",
+        "gsm8k_train_00016_traj_002"
+      ],
+      "no_answer_marker": [
+        "gsm8k_train_00013_traj_001",
+        "gsm8k_train_03081_traj_002",
+        "gsm8k_train_01718_traj_001"
+      ],
+      "answer_before_reasoning": [
+        "gsm8k_train_00017_traj_001",
+        "gsm8k_train_00017_traj_002",
+        "gsm8k_train_00019_traj_005"
+      ]
+    }
+  }
+}

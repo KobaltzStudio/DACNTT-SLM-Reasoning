@@ -1,0 +1,23 @@
+{
+  "purpose": "Task 6 official pool input (task6_decisions.md T6-1, T6-2)",
+  "pool_sample_seed": 20261021,
+  "shuffle_rule": "random.Random(pool_sample_seed).shuffle(sorted(D_pool - batch_100))",
+  "index_rule": "batch_100 in batch_100.jsonl order = problem_index 0-99; new problems from index 100 in candidate order; generation_seed = generation_seed_base + problem_index * K + k",
+  "question_source": "data/raw/gsm8k_train.jsonl",
+  "python": "3.14.6",
+  "n_candidates": 6868,
+  "n_batch_100": 100,
+  "n_new": 1000,
+  "n_rows": 1100,
+  "inputs_sha256": {
+    "splits/d_pool_ids.txt": "6463d0ce8c159653d8b410c25d0751c6b0f37323d6e24e9391bd75ae0f7562cd",
+    "splits/d_dev_ids.txt": "385ff56df2d5401b1ee7027fe2976b181c87b82bb13051293058df059cd06f0d",
+    "splits/d_test_ids.txt": "dc6a008ace96e743da18ad69091ba6b96fb2e8adb3fd48ae1afed05fdb203e99",
+    "data/batch_100/batch_100.jsonl": "e0eea15a5e21e3957644460fc9626683a1b6ed159cf343d982f2205128bd36a3",
+    "data/raw/gsm8k_train.jsonl": "b49b58971a0083f7712ba564814de1b67574775b0f36e81d774f206bf5d99b81"
+  },
+  "outputs_sha256": {
+    "trajectory/pool/pool_v1_candidate_order.txt": "ac9787d72508981f49bbd993bec9124a3da2330d4e93025a9e6e1346d5ed7beb",
+    "trajectory/pool/pool_v1_input.jsonl": "60f7c38e62953464efccfba895fe2036bc65517618b2b88d30693ed54286e15f"
+  }
+}

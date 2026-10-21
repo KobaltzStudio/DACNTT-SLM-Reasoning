@@ -18,7 +18,7 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from student_common import POOL_VERIFIED, SMOKE_DIR, load_config, load_pool, sha256_file, write_json  # noqa: E402
+from student_common import POOL_PRELIMINARY, SMOKE_DIR, load_config, load_pool, sha256_file, write_json  # noqa: E402
 
 
 def main():
@@ -32,7 +32,7 @@ def main():
     if args.seed not in cfg["seeds"]["training_seeds"]:
         raise ValueError(f"seed {args.seed} is not in config seeds.training_seeds")
     n = args.n or cfg["budget"]["n_round"]
-    pool = load_pool()
+    pool = load_pool(POOL_PRELIMINARY)  # the smoke test is fixed to the preliminary pool
     ids = sorted(r["trajectory_id"] for r in pool)
     chosen = sorted(random.Random(args.seed).sample(ids, n))
 
@@ -44,8 +44,8 @@ def main():
         "rule": "random.Random(seed).sample(sorted(trajectory_id), n)",
         "seed": args.seed,
         "n": n,
-        "pool": str(POOL_VERIFIED.relative_to(POOL_VERIFIED.parents[2])),
-        "pool_sha256": sha256_file(POOL_VERIFIED),
+        "pool": str(POOL_PRELIMINARY.relative_to(POOL_PRELIMINARY.parents[2])),
+        "pool_sha256": sha256_file(POOL_PRELIMINARY),
         "pool_size": len(ids),
         "deviation": "n_cap not applied (preliminary pool has 98 problems < n_round)",
         "n_problems_covered": len(per_problem),

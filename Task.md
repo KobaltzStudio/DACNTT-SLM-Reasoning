@@ -1,6 +1,6 @@
 # Task: các việc cần làm tiếp theo
 
-Cập nhật: 2026-10-20. Tiến độ ước tính: khoảng 35-40%. Giai đoạn chuẩn bị (Task 1-5) gần xong. Smoke test S_0 → S_1 đã chạy: Student học được từ Teacher (+10,6 đến +11,8 điểm % trên D_dev), giữ nguyên tham số.
+Cập nhật: 2026-10-22. Tiến độ ước tính: khoảng 45-50%. Task 1-6 xong (I4 giữ tạm). Smoke test S_0 → S_1: Student học được từ Teacher (+10,6 đến +11,8 điểm % trên D_dev), giữ nguyên tham số. Đo Teacher trên D_dev: 0,886, giữ cặp 3B → 1.5B. Task 6 xong: pool v1 `pool_v1_verified.jsonl` 4.353 trajectory / 1.032 bài (sinh bằng vLLM trên L4), báo cáo `reports/task6/pool_report.md`. Việc tiếp theo: cài đặt pipeline Task 7 (2.1) và đo nhiễu (2.2).
 
 Nguồn: `BaoCaoTienDoTuan4.txt`, `experiments/week2September/manual/README.txt` (mục 0), `task4_todo.txt`, `task5_todo.txt`, `config/experiment_config.json`, `analysis_plan.md`.
 
@@ -25,7 +25,7 @@ Ký hiệu: `[ ]` chưa làm, `[~]` đang làm / làm một phần, `[!]` bị c
 
 Lưu ý từ smoke test (chi tiết: `smoke_test_report.md` mục 4):
 - Khoảng 40% mức tăng là do học định dạng; accuracy lỏng chỉ tăng +6,8 điểm % (vẫn có ý nghĩa, p ≈ 0,001).
-- S_1 đã đạt 0,82–0,83 sau 1 vòng. **Cần đo accuracy của Teacher 3B trên D_dev trước khi sinh pool chính thức.** Nếu Teacher không hơn S_1 rõ rệt, cân nhắc đổi cặp mô hình (Teacher Qwen2.5-7B hoặc Qwen2.5-Math) vì vòng 2–3 sẽ đụng trần.
+- S_1 đã đạt 0,82–0,83 sau 1 vòng. ~~Cần đo accuracy của Teacher 3B trên D_dev~~ **Đã đo (2026-10-20): Teacher 0,886, hơn S_1 trung bình 6,2 điểm % (ngưỡng đặt trước ≥ 5 điểm %) → GIỮ cặp Teacher Qwen2.5-3B → Student Qwen2.5-1.5B.** Rủi ro: chỉ còn khoảng 55/500 câu Teacher đúng mà S_1 sai, khác biệt B5 so với B4 có thể nhỏ. Chi tiết: `task5_decisions.md` mục K, `smoke_test_report.md` mục 4.3.
 
 ### 0.2. Thuê máy chủ cloud (Task 9)
 Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấn luyện 1 vòng khoảng 8,5 phút, NLL khoảng 1,27 trajectory/giây. Ước tính phần đánh giá của thí nghiệm chính khoảng 70–80 giờ GPU T4 nếu dùng HF `generate`; nên chuyển sang vLLM.
@@ -38,11 +38,16 @@ Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấ
 ## Ưu tiên 1: Dữ liệu và độ tin cậy nhãn
 
 ### 1.1. Pool trajectory chính thức (Task 6)
-- [ ] Sinh trajectory cho ít nhất 1.000 câu thuộc D_pool (khoảng 900 câu mới × K = 5, khoảng 4.500 lượt sinh), giữ nguyên seed rule trong config.
-- [ ] Tái sử dụng pool sơ bộ: chỉ lấy các câu của batch 100 thuộc D_pool, không sinh lại, không ghi đè file raw.
-- [ ] Chấm đáp án bằng `scripts/answer_utils.py`. Nhóm cần chốt chính thức hàm này (hiện mới khớp với dữ liệu cũ).
-- [ ] Validate toàn bộ trajectory theo `schemas/teacher_trajectory_schema.json`.
-- [ ] Chốt quy tắc cho các câu không có lời giải đúng nào sau K lần sinh (hiện có 2 câu): sinh thêm hay loại bỏ. Ghi vào decisions.
+- [x] Chốt các quyết định của Task 6 (2026-10-21): `experiments/week2September/manual/task6_decisions.md`. 1.000 câu mới (thiếu thì thêm khối 100 câu theo thứ tự đã xáo), bài mới bắt đầu từ index 100, loại câu không có lời giải đúng, **sinh lại cả 100 bài batch_100** (98 trajectory của pool sơ bộ dùng prompt khác prompt v1 và seed ngoài quy tắc), sinh bằng vLLM (bf16, tham số lấy mẫu khớp HF).
+- [x] Viết script sinh bằng vLLM, script kiểm tra tương đương, `setup_pod.sh` và `Instruction_task6.md`; tạo thứ tự xáo 6.868 bài và `pool_v1_input.jsonl` (1.100 dòng) kèm manifest SHA-256 (2026-10-21).
+- [x] Chuẩn bị GPU có bf16: pod RunPod `tz1k71joq490o0` (L4, EUR-IS-1, $0,59/giờ), network volume `0q3rshkad1` (40 GB) tại `/workspace` (2026-10-21).
+- [x] Chạy 100 bài batch_100 bằng vLLM 0.32.0 trên L4 (500 lượt, 68 giây) và kiểm tra tương đương với lần sinh đầu bằng HF (2026-10-21): **PASS**. Valid 402/500 (80,4%) so với 406/500 (81,2%), lệch −0,8 điểm %; độ dài valid trung bình 237,2 so với 236,8 token, lệch +0,2%. Báo cáo: `reports/task6/parity_vllm_hf.json`.
+- [x] Sinh trajectory cho 1.100 câu (100 batch_100 + 1.000 câu mới) × K = 5 = 5.500 lượt sinh, giữ nguyên seed rule trong config (2026-10-21, vLLM 0.32.0, L4, 499 giây cho 5.000 lượt bài mới). Kết quả `trajectory/pool/pool_v1_teacher_raw.jsonl`: 5.500 dòng, đủ K = 5 cho mọi bài, seed và ID đúng quy tắc; valid 4.355 (79,2%), invalid_format 730 (13,3%), invalid_answer 415 (7,5%); 168 trajectory chạm 512 token. **1.032 bài có ít nhất 1 lời giải đúng (≥ 1.000), không cần thêm khối 100 bài**; 68 bài bị loại theo T6-3 (6,2%).
+- [x] ~~Tái sử dụng pool sơ bộ~~: thay bằng sinh lại cả batch_100 (T6-4). Không ghi đè file raw cũ.
+- [x] Chấm đáp án bằng `scripts/answer_utils.py` (đã chốt ở Task 5, I1): chấm ngay khi sinh, lưu ở `metadata.verification_status`.
+- [x] Validate toàn bộ trajectory: tạo `schemas/teacher_trajectory_schema_v2.json` (v1 cấm `question`/`raw_generation` cần cho huấn luyện), `pool_v1_verified.jsonl` 4.353 trajectory / 1.032 bài eligible, 0 lỗi schema; kiểm tra rò rỉ D_dev/D_test PASS; C(τ) từ extractor rules v2 trên toàn bộ output (T6-6) (2026-10-21).
+- [x] Thống kê (trạng thái, 68 bài bị loại, capability, token theo tokenizer Student, phân tích invalid_format 13,3%) và báo cáo `reports/task6/pool_report.md`; `student_common.load_pool` trỏ sang `pool_v1_verified.jsonl`, smoke test vẫn tái lập được với pool sơ bộ (2026-10-22). Lưu ý cho Task 7: response trung bình 245,8 token (cao hơn L̄ 8,2%), ratio chỉ 19 bài; nên báo cáo kèm accuracy chấm nới.
+- [x] Chốt quy tắc cho các câu không có lời giải đúng nào sau K lần sinh: **loại** khỏi eligible, giữ trong raw và báo cáo (T6-3).
 - [ ] Nếu không đủ tài nguyên cho 1.000 câu: giảm `n_round` tương ứng (ví dụ pool 500 câu thì `n_round` = 100) qua config v2.
 
 ### 1.2. Annotation (phần còn lại của Task 4)

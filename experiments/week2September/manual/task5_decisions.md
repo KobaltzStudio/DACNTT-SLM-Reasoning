@@ -3,7 +3,7 @@
 Ngày: 2026-10-14.
 Phạm vi: các quyết định cần chốt trước khi freeze (`task5_todo.txt`).
 Trạng thái: config v1 không còn TBD (`--frozen` PASS). Thay đổi sau freeze phải tạo config version mới kèm lý do.
-Cập nhật 2026-10-20: smoke test xong, I3 và I5 đã chốt, I4 giữ tạm (mục J).
+Cập nhật 2026-10-20: smoke test xong, I3 và I5 đã chốt, I4 giữ tạm (mục J). Đo Teacher trên D_dev: giữ cặp 3B → 1.5B (mục K).
 
 Nhãn nguồn:
 - [README CŨ]: lấy từ `readme.md` gốc trước commit 3f7dce4 (`git show 3f7dce4^:readme.md`), có ghi mục.
@@ -223,7 +223,42 @@ Chốt I4 ở `Task.md` mục 2.2: chạy thử 1–2 nhóm probe trên D_dev, s
 - Khoảng 40% mức tăng là do học định dạng (21/89 và 17/84 câu sai → đúng chỉ nhờ sửa định dạng). Đề xuất thêm accuracy lỏng làm metric phụ.
 - Nhóm trajectory đã huấn luyện giảm NLL gấp khoảng 2,5 lần nhóm chưa huấn luyện. Đề xuất phân tích H chính trên nhóm chưa được chọn huấn luyện (`Task.md` 2.4).
 - Chọn theo số lượng làm token thực tế lệch −2,6% đến +4,5% so với `beta_round`. Script chọn dữ liệu của thí nghiệm chính phải dừng theo ngân sách token (đúng I2).
-- Chưa đo accuracy của Teacher trên D_dev. S_1 đã 0,82–0,83, cần kiểm tra trần trước Task 6.
+- ~~Chưa đo accuracy của Teacher trên D_dev~~. Đã đo 2026-10-20, xem mục K.
+
+## K. Trần accuracy: đo Teacher trên D_dev (2026-10-20)
+
+Báo cáo đầy đủ: `reports/task5/smoke_test_report.md` mục 4.3. Dữ liệu: `reports/task5/teacher_dev/`.
+
+Lý do: sau 1 vòng S_1 đã đạt 0,82–0,83. Nếu Teacher không hơn rõ thì vòng 2–3 đụng trần và B5, B4 khó tách nhau. Phải quyết định trước Task 6, vì sau khi sinh pool chính thức gần như không đổi được cặp mô hình.
+
+Quy tắc quyết định (đặt trước khi xem kết quả): Teacher − S_1 (accuracy chính thức, trung bình 2 seed của smoke test):
+- ≥ 5 điểm %: giữ cặp mô hình;
+- 2 đến 5 điểm %: nhóm thảo luận, xem thêm số câu Teacher đúng, S_1 sai;
+- < 2 điểm %: đổi Teacher (Qwen2.5-7B-Instruct hoặc Qwen2.5-Math-7B-Instruct) bằng config v2, chạy lại smoke test.
+
+Cách đo: `eval_student.py --model Qwen/Qwen2.5-3B-Instruct --revision aa8e725…` trên D_dev 500 câu, cùng prompt v1, greedy, tối đa 512 token và cùng `answer_utils.py` như khi đánh giá Student. Colab Tesla T4, bf16, khoảng 65 phút. Không sửa code, dùng lại bundle smoke test.
+
+Kết quả [TÍNH]:
+| | Accuracy | Accuracy lỏng | Đúng định dạng |
+|---|---|---|---|
+| Teacher 3B | 0,886 | 0,904 | 0,968 |
+| S_0 | 0,712 | 0,762 | 0,916 |
+| S_1 seed 13 / seed 42 | 0,830 / 0,818 | 0,830 / 0,830 | 0,996 / 0,966 |
+
+| | Teacher đúng, Student sai | Student đúng, Teacher sai | McNemar p |
+|---|---|---|---|
+| Teacher với S_0 | 104 | 17 | 2e-16 |
+| Teacher với S_1 seed 13 | 53 | 25 | 0,002 |
+| Teacher với S_1 seed 42 | 57 | 23 | 0,0002 |
+
+**Quyết định: GIỮ cặp Teacher Qwen2.5-3B-Instruct → Student Qwen2.5-1.5B-Instruct**, không tạo config v2. Teacher hơn S_1 trung bình 6,2 điểm % (7,4 điểm % theo accuracy lỏng), trên ngưỡng 5 điểm %.
+
+Rủi ro ghi nhận [SUY RA]:
+- Khoảng trống hẹp: một vòng đã thu hẹp khoảng 2/3 khoảng cách (17,4 → 6,2 điểm %), chỉ còn khoảng 55/500 câu Teacher đúng mà S_1 sai. Khác biệt B5 so với B4 có thể chỉ khoảng 1–2 điểm %. Phải nêu rủi ro này khi diễn giải kết quả chính, kể cả khi kết quả null.
+- Trần thực tế có thể cao hơn 0,886, vì Student học các trajectory đã chấm đúng trong K = 5 lần sinh ở T = 0,7, không phải lời giải greedy. Chưa đo tỉ lệ câu có ít nhất một trajectory đúng trên D_dev.
+- Phương án dự phòng (Teacher 7B) chỉ còn khả thi trước Task 6.
+
+Ghi nhận thêm (exploratory, `smoke_test_report.md` mục 4.2): trên 158 trajectory không được huấn luyện ở cả hai seed, Spearman của L_proxy giữa S_1 seed 13 và seed 42 là 0,855, còn giữa S_0 và S_1 là 0,62–0,69. Đây là tín hiệu sơ bộ ủng hộ H, không thay cho ρ_noise chính thức (`Task.md` 2.2).
 
 ## Còn mở
 
@@ -236,4 +271,6 @@ Còn lại:
 |---|---|---|
 | ~~I3, I5~~ | ~~Budget mỗi vòng, hyperparameters~~ | Đã chốt sau smoke test (2026-10-20, mục J) |
 | I4 | Probe budget b | Tạm b = 7; chốt khi đo L_emp (`Task.md` 2.2) |
+| ~~K~~ | ~~Trần accuracy, cặp Teacher/Student~~ | Giữ 3B → 1.5B (2026-10-20, mục K) |
+| AP | Cập nhật analysis plan trước thí nghiệm chính: accuracy lỏng, phân tích H trên nhóm chưa huấn luyện, chọn theo ngân sách token, cách đo ρ_noise | Mục J, K; tạo config v2 hoặc cập nhật `analysis_plan.md` trước `Task.md` 2.3 |
 | T6 | Task 6 phải tạo pool chính thức ≥ 1000 bài D_pool (điều kiện của I3) | Nếu không đủ tài nguyên: giảm n_round (sửa I3, config v2) |
