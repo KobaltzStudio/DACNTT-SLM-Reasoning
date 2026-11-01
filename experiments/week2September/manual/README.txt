@@ -41,6 +41,7 @@
         trajectory/pool/pool_v1_teacher_raw.jsonl: 1.100 bài x K=5 = 5.500 trajectory; valid 4.355, invalid_format 730, invalid_answer 415.
         1.032 bài có >= 1 lời giải đúng (đạt >= 1.000), 68 bài bị loại (T6-3). Cập nhật 2026-10-22: Task 6 XONG. pool_v1_verified.jsonl 4.353 trajectory / 1.032 bài (schema v2, C(tau) rules v2 trên toàn bộ output),
           kiểm tra rò rỉ PASS; báo cáo reports/task6/pool_report.md; student_common.py trỏ sang pool v1.
+    - Task 7 cập nhật 2026-11-01: đã chốt quy tắc trước khi chạy (task7_decisions.md, config v2, analysis_plan.md v2; v1 lưu ở *_v1). Chưa cài đặt pipeline.
     - Task 7 (S0 -> S1): chưa có bằng chứng về một vòng selection-training-evaluation hoàn chỉnh trên D_dev với số liệu thực.
       Cập nhật 2026-10-20: smoke test đã chạy 1 vòng train-evaluate S_0 -> S_1 trên D_dev, nhưng chọn dữ liệu ngẫu nhiên từ pool sơ bộ, chưa có selection theo L_proxy.
     - Task 8 (Docs/environment): chưa xác nhận protocol/README đồng bộ, dependency đủ và clean environment đã test.

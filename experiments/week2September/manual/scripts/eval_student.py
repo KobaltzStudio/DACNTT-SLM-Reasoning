@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Evaluate a Student checkpoint on D_dev with the frozen evaluation protocol.
+Evaluate a Student checkpoint on D_dev or D_test with the frozen evaluation protocol.
 
 Protocol (config/experiment_config.json "evaluation"): prompt v1, greedy decoding,
 max_new_tokens 512, answers scored by answer_utils.evaluate_output
@@ -9,9 +9,14 @@ max_new_tokens 512, answers scored by answer_utils.evaluate_output
 Greedy is enforced explicitly: the Qwen generation_config ships sampling defaults and
 repetition_penalty 1.05, which would otherwise still apply under do_sample=False.
 
-Also records lenient_correct (last number anywhere in the output, format ignored). It is a
-diagnostic that separates learning the output format from learning to reason; it does not
-replace the frozen metric.
+Also records lenient_correct (last number anywhere in the output, format ignored): the registered
+secondary metric of T7-5, always reported with strict accuracy and format compliance. Accuracy per
+capability is added on D_dev, over the problems with manual labels.
+
+Backends:
+  hf    transformers generate (default; used by the Task 5 smoke test)
+  vllm  vLLM with the same greedy settings; needs a bf16 GPU (L4/A100). A LoRA adapter is merged into a
+        temporary model directory first, exactly as the hf backend merges it before generating.
 
 Output (resumable: problem_ids already in --out are skipped):
   --out           one JSON line per problem
@@ -21,22 +26,82 @@ Usage (from experiments/week2September/manual/):
   python scripts/eval_student.py --tag S0 --out reports/task5/smoke_test/eval_S0_dev.jsonl
   python scripts/eval_student.py --tag S1_seed13 --adapter <adapter_dir> \
       --out reports/task5/smoke_test/eval_S1_dev_seed13.jsonl
+  python scripts/eval_student.py --split test --backend vllm --tag S1 --adapter <adapter_dir> --out <out.jsonl>
 """
 import argparse
+import gc
+import os
 import sys
+import tempfile
 import time
 from pathlib import Path
 
-import torch
-from transformers import GenerationConfig
+# Deterministic scheduling in offline mode (vLLM docs, Reproducibility); must be set before importing vllm.
+os.environ.setdefault("VLLM_ENABLE_V1_MULTIPROCESSING", "0")
+
+import torch  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from answer_utils import answers_match, evaluate_output  # noqa: E402
+from eval_metrics import score_output, summarize  # noqa: E402
 from student_common import (  # noqa: E402
     add_model_args, append_jsonl, build_prompt, check_prompt_template, end_of_turn_id,
-    environment_info, load_config, load_dev_rows, load_model, load_tokenizer, pick_dtype,
-    read_jsonl, student_from_args, write_json,
+    environment_info, load_capability_labels, load_config, load_dev_rows, load_model, load_test_rows,
+    load_tokenizer, pick_dtype, read_jsonl_resumable, student_from_args, write_json,
 )
+
+
+def generate_hf(todo, tok, model_name, revision, dtype, adapter, max_new_tokens, batch_size):
+    """Yields lists of (row, text, n_output_tokens), one list per batch."""
+    from transformers import GenerationConfig
+    model = load_model(model_name, revision, dtype, adapter=adapter)
+    gen_cfg = GenerationConfig(
+        do_sample=False,
+        max_new_tokens=max_new_tokens,
+        repetition_penalty=1.0,
+        eos_token_id=[end_of_turn_id(tok), tok.eos_token_id],
+        pad_token_id=tok.pad_token_id,
+    )
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i: i + batch_size]
+        prompts = [build_prompt(tok, r["question"]) for r in batch]
+        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
+        with torch.no_grad():
+            out = model.generate(**enc, generation_config=gen_cfg)
+        results = []
+        for r, ids in zip(batch, out[:, enc["input_ids"].shape[1]:]):
+            ids = ids.tolist()
+            n_out = len(ids)
+            while n_out and ids[n_out - 1] == tok.pad_token_id:
+                n_out -= 1
+            results.append((r, tok.decode(ids[:n_out], skip_special_tokens=True), n_out))
+        yield results
+
+
+def generate_vllm(todo, tok, model_name, revision, adapter, max_new_tokens, batch_size, gpu_memory_utilization):
+    """Same contract as generate_hf. batch_size here is the number of problems per generate() call."""
+    from vllm import LLM, SamplingParams
+    if not torch.cuda.is_available() or not torch.cuda.is_bf16_supported():
+        raise SystemExit("the vllm backend needs a GPU with bf16 (T6-5)")
+    stop_ids = sorted({end_of_turn_id(tok), tok.eos_token_id})
+    params = SamplingParams(n=1, temperature=0.0, top_p=1.0, repetition_penalty=1.0,
+                            max_tokens=max_new_tokens, stop_token_ids=stop_ids)
+    with tempfile.TemporaryDirectory(prefix="merged_student_") as merged:
+        if adapter:
+            model = load_model(model_name, revision, torch.bfloat16, adapter=adapter)
+            model.save_pretrained(merged)
+            tok.save_pretrained(merged)
+            del model
+            gc.collect()
+            torch.cuda.empty_cache()
+            llm = LLM(model=merged, dtype="bfloat16", generation_config="vllm",
+                      gpu_memory_utilization=gpu_memory_utilization)
+        else:
+            llm = LLM(model=model_name, revision=revision, tokenizer_revision=revision, dtype="bfloat16",
+                      generation_config="vllm", gpu_memory_utilization=gpu_memory_utilization)
+        for i in range(0, len(todo), batch_size):
+            batch = todo[i: i + batch_size]
+            outputs = llm.generate([build_prompt(tok, r["question"]) for r in batch], params, use_tqdm=False)
+            yield [(r, o.outputs[0].text, len(o.outputs[0].token_ids)) for r, o in zip(batch, outputs)]
 
 
 def main():
@@ -45,7 +110,10 @@ def main():
     ap.add_argument("--adapter", default=None, help="LoRA adapter directory (omit for S_0)")
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--summary", type=Path, default=None, help="default: <out>.summary.json")
-    ap.add_argument("--batch-size", type=int, default=16)
+    ap.add_argument("--split", default="dev", choices=["dev", "test"])
+    ap.add_argument("--backend", default="hf", choices=["hf", "vllm"])
+    ap.add_argument("--batch-size", type=int, default=None, help="default: 16 for hf, 200 for vllm")
+    ap.add_argument("--gpu-memory-utilization", type=float, default=0.85, help="vllm backend only")
     ap.add_argument("--limit", type=int, default=None, help="first N problems only (pipeline tests)")
     add_model_args(ap)
     args = ap.parse_args()
@@ -57,75 +125,52 @@ def main():
         raise ValueError("config evaluation.decoding is not greedy")
     model_name, revision = student_from_args(args, cfg)
     dtype = pick_dtype(torch, args.dtype)
+    batch_size = args.batch_size or (200 if args.backend == "vllm" else 16)
 
-    rows = load_dev_rows()
+    rows = load_dev_rows() if args.split == "dev" else load_test_rows()
     if args.limit:
         rows = rows[: args.limit]
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    done = {r["problem_id"] for r in read_jsonl(args.out)} if args.out.exists() else set()
+    done = {r["problem_id"] for r in read_jsonl_resumable(args.out)}
     todo = [r for r in rows if r["problem_id"] not in done]
-    print(f"[{args.tag}] {len(rows)} problems, {len(done)} already done, {len(todo)} to run, dtype={dtype}")
+    print(f"[{args.tag}] {args.split}: {len(rows)} problems, {len(done)} already done, {len(todo)} to run, "
+          f"backend={args.backend}, dtype={dtype}")
 
     tok = load_tokenizer(model_name, revision)
-    model = load_model(model_name, revision, dtype, adapter=args.adapter)
-    gen_cfg = GenerationConfig(
-        do_sample=False,
-        max_new_tokens=ev["max_new_tokens"],
-        repetition_penalty=1.0,
-        eos_token_id=[end_of_turn_id(tok), tok.eos_token_id],
-        pad_token_id=tok.pad_token_id,
-    )
-
     if torch.cuda.is_available():
         torch.cuda.reset_peak_memory_stats()
     t0 = time.time()
-    for i in range(0, len(todo), args.batch_size):
-        batch = todo[i: i + args.batch_size]
-        prompts = [build_prompt(tok, r["question"]) for r in batch]
-        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
-        with torch.no_grad():
-            out = model.generate(**enc, generation_config=gen_cfg)
-        new = out[:, enc["input_ids"].shape[1]:]
-        for r, ids in zip(batch, new):
-            ids = ids.tolist()
-            n_out = len(ids)
-            while n_out and ids[n_out - 1] == tok.pad_token_id:
-                n_out -= 1
-            text = tok.decode(ids[:n_out], skip_special_tokens=True)
-            append_jsonl(args.out, {
-                "problem_id": r["problem_id"],
-                "checkpoint": args.tag,
-                "status": evaluate_output(text, r["ground_truth"]),
-                # diagnostic only: last number anywhere in the output, ignoring the REASONING/ANSWER format
-                "lenient_correct": answers_match(text, r["ground_truth"]),
-                "ground_truth": r["ground_truth"],
-                "n_output_tokens": n_out,
-                "hit_max_tokens": n_out >= ev["max_new_tokens"],
-                "raw_output": text,
-            })
-        print(f"[{args.tag}] {min(i + args.batch_size, len(todo))}/{len(todo)}  {time.time() - t0:.0f}s", flush=True)
+    n_done = 0
+    if todo:
+        if args.backend == "vllm":
+            batches = generate_vllm(todo, tok, model_name, revision, args.adapter, ev["max_new_tokens"], batch_size,
+                                    args.gpu_memory_utilization)
+        else:
+            batches = generate_hf(todo, tok, model_name, revision, dtype, args.adapter, ev["max_new_tokens"], batch_size)
+        for batch in batches:
+            for r, text, n_out in batch:
+                append_jsonl(args.out, score_output(r, args.tag, text, n_out, ev["max_new_tokens"]))
+            n_done += len(batch)
+            print(f"[{args.tag}] {n_done}/{len(todo)}  {time.time() - t0:.0f}s", flush=True)
     elapsed = time.time() - t0
 
-    results = [r for r in read_jsonl(args.out) if r["problem_id"] in {x["problem_id"] for x in rows}]
-    n = len(results)
+    wanted = {x["problem_id"] for x in rows}
+    results = [r for r in read_jsonl_resumable(args.out) if r["problem_id"] in wanted]
+    if len(results) != len(rows):
+        raise RuntimeError(f"{args.out} has {len(results)} of {len(rows)} problems")
+    labels = load_capability_labels() if args.split == "dev" else None
     summary = {
         "checkpoint": args.tag,
+        "split": args.split,
+        "backend": args.backend,
         "model": model_name,
         "revision": revision,
         "adapter": args.adapter,
-        "dtype": str(dtype).replace("torch.", ""),
-        "n_problems": n,
-        "accuracy": sum(r["status"] == "valid" for r in results) / n,
-        "format_compliance": sum(r["status"] != "invalid_format" for r in results) / n,
-        "lenient_accuracy_exploratory": sum(r["lenient_correct"] for r in results) / n,
-        "n_valid": sum(r["status"] == "valid" for r in results),
-        "n_invalid_answer": sum(r["status"] == "invalid_answer" for r in results),
-        "n_invalid_format": sum(r["status"] == "invalid_format" for r in results),
-        "mean_output_tokens": sum(r["n_output_tokens"] for r in results) / n,
-        "n_hit_max_tokens": sum(r["hit_max_tokens"] for r in results),
+        "dtype": "bfloat16" if args.backend == "vllm" else str(dtype).replace("torch.", ""),
+        **summarize(results, labels),
         "decoding": {"do_sample": False, "max_new_tokens": ev["max_new_tokens"], "repetition_penalty": 1.0,
                      "prompt_version": ev["prompt_version"]},
-        "batch_size": args.batch_size,
+        "batch_size": batch_size,
         "limit": args.limit,
         "elapsed_seconds_this_run": round(elapsed, 1),
         "problems_this_run": len(todo),
@@ -134,8 +179,8 @@ def main():
     }
     summary_path = args.summary or args.out.with_suffix(".summary.json")
     write_json(summary_path, summary)
-    print(f"[{args.tag}] accuracy {summary['accuracy']:.4f}  format {summary['format_compliance']:.4f}  "
-          f"mean_len {summary['mean_output_tokens']:.1f}  -> {summary_path}")
+    print(f"[{args.tag}] accuracy {summary['accuracy']:.4f}  lenient {summary['lenient_accuracy']:.4f}  "
+          f"format {summary['format_compliance']:.4f}  mean_len {summary['mean_output_tokens']:.1f}  -> {summary_path}")
 
 
 if __name__ == "__main__":

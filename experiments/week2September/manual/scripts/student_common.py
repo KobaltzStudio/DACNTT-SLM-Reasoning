@@ -20,6 +20,8 @@ from pathlib import Path
 MANUAL_DIR = Path(__file__).resolve().parent.parent
 CONFIG_PATH = MANUAL_DIR / "config" / "experiment_config.json"
 GSM8K_TRAIN = MANUAL_DIR / "data" / "raw" / "gsm8k_train.jsonl"
+GSM8K_TEST = MANUAL_DIR / "data" / "raw" / "gsm8k_test.jsonl"
+CAPABILITY_LABELS = MANUAL_DIR / "data" / "supplement" / "supplement_annotations_v2.jsonl"
 DEV_IDS = MANUAL_DIR / "splits" / "d_dev_ids.txt"
 TEST_IDS = MANUAL_DIR / "splits" / "d_test_ids.txt"
 # Official pool (Task 6, task6_decisions.md): default for Task 7 onwards.
@@ -93,6 +95,43 @@ def load_dev_rows():
     if missing:
         raise ValueError(f"{len(missing)} D_dev ids not found in {GSM8K_TRAIN}")
     return [by_id[i] for i in ids]
+
+
+def load_test_rows():
+    """D_test problems in d_test_ids.txt order. Reporting only: never for selection, tuning or any design decision."""
+    ids = [x.strip() for x in TEST_IDS.read_text(encoding="utf-8").splitlines() if x.strip()]
+    by_id = {r["problem_id"]: r for r in read_jsonl(GSM8K_TEST)}
+    missing = [i for i in ids if i not in by_id]
+    if missing:
+        raise ValueError(f"{len(missing)} D_test ids not found in {GSM8K_TEST}")
+    return [by_id[i] for i in ids]
+
+
+def load_capability_labels():
+    """Manual capability labels of D_dev: {problem_id: [capability]}, supplement problems only."""
+    dev = set(DEV_IDS.read_text(encoding="utf-8").split())
+    rows = read_jsonl(CAPABILITY_LABELS)
+    if any(r["problem_id"] not in dev for r in rows):
+        raise ValueError(f"{CAPABILITY_LABELS} has problems outside D_dev")
+    return {r["problem_id"]: r["capabilities_manual"] for r in rows}
+
+
+def read_jsonl_resumable(path):
+    """Rows of an append-only file; a line cut off by an interrupted run is dropped from the file."""
+    path = Path(path)
+    if not path.exists():
+        return []
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+    rows = []
+    for i, line in enumerate(lines):
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            if i != len(lines) - 1:
+                raise
+            path.write_text("".join(lines[:-1]), encoding="utf-8")
+            print(f"[resume] dropped a truncated last line of {path}")
+    return rows
 
 
 def load_pool(path=POOL_VERIFIED):

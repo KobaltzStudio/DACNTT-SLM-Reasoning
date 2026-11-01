@@ -21,6 +21,12 @@ if [ ! -x "$VENV/bin/python" ]; then
 fi
 source "$VENV/bin/activate"
 
+# Task 7 also trains on the pod (train_round.py) and validates selection logs. An existing venv from Task 6
+# may lack these. PEFT_VERSION is the version the local pilot ran with (2026-11-01).
+PEFT_VERSION="${PEFT_VERSION:-0.20.0}"
+python -c "import peft" 2>/dev/null || pip install "peft==$PEFT_VERSION"
+python -c "import jsonschema" 2>/dev/null || pip install jsonschema
+
 export HF_HOME=/workspace/hf
 export VLLM_ENABLE_V1_MULTIPROCESSING=0   # deterministic scheduling (vLLM docs, Reproducibility)
 

@@ -1,8 +1,8 @@
 # Task: các việc cần làm tiếp theo
 
-Cập nhật: 2026-10-22. Tiến độ ước tính: khoảng 45-50%. Task 1-6 xong (I4 giữ tạm). Smoke test S_0 → S_1: Student học được từ Teacher (+10,6 đến +11,8 điểm % trên D_dev), giữ nguyên tham số. Đo Teacher trên D_dev: 0,886, giữ cặp 3B → 1.5B. Task 6 xong: pool v1 `pool_v1_verified.jsonl` 4.353 trajectory / 1.032 bài (sinh bằng vLLM trên L4), báo cáo `reports/task6/pool_report.md`. Việc tiếp theo: cài đặt pipeline Task 7 (2.1) và đo nhiễu (2.2).
+Cập nhật: 2026-11-02. Pipeline Task 7 đã viết và chạy pilot local (`done.md`); việc tiếp theo là chạy thử trên L4. Tiến độ ước tính ở dòng này chưa đánh giá lại. Task 1-6 xong (I4 giữ tạm). Smoke test S_0 → S_1: Student học được từ Teacher (+10,6 đến +11,8 điểm % trên D_dev), giữ nguyên tham số. Đo Teacher trên D_dev: 0,886, giữ cặp 3B → 1.5B. Task 6 xong: pool v1 `pool_v1_verified.jsonl` 4.353 trajectory / 1.032 bài (sinh bằng vLLM trên L4), báo cáo `reports/task6/pool_report.md`.
 
-Nguồn: `BaoCaoTienDoTuan4.txt`, `experiments/week2September/manual/README.txt` (mục 0), `task4_todo.txt`, `task5_todo.txt`, `config/experiment_config.json`, `analysis_plan.md`.
+Nguồn: `BaoCaoTienDoTuan4.txt`, `experiments/week2September/manual/README.txt` (mục 0), `task4_todo.txt`, `task5_todo.txt`, `task7_decisions.md`, `config/experiment_config.json`, `analysis_plan.md`. File này chưa gồm yêu cầu riêng của khoa và giảng viên hướng dẫn.
 
 Ký hiệu: `[ ]` chưa làm, `[~]` đang làm / làm một phần, `[!]` bị chặn.
 
@@ -29,9 +29,10 @@ Lưu ý từ smoke test (chi tiết: `smoke_test_report.md` mục 4):
 
 ### 0.2. Thuê máy chủ cloud (Task 9)
 Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấn luyện 1 vòng khoảng 8,5 phút, NLL khoảng 1,27 trajectory/giây. Ước tính phần đánh giá của thí nghiệm chính khoảng 70–80 giờ GPU T4 nếu dùng HF `generate`; nên chuyển sang vLLM.
-- [ ] Chọn nhà cung cấp, ước tính chi phí theo khối lượng: khoảng 4.500 lượt sinh Teacher và khoảng 87.000 lượt sinh để đánh giá.
-- [ ] Chạy thành công một job thử (sinh trajectory hoặc đánh giá) trên cloud.
-- [ ] Có cơ chế lưu checkpoint, chạy tiếp khi bị ngắt, và sao lưu kết quả về repo/lưu trữ chung.
+- [~] Chọn nhà cung cấp, ước tính chi phí theo khối lượng: khoảng 4.500 lượt sinh Teacher và khoảng 87.000 lượt sinh để đánh giá. Đã chọn RunPod L4 ($0,59/giờ, Task 6); chi phí thí nghiệm chính chờ đo thời gian trên L4.
+- [x] Chạy thành công một job thử (sinh trajectory hoặc đánh giá) trên cloud: sinh pool v1 bằng vLLM trên L4 (Task 6).
+- [~] Có cơ chế lưu checkpoint, chạy tiếp khi bị ngắt, và sao lưu kết quả về repo/lưu trữ chung: `run_experiment.py` chạy tiếp được; kết quả nằm trên network volume và rsync về thủ công.
+- [ ] Xóa pod cũ `jfs0rhsawcq0fd` (có API key dạng văn bản thuần) và đổi API key RunPod, nếu chưa làm.
 
 ---
 
@@ -48,7 +49,7 @@ Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấ
 - [x] Validate toàn bộ trajectory: tạo `schemas/teacher_trajectory_schema_v2.json` (v1 cấm `question`/`raw_generation` cần cho huấn luyện), `pool_v1_verified.jsonl` 4.353 trajectory / 1.032 bài eligible, 0 lỗi schema; kiểm tra rò rỉ D_dev/D_test PASS; C(τ) từ extractor rules v2 trên toàn bộ output (T6-6) (2026-10-21).
 - [x] Thống kê (trạng thái, 68 bài bị loại, capability, token theo tokenizer Student, phân tích invalid_format 13,3%) và báo cáo `reports/task6/pool_report.md`; `student_common.load_pool` trỏ sang `pool_v1_verified.jsonl`, smoke test vẫn tái lập được với pool sơ bộ (2026-10-22). Lưu ý cho Task 7: response trung bình 245,8 token (cao hơn L̄ 8,2%), ratio chỉ 19 bài; nên báo cáo kèm accuracy chấm nới.
 - [x] Chốt quy tắc cho các câu không có lời giải đúng nào sau K lần sinh: **loại** khỏi eligible, giữ trong raw và báo cáo (T6-3).
-- [ ] Nếu không đủ tài nguyên cho 1.000 câu: giảm `n_round` tương ứng (ví dụ pool 500 câu thì `n_round` = 100) qua config v2.
+- [x] ~~Nếu không đủ tài nguyên cho 1.000 câu: giảm `n_round`~~: không cần, pool có 1.032 bài eligible.
 
 ### 1.2. Annotation (phần còn lại của Task 4)
 - [!] Xác minh người annotate thứ hai (A2) có làm độc lập không (A1/A2 trùng 30/30). Nếu không: annotate lại theo `guideline_v3.md` mà không xem nhãn A1, rồi tính lại kappa.
@@ -66,25 +67,34 @@ Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấ
 ## Ưu tiên 2: Thí nghiệm chính (Task 7 trở đi)
 
 ### 2.1. Cài đặt pipeline
-- [ ] Script tính `L_proxy` (NLL chuẩn hoá theo độ dài, dải Gauss với ℓ* = median, σ = IQR/1.349) cho toàn pool tại mỗi checkpoint.
-- [ ] Script chọn dữ liệu theo đúng `analysis_plan.md`: `n_cap = 1`, tie-break theo `trajectory_id`, ghi log theo `selection_log_schema.json`. **Dừng theo ngân sách token `beta_round`, không theo số lượng** (smoke test chọn theo số lượng đã lệch tới +4,5%).
-- [ ] Cài đặt các phương pháp bắt buộc: B0, B2, B3, B4, B5, và ablation `shuffled_scores`. Tuỳ chọn: B1, B6.
-- [ ] Script huấn luyện LoRA theo config (completion-only loss, giữ adapter qua các vòng, khởi tạo lại optimizer mỗi vòng).
-- [ ] Script đánh giá (greedy, `answer_utils.py`), ghi accuracy tổng, accuracy theo capability, tỉ lệ đúng định dạng, độ dài output.
+- [x] Chốt quy tắc phân tích và lịch chọn của B3, B4 trước khi chạy (2026-11-01): `task7_decisions.md`, config v2, `analysis_plan.md` v2. Scripts bên dưới phải cài theo các quy tắc này.
+- [x] Script tính `L_proxy` (NLL chuẩn hoá theo độ dài, dải Gauss với ℓ* = median, σ = IQR/1.349) cho toàn pool tại mỗi checkpoint: `scripts/learnability.py` (2026-11-01).
+- [x] Script chọn dữ liệu theo đúng `analysis_plan.md`: `n_cap = 1`, tie-break theo `trajectory_id`, ghi log theo `selection_log_schema.json`. **Dừng theo ngân sách token `beta_round`, không theo số lượng** (smoke test chọn theo số lượng đã lệch tới +4,5%): `scripts/selection.py`, `select_round.py`, `build_pool_tokens.py`, test `test_selection.py` (2026-11-01).
+- [x] Cài đặt các phương pháp bắt buộc: B0, B2, B3, B4, B5, và ablation `shuffled_scores` (2026-11-01). Tuỳ chọn B1, B6: chưa cài.
+- [x] Script huấn luyện LoRA theo config (completion-only loss, giữ adapter qua các vòng, khởi tạo lại optimizer mỗi vòng): `train_round.py` có sẵn, đã chạy nối 3 vòng trong pilot.
+- [~] Script đánh giá (greedy, `answer_utils.py`), ghi accuracy tổng, accuracy theo capability, tỉ lệ đúng định dạng, độ dài output: `eval_student.py` thêm D_test, chấm nới, capability (85 bài có nhãn), backend vLLM. **Backend vLLM chưa chạy thử**; đối chiếu bằng `compare_eval_backends.py` trên pod.
+- [x] Orchestrator chạy một phương pháp, một seed, chạy tiếp khi bị ngắt, dùng lại S_1 giữa B4 và B5: `scripts/run_experiment.py` (2026-11-01).
+- [x] Pilot pipeline trên máy local (Qwen2.5-0.5B, pool 60 bài, backend HF): đủ 6 phương pháp và L_emp chạy hết, chỉ để kiểm tra pipeline (2026-11-01). Chi tiết: `done.md`.
+- [ ] Chạy thử trên L4 với model thật: đo thời gian từ `runs/.../timing.jsonl`, đối chiếu vLLM với HF, tách khỏi kết quả chính.
+- [ ] Xác nhận 3 quy ước cài đặt và việc giữ hay bỏ ablation (`done.md`, mục 4); ghi thành T7-9 trong `task7_decisions.md` và tạo lại manifest Task 7.
+- [ ] **Quyết định trước khi chạy chính:** có thêm biến thể chọn theo ℓ cao / ℓ thấp không (`notes/formula_review.md`, mục A2). Hiện chưa có bằng chứng "vùng giữa" tốt hơn hai đầu. Nếu thêm: ghi quyết định mới, cài vào `selection.py`, tính thêm chi phí GPU.
+- [ ] Viết script phân tích cho mọi mục ở 3.1, thử trên dữ liệu pilot trước khi có kết quả chính.
+- [ ] Commit theo hai đợt: đợt chốt v2 trước, pipeline sau, để giữ bằng chứng quy tắc được chốt trước khi có số liệu. Dọn các file đã xóa trong git; không đưa `diagrams/.$file_relationships.drawio.bkp` vào commit.
 
 ### 2.2. Đo nhiễu trước khi chạy so sánh
-- [ ] Đo `L_proxy` cùng một checkpoint với các seed khác nhau để lấy ρ_noise và ε (tolerance của "approximately equal").
-- [ ] Đo `L_emp` tại S_0 trên 5 nhóm theo độ dài token (50 trajectory/nhóm), tính tương quan Spearman với `L_proxy` để kiểm chứng proxy.
+- [ ] Đo ρ_noise và ε trên các lần chạy B4 (cùng dữ liệu, khác seed) theo T7-6, T7-7; cần NLL của B4 tại S_1 và S_2 cho 3 seed.
+- [~] Đo `L_emp` tại S_0 trên 5 nhóm theo độ dài token (50 trajectory/nhóm), tính tương quan Spearman với `L_proxy` để kiểm chứng proxy: `scripts/probe_lemp.py` đã có, chưa đo trên model thật.
 - [ ] **Chốt I4 (probe `b = 7`)**: chạy thử 1–2 nhóm probe, so mức thay đổi với nhiễu giữa seed (1,2 điểm % ở smoke test). Tín hiệu quá nhỏ thì tăng `b` hoặc kích thước nhóm qua config v2. Cân nhắc dùng accuracy lỏng để loại hiệu ứng học định dạng.
 
 ### 2.3. Chạy thí nghiệm
 - [ ] Vòng đầu S_0 → S_1 cho tất cả phương pháp, 3 seed (13, 42, 2026).
 - [ ] Hoàn thành 3 vòng (S_0 → S_3). Chỉ đánh giá trên D_test tại các checkpoint đã định trước.
-- [ ] Ghi `beta_est` (chi phí ước lượng learnability) cạnh chi phí huấn luyện.
+- [~] Ghi `beta_est` (chi phí ước lượng learnability) cạnh chi phí huấn luyện: `run_experiment.py` đã ghi vào `checkpoint_log.jsonl`, còn đưa vào báo cáo.
+- [ ] Tạo manifest SHA-256 cho kết quả thí nghiệm chính và sao lưu về máy local, giống các Task trước.
 
 ### 2.4. Kiểm soát hiệu ứng giả (đề xuất bổ sung, cần nhóm duyệt)
-- [ ] Phân tích riêng sự thay đổi `L_proxy` trên các trajectory **chưa từng được chọn huấn luyện**. Trajectory đã được học sẽ tự giảm NLL, nên đó là thay đổi cơ học, không phải learnability.
-- [ ] Cân nhắc thêm biến thể chọn theo NLL cao / NLL thấp để biện minh cho lựa chọn "vùng giữa".
+- [x] Phân tích riêng sự thay đổi `L_proxy` trên các trajectory **chưa từng được chọn huấn luyện**. Trajectory đã được học sẽ tự giảm NLL, nên đó là thay đổi cơ học, không phải learnability: đã chốt thành tập U (T7-6, T7-7), thực hiện ở mục 3.1.
+- [ ] Biến thể chọn theo NLL cao / NLL thấp: chuyển thành việc phải quyết định ở mục 2.1.
 - [ ] Cân nhắc thêm tập đánh giá độ bền (GSM-Plus hoặc GSM-Symbolic) vì GSM8K có thể đã bị nhiễm vào dữ liệu huấn luyện của Qwen2.5.
 - [ ] Mọi bổ sung ở trên phải ghi là **exploratory** hoặc tạo config v2 trước khi chạy, không sửa phân tích chính sau khi đã thấy kết quả.
 
@@ -94,9 +104,18 @@ Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấ
 
 ### 3.1. Phân tích thống kê (theo `analysis_plan.md`)
 - [ ] So sánh chính B5 vs B4 trên D_test: McNemar trong từng seed, trung bình hiệu cặp + 95% CI giữa các seed.
-- [ ] Kiểm định giả thuyết H: Wilcoxon cho thay đổi theo trajectory, so sánh ρ(L_t, L_{t+1}) với ρ_noise.
-- [ ] Các chỉ số dynamic: Jaccard(B_t, B_{t+1}), tỉ lệ trajectory vào/ra dải, phân loại profile tăng/giảm/ổn định/không đơn điệu.
-- [ ] Hiệu chỉnh Holm-Bonferroni. Báo cáo kết quả null/âm chi tiết như kết quả dương.
+- [ ] So sánh phụ: B4 vs B3, B4/B5 vs B2, B5 vs ablation (nếu giữ ablation).
+- [ ] Accuracy chấm nới (T7-5): McNemar và CI qua seed cho B5 vs B4, luôn báo cáo cùng accuracy chặt và tỉ lệ đúng định dạng.
+- [ ] Đọc thủ công nhóm `invalid_format` có `lenient_correct = True` trên D_test tại S_0 và S_3, tối đa 100 trường hợp mỗi checkpoint, để ước lượng tỉ lệ đúng nhầm (T7-5).
+- [ ] Đo ε trên U: phân vị 95% của |L^a − L^b| tại S_1, kèm 2,77·s_w và CI bootstrap theo bài; báo cáo tỉ lệ vượt ε so với mốc 5% (T7-6).
+- [ ] Kiểm định giả thuyết H (T7-4, T7-7): trên B4, S_0→S_1 và S_1→S_2, Δ^a = ρ_noise^a − ρ_change^a trên U, bootstrap theo cụm `problem_id` 10.000 lần. Ủng hộ H khi **mọi** seed có cận dưới một phía 95% của Δ^a > 0 và Δ^a ≥ 0,05.
+- [ ] Thang đo của H (T7-7): quyết định trên L_proxy, báo cáo Δ trên thứ hạng ℓ kèm CI. Nếu L_proxy đạt mà ℓ không đạt, chỉ kết luận "thứ hạng theo khoảng cách tới trung vị thay đổi".
+- [ ] Độ nhạy của H (T7-7): mốc √ρ_noise ở S_0→S_1, kiểm định Steiger, U bỏ các bài có trajectory đã train, lặp lại trên B2 (cần `--b2-nll`). Wilcoxon kèm effect size chỉ để mô tả.
+- [ ] Độ nhạy của việc chọn với nhiễu: Jaccard giữa tập chọn vòng 2 của B5 ở các seed, so với mức ngẫu nhiên khoảng 0,02 (T7-8).
+- [ ] Các chỉ số dynamic: Jaccard(B_t, B_{t+1}), tỉ lệ trajectory vào/ra dải, phân loại profile tăng/giảm/ổn định/không đơn điệu (profile chỉ mang tính mô tả).
+- [ ] Hiệu quả: accuracy D_test theo số token đã train, diện tích dưới đường cong, `beta_est`.
+- [ ] Proxy validity: Spearman giữa L_proxy trung bình theo nhóm và L_emp, kèm bootstrap CI; 5 nhóm nên chỉ mang tính mô tả.
+- [ ] Hiệu chỉnh Holm-Bonferroni qua các baseline và các phân tích theo capability. Báo cáo effect size và CI cùng p-value; báo cáo kết quả null/âm chi tiết như kết quả dương.
 
 ### 3.2. Đề xuất 1
 - [ ] Nhóm chốt phạm vi: chỉ làm đường cong học theo capability (rẻ, có sẵn từ đánh giá mỗi checkpoint), hay cả đồ thị transfer (cần huấn luyện can thiệp riêng cho từng capability, rất tốn tài nguyên).
@@ -122,13 +141,24 @@ Số liệu đo trên T4 (smoke test): đánh giá 500 câu 23–28 phút, huấ
 - [ ] Viết `papers/paper_analysis.md` (hiện rỗng). Cần so sánh với các công trình liên quan (learnability gap / mix distillation, chọn dữ liệu theo loss hoặc độ khó như IFD, LESS, RHO-1, curriculum) để xác định điểm mới.
 - [ ] Tìm cơ sở tài liệu cho các ngưỡng đang chọn (n-gram = 13, retention r = 50%, dải median/IQR).
 - [ ] Bắt đầu viết các phần đã ổn định của khoá luận: tổng quan, phương pháp, dữ liệu, thiết lập thực nghiệm.
-- [ ] Ước lượng thời gian chạy, chia việc trong nhóm và lên lộ trình đến hạn nộp.
+- [ ] Viết chương kết quả và thảo luận của khoá luận, sau khi có phân tích 3.1.
+- [ ] Viết bài báo. Giá trị config và kết quả chỉ đặt ở mục Experiments, không đặt ở Related Work hay Methodology.
+- [ ] Rà lại BCGK và báo cáo tiến độ: `need_fix.txt`, `need_fix_BaoCaoTienDo2.txt` không còn trong thư mục gốc repo, cần xác nhận các lỗi đã sửa chưa.
+- [ ] Làm slide và chuẩn bị bảo vệ.
+- [ ] Đối chiếu file này với yêu cầu của khoa và giảng viên hướng dẫn.
+- [ ] Ước lượng thời gian chạy, chia việc trong nhóm và lên lộ trình đến hạn nộp. **Chưa ghi hạn nộp trong file này.**
 
 ---
 
 ## Thứ tự gợi ý
 
-1. Smoke test (0.1) và song song chuẩn bị cloud (0.2).
-2. Nếu smoke test ổn: sinh pool chính thức (1.1), cài đặt pipeline (2.1), đo nhiễu (2.2).
-3. Chạy thí nghiệm chính (2.3), rồi phân tích (3.1).
-4. Annotation, extractor, tài liệu và viết báo cáo (1.2, 1.3, 4.x) làm xen kẽ khi chờ máy chạy.
+Đã xong: smoke test (0.1), pool chính thức (1.1), chốt quy tắc và viết pipeline, pilot local (2.1).
+
+1. Commit, xóa pod cũ và đổi API key (0.2, 2.1).
+2. Chốt các quyết định còn mở ở 2.1: ablation, 3 quy ước cài đặt, biến thể ℓ cao / ℓ thấp.
+3. Chạy thử trên L4 với model thật, đối chiếu vLLM với HF, ước tính chi phí (2.1).
+4. Đo `L_emp`, chốt I4 (2.2). Nếu I4 đổi thì tạo config mới trước khi chạy chính.
+5. Viết script phân tích và thử trên dữ liệu pilot (2.1).
+6. Chạy thí nghiệm chính (2.3); đo ρ_noise và ε từ các lần chạy B4 (2.2).
+7. Phân tích (3.1), rồi chương kết quả và bài báo (4.3).
+8. Annotation, extractor, tài liệu (1.2, 1.3, 4.1, 4.2) và phần khoá luận đã ổn định làm xen kẽ khi chờ máy chạy.
