@@ -40,11 +40,19 @@ DEFAULT_NGRAM = 13
 
 
 def sha256_file(path):
-    h = hashlib.sha256()
-    with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
+    """
+    Calculate SHA256 using canonical LF line endings.
+
+    This ensures consistent manifest verification across
+    Windows (CRLF) and Unix-like systems (LF).
+    """
+    content = path.read_bytes()
+
+    # Normalize Windows and legacy Mac line endings to LF.
+    content = content.replace(b"\r\n", b"\n")
+    content = content.replace(b"\r", b"\n")
+
+    return hashlib.sha256(content).hexdigest()
 
 
 def load_jsonl(path):
