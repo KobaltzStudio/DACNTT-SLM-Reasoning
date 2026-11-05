@@ -1,0 +1,101 @@
+{
+  "schema_version": "v1",
+  "evaluation_unit": "problem",
+  "gold_unit": "problem",
+  "rules_file": "config/capability_rules_v2.json",
+  "guideline_version": "v3",
+  "gold_records": 185,
+  "prediction_records": 185,
+  "unique_problem_ids": 185,
+  "exact_matches": 4,
+  "exact_match_rate": 0.021621621621621623,
+  "micro": {
+    "TP": 191,
+    "FP": 21,
+    "FN": 357,
+    "precision": 0.9009433962264151,
+    "recall": 0.34854014598540145,
+    "f1": 0.5026315789473684
+  },
+  "macro_f1": 0.570888059075874,
+  "macro_f1_capabilities_included": 7,
+  "capabilities": {
+    "addition": {
+      "support": 78,
+      "TP": 12,
+      "FP": 4,
+      "FN": 66,
+      "TN": 103,
+      "precision": 0.75,
+      "recall": 0.15384615384615385,
+      "f1": 0.25531914893617025,
+      "status": "ok"
+    },
+    "subtraction": {
+      "support": 106,
+      "TP": 31,
+      "FP": 1,
+      "FN": 75,
+      "TN": 78,
+      "precision": 0.96875,
+      "recall": 0.29245283018867924,
+      "f1": 0.4492753623188405,
+      "status": "ok"
+    },
+    "multiplication": {
+      "support": 155,
+      "TP": 27,
+      "FP": 3,
+      "FN": 128,
+      "TN": 27,
+      "precision": 0.9,
+      "recall": 0.17419354838709677,
+      "f1": 0.29189189189189185,
+      "status": "ok"
+    },
+    "division": {
+      "support": 89,
+      "TP": 7,
+      "FP": 11,
+      "FN": 82,
+      "TN": 85,
+      "precision": 0.3888888888888889,
+      "recall": 0.07865168539325842,
+      "f1": 0.1308411214953271,
+      "status": "ok"
+    },
+    "percentage": {
+      "support": 41,
+      "TP": 41,
+      "FP": 0,
+      "FN": 0,
+      "TN": 144,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "status": "ok"
+    },
+    "fraction": {
+      "support": 49,
+      "TP": 49,
+      "FP": 2,
+      "FN": 0,
+      "TN": 134,
+      "precision": 0.9607843137254902,
+      "recall": 1.0,
+      "f1": 0.98,
+      "status": "ok"
+    },
+    "ratio": {
+      "support": 30,
+      "TP": 24,
+      "FP": 0,
+      "FN": 6,
+      "TN": 155,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.888888888888889,
+      "status": "ok"
+    }
+  }
+}
