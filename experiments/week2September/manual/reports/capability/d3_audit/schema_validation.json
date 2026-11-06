@@ -1,0 +1,548 @@
+{
+  "input_file": "data\\supplement\\supplement_annotations_v2.jsonl",
+  "schema_file": "schemas\\manual_annotation_schema.json",
+  "records": 85,
+  "pass_count": 85,
+  "fail_count": 0,
+  "schema_required_fields": [
+    "annotator_id",
+    "capabilities_manual",
+    "difficulty_manual",
+    "notes",
+    "problem_id",
+    "schema_version"
+  ],
+  "capability_support": {
+    "subtraction": 55,
+    "multiplication": 84,
+    "division": 47,
+    "ratio": 30,
+    "fraction": 31,
+    "addition": 27,
+    "percentage": 29
+  },
+  "difficulty_support": {
+    "medium": 46,
+    "hard": 8,
+    "easy": 31
+  },
+  "annotator_support": {
+    "A1": 85
+  },
+  "schema_version_support": {
+    "v1": 85
+  },
+  "semantic_review_completed": false,
+  "record_results": [
+    {
+      "line": 1,
+      "problem_id": "gsm8k_train_00116",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 2,
+      "problem_id": "gsm8k_train_00155",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 3,
+      "problem_id": "gsm8k_train_00166",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 4,
+      "problem_id": "gsm8k_train_00239",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 5,
+      "problem_id": "gsm8k_train_00293",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 6,
+      "problem_id": "gsm8k_train_00325",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 7,
+      "problem_id": "gsm8k_train_00342",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 8,
+      "problem_id": "gsm8k_train_00563",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 9,
+      "problem_id": "gsm8k_train_00666",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 10,
+      "problem_id": "gsm8k_train_00678",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 11,
+      "problem_id": "gsm8k_train_00713",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 12,
+      "problem_id": "gsm8k_train_00724",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 13,
+      "problem_id": "gsm8k_train_00761",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 14,
+      "problem_id": "gsm8k_train_00769",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 15,
+      "problem_id": "gsm8k_train_00779",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 16,
+      "problem_id": "gsm8k_train_00818",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 17,
+      "problem_id": "gsm8k_train_00830",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 18,
+      "problem_id": "gsm8k_train_00840",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 19,
+      "problem_id": "gsm8k_train_00934",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 20,
+      "problem_id": "gsm8k_train_00942",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 21,
+      "problem_id": "gsm8k_train_01013",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 22,
+      "problem_id": "gsm8k_train_01200",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 23,
+      "problem_id": "gsm8k_train_01280",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 24,
+      "problem_id": "gsm8k_train_01334",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 25,
+      "problem_id": "gsm8k_train_01377",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 26,
+      "problem_id": "gsm8k_train_01384",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 27,
+      "problem_id": "gsm8k_train_01600",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 28,
+      "problem_id": "gsm8k_train_01869",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 29,
+      "problem_id": "gsm8k_train_02039",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 30,
+      "problem_id": "gsm8k_train_02059",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 31,
+      "problem_id": "gsm8k_train_02327",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 32,
+      "problem_id": "gsm8k_train_02342",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 33,
+      "problem_id": "gsm8k_train_02359",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 34,
+      "problem_id": "gsm8k_train_02376",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 35,
+      "problem_id": "gsm8k_train_02486",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 36,
+      "problem_id": "gsm8k_train_02508",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 37,
+      "problem_id": "gsm8k_train_02634",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 38,
+      "problem_id": "gsm8k_train_02713",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 39,
+      "problem_id": "gsm8k_train_02754",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 40,
+      "problem_id": "gsm8k_train_02837",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 41,
+      "problem_id": "gsm8k_train_02858",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 42,
+      "problem_id": "gsm8k_train_02871",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 43,
+      "problem_id": "gsm8k_train_02893",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 44,
+      "problem_id": "gsm8k_train_02919",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 45,
+      "problem_id": "gsm8k_train_02960",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 46,
+      "problem_id": "gsm8k_train_02997",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 47,
+      "problem_id": "gsm8k_train_03016",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 48,
+      "problem_id": "gsm8k_train_03048",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 49,
+      "problem_id": "gsm8k_train_03116",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 50,
+      "problem_id": "gsm8k_train_03125",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 51,
+      "problem_id": "gsm8k_train_03140",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 52,
+      "problem_id": "gsm8k_train_03263",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 53,
+      "problem_id": "gsm8k_train_03289",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 54,
+      "problem_id": "gsm8k_train_03316",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 55,
+      "problem_id": "gsm8k_train_03355",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 56,
+      "problem_id": "gsm8k_train_03360",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 57,
+      "problem_id": "gsm8k_train_03390",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 58,
+      "problem_id": "gsm8k_train_03439",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 59,
+      "problem_id": "gsm8k_train_03734",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 60,
+      "problem_id": "gsm8k_train_03879",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 61,
+      "problem_id": "gsm8k_train_03882",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 62,
+      "problem_id": "gsm8k_train_03999",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 63,
+      "problem_id": "gsm8k_train_04046",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 64,
+      "problem_id": "gsm8k_train_04231",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 65,
+      "problem_id": "gsm8k_train_04426",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 66,
+      "problem_id": "gsm8k_train_04470",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 67,
+      "problem_id": "gsm8k_train_04617",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 68,
+      "problem_id": "gsm8k_train_04862",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 69,
+      "problem_id": "gsm8k_train_05030",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 70,
+      "problem_id": "gsm8k_train_05194",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 71,
+      "problem_id": "gsm8k_train_05287",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 72,
+      "problem_id": "gsm8k_train_05356",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 73,
+      "problem_id": "gsm8k_train_05451",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 74,
+      "problem_id": "gsm8k_train_05463",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 75,
+      "problem_id": "gsm8k_train_05486",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 76,
+      "problem_id": "gsm8k_train_05565",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 77,
+      "problem_id": "gsm8k_train_05585",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 78,
+      "problem_id": "gsm8k_train_05715",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 79,
+      "problem_id": "gsm8k_train_06274",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 80,
+      "problem_id": "gsm8k_train_06506",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 81,
+      "problem_id": "gsm8k_train_06921",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 82,
+      "problem_id": "gsm8k_train_07080",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 83,
+      "problem_id": "gsm8k_train_07117",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 84,
+      "problem_id": "gsm8k_train_07158",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "line": 85,
+      "problem_id": "gsm8k_train_07349",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

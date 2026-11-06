@@ -1,0 +1,243 @@
+{
+  "schema_version": "v1",
+  "annotation_type": "a1_vs_ai_assisted_a2_agreement",
+  "a1_file": "data\\annotation\\a1_supplement_agreement_25.jsonl",
+  "a2_file": "data\\annotation\\a2_supplement_annotations.jsonl",
+  "n_records": 25,
+  "capabilities": {
+    "addition": {
+      "kappa": 0.512987012987013,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 13,
+      "a2_positive": 17,
+      "agreement_count": 19,
+      "confusion_matrix": {
+        "true_positive": 12,
+        "true_negative": 7,
+        "false_positive": 5,
+        "false_negative": 1
+      }
+    },
+    "subtraction": {
+      "kappa": 0.9049429657794675,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 18,
+      "a2_positive": 17,
+      "agreement_count": 24,
+      "confusion_matrix": {
+        "true_positive": 17,
+        "true_negative": 7,
+        "false_positive": 0,
+        "false_negative": 1
+      }
+    },
+    "multiplication": {
+      "kappa": 0.0,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 25,
+      "a2_positive": 20,
+      "agreement_count": 20,
+      "confusion_matrix": {
+        "true_positive": 20,
+        "true_negative": 0,
+        "false_positive": 0,
+        "false_negative": 5
+      }
+    },
+    "division": {
+      "kappa": 0.9196141479099678,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 11,
+      "a2_positive": 12,
+      "agreement_count": 24,
+      "confusion_matrix": {
+        "true_positive": 11,
+        "true_negative": 13,
+        "false_positive": 1,
+        "false_negative": 0
+      }
+    },
+    "percentage": {
+      "kappa": 1.0,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 12,
+      "a2_positive": 12,
+      "agreement_count": 25,
+      "confusion_matrix": {
+        "true_positive": 12,
+        "true_negative": 13,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    },
+    "fraction": {
+      "kappa": 0.9152542372881355,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 10,
+      "a2_positive": 9,
+      "agreement_count": 24,
+      "confusion_matrix": {
+        "true_positive": 9,
+        "true_negative": 15,
+        "false_positive": 0,
+        "false_negative": 1
+      }
+    },
+    "ratio": {
+      "kappa": 1.0,
+      "status": "ok",
+      "n": 25,
+      "a1_positive": 5,
+      "a2_positive": 5,
+      "agreement_count": 25,
+      "confusion_matrix": {
+        "true_positive": 5,
+        "true_negative": 20,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    }
+  },
+  "difficulty": {
+    "kappa": 0.47643979057591634,
+    "status": "ok",
+    "n": 25,
+    "agreement_count": 17
+  },
+  "disagreements": [
+    {
+      "problem_id": "gsm8k_train_00761",
+      "capability_disagreements": [
+        "division",
+        "multiplication"
+      ],
+      "difficulty_A1": "medium",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_01280",
+      "capability_disagreements": [
+        "addition",
+        "multiplication"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_01334",
+      "capability_disagreements": [
+        "addition"
+      ],
+      "difficulty_A1": "medium",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_01600",
+      "capability_disagreements": [],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_02342",
+      "capability_disagreements": [
+        "addition"
+      ],
+      "difficulty_A1": "hard",
+      "difficulty_A2": "hard"
+    },
+    {
+      "problem_id": "gsm8k_train_02919",
+      "capability_disagreements": [
+        "multiplication"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_02997",
+      "capability_disagreements": [
+        "multiplication"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "easy"
+    },
+    {
+      "problem_id": "gsm8k_train_03016",
+      "capability_disagreements": [],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_03125",
+      "capability_disagreements": [],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_03263",
+      "capability_disagreements": [
+        "multiplication"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "hard"
+    },
+    {
+      "problem_id": "gsm8k_train_03390",
+      "capability_disagreements": [
+        "subtraction"
+      ],
+      "difficulty_A1": "hard",
+      "difficulty_A2": "hard"
+    },
+    {
+      "problem_id": "gsm8k_train_04426",
+      "capability_disagreements": [
+        "addition"
+      ],
+      "difficulty_A1": "medium",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_04617",
+      "capability_disagreements": [
+        "addition"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_04862",
+      "capability_disagreements": [],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "medium"
+    },
+    {
+      "problem_id": "gsm8k_train_05194",
+      "capability_disagreements": [
+        "addition"
+      ],
+      "difficulty_A1": "easy",
+      "difficulty_A2": "easy"
+    },
+    {
+      "problem_id": "gsm8k_train_05715",
+      "capability_disagreements": [
+        "fraction"
+      ],
+      "difficulty_A1": "medium",
+      "difficulty_A2": "medium"
+    }
+  ],
+  "disagreement_count": 16,
+  "interpretation_rule": {
+    "target_kappa": 0.6,
+    "note": "Kappa below 0.60 requires inspection of disagreements and guideline underspecification before any annotation revision.",
+    "degenerate_note": "If a capability has no prevalence variation, kappa may be degenerate and should be reported as N/A rather than forced."
+  }
+}
