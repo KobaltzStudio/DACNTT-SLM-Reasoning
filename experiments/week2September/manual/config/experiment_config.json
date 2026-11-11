@@ -9,7 +9,7 @@
   },
   "splits": {
     "manifest": "splits/split_manifest.json",
-    "manifest_sha256": "8bac2c8d43eae6df53b63f97f353ed6006551f44d5562b74941455301fec09a3",
+    "manifest_sha256": "85f4559246542d197c427318afb3eefb8b8492573b69ac23e691fc19ce93bbda",
     "split_seed": 363636,
     "n_dev": 500,
     "near_duplicate_ngram": 13

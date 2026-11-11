@@ -1,0 +1,9 @@
+{
+  "checkpoint": "student_ckpt_000",
+  "n_trajectories": 4353,
+  "l_proxy_mean": 0.7191017207021699,
+  "l_proxy_median": 0.79880618237434,
+  "l_proxy_min": 3.24108342299825e-11,
+  "l_proxy_max": 1.0,
+  "l_proxy_std": 0.26952938410364036
+}

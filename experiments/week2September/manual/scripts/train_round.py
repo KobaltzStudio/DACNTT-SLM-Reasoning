@@ -65,6 +65,11 @@ def main():
     add_model_args(ap)
     args = ap.parse_args()
 
+    if args.adapter_dir.exists():
+        raise FileExistsError(
+            f"refusing to train into an existing adapter directory: {args.adapter_dir}; "
+            "if it is a complete checkpoint, reuse it; if incomplete, inspect manually"
+        )
     check_prompt_template()
     cfg = load_config()
     tc = cfg["training"]
@@ -82,6 +87,8 @@ def main():
     from peft import LoraConfig, PeftModel, get_peft_model
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    if not args.train_set.exists():
+        raise FileNotFoundError(args.train_set)
     train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
     if "pool" in train_set:
         pool_path = MANUAL_DIR / train_set["pool"]
