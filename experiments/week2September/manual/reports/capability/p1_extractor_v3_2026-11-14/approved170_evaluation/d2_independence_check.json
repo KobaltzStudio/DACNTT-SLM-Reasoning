@@ -1,0 +1,9 @@
+{
+  "approved170_unique_ids": 170,
+  "d2_records": 30,
+  "d2_unique_ids": 30,
+  "id_overlap_count": 0,
+  "overlap_ids": [],
+  "id_disjoint": true,
+  "warning": "ID disjointness alone does not prove independence. Also inspect how D2 cases were authored and whether they were derived from or tuned against the 170 records."
+}

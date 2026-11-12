@@ -1,0 +1,3 @@
+﻿test_id,expected,original_predictions,candidate_predictions,missing,unexpected,forbidden_found,exact_match,test_pass
+N01,"[""multiplication"", ""percentage"", ""subtraction""]","[""percentage""]","[""multiplication"", ""percentage"", ""subtraction""]",[],[],[],True,True
+N02,"[""multiplication"", ""percentage"", ""subtraction""]","[""percentage""]","[""multiplication"", ""percentage"", ""subtraction""]",[],[],[],True,True

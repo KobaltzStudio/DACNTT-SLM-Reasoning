@@ -1,0 +1,107 @@
+﻿{
+    "schema_version":  "v3",
+    "taxonomy":  [
+                     "addition",
+                     "subtraction",
+                     "multiplication",
+                     "division",
+                     "percentage",
+                     "fraction",
+                     "ratio"
+                 ],
+    "normalization":  {
+                          "lowercase":  true,
+                          "unicode_math":  true,
+                          "collapse_whitespace":  true
+                      },
+    "rules":  {
+                  "addition":  {
+                                   "patterns":  [
+                                                    "\\b(?:add|added|adding|sum|summed|plus|combined|combine|together)\\b",
+                                                    "(?\u003c!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*\\+\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+                                                ],
+                                   "notes":  "Prefer explicit addition evidence; \u0027total\u0027 is weak contextual evidence.",
+                                   "negative_patterns":  [
+
+                                                         ]
+                               },
+                  "subtraction":  {
+                                      "patterns":  [
+                                                       "\\b(?:subtract|subtracted|subtracting|minus|difference|decrease|decreased|remaining|remains|left|less)\\b",
+                                                       "(?\u003c!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*-\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+                                                   ],
+                                      "notes":  "Use explicit subtraction/difference evidence; remaining/left are contextual cues.",
+                                      "negative_patterns":  [
+
+                                                            ]
+                                  },
+                  "multiplication":  {
+                                         "patterns":  [
+                                                          "(?:\\d+(?:\\.\\d+)?(?:\\s+[a-z]+(?:/[a-z]+)?)?|\\))\\s*(?:\\*|Ã—|x|âœ•|Â·|times)\\s*(?:\\d+(?:\\.\\d+)?|\\()",
+                                                          "\\b(?:multiply|multiplied|multiplying|times|double|twice|triple|tripled)\\b",
+                                                          "\\b(?:groups?|batches?|sets?)\\s+of\\b",
+                                                          "\\b(?:scale|scaling)\\b.{0,50}\\b(?:ratio|quantity|amount)\\b"
+                                                      ],
+                                         "notes":  "Recognizes explicit multiplication, including parenthesized expressions and quantities with units between the number and operator. \u0027twice/double/triple\u0027 implies scaling, not ratio.",
+                                         "negative_patterns":  [
+                                                                   "\\bhow many groups of\\b.{0,30}\\bfrom\\b",
+                                                                   "\\bhow many\\b.{0,40}\\b(?:boxes|groups|packs|sets)\\b.{0,30}\\busing\\b"
+                                                               ]
+                                     },
+                  "division":  {
+                                   "patterns":  [
+                                                    "(?:(?\u003c![\\d.,])(?\u003c!\\btimes )(?\u003c!\\bx )(?\u003c!\\* )(?\u003c!\\bof )\\d+(?:,\\d{3})*(?:\\.\\d+)?|\\))\\s*(?:/|Ã·|â„)\\s*(?:\\d+(?:\\.\\d+)?(?![\\d.])|\\()(?!\\)?\\s*(?:(?:times|x|of)\\b|\\*))",
+                                                    "\\b(?:divide|divided|dividing|quotient|equal(?:ly)?\\s+(?:among|between|into)|split\\s+(?:equally|evenly))\\b",
+                                                    "(?\u003c![\\d.,])\\d+(?:,\\d{3})*(?:\\.\\d+)?\\s+[a-z]+\\s*/\\s*\\d+(?:\\.\\d+)?(?![\\d.])",
+                                                    "\\b(?:split|share|distribute)\\b.{0,60}\\b(?:evenly|equally|between|among|into)\\b",
+                                                    "\\bhow many groups of\\b.{0,30}\\bfrom\\b",
+                                                    "\\bhow many\\b.{0,40}\\b(?:boxes|groups|packs|sets)\\b.{0,30}\\busing\\b",
+                                                    "\\b(?:cost|price|value) of each\\b",
+                                                    "\\bsolve\\b.{0,40}\\b\\d+\\s*[a-z]\\s*=\\s*\\d+",
+                                                    "\\bwhat percentage of\\b",
+                                                    "\\b(?:one-third|one-third|half|one-half)\\b.{0,60}\\b(?:original|whole|entire) number\\b",
+                                                    "\\bwhat fraction of\\b"
+                                                ],
+                                   "notes":  "APPROVED 2026-10-12 (part A + part B; task4_decisions.md). v2 (Task 4 adjudication): rule_1 ignores a / b used as a fraction/percentage multiplier (preceded or followed by \u0027times\u0027/\u0027x\u0027/\u0027*\u0027/\u0027of\u0027, e.g. \u00272 / 5 times 400\u0027, \u002710 / 100 times 40\u0027, \u002792 times 1 / 4\u0027), per guideline_v2 Rule 3/Rule 5. Bare \u0027per\u0027 removed from rule_2: it marks a rate unit, not a division operation (17 adjudicated FALSE_LEXICAL_TRIGGER cases). rule_3 added for unit-bearing division such as \u0027210 points / 5 games\u0027 or \u0027504 ounces / 84\u0027, which v1 only caught through \u0027per\u0027. v3 additions: contextual question forms for equal sharing, group counting, unit value, inverse unknown-factor, part-to-whole percentage, and inverse fraction. Fraction-of-N remains fraction-only unless inverse unknown is requested.",
+                                   "negative_patterns":  [
+
+                                                         ]
+                               },
+                  "percentage":  {
+                                     "patterns":  [
+                                                      "\\b(?:percentage|percent|pct|per\\s+hundred|out\\s+of\\s+100)\\b",
+                                                      "(?\u003c!\\w)\\d+(?:\\.\\d+)?\\s*%",
+                                                      "(?\u003c!\\w)\\d+(?:\\.\\d+)?\\s*/\\s*100\\b"
+                                                  ],
+                                     "notes":  "Percentage is explicit; decimals alone do not imply percentage.",
+                                     "negative_patterns":  [
+
+                                                           ]
+                                 },
+                  "fraction":  {
+                                   "patterns":  [
+                                                    "\\b(?:fraction|fractional|half|halves|one[-\\s]half|one[-\\s]third|one[-\\s]quarter|two[-\\s]fifths|three[-\\s]quarters|a\\s+third|a\\s+quarter)\\b",
+                                                    "(?\u003c!\\w)(?:(?:\\(\\s*(?:1|2|3)\\s*\\)\\s*/\\s*\\(\\s*(?:2|3|4|5)\\s*\\))|(?:(?:1\\s*/\\s*[2-4]|2\\s*/\\s*3|3\\s*/\\s*4|2\\s*/\\s*5)))(?!\\w)",
+                                                    "\\b(?:one[-\\s]?(?:fourth|fifth|sixth|seventh|eighth|ninth|tenth)|\\d+(?:st|nd|rd|th)\\s+part)\\b"
+                                                ],
+                                   "notes":  "Use explicit fractional language or common proper fractions. Bare ordinal words such as \u0027third\u0027 are not sufficient. A numeric fraction such as 1/2 can still be semantically ambiguous without context.",
+                                   "negative_patterns":  [
+
+                                                         ]
+                               },
+                  "ratio":  {
+                                "patterns":  [
+                                                 "\\b(?:ratio|proportional|in\\s+the\\s+ratio\\s+of)\\b|\\bproportion\\b(?!\\s+of\\b)",
+                                                 "(?\u003c!\\w)\\d+:\\d+(?!\\w)",
+                                                 "(?\u003c!\\w)\\d+\\s+:\\s+\\d+(?!\\w)"
+                                             ],
+                                "notes":  "Colon-form ratio accepts 3:2 or 3 : 2; one-sided whitespace is rejected to avoid \u0027Step 3: 12\u0027. Clock-like HH:MM values are suppressed. Do not infer ratio from twice/double/ordinary division. APPROVED 2026-10-12: \u0027the proportion of X\u0027 (share/fraction wording) no longer triggers ratio; guideline_v2 Rule 6 (gsm8k_train_00087).",
+                                "negative_patterns":  [
+                                                          "\\b(?:ratio|proportion)\\b\\s+(?:is\\s+)?(?:not|unnecessary|irrelevant)\\b",
+                                                          "\\bnot\\s+(?:a\\s+)?ratio\\b",
+                                                          "\\bratio\\s+(?:is\\s+)?not\\s+(?:needed|required|used)\\b",
+                                                          "(?\u003c!\\w)(?:[01]?\\d|2[0-3]):[0-5]\\d(?!\\w)"
+                                                      ]
+                            }
+              }
+}
