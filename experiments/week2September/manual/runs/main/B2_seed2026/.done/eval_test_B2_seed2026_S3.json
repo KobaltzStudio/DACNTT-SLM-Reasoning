@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B2_seed2026_S3 --split test --out /workspace/manual/runs/main/B2_seed2026/S3/eval_test.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B2_seed2026/S3/adapter",
+  "elapsed_seconds": 348.0
+}

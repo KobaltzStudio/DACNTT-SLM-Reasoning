@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/train_round.py --seed 42 --train-set /workspace/manual/runs/main/B5_seed42/round_000/train_set.json --adapter-dir /workspace/manual/runs/main/B5_seed42/S1/adapter --micro-batch 8 --dtype auto",
+  "elapsed_seconds": 198.6
+}

@@ -1,0 +1,24 @@
+{
+  "checkpoint": "student_ckpt_002",
+  "run": "B5_seed13",
+  "nll_file": "runs/main/B5_seed13/S2/nll.jsonl",
+  "nll_sha256": "33c929eb4ca06ff263496cbf8f18e96d23ef117671e1bb9554d119203989ea92",
+  "n_scored": 4353,
+  "n_reference": 3991,
+  "n_trained_excluded": 362,
+  "ell_star": 0.18826596545770702,
+  "q1": 0.13844966888427734,
+  "q3": 0.2507537271966578,
+  "sigma": 0.08324985790391434,
+  "quantile_method": "statistics.quantiles(n=4), exclusive",
+  "ell": {
+    "mean": 0.19513839546485612,
+    "median": 0.17735741279318243,
+    "sd": 0.07871235354104257
+  },
+  "l_proxy": {
+    "mean": 0.7406640307351022,
+    "median": 0.8110906529556215,
+    "sd": 0.2456502878743925
+  }
+}
