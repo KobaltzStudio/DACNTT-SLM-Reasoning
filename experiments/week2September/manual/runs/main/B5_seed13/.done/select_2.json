@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/select_round.py --method B5 --seed 13 --round 2 --run-dir /workspace/manual/runs/main/B5_seed13 --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/manual/trajectory/pool/pool_v1_tokens.jsonl --nll /workspace/manual/runs/main/B5_seed13/S2/nll.jsonl",
+  "elapsed_seconds": 2.1
+}

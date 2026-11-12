@@ -1,0 +1,23 @@
+{
+  "checkpoint": "S0",
+  "adapter": null,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "n_trajectories": 841,
+  "pool": "/workspace/manual/runs/pilot/pilot_pool.jsonl",
+  "pool_sha256": "bb39b108a1a4ca549bee8088dead92076c257217dfb32cdb86e5aaa6bbcb083f",
+  "forward_passes": 841,
+  "elapsed_seconds": 43.5,
+  "peak_gpu_memory_gb": 9.44,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
