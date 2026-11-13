@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "candidate": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\data\\gold_vnext_candidate_2026-11-16_r1",
+  "parent_candidate": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\data\\gold_vnext_candidate_2026-11-16",
+  "freeze_status": "NOT_FROZEN",
+  "counts": {
+    "batch": 100,
+    "supplement": 85,
+    "total_unique": 185,
+    "ledger_rows": 63
+  },
+  "checks": [
+    {
+      "name": "parent_batch_100",
+      "passed": true,
+      "detail": 100
+    },
+    {
+      "name": "parent_supplement_85",
+      "passed": true,
+      "detail": 85
+    },
+    {
+      "name": "r1_batch_100",
+      "passed": true,
+      "detail": 100
+    },
+    {
+      "name": "r1_supplement_85",
+      "passed": true,
+      "detail": 85
+    },
+    {
+      "name": "batch_supplement_disjoint",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "r1_total_unique_185",
+      "passed": true,
+      "detail": 185
+    },
+    {
+      "name": "batch_byte_identical_to_parent",
+      "passed": true,
+      "detail": {
+        "parent": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+        "r1": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+      }
+    },
+    {
+      "name": "parent_batch_matches_parent_manifest",
+      "passed": true,
+      "detail": {
+        "manifest_hash": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+        "actual_hash": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+      }
+    },
+    {
+      "name": "parent_supplement_matches_parent_manifest",
+      "passed": true,
+      "detail": {
+        "manifest_hash": "970c5d63c2f0f822a73805c0dd03a727a542d08077dcc3fbdffeb043e7f29257",
+        "actual_hash": "970c5d63c2f0f822a73805c0dd03a727a542d08077dcc3fbdffeb043e7f29257"
+      }
+    },
+    {
+      "name": "only_two_supplement_notes_changed",
+      "passed": true,
+      "detail": [
+        "gsm8k_train_00713",
+        "gsm8k_train_00830"
+      ]
+    },
+    {
+      "name": "gsm8k_train_00713_note_exact_match",
+      "passed": true,
+      "detail": "Exact expected note comparison"
+    },
+    {
+      "name": "gsm8k_train_00830_note_exact_match",
+      "passed": true,
+      "detail": "Exact expected note comparison"
+    },
+    {
+      "name": "00713_old_contradiction_absent",
+      "passed": true,
+      "detail": "Old contradictory phrase must be absent"
+    },
+    {
+      "name": "00830_old_contradiction_absent",
+      "passed": true,
+      "detail": "Old contradictory phrase must be absent"
+    },
+    {
+      "name": "00830_subtraction_label_present",
+      "passed": true,
+      "detail": "Note explicitly explains subtraction"
+    },
+    {
+      "name": "ledger_has_63_rows",
+      "passed": true,
+      "detail": 63
+    },
+    {
+      "name": "ledger_notes_match_r1",
+      "passed": true,
+      "detail": [
+        "gsm8k_train_00713",
+        "gsm8k_train_00830"
+      ]
+    },
+    {
+      "name": "r1_manifest_version",
+      "passed": true,
+      "detail": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "name": "r1_manifest_not_frozen",
+      "passed": true,
+      "detail": "NOT_FROZEN"
+    },
+    {
+      "name": "r1_manifest_validation_pass",
+      "passed": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "r1_batch_matches_manifest",
+      "passed": true,
+      "detail": {
+        "manifest_hash": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+        "actual_hash": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+      }
+    },
+    {
+      "name": "r1_supplement_matches_manifest",
+      "passed": true,
+      "detail": {
+        "manifest_hash": "8c41bc4e5c237a289dfcda92fcc691bf84b0ff5552ea8c8249c3947d3725ae26",
+        "actual_hash": "8c41bc4e5c237a289dfcda92fcc691bf84b0ff5552ea8c8249c3947d3725ae26"
+      }
+    },
+    {
+      "name": "final_adjudication_report_has_r1_section",
+      "passed": true,
+      "detail": "Revision r1 section presence"
+    }
+  ],
+  "failed_checks": [],
+  "important_limitation": "This audit verifies parent batch and supplement against hashes stored in the parent manifest. It cannot independently prove the parent manifest file itself is unchanged because no pre-build hash of that manifest was recorded.",
+  "freeze_authorized": false
+}

@@ -1,0 +1,10 @@
+{
+  "script": "freeze_gold_vnext_candidate_r1_2026_11_16.py",
+  "candidate_version": "vNext-candidate-2026-11-16-r1",
+  "started_at_utc": "2026-11-13T03:23:03.688547+00:00",
+  "mode": "AUDIT_ONLY",
+  "checks": {},
+  "status": "FAIL",
+  "error": "Required JSON file is missing: C:\\KLTN-SLM-Reasoning\\experiments\\experiments\\week2September\\manual\\reports\\gold\\review_2026-11-16\\gold_r1_freeze_baseline_sha256.json",
+  "completed_at_utc": "2026-11-13T03:23:03.688547+00:00"
+}
