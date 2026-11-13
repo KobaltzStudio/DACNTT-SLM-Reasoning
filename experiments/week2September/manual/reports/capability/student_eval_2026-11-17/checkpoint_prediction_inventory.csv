@@ -1,0 +1,3 @@
+﻿prediction_file,records,unique_problem_ids,checkpoint_values,duplicate_count,outside_d_dev_count,missing_d_dev_count,correct_field_types,status,error
+C:\KLTN-SLM-Reasoning\experiments\week2September\manual\reports\task7\B4\seed_13\eval_student_ckpt_001_dev.jsonl,500,500,B4_seed13_student_ckpt_001,0,0,0,"{""bool"": 500}",PASS,
+C:\KLTN-SLM-Reasoning\experiments\week2September\manual\reports\task7\smoke\eval_S0_dev_10.jsonl,10,10,S0_test,0,0,490,"{""bool"": 10}",PASS,
