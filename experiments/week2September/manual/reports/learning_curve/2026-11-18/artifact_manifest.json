@@ -1,0 +1,238 @@
+{
+  "manifest_version": "1.0",
+  "project": "Proposal 1 - Student-Specific Capability Dependency, Transfer, and Learning Dynamics",
+  "method": "B4",
+  "seed": 13,
+  "created_at_utc": "2026-11-14T04:10:34.122654+00:00",
+  "checkpoint_rounds": [
+    0,
+    1,
+    2
+  ],
+  "capabilities": [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio"
+  ],
+  "graph_summary": {
+    "nodes": 7,
+    "edges": 0,
+    "prerequisite_edges": 0,
+    "transfer_edges": 0
+  },
+  "learning_curve_summary": {
+    "observations": 21,
+    "checkpoints": 3,
+    "capabilities": 7
+  },
+  "checkpoint_provenance": [
+    {
+      "round": 0,
+      "checkpoint_directory": "student_ckpt_001",
+      "evaluation_directory": "B4_seed13_ckpt001",
+      "checkpoint_parent": "student_ckpt_000",
+      "seed": 13,
+      "data_order_seed": 13,
+      "train_set_path": "reports/task7/B4/seed_13/round_000/train_set.json",
+      "train_set_sha256": "614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006",
+      "train_set_source_checkpoint": "student_ckpt_000",
+      "train_set_round": 0,
+      "train_set_method": "B4",
+      "train_set_seed": 13,
+      "n_examples_train_log": 186,
+      "n_trajectories_train_set": 186,
+      "pool_sha256_train_log": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "pool_sha256_train_set": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "round_normalization": "round_unknown normalized to 0 after checkpoint identity and Round 0 training lineage verification"
+    },
+    {
+      "round": 1,
+      "checkpoint_directory": "student_ckpt_002",
+      "evaluation_directory": "B4_seed13_ckpt002",
+      "checkpoint_parent": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_001",
+      "seed": 13,
+      "data_order_seed": 13,
+      "train_set_path": "reports/task7/B4/seed_13/round_001/train_set.json",
+      "train_set_sha256": "cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a",
+      "train_set_source_checkpoint": "student_ckpt_000",
+      "train_set_round": 1,
+      "train_set_method": "B4",
+      "train_set_seed": 13,
+      "n_examples_train_log": 187,
+      "n_trajectories_train_set": 187,
+      "pool_sha256_train_log": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "pool_sha256_train_set": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "round_normalization": "round_001"
+    },
+    {
+      "round": 2,
+      "checkpoint_directory": "student_ckpt_003",
+      "evaluation_directory": "B4_seed13_ckpt003",
+      "checkpoint_parent": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_002",
+      "seed": 13,
+      "data_order_seed": 13,
+      "train_set_path": "reports/task7/B4/seed_13/round_002/train_set.json",
+      "train_set_sha256": "f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e",
+      "train_set_source_checkpoint": "student_ckpt_000",
+      "train_set_round": 2,
+      "train_set_method": "B4",
+      "train_set_seed": 13,
+      "n_examples_train_log": 187,
+      "n_trajectories_train_set": 187,
+      "pool_sha256_train_log": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "pool_sha256_train_set": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "round_normalization": "round_002"
+    }
+  ],
+  "artifacts": [
+    {
+      "category": "generated_artifact",
+      "path": "reports/learning_curve/2026-11-18/capability_learning_curves.csv",
+      "sha256": "bf9fb33539ca4887f9689e4b35b49d1f8f482503b3f56dc3a34b0d77e5df428d",
+      "size_bytes": 3081
+    },
+    {
+      "category": "generated_artifact",
+      "path": "reports/learning_curve/2026-11-18/capability_learning_curves.png",
+      "sha256": "bbd082e443f3cdc0945f7cbec656db8c66dfa126f3cb2287599b06d1f03a2d21",
+      "size_bytes": 343442
+    },
+    {
+      "category": "generated_artifact",
+      "path": "reports/learning_curve/2026-11-18/capability_graph.json",
+      "sha256": "dd77d92563d8e055d543031182f3a34e8691f705eef49f0614d2edf5267d991c",
+      "size_bytes": 676
+    },
+    {
+      "category": "generated_artifact",
+      "path": "reports/learning_curve/2026-11-18/graph_evidence_ledger.csv",
+      "sha256": "3422f1b44fe9d1f774470c6810b3550ac60094dd9f40991dd56a3d0b4471ad95",
+      "size_bytes": 14714
+    },
+    {
+      "category": "generated_artifact",
+      "path": "reports/learning_curve/2026-11-18/student_learning_dynamics.md",
+      "sha256": "e3e77ee84e295b6b337bb87ea6bf4445ccc9ac707fdd9be995dcbc13dbc74007",
+      "size_bytes": 5646
+    }
+  ],
+  "inputs": [
+    {
+      "category": "protocol",
+      "path": "config/proposal1_graph_protocol.md",
+      "sha256": "3f5f84e912a7b30e266e1887cf6fc0691e02e693a20c506f5d015091ea1d4577",
+      "size_bytes": 17635
+    },
+    {
+      "category": "schema",
+      "path": "schemas/capability_graph_schema.json",
+      "sha256": "c3ef3ab86aa782f1770d66e2476cc96259ba6beb86bc1d1c5aa84fba714f88ff",
+      "size_bytes": 2192
+    },
+    {
+      "category": "schema",
+      "path": "schemas/student_learning_curve_schema.json",
+      "sha256": "f061579ee1f0a862307404d672ade873ba41166da780656f62664e6e38b072b9",
+      "size_bytes": 3483
+    },
+    {
+      "category": "evaluation_manifest",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt001/student_capability_evaluation_manifest.json",
+      "sha256": "43c62b529b815114d1fcdca42665513b080cef0b9d37128cde426e1a09f68d79",
+      "size_bytes": 1889
+    },
+    {
+      "category": "evaluation_metrics_csv",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt001/capability_metrics.csv",
+      "sha256": "d8414524082beb97d96ce45246135beccc978a125aaebe6fafc284951616afdf",
+      "size_bytes": 1665
+    },
+    {
+      "category": "evaluation_metrics_jsonl",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt001/capability_metrics.jsonl",
+      "sha256": "4d3237fdde13ad730a3b8ac856f5682c70391b19585c7e29f4611b0cb78db7ff",
+      "size_bytes": 3123
+    },
+    {
+      "category": "train_log",
+      "path": "models/task7/B4/seed_13/student_ckpt_001/train_log.json",
+      "sha256": "54f595bdbe4c0c010a6b96ff802161db7cc305d3e098c1513f298d5f2ad3592f",
+      "size_bytes": 7116
+    },
+    {
+      "category": "train_set",
+      "path": "reports/task7/B4/seed_13/round_000/train_set.json",
+      "sha256": "614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006",
+      "size_bytes": 7152
+    },
+    {
+      "category": "evaluation_manifest",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt002/student_capability_evaluation_manifest.json",
+      "sha256": "0ca25361c1dc42aa84cc1e03fc8a26bbabd43bbf77d983d51d3bd73b6da3cd3e",
+      "size_bytes": 1885
+    },
+    {
+      "category": "evaluation_metrics_csv",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt002/capability_metrics.csv",
+      "sha256": "ac31641c2cbfe585b45515245cc53884959945cf2237bf1b53a89f12ef6eecca",
+      "size_bytes": 1637
+    },
+    {
+      "category": "evaluation_metrics_jsonl",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt002/capability_metrics.jsonl",
+      "sha256": "735d4adb6fe5b78c27edb4616df72ccda3d8a58acf0a698d47d76d9364419327",
+      "size_bytes": 3095
+    },
+    {
+      "category": "train_log",
+      "path": "models/task7/B4/seed_13/student_ckpt_002/train_log.json",
+      "sha256": "3ce41159b16b4ad56b1efe7c7704524fb07a9a7b7d233d7b2cde0a26d770f20a",
+      "size_bytes": 7207
+    },
+    {
+      "category": "train_set",
+      "path": "reports/task7/B4/seed_13/round_001/train_set.json",
+      "sha256": "cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a",
+      "size_bytes": 7187
+    },
+    {
+      "category": "evaluation_manifest",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt003/student_capability_evaluation_manifest.json",
+      "sha256": "1848b522356843d03b206e981700756782b40370b22d58e548a79fa7c00920db",
+      "size_bytes": 1885
+    },
+    {
+      "category": "evaluation_metrics_csv",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt003/capability_metrics.csv",
+      "sha256": "9c8ceb407a2d357c9e46413fa712bda739bd36c76395450473bc6053d4b0db35",
+      "size_bytes": 1616
+    },
+    {
+      "category": "evaluation_metrics_jsonl",
+      "path": "reports/capability/student_eval_2026-11-17/B4_seed13_ckpt003/capability_metrics.jsonl",
+      "sha256": "0f43a7a89a5222b2b810eb4303a90a5ca547220fbe61094b1f36bcced17412c4",
+      "size_bytes": 3074
+    },
+    {
+      "category": "train_log",
+      "path": "models/task7/B4/seed_13/student_ckpt_003/train_log.json",
+      "sha256": "41ac5184a1145cf6674b8100dadd654c7bc99f9f397d617244fc8d30e7c9fefb",
+      "size_bytes": 7210
+    },
+    {
+      "category": "train_set",
+      "path": "reports/task7/B4/seed_13/round_002/train_set.json",
+      "sha256": "f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e",
+      "size_bytes": 7187
+    }
+  ],
+  "integrity_policy": {
+    "algorithm": "SHA256",
+    "manifest_does_not_hash_itself": true,
+    "source_files_modified": false
+  }
+}
