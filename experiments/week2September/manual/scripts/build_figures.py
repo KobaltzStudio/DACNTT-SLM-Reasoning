@@ -640,6 +640,7 @@ def fig_selection(plt, runs, sel_rows, out):
     return True
 
 def fig_final(plt, acc_rows, final_t, out):
+    from matplotlib.ticker import PercentFormatter
     fig, ax = plt.subplots(figsize=(6, 4), facecolor=SURFACE)
     style(ax, f"D_test accuracy at S{final_t} (equal token budget)")
     base = [r for r in acc_rows if r["method"] == "B0" and r["split"] == "test"]
@@ -654,10 +655,11 @@ def fig_final(plt, acc_rows, final_t, out):
         mean, sd = mean_sd(vals)
         ax.errorbar([x + 0.18], [mean], yerr=[0 if math.isnan(sd) else sd], fmt=MARKER.get(m, "o"), color=color,
                     markersize=8, capsize=4, linewidth=2, zorder=4)
-        ax.annotate(f"{mean:.3f}", (x + 0.3, mean), color=INK, fontsize=9, va="center")
+        ax.annotate(f"{mean * 100:.1f}%", (x + 0.3, mean), color=INK, fontsize=9, va="center")
     ax.set_xticks(range(len(names)), ["B0\n(S0)" if m == "B0" else m for m in names])
     ax.set_xlim(-0.5, len(names) - 0.2)
-    ax.set_ylabel("strict accuracy", color=INK2, fontsize=9)
+    ax.set_ylabel("Strict accuracy (%)", color=INK2, fontsize=9)
+    ax.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
     fig.tight_layout()
     fig.savefig(out, dpi=200, facecolor=SURFACE)
     plt.close(fig)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Proposal 1 analyses on the Proposal 2 runs (KeHoach_PhanCong 4.4): mastery by capability at every checkpoint,
 and the capability make-up of the selected trajectories. Descriptive only; no GPU, no torch.
@@ -352,6 +352,7 @@ def fig_mastery(plt, summary, out, label_name):
 
 
 def fig_selection(plt, rows, pool_share, out):
+    from matplotlib.ticker import PercentFormatter
     fig, ax = plt.subplots(figsize=(10, 4), facecolor=SURFACE)
     style(ax, "Capability make-up of selected trajectories (mean over seeds and rounds) vs whole pool")
     methods = [m for m in METHODS if any(r["method"] == m for r in rows)]
@@ -366,10 +367,21 @@ def fig_selection(plt, rows, pool_share, out):
     for i, c in enumerate(CAPABILITIES):
         ax.hlines(pool_share[c], i - 0.45, i + 0.45, color=INK, linewidth=1.5, label="pool" if i == 0 else None)
     ax.set_xticks(range(len(CAPABILITIES)), CAPABILITIES)
-    ax.set_ylabel("share of selected trajectories", color=INK2, fontsize=9)
+    ax.set_ylabel("Share of selected trajectories (%)", color=INK2, fontsize=9)
+    ax.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
+    observed_max = max(
+        [r["share"] for r in rows] + list(pool_share.values()) + [0.8]
+    )
+    upper = max(0.8, min(1.0, observed_max * 1.08))
+    ax.set_ylim(0, upper)
     ax.legend(frameon=False, fontsize=9, labelcolor=INK, ncol=len(methods) + 1, loc="upper center",
               bbox_to_anchor=(0.5, -0.12))
-    fig.tight_layout()
+    fig.text(
+        0.5, 0.015,
+        "Caution: Capability extractor recall = 0.3601; incomplete labels may underestimate capability coverage.",
+        ha="center", va="bottom", fontsize=8, color=INK2,
+    )
+    fig.tight_layout(rect=(0, 0.09, 1, 1))
     fig.savefig(out, dpi=200, facecolor=SURFACE)
     plt.close(fig)
 
