@@ -125,43 +125,230 @@ def selection_rows(runs):
     return rows, pool_share
 
 
+
 def style(ax, title):
     ax.set_facecolor(SURFACE)
+
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
+
     for side in ("left", "bottom"):
         ax.spines[side].set_color(GRID)
-    ax.grid(axis="y", color=GRID, linewidth=0.8)
+        ax.spines[side].set_linewidth(0.9)
+
+    ax.grid(
+        axis="y",
+        color=GRID,
+        linewidth=0.75,
+        alpha=0.85,
+    )
+
     ax.set_axisbelow(True)
-    ax.tick_params(colors=INK2, labelsize=8)
-    ax.set_title(title, color=INK, fontsize=10, loc="left")
+
+    ax.tick_params(
+        axis="both",
+        colors=INK2,
+        labelsize=9.5,
+        length=3,
+        width=0.8,
+        pad=4,
+    )
+
+    ax.set_title(
+        title,
+        color=INK,
+        fontsize=11,
+        fontweight="semibold",
+        loc="left",
+        pad=8,
+    )
+
+
 
 
 def fig_mastery(plt, summary, out, label_name):
-    fig, axes = plt.subplots(2, 4, figsize=(13, 6), facecolor=SURFACE, sharey=True)
-    base = {r["capability"]: r for r in summary if r["method"] == "B0"}
+    from matplotlib.ticker import PercentFormatter
+
+    # 7 capability panels + 1 legend panel.
+    # Keep the 4 + 3 layout, but enlarge each panel.
+    fig, axes = plt.subplots(
+        2,
+        4,
+        figsize=(14, 7.5),
+        facecolor=SURFACE,
+        sharey=True,
+    )
+
+    base = {
+        r["capability"]: r
+        for r in summary
+        if r["method"] == "B0"
+    }
+
     for ax, c in zip(axes.flat, CAPABILITIES):
-        n = base[c]["n_support"] if c in base else next((r["n_support"] for r in summary if r["capability"] == c), 0)
-        style(ax, f"{c} (n = {n})")
+        n = (
+            base[c]["n_support"]
+            if c in base
+            else next(
+                (
+                    r["n_support"]
+                    for r in summary
+                    if r["capability"] == c
+                ),
+                0,
+            )
+        )
+
+        style(ax, f"{c.capitalize()} (n = {n})")
+
         for m in METHODS:
-            pts = sorted((r for r in summary if r["method"] == m and r["capability"] == c), key=lambda r: r["checkpoint"])
+            pts = sorted(
+                (
+                    r for r in summary
+                    if r["method"] == m
+                    and r["capability"] == c
+                ),
+                key=lambda r: r["checkpoint"],
+            )
+
             if not pts:
                 continue
-            xs = ([0] if c in base else []) + [r["checkpoint"] for r in pts]
-            ys = ([base[c]["mastery_mean"]] if c in base else []) + [r["mastery_mean"] for r in pts]
-            ax.plot(xs, ys, color=COLOR[m], marker=MARKER[m], markersize=5, linewidth=1.8, label=m,
-                    markeredgecolor=SURFACE, markeredgewidth=1)
-        ax.set_xticks([0, 1, 2, 3], ["S0", "S1", "S2", "S3"])
-        ax.set_ylim(0, 1.02)
-    axes.flat[-1].axis("off")
+
+            xs = (
+                [0] + [r["checkpoint"] for r in pts]
+                if c in base
+                else [r["checkpoint"] for r in pts]
+            )
+
+            ys = (
+                [base[c]["mastery_mean"]]
+                if c in base
+                else []
+            ) + [
+                r["mastery_mean"] for r in pts
+            ]
+
+            # SD across seeds. S0 is the shared baseline,
+            # so it has no across-seed SD.
+            sds = (
+                [0.0] if c in base else []
+            ) + [
+                (
+                    0.0
+                    if math.isnan(r["mastery_sd"])
+                    else r["mastery_sd"]
+                )
+                for r in pts
+            ]
+
+            ax.plot(
+                xs,
+                ys,
+                color=COLOR[m],
+                marker=MARKER[m],
+                markersize=5.5,
+                linewidth=1.9,
+                label=m,
+                markeredgecolor=SURFACE,
+                markeredgewidth=1.0,
+                zorder=4,
+            )
+
+            # Show seed variability without changing the mean values.
+            ax.errorbar(
+                xs,
+                ys,
+                yerr=sds,
+                fmt="none",
+                ecolor=COLOR[m],
+                elinewidth=1.0,
+                capsize=2.5,
+                alpha=0.65,
+                zorder=3,
+            )
+
+        ax.set_xticks(
+            [0, 1, 2, 3],
+            ["S0", "S1", "S2", "S3"],
+        )
+
+        ax.set_xlim(-0.15, 3.15)
+        ax.set_ylim(0, 1.0)
+
+        ax.yaxis.set_major_formatter(
+            PercentFormatter(xmax=1.0)
+        )
+
+        ax.set_yticks(
+            [0, 0.25, 0.50, 0.75, 1.0]
+        )
+
+        ax.set_ylabel(
+            "Mastery",
+            fontsize=9.5,
+            color=INK2,
+        )
+
+    # The eighth panel is reserved for the shared legend.
+    legend_ax = axes.flat[-1]
+    legend_ax.axis("off")
+
     handles, labels = axes.flat[0].get_legend_handles_labels()
-    axes.flat[-1].legend(handles, labels, loc="center", frameon=False, fontsize=10, labelcolor=INK,
-                         title="mean over seeds", title_fontsize=9)
-    fig.suptitle(f"Mastery by capability on labelled D_dev problems (labels {label_name}; descriptive, small n)",
-                 color=INK, fontsize=11, x=0.01, ha="left")
-    fig.tight_layout(rect=(0, 0, 1, 0.95))
-    fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+    if handles:
+        legend_ax.legend(
+            handles,
+            labels,
+            loc="center",
+            frameon=False,
+            fontsize=11,
+            labelcolor=INK,
+            title="Training method",
+            title_fontsize=10,
+        )
+
+    fig.suptitle(
+        "Capability mastery across checkpoints",
+        color=INK,
+        fontsize=14,
+        fontweight="semibold",
+        x=0.055,
+        ha="left",
+    )
+
+    fig.text(
+        0.055,
+        0.925,
+        (
+            f"Gold {label_name} labels | "
+            "Mean ± SD across training seeds | "
+            "Descriptive analysis"
+        ),
+        fontsize=9.5,
+        color=INK2,
+    )
+
+    fig.tight_layout(
+        rect=(0.025, 0.035, 0.99, 0.89),
+        w_pad=1.8,
+        h_pad=2.0,
+    )
+
+    fig.savefig(
+        out,
+        dpi=300,
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+
+    fig.savefig(
+        out.with_suffix(".pdf"),
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+
     plt.close(fig)
+
 
 
 def fig_selection(plt, rows, pool_share, out):

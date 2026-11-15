@@ -1,0 +1,633 @@
+﻿
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\analyze_smoke_test.py
+LineNumber : 6
+Line       :   change is "clear" if |Acc(S_1) - Acc(S_0)| >= 0.02 on D_dev OR exact McNemar p < 0.10.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\analyze_smoke_test.py
+LineNumber : 109
+Line       :                       "top_n": n_top, "jaccard_top_n": len(t0 & t1) / len(t0 | t1)}
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\analyze_smoke_test.py
+LineNumber : 179
+Line       :                          f"Jaccard top-{lp['top_n']} = {lp['jaccard_top_n']:.3f}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_ambiguous_cases.py
+LineNumber : 111
+Line       :         "annotation_retained": sum(
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 89
+Line       :         raise ValueError("D_dev contains duplicate IDs")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 189
+Line       :         "d_dev_count": len(dev_ids),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 192
+Line       :         "gold_labeled_d_dev": len(gold_ids),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 207
+Line       :         "ids_outside_d_dev": sorted(set(unknown_ids)),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 219
+Line       :         f"- D_dev count: {len(dev_ids)}",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 221
+Line       :         f"- Gold-labeled D_dev: {len(gold_ids)}",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts.py
+LineNumber : 245
+Line       :         f"- IDs outside D_dev: {len(set(unknown_ids))}",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts_v2.py
+LineNumber : 28
+Line       :     "D_dev": Path("splits/d_dev_ids.txt"),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts_v2.py
+LineNumber : 29
+Line       :     "D_test": Path("splits/d_test_ids.txt"),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\audit_capability_artifacts_v2.py
+LineNumber : 377
+Line       :             "Whether Gold is expected in D_pool, D_dev, or D_test must be determined from the split protocol and project design.",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 9
+Line       :   b5_vs_b4.csv            per seed on D_test at the final checkpoint: accuracies, difference, discordant
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 13
+Line       :   selection.csv           per method, seed, round: trajectories, tokens, new / retained / re-admitted /
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 14
+Line       :                           dropped, Jaccard with the previous round, selection / training / NLL seconds
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 16
+Line       :   fig1_accuracy_curve.png       accuracy S_0..S_3, D_dev and D_test panels, mean +- SD over seeds
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 18
+Line       :   fig3_selection_dynamics.png   B5: Jaccard between rounds (mean over seeds) and new / retained /
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 20
+Line       :   fig4_final_accuracy.png       D_test accuracy at the final checkpoint: each seed and mean +- SD
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 25
+Line       : Needs matplotlib for the figures (tables are written without it).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 37
+Line       : from run_layout import discover, jaccard, load_eval, load_timing, spearman  # noqa: E402
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 185
+Line       :                 "new": len(cur - seen), "retained": len(cur & prev), "readmitted": len((cur & seen) - prev),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 186
+Line       :                 "dropped": len(prev - cur), "jaccard_previous": jaccard(cur, prev) if t else None,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 222
+Line       :             ax.plot(xs, ys, color=COLOR[m], linewidth=2, marker=MARKER[m], markersize=7,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 224
+Line       :             ax.fill_between(xs, [y - s for y, s in zip(ys, sds)], [y + s for y, s in zip(ys, sds)],
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 234
+Line       :     fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 268
+Line       :         fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 280
+Line       :     mat = [[statistics.mean(jaccard(r.train_set(i)["trajectory_ids"], r.train_set(j)["trajectory_ids"]) for r in b5)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 284
+Line       :     im = ax1.imshow(mat, cmap="Blues", vmin=0, vmax=1)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 291
+Line       :     ax1.set_title("B5: Jaccard between selected sets", color=INK, fontsize=11, loc="left")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 296
+Line       :     parts = (("new", "#2a78d6"), ("retained", "#eb6834"), ("readmitted", "#1baf7a"))
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 308
+Line       :     fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 315
+Line       :     style(ax, f"D_test accuracy at S{final_t} (equal token budget)")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 326
+Line       :         ax.errorbar([x + 0.18], [mean], yerr=[0 if math.isnan(sd) else sd], fmt=MARKER.get(m, "o"), color=color,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 333
+Line       :     fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 358
+Line       :         import matplotlib
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 359
+Line       :         matplotlib.use("Agg")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 360
+Line       :         import matplotlib.pyplot as plt
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\build_figures.py
+LineNumber : 362
+Line       :         print("matplotlib not installed: figures skipped")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 6
+Line       : Mastery M(c, S_t) = correct_c / total_c on the D_dev problems that have manual capability labels (85
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 9
+Line       : methods are not tests. D_test has no manual labels and is not used here.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 20
+Line       :   python scripts/capability_mastery.py runs/main --labels vfinal --out reports/task7/main_results
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 21
+Line       :   python scripts/capability_mastery.py runs/main --labels v2 vfinal
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 23
+Line       :   capability_mastery_<labels>.csv, capability_mastery_summary_<labels>.csv, fig6_capability_mastery_<labels>.png
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 54
+Line       :         raise ValueError(f"{LABEL_FILES[name]}: {len(outside)} problems outside D_dev")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 152
+Line       :             ax.plot(xs, ys, color=COLOR[m], marker=MARKER[m], markersize=5, linewidth=1.8, label=m,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 160
+Line       :     fig.suptitle(f"Mastery by capability on labelled D_dev problems (labels {label_name}; descriptive, small n)",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 163
+Line       :     fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 186
+Line       :     fig.savefig(out, dpi=200, facecolor=SURFACE)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 199
+Line       :         import matplotlib
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 200
+Line       :         matplotlib.use("Agg")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 201
+Line       :         import matplotlib.pyplot as plt
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 204
+Line       :         print("matplotlib not installed: figures skipped")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 209
+Line       :         write_csv(args.out / "tables" / f"capability_mastery_{name}.csv", rows)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 210
+Line       :         write_csv(args.out / "tables" / f"capability_mastery_summary_{name}.csv", summary)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_mastery.py
+LineNumber : 214
+Line       :             fig_mastery(plt, summary, args.out / "figures" / f"fig6_capability_mastery_{name}.png", name)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 5
+Line       : Checks that no problem in the pool belongs to, or overlaps with, D_dev or D_test:
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 7
+Line       :   2. every pool problem_id is in D_pool and in none of D_dev, D_test, near_duplicates;
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 10
+Line       :   4. no pool question equals a D_dev / D_test question after lowercasing and keeping word characters;
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 11
+Line       :   5. no pool question shares a word 13-gram with a D_dev / D_test question (the split rule,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 52
+Line       :     d_pool, d_dev, d_test = ids("d_pool_ids.txt"), ids("d_dev_ids.txt"), ids("d_test_ids.txt")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 68
+Line       :     refs = {pid: train[pid]["question"] for pid in d_dev}
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 69
+Line       :     refs.update({pid: test[pid]["question"] for pid in d_test})
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 77
+Line       :         "in_d_dev": sorted(pids & d_dev),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 78
+Line       :         "in_d_test": sorted(pids & d_test),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\check_pool_leak.py
+LineNumber : 91
+Line       :         "references": {"d_dev": len(d_dev), "d_test": len(d_test), "d_pool": len(d_pool),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_d3_ai_adjudication.py
+LineNumber : 48
+Line       :             "Fraction is retained as the fractional-quantity capability; "
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 5
+Line       :   D_test = every problem in data/raw/gsm8k_test.jsonl (official GSM8K test).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 6
+Line       :   D_dev  = all supplement problems (data/raw/supplement_selected.jsonl)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 10
+Line       :            of any D_dev or D_test question (shared word 13-gram).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 14
+Line       :   d_pool_ids.txt, d_dev_ids.txt, d_test_ids.txt   one problem_id per line, sorted
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 142
+Line       :     # D_dev: supplement + seeded random sample of the rest
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 175
+Line       :         "d_dev": args.out_dir / "d_dev_ids.txt",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 176
+Line       :         "d_test": args.out_dir / "d_test_ids.txt",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 179
+Line       :     write_ids(files["d_dev"], dev_ids)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 180
+Line       :     write_ids(files["d_test"], test_ids)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 198
+Line       :             "d_test": "all problems in gsm8k_test.jsonl (official GSM8K test)",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 199
+Line       :             "d_dev": f"all supplement_selected problems + random.Random(split_seed).sample(sorted(gsm8k_train - batch_100 - supplement), n_dev - |supplement|)",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 200
+Line       :             "d_pool": "gsm8k_train - d_dev - near_duplicates",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 201
+Line       :             "near_duplicate": f"D_pool candidate shares >= 1 lowercase word {args.ngram}-gram (regex \\w+) with any D_dev or D_test question; whole question used if shorter than {args.ngram} words",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 219
+Line       :             "d_dev": len(dev_ids),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 220
+Line       :             "d_dev_supplement": len(supplement_ids),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 221
+Line       :             "d_dev_random": len(dev_random),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\create_splits.py
+LineNumber : 222
+Line       :             "d_test": len(test_ids),
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\download_gsm8k_test.py
+LineNumber : 2
+Line       : Download the official GSM8K test split (Task 5: D_test).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\download_gsm8k_train.py
+LineNumber : 328
+Line       :     This is critical because project problem_id values are retained,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\eval_metrics.py
+LineNumber : 7
+Line       : problems of D_dev (task5_decisions.md, consequence of #7).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\eval_student.py
+LineNumber : 3
+Line       : Evaluate a Student checkpoint on D_dev or D_test with the frozen evaluation protocol.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\eval_student.py
+LineNumber : 14
+Line       : capability is added on D_dev, over the problems with manual labels.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\eval_student.py
+LineNumber : 48
+Line       :     environment_info, load_capability_labels, load_config, load_dev_rows, load_model, load_test_rows,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\eval_student.py
+LineNumber : 130
+Line       :     rows = load_dev_rows() if args.split == "dev" else load_test_rows()
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 24
+Line       : Selection noise [T7-8]: mean pairwise Jaccard of the B5 round-2 train sets across seeds, against the random
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 30
+Line       : Outputs: <out>/h_test.json, <out>/tables/h_test.csv, <out>/figures/fig5_h_test.png (needs matplotlib).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 43
+Line       : from run_layout import discover, jaccard  # noqa: E402
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 235
+Line       : def selection_jaccard(runs_dir, n_pool):
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 240
+Line       :     pairs = {f"{a}-{b}": jaccard(sets[a], sets[b]) for a, b in itertools.combinations(sorted(sets), 2)}
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 248
+Line       :         import matplotlib
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 249
+Line       :         matplotlib.use("Agg")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 250
+Line       :         import matplotlib.pyplot as plt
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 252
+Line       :         print("matplotlib not installed: figure skipped")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 278
+Line       :             ax.errorbar(xs, ys, yerr=[lo, [0] * len(pts)], fmt="o" if scale == "l_proxy" else "s", color=color[scale],
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 289
+Line       :     fig.savefig(out, dpi=200, facecolor=surface)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\h_test.py
+LineNumber : 312
+Line       :               "selection_jaccard_B5_round2": selection_jaccard(args.runs_dir, n_pool), "notes": notes, "rows": rows}
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\make_pool_input.py
+LineNumber : 15
+Line       : for D_dev), not from data/batch_100/batch_100.jsonl: 23 of its 100 questions differ in whitespace only.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\make_pool_input.py
+LineNumber : 55
+Line       :     held_out = set(read_ids(SPLITS / "d_dev_ids.txt")) | set(read_ids(SPLITS / "d_test_ids.txt"))
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\make_pool_input.py
+LineNumber : 60
+Line       :         raise SystemExit("D_pool overlaps D_dev/D_test")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\make_pool_input.py
+LineNumber : 100
+Line       :                           [SPLITS / "d_pool_ids.txt", SPLITS / "d_dev_ids.txt", SPLITS / "d_test_ids.txt",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\make_smoke_bundle.py
+LineNumber : 29
+Line       :     "splits/d_dev_ids.txt",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\probe_lemp.py
+LineNumber : 8
+Line       : from S_0 for one epoch (b = 7 steps) with each training seed and is evaluated on D_dev only, never on D_test.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_graph.py
+LineNumber : 5
+Line       : import matplotlib.pyplot as plt
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_graph.py
+LineNumber : 122
+Line       :     plt.savefig(
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_learning_curve.py
+LineNumber : 5
+Line       : import matplotlib.pyplot as plt
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_learning_curve.py
+LineNumber : 80
+Line       :         plt.plot(
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_learning_curve.py
+LineNumber : 129
+Line       :         plt.plot(
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\render_learning_curve.py
+LineNumber : 190
+Line       :     plt.savefig(
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\run_experiment.py
+LineNumber : 5
+Line       :   S_0 (shared by all runs): eval D_dev, eval D_test, NLL of the pool
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\run_experiment.py
+LineNumber : 6
+Line       :   t = 0..M-1: select B_t -> train S_t + B_t -> S_{t+1} -> eval D_dev, eval D_test -> NLL when needed
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\run_layout.py
+LineNumber : 97
+Line       : def jaccard(a, b):
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\select_smoke_train_set.py
+LineNumber : 43
+Line       :         "purpose": "Task 5 smoke test (S_0 -> S_1 on D_dev); not a main-experiment selection",
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 25
+Line       : DEV_IDS = MANUAL_DIR / "splits" / "d_dev_ids.txt"
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 26
+Line       : TEST_IDS = MANUAL_DIR / "splits" / "d_test_ids.txt"
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 90
+Line       : def load_dev_rows():
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 91
+Line       :     """D_dev problems in d_dev_ids.txt order: problem_id, question, ground_truth."""
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 96
+Line       :         raise ValueError(f"{len(missing)} D_dev ids not found in {GSM8K_TRAIN}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 100
+Line       : def load_test_rows():
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 101
+Line       :     """D_test problems in d_test_ids.txt order. Reporting only: never for selection, tuning or any design decision."""
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 106
+Line       :         raise ValueError(f"{len(missing)} D_test ids not found in {GSM8K_TEST}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 111
+Line       :     """Manual capability labels of D_dev: {problem_id: [capability]}, supplement problems only."""
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 115
+Line       :         raise ValueError(f"{CAPABILITY_LABELS} has problems outside D_dev")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+LineNumber : 150
+Line       :         raise ValueError(f"pool problems found in D_dev/D_test: {leaked[:5]}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_analysis.py
+LineNumber : 14
+Line       : from run_layout import RUN_NAME, jaccard, spearman  # noqa: E402
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_analysis.py
+LineNumber : 24
+Line       :     def test_jaccard(self):
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_analysis.py
+LineNumber : 25
+Line       :         self.assertEqual(jaccard({"a", "b"}, {"b", "c"}), 1 / 3)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_analysis.py
+LineNumber : 26
+Line       :         self.assertEqual(jaccard([], []), 1.0)
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_eval_metrics.py
+LineNumber : 17
+Line       : from student_common import load_capability_labels, load_test_rows, read_jsonl_resumable  # noqa: E402
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\test_eval_metrics.py
+LineNumber : 68
+Line       :         rows = load_test_rows()
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_runs.py
+LineNumber : 8
+Line       :   and none in D_dev/D_test; n_cap; token total recomputed from the token table (and, with --retokenize,
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_runs.py
+LineNumber : 118
+Line       :     rep.add(scope, "no_D_dev_D_test", not leaked, ", ".join(leaked[:3]))
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 6
+Line       :   2. D_pool, D_dev, D_test are pairwise disjoint.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 7
+Line       :   3. Every id exists in its source (D_pool/D_dev in gsm8k_train, D_test in gsm8k_test).
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 8
+Line       :   4. D_test == all of gsm8k_test; D_pool + D_dev + near_duplicates == all of gsm8k_train.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 9
+Line       :   5. batch_100 is in D_pool; supplement is in D_dev.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 11
+Line       :   7. No D_pool question shares a word n-gram with any D_dev or D_test question.
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 66
+Line       :     for name in ("d_pool", "d_dev", "d_test"):
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 73
+Line       :     pool, dev, test = splits["d_pool"], splits["d_dev"], splits["d_test"]
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 76
+Line       :     check(not (pool & dev), "d_pool and d_dev disjoint")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 77
+Line       :     check(not (pool & test), "d_pool and d_test disjoint")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 78
+Line       :     check(not (dev & test), "d_dev and d_test disjoint")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 85
+Line       :     check(pool <= set(train) and dev <= set(train), "d_pool and d_dev ids exist in gsm8k_train")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 86
+Line       :     check(test == set(test_q), "d_test == all gsm8k_test")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 87
+Line       :     check(not (near_dups & (pool | dev)), "near_duplicates not in d_pool or d_dev")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 88
+Line       :     check(pool | dev | near_dups == set(train), "d_pool + d_dev + near_duplicates == all gsm8k_train")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 94
+Line       :     check(supplement <= dev, f"supplement ({len(supplement)}) in d_dev")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 99
+Line       :     check(counts["d_dev"] == len(dev) == manifest["n_dev"], f"count d_dev = {len(dev)}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 100
+Line       :     check(counts["d_test"] == len(test), f"count d_test = {len(test)}")
+
+Path       : C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\validate_splits.py
+LineNumber : 107
+Line       :     check(not leaked, f"no d_pool question shares a {manifest['ngram']}-gram with d_dev/d_test ({len(leaked)} found)")
+
+
+
+
