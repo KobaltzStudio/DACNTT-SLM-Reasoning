@@ -1,0 +1,24 @@
+﻿{
+    "baseline_created_local":  "2026-11-13T12:00:18.7734326+09:00",
+    "review_date":  "2026-11-16",
+    "repository":  "C:\\KLTN-SLM-Reasoning",
+    "baseline_verification_status":  "PASS",
+    "protected_and_candidate_sha256":  {
+                                           "gold_vfinal_batch":  "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+                                           "gold_vfinal_supplement":  "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+                                           "gold_vfinal_manifest":  "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+                                           "raw_train":  "771125f195aa72606ce2844ccbd9826e1f2cc3c0e6d4b882f7f2f5ec20fc1754",
+                                           "raw_supplement":  "32f464e3db07fbad83928e87048cae73be18ffad1d115dca181dea6741629f0e",
+                                           "parent_batch":  "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+                                           "parent_supplement":  "970c5d63c2f0f822a73805c0dd03a727a542d08077dcc3fbdffeb043e7f29257",
+                                           "parent_manifest":  "d812903f307bd2c2d81e401bfc7993038f0d5efd6d5eeaedc0d0af3d7898deae",
+                                           "r1_batch":  "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+                                           "r1_supplement":  "8c41bc4e5c237a289dfcda92fcc691bf84b0ff5552ea8c8249c3947d3725ae26",
+                                           "r1_manifest":  "6c342b10d7af6b0d0dd4144bc9be1c571a88be0cfe693aa4cdd396f6ce3f8b75"
+                                       },
+    "expected_gold_vfinal_sha256":  {
+                                        "gold_vfinal_manifest":  "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+                                        "gold_vfinal_supplement":  "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+                                        "gold_vfinal_batch":  "5b655ab6705fa8d6178871d35f30712b90058354a29952e8e88e0108c8a9f"
+                                    }
+}

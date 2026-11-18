@@ -1,0 +1,7 @@
+﻿"Label","RelativePath","Exists","Length","SHA256"
+"SIDECAR_capability_metrics.csv","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\capability_metrics.csv","True","1636","2DEB7E3E2A3A5B8967170E9A3C49835626C216C08E62D7601C4702B0FEBEFA4E"
+"SIDECAR_capability_metrics.jsonl","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\capability_metrics.jsonl","True","3147","E0796B01F43061D26EB6A52EC45C8A76A606E237454544311FD5F3FA151991B8"
+"SIDECAR_prediction_coverage_report.json","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\prediction_coverage_report.json","True","574","F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A"
+"SIDECAR_checkpoint_lineage.json","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\checkpoint_lineage.json","True","1095","9D1CAA51388E0755499572280B3D5E656654854D52573468D79C01380AA1FFB1"
+"SIDECAR_input_fingerprint.json","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\input_fingerprint.json","True","724","6E07EFD2AC0C23394689741B0360F2149B885D9B45B70B5087C701760E8F4CC3"
+"SIDECAR_student_capability_evaluation_manifest.json","reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\student_capability_evaluation_manifest.json","True","1976","89AC7781206737479545003C2185AB1F4C185EA172F6F81B8DB1B3BAFC01BF13"

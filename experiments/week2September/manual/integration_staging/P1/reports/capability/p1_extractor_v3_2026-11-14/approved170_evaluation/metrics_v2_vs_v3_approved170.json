@@ -1,0 +1,128 @@
+{
+  "evaluation": "approved 170 development records; question-only input",
+  "warning": "Not an independent test set; Gold review notes state source worked traces are unavailable for these records.",
+  "v2": {
+    "records": 170,
+    "exact_match": 0,
+    "exact_match_rate": 0.0,
+    "micro_TP": 166,
+    "micro_FP": 17,
+    "micro_FN": 337,
+    "micro_precision": 0.907103825136612,
+    "micro_recall": 0.33001988071570576,
+    "micro_f1": 0.4839650145772595,
+    "per_capability": {
+      "addition": {
+        "TP": 8,
+        "FP": 3,
+        "FN": 68,
+        "precision": 0.7272727272727273,
+        "recall": 0.10526315789473684
+      },
+      "subtraction": {
+        "TP": 26,
+        "FP": 1,
+        "FN": 65,
+        "precision": 0.9629629629629629,
+        "recall": 0.2857142857142857
+      },
+      "multiplication": {
+        "TP": 23,
+        "FP": 3,
+        "FN": 117,
+        "precision": 0.8846153846153846,
+        "recall": 0.16428571428571428
+      },
+      "division": {
+        "TP": 7,
+        "FP": 8,
+        "FN": 81,
+        "precision": 0.4666666666666667,
+        "recall": 0.07954545454545454
+      },
+      "percentage": {
+        "TP": 38,
+        "FP": 0,
+        "FN": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "fraction": {
+        "TP": 40,
+        "FP": 2,
+        "FN": 0,
+        "precision": 0.9523809523809523,
+        "recall": 1.0
+      },
+      "ratio": {
+        "TP": 24,
+        "FP": 0,
+        "FN": 6,
+        "precision": 1.0,
+        "recall": 0.8
+      }
+    }
+  },
+  "v3": {
+    "records": 170,
+    "exact_match": 1,
+    "exact_match_rate": 0.0058823529411764705,
+    "micro_TP": 177,
+    "micro_FP": 19,
+    "micro_FN": 326,
+    "micro_precision": 0.9030612244897959,
+    "micro_recall": 0.3518886679920477,
+    "micro_f1": 0.5064377682403434,
+    "per_capability": {
+      "addition": {
+        "TP": 8,
+        "FP": 3,
+        "FN": 68,
+        "precision": 0.7272727272727273,
+        "recall": 0.10526315789473684
+      },
+      "subtraction": {
+        "TP": 26,
+        "FP": 1,
+        "FN": 65,
+        "precision": 0.9629629629629629,
+        "recall": 0.2857142857142857
+      },
+      "multiplication": {
+        "TP": 23,
+        "FP": 3,
+        "FN": 117,
+        "precision": 0.8846153846153846,
+        "recall": 0.16428571428571428
+      },
+      "division": {
+        "TP": 18,
+        "FP": 10,
+        "FN": 70,
+        "precision": 0.6428571428571429,
+        "recall": 0.20454545454545456
+      },
+      "percentage": {
+        "TP": 38,
+        "FP": 0,
+        "FN": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "fraction": {
+        "TP": 40,
+        "FP": 2,
+        "FN": 0,
+        "precision": 0.9523809523809523,
+        "recall": 1.0
+      },
+      "ratio": {
+        "TP": 24,
+        "FP": 0,
+        "FN": 6,
+        "precision": 1.0,
+        "recall": 0.8
+      }
+    }
+  }
+}

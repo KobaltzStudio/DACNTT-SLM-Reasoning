@@ -1,0 +1,400 @@
+﻿    runs: runs/p1p2_integration
+    models: models/p1p2_integration
+    reports: reports/p1p2_integration
+  custom:
+    runs: runs/p1p2_integration_custom
+    models: models/p1p2_integration_custom
+    reports: reports/p1p2_integration_custom
+  forbidden:
+    - runs/main
+
+============================================================
+FILE: config\p1p2_unified_run.yaml
+============================================================
+schema_version: p1p2.unified-run.v1
+config_version: 1
+status: frozen_integration_protocol
+
+source_of_truth:
+  method_registry: config/p1p2_method_registry.yaml
+  p2_experiment_config: config/experiment_config.json
+  p2_config_version: v2
+  rule: >-
+    This file defines integration orchestration and protocol constraints.
+    It does not override or duplicate P2 training hyperparameters or method
+    selection implementations in config/experiment_config.json.
+
+execution:
+  default_methods:
+    - B2
+    - B3
+    - B4
+    - B5
+    - P1-DEFICIT
+    - P1P2
+  default_seeds:
+    - 13
+    - 42
+    - 2026
+  custom_seed:
+    enabled: true
+    registered_seeds_are_reserved: true
+    namespace_from_registry: custom
+  rounds:
+    first: 1
+    last: 3
+    total: 3
+    user_round_numbering: 1_based
+    checkpoint_by_round:
+      0: S0
+      1: S1
+      2: S2
+      3: S3
+    p2_round_index_offset: -1
+  dry_run:
+    supported: true
+    must_not_train: true
+    must_not_write_model_checkpoints: true
+    may_write_only_under: reports/p1p2_integration/integration_tests
+  resume:
+    supported_by_target_controller: true
+    require_valid_parent_checkpoint: true
+    require_matching_run_fingerprint: true
+    never_overwrite_completed_round: true
+
+models:
+  teacher:
+    model_id: Qwen/Qwen2.5-3B-Instruct
+    revision: aa8e72537993ba99e69dfaafa59ed015b17504d1
+  student:
+    model_id: Qwen/Qwen2.5-1.5B-Instruct
+    revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+    initial_checkpoint: student_ckpt_000
+  benchmark: GSM8K
+
+data:
+  verified_pool:
+    path: trajectory/pool/pool_v1_verified.jsonl
+    required_verification_status: valid
+    expected_records: 4353
+    expected_sha256: 95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04
+  token_table:
+    path: reports/task5/pool_v1_tokens.jsonl
+    required_fields:
+      - trajectory_id
+      - problem_id
+      - response_tokens
+    token_source: student_tokenizer
+  d_pool:
+    path: splits/d_pool_ids.txt
+    required: true
+  dev:
+    path: splits/d_dev_ids.txt
+    expected_count: 500
+  dev_select:
+    path: splits/p1p2_vfinal_2026-11-16/d_dev_select_ids.txt
+    expected_count: 415
+    purpose: checkpoint_selection_only
+  dev_graph:
+    path: splits/p1p2_vfinal_2026-11-16/d_dev_graph_ids.txt
+    expected_count: 85
+    purpose: primary_capability_evaluation
+  split_constraints:
+    dev_select_and_dev_graph_disjoint: true
+    dev_select_union_dev_graph_equals_dev: true
+    primary_correctness_field: status
+    primary_correctness_value: valid
+    lenient_correctness_is_primary: false
+  test:
+    path: splits/d_test_ids.txt
+    allowed_during_training_rounds: false
+    allowed_for_checkpoint_selection_or_tuning: false
+    allowed_only_after_policy_and_checkpoint_selection_frozen: true
+
+selection:
+  budget:
+    source: config/experiment_config.json
+    unit: supervised_response_tokens_student_tokenizer
+    beta_round_tokens: 45426
+    beta_total_tokens: 136278
+  n_cap: 1
+  tie_break: trajectory_id ascending
+  allow_reselect_across_rounds: true
+  reselect_semantics: >-
+    Previously selected trajectory IDs remain eligible as candidates in later
+    rounds; for learnability percentile/reference computation, previously
+    trained IDs are excluded from the reference set as implemented by the
+    P2 learnability API.
+  budget_fill_semantics: stop_at_first_candidate_that_exceeds_remaining_budget
+  pool_constraints:
+    only_verified_pool_records: true
+    require_nonempty_capabilities: true
+    allowed_capabilities:
+      - addition
+      - subtraction
+      - multiplication
+      - division
+      - percentage
+      - fraction
+      - ratio
+    token_count_must_come_from_token_table: true
+  p1p2_priority:
+    policy_id: p1p2_alpha_050_v1
+    alpha: 0.5
+    alpha_tuned: false
+    formula: alpha * p1_deficit + (1 - alpha) * percentile_rank_l_proxy
+    nll_policy: recompute_on_current_student_checkpoint_each_round
+  p1_deficit:
+    nll_required: false
+    graph_required: false
+  p1_graph:
+    enabled: false
+    enable_only_after_graph_evidence_validation: true
+
+method_runtime:
+  B2:
+    dispatch: existing_p2_method
+    nll_policy: none
+    capability_state_required: false
+  B3:
+    dispatch: existing_p2_method
+    nll_policy: none
+    capability_state_required: false
+  B4:
+    dispatch: existing_p2_method
+    nll_policy: S0
+    capability_state_required: false
+    shared_s1_alias_group: B4_B5_seed_scoped_S1
+  B5:
+    dispatch: existing_p2_method
+    nll_policy: current_checkpoint
+    capability_state_required: false
+    shared_s1_alias_group: B4_B5_seed_scoped_S1
+  P1-DEFICIT:
+    dispatch: p1p2_selector
+    nll_policy: none
+    capability_state_required: true
+    graph_required: false
+  P1P2:
+    dispatch: p1p2_selector
+    nll_policy: current_checkpoint_each_round
+    capability_state_required: true
+    graph_required: false
+  P1-GRAPH:
+    enabled: false
+    dispatch: blocked_pending_graph_evidence
+    graph_required: true
+
+round_protocol:
+  evaluation_split: dev
+  evaluation_command_intent: eval_student.py --split dev
+  prohibit_full_p2_runner_during_integrated_rounds: true
+  reason: >-
+    The full P2 experiment runner may evaluate D_test at each checkpoint.
+    Integrated rounds must evaluate D_dev only; D_test is deferred until
+    checkpoint selection and policy are frozen.
+  stages:
+    - compute_required_nll
+    - calculate_p1_capability_priority_when_required
+    - calculate_p2_dynamic_learnability_when_required
+    - select_from_verified_d_pool
+    - publish_train_set_and_selection_log
+    - train_with_canonical_p2_engine
+    - publish_checkpoint_and_lineage
+    - evaluate_dev_only
+    - run_p1_post_evaluation_hook_when_required
+    - update_capability_state_when_required
+  checkpoint_selection:
+    metric: strict_exact_match_accuracy
+    split: dev_select
+    record_count: 415
+    tie_break: earliest_checkpoint
+    d_test_allowed: false
+
+training:
+  implementation: scripts/train_round.py
+  configuration_source: config/experiment_config.json
+  do_not_duplicate_hyperparameters: true
+  continue_same_lora_adapter_across_rounds: true
+  optimizer_state_reinitialized_each_round: true
+
+post_evaluation_hook:
+  implementation: scripts/run_p1p2_post_eval.py
+  required_cli_inputs:
+    - method
+    - seed
+    - round
+    - prediction
+    - checkpoint
+    - output_dir
+  supported_round_values:
+    - 0
+    - 1
+    - 2
+    - 3
+  round_zero_means: S0
+  methods:
+    - B2
+    - B3
+    - B4
+    - B5
+    - P1-DEFICIT
+    - P1P2
+  p1_graph_allowed: false
+  must_preserve_method_seed_round_checkpoint_lineage: true
+
+artifacts:
+  registered:
+    runs_root: runs/p1p2_integration
+    models_root: models/p1p2_integration
+    reports_root: reports/p1p2_integration
+  custom:
+    runs_root: runs/p1p2_integration_custom
+    models_root: models/p1p2_integration_custom
+    reports_root: reports/p1p2_integration_custom
+  forbidden_write_roots:
+    - runs/main
+    - models/task7
+  publication:
+    fingerprint_required: true
+    no_overwrite: true
+    atomic_publish: true
+    preserve_historical_artifacts: true
+
+protected_inputs:
+  - config/experiment_config.json
+  - config/experiment_config_v1.json
+  - trajectory/pool/pool_v1_verified.jsonl
+  - splits/split_manifest.json
+  - splits/d_pool_ids.txt
+  - splits/d_dev_ids.txt
+  - splits/d_test_ids.txt
+  - runs/main
+  - models/task7
+
+validation:
+  require_registry_consistency: true
+  require_frozen_p2_config_consistency: true
+  require_pool_fingerprint_match: true
+  require_dev_split_counts_and_disjointness: true
+  require_no_test_evaluation_during_rounds: true
+  require_method_nll_policy_consistency: true
+  require_registered_custom_namespace_separation: true
+
+============================================================
+FILE: tests\test_p1p2_artifact_manager.py
+============================================================
+from __future__ import annotations
+
+import hashlib
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from unittest import mock
+
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import p1p2_artifact_manager as manager
+
+
+class ArtifactManagerTests(unittest.TestCase):
+    def test_sha256_file_matches_hashlib(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "input.bin"
+            path.write_bytes(b"abc")
+            self.assertEqual(manager.sha256_file(path), hashlib.sha256(b"abc").hexdigest())
+
+    def test_canonical_json_is_key_order_independent(self):
+        self.assertEqual(manager.sha256_json({"a": 1, "b": 2}), manager.sha256_json({"b": 2, "a": 1}))
+
+    def test_fingerprint_and_verify_source_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            a, b = root / "a.txt", root / "b.txt"
+            a.write_text("alpha", encoding="utf-8")
+            b.write_text("beta", encoding="utf-8")
+            fp = manager.fingerprint_files({"a": a, "b": b})
+            self.assertTrue(manager.verify_fingerprint(fp))
+            self.assertTrue(manager.verify_fingerprint_files(fp))
+
+    def test_fingerprint_detects_tampering(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "input.txt"
+            path.write_text("before", encoding="utf-8")
+            fp = manager.fingerprint_files({"input": path})
+            path.write_text("after", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "mismatch"):
+                manager.verify_fingerprint_files(fp)
+
+    def test_fingerprint_rejects_missing_input(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(FileNotFoundError):
+                manager.fingerprint_files({"missing": Path(tmp) / "missing.txt"})
+
+    def test_fingerprint_rejects_duplicate_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "same.txt"
+            path.write_text("x", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Duplicate fingerprint path"):
+                manager.fingerprint_files({"one": path, "two": path})
+
+    def test_ensure_no_overwrite_rejects_existing_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "existing.txt"
+            path.write_text("protected", encoding="utf-8")
+            with self.assertRaises(FileExistsError):
+                manager.ensure_no_overwrite([path])
+            self.assertEqual(path.read_text(encoding="utf-8"), "protected")
+
+    def test_publish_bytes_creates_file_and_refuses_overwrite(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "nested" / "artifact.bin"
+            manager.publish_bytes_no_overwrite(path, b"first")
+            self.assertEqual(path.read_bytes(), b"first")
+            with self.assertRaises(FileExistsError):
+                manager.publish_bytes_no_overwrite(path, b"second")
+            self.assertEqual(path.read_bytes(), b"first")
+
+    def test_publish_json_is_valid_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "manifest.json"
+            manager.publish_json_no_overwrite(path, {"ok": True, "value": 3})
+            self.assertEqual(json.loads(path.read_text(encoding="utf-8")), {"ok": True, "value": 3})
+
+    def test_publish_pair_creates_both_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            first, second = root / "a.bin", root / "b.bin"
+            manager.publish_pair_no_overwrite(first, b"A", second, b"B")
+            self.assertEqual(first.read_bytes(), b"A")
+            self.assertEqual(second.read_bytes(), b"B")
+
+    def test_publish_pair_refuses_overwrite_without_mutation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            first, second = root / "a.bin", root / "b.bin"
+            first.write_bytes(b"protected")
+            with self.assertRaises(FileExistsError):
+                manager.publish_pair_no_overwrite(first, b"new-A", second, b"new-B")
+            self.assertEqual(first.read_bytes(), b"protected")
+            self.assertFalse(second.exists())
+
+    def test_publish_pair_rolls_back_first_if_second_publish_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            first, second = root / "a.bin", root / "b.bin"
+            real_link = manager.os.link
+            calls = {"n": 0}
+            def controlled_link(source, destination):
+                calls["n"] += 1
+                if calls["n"] == 2:
+                    raise OSError("simulated second publication failure")
+                return real_link(source, destination)
+            with mock.patch.object(manager.os, "link", side_effect=controlled_link):
+                with self.assertRaisesRegex(OSError, "simulated"):
+                    manager.publish_pair_no_overwrite(first, b"A", second, b"B")
+            self.assertFalse(first.exists())
+            self.assertFalse(second.exists())

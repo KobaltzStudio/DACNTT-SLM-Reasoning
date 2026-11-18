@@ -1,0 +1,2492 @@
+﻿PROJECT ROOT: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+GENERATED: 2026-11-17T18:18:58.1110630+09:00
+
+
+================================================================
+FILE: scripts\p1p2_capability_state.py
+================================================================
+STATUS: FOUND
+SIZE: 9479
+SHA256: 3EB7F833E8545E8B1289678F67D73169387C1167C5D1310E370EE9C6D61126B7
+#!/usr/bin/env python3
+"""Build an immutable P1 capability state from a validated sidecar."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+CAPABILITIES = (
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+)
+
+EXPECTED_SUPPORT = {
+    "addition": 30,
+    "subtraction": 51,
+    "multiplication": 73,
+    "division": 47,
+    "fraction": 31,
+    "percentage": 29,
+    "ratio": 30,
+}
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def read_json(path: Path) -> dict:
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(value, dict):
+        raise ValueError(f"Expected JSON object: {path}")
+    return value
+
+
+def stable_state(value: dict) -> dict:
+    """Remove creation time; compare all scientific/provenance fields."""
+    return {
+        key: item
+        for key, item in value.items()
+        if key != "created_at_utc"
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Create immutable capability state from a sidecar"
+    )
+    parser.add_argument("--sidecar-dir", required=True)
+    parser.add_argument(
+        "--target-method",
+        required=True,
+        choices=["P1-DEFICIT", "P1P2"],
+    )
+    parser.add_argument("--target-seed", required=True, type=int)
+    parser.add_argument("--out", required=True)
+    args = parser.parse_args()
+
+    sidecar = Path(args.sidecar_dir).resolve()
+    required = {
+        "metrics": sidecar / "capability_metrics.jsonl",
+        "coverage": sidecar / "prediction_coverage_report.json",
+        "lineage": sidecar / "checkpoint_lineage.json",
+        "fingerprint": sidecar / "input_fingerprint.json",
+        "manifest": sidecar / "student_capability_evaluation_manifest.json",
+    }
+
+    for label, path in required.items():
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing sidecar {label}: {path}")
+
+    manifest = read_json(required["manifest"])
+    coverage = read_json(required["coverage"])
+    lineage = read_json(required["lineage"])
+    fingerprint = read_json(required["fingerprint"])
+
+    if manifest.get("schema_version") != "p1p2.capability-manifest.v1":
+        raise ValueError("Unexpected capability sidecar schema")
+    if manifest.get("gold_policy") != "approved_85_primary":
+        raise ValueError("Sidecar does not use approved 85 Gold policy")
+    if manifest.get("strict_metric") != "status == valid":
+        raise ValueError("Sidecar does not use strict status==valid metric")
+
+    if coverage.get("status") != "PASS":
+        raise ValueError("Prediction coverage report is not PASS")
+    if coverage.get("prediction_records") != 500:
+        raise ValueError("Expected exactly 500 D_dev prediction records")
+    if coverage.get("prediction_unique_ids") != 500:
+        raise ValueError("Expected 500 unique D_dev prediction IDs")
+    if coverage.get("gold_records") != 85:
+        raise ValueError("Expected exactly 85 approved Gold records")
+    if coverage.get("lenient_correct_excluded") is not True:
+        raise ValueError("lenient_correct must be excluded")
+
+    output_metadata = manifest.get("outputs", {})
+    expected_output_names = {
+        "capability_metrics.csv",
+        "capability_metrics.jsonl",
+        "prediction_coverage_report.json",
+        "checkpoint_lineage.json",
+        "input_fingerprint.json",
+    }
+    if set(output_metadata) != expected_output_names:
+        raise ValueError(
+            "Sidecar manifest output inventory mismatch: "
+            f"{sorted(output_metadata)}"
+        )
+
+    for name, metadata in output_metadata.items():
+        output_path = sidecar / name
+        if not output_path.is_file():
+            raise FileNotFoundError(
+                f"Manifest output is missing: {output_path}"
+            )
+        if sha256_file(output_path) != metadata.get("sha256"):
+            raise ValueError(f"Sidecar output hash mismatch: {name}")
+
+    source_fingerprint = fingerprint.get("fingerprint")
+    if not isinstance(source_fingerprint, str) or not source_fingerprint:
+        raise ValueError("Missing input fingerprint")
+
+    metrics = []
+    with required["metrics"].open(
+        "r", encoding="utf-8-sig"
+    ) as stream:
+        for line_no, line in enumerate(stream, 1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                raise ValueError(f"Invalid metric row at line {line_no}")
+            metrics.append(row)
+
+    if len(metrics) != 7:
+        raise ValueError(f"Expected 7 capability rows, got {len(metrics)}")
+
+    by_capability = {}
+    for row in metrics:
+        capability = row.get("capability")
+        if capability not in CAPABILITIES:
+            raise ValueError(f"Unknown capability: {capability!r}")
+        if capability in by_capability:
+            raise ValueError(f"Duplicate capability row: {capability}")
+        if row.get("strict_metric") != "status_equals_valid":
+            raise ValueError("Capability row does not use strict metric")
+        if row.get("gold_policy") != "approved_85_primary":
+            raise ValueError("Capability row does not use approved Gold policy")
+
+        support = int(row["n_support"])
+        correct = int(row["n_correct"])
+        incorrect = int(row["n_incorrect"])
+
+        if support != EXPECTED_SUPPORT[capability]:
+            raise ValueError(
+                f"Support mismatch for {capability}: "
+                f"{support} != {EXPECTED_SUPPORT[capability]}"
+            )
+        if correct < 0 or incorrect < 0 or correct + incorrect != support:
+            raise ValueError(f"Invalid counts for {capability}")
+
+        mastery = correct / support
+        deficit = 1.0 - mastery
+
+        if abs(float(row["mastery"]) - mastery) > 1e-12:
+            raise ValueError(f"Mastery mismatch for {capability}")
+        if abs(float(row["deficit"]) - deficit) > 1e-12:
+            raise ValueError(f"Deficit mismatch for {capability}")
+
+        by_capability[capability] = {
+            "n_support": support,
+            "n_correct": correct,
+            "n_incorrect": incorrect,
+            "mastery": mastery,
+            "deficit": deficit,
+            "ci95_low": row.get("ci95_low"),
+            "ci95_high": row.get("ci95_high"),
+        }
+
+    if set(by_capability) != set(CAPABILITIES):
+        raise ValueError("Capability coverage is incomplete")
+
+    source_round = int(lineage["round"])
+    source_method = str(lineage["method"])
+    source_seed = int(lineage["seed"])
+
+    if source_round not in (0, 1, 2, 3):
+        raise ValueError(f"Invalid source round: {source_round}")
+    if source_round == 0 and source_method != "SHARED":
+        raise ValueError("S0 capability state must originate from SHARED")
+    if source_round > 0 and source_method not in (
+        "B2", "B3", "B4", "B5", "P1-DEFICIT", "P1P2"
+    ):
+        raise ValueError(f"Unsupported source method: {source_method}")
+
+    state = {
+        "schema_version": "p1p2.capability-state.v1",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "target": {
+            "method": args.target_method,
+            "seed": args.target_seed,
+            "selection_round": source_round + 1,
+        },
+        "source": {
+            "run_id": manifest["run_id"],
+            "method": source_method,
+            "seed": source_seed,
+            "round": source_round,
+            "checkpoint": manifest["checkpoint"],
+            "checkpoint_id": lineage["checkpoint_id"],
+            "checkpoint_sha256": lineage["checkpoint_sha256"],
+            "sidecar_manifest_sha256": sha256_file(required["manifest"]),
+            "input_fingerprint": source_fingerprint,
+        },
+        "metric_policy": {
+            "correctness": "status == valid",
+            "gold_policy": "approved_85_primary",
+            "lenient_correct_used": False,
+            "mastery": "n_correct / n_support",
+            "deficit": "1 - mastery",
+        },
+        "capabilities": by_capability,
+    }
+
+    output = Path(args.out).resolve()
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    if output.exists():
+        existing = read_json(output)
+        if stable_state(existing) != stable_state(state):
+            raise FileExistsError(
+                "Existing capability state has different provenance or "
+                "metrics; refusing overwrite: " + str(output)
+            )
+        print("CAPABILITY_STATE=EXACT_REUSE")
+    else:
+        content = (
+            json.dumps(state, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        output.write_bytes(content)
+        print("CAPABILITY_STATE=CREATED")
+
+    print(f"SOURCE_RUN_ID={manifest['run_id']}")
+    print(f"SOURCE_ROUND={source_round}")
+    print(f"TARGET_METHOD={args.target_method}")
+    print(f"TARGET_SEED={args.target_seed}")
+    print(f"SELECTION_ROUND={source_round + 1}")
+    print(f"CAPABILITY_COUNT={len(by_capability)}")
+    print(f"STATE_SHA256={sha256_file(output)}")
+    print(f"STATE_PATH={output}")
+    print("CAPABILITY_STATE_VALIDATION=PASS")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+================================================================
+FILE: scripts\run_p1p2_post_eval.py
+================================================================
+STATUS: FOUND
+SIZE: 9874
+SHA256: EF769EC7A7F8F4C0C4DA4699D4B4F436355C4AB50DE632F264F335A255178B96
+#!/usr/bin/env python3
+"""P1/P2 post-evaluation hook.
+
+Wraps the audited P2 capability evaluator without modifying its source.
+Publishes an immutable capability sidecar for SHARED, B2-B5,
+P1-DEFICIT, or P1P2.
+"""
+from __future__ import annotations
+
+import argparse
+import os
+import sys
+import tempfile
+import time
+from pathlib import Path
+from types import SimpleNamespace
+
+
+SUPPORTED_METHODS = {
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "P1-DEFICIT",
+    "P1P2",
+}
+SHARED_METHOD = "SHARED"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="P1/P2 immutable post-evaluation capability hook"
+    )
+
+    parser.add_argument("--method", required=True)
+    parser.add_argument("--seed", required=True, type=int)
+    parser.add_argument(
+        "--round",
+        required=True,
+        type=int,
+        choices=[0, 1, 2, 3],
+    )
+    parser.add_argument("--prediction", required=True)
+    parser.add_argument("--checkpoint", required=True)
+    parser.add_argument("--out-dir", required=True)
+
+    parser.add_argument(
+        "--gold-manifest",
+        default="data/gold_vfinal/gold_vfinal_manifest.json",
+    )
+    parser.add_argument(
+        "--gold-labels",
+        default="data/gold_vfinal/supplement_annotations_vfinal.jsonl",
+    )
+    parser.add_argument(
+        "--approval-csv",
+        default=(
+            "data/gold_releases/vFinal_2026-11-16/"
+            "gold_supplement_85_approved_review.csv"
+        ),
+    )
+    parser.add_argument("--dev-ids", default="splits/d_dev_ids.txt")
+    parser.add_argument(
+        "--config",
+        default="config/experiment_config.json",
+    )
+
+    parser.add_argument("--train-set")
+    parser.add_argument("--selection-log")
+    parser.add_argument("--train-log")
+    parser.add_argument("--checkpoint-log")
+    parser.add_argument("--shared-checkpoint-group")
+
+    args = parser.parse_args()
+
+    if args.method == SHARED_METHOD:
+        if args.seed != 0 or args.round != 0:
+            parser.error("SHARED baseline requires --seed 0 --round 0")
+        if any((
+            args.train_set,
+            args.selection_log,
+            args.train_log,
+            args.checkpoint_log,
+        )):
+            parser.error("SHARED S0 must not receive round training artifacts")
+    else:
+        if args.method not in SUPPORTED_METHODS:
+            parser.error(
+                f"Unsupported method {args.method!r}. "
+                f"Allowed: {sorted(SUPPORTED_METHODS)} and SHARED. "
+                "P1-GRAPH is intentionally excluded until graph evidence "
+                "passes the project evidence gate."
+            )
+        if args.round == 0:
+            parser.error("S0 is the shared baseline; method-specific runs start at S1")
+        missing = [
+            name
+            for name in (
+                "train_set",
+                "selection_log",
+                "train_log",
+                "checkpoint_log",
+            )
+            if not getattr(args, name)
+        ]
+        if missing:
+            parser.error(
+                "S1-S3 require all training lineage inputs: "
+                + ", ".join("--" + x.replace("_", "-") for x in missing)
+            )
+
+    expected_run_id = (
+        "SHARED_seed0_S0"
+        if args.method == SHARED_METHOD
+        else f"{args.method}_seed{args.seed}_S{args.round}"
+    )
+    args.run_id = expected_run_id
+
+    return args
+
+
+
+def publish_staged_directory(stage: Path, out_dir: Path) -> None:
+    """Publish a completed staging directory without overwriting a target.
+
+    Retries transient Windows PermissionError failures. On terminal failure,
+    the staging directory is intentionally preserved for recovery.
+    """
+    retry_delays = (0.25, 0.5, 1.0, 2.0, 4.0)
+
+    for attempt in range(len(retry_delays) + 1):
+        if out_dir.exists():
+            raise FileExistsError(
+                "OUTPUT_COLLISION: destination already exists; "
+                "refusing to overwrite: " + str(out_dir)
+            )
+
+        try:
+            os.rename(stage, out_dir)
+            return
+        except PermissionError as exc:
+            if out_dir.exists():
+                raise FileExistsError(
+                    "OUTPUT_COLLISION: destination appeared during "
+                    "publication; refusing to overwrite: " + str(out_dir)
+                ) from exc
+
+            if attempt >= len(retry_delays):
+                raise RuntimeError(
+                    "PUBLICATION_FAILED_AFTER_RETRIES: "
+                    f"{type(exc).__name__}: {exc}. "
+                    f"Recovery staging directory preserved at: {stage}"
+                ) from exc
+
+            delay = retry_delays[attempt]
+            print(
+                "PUBLICATION_RETRY="
+                f"{attempt + 1}/{len(retry_delays)} "
+                f"DELAY_SECONDS={delay}"
+            )
+            time.sleep(delay)
+
+
+def main() -> int:
+    args = parse_args()
+
+    repo_root = Path(__file__).resolve().parents[1]
+    script_dir = repo_root / "scripts"
+
+    if str(script_dir) not in sys.path:
+        sys.path.insert(0, str(script_dir))
+
+    try:
+        import capability_eval as evaluator
+    except Exception as exc:
+        raise RuntimeError(
+            "Cannot import scripts/capability_eval.py. "
+            "Keep the audited evaluator in the scripts directory."
+        ) from exc
+
+    # Resolve every path against the canonical repository root.
+    path_fields = (
+        "prediction",
+        "checkpoint",
+        "gold_manifest",
+        "gold_labels",
+        "approval_csv",
+        "dev_ids",
+        "config",
+        "train_set",
+        "selection_log",
+        "train_log",
+        "checkpoint_log",
+    )
+
+    resolved = {}
+    for field in path_fields:
+        value = getattr(args, field, None)
+        if value:
+            path = Path(value)
+            if not path.is_absolute():
+                path = repo_root / path
+            resolved[field] = path.resolve()
+        else:
+            resolved[field] = None
+
+    required_fields = (
+        "prediction",
+        "checkpoint",
+        "gold_manifest",
+        "gold_labels",
+        "approval_csv",
+        "dev_ids",
+        "config",
+    )
+    for field in required_fields:
+        path = resolved[field]
+        if path is None or not path.exists():
+            raise FileNotFoundError(
+                f"Required input {field!r} does not exist: {path}"
+            )
+
+    for field in (
+        "train_set",
+        "selection_log",
+        "train_log",
+        "checkpoint_log",
+    ):
+        path = resolved[field]
+        if args.method != SHARED_METHOD and (
+            path is None or not path.is_file()
+        ):
+            raise FileNotFoundError(
+                f"Required S1-S3 lineage file {field!r} is missing: {path}"
+            )
+
+    checkpoint = resolved["checkpoint"]
+    if not checkpoint.is_file() and not checkpoint.is_dir():
+        raise FileNotFoundError(
+            f"Checkpoint reference does not exist: {checkpoint}"
+        )
+
+    out_dir = Path(args.out_dir)
+    if not out_dir.is_absolute():
+        out_dir = repo_root / out_dir
+    out_dir = out_dir.resolve()
+
+    if out_dir == repo_root or repo_root not in out_dir.parents:
+        raise ValueError(
+            f"Output must be a child of the repository root: {out_dir}"
+        )
+
+    # The existing evaluator expects these attribute names.
+    evaluator_args = SimpleNamespace(
+        run_id=args.run_id,
+        method=args.method,
+        seed=args.seed,
+        round=args.round,
+        checkpoint=str(checkpoint),
+        dev_predictions=str(resolved["prediction"]),
+        gold_manifest=str(resolved["gold_manifest"]),
+        gold_labels=str(resolved["gold_labels"]),
+        approval_csv=str(resolved["approval_csv"]),
+        dev_ids=str(resolved["dev_ids"]),
+        config=str(resolved["config"]),
+        train_set=(
+            str(resolved["train_set"])
+            if resolved["train_set"] else None
+        ),
+        selection_log=(
+            str(resolved["selection_log"])
+            if resolved["selection_log"] else None
+        ),
+        train_log=(
+            str(resolved["train_log"])
+            if resolved["train_log"] else None
+        ),
+        checkpoint_log=(
+            str(resolved["checkpoint_log"])
+            if resolved["checkpoint_log"] else None
+        ),
+        shared_checkpoint_group=args.shared_checkpoint_group,
+    )
+
+    input_hashes = evaluator.build_input_hashes(evaluator_args)
+
+    if out_dir.exists():
+        evaluator.verify_existing_sidecar(out_dir, input_hashes)
+        print(f"POST_EVAL_HOOK: REUSED {out_dir}")
+        print(f"RUN_ID={args.run_id}")
+        print(f"METHOD={args.method}")
+        print(f"SEED={args.seed}")
+        print(f"ROUND={args.round}")
+        return 0
+
+    out_dir.parent.mkdir(parents=True, exist_ok=True)
+
+    stage = Path(tempfile.mkdtemp(
+        prefix=f".{out_dir.name}.staging.",
+        dir=str(out_dir.parent),
+    ))
+
+    try:
+        evaluator.build_sidecar(
+            evaluator_args,
+            stage,
+            input_hashes,
+        )
+
+        publish_staged_directory(stage, out_dir)
+
+    except Exception as exc:
+        # Preserve staging for diagnosis/recovery. It is deliberately not
+        # named as the final sidecar and therefore cannot be mistaken for PASS.
+        if stage.exists():
+            print(f"RECOVERY_STAGING_PRESERVED={stage}")
+            print(f"RECOVERY_ERROR={type(exc).__name__}: {exc}")
+        raise
+
+    print(f"POST_EVAL_HOOK: PASS {out_dir}")
+    print(f"RUN_ID={args.run_id}")
+    print(f"METHOD={args.method}")
+    print(f"SEED={args.seed}")
+    print(f"ROUND={args.round}")
+    print(f"PREDICTION_SHA256={input_hashes['dev_predictions']}")
+    print(f"CHECKPOINT_SHA256={input_hashes['checkpoint']}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+================================================================
+FILE: scripts\capability_eval.py
+================================================================
+STATUS: FOUND
+SIZE: 20932
+SHA256: 34BD941657131476748AD34E392086CF5B8259105F264C90FBE798A737925CFB
+#!/usr/bin/env python3
+"""Immutable CPU-only capability evaluation adapter for P1/P2.
+
+Reads existing P2 D_dev predictions. Does not load or train a model.
+Writes one immutable sidecar per run_id.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import os
+import tempfile
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+CAPABILITIES = (
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+)
+
+REQUIRED_OUTPUTS = (
+    "capability_metrics.csv",
+    "capability_metrics.jsonl",
+    "prediction_coverage_report.json",
+    "checkpoint_lineage.json",
+    "input_fingerprint.json",
+    "student_capability_evaluation_manifest.json",
+)
+
+EXPECTED_SUPPORT = {
+    "addition": 30,
+    "subtraction": 51,
+    "multiplication": 73,
+    "division": 47,
+    "fraction": 31,
+    "percentage": 29,
+    "ratio": 30,
+}
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def hash_path(path: Path) -> str:
+    path = path.resolve()
+
+    if path.is_file():
+        return sha256_file(path)
+
+    if not path.is_dir():
+        raise FileNotFoundError(f"Input does not exist: {path}")
+
+    files = sorted(p for p in path.rglob("*") if p.is_file())
+    if not files:
+        raise ValueError(f"Checkpoint directory is empty: {path}")
+
+    digest = hashlib.sha256()
+    for file_path in files:
+        relative = file_path.relative_to(path).as_posix()
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(sha256_file(file_path).encode("ascii"))
+        digest.update(b"\n")
+
+    return digest.hexdigest()
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8-sig") as stream:
+        value = json.load(stream)
+    if not isinstance(value, dict):
+        raise ValueError(f"Expected JSON object: {path}")
+    return value
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+
+    with path.open("r", encoding="utf-8-sig") as stream:
+        for line_no, line in enumerate(stream, 1):
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSONL at {path}:{line_no}: {exc}"
+                ) from exc
+
+            if not isinstance(row, dict):
+                raise ValueError(
+                    f"Expected JSON object at {path}:{line_no}"
+                )
+            rows.append(row)
+
+    return rows
+
+
+def read_id_file(path: Path) -> set[str]:
+    values = [
+        line.strip()
+        for line in path.read_text(encoding="utf-8-sig").splitlines()
+        if line.strip()
+    ]
+
+    if len(values) != len(set(values)):
+        raise ValueError(f"Duplicate IDs in {path}")
+
+    return set(values)
+
+
+def wilson_interval(
+    correct: int,
+    support: int,
+    z: float = 1.959963984540054,
+) -> tuple[float | None, float | None]:
+    if support <= 0:
+        return None, None
+
+    p = correct / support
+    z2 = z * z
+    denominator = 1.0 + z2 / support
+    center = (p + z2 / (2.0 * support)) / denominator
+    margin = (
+        z
+        * (
+            p * (1.0 - p) / support
+            + z2 / (4.0 * support * support)
+        ) ** 0.5
+        / denominator
+    )
+
+    return max(0.0, center - margin), min(1.0, center + margin)
+
+
+def strict_correct(row: dict[str, Any]) -> bool:
+    """P2 primary strict metric: only status == 'valid' is correct."""
+    status = row.get("status")
+
+    if status not in {"valid", "invalid_answer", "invalid_format"}:
+        raise ValueError(
+            "Prediction must contain a recognized P2 status; "
+            f"got status={status!r}, problem_id={row.get('problem_id')!r}"
+        )
+
+    return status == "valid"
+
+
+def load_approved_gold(
+    gold_path: Path,
+    approval_path: Path,
+    dev_ids: set[str],
+) -> dict[str, dict[str, Any]]:
+    gold_rows = read_jsonl(gold_path)
+
+    if len(gold_rows) != 85:
+        raise ValueError(
+            f"Expected exactly 85 Gold rows; found {len(gold_rows)}"
+        )
+
+    gold_by_id: dict[str, dict[str, Any]] = {}
+
+    for row in gold_rows:
+        problem_id = str(row.get("problem_id", "")).strip()
+        if not problem_id:
+            raise ValueError("Gold row missing problem_id")
+        if problem_id in gold_by_id:
+            raise ValueError(f"Duplicate Gold problem_id: {problem_id}")
+
+        labels = row.get("capabilities_manual")
+        if not isinstance(labels, list) or not labels:
+            raise ValueError(
+                f"Gold capability labels missing/invalid: {problem_id}"
+            )
+
+        unknown = set(labels) - set(CAPABILITIES)
+        if unknown:
+            raise ValueError(
+                f"Unknown capabilities for {problem_id}: {sorted(unknown)}"
+            )
+
+        gold_by_id[problem_id] = row
+
+    gold_ids = set(gold_by_id)
+
+    if len(gold_ids) != 85:
+        raise ValueError("Gold IDs are not 85 unique IDs")
+
+    if not gold_ids.issubset(dev_ids):
+        outside = sorted(gold_ids - dev_ids)
+        raise ValueError(
+            f"Gold IDs outside D_dev: {outside[:10]}"
+        )
+
+    approval_by_id: dict[str, dict[str, str]] = {}
+
+    with approval_path.open(
+        "r", encoding="utf-8-sig", newline=""
+    ) as stream:
+        reader = csv.DictReader(stream)
+
+        required_columns = {
+            "problem_id",
+            "review_status",
+            "human_approval",
+        }
+        actual_columns = set(reader.fieldnames or [])
+        missing_columns = required_columns - actual_columns
+
+        if missing_columns:
+            raise ValueError(
+                f"Approval CSV missing columns: {sorted(missing_columns)}"
+            )
+
+        for row in reader:
+            problem_id = str(row.get("problem_id", "")).strip()
+            if not problem_id:
+                raise ValueError("Approval CSV contains empty problem_id")
+            if problem_id in approval_by_id:
+                raise ValueError(
+                    f"Duplicate approval problem_id: {problem_id}"
+                )
+            approval_by_id[problem_id] = row
+
+    approval_ids = set(approval_by_id)
+
+    if approval_ids != gold_ids:
+        missing = sorted(gold_ids - approval_ids)
+        extra = sorted(approval_ids - gold_ids)
+        raise ValueError(
+            "Approval/Gold ID set mismatch: "
+            f"missing_approval={missing[:10]}, "
+            f"extra_approval={extra[:10]}"
+        )
+
+    for problem_id, row in approval_by_id.items():
+        review_status = str(row.get("review_status", "")).strip()
+        human_approval = str(row.get("human_approval", "")).strip()
+
+        approved_review_statuses = {
+            "APPROVED_NO_LABEL_CHANGE",
+            "APPROVED_WITH_SOURCE_CLARIFICATION",
+        }
+
+        if review_status not in approved_review_statuses:
+            raise ValueError(
+                f"Gold review status is not approved: "
+                f"{problem_id}={review_status!r}"
+            )
+
+        if not human_approval.startswith("APPROVED_BY_USER_"):
+            raise ValueError(
+                f"Gold lacks explicit user approval: "
+                f"{problem_id}={human_approval!r}"
+            )
+
+    return gold_by_id
+
+
+def build_input_hashes(args: argparse.Namespace) -> dict[str, str]:
+    input_paths = {
+        "checkpoint": Path(args.checkpoint),
+        "dev_predictions": Path(args.dev_predictions),
+        "gold_manifest": Path(args.gold_manifest),
+        "gold_labels": Path(args.gold_labels),
+        "approval_csv": Path(args.approval_csv),
+        "dev_ids": Path(args.dev_ids),
+        "config": Path(args.config),
+    }
+
+    optional_paths = {
+        "train_set": args.train_set,
+        "selection_log": args.selection_log,
+        "train_log": args.train_log,
+        "checkpoint_log": args.checkpoint_log,
+    }
+
+    for name, value in optional_paths.items():
+        if value:
+            input_paths[name] = Path(value)
+
+    hashes: dict[str, str] = {}
+    for name, path in input_paths.items():
+        if not path.exists():
+            raise FileNotFoundError(f"Missing input {name}: {path}")
+        hashes[name] = hash_path(path)
+
+    return hashes
+
+
+def validate_manifest_count(path: Path) -> None:
+    manifest = read_json(path)
+
+    if manifest.get("gold_version") != "vFinal":
+        raise ValueError(
+            "Expected Gold manifest gold_version='vFinal'"
+        )
+
+    if manifest.get("supplement_count") != 85:
+        raise ValueError(
+            "Gold manifest supplement_count must equal 85"
+        )
+
+
+def build_sidecar(
+    args: argparse.Namespace,
+    stage: Path,
+    input_hashes: dict[str, str],
+) -> None:
+    dev_ids = read_id_file(Path(args.dev_ids))
+
+    if len(dev_ids) != 500:
+        raise ValueError(
+            f"Expected 500 unique D_dev IDs; found {len(dev_ids)}"
+        )
+
+    predictions = read_jsonl(Path(args.dev_predictions))
+    prediction_ids = [
+        str(row.get("problem_id", "")).strip()
+        for row in predictions
+    ]
+
+    if any(not value for value in prediction_ids):
+        raise ValueError("Prediction contains empty problem_id")
+
+    if len(prediction_ids) != len(set(prediction_ids)):
+        raise ValueError("Duplicate problem_id in D_dev predictions")
+
+    if set(prediction_ids) != dev_ids or len(predictions) != 500:
+        missing = sorted(dev_ids - set(prediction_ids))
+        extra = sorted(set(prediction_ids) - dev_ids)
+        raise ValueError(
+            "Prediction coverage mismatch: "
+            f"rows={len(predictions)}, "
+            f"missing={missing[:10]}, extra={extra[:10]}"
+        )
+
+    prediction_by_id = {
+        str(row["problem_id"]): row for row in predictions
+    }
+
+    # Validate status for every prediction, not only the 85 Gold rows.
+    for row in predictions:
+        strict_correct(row)
+
+    validate_manifest_count(Path(args.gold_manifest))
+
+    gold_by_id = load_approved_gold(
+        Path(args.gold_labels),
+        Path(args.approval_csv),
+        dev_ids,
+    )
+
+    metrics: list[dict[str, Any]] = []
+
+    for capability in CAPABILITIES:
+        capability_ids = sorted(
+            problem_id
+            for problem_id, gold in gold_by_id.items()
+            if capability in gold["capabilities_manual"]
+        )
+
+        support = len(capability_ids)
+        correct = sum(
+            strict_correct(prediction_by_id[problem_id])
+            for problem_id in capability_ids
+        )
+
+        ci_low, ci_high = wilson_interval(correct, support)
+
+        metrics.append({
+            "run_id": args.run_id,
+            "method": args.method,
+            "seed": args.seed,
+            "checkpoint": f"S{args.round}",
+            "checkpoint_id": Path(args.checkpoint).name,
+            "capability": capability,
+            "n_support": support,
+            "n_correct": correct,
+            "n_incorrect": support - correct,
+            "mastery": correct / support if support else None,
+            "deficit": 1.0 - correct / support if support else None,
+            "ci95_low": ci_low,
+            "ci95_high": ci_high,
+            "ci_method": "Wilson_95_percent",
+            "strict_metric": "status_equals_valid",
+            "gold_policy": "approved_85_primary",
+        })
+
+    observed_support = {
+        row["capability"]: row["n_support"] for row in metrics
+    }
+
+    if observed_support != EXPECTED_SUPPORT:
+        raise ValueError(
+            "Gold capability support differs from the frozen expected "
+            f"vector. observed={observed_support}; "
+            f"expected={EXPECTED_SUPPORT}"
+        )
+
+    with (stage / "capability_metrics.csv").open(
+        "w", encoding="utf-8-sig", newline=""
+    ) as stream:
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=list(metrics[0].keys()),
+        )
+        writer.writeheader()
+        writer.writerows(metrics)
+
+    with (stage / "capability_metrics.jsonl").open(
+        "w", encoding="utf-8"
+    ) as stream:
+        for row in metrics:
+            stream.write(
+                json.dumps(row, ensure_ascii=False) + "\n"
+            )
+
+    coverage = {
+        "status": "PASS",
+        "split": "D_dev",
+        "expected_dev_ids": 500,
+        "prediction_records": len(predictions),
+        "prediction_unique_ids": len(set(prediction_ids)),
+        "gold_records": len(gold_by_id),
+        "gold_unique_ids": len(gold_by_id),
+        "gold_matched_prediction_ids": len(
+            set(gold_by_id) & set(prediction_ids)
+        ),
+        "missing_prediction_ids": [],
+        "gold_policy": "approved_85_primary",
+        "strict_correctness_policy": "status == valid",
+        "lenient_correct_excluded": True,
+        "capability_support": observed_support,
+    }
+
+    (stage / "prediction_coverage_report.json").write_text(
+        json.dumps(coverage, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    lineage = {
+        "run_id": args.run_id,
+        "method": args.method,
+        "seed": args.seed,
+        "round": args.round,
+        "checkpoint_id": Path(args.checkpoint).name,
+        "checkpoint_path": str(Path(args.checkpoint)),
+        "checkpoint_sha256": input_hashes["checkpoint"],
+        "shared_checkpoint_group": args.shared_checkpoint_group,
+        "train_set": args.train_set,
+        "selection_log": args.selection_log,
+        "train_log": args.train_log,
+        "checkpoint_log": args.checkpoint_log,
+        "config_sha256": input_hashes["config"],
+        "prediction_sha256": input_hashes["dev_predictions"],
+        "gold_manifest_sha256": input_hashes["gold_manifest"],
+        "gold_labels_sha256": input_hashes["gold_labels"],
+        "approval_csv_sha256": input_hashes["approval_csv"],
+        "dev_ids_sha256": input_hashes["dev_ids"],
+    }
+
+    (stage / "checkpoint_lineage.json").write_text(
+        json.dumps(lineage, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    fingerprint = hashlib.sha256(
+        json.dumps(
+            input_hashes,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+
+    (stage / "input_fingerprint.json").write_text(
+        json.dumps({
+            "fingerprint": fingerprint,
+            "inputs": input_hashes,
+        }, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    manifest = {
+        "schema_version": "p1p2.capability-manifest.v1",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "run_id": args.run_id,
+        "method": args.method,
+        "seed": args.seed,
+        "round": args.round,
+        "checkpoint": f"S{args.round}",
+        "gold_policy": "approved_85_primary",
+        "strict_metric": "status == valid",
+        "capabilities": list(CAPABILITIES),
+        "n_capability_rows": len(metrics),
+        "input_hashes": input_hashes,
+        "outputs": {},
+        "overwrite_policy": "immutable_exact_fingerprint_reuse_only",
+    }
+
+    for name in REQUIRED_OUTPUTS:
+        if name == "student_capability_evaluation_manifest.json":
+            continue
+
+        output_path = stage / name
+        manifest["outputs"][name] = {
+            "sha256": sha256_file(output_path),
+            "size_bytes": output_path.stat().st_size,
+        }
+
+    (stage / "student_capability_evaluation_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def verify_existing_sidecar(
+    out_dir: Path,
+    input_hashes: dict[str, str],
+) -> None:
+    manifest_path = (
+        out_dir / "student_capability_evaluation_manifest.json"
+    )
+
+    if not manifest_path.is_file():
+        raise RuntimeError(
+            "EXISTING_PARTIAL_SIDECAR: manifest missing; "
+            "do not overwrite or auto-delete this directory"
+        )
+
+    manifest = read_json(manifest_path)
+
+    if manifest.get("input_hashes") != input_hashes:
+        raise RuntimeError(
+            "INPUT_FINGERPRINT_MISMATCH: sidecar is immutable"
+        )
+
+    outputs = manifest.get("outputs", {})
+    expected_names = set(REQUIRED_OUTPUTS) - {
+        "student_capability_evaluation_manifest.json"
+    }
+
+    if set(outputs) != expected_names:
+        raise RuntimeError("Existing sidecar output inventory mismatch")
+
+    for name, metadata in outputs.items():
+        path = out_dir / name
+
+        if not path.is_file():
+            raise RuntimeError(f"Existing output missing: {path}")
+
+        if sha256_file(path) != metadata.get("sha256"):
+            raise RuntimeError(f"Existing output hash mismatch: {path}")
+
+    print(f"REUSE: PASS {out_dir}")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="CPU-only P1/P2 capability sidecar evaluator"
+    )
+
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument(
+        "--method",
+        required=True,
+        choices=["SHARED", "B2", "B3", "B4", "B5"],
+    )
+    parser.add_argument("--seed", required=True, type=int)
+    parser.add_argument(
+        "--round",
+        required=True,
+        type=int,
+        choices=[0, 1, 2, 3],
+    )
+
+    parser.add_argument("--checkpoint", required=True)
+    parser.add_argument("--dev-predictions", required=True)
+    parser.add_argument("--gold-manifest", required=True)
+    parser.add_argument("--gold-labels", required=True)
+    parser.add_argument("--approval-csv", required=True)
+    parser.add_argument("--dev-ids", required=True)
+    parser.add_argument("--config", required=True)
+
+    parser.add_argument("--train-set")
+    parser.add_argument("--selection-log")
+    parser.add_argument("--train-log")
+    parser.add_argument("--checkpoint-log")
+    parser.add_argument("--shared-checkpoint-group")
+    parser.add_argument(
+        "--out-root",
+        default="reports/capability",
+    )
+
+    args = parser.parse_args()
+
+    expected_run_id = (
+        "SHARED_seed0_S0"
+        if args.method == "SHARED"
+        else f"{args.method}_seed{args.seed}_S{args.round}"
+    )
+
+    if args.run_id != expected_run_id:
+        parser.error(
+            f"--run-id must be {expected_run_id!r} "
+            f"for the supplied method/seed/round"
+        )
+
+    if args.method == "SHARED" and (
+        args.seed != 0 or args.round != 0
+    ):
+        parser.error("SHARED baseline must use seed=0 and round=0")
+
+    if args.method != "SHARED" and args.round == 0:
+        parser.error("S0 is a shared baseline, not a method-specific run")
+
+    return args
+
+
+
+def publish_staged_directory(stage: Path, out_dir: Path) -> None:
+    """Publish without overwrite; retry transient Windows permission failures."""
+    retry_delays = (0.25, 0.5, 1.0, 2.0, 4.0)
+
+    for attempt in range(len(retry_delays) + 1):
+        if out_dir.exists():
+            raise FileExistsError(
+                "OUTPUT_COLLISION: destination already exists; "
+                "refusing to overwrite: " + str(out_dir)
+            )
+
+        try:
+            os.rename(stage, out_dir)
+            return
+        except PermissionError as exc:
+            if out_dir.exists():
+                raise FileExistsError(
+                    "OUTPUT_COLLISION: destination appeared during "
+                    "publication; refusing to overwrite: " + str(out_dir)
+                ) from exc
+
+            if attempt >= len(retry_delays):
+                raise RuntimeError(
+                    "PUBLICATION_FAILED_AFTER_RETRIES: "
+                    f"{type(exc).__name__}: {exc}. "
+                    f"Recovery staging directory preserved at: {stage}"
+                ) from exc
+
+            delay = retry_delays[attempt]
+            print(
+                "PUBLICATION_RETRY="
+                f"{attempt + 1}/{len(retry_delays)} "
+                f"DELAY_SECONDS={delay}"
+            )
+            time.sleep(delay)
+
+
+def main() -> None:
+    args = parse_args()
+
+    input_hashes = build_input_hashes(args)
+    out_dir = Path(args.out_root) / args.run_id
+
+    if out_dir.exists():
+        verify_existing_sidecar(out_dir, input_hashes)
+        return
+
+    out_dir.parent.mkdir(parents=True, exist_ok=True)
+
+    stage = Path(tempfile.mkdtemp(
+        prefix=f".{args.run_id}.staging.",
+        dir=out_dir.parent,
+    ))
+
+    try:
+        build_sidecar(args, stage, input_hashes)
+        publish_staged_directory(stage, out_dir)
+    except Exception as exc:
+        if stage.exists():
+            print(f"RECOVERY_STAGING_PRESERVED={stage}")
+            print(f"RECOVERY_ERROR={type(exc).__name__}: {exc}")
+        raise
+
+    print(f"CAPABILITY_EVAL: PASS {out_dir}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================
+FILE: scripts\selection.py
+================================================================
+STATUS: FOUND
+SIZE: 7714
+SHA256: 586B36254A10B5A144ABB0559D90057A56DFC59C33B7FCA6C233502B4F10DEAE
+#!/usr/bin/env python3
+"""
+Selection rules of B2, B3, B4, B5 and the shuffled-scores ablation (analysis_plan.md section 5,
+task7_decisions.md T7-1, T7-2, T7-3). Pure Python: no torch, no files; select_round.py does the I/O.
+
+Budget filling (protocol section 16.1, tokens(B_t) <= beta_round): walk the order and stop at the first
+trajectory that would exceed the budget. Later, shorter trajectories are not used to top up, because that
+would favour short trajectories over the method's own order. B3 and B4 keep the stopping trajectory for
+the next round.
+
+Tokens are response tokens under the Student tokenizer without the end-of-turn token, the unit of L_bar
+and therefore of beta_round.
+
+Seeds fixed by the config: B2 random.Random(training_seed * 100 + round); B3 random.Random(training_seed).
+The ablation's seed is not in the config; ABLATION_SEED_OFFSET keeps it apart from B2.
+"""
+import random
+from collections import Counter
+
+from learnability import score_checkpoint
+
+METHODS = ("B2", "B3", "B4", "B5", "ablation_shuffled_scores")
+NEEDS_NLL = ("B4", "B5", "ablation_shuffled_scores")
+ABLATION_SEED_OFFSET = 50
+SELECTED_CRITERION = {"B2": "random", "B3": "shortest_correct", "B4": "top_score", "B5": "top_score",
+                      "ablation_shuffled_scores": "shuffled_score"}
+
+
+def fill_budget(order, problems, tokens, budget, n_cap, unavailable=()):
+    """Returns (selected ids in order, {id: reason}, tokens used, whether the budget stopped the walk)."""
+    unavailable = set(unavailable)
+    selected, reasons, per_problem = [], {}, Counter()
+    used, stopped = 0, False
+    for tid in order:
+        if tid in unavailable:
+            reasons[tid] = "already_trained"
+        elif stopped:
+            reasons[tid] = "budget_exhausted"
+        elif per_problem[problems[tid]] >= n_cap:
+            reasons[tid] = "n_cap_reached"
+        elif used + tokens[tid] > budget:
+            stopped = True
+            reasons[tid] = "budget_exhausted"
+        else:
+            selected.append(tid)
+            reasons[tid] = "selected"
+            per_problem[problems[tid]] += 1
+            used += tokens[tid]
+    return selected, reasons, used, stopped
+
+
+def rank_by_score(scores):
+    """Descending score, ties by trajectory_id ascending (decision #23)."""
+    return sorted(scores, key=lambda tid: (-scores[tid], tid))
+
+
+def random_order(ids, seed):
+    order = sorted(ids)
+    random.Random(seed).shuffle(order)
+    return order
+
+
+def shuffled_scores(scores, seed):
+    """The same score values assigned to trajectories at random."""
+    ids = sorted(scores)
+    values = [scores[tid] for tid in ids]
+    random.Random(seed).shuffle(values)
+    return dict(zip(ids, values))
+
+
+def shortest_per_problem(problems, tokens):
+    """Decision #24: per problem the shortest trajectory, ties by smallest trajectory_id."""
+    best = {}
+    for tid in sorted(problems):
+        pid = problems[tid]
+        if pid not in best or tokens[tid] < tokens[best[pid]]:
+            best[pid] = tid
+    return best
+
+
+def b3_order(problems, tokens, training_seed):
+    """B3 order: the shortest trajectory of each problem, problems shuffled once [T7-2]."""
+    best = shortest_per_problem(problems, tokens)
+    return [best[pid] for pid in random_order(best, training_seed)]
+
+
+def static_round(order, problems, tokens, budget, n_cap, round_index):
+    """
+    Round round_index of a once-computed order (B3, B4): walk it without repeating a trajectory; a
+    trajectory skipped by n_cap or by the budget stays available for later rounds [T7-1, T7-2].
+    """
+    used_before = set()
+    for r in range(round_index + 1):
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap, used_before)
+        if r < round_index:
+            used_before |= set(selected)
+    return selected, reasons, used, stopped
+
+
+def select(method, round_index, training_seed, problems, tokens, budget, n_cap, ell_by_id=None, trained_ids=()):
+    """
+    One round's selection over the eligible pool. Returns the selected ids, tokens used, band parameters
+    and one log entry per eligible trajectory (fields of selection_log_schema.json, null where unused).
+    ell_by_id: ell at S_t for B5 and the ablation, at S_0 for B4 in every round.
+    trained_ids: trained in this run before this round (reference set of B5 and the ablation [T7-3]).
+    """
+    if method not in METHODS:
+        raise ValueError(f"unknown method {method}")
+    scoring, scores = None, None
+    if method in NEEDS_NLL:
+        if ell_by_id is None or set(ell_by_id) != set(problems):
+            raise ValueError(f"{method} needs ell for exactly the eligible pool")
+        # B4 ranks at S_0, where nothing has been trained: the reference set is the whole eligible pool.
+        scoring = score_checkpoint(ell_by_id, () if method == "B4" else trained_ids)
+        scores = scoring["l_proxy"]
+
+    if method == "B2":
+        order = random_order(problems, training_seed * 100 + round_index)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    elif method == "B3":
+        order = b3_order(problems, tokens, training_seed)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    elif method == "B4":
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    else:
+        if method == "ablation_shuffled_scores":
+            scores = shuffled_scores(scores, training_seed * 100 + round_index + ABLATION_SEED_OFFSET)
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    if not stopped:
+        raise ValueError(f"{method} round {round_index}: order exhausted before the budget ({used}/{budget} tokens)")
+
+    ranks = {tid: i for i, tid in enumerate(order, start=1)}
+    has_rank = method != "B2"
+    rows = []
+    for tid in sorted(problems):
+        reason = reasons.get(tid, "not_shortest")
+        rows.append({
+            "problem_id": problems[tid],
+            "trajectory_id": tid,
+            "tokens": tokens[tid],
+            "nll": ell_by_id[tid] if scoring else None,
+            "ell_star": scoring["ell_star"] if scoring else None,
+            "sigma": scoring["sigma"] if scoring else None,
+            "l_proxy": scoring["l_proxy"][tid] if scoring else None,
+            "score": scores[tid] if scores else None,
+            "rank": ranks.get(tid) if has_rank else None,
+            "selected": reason == "selected",
+            "criterion": SELECTED_CRITERION[method] if reason == "selected" else reason,
+            "outcome": None,
+        })
+    return {
+        "selected": selected,
+        "tokens_used": used,
+        "ell_star": scoring["ell_star"] if scoring else None,
+        "sigma": scoring["sigma"] if scoring else None,
+        "n_reference": scoring["n_reference"] if scoring else None,
+        "rows": rows,
+    }
+
+
+def probe_groups(tokens, group_size, seed, n_bins=5):
+    """
+    L_emp groups (config budget.l_emp_groups): token-length quintile bins of the eligible pool, group_size
+    trajectories sampled per bin. n_cap is not applied: the rule does not ask for it.
+    """
+    ordered = sorted(tokens, key=lambda tid: (tokens[tid], tid))
+    bins = [ordered[i * len(ordered) // n_bins: (i + 1) * len(ordered) // n_bins] for i in range(n_bins)]
+    rng = random.Random(seed)
+    return [sorted(rng.sample(b, group_size)) for b in bins]
+
+
+================================================================
+FILE: scripts\learnability.py
+================================================================
+STATUS: FOUND
+SIZE: 2096
+SHA256: A97F44C5905BF3779BA1909C28174C4CF96E31E06C83C4FFEFE1858C7420E4C3
+#!/usr/bin/env python3
+"""
+L_proxy (analysis_plan.md section 4, config "learnability"). Pure Python: no torch, no files.
+
+  ell*_t  = median of ell over the reference set at S_t
+  sigma_t = IQR of ell over the reference set at S_t / 1.349
+  L_proxy = exp(-(ell - ell*_t)^2 / (2 sigma_t^2)), computed for every eligible trajectory
+
+Reference set [T7-3]: eligible trajectories not yet trained in this run (at S_0: all eligible).
+
+Quartiles use statistics.quantiles(n=4) (method "exclusive"), the same call as the Task 5 smoke analysis
+(analyze_smoke_test.py). The choice cannot change the ranking: L_proxy order depends only on |ell - ell*_t|.
+"""
+import math
+import statistics
+
+
+def band_parameters(ells):
+    """(ell_star, sigma) of a list of ell values."""
+    if len(ells) < 2:
+        raise ValueError(f"reference set too small: {len(ells)}")
+    if not all(math.isfinite(x) for x in ells):
+        raise ValueError("non-finite ell in the reference set")
+    q = statistics.quantiles(ells, n=4)
+    sigma = (q[2] - q[0]) / 1.349
+    if sigma <= 0:
+        raise ValueError("IQR of ell is zero: L_proxy is undefined")
+    return statistics.median(ells), sigma
+
+
+def l_proxy(ell, ell_star, sigma):
+    return math.exp(-((ell - ell_star) ** 2) / (2 * sigma ** 2))
+
+
+def score_checkpoint(ell_by_id, trained_ids=()):
+    """
+    L_proxy of every trajectory in ell_by_id (the whole eligible pool at one checkpoint).
+    trained_ids: trajectories already trained in this run; excluded from the reference set only.
+    """
+    unknown = set(trained_ids) - set(ell_by_id)
+    if unknown:
+        raise ValueError(f"trained trajectories missing from the scored pool: {sorted(unknown)[:3]}")
+    trained = set(trained_ids)
+    reference = [ell for tid, ell in ell_by_id.items() if tid not in trained]
+    ell_star, sigma = band_parameters(reference)
+    return {
+        "ell_star": ell_star,
+        "sigma": sigma,
+        "n_reference": len(reference),
+        "l_proxy": {tid: l_proxy(ell, ell_star, sigma) for tid, ell in ell_by_id.items()},
+    }
+
+
+================================================================
+FILE: scripts\select_round.py
+================================================================
+STATUS: FOUND
+SIZE: 6305
+SHA256: 06CED4DE235C2E22223810E8C52C14E02B943223E02C5B0712B1F45303DE8281
+#!/usr/bin/env python3
+"""
+Select B_t for one method, seed and round; writes the train set and the selection log (selection.py has the rules).
+
+Reads:
+  --tokens          token table of the pool (build_pool_tokens.py)
+  --nll             compute_nll.py output: at S_t for B5 and the ablation, at S_0 for B4 in every round
+  <run-dir>/round_NNN/train_set.json of earlier rounds (trajectories already trained in this run, T7-3)
+
+Writes (atomically):
+  <run-dir>/round_NNN/train_set.json       input of train_round.py
+  <run-dir>/round_NNN/selection_log.jsonl  one record per eligible trajectory (selection_log_schema.json)
+
+--pilot allows a smaller budget and seeds outside the config; the output is marked and is not a result.
+
+Usage (from experiments/week2September/manual/):
+  python scripts/select_round.py --method B5 --seed 13 --round 1 --run-dir runs/main/B5_seed13 \
+      --nll runs/main/B5_seed13/S1/nll.jsonl
+"""
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from selection import METHODS, NEEDS_NLL, select  # noqa: E402
+from student_common import CONFIG_PATH, MANUAL_DIR, POOL_VERIFIED, load_config, read_jsonl, sha256_file  # noqa: E402
+
+DEFAULT_TOKENS = POOL_VERIFIED.with_name("pool_v1_tokens.jsonl")
+
+
+def round_dir(run_dir, t):
+    return Path(run_dir) / f"round_{t:03d}"
+
+
+def rel(path):
+    resolved = Path(path).resolve()
+    return str(resolved.relative_to(MANUAL_DIR)) if resolved.is_relative_to(MANUAL_DIR) else str(resolved)
+
+
+def write_atomic(path, text):
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, path)
+
+
+def load_tokens(tokens_path, pool_path):
+    summary = json.loads(Path(tokens_path).with_suffix(".summary.json").read_text(encoding="utf-8"))
+    if summary["pool_sha256"] != sha256_file(pool_path):
+        raise ValueError(f"{tokens_path} was built from another pool")
+    rows = read_jsonl(tokens_path)
+    return {r["trajectory_id"]: r["problem_id"] for r in rows}, {r["trajectory_id"]: r["response_tokens"] for r in rows}
+
+
+def load_ell(nll_path, tokens):
+    """ell by trajectory; the NLL file must cover the pool with the token counts of the budget."""
+    rows = read_jsonl(nll_path)
+    ell = {r["trajectory_id"]: r["ell"] for r in rows}
+    if len(ell) != len(rows) or set(ell) != set(tokens):
+        raise ValueError(f"{nll_path} does not cover exactly the eligible pool")
+    wrong = [r["trajectory_id"] for r in rows if r["n_tokens"] != tokens[r["trajectory_id"]]]
+    if wrong:
+        raise ValueError(f"{len(wrong)} token counts in {nll_path} differ from the token table: {wrong[:3]}")
+    return ell
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--method", required=True, choices=METHODS)
+    ap.add_argument("--seed", required=True, type=int)
+    ap.add_argument("--round", required=True, type=int)
+    ap.add_argument("--run-dir", required=True, type=Path)
+    ap.add_argument("--pool", type=Path, default=POOL_VERIFIED)
+    ap.add_argument("--tokens", type=Path, default=DEFAULT_TOKENS)
+    ap.add_argument("--nll", type=Path, default=None)
+    ap.add_argument("--budget", type=int, default=None, help="pilot only (default: config beta_round_tokens)")
+    ap.add_argument("--pilot", action="store_true")
+    args = ap.parse_args()
+
+    cfg = load_config()
+    if not args.pilot:
+        if args.seed not in cfg["seeds"]["training_seeds"] + cfg["seeds"]["optional_extra_seeds"]:
+            raise SystemExit(f"seed {args.seed} is not in the config")
+        if args.budget is not None:
+            raise SystemExit("--budget needs --pilot")
+    if not 0 <= args.round < cfg["schedule"]["rounds_M"]:
+        raise SystemExit(f"round must be in 0..{cfg['schedule']['rounds_M'] - 1}")
+    if args.method in NEEDS_NLL and args.nll is None:
+        raise SystemExit(f"{args.method} needs --nll")
+    budget = args.budget or cfg["budget"]["beta_round_tokens"]
+    n_cap = cfg["selection"]["n_cap"]
+
+    problems, tokens = load_tokens(args.tokens, args.pool)
+    trained = []
+    for t in range(args.round):
+        trained += json.loads((round_dir(args.run_dir, t) / "train_set.json").read_text(encoding="utf-8"))["trajectory_ids"]
+    ell = load_ell(args.nll, tokens) if args.method in NEEDS_NLL else None
+
+    res = select(args.method, args.round, args.seed, problems, tokens, budget, n_cap, ell, sorted(set(trained)))
+
+    config_hash = sha256_file(CONFIG_PATH)
+    source_t = 0 if args.method == "B4" else args.round  # B4 is ranked at S_0 in every round
+    source = cfg["schedule"]["checkpoint_name"].format(t=source_t)
+    out_dir = round_dir(args.run_dir, args.round)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_atomic(out_dir / "selection_log.jsonl", "".join(
+        json.dumps({"record_type": "selection", "method": args.method, "round": args.round,
+                    "source_checkpoint": source, "training_seed": args.seed, **row, "config_hash": config_hash},
+                   ensure_ascii=False) + "\n"
+        for row in res["rows"]))
+    write_atomic(out_dir / "train_set.json", json.dumps({
+        "pilot": args.pilot,
+        "method": args.method, "round": args.round, "training_seed": args.seed, "source_checkpoint": source,
+        "pool": rel(args.pool), "pool_sha256": sha256_file(args.pool),
+        "config_sha256": config_hash,
+        "nll_file": rel(args.nll) if ell else None,
+        "nll_sha256": sha256_file(args.nll) if ell else None,
+        "ell_star": res["ell_star"], "sigma": res["sigma"], "n_reference": res["n_reference"],
+        "n_eligible": len(problems), "n_trained_before": len(set(trained)),
+        "beta_round_tokens": budget, "n_cap": n_cap,
+        "tokens_used": res["tokens_used"], "n_selected": len(res["selected"]),
+        "trajectory_ids": res["selected"],
+    }, ensure_ascii=False, indent=2) + "\n")
+    print(f"[{args.method} seed {args.seed} round {args.round}] {len(res['selected'])} trajectories, "
+          f"{res['tokens_used']}/{budget} tokens -> {out_dir}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================
+FILE: scripts\train_round.py
+================================================================
+STATUS: FOUND
+SIZE: 9895
+SHA256: D78E7E329BA49E7C17E16265EE49B40E113F6B9EFCB65BEF9BF574C50BEF95FE
+#!/usr/bin/env python3
+"""
+Train one round of the Student with LoRA: S_t + B_t -> S_{t+1}.
+
+Hyperparameters come from config/experiment_config.json "training" (LoRA r/alpha/dropout/targets,
+AdamW, constant lr, no warmup, max_grad_norm, effective batch, 1 epoch, max_seq_len,
+completion-only loss). Effective batch = --micro-batch x gradient accumulation.
+
+Loss: token-level mean over all supervised (response) tokens of the effective batch;
+prompt tokens are masked. Seeds: torch seed (LoRA init, dropout) = data order seed = --seed.
+
+Pool: the trajectories are looked up in the pool named by the train set ("pool", checked against
+"pool_sha256"), so the Task 5 smoke-test train sets still resolve to the preliminary pool; train sets
+without that field use --pool (default: official pool v1).
+
+Outputs:
+  <adapter-dir>/                 LoRA adapter (safetensors) + tokenizer files
+  <adapter-dir>/train_log.json   per-step loss, tokens, time; totals; config used
+
+Usage (from experiments/week2September/manual/):
+  python scripts/train_round.py --seed 13 \
+      --train-set reports/task5/smoke_test/train_set_seed13.json \
+      --adapter-dir models/smoke/student_ckpt_001_smoke_seed13
+"""
+import argparse
+import json
+import math
+import random
+import sys
+import time
+from pathlib import Path
+
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    CONFIG_PATH, IGNORE_INDEX, MANUAL_DIR, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example,
+    environment_info, load_config, load_pool, pick_dtype, sha256_file, student_from_args, write_json,
+)
+
+
+def collate(examples, pad_id):
+    width = max(len(e["input_ids"]) for e in examples)
+    ids, labels, mask = [], [], []
+    for e in examples:
+        pad = width - len(e["input_ids"])
+        ids.append(e["input_ids"] + [pad_id] * pad)          # right padding for training
+        labels.append(e["labels"] + [IGNORE_INDEX] * pad)
+        mask.append([1] * len(e["input_ids"]) + [0] * pad)
+    return torch.tensor(ids), torch.tensor(labels), torch.tensor(mask)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--seed", type=int, required=True)
+    ap.add_argument("--train-set", required=True, type=Path, help="JSON with trajectory_ids (select_smoke_train_set.py)")
+    ap.add_argument("--adapter-dir", required=True, type=Path)
+    ap.add_argument("--init-adapter", default=None, help="continue from an existing adapter (round t > 0)")
+    ap.add_argument("--micro-batch", type=int, default=4)
+    ap.add_argument("--epochs", type=int, default=None, help="default: config training.epochs_per_round")
+    ap.add_argument("--lr", type=float, default=None, help="default: config training.learning_rate")
+    ap.add_argument("--no-gradient-checkpointing", action="store_true")
+    ap.add_argument("--pool", type=Path, default=None,
+                    help="pool for train sets without a 'pool' field (default: official pool v1)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    tc = cfg["training"]
+    if tc["loss"].split()[0] != "completion-only" or tc["lr_scheduler"] != "constant" or tc["warmup_steps"] != 0:
+        raise ValueError("config training block differs from what this script implements")
+    eff_batch = tc["batch_size"]
+    if eff_batch % args.micro_batch:
+        raise ValueError(f"--micro-batch must divide the effective batch {eff_batch}")
+    accum = eff_batch // args.micro_batch
+    epochs = args.epochs or tc["epochs_per_round"]
+    lr = args.lr or tc["learning_rate"]
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+
+    from peft import LoraConfig, PeftModel, get_peft_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
+    if "pool" in train_set:
+        pool_path = MANUAL_DIR / train_set["pool"]
+        if args.pool and args.pool.resolve() != pool_path.resolve():
+            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+        if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
+            raise ValueError(f"{pool_path} changed since the train set was drawn")
+    else:
+        pool_path = args.pool or POOL_VERIFIED
+    by_id = {r["trajectory_id"]: r for r in load_pool(pool_path)}
+    rows = [by_id[t] for t in train_set["trajectory_ids"]]
+
+    tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
+    examples = [encode_example(tok, r["question"], r["raw_generation"]) for r in rows]
+    too_long = [r["trajectory_id"] for r, e in zip(rows, examples) if len(e["input_ids"]) > tc["max_seq_len"]]
+    if too_long:
+        raise ValueError(f"{len(too_long)} examples exceed max_seq_len {tc['max_seq_len']}: {too_long[:3]}")
+
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    model = AutoModelForCausalLM.from_pretrained(model_name, revision=revision, dtype=dtype)
+    if not args.no_gradient_checkpointing:
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        model.enable_input_require_grads()
+    if args.init_adapter:
+        model = PeftModel.from_pretrained(model, args.init_adapter, is_trainable=True)
+    else:
+        model = get_peft_model(model, LoraConfig(
+            r=tc["lora_r"], lora_alpha=tc["lora_alpha"], lora_dropout=tc["lora_dropout"],
+            target_modules=tc["lora_target_modules"], bias="none", task_type="CAUSAL_LM",
+        ))
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device)
+    model.train()
+    trainable = [p for p in model.parameters() if p.requires_grad]
+    n_trainable = sum(p.numel() for p in trainable)
+    opt = torch.optim.AdamW(trainable, lr=lr, betas=(tc["adam_beta1"], tc["adam_beta2"]),
+                            weight_decay=tc["weight_decay"])  # fresh optimizer state each round (config)
+
+    order_rng = random.Random(args.seed)  # data_order_seed = training_seed
+    log, step, t0 = [], 0, time.time()
+    total_sup, total_prompt = 0, 0
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    for epoch in range(epochs):
+        order = list(range(len(examples)))
+        order_rng.shuffle(order)
+        for start in range(0, len(order), eff_batch):
+            eff = [examples[i] for i in order[start: start + eff_batch]]
+            n_sup = sum(e["n_supervised"] for e in eff)
+            loss_sum = 0.0
+            opt.zero_grad(set_to_none=True)
+            for m in range(0, len(eff), args.micro_batch):
+                ids, labels, mask = (x.to(device) for x in collate(eff[m: m + args.micro_batch], tok.pad_token_id))
+                logits = model(input_ids=ids, attention_mask=mask).logits[:, :-1]
+                tgt = labels[:, 1:]
+                sel = tgt != IGNORE_INDEX  # upcast only supervised positions (saves memory)
+                tok_loss = torch.nn.functional.cross_entropy(logits[sel].float(), tgt[sel], reduction="sum")
+                (tok_loss / n_sup).backward()
+                loss_sum += tok_loss.item()
+            grad_norm = torch.nn.utils.clip_grad_norm_(trainable, tc["max_grad_norm"]).item()
+            opt.step()
+            step += 1
+            total_sup += n_sup
+            total_prompt += sum(e["n_prompt"] for e in eff)
+            log.append({"step": step, "epoch": epoch, "loss": loss_sum / n_sup, "grad_norm": grad_norm,
+                        "n_examples": len(eff), "supervised_tokens": n_sup, "lr": lr,
+                        "elapsed_s": round(time.time() - t0, 1)})
+            print(f"step {step:3d}  loss {loss_sum / n_sup:.4f}  grad_norm {grad_norm:.3f}  "
+                  f"tokens {n_sup}  {time.time() - t0:.0f}s", flush=True)
+            if not math.isfinite(loss_sum):
+                raise RuntimeError("non-finite loss")
+
+    args.adapter_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(args.adapter_dir)
+    tok.save_pretrained(args.adapter_dir)
+    write_json(args.adapter_dir / "train_log.json", {
+        "checkpoint_parent": args.init_adapter or "student_ckpt_000",
+        "seed": args.seed, "data_order_seed": args.seed,
+        "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
+        "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
+        "n_examples": len(examples), "epochs": epochs, "steps": step,
+        "effective_batch": eff_batch, "micro_batch": args.micro_batch, "grad_accum": accum,
+        "learning_rate": lr, "lr_from_config": lr == tc["learning_rate"],
+        "epochs_from_config": epochs == tc["epochs_per_round"],
+        "model": model_name, "revision": revision, "dtype": str(dtype).replace("torch.", ""),
+        "gradient_checkpointing": not args.no_gradient_checkpointing,
+        "trainable_parameters": n_trainable,
+        "cumulative_training_tokens": total_sup,
+        "prompt_tokens_masked": total_prompt,
+        "trajectory_tokens": sum(e["n_traj"] for e in examples) * epochs,
+        "beta_round_tokens_config": cfg["budget"]["beta_round_tokens"],
+        "elapsed_seconds": round(time.time() - t0, 1),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "config_sha256": sha256_file(CONFIG_PATH),
+        "environment": environment_info(torch),
+        "steps_log": log,
+    })
+    print(f"saved adapter -> {args.adapter_dir}  ({step} steps, {total_sup} supervised tokens)")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================
+FILE: scripts\compute_nll.py
+================================================================
+STATUS: FOUND
+SIZE: 5497
+SHA256: DDF62BF5CAF5E3DF8D5187F5A0D6CB980B7A26FDB39EC0B8CE2AEE6AA1D25741
+#!/usr/bin/env python3
+"""
+Score every verified pool trajectory under a Student checkpoint (one forward pass, no backward).
+
+Per trajectory tau (trajectory tokens only, the end-of-turn token excluded):
+  nll_sum    = sum_t -log p(tau_t | x, tau_<t)
+  ell        = nll_sum / n_tokens            (length-normalized NLL; input of L_proxy, config "learnability")
+  brier_sum  = sum_t || pi_t - onehot(tau_t) ||^2
+               (Brier residual; stored so the LARK score, arXiv 2605.30651 Eq. 7, can be computed
+                later without another pass. Exploratory, not part of the frozen L_proxy.)
+
+L_proxy itself is not computed here: it needs ell over the whole pool (median / IQR rule) and
+is derived in the analysis step.
+
+--pool defaults to the official pool v1 (trajectory/pool/pool_v1_verified.jsonl). The Task 5 smoke test
+scored the preliminary pool; reproduce it with --pool trajectory/pool/batch_100_teacher_verified.jsonl.
+
+Usage (from experiments/week2September/manual/):
+  python scripts/compute_nll.py --tag S0 --out reports/task5/smoke_test/nll_pool_S0.jsonl \
+      --pool trajectory/pool/batch_100_teacher_verified.jsonl
+  python scripts/compute_nll.py --tag S1_seed13 --adapter <adapter_dir> \
+      --out reports/task5/smoke_test/nll_pool_S1_seed13.jsonl --pool trajectory/pool/batch_100_teacher_verified.jsonl
+"""
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    IGNORE_INDEX, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example, environment_info,
+    load_config, load_model, load_pool, load_tokenizer, pick_dtype, sha256_file, student_from_args, write_json,
+)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--tag", required=True)
+    ap.add_argument("--adapter", default=None)
+    ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--batch-size", type=int, default=4)
+    ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--pool", type=Path, default=POOL_VERIFIED, help="verified pool to score (default: pool v1)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+    pool = sorted(load_pool(args.pool), key=lambda r: r["trajectory_id"])
+    if args.limit:
+        pool = pool[: args.limit]
+
+    tok = load_tokenizer(model_name, revision)
+    model = load_model(model_name, revision, dtype, adapter=args.adapter)
+    examples = [encode_example(tok, r["question"], r["raw_generation"], add_eos=False) for r in pool]
+
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    t0 = time.time()
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    with args.out.open("w", encoding="utf-8") as f:
+        for i in range(0, len(examples), args.batch_size):
+            batch = examples[i: i + args.batch_size]
+            width = max(len(e["input_ids"]) for e in batch)
+            ids = torch.tensor([e["input_ids"] + [tok.pad_token_id] * (width - len(e["input_ids"])) for e in batch])
+            mask = torch.tensor([[1] * len(e["input_ids"]) + [0] * (width - len(e["input_ids"])) for e in batch])
+            labels = torch.tensor([e["labels"] + [IGNORE_INDEX] * (width - len(e["labels"])) for e in batch])
+            ids, mask, labels = ids.to(model.device), mask.to(model.device), labels.to(model.device)
+            with torch.no_grad():
+                logits = model(input_ids=ids, attention_mask=mask).logits[:, :-1]
+            tgt = labels[:, 1:]
+            for b, e in enumerate(batch):
+                sel = tgt[b] != IGNORE_INDEX
+                lp = torch.log_softmax(logits[b][sel].float(), dim=-1)
+                y = tgt[b][sel]
+                lp_y = lp.gather(1, y[:, None]).squeeze(1)
+                p = lp.exp()
+                brier = (p.pow(2).sum(-1) - 2 * lp_y.exp() + 1).sum().item()
+                nll_sum = -lp_y.sum().item()
+                r = pool[i + b]
+                f.write(json.dumps({
+                    "trajectory_id": r["trajectory_id"], "problem_id": r["problem_id"], "checkpoint": args.tag,
+                    "n_tokens": int(sel.sum()), "nll_sum": nll_sum, "ell": nll_sum / int(sel.sum()),
+                    "brier_sum": brier,
+                }) + "\n")
+            print(f"[{args.tag}] {min(i + args.batch_size, len(examples))}/{len(examples)}  {time.time() - t0:.0f}s",
+                  flush=True)
+    elapsed = time.time() - t0
+    write_json(args.out.with_suffix(".summary.json"), {
+        "checkpoint": args.tag, "adapter": args.adapter, "model": model_name, "revision": revision,
+        "dtype": str(dtype).replace("torch.", ""), "n_trajectories": len(examples),
+        "pool": str(args.pool), "pool_sha256": sha256_file(args.pool),
+        "forward_passes": len(examples), "elapsed_seconds": round(elapsed, 1),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "environment": environment_info(torch),
+    })
+    print(f"[{args.tag}] scored {len(examples)} trajectories in {elapsed:.0f}s -> {args.out}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================
+FILE: scripts\build_pool_tokens.py
+================================================================
+STATUS: FOUND
+SIZE: 2296
+SHA256: 0879E7C776F22E05D6599E2E500D2F528709B0232BB24F927C8DED358CC0AB31
+#!/usr/bin/env python3
+"""
+Token table of a verified pool under the Student tokenizer: the unit of the selection budget.
+
+response_tokens = tokens of raw_generation.strip() without the end-of-turn token (same count as L_bar and
+as n_tokens in compute_nll.py; select_round.py checks that the two agree).
+
+Outputs:
+  --out                  one JSON line per trajectory: trajectory_id, problem_id, response_tokens
+  <out>.summary.json     pool SHA-256, tokenizer, totals
+
+Usage (from experiments/week2September/manual/):
+  python scripts/build_pool_tokens.py
+"""
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    POOL_VERIFIED, add_model_args, encode_example, load_config, load_pool, load_tokenizer, sha256_file,
+    student_from_args, write_json,
+)
+
+DEFAULT_OUT = POOL_VERIFIED.with_name("pool_v1_tokens.jsonl")
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--pool", type=Path, default=POOL_VERIFIED)
+    ap.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    cfg = load_config()
+    model_name, revision = student_from_args(args, cfg)
+    tok = load_tokenizer(model_name, revision)
+    pool = sorted(load_pool(args.pool), key=lambda r: r["trajectory_id"])
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    total = 0
+    with args.out.open("w", encoding="utf-8") as f:
+        for r in pool:
+            n = encode_example(tok, r["question"], r["raw_generation"], add_eos=False)["n_traj"]
+            total += n
+            f.write(json.dumps({"trajectory_id": r["trajectory_id"], "problem_id": r["problem_id"],
+                                "response_tokens": n}) + "\n")
+    write_json(args.out.with_suffix(".summary.json"), {
+        "pool": str(args.pool), "pool_sha256": sha256_file(args.pool),
+        "tokenizer": model_name, "tokenizer_revision": revision,
+        "n_trajectories": len(pool), "response_tokens_sum": total,
+    })
+    print(f"{len(pool)} trajectories, {total} response tokens -> {args.out}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================
+FILE: tests\test_g59_publication.py
+================================================================
+STATUS: FOUND
+SIZE: 3392
+SHA256: 9772436DC63BE1EB3C12533D567ECEDFF8C61EEAFC9539AE5A6B53C3C0B93F72
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import run_p1p2_post_eval as hook
+
+
+class PublicationTests(unittest.TestCase):
+    def test_publish_directory(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage = root / ".stage"
+            target = root / "final"
+            stage.mkdir()
+            (stage / "payload.txt").write_text("ok", encoding="utf-8")
+
+            hook.publish_staged_directory(stage, target)
+
+            self.assertFalse(stage.exists())
+            self.assertEqual(
+                (target / "payload.txt").read_text(encoding="utf-8"),
+                "ok",
+            )
+
+    def test_destination_collision_is_rejected_and_stage_preserved(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage = root / ".stage"
+            target = root / "final"
+            stage.mkdir()
+            target.mkdir()
+            marker = stage / "recovery.txt"
+            marker.write_text("preserve", encoding="utf-8")
+
+            with self.assertRaisesRegex(FileExistsError, "OUTPUT_COLLISION"):
+                hook.publish_staged_directory(stage, target)
+
+            self.assertTrue(marker.is_file())
+            self.assertEqual(marker.read_text(encoding="utf-8"), "preserve")
+
+    def test_transient_permission_error_retries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage = root / ".stage"
+            target = root / "final"
+            stage.mkdir()
+            (stage / "payload.txt").write_text("ok", encoding="utf-8")
+
+            real_rename = hook.os.rename
+            calls = {"n": 0}
+
+            def flaky_rename(src, dst):
+                calls["n"] += 1
+                if calls["n"] == 1:
+                    raise PermissionError(5, "transient test failure")
+                return real_rename(src, dst)
+
+            with patch.object(hook.os, "rename", side_effect=flaky_rename):
+                with patch.object(hook.time, "sleep", return_value=None):
+                    hook.publish_staged_directory(stage, target)
+
+            self.assertEqual(calls["n"], 2)
+            self.assertTrue(target.is_dir())
+            self.assertFalse(stage.exists())
+
+    def test_terminal_permission_error_preserves_stage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage = root / ".stage"
+            target = root / "final"
+            stage.mkdir()
+            marker = stage / "recovery.txt"
+            marker.write_text("preserve", encoding="utf-8")
+
+            with patch.object(
+                hook.os, "rename",
+                side_effect=PermissionError(5, "persistent test failure"),
+            ):
+                with patch.object(hook.time, "sleep", return_value=None):
+                    with self.assertRaisesRegex(
+                        RuntimeError,
+                        "PUBLICATION_FAILED_AFTER_RETRIES",
+                    ):
+                        hook.publish_staged_directory(stage, target)
+
+            self.assertTrue(marker.is_file())
+            self.assertFalse(target.exists())
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+
+================================================================
+FILE: tests\test_capability_eval_publication.py
+================================================================
+STATUS: FOUND
+SIZE: 3001
+SHA256: B996EAF5DE0D910FB38E4D11BF0A4DDD3E9F26B39FBCDC60F4AAA5544948605E
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import capability_eval as evaluator
+
+
+class EvaluatorPublicationTests(unittest.TestCase):
+    def test_publish_directory(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            (stage / "payload.txt").write_text("ok", encoding="utf-8")
+            evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(target.is_dir())
+            self.assertFalse(stage.exists())
+
+    def test_collision_preserves_stage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            target.mkdir()
+            marker = stage / "marker"
+            marker.write_text("preserve", encoding="utf-8")
+            with self.assertRaisesRegex(FileExistsError, "OUTPUT_COLLISION"):
+                evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(marker.is_file())
+
+    def test_transient_permission_error_retries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            real_rename = evaluator.os.rename
+            calls = {"n": 0}
+
+            def flaky(src, dst):
+                calls["n"] += 1
+                if calls["n"] == 1:
+                    raise PermissionError(5, "transient")
+                return real_rename(src, dst)
+
+            with patch.object(evaluator.os, "rename", side_effect=flaky):
+                with patch.object(evaluator.time, "sleep", return_value=None):
+                    evaluator.publish_staged_directory(stage, target)
+            self.assertEqual(calls["n"], 2)
+            self.assertTrue(target.is_dir())
+
+    def test_persistent_permission_error_keeps_stage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            marker = stage / "marker"
+            marker.write_text("preserve", encoding="utf-8")
+            with patch.object(
+                evaluator.os, "rename",
+                side_effect=PermissionError(5, "persistent"),
+            ):
+                with patch.object(evaluator.time, "sleep", return_value=None):
+                    with self.assertRaisesRegex(
+                        RuntimeError, "PUBLICATION_FAILED_AFTER_RETRIES"
+                    ):
+                        evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(marker.is_file())
+            self.assertFalse(target.exists())
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+
+================================================================
+FILE: config\experiment_config.json
+================================================================
+STATUS: FOUND
+SIZE: 10235
+SHA256: E27FCF0AE16EC9B391A85757E0CC8FFA5630E29129F805D9DCA495E2FDD2C461
+{
+  "config_version": "v2",
+  "status": "FROZEN v2 (2026-11-01): supersedes v1 before any main-experiment run. Only selection schedules of B3/B4, the reference set of ell_star/sigma and the H-testing rules changed; budget, training, seeds, evaluation and primary comparison are unchanged. Rationale: task7_decisions.md. v1 is archived byte-identical at config/experiment_config_v1.json (used by the smoke test and Task 6 pool). I4 (probe b = 7) remains provisional until the L_emp probe check.",
+  "sources": {
+    "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
+    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14",
+    "decisions_v2": "task7_decisions.md",
+    "previous_version": "config/experiment_config_v1.json (sha256 7c5aa72d68be56de6ce0a4425635462a223ed540fd02d6e0e9806497ee382df5)"
+  },
+  "splits": {
+    "manifest": "splits/split_manifest.json",
+    "manifest_sha256": "8bac2c8d43eae6df53b63f97f353ed6006551f44d5562b74941455301fec09a3",
+    "split_seed": 363636,
+    "n_dev": 500,
+    "near_duplicate_ngram": 13
+  },
+  "teacher": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "K": 5,
+    "temperature": 0.7,
+    "max_new_tokens": 512,
+    "generation_seed_base": 20261009,
+    "generation_seed_rule": "generation_seed_base + problem_index * K + k (problem_index = row order of the input file, k = 0..K-1)",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "revision_note": "Not recorded at generation time. HF repo last modified 2024-09-25 (before generation in 2026-10), so main == this sha if the model was loaded from HF main."
+  },
+  "student": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "initial_checkpoint": "student_ckpt_000",
+    "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs."
+  },
+  "schedule": {
+    "rounds_M": 3,
+    "checkpoint_name": "student_ckpt_{t:03d}"
+  },
+  "budget": {
+    "unit": "supervised (loss-bearing) response tokens under the Student tokenizer; prompt tokens are masked from the loss and logged separately",
+    "beta_round_rule": "n_round * mean token length of verified trajectories",
+    "n_round": 200,
+    "beta_round_tokens": 45426,
+    "beta_total_tokens": 136278,
+    "probe_budget_b_steps": 7,
+    "probe_budget_note": "b = one epoch over a 50-trajectory group at effective batch 8 (= ceil(50/8) = 7 steps), same regime as one training round",
+    "l_emp_checkpoints": [
+      "student_ckpt_000"
+    ],
+    "l_emp_groups": "5 token-length quintile bins of the eligible pool at S_0; 50 trajectories sampled per bin with seed 363636",
+    "report_beta_est": true,
+    "pool_token_stats": "reports/task5/pool_token_stats.json (Student tokenizer; response mean 227.13, with prompt mean 359.6)",
+    "L_bar_response_tokens": 227.13,
+    "L_bar_source": "reports/task5/pool_token_stats.json (480 verified trajectories of the preliminary pool, Student tokenizer)",
+    "pool_requirement": "Task 6 official D_pool trajectory pool must cover >= 1000 problems (5 x n_round with n_cap = 1); otherwise revise via config v2 before training",
+    "b1_exception": "B1 trains on the full pool once per round (reference, higher cost), not budget-matched",
+    "probe_group_size": 50
+  },
+  "training": {
+    "method": "LoRA",
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "optimizer": "adamw_torch",
+    "batch_size": 8,
+    "epochs_per_round": 1,
+    "max_seq_len": 1024,
+    "tuned": false,
+    "official_runs": "cloud",
+    "local_runs": "smoke test only (QLoRA, RTX 3050 Ti 4GB)",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "lr_scheduler": "constant",
+    "warmup_steps": 0,
+    "batch_size_note": "effective batch size (per-device x gradient accumulation)",
+    "loss": "completion-only (prompt tokens masked)",
+    "precision": "bf16",
+    "adapter_across_rounds": "continue the same LoRA adapter from S_t; optimizer state re-initialized each round",
+    "hyperparameter_source": "QLoRA (Dettmers et al., 2023, arXiv 2305.14314) Appendix: LoRA on all linear layers, dropout 0.1 for models up to 13B, constant LR schedule, Adam beta2 0.999, max grad norm 0.3"
+  },
+  "seeds": {
+    "training_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "data_order_seed_rule": "data_order_seed = training_seed",
+    "optional_extra_seeds": [
+      7,
+      77
+    ],
+    "optional_extra_seeds_rule": "run only if compute allows, and then for every method"
+  },
+  "learnability": {
+    "proxy": "ell = length-normalized NLL of tau under S_t; L_proxy = exp(-(ell - ell_star_t)^2 / (2 sigma_t^2))",
+    "ell_star_rule": "median of ell over the reference set at S_t",
+    "sigma_rule": "IQR of ell over the reference set at S_t / 1.349",
+    "eligible": "verified trajectories only",
+    "reference_set": "eligible trajectories not yet trained in this run (at S_0: all eligible). L_proxy is still computed for every eligible trajectory."
+  },
+  "selection": {
+    "n_cap": 1,
+    "alpha": 0.5,
+    "alpha_tuned": false,
+    "alpha_tuning_grid": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "retention_r": 0.5,
+    "retention_scope": [
+      "B6"
+    ],
+    "allow_reselect_across_rounds": true,
+    "max_total_reselect": null,
+    "tie_break": "trajectory_id ascending",
+    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; shuffle problems once with seed; walk that order across rounds, each round continuing where the previous stopped and filling until beta_round; no trajectory repeats",
+    "b3_problem_order_seed": "training_seed",
+    "b2_seed_rule": "random.Random(training_seed * 100 + round)",
+    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)",
+    "b4_rule": "rank all eligible trajectories once by L_proxy(tau | S_0) descending, tie_break applied; walk that ranking across rounds, each round continuing with the remaining trajectories and filling until beta_round; a trajectory skipped by n_cap in a round stays available for later rounds; no trajectory repeats; identical across training seeds",
+    "allow_reselect_note": "applies to B2, B5 and the ablation; the B3 and B4 schedules never repeat a trajectory"
+  },
+  "evaluation": {
+    "decoding": "greedy",
+    "max_new_tokens": 512,
+    "prompt_version": "v1",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "answer_extractor": "scripts/answer_utils.py:split_response + final_number",
+    "answer_verifier": "scripts/answer_utils.py:evaluate_output (invalid_format counts as incorrect; format compliance reported separately)",
+    "dev_checkpoints": "all",
+    "test_checkpoints": [
+      "student_ckpt_000",
+      "student_ckpt_001",
+      "student_ckpt_002",
+      "student_ckpt_003"
+    ],
+    "decisions_use": "D_dev only"
+  },
+  "methods": {
+    "required": [
+      "B0",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "recommended": [
+      "ablation_shuffled_scores"
+    ],
+    "optional": [
+      "B1",
+      "B6"
+    ]
+  },
+  "analysis": {
+    "primary_metric": "exact-match accuracy on D_test",
+    "primary_comparison": "B5 vs B4",
+    "within_seed_test": "McNemar on paired per-problem correctness",
+    "across_seed": "mean of paired differences with 95% CI",
+    "significance_alpha": 0.05,
+    "plan": "analysis_plan.md",
+    "secondary_metrics": {
+      "lenient_accuracy": "last number anywhere in the output matches ground truth, format ignored (answer_utils.answers_match, as in eval_student.py); registered secondary metric, does not replace the primary metric",
+      "report_together": [
+        "strict accuracy",
+        "lenient accuracy",
+        "format compliance"
+      ]
+    },
+    "noise": {
+      "test_retest_runs": "B4 runs of the training seeds (same selected data, different training seed); selection logs must match",
+      "analysis_set_U": "trajectories not trained in B4 up to the later checkpoint of the pair",
+      "epsilon_rule": "95th percentile of |L_proxy(tau|S_1^a) - L_proxy(tau|S_1^b)| over U and all seed pairs; also report 2.77*s_w and a bootstrap CI",
+      "epsilon_use": "report the share of U with |change| > epsilon against the 5% expected from noise; per-trajectory profiles are descriptive"
+    },
+    "h_test": {
+      "pairs": [
+        "S_0->S_1",
+        "S_1->S_2"
+      ],
+      "runs": "B4, for both rho_change and rho_noise",
+      "delta": "Delta^a = rho_noise^a - rho_change^a; rho_change^a = Spearman(L|S_t^a, L|S_{t+1}^a); rho_noise^a = mean Spearman(L|S_{t+1}^a, L|S_{t+1}^b) over b != a; on U",
+      "inference": "cluster bootstrap over problem_id, same resamples for all seeds",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 363636,
+      "supported_if": "for every training seed: one-sided 95% lower bound of Delta^a > 0 and Delta^a >= min_delta",
+      "min_delta": 0.05,
+      "min_delta_source": "group convention, no literature source",
+      "decision_scale": "L_proxy; rank of ell is reported with CI. If L_proxy meets the rule and ell does not, report only that the ranking by distance to the median changed.",
+      "descriptive_only": [
+        "Wilcoxon signed-rank with effect size"
+      ],
+      "sensitivity": [
+        "sqrt(rho_noise) benchmark at S_0->S_1",
+        "Steiger test",
+        "U without problems having a trained trajectory",
+        "B2 runs"
+      ]
+    },
+    "selection_noise_check": "Jaccard of the round-2 B5 selections between seeds, against the chance level of about 0.02"
+  }
+}
+
+
+================================================================
+FILE: next_input_audit_20261117.json
+================================================================
+STATUS: NOT_FOUND

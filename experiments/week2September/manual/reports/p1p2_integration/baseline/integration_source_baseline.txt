@@ -1,0 +1,14 @@
+﻿P1 source repository: C:\Users\PC - NGHI\Desktop\Pipeline\P1\experiments\week2September\manual
+P1 source branch: v3.3-capability-graph-learning-dynamics-2026-11-18
+P1 source commit: 30b4556467a6dd3eae72e93536f5a9332cfdcc9a
+
+P2 target repository: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+P2 integration branch: p1-p2-runpod-integration
+P2 base commit: bb7559b63c6d09e7040f33a79b5f1aa5743dbeec
+
+P2 config SHA256 at integration baseline:
+E27FCF0AE16EC9B391A85757E0CC8FFA5630E29129F805D9DCA495E2FDD2C461
+
+Hash policy:
+Continue with the current integration baseline.
+Do not restore an older config merely to match a historical hash.

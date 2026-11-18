@@ -1,0 +1,59 @@
+[
+  {
+    "checkpoint": "student_ckpt_001",
+    "prediction_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_001_dev.jsonl",
+    "records": 500,
+    "verification_status_counts": {
+      "str:valid": 391,
+      "str:invalid_answer": 106,
+      "str:invalid_format": 3
+    },
+    "format_compliant_counts": {
+      "bool:True": 497,
+      "bool:False": 3
+    },
+    "correct_verification_pairs": {
+      "bool:True | str:valid": 391,
+      "bool:False | str:invalid_answer": 106,
+      "bool:False | str:invalid_format": 3
+    }
+  },
+  {
+    "checkpoint": "student_ckpt_002",
+    "prediction_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_002_dev.jsonl",
+    "records": 500,
+    "verification_status_counts": {
+      "str:invalid_answer": 88,
+      "str:valid": 407,
+      "str:invalid_format": 5
+    },
+    "format_compliant_counts": {
+      "bool:True": 495,
+      "bool:False": 5
+    },
+    "correct_verification_pairs": {
+      "bool:False | str:invalid_answer": 88,
+      "bool:True | str:valid": 407,
+      "bool:False | str:invalid_format": 5
+    }
+  },
+  {
+    "checkpoint": "student_ckpt_003",
+    "prediction_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_003_dev.jsonl",
+    "records": 500,
+    "verification_status_counts": {
+      "str:invalid_answer": 86,
+      "str:valid": 409,
+      "str:invalid_format": 5
+    },
+    "format_compliant_counts": {
+      "bool:True": 495,
+      "bool:False": 5
+    },
+    "correct_verification_pairs": {
+      "bool:False | str:invalid_answer": 86,
+      "bool:True | str:valid": 409,
+      "bool:False | str:invalid_format": 5
+    }
+  }
+]

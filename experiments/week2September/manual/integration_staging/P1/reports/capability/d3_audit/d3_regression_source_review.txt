@@ -1,0 +1,931 @@
+
+
+====================================================================================================
+FILE: .\scripts\build_gold_regression_input.py
+====================================================================================================
+#!/usr/bin/env python3
+
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+GOLD_FILES = [
+    BASE / "data" / "batch_100" / "batch_100_annotations_v2.jsonl",
+    BASE / "data" / "supplement" / "supplement_annotations_v2.jsonl",
+]
+
+SOURCE_FILE = BASE / "data" / "raw" / "gsm8k_train.jsonl"
+
+OUTPUT_FILE = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+CAPABILITIES = {
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+}
+
+
+def read_jsonl(path):
+    with path.open("r", encoding="utf-8") as f:
+        return [
+            json.loads(line)
+            for line in f
+            if line.strip()
+        ]
+
+
+def main():
+    source_records = read_jsonl(SOURCE_FILE)
+
+    source_by_id = {
+        row["problem_id"]: row
+        for row in source_records
+    }
+
+    if len(source_by_id) != len(source_records):
+        raise ValueError("Duplicate problem IDs in source dataset")
+
+    gold_records = []
+
+    for path in GOLD_FILES:
+        if not path.exists():
+            raise FileNotFoundError(path)
+
+        gold_records.extend(read_jsonl(path))
+
+    gold_ids = [
+        row["problem_id"]
+        for row in gold_records
+    ]
+
+    if len(gold_ids) != len(set(gold_ids)):
+        raise ValueError("Duplicate problem IDs across Gold files")
+
+    output = []
+    missing_source = []
+
+    for gold in gold_records:
+        problem_id = gold["problem_id"]
+
+        source = source_by_id.get(problem_id)
+
+        if source is None:
+            missing_source.append(problem_id)
+            continue
+
+        question = source.get("question")
+
+        if not isinstance(question, str) or not question.strip():
+            raise ValueError(
+                f"Missing/empty question for {problem_id}"
+            )
+
+        labels = set(gold["capabilities_manual"])
+
+        unknown = labels - CAPABILITIES
+
+        if unknown:
+            raise ValueError(
+                f"Unknown Gold labels for {problem_id}: {unknown}"
+            )
+
+        output.append({
+            "problem_id": problem_id,
+            "question": question,
+            "gold_capabilities": sorted(labels),
+        })
+
+    if missing_source:
+        raise ValueError(
+            f"Missing source problems: {missing_source[:10]}"
+        )
+
+    if len(output) != 185:
+        raise ValueError(
+            f"Expected 185 records, got {len(output)}"
+        )
+
+    output_ids = [
+        row["problem_id"]
+        for row in output
+    ]
+
+    if len(output_ids) != len(set(output_ids)):
+        raise ValueError("Duplicate IDs in evaluation input")
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUTPUT_FILE.open("w", encoding="utf-8") as f:
+        for row in output:
+            f.write(
+                json.dumps(row, ensure_ascii=False) + "\n"
+            )
+
+    print("GOLD EVALUATION INPUT")
+    print(f"Gold records: {len(gold_records)}")
+    print(f"Output records: {len(output)}")
+    print(f"Unique IDs: {len(set(output_ids))}")
+    print(f"Output: {OUTPUT_FILE}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+====================================================================================================
+FILE: .\scripts\run_extractor_on_gold.py
+====================================================================================================
+#!/usr/bin/env python3
+
+import json
+import sys
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+sys.path.insert(0, str(BASE / "scripts"))
+
+from extract_capabilities_rule_based import (
+    compile_rules,
+    extract_capabilities,
+)
+
+RULES_FILE = BASE / "config" / "capability_rules_v2.json"
+
+INPUT_FILE = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+OUTPUT_FILE = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "extractor_predictions.jsonl"
+)
+
+EVIDENCE_FILE = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "extractor_evidence.jsonl"
+)
+
+
+def read_jsonl(path):
+    with path.open("r", encoding="utf-8") as f:
+        return [
+            json.loads(line)
+            for line in f
+            if line.strip()
+        ]
+
+
+def main():
+    rules_data = json.loads(
+        RULES_FILE.read_text(encoding="utf-8")
+    )
+
+    compiled_rules = compile_rules(rules_data)
+
+    records = read_jsonl(INPUT_FILE)
+
+    predictions = []
+    evidence_records = []
+
+    seen_ids = set()
+
+    for record in records:
+        problem_id = record["problem_id"]
+        question = record["question"]
+
+        if problem_id in seen_ids:
+            raise ValueError(f"Duplicate ID: {problem_id}")
+
+        seen_ids.add(problem_id)
+
+        predicted, evidence, rules_fired = extract_capabilities(
+            question,
+            compiled_rules,
+        )
+
+        predictions.append({
+            "problem_id": problem_id,
+            "predicted_capabilities": sorted(set(predicted)),
+        })
+
+        evidence_records.append({
+            "problem_id": problem_id,
+            "predicted_capabilities": sorted(set(predicted)),
+            "evidence": evidence,
+            "rules_fired": rules_fired,
+        })
+
+    if len(predictions) != 185:
+        raise ValueError(
+            f"Expected 185 predictions, got {len(predictions)}"
+        )
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUTPUT_FILE.open("w", encoding="utf-8") as f:
+        for row in predictions:
+            f.write(
+                json.dumps(row, ensure_ascii=False) + "\n"
+            )
+
+    with EVIDENCE_FILE.open("w", encoding="utf-8") as f:
+        for row in evidence_records:
+            f.write(
+                json.dumps(row, ensure_ascii=False) + "\n"
+            )
+
+    print("PROBLEM-LEVEL EXTRACTOR")
+    print(f"Input records: {len(records)}")
+    print(f"Prediction records: {len(predictions)}")
+    print(f"Unique IDs: {len(seen_ids)}")
+    print(f"Predictions: {OUTPUT_FILE}")
+    print(f"Evidence: {EVIDENCE_FILE}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+====================================================================================================
+FILE: .\scripts\evaluate_extractor_baseline.py
+====================================================================================================
+#!/usr/bin/env python3
+
+import csv
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+GOLD_FILES = [
+    BASE / "data" / "batch_100" / "batch_100_annotations_v2.jsonl",
+    BASE / "data" / "supplement" / "supplement_annotations_v2.jsonl",
+]
+
+PREDICTIONS_FILE = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "extractor_predictions.jsonl"
+)
+
+OUTPUT_DIR = (
+    BASE / "reports" / "capability" / "d2_regression"
+)
+
+JSON_REPORT = OUTPUT_DIR / "extractor_baseline.json"
+CSV_REPORT = OUTPUT_DIR / "capability_metrics.csv"
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+
+def load_jsonl(path):
+    rows = []
+
+    with path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSON: {path}:{line_no}"
+                ) from exc
+
+    return rows
+
+
+def safe_divide(numerator, denominator):
+    if denominator == 0:
+        return None
+
+    return numerator / denominator
+
+
+def calculate_metrics(tp, fp, fn, tn):
+    support = tp + fn
+
+    if support == 0:
+        return {
+            "support": 0,
+            "TP": tp,
+            "FP": fp,
+            "FN": fn,
+            "TN": tn,
+            "precision": None,
+            "recall": None,
+            "f1": None,
+            "status": "N/A_no_positive_gold",
+        }
+
+    precision = safe_divide(tp, tp + fp)
+    recall = safe_divide(tp, tp + fn)
+
+    if precision is None or recall is None:
+        f1 = None
+    elif precision + recall == 0:
+        f1 = 0.0
+    else:
+        f1 = (
+            2 * precision * recall
+            / (precision + recall)
+        )
+
+    return {
+        "support": support,
+        "TP": tp,
+        "FP": fp,
+        "FN": fn,
+        "TN": tn,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "status": "ok",
+    }
+
+
+def main():
+    gold_records = []
+
+    for path in GOLD_FILES:
+        if not path.exists():
+            raise FileNotFoundError(path)
+
+        gold_records.extend(load_jsonl(path))
+
+    predictions = load_jsonl(PREDICTIONS_FILE)
+
+    gold = {}
+
+    for row in gold_records:
+        problem_id = row["problem_id"]
+
+        if problem_id in gold:
+            raise ValueError(
+                f"Duplicate Gold problem ID: {problem_id}"
+            )
+
+        labels = set(row["capabilities_manual"])
+
+        unknown = labels - set(CAPABILITIES)
+
+        if unknown:
+            raise ValueError(
+                f"Unknown Gold labels for {problem_id}: {unknown}"
+            )
+
+        gold[problem_id] = labels
+
+    predicted_by_id = {}
+
+    for row in predictions:
+        problem_id = row["problem_id"]
+
+        if problem_id in predicted_by_id:
+            raise ValueError(
+                f"Duplicate prediction ID: {problem_id}"
+            )
+
+        labels = set(row["predicted_capabilities"])
+
+        unknown = labels - set(CAPABILITIES)
+
+        if unknown:
+            raise ValueError(
+                f"Unknown predicted labels for {problem_id}: {unknown}"
+            )
+
+        predicted_by_id[problem_id] = labels
+
+    gold_ids = set(gold)
+    prediction_ids = set(predicted_by_id)
+
+    missing_predictions = sorted(gold_ids - prediction_ids)
+    extra_predictions = sorted(prediction_ids - gold_ids)
+
+    if missing_predictions or extra_predictions:
+        raise ValueError(
+            "Prediction/Gold ID mismatch\n"
+            f"Missing predictions: {missing_predictions[:10]}\n"
+            f"Extra predictions: {extra_predictions[:10]}"
+        )
+
+    if len(gold) != 185:
+        raise ValueError(
+            f"Expected 185 Gold records, got {len(gold)}"
+        )
+
+    counts = {
+        capability: {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0,
+            "TN": 0,
+        }
+        for capability in CAPABILITIES
+    }
+
+    exact_matches = 0
+
+    for problem_id, truth in gold.items():
+        predicted = predicted_by_id[problem_id]
+
+        if predicted == truth:
+            exact_matches += 1
+
+        for capability in CAPABILITIES:
+            p = capability in predicted
+            y = capability in truth
+
+            if p and y:
+                counts[capability]["TP"] += 1
+            elif p and not y:
+                counts[capability]["FP"] += 1
+            elif not p and y:
+                counts[capability]["FN"] += 1
+            else:
+                counts[capability]["TN"] += 1
+
+    metrics = {}
+
+    for capability in CAPABILITIES:
+        c = counts[capability]
+
+        metrics[capability] = calculate_metrics(
+            c["TP"],
+            c["FP"],
+            c["FN"],
+            c["TN"],
+        )
+
+    total_tp = sum(x["TP"] for x in counts.values())
+    total_fp = sum(x["FP"] for x in counts.values())
+    total_fn = sum(x["FN"] for x in counts.values())
+
+    micro_precision = safe_divide(
+        total_tp,
+        total_tp + total_fp,
+    )
+
+    micro_recall = safe_divide(
+        total_tp,
+        total_tp + total_fn,
+    )
+
+    if micro_precision is None or micro_recall is None:
+        micro_f1 = None
+    elif micro_precision + micro_recall == 0:
+        micro_f1 = 0.0
+    else:
+        micro_f1 = (
+            2 * micro_precision * micro_recall
+            / (micro_precision + micro_recall)
+        )
+
+    valid_f1 = [
+        value["f1"]
+        for value in metrics.values()
+        if value["f1"] is not None
+    ]
+
+    macro_f1 = (
+        sum(valid_f1) / len(valid_f1)
+        if valid_f1
+        else None
+    )
+
+    exact_match_rate = exact_matches / len(gold)
+
+    report = {
+        "schema_version": "v1",
+        "evaluation_unit": "problem",
+        "gold_unit": "problem",
+        "rules_file": "config/capability_rules_v2.json",
+        "guideline_version": "v3",
+        "gold_records": len(gold),
+        "prediction_records": len(predicted_by_id),
+        "unique_problem_ids": len(gold),
+        "exact_matches": exact_matches,
+        "exact_match_rate": exact_match_rate,
+        "micro": {
+            "TP": total_tp,
+            "FP": total_fp,
+            "FN": total_fn,
+            "precision": micro_precision,
+            "recall": micro_recall,
+            "f1": micro_f1,
+        },
+        "macro_f1": macro_f1,
+        "macro_f1_capabilities_included": len(valid_f1),
+        "capabilities": metrics,
+    }
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    JSON_REPORT.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    with CSV_REPORT.open(
+        "w",
+        newline="",
+        encoding="utf-8",
+    ) as f:
+        writer = csv.writer(f)
+
+        writer.writerow([
+            "capability",
+            "support",
+            "TP",
+            "FP",
+            "FN",
+            "TN",
+            "precision",
+            "recall",
+            "F1",
+            "status",
+        ])
+
+        for capability in CAPABILITIES:
+            m = metrics[capability]
+
+            writer.writerow([
+                capability,
+                m["support"],
+                m["TP"],
+                m["FP"],
+                m["FN"],
+                m["TN"],
+                m["precision"],
+                m["recall"],
+                m["f1"],
+                m["status"],
+            ])
+
+    print("\nPROBLEM-LEVEL EXTRACTOR BASELINE")
+    print(f"Gold records: {len(gold)}")
+    print(f"Prediction records: {len(predicted_by_id)}")
+    print(f"Exact matches: {exact_matches}")
+    print()
+
+    print(
+        f"{'Capability':<16}"
+        f"{'Support':>9}"
+        f"{'TP':>6}"
+        f"{'FP':>6}"
+        f"{'FN':>6}"
+        f"{'P':>9}"
+        f"{'R':>9}"
+        f"{'F1':>9}"
+    )
+
+    for capability in CAPABILITIES:
+        m = metrics[capability]
+
+        fmt = lambda value: (
+            "N/A" if value is None
+            else f"{value:.4f}"
+        )
+
+        print(
+            f"{capability:<16}"
+            f"{m['support']:>9}"
+            f"{m['TP']:>6}"
+            f"{m['FP']:>6}"
+            f"{m['FN']:>6}"
+            f"{fmt(m['precision']):>9}"
+            f"{fmt(m['recall']):>9}"
+            f"{fmt(m['f1']):>9}"
+        )
+
+    print()
+    print(f"Micro F1: {micro_f1}")
+    print(f"Macro F1: {macro_f1}")
+    print(f"Exact match rate: {exact_match_rate:.4f}")
+    print(f"JSON report: {JSON_REPORT}")
+    print(f"CSV report: {CSV_REPORT}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+====================================================================================================
+FILE: .\scripts\extract_capabilities_rule_based.py
+====================================================================================================
+#!/usr/bin/env python3
+"""
+Deterministic trajectory-level capability extractor.
+
+Supports plain-text and common LaTeX arithmetic in Teacher reasoning traces.
+Predictions are rule-based and include auditable evidence.
+
+--source reasoning (default, as evaluated in Task 4): reasoning_trace + " ANSWER " + answer.
+--source raw: the whole Teacher output (raw_generation), i.e. the text the Student is trained on;
+  used for the Task 6 pool because some outputs solve the problem before "REASONING:" and keep
+  only a verbal summary after it (task6_decisions.md, "Kết quả chạy").
+"""
+import argparse
+import json
+import re
+import unicodedata
+from pathlib import Path
+
+CAPABILITIES = [
+    "addition", "subtraction", "multiplication", "division",
+    "percentage", "fraction", "ratio"
+]
+
+LATEX_TEXT_WRAPPER = re.compile(
+    r"\\(?:text|textbf|textit|mathrm|mathbf|operatorname|boxed)\s*\{([^{}]*)\}"
+)
+LATEX_FRAC = re.compile(r"\\[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}")
+SIMPLE_NUMBER = re.compile(r"-?\d+(?:\.\d+)?")
+
+def _frac_to_division(match):
+    # Do not wrap a compound numerator in parentheses: the current rule set
+    # detects arithmetic operators using simple operand patterns. Keeping the
+    # operators visible allows e.g. \frac{24 \times 2}{3} to trigger both
+    # multiplication and division.
+    numerator = match.group(1).strip()
+    denominator = match.group(2).strip()
+    # Parenthesize compound numerators/denominators. This preserves the
+    # operator boundary so a trailing "... 2 / 3" is not misread as the
+    # standalone proper fraction "2/3".
+    if not SIMPLE_NUMBER.fullmatch(numerator):
+        numerator = f"({numerator})"
+    if not SIMPLE_NUMBER.fullmatch(denominator):
+        denominator = f"({denominator})"
+    return f" {numerator} / {denominator} "
+
+def normalize_latex(text):
+    """Convert common LaTeX math into text patterns understood by the rules."""
+    text = str(text or "")
+    previous = None
+    while previous != text:
+        previous = text
+        text = LATEX_TEXT_WRAPPER.sub(r" \1 ", text)
+
+    text = re.sub(r"\\?\$", " ", text)
+    text = re.sub(r"(\d)\{,\}(\d)", r"\1\2", text)
+    text = re.sub(r"\\(?:left|right)(?![a-zA-Z])", "", text)
+
+    # Repeat so nested fractions are reduced from inner expressions outward.
+    previous = None
+    while previous != text:
+        previous = text
+        text = LATEX_FRAC.sub(_frac_to_division, text)
+
+    text = re.sub(r"\\(?:times|cdot|ast)(?![a-zA-Z])", " times ", text)
+    text = re.sub(r"\\div(?![a-zA-Z])", " / ", text)
+    text = re.sub(r"\\%", "%", text)
+    # Preserve boundaries around display/inline math; avoid joining a step
+    # number to the first number in the math expression.
+    text = re.sub(r"\\[\[\]]", " ; ", text)
+    text = re.sub(r"\\[()]", " ", text)
+    text = re.sub(r"\\[,;:! ]|\\\\", " ", text)
+    text = re.sub(r"\\[a-zA-Z]+", " ", text)
+    text = text.replace("{", " ").replace("}", " ")
+    return text
+
+def normalize_text(text):
+    if text is None:
+        return ""
+    text = unicodedata.normalize("NFKC", str(text)).lower()
+    text = normalize_latex(text)
+    replacements = {
+        "−": "-", "–": "-", "—": "-", "⁄": "/", "÷": "/",
+        "×": " x ", "✕": " x ", "·": " x ", "＋": "+", "％": "%"
+    }
+    for src, dst in replacements.items():
+        text = text.replace(src, dst)
+
+    # A step label such as "Step 3: 12 apples remain" is not a ratio.
+    # Replace only the label's colon before the ratio patterns are applied;
+    # real ratio expressions elsewhere (e.g. "ratio is 2:5") remain detectable.
+    text = re.sub(
+        r"\bstep\s+(\d+)\s*:\s*(?=\d)",
+        lambda m: f"step {m.group(1)} ; ",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+def compile_rules(rule_data):
+    compiled = {}
+    for capability in CAPABILITIES:
+        rule = rule_data["rules"][capability]
+        compiled[capability] = {
+            "positive": [
+                re.compile(pattern, flags=re.IGNORECASE)
+                for pattern in rule.get("patterns", [])
+            ],
+            "negative": [
+                re.compile(pattern, flags=re.IGNORECASE)
+                for pattern in rule.get("negative_patterns", [])
+            ],
+        }
+    return compiled
+
+def extract_capabilities(text, compiled_rules):
+    normalized = normalize_text(text)
+    predictions = []
+    evidence = {}
+    rules_fired = {}
+    for capability in CAPABILITIES:
+        ev = []
+        fired = []
+        negative_hit = any(
+            pattern.search(normalized)
+            for pattern in compiled_rules[capability]["negative"]
+        )
+        if negative_hit:
+            continue
+        for idx, pattern in enumerate(compiled_rules[capability]["positive"]):
+            matches = list(pattern.finditer(normalized))
+            if matches:
+                fired.append(f"rule_{idx+1}")
+                for m in matches[:5]:
+                    snippet = normalized[max(0, m.start()-35):min(len(normalized), m.end()+35)]
+                    ev.append(snippet)
+        if ev:
+            predictions.append(capability)
+            evidence[capability] = ev[:5]
+            rules_fired[capability] = fired
+    return predictions, evidence, rules_fired
+
+def process_record(record, compiled_rules, source="reasoning"):
+    problem_id = record.get("problem_id") or record.get("question_id")
+    raw_tid = record.get("trajectory_id")
+    if isinstance(raw_tid, int):
+        trajectory_id = f"{problem_id}_traj_{raw_tid + 1:03d}"
+    else:
+        trajectory_id = raw_tid
+    checkpoint = record.get("checkpoint") or "ckpt_000"
+    reasoning = record.get("reasoning_trace", record.get("trajectory", ""))
+    answer = record.get("answer", record.get("predicted_answer", ""))
+    problem = record.get("question", record.get("problem", record.get("problem_text", "")))
+    source_text = reasoning
+    if not source_text and problem:
+        source_text = problem
+    elif answer:
+        source_text = f"{source_text} ANSWER {answer}"
+    if source == "raw":
+        source_text = record["raw_generation"]
+
+    capabilities, evidence, rules_fired = extract_capabilities(source_text, compiled_rules)
+    return {
+        "problem_id": problem_id,
+        "trajectory_id": trajectory_id,
+        "checkpoint": checkpoint,
+        "capabilities_predicted": capabilities,
+        "evidence": evidence,
+        "rules_fired": rules_fired
+    }
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", type=Path)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--rules", type=Path,
+                        default=Path(__file__).resolve().parents[1] /
+                                "config" / "capability_rules_v1.json")
+    parser.add_argument("--source", choices=["reasoning", "raw"], default="reasoning",
+                        help="text to extract from: reasoning_trace + answer (Task 4) or raw_generation")
+    args = parser.parse_args()
+    rule_data = json.loads(args.rules.read_text(encoding="utf-8"))
+    compiled_rules = compile_rules(rule_data)
+
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    n = 0
+    with args.input.open("r", encoding="utf-8") as fin, \
+         args.output.open("w", encoding="utf-8") as fout:
+        for line_no, line in enumerate(fin, 1):
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            problem_id = record.get("problem_id") or record.get("question_id")
+            trajectory_id = record.get("trajectory_id")
+            if problem_id is None or trajectory_id is None:
+                raise ValueError(
+                    f"Missing problem_id/trajectory_id (or legacy question_id/trajectory_id) at line {line_no}"
+                )
+            result = process_record(record, compiled_rules, args.source)
+            fout.write(json.dumps(result, ensure_ascii=False) + "\n")
+            n += 1
+    print(f"Extracted: {n} trajectories")
+    print(f"Created: {args.output}")
+
+if __name__ == "__main__":
+    main()
+
+
+====================================================================================================
+FILE: .\config\capability_rules_v2.json
+====================================================================================================
+{
+    "schema_version": "v2",
+    "taxonomy": [
+        "addition",
+        "subtraction",
+        "multiplication",
+        "division",
+        "percentage",
+        "fraction",
+        "ratio"
+    ],
+    "normalization": {
+        "lowercase": true,
+        "unicode_math": true,
+        "collapse_whitespace": true
+    },
+    "rules": {
+        "addition": {
+            "patterns": [
+                "\\b(?:add|added|adding|sum|summed|plus|combined|combine|together)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*\\+\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+            ],
+            "notes": "Prefer explicit addition evidence; 'total' is weak contextual evidence.",
+            "negative_patterns": []
+        },
+        "subtraction": {
+            "patterns": [
+                "\\b(?:subtract|subtracted|subtracting|minus|difference|decrease|decreased|remaining|remains|left|less)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*-\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+            ],
+            "notes": "Use explicit subtraction/difference evidence; remaining/left are contextual cues.",
+            "negative_patterns": []
+        },
+        "multiplication": {
+            "patterns": [
+                "(?:\\d+(?:\\.\\d+)?(?:\\s+[a-z]+(?:/[a-z]+)?)?|\\))\\s*(?:\\*|×|x|✕|·|times)\\s*(?:\\d+(?:\\.\\d+)?|\\()",
+                "\\b(?:multiply|multiplied|multiplying|times|double|twice|triple|tripled)\\b",
+                "\\b(?:groups?|batches?|sets?)\\s+of\\b"
+            ],
+            "notes": "Recognizes explicit multiplication, including parenthesized expressions and quantities with units between the number and operator. 'twice/double/triple' implies scaling, not ratio.",
+            "negative_patterns": []
+        },
+        "division": {
+            "patterns": [
+                "(?:(?<![\\d.,])(?<!\\btimes )(?<!\\bx )(?<!\\* )(?<!\\bof )\\d+(?:,\\d{3})*(?:\\.\\d+)?|\\))\\s*(?:/|÷|⁄)\\s*(?:\\d+(?:\\.\\d+)?(?![\\d.])|\\()(?!\\)?\\s*(?:(?:times|x|of)\\b|\\*))",
+                "\\b(?:divide|divided|dividing|quotient|equal(?:ly)?\\s+(?:among|between|into)|split\\s+(?:equally|evenly))\\b",
+                "(?<![\\d.,])\\d+(?:,\\d{3})*(?:\\.\\d+)?\\s+[a-z]+\\s*/\\s*\\d+(?:\\.\\d+)?(?![\\d.])"
+            ],
+            "notes": "APPROVED 2026-10-12 (part A + part B; task4_decisions.md). v2 (Task 4 adjudication): rule_1 ignores a / b used as a fraction/percentage multiplier (preceded or followed by 'times'/'x'/'*'/'of', e.g. '2 / 5 times 400', '10 / 100 times 40', '92 times 1 / 4'), per guideline_v2 Rule 3/Rule 5. Bare 'per' removed from rule_2: it marks a rate unit, not a division operation (17 adjudicated FALSE_LEXICAL_TRIGGER cases). rule_3 added for unit-bearing division such as '210 points / 5 games' or '504 ounces / 84', which v1 only caught through 'per'.",
+            "negative_patterns": []
+        },
+        "percentage": {
+            "patterns": [
+                "\\b(?:percentage|percent|pct|per\\s+hundred|out\\s+of\\s+100)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?\\s*%",
+                "(?<!\\w)\\d+(?:\\.\\d+)?\\s*/\\s*100\\b"
+            ],
+            "notes": "Percentage is explicit; decimals alone do not imply percentage.",
+            "negative_patterns": []
+        },
+        "fraction": {
+            "patterns": [
+                "\\b(?:fraction|fractional|half|halves|one[-\\s]half|one[-\\s]third|one[-\\s]quarter|two[-\\s]fifths|three[-\\s]quarters|a\\s+third|a\\s+quarter)\\b",
+                "(?<!\\w)(?:(?:\\(\\s*(?:1|2|3)\\s*\\)\\s*/\\s*\\(\\s*(?:2|3|4|5)\\s*\\))|(?:(?:1\\s*/\\s*[2-4]|2\\s*/\\s*3|3\\s*/\\s*4|2\\s*/\\s*5)))(?!\\w)"
+            ],
+            "notes": "Use explicit fractional language or common proper fractions. Bare ordinal words such as 'third' are not sufficient. A numeric fraction such as 1/2 can still be semantically ambiguous without context.",
+            "negative_patterns": []
+        },
+        "ratio": {
+            "patterns": [
+                "\\b(?:ratio|proportional|in\\s+the\\s+ratio\\s+of)\\b|\\bproportion\\b(?!\\s+of\\b)",
+                "(?<!\\w)\\d+:\\d+(?!\\w)",
+                "(?<!\\w)\\d+\\s+:\\s+\\d+(?!\\w)"
+            ],
+            "notes": "Colon-form ratio accepts 3:2 or 3 : 2; one-sided whitespace is rejected to avoid 'Step 3: 12'. Clock-like HH:MM values are suppressed. Do not infer ratio from twice/double/ordinary division. APPROVED 2026-10-12: 'the proportion of X' (share/fraction wording) no longer triggers ratio; guideline_v2 Rule 6 (gsm8k_train_00087).",
+            "negative_patterns": [
+                "\\b(?:ratio|proportion)\\b\\s+(?:is\\s+)?(?:not|unnecessary|irrelevant)\\b",
+                "\\bnot\\s+(?:a\\s+)?ratio\\b",
+                "\\bratio\\s+(?:is\\s+)?not\\s+(?:needed|required|used)\\b",
+                "(?<!\\w)(?:[01]?\\d|2[0-3]):[0-5]\\d(?!\\w)"
+            ]
+        }
+    }
+}

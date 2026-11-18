@@ -1,0 +1,5 @@
+﻿relative_path,size_bytes,sha256,zip_integrity,entry_count,weight_or_metadata_count,interesting_entries
+integration_staging/G4_CHECKPOINT_AUDIT.zip,1773,78f9f92ad4f0bc1be40ebad0270e36239cf7ce9874065e788f13ea2510c433af,OK,3,0,
+integration_staging/P1/models/task7/B4/seed_13/student_ckpt_001/student_ckpt_001.zip,70403181,851742c95cdc1dba0333112f35f2f32d7e8cfe2e4235ae2c5ddc535bc2955615,OK,7,3,train_log.json ; adapter_config.json ; adapter_model.safetensors
+integration_staging/P1/models/task7/B4/seed_13/student_ckpt_002/student_ckpt_002.zip,70502494,8ae764306b33f9456ffd18b09b4824784a87b1e827d15178e8b26bdcbe307f6f,OK,7,3,train_log.json ; adapter_config.json ; adapter_model.safetensors
+integration_staging/P1/models/task7/B4/seed_13/student_ckpt_003/student_ckpt_003.zip,70518071,cb55d9d34244f24964882f71a5654744d3d7cac8ca2ed6d7ebe77deb36c968df,OK,7,3,train_log.json ; adapter_config.json ; adapter_model.safetensors

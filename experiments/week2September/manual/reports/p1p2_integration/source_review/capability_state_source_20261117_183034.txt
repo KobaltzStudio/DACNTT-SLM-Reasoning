@@ -1,0 +1,475 @@
+﻿CAPABILITY_STATE_SOURCE_AUDIT
+ROOT=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+SOURCE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\p1p2_capability_state.py
+SHA256=12FA7C26861B41F432F231B3F44DBE707686E81614CDB50896E14D994DED61A2
+LINE_COUNT=461
+
+=== SOURCE BEGIN ===
+    1: #!/usr/bin/env python3
+    2: """Build an immutable P1 capability state from a validated sidecar."""
+    3: from __future__ import annotations
+    4: 
+    5: import argparse
+    6: import hashlib
+    7: import json
+    8: import math
+    9: import os
+   10: import tempfile
+   11: from datetime import datetime, timezone
+   12: from pathlib import Path
+   13: from typing import Any
+   14: 
+   15: 
+   16: CAPABILITIES = (
+   17:     "addition",
+   18:     "subtraction",
+   19:     "multiplication",
+   20:     "division",
+   21:     "percentage",
+   22:     "fraction",
+   23:     "ratio",
+   24: )
+   25: 
+   26: EXPECTED_SUPPORT = {
+   27:     "addition": 30,
+   28:     "subtraction": 51,
+   29:     "multiplication": 73,
+   30:     "division": 47,
+   31:     "percentage": 29,
+   32:     "fraction": 31,
+   33:     "ratio": 30,
+   34: }
+   35: 
+   36: SOURCE_METHODS = {
+   37:     "B2", "B3", "B4", "B5", "P1-DEFICIT", "P1P2"
+   38: }
+   39: 
+   40: EXPECTED_OUTPUT_NAMES = {
+   41:     "capability_metrics.csv",
+   42:     "capability_metrics.jsonl",
+   43:     "prediction_coverage_report.json",
+   44:     "checkpoint_lineage.json",
+   45:     "input_fingerprint.json",
+   46: }
+   47: 
+   48: 
+   49: def sha256_file(path: Path) -> str:
+   50:     digest = hashlib.sha256()
+   51:     with path.open("rb") as stream:
+   52:         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+   53:             digest.update(chunk)
+   54:     return digest.hexdigest()
+   55: 
+   56: 
+   57: def read_json(path: Path) -> dict[str, Any]:
+   58:     with path.open("r", encoding="utf-8-sig") as stream:
+   59:         value = json.load(stream)
+   60:     if not isinstance(value, dict):
+   61:         raise ValueError(f"Expected JSON object: {path}")
+   62:     return value
+   63: 
+   64: 
+   65: def stable_state(value: dict[str, Any]) -> dict[str, Any]:
+   66:     return {
+   67:         key: item
+   68:         for key, item in value.items()
+   69:         if key != "created_at_utc"
+   70:     }
+   71: 
+   72: 
+   73: def require_equal(label: str, left: Any, right: Any) -> None:
+   74:     if left != right:
+   75:         raise ValueError(
+   76:             f"PROVENANCE_MISMATCH {label}: "
+   77:             f"manifest={left!r}, lineage={right!r}"
+   78:         )
+   79: 
+   80: 
+   81: def validate_source_identity(
+   82:     manifest: dict[str, Any],
+   83:     lineage: dict[str, Any],
+   84:     fingerprint: dict[str, Any],
+   85: ) -> tuple[int, str, int, str]:
+   86:     required_fields = (
+   87:         "run_id", "method", "seed", "round",
+   88:         "checkpoint_id", "checkpoint_sha256",
+   89:     )
+   90: 
+   91:     for field in required_fields:
+   92:         if field not in lineage:
+   93:             raise ValueError(f"Missing lineage field: {field}")
+   94: 
+   95:     for field in ("run_id", "method", "seed", "round"):
+   96:         if field not in manifest:
+   97:             raise ValueError(f"Missing manifest field: {field}")
+   98: 
+   99:     for field in ("run_id", "method", "seed", "round"):
+  100:         require_equal(field, manifest[field], lineage[field])
+  101: 
+  102:     source_round = int(lineage["round"])
+  103:     source_method = str(lineage["method"])
+  104:     source_seed = int(lineage["seed"])
+  105:     run_id = str(lineage["run_id"])
+  106: 
+  107:     if source_round not in (0, 1, 2, 3):
+  108:         raise ValueError(f"Invalid source round: {source_round}")
+  109: 
+  110:     if source_round == 0:
+  111:         if source_method != "SHARED" or source_seed != 0:
+  112:             raise ValueError("S0 must originate from SHARED seed 0")
+  113:         expected_run_id = "SHARED_seed0_S0"
+  114:     else:
+  115:         if source_method not in SOURCE_METHODS:
+  116:             raise ValueError(f"Unsupported source method: {source_method}")
+  117:         expected_run_id = (
+  118:             f"{source_method}_seed{source_seed}_S{source_round}"
+  119:         )
+  120: 
+  121:     if run_id != expected_run_id:
+  122:         raise ValueError(
+  123:             f"RUN_ID_MISMATCH: {run_id!r} != {expected_run_id!r}"
+  124:         )
+  125: 
+  126:     expected_checkpoint = f"S{source_round}"
+  127:     if manifest.get("checkpoint") != expected_checkpoint:
+  128:         raise ValueError(
+  129:             "Manifest checkpoint does not match source round: "
+  130:             f"{manifest.get('checkpoint')!r} != {expected_checkpoint!r}"
+  131:         )
+  132: 
+  133:     checkpoint_id = str(lineage["checkpoint_id"]).strip()
+  134:     checkpoint_sha256 = str(lineage["checkpoint_sha256"]).lower()
+  135: 
+  136:     if not checkpoint_id:
+  137:         raise ValueError("Empty checkpoint_id")
+  138: 
+  139:     if len(checkpoint_sha256) != 64:
+  140:         raise ValueError("Invalid checkpoint_sha256 length")
+  141: 
+  142:     if any(ch not in "0123456789abcdef" for ch in checkpoint_sha256):
+  143:         raise ValueError("Invalid checkpoint_sha256 characters")
+  144: 
+  145:     manifest_inputs = manifest.get("input_hashes")
+  146:     fingerprint_inputs = fingerprint.get("inputs")
+  147: 
+  148:     if not isinstance(manifest_inputs, dict):
+  149:         raise ValueError("Manifest input_hashes must be an object")
+  150: 
+  151:     if not isinstance(fingerprint_inputs, dict):
+  152:         raise ValueError("Fingerprint inputs must be an object")
+  153: 
+  154:     if manifest_inputs != fingerprint_inputs:
+  155:         raise ValueError(
+  156:             "Manifest input_hashes do not match fingerprint inputs"
+  157:         )
+  158: 
+  159:     if fingerprint_inputs.get("checkpoint") != checkpoint_sha256:
+  160:         raise ValueError(
+  161:             "Checkpoint hash in lineage does not match input fingerprint"
+  162:         )
+  163: 
+  164:     expected_fingerprint = hashlib.sha256(
+  165:         json.dumps(
+  166:             fingerprint_inputs,
+  167:             sort_keys=True,
+  168:             separators=(",", ":"),
+  169:         ).encode("utf-8")
+  170:     ).hexdigest()
+  171: 
+  172:     if fingerprint.get("fingerprint") != expected_fingerprint:
+  173:         raise ValueError("Input fingerprint digest is invalid")
+  174: 
+  175:     return source_round, source_method, source_seed, run_id
+  176: 
+  177: 
+  178: def validate_metrics(metrics_path: Path) -> dict[str, dict[str, Any]]:
+  179:     by_capability: dict[str, dict[str, Any]] = {}
+  180: 
+  181:     with metrics_path.open("r", encoding="utf-8-sig") as stream:
+  182:         for line_no, line in enumerate(stream, 1):
+  183:             if not line.strip():
+  184:                 continue
+  185: 
+  186:             row = json.loads(line)
+  187:             if not isinstance(row, dict):
+  188:                 raise ValueError(f"Invalid metric row at line {line_no}")
+  189: 
+  190:             capability = row.get("capability")
+  191:             if capability not in CAPABILITIES:
+  192:                 raise ValueError(f"Unknown capability: {capability!r}")
+  193: 
+  194:             if capability in by_capability:
+  195:                 raise ValueError(f"Duplicate capability row: {capability}")
+  196: 
+  197:             if row.get("strict_metric") != "status_equals_valid":
+  198:                 raise ValueError("Capability row does not use strict metric")
+  199: 
+  200:             if row.get("gold_policy") != "approved_85_primary":
+  201:                 raise ValueError("Capability row uses an invalid Gold policy")
+  202: 
+  203:             support = int(row["n_support"])
+  204:             correct = int(row["n_correct"])
+  205:             incorrect = int(row["n_incorrect"])
+  206: 
+  207:             if support != EXPECTED_SUPPORT[capability]:
+  208:                 raise ValueError(
+  209:                     f"Support mismatch for {capability}: "
+  210:                     f"{support} != {EXPECTED_SUPPORT[capability]}"
+  211:                 )
+  212: 
+  213:             if correct < 0 or incorrect < 0:
+  214:                 raise ValueError(f"Negative metric count: {capability}")
+  215: 
+  216:             if correct + incorrect != support:
+  217:                 raise ValueError(f"Count mismatch: {capability}")
+  218: 
+  219:             mastery = correct / support
+  220:             deficit = 1.0 - mastery
+  221: 
+  222:             if not math.isfinite(float(row["mastery"])):
+  223:                 raise ValueError(f"Non-finite mastery: {capability}")
+  224: 
+  225:             if not math.isfinite(float(row["deficit"])):
+  226:                 raise ValueError(f"Non-finite deficit: {capability}")
+  227: 
+  228:             if abs(float(row["mastery"]) - mastery) > 1e-12:
+  229:                 raise ValueError(f"Mastery mismatch: {capability}")
+  230: 
+  231:             if abs(float(row["deficit"]) - deficit) > 1e-12:
+  232:                 raise ValueError(f"Deficit mismatch: {capability}")
+  233: 
+  234:             by_capability[capability] = {
+  235:                 "n_support": support,
+  236:                 "n_correct": correct,
+  237:                 "n_incorrect": incorrect,
+  238:                 "mastery": mastery,
+  239:                 "deficit": deficit,
+  240:                 "ci95_low": row.get("ci95_low"),
+  241:                 "ci95_high": row.get("ci95_high"),
+  242:             }
+  243: 
+  244:     if set(by_capability) != set(CAPABILITIES):
+  245:         raise ValueError(
+  246:             "Capability coverage is incomplete: "
+  247:             f"{sorted(by_capability)}"
+  248:         )
+  249: 
+  250:     return by_capability
+  251: 
+  252: 
+  253: def publish_exclusive(output: Path, content: bytes) -> None:
+  254:     """Publish through a same-directory hard link; never replace a target."""
+  255:     output.parent.mkdir(parents=True, exist_ok=True)
+  256: 
+  257:     fd, temp_name = tempfile.mkstemp(
+  258:         prefix=f".{output.name}.staging.",
+  259:         suffix=".tmp",
+  260:         dir=str(output.parent),
+  261:     )
+  262:     temp_path = Path(temp_name)
+  263: 
+  264:     try:
+  265:         with os.fdopen(fd, "wb") as stream:
+  266:             stream.write(content)
+  267:             stream.flush()
+  268:             os.fsync(stream.fileno())
+  269: 
+  270:         try:
+  271:             os.link(temp_path, output)
+  272:         except FileExistsError:
+  273:             raise
+  274:         except OSError as exc:
+  275:             raise RuntimeError(
+  276:                 "ATOMIC_NO_OVERWRITE_UNAVAILABLE: hard-link publication "
+  277:                 f"failed; temporary file preserved at {temp_path}: {exc}"
+  278:             ) from exc
+  279: 
+  280:         temp_path.unlink(missing_ok=True)
+  281: 
+  282:     except Exception:
+  283:         if temp_path.exists():
+  284:             print(f"RECOVERY_TEMP_PRESERVED={temp_path}")
+  285:         raise
+  286: 
+  287: 
+  288: def main() -> int:
+  289:     parser = argparse.ArgumentParser(
+  290:         description="Create immutable capability state from a sidecar"
+  291:     )
+  292:     parser.add_argument("--sidecar-dir", required=True)
+  293:     parser.add_argument(
+  294:         "--target-method",
+  295:         required=True,
+  296:         choices=["P1-DEFICIT", "P1P2"],
+  297:     )
+  298:     parser.add_argument("--target-seed", required=True, type=int)
+  299:     parser.add_argument("--out", required=True)
+  300:     args = parser.parse_args()
+  301: 
+  302:     sidecar = Path(args.sidecar_dir).resolve()
+  303: 
+  304:     required = {
+  305:         "metrics": sidecar / "capability_metrics.jsonl",
+  306:         "coverage": sidecar / "prediction_coverage_report.json",
+  307:         "lineage": sidecar / "checkpoint_lineage.json",
+  308:         "fingerprint": sidecar / "input_fingerprint.json",
+  309:         "manifest": sidecar / "student_capability_evaluation_manifest.json",
+  310:     }
+  311: 
+  312:     for label, path in required.items():
+  313:         if not path.is_file():
+  314:             raise FileNotFoundError(f"Missing sidecar {label}: {path}")
+  315: 
+  316:     manifest = read_json(required["manifest"])
+  317:     coverage = read_json(required["coverage"])
+  318:     lineage = read_json(required["lineage"])
+  319:     fingerprint = read_json(required["fingerprint"])
+  320: 
+  321:     if manifest.get("schema_version") != "p1p2.capability-manifest.v1":
+  322:         raise ValueError("Unexpected capability sidecar schema")
+  323: 
+  324:     if manifest.get("gold_policy") != "approved_85_primary":
+  325:         raise ValueError("Sidecar does not use approved 85 Gold policy")
+  326: 
+  327:     if manifest.get("strict_metric") != "status == valid":
+  328:         raise ValueError("Sidecar does not use strict status==valid metric")
+  329: 
+  330:     if coverage.get("status") != "PASS":
+  331:         raise ValueError("Prediction coverage report is not PASS")
+  332: 
+  333:     if coverage.get("split") != "D_dev":
+  334:         raise ValueError("Capability evaluation must use D_dev")
+  335: 
+  336:     if coverage.get("prediction_records") != 500:
+  337:         raise ValueError("Expected exactly 500 D_dev prediction records")
+  338: 
+  339:     if coverage.get("prediction_unique_ids") != 500:
+  340:         raise ValueError("Expected 500 unique D_dev prediction IDs")
+  341: 
+  342:     if coverage.get("gold_records") != 85:
+  343:         raise ValueError("Expected exactly 85 approved Gold records")
+  344: 
+  345:     if coverage.get("gold_unique_ids") != 85:
+  346:         raise ValueError("Expected 85 unique approved Gold IDs")
+  347: 
+  348:     if coverage.get("gold_matched_prediction_ids") != 85:
+  349:         raise ValueError("Not all approved Gold IDs have predictions")
+  350: 
+  351:     if coverage.get("lenient_correct_excluded") is not True:
+  352:         raise ValueError("lenient_correct must be excluded")
+  353: 
+  354:     output_metadata = manifest.get("outputs", {})
+  355:     if set(output_metadata) != EXPECTED_OUTPUT_NAMES:
+  356:         raise ValueError(
+  357:             "Sidecar manifest output inventory mismatch: "
+  358:             f"{sorted(output_metadata)}"
+  359:         )
+  360: 
+  361:     for name, metadata in output_metadata.items():
+  362:         output_path = sidecar / name
+  363: 
+  364:         if not output_path.is_file():
+  365:             raise FileNotFoundError(
+  366:                 f"Manifest output is missing: {output_path}"
+  367:             )
+  368: 
+  369:         if sha256_file(output_path) != metadata.get("sha256"):
+  370:             raise ValueError(f"Sidecar output hash mismatch: {name}")
+  371: 
+  372:         if output_path.stat().st_size != metadata.get("size_bytes"):
+  373:             raise ValueError(f"Sidecar output size mismatch: {name}")
+  374: 
+  375:     source_round, source_method, source_seed, source_run_id = (
+  376:         validate_source_identity(manifest, lineage, fingerprint)
+  377:     )
+  378: 
+  379:     by_capability = validate_metrics(required["metrics"])
+  380: 
+  381:     if args.target_seed < 0:
+  382:         raise ValueError("target-seed must be non-negative")
+  383: 
+  384:     state = {
+  385:         "schema_version": "p1p2.capability-state.v1",
+  386:         "created_at_utc": datetime.now(timezone.utc).isoformat(),
+  387:         "target": {
+  388:             "method": args.target_method,
+  389:             "seed": args.target_seed,
+  390:             "selection_round": source_round + 1,
+  391:         },
+  392:         "source": {
+  393:             "run_id": source_run_id,
+  394:             "method": source_method,
+  395:             "seed": source_seed,
+  396:             "round": source_round,
+  397:             "checkpoint": manifest["checkpoint"],
+  398:             "checkpoint_id": lineage["checkpoint_id"],
+  399:             "checkpoint_sha256": lineage["checkpoint_sha256"],
+  400:             "sidecar_manifest_sha256": sha256_file(required["manifest"]),
+  401:             "input_fingerprint": fingerprint["fingerprint"],
+  402:         },
+  403:         "metric_policy": {
+  404:             "correctness": "status == valid",
+  405:             "gold_policy": "approved_85_primary",
+  406:             "lenient_correct_used": False,
+  407:             "mastery": "n_correct / n_support",
+  408:             "deficit": "1 - mastery",
+  409:         },
+  410:         "capabilities": by_capability,
+  411:     }
+  412: 
+  413:     output = Path(args.out).resolve()
+  414:     content = (
+  415:         json.dumps(state, ensure_ascii=False, indent=2) + "\n"
+  416:     ).encode("utf-8")
+  417: 
+  418:     output.parent.mkdir(parents=True, exist_ok=True)
+  419: 
+  420:     if output.exists():
+  421:         existing = read_json(output)
+  422: 
+  423:         if stable_state(existing) != stable_state(state):
+  424:             raise FileExistsError(
+  425:                 "Existing capability state has different provenance or "
+  426:                 f"metrics; refusing overwrite: {output}"
+  427:             )
+  428: 
+  429:         print("CAPABILITY_STATE=EXACT_REUSE")
+  430: 
+  431:     if not output.exists():
+  432:         try:
+  433:             publish_exclusive(output, content)
+  434:             print("CAPABILITY_STATE=CREATED")
+  435:         except FileExistsError:
+  436:             existing = read_json(output)
+  437: 
+  438:             if stable_state(existing) != stable_state(state):
+  439:                 raise FileExistsError(
+  440:                     "Concurrent state publication produced a different "
+  441:                     f"state; refusing overwrite: {output}"
+  442:                 )
+  443: 
+  444:             print("CAPABILITY_STATE=EXACT_REUSE")
+  445: 
+  446:     print(f"SOURCE_RUN_ID={source_run_id}")
+  447:     print(f"SOURCE_METHOD={source_method}")
+  448:     print(f"SOURCE_SEED={source_seed}")
+  449:     print(f"SOURCE_ROUND={source_round}")
+  450:     print(f"TARGET_METHOD={args.target_method}")
+  451:     print(f"TARGET_SEED={args.target_seed}")
+  452:     print(f"SELECTION_ROUND={source_round + 1}")
+  453:     print(f"CAPABILITY_COUNT={len(by_capability)}")
+  454:     print(f"STATE_SHA256={sha256_file(output)}")
+  455:     print(f"STATE_PATH={output}")
+  456:     print("CAPABILITY_STATE_VALIDATION=PASS")
+  457:     return 0
+  458: 
+  459: 
+  460: if __name__ == "__main__":
+  461:     raise SystemExit(main())
+=== SOURCE END ===
+
+=== TEST FILE INVENTORY ===
+
+=== CURRENT STATE FILE INVENTORY ===
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\capability_state\P1-DEFICIT_seed13\S0_state.json
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\capability_state\P1P2_seed13\S0_state.json

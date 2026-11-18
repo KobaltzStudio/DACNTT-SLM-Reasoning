@@ -1,0 +1,13 @@
+﻿{
+    "stage":  "S2",
+    "run_id":  "B4_seed13_S2",
+    "status":  "PASS",
+    "exit_code":  0,
+    "started_at":  "2026-11-17T00:35:16.8494349+09:00",
+    "ended_at":  "2026-11-17T00:35:17.6966484+09:00",
+    "elapsed_seconds":  0.85,
+    "error":  null,
+    "output_directory":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\capability_g4_validation\\B4_seed13_S2",
+    "transcript_log":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\execution_logs\\B4_seed13_S2_20261117_003516.transcript.log",
+    "python_log":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\execution_logs\\B4_seed13_S2_20261117_003516.python.log"
+}

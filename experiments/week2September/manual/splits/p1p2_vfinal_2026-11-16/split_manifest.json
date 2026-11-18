@@ -1,0 +1,30 @@
+{
+  "split_version": "p1p2_vfinal_2026-11-16",
+  "created_utc": "2026-11-16T08:23:55.106390+00:00",
+  "source_split_manifest": {
+    "path": "splits/split_manifest.json",
+    "sha256": "85f4559246542d197c427318afb3eefb8b8492573b69ac23e691fc19ce93bbda"
+  },
+  "policy": {
+    "d_dev_graph": "Exactly the 85 user-approved Gold supplement problem IDs.",
+    "d_dev_select": "The remaining 415 D_dev IDs; reserved for checkpoint selection and excluded from Gold capability evaluation.",
+    "d_test": "Unchanged. Not used for checkpoint selection."
+  },
+  "counts": {
+    "d_dev_original": 500,
+    "d_dev_graph": 85,
+    "d_dev_select": 415,
+    "d_pool": 6968,
+    "d_test": 1319
+  },
+  "files": {
+    "d_dev_graph_ids.txt": {
+      "sha256": "9125cbc3e982858330aafae5cb72ba1888fb9ff2b595c4064d2f304c6eb7dcad",
+      "count": 85
+    },
+    "d_dev_select_ids.txt": {
+      "sha256": "c08527e9c90181d2a35e037dc314fe17d8681aaf5ae57b7d6ee041ed014b6508",
+      "count": 415
+    }
+  }
+}

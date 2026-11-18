@@ -1,0 +1,4469 @@
+{
+  "runs_dir": "runs\\main",
+  "checks": [
+    {
+      "scope": "S0",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "accuracy 0.7140"
+    },
+    {
+      "scope": "S0",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "accuracy 0.6217"
+    },
+    {
+      "scope": "S0",
+      "check": "nll",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed13/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "181 vs 181"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45274/45426"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "181 selected records"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_001"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed13/S1/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "181 vs 181"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45274 vs 45274"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45455 = 45274 + 181 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed13/S1/adapter"
+    },
+    {
+      "scope": "B5_seed13/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45332/45426"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_002"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed13/S2/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45332 vs 45332"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45517 = 45332 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed13/S2/adapter"
+    },
+    {
+      "scope": "B5_seed13/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed13/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8360"
+    },
+    {
+      "scope": "B5_seed13/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7453"
+    },
+    {
+      "scope": "B5_seed13/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8260"
+    },
+    {
+      "scope": "B5_seed13/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7331"
+    },
+    {
+      "scope": "B5_seed13/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8280"
+    },
+    {
+      "scope": "B5_seed13/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7460"
+    },
+    {
+      "scope": "B5_seed42",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed42/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45373/45426"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_001"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed42/S1/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45373 vs 45373"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45558 = 45373 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed42/S1/adapter"
+    },
+    {
+      "scope": "B5_seed42/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45214/45426"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "186 selected records"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_002"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed42/S2/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45214 vs 45214"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45400 = 45214 + 186 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed42/S2/adapter"
+    },
+    {
+      "scope": "B5_seed42/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed42/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8220"
+    },
+    {
+      "scope": "B5_seed42/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7316"
+    },
+    {
+      "scope": "B5_seed42/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8220"
+    },
+    {
+      "scope": "B5_seed42/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7195"
+    },
+    {
+      "scope": "B5_seed42/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8240"
+    },
+    {
+      "scope": "B5_seed42/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7293"
+    },
+    {
+      "scope": "B5_seed2026",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B5_seed2026/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "182 vs 182"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45326/45426"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "182 selected records"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_001"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed2026/S1/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "182 vs 182"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45326 vs 45326"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45508 = 45326 + 182 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed2026/S1/adapter"
+    },
+    {
+      "scope": "B5_seed2026/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "181 vs 181"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45163/45426"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "181 selected records"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_002"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/B5_seed2026/S2/nll.jsonl"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "181 vs 181"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45163 vs 45163"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45344 = 45163 + 181 <|im_end|>"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B5_seed2026/S2/adapter"
+    },
+    {
+      "scope": "B5_seed2026/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B5_seed2026/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8100"
+    },
+    {
+      "scope": "B5_seed2026/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7324"
+    },
+    {
+      "scope": "B5_seed2026/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8240"
+    },
+    {
+      "scope": "B5_seed2026/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7255"
+    },
+    {
+      "scope": "B5_seed2026/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.7980"
+    },
+    {
+      "scope": "B5_seed2026/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7119"
+    },
+    {
+      "scope": "B4_seed13",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed13/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45336/45426"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "188 selected records"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45336 vs 45336"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45524 = 45336 + 188 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed13/S1/adapter"
+    },
+    {
+      "scope": "B4_seed13/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45312/45426"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "186 selected records"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45312 vs 45312"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45498 = 45312 + 186 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed13/S2/adapter"
+    },
+    {
+      "scope": "B4_seed13/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed13",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B4_seed13/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8360"
+    },
+    {
+      "scope": "B4_seed13/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7453"
+    },
+    {
+      "scope": "B4_seed13/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8160"
+    },
+    {
+      "scope": "B4_seed13/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7271"
+    },
+    {
+      "scope": "B4_seed13/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8140"
+    },
+    {
+      "scope": "B4_seed13/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7233"
+    },
+    {
+      "scope": "B4_seed42",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed42/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45336/45426"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "188 selected records"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45336 vs 45336"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45524 = 45336 + 188 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed42/S1/adapter"
+    },
+    {
+      "scope": "B4_seed42/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45312/45426"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "186 selected records"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45312 vs 45312"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45498 = 45312 + 186 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed42/S2/adapter"
+    },
+    {
+      "scope": "B4_seed42/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed42",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B4_seed42/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8220"
+    },
+    {
+      "scope": "B4_seed42/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7316"
+    },
+    {
+      "scope": "B4_seed42/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8140"
+    },
+    {
+      "scope": "B4_seed42/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7240"
+    },
+    {
+      "scope": "B4_seed42/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8140"
+    },
+    {
+      "scope": "B4_seed42/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7104"
+    },
+    {
+      "scope": "B4_seed2026",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45187/45426"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45187 vs 45187"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45372 = 45187 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed2026/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45336/45426"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "188 selected records"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45336 vs 45336"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45524 = 45336 + 188 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed2026/S1/adapter"
+    },
+    {
+      "scope": "B4_seed2026/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45312/45426"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "186 selected records"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "source_checkpoint",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "nll_sha256",
+      "ok": false,
+      "detail": "runs/main/S0/nll.jsonl"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "186 vs 186"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45312 vs 45312"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45498 = 45312 + 186 <|im_end|>"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B4_seed2026/S2/adapter"
+    },
+    {
+      "scope": "B4_seed2026/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B4_seed2026",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B4_seed2026/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8100"
+    },
+    {
+      "scope": "B4_seed2026/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7324"
+    },
+    {
+      "scope": "B4_seed2026/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8400"
+    },
+    {
+      "scope": "B4_seed2026/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7149"
+    },
+    {
+      "scope": "B4_seed2026/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8300"
+    },
+    {
+      "scope": "B4_seed2026/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7255"
+    },
+    {
+      "scope": "B2_seed13",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "191 vs 191"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45317/45426"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "191 selected records"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "191 vs 191"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45317 vs 45317"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45508 = 45317 + 191 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B2_seed13/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45215/45426"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "185 selected records"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "185 vs 185"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45215 vs 45215"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45400 = 45215 + 185 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed13/S1/adapter"
+    },
+    {
+      "scope": "B2_seed13/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "179 vs 179"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45297/45426"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "179 selected records"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "179 vs 179"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45297 vs 45297"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45476 = 45297 + 179 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed13/S2/adapter"
+    },
+    {
+      "scope": "B2_seed13/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed13/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8180"
+    },
+    {
+      "scope": "B2_seed13/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7301"
+    },
+    {
+      "scope": "B2_seed13/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8380"
+    },
+    {
+      "scope": "B2_seed13/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7468"
+    },
+    {
+      "scope": "B2_seed13/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8220"
+    },
+    {
+      "scope": "B2_seed13/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7142"
+    },
+    {
+      "scope": "B2_seed42",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "184 vs 184"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45060/45426"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "184 selected records"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "184 vs 184"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45060 vs 45060"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45244 = 45060 + 184 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B2_seed42/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "172 vs 172"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45375/45426"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "172 selected records"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "172 vs 172"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45375 vs 45375"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45547 = 45375 + 172 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed42/S1/adapter"
+    },
+    {
+      "scope": "B2_seed42/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "183 vs 183"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45402/45426"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "183 selected records"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "183 vs 183"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45402 vs 45402"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45585 = 45402 + 183 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed42/S2/adapter"
+    },
+    {
+      "scope": "B2_seed42/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed42/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.7920"
+    },
+    {
+      "scope": "B2_seed42/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7195"
+    },
+    {
+      "scope": "B2_seed42/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8140"
+    },
+    {
+      "scope": "B2_seed42/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.6967"
+    },
+    {
+      "scope": "B2_seed42/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8360"
+    },
+    {
+      "scope": "B2_seed42/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7195"
+    },
+    {
+      "scope": "B2_seed2026",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "184 vs 184"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45042/45426"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "184 selected records"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "184 vs 184"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45042 vs 45042"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45226 = 45042 + 184 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B2_seed2026/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45210/45426"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "188 selected records"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "188 vs 188"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45210 vs 45210"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45398 = 45210 + 188 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed2026/S1/adapter"
+    },
+    {
+      "scope": "B2_seed2026/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "190 vs 190"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45403/45426"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "190 selected records"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "190 vs 190"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45403 vs 45403"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45593 = 45403 + 190 <|im_end|>"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B2_seed2026/S2/adapter"
+    },
+    {
+      "scope": "B2_seed2026/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B2_seed2026/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8440"
+    },
+    {
+      "scope": "B2_seed2026/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7430"
+    },
+    {
+      "scope": "B2_seed2026/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8380"
+    },
+    {
+      "scope": "B2_seed2026/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7081"
+    },
+    {
+      "scope": "B2_seed2026/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8140"
+    },
+    {
+      "scope": "B2_seed2026/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7263"
+    },
+    {
+      "scope": "B3_seed13",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "214 vs 214"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45271/45426"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "214 selected records"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "214 vs 214"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45271 vs 45271"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45485 = 45271 + 214 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B3_seed13/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "211 vs 211"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45179/45426"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "211 selected records"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "211 vs 211"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45179 vs 45179"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45390 = 45179 + 211 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed13/S1/adapter"
+    },
+    {
+      "scope": "B3_seed13/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "209 vs 209"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45324/45426"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "209 selected records"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "209 vs 209"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45324 vs 45324"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45533 = 45324 + 209 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed13/S2/adapter"
+    },
+    {
+      "scope": "B3_seed13/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed13",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B3_seed13/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8300"
+    },
+    {
+      "scope": "B3_seed13/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7377"
+    },
+    {
+      "scope": "B3_seed13/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8560"
+    },
+    {
+      "scope": "B3_seed13/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7407"
+    },
+    {
+      "scope": "B3_seed13/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8060"
+    },
+    {
+      "scope": "B3_seed13/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7066"
+    },
+    {
+      "scope": "B3_seed42",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "210 vs 210"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45168/45426"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "210 selected records"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "210 vs 210"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45168 vs 45168"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45378 = 45168 + 210 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B3_seed42/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "204 vs 204"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45164/45426"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "204 selected records"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "204 vs 204"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45164 vs 45164"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45368 = 45164 + 204 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed42/S1/adapter"
+    },
+    {
+      "scope": "B3_seed42/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "219 vs 219"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45047/45426"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "219 selected records"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "219 vs 219"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45047 vs 45047"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45266 = 45047 + 219 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed42/S2/adapter"
+    },
+    {
+      "scope": "B3_seed42/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed42",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B3_seed42/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8480"
+    },
+    {
+      "scope": "B3_seed42/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7384"
+    },
+    {
+      "scope": "B3_seed42/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8160"
+    },
+    {
+      "scope": "B3_seed42/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7468"
+    },
+    {
+      "scope": "B3_seed42/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8460"
+    },
+    {
+      "scope": "B3_seed42/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7460"
+    },
+    {
+      "scope": "B3_seed2026",
+      "check": "rounds_present",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "209 vs 209"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45331/45426"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "209 selected records"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "209 vs 209"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45331 vs 45331"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45540 = 45331 + 209 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "lineage",
+      "ok": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "scope": "B3_seed2026/round_000",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "204 vs 204"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45344/45426"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "204 selected records"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "204 vs 204"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45344 vs 45344"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45548 = 45344 + 204 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed2026/S1/adapter"
+    },
+    {
+      "scope": "B3_seed2026/round_001",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "pool_sha256",
+      "ok": false,
+      "detail": "trajectory/pool/pool_v1_verified.jsonl"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "config_sha256",
+      "ok": false,
+      "detail": "run 332b2c4849a1 vs now e27fcf0ae16e"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "ids_unique",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "n_selected",
+      "ok": true,
+      "detail": "219 vs 219"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "ids_in_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "problems_in_D_pool",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "no_D_dev_D_test",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "n_cap",
+      "ok": true,
+      "detail": "max 1 per problem, n_cap 1"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "tokens_table",
+      "ok": false,
+      "detail": "no token table for trajectory/pool/pool_v1_verified.jsonl (use --retokenize)"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "within_budget",
+      "ok": true,
+      "detail": "45236/45426"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "budget_is_frozen_value",
+      "ok": true,
+      "detail": "45426 vs config 45426"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "selection_log_matches",
+      "ok": true,
+      "detail": "219 selected records"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "train_n_examples",
+      "ok": true,
+      "detail": "219 vs 219"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "train_trajectory_tokens",
+      "ok": true,
+      "detail": "45236 vs 45236"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "train_supervised_tokens",
+      "ok": true,
+      "detail": "45455 = 45236 + 219 <|im_end|>"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "lineage",
+      "ok": true,
+      "detail": "/workspace/manual/runs/main/B3_seed2026/S2/adapter"
+    },
+    {
+      "scope": "B3_seed2026/round_002",
+      "check": "train_pool_sha256",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "scope": "B3_seed2026",
+      "check": "no_repeat_across_rounds",
+      "ok": true,
+      "detail": "0 repeats"
+    },
+    {
+      "scope": "B3_seed2026/S1",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8240"
+    },
+    {
+      "scope": "B3_seed2026/S1",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7248"
+    },
+    {
+      "scope": "B3_seed2026/S2",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8260"
+    },
+    {
+      "scope": "B3_seed2026/S2",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7346"
+    },
+    {
+      "scope": "B3_seed2026/S3",
+      "check": "eval_dev",
+      "ok": true,
+      "detail": "500 problems, accuracy 0.8320"
+    },
+    {
+      "scope": "B3_seed2026/S3",
+      "check": "eval_test",
+      "ok": true,
+      "detail": "1319 problems, accuracy 0.7225"
+    },
+    {
+      "scope": "seed13",
+      "check": "B4_B5_same_B0",
+      "ok": true,
+      "detail": "185 vs 185 trajectories"
+    },
+    {
+      "scope": "seed42",
+      "check": "B4_B5_same_B0",
+      "ok": true,
+      "detail": "185 vs 185 trajectories"
+    },
+    {
+      "scope": "seed2026",
+      "check": "B4_B5_same_B0",
+      "ok": true,
+      "detail": "185 vs 185 trajectories"
+    }
+  ]
+}

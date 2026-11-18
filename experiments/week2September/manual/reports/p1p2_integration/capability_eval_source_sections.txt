@@ -1,0 +1,494 @@
+
+======================== LINES 130-220 ========================
+0130: ) -> tuple[float | None, float | None]:
+0131:     if support <= 0:
+0132:         return None, None
+0133: 
+0134:     p = correct / support
+0135:     z2 = z * z
+0136:     denominator = 1.0 + z2 / support
+0137:     center = (p + z2 / (2.0 * support)) / denominator
+0138:     margin = (
+0139:         z
+0140:         * (
+0141:             p * (1.0 - p) / support
+0142:             + z2 / (4.0 * support * support)
+0143:         ) ** 0.5
+0144:         / denominator
+0145:     )
+0146: 
+0147:     return max(0.0, center - margin), min(1.0, center + margin)
+0148: 
+0149: 
+0150: def strict_correct(row: dict[str, Any]) -> bool:
+0151:     """P2 primary strict metric: only status == 'valid' is correct."""
+0152:     status = row.get("status")
+0153: 
+0154:     if status not in {"valid", "invalid_answer", "invalid_format"}:
+0155:         raise ValueError(
+0156:             "Prediction must contain a recognized P2 status; "
+0157:             f"got status={status!r}, problem_id={row.get('problem_id')!r}"
+0158:         )
+0159: 
+0160:     return status == "valid"
+0161: 
+0162: 
+0163: def load_approved_gold(
+0164:     gold_path: Path,
+0165:     approval_path: Path,
+0166:     dev_ids: set[str],
+0167: ) -> dict[str, dict[str, Any]]:
+0168:     gold_rows = read_jsonl(gold_path)
+0169: 
+0170:     if len(gold_rows) != 85:
+0171:         raise ValueError(
+0172:             f"Expected exactly 85 Gold rows; found {len(gold_rows)}"
+0173:         )
+0174: 
+0175:     gold_by_id: dict[str, dict[str, Any]] = {}
+0176: 
+0177:     for row in gold_rows:
+0178:         problem_id = str(row.get("problem_id", "")).strip()
+0179:         if not problem_id:
+0180:             raise ValueError("Gold row missing problem_id")
+0181:         if problem_id in gold_by_id:
+0182:             raise ValueError(f"Duplicate Gold problem_id: {problem_id}")
+0183: 
+0184:         labels = row.get("capabilities_manual")
+0185:         if not isinstance(labels, list) or not labels:
+0186:             raise ValueError(
+0187:                 f"Gold capability labels missing/invalid: {problem_id}"
+0188:             )
+0189: 
+0190:         unknown = set(labels) - set(CAPABILITIES)
+0191:         if unknown:
+0192:             raise ValueError(
+0193:                 f"Unknown capabilities for {problem_id}: {sorted(unknown)}"
+0194:             )
+0195: 
+0196:         gold_by_id[problem_id] = row
+0197: 
+0198:     gold_ids = set(gold_by_id)
+0199: 
+0200:     if len(gold_ids) != 85:
+0201:         raise ValueError("Gold IDs are not 85 unique IDs")
+0202: 
+0203:     if not gold_ids.issubset(dev_ids):
+0204:         outside = sorted(gold_ids - dev_ids)
+0205:         raise ValueError(
+0206:             f"Gold IDs outside D_dev: {outside[:10]}"
+0207:         )
+0208: 
+0209:     approval_by_id: dict[str, dict[str, str]] = {}
+0210: 
+0211:     with approval_path.open(
+0212:         "r", encoding="utf-8-sig", newline=""
+0213:     ) as stream:
+0214:         reader = csv.DictReader(stream)
+0215: 
+0216:         required_columns = {
+0217:             "problem_id",
+0218:             "review_status",
+0219:             "human_approval",
+0220:         }
+
+======================== LINES 250-320 ========================
+0250:     for problem_id, row in approval_by_id.items():
+0251:         review_status = str(row.get("review_status", "")).strip()
+0252:         human_approval = str(row.get("human_approval", "")).strip()
+0253: 
+0254:         approved_review_statuses = {
+0255:             "APPROVED_NO_LABEL_CHANGE",
+0256:             "APPROVED_WITH_SOURCE_CLARIFICATION",
+0257:         }
+0258: 
+0259:         if review_status not in approved_review_statuses:
+0260:             raise ValueError(
+0261:                 f"Gold review status is not approved: "
+0262:                 f"{problem_id}={review_status!r}"
+0263:             )
+0264: 
+0265:         if not human_approval.startswith("APPROVED_BY_USER_"):
+0266:             raise ValueError(
+0267:                 f"Gold lacks explicit user approval: "
+0268:                 f"{problem_id}={human_approval!r}"
+0269:             )
+0270: 
+0271:     return gold_by_id
+0272: 
+0273: 
+0274: def build_input_hashes(args: argparse.Namespace) -> dict[str, str]:
+0275:     input_paths = {
+0276:         "checkpoint": Path(args.checkpoint),
+0277:         "dev_predictions": Path(args.dev_predictions),
+0278:         "gold_manifest": Path(args.gold_manifest),
+0279:         "gold_labels": Path(args.gold_labels),
+0280:         "approval_csv": Path(args.approval_csv),
+0281:         "dev_ids": Path(args.dev_ids),
+0282:         "config": Path(args.config),
+0283:     }
+0284: 
+0285:     optional_paths = {
+0286:         "train_set": args.train_set,
+0287:         "selection_log": args.selection_log,
+0288:         "train_log": args.train_log,
+0289:         "checkpoint_log": args.checkpoint_log,
+0290:     }
+0291: 
+0292:     for name, value in optional_paths.items():
+0293:         if value:
+0294:             input_paths[name] = Path(value)
+0295: 
+0296:     hashes: dict[str, str] = {}
+0297:     for name, path in input_paths.items():
+0298:         if not path.exists():
+0299:             raise FileNotFoundError(f"Missing input {name}: {path}")
+0300:         hashes[name] = hash_path(path)
+0301: 
+0302:     return hashes
+0303: 
+0304: 
+0305: def validate_manifest_count(path: Path) -> None:
+0306:     manifest = read_json(path)
+0307: 
+0308:     if manifest.get("gold_version") != "vFinal":
+0309:         raise ValueError(
+0310:             "Expected Gold manifest gold_version='vFinal'"
+0311:         )
+0312: 
+0313:     if manifest.get("supplement_count") != 85:
+0314:         raise ValueError(
+0315:             "Gold manifest supplement_count must equal 85"
+0316:         )
+0317: 
+0318: 
+0319: def build_sidecar(
+0320:     args: argparse.Namespace,
+
+======================== LINES 319-530 ========================
+0319: def build_sidecar(
+0320:     args: argparse.Namespace,
+0321:     stage: Path,
+0322:     input_hashes: dict[str, str],
+0323: ) -> None:
+0324:     dev_ids = read_id_file(Path(args.dev_ids))
+0325: 
+0326:     if len(dev_ids) != 500:
+0327:         raise ValueError(
+0328:             f"Expected 500 unique D_dev IDs; found {len(dev_ids)}"
+0329:         )
+0330: 
+0331:     predictions = read_jsonl(Path(args.dev_predictions))
+0332:     prediction_ids = [
+0333:         str(row.get("problem_id", "")).strip()
+0334:         for row in predictions
+0335:     ]
+0336: 
+0337:     if any(not value for value in prediction_ids):
+0338:         raise ValueError("Prediction contains empty problem_id")
+0339: 
+0340:     if len(prediction_ids) != len(set(prediction_ids)):
+0341:         raise ValueError("Duplicate problem_id in D_dev predictions")
+0342: 
+0343:     if set(prediction_ids) != dev_ids or len(predictions) != 500:
+0344:         missing = sorted(dev_ids - set(prediction_ids))
+0345:         extra = sorted(set(prediction_ids) - dev_ids)
+0346:         raise ValueError(
+0347:             "Prediction coverage mismatch: "
+0348:             f"rows={len(predictions)}, "
+0349:             f"missing={missing[:10]}, extra={extra[:10]}"
+0350:         )
+0351: 
+0352:     prediction_by_id = {
+0353:         str(row["problem_id"]): row for row in predictions
+0354:     }
+0355: 
+0356:     # Validate status for every prediction, not only the 85 Gold rows.
+0357:     for row in predictions:
+0358:         strict_correct(row)
+0359: 
+0360:     validate_manifest_count(Path(args.gold_manifest))
+0361: 
+0362:     gold_by_id = load_approved_gold(
+0363:         Path(args.gold_labels),
+0364:         Path(args.approval_csv),
+0365:         dev_ids,
+0366:     )
+0367: 
+0368:     metrics: list[dict[str, Any]] = []
+0369: 
+0370:     for capability in CAPABILITIES:
+0371:         capability_ids = sorted(
+0372:             problem_id
+0373:             for problem_id, gold in gold_by_id.items()
+0374:             if capability in gold["capabilities_manual"]
+0375:         )
+0376: 
+0377:         support = len(capability_ids)
+0378:         correct = sum(
+0379:             strict_correct(prediction_by_id[problem_id])
+0380:             for problem_id in capability_ids
+0381:         )
+0382: 
+0383:         ci_low, ci_high = wilson_interval(correct, support)
+0384: 
+0385:         metrics.append({
+0386:             "run_id": args.run_id,
+0387:             "method": args.method,
+0388:             "seed": args.seed,
+0389:             "checkpoint": f"S{args.round}",
+0390:             "checkpoint_id": Path(args.checkpoint).name,
+0391:             "capability": capability,
+0392:             "n_support": support,
+0393:             "n_correct": correct,
+0394:             "n_incorrect": support - correct,
+0395:             "mastery": correct / support if support else None,
+0396:             "deficit": 1.0 - correct / support if support else None,
+0397:             "ci95_low": ci_low,
+0398:             "ci95_high": ci_high,
+0399:             "ci_method": "Wilson_95_percent",
+0400:             "strict_metric": "status_equals_valid",
+0401:             "gold_policy": "approved_85_primary",
+0402:         })
+0403: 
+0404:     observed_support = {
+0405:         row["capability"]: row["n_support"] for row in metrics
+0406:     }
+0407: 
+0408:     if observed_support != EXPECTED_SUPPORT:
+0409:         raise ValueError(
+0410:             "Gold capability support differs from the frozen expected "
+0411:             f"vector. observed={observed_support}; "
+0412:             f"expected={EXPECTED_SUPPORT}"
+0413:         )
+0414: 
+0415:     with (stage / "capability_metrics.csv").open(
+0416:         "w", encoding="utf-8-sig", newline=""
+0417:     ) as stream:
+0418:         writer = csv.DictWriter(
+0419:             stream,
+0420:             fieldnames=list(metrics[0].keys()),
+0421:         )
+0422:         writer.writeheader()
+0423:         writer.writerows(metrics)
+0424: 
+0425:     with (stage / "capability_metrics.jsonl").open(
+0426:         "w", encoding="utf-8"
+0427:     ) as stream:
+0428:         for row in metrics:
+0429:             stream.write(
+0430:                 json.dumps(row, ensure_ascii=False) + "\n"
+0431:             )
+0432: 
+0433:     coverage = {
+0434:         "status": "PASS",
+0435:         "split": "D_dev",
+0436:         "expected_dev_ids": 500,
+0437:         "prediction_records": len(predictions),
+0438:         "prediction_unique_ids": len(set(prediction_ids)),
+0439:         "gold_records": len(gold_by_id),
+0440:         "gold_unique_ids": len(gold_by_id),
+0441:         "gold_matched_prediction_ids": len(
+0442:             set(gold_by_id) & set(prediction_ids)
+0443:         ),
+0444:         "missing_prediction_ids": [],
+0445:         "gold_policy": "approved_85_primary",
+0446:         "strict_correctness_policy": "status == valid",
+0447:         "lenient_correct_excluded": True,
+0448:         "capability_support": observed_support,
+0449:     }
+0450: 
+0451:     (stage / "prediction_coverage_report.json").write_text(
+0452:         json.dumps(coverage, ensure_ascii=False, indent=2) + "\n",
+0453:         encoding="utf-8",
+0454:     )
+0455: 
+0456:     lineage = {
+0457:         "run_id": args.run_id,
+0458:         "method": args.method,
+0459:         "seed": args.seed,
+0460:         "round": args.round,
+0461:         "checkpoint_id": Path(args.checkpoint).name,
+0462:         "checkpoint_path": str(Path(args.checkpoint)),
+0463:         "checkpoint_sha256": input_hashes["checkpoint"],
+0464:         "shared_checkpoint_group": args.shared_checkpoint_group,
+0465:         "train_set": args.train_set,
+0466:         "selection_log": args.selection_log,
+0467:         "train_log": args.train_log,
+0468:         "checkpoint_log": args.checkpoint_log,
+0469:         "config_sha256": input_hashes["config"],
+0470:         "prediction_sha256": input_hashes["dev_predictions"],
+0471:         "gold_manifest_sha256": input_hashes["gold_manifest"],
+0472:         "gold_labels_sha256": input_hashes["gold_labels"],
+0473:         "approval_csv_sha256": input_hashes["approval_csv"],
+0474:         "dev_ids_sha256": input_hashes["dev_ids"],
+0475:     }
+0476: 
+0477:     (stage / "checkpoint_lineage.json").write_text(
+0478:         json.dumps(lineage, ensure_ascii=False, indent=2) + "\n",
+0479:         encoding="utf-8",
+0480:     )
+0481: 
+0482:     fingerprint = hashlib.sha256(
+0483:         json.dumps(
+0484:             input_hashes,
+0485:             sort_keys=True,
+0486:             separators=(",", ":"),
+0487:         ).encode("utf-8")
+0488:     ).hexdigest()
+0489: 
+0490:     (stage / "input_fingerprint.json").write_text(
+0491:         json.dumps({
+0492:             "fingerprint": fingerprint,
+0493:             "inputs": input_hashes,
+0494:         }, ensure_ascii=False, indent=2) + "\n",
+0495:         encoding="utf-8",
+0496:     )
+0497: 
+0498:     manifest = {
+0499:         "schema_version": "p1p2.capability-manifest.v1",
+0500:         "created_at_utc": datetime.now(timezone.utc).isoformat(),
+0501:         "run_id": args.run_id,
+0502:         "method": args.method,
+0503:         "seed": args.seed,
+0504:         "round": args.round,
+0505:         "checkpoint": f"S{args.round}",
+0506:         "gold_policy": "approved_85_primary",
+0507:         "strict_metric": "status == valid",
+0508:         "capabilities": list(CAPABILITIES),
+0509:         "n_capability_rows": len(metrics),
+0510:         "input_hashes": input_hashes,
+0511:         "outputs": {},
+0512:         "overwrite_policy": "immutable_exact_fingerprint_reuse_only",
+0513:     }
+0514: 
+0515:     for name in REQUIRED_OUTPUTS:
+0516:         if name == "student_capability_evaluation_manifest.json":
+0517:             continue
+0518: 
+0519:         output_path = stage / name
+0520:         manifest["outputs"][name] = {
+0521:             "sha256": sha256_file(output_path),
+0522:             "size_bytes": output_path.stat().st_size,
+0523:         }
+0524: 
+0525:     (stage / "student_capability_evaluation_manifest.json").write_text(
+0526:         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+0527:         encoding="utf-8",
+0528:     )
+0529: 
+0530: 
+
+======================== LINES 560-675 ========================
+0560:     for name, metadata in outputs.items():
+0561:         path = out_dir / name
+0562: 
+0563:         if not path.is_file():
+0564:             raise RuntimeError(f"Existing output missing: {path}")
+0565: 
+0566:         if sha256_file(path) != metadata.get("sha256"):
+0567:             raise RuntimeError(f"Existing output hash mismatch: {path}")
+0568: 
+0569:     print(f"REUSE: PASS {out_dir}")
+0570: 
+0571: 
+0572: def parse_args() -> argparse.Namespace:
+0573:     parser = argparse.ArgumentParser(
+0574:         description="CPU-only P1/P2 capability sidecar evaluator"
+0575:     )
+0576: 
+0577:     parser.add_argument("--run-id", required=True)
+0578:     parser.add_argument(
+0579:         "--method",
+0580:         required=True,
+0581:         choices=["SHARED", "B2", "B3", "B4", "B5"],
+0582:     )
+0583:     parser.add_argument("--seed", required=True, type=int)
+0584:     parser.add_argument(
+0585:         "--round",
+0586:         required=True,
+0587:         type=int,
+0588:         choices=[0, 1, 2, 3],
+0589:     )
+0590: 
+0591:     parser.add_argument("--checkpoint", required=True)
+0592:     parser.add_argument("--dev-predictions", required=True)
+0593:     parser.add_argument("--gold-manifest", required=True)
+0594:     parser.add_argument("--gold-labels", required=True)
+0595:     parser.add_argument("--approval-csv", required=True)
+0596:     parser.add_argument("--dev-ids", required=True)
+0597:     parser.add_argument("--config", required=True)
+0598: 
+0599:     parser.add_argument("--train-set")
+0600:     parser.add_argument("--selection-log")
+0601:     parser.add_argument("--train-log")
+0602:     parser.add_argument("--checkpoint-log")
+0603:     parser.add_argument("--shared-checkpoint-group")
+0604:     parser.add_argument(
+0605:         "--out-root",
+0606:         default="reports/capability",
+0607:     )
+0608: 
+0609:     args = parser.parse_args()
+0610: 
+0611:     expected_run_id = (
+0612:         "SHARED_seed0_S0"
+0613:         if args.method == "SHARED"
+0614:         else f"{args.method}_seed{args.seed}_S{args.round}"
+0615:     )
+0616: 
+0617:     if args.run_id != expected_run_id:
+0618:         parser.error(
+0619:             f"--run-id must be {expected_run_id!r} "
+0620:             f"for the supplied method/seed/round"
+0621:         )
+0622: 
+0623:     if args.method == "SHARED" and (
+0624:         args.seed != 0 or args.round != 0
+0625:     ):
+0626:         parser.error("SHARED baseline must use seed=0 and round=0")
+0627: 
+0628:     if args.method != "SHARED" and args.round == 0:
+0629:         parser.error("S0 is a shared baseline, not a method-specific run")
+0630: 
+0631:     return args
+0632: 
+0633: 
+0634: def main() -> None:
+0635:     args = parse_args()
+0636: 
+0637:     input_hashes = build_input_hashes(args)
+0638:     out_dir = Path(args.out_root) / args.run_id
+0639: 
+0640:     if out_dir.exists():
+0641:         verify_existing_sidecar(out_dir, input_hashes)
+0642:         return
+0643: 
+0644:     out_dir.parent.mkdir(parents=True, exist_ok=True)
+0645: 
+0646:     stage = Path(tempfile.mkdtemp(
+0647:         prefix=f".{args.run_id}.staging.",
+0648:         dir=out_dir.parent,
+0649:     ))
+0650: 
+0651:     try:
+0652:         build_sidecar(args, stage, input_hashes)
+0653: 
+0654:         # Atomic publish. If another process created the target first,
+0655:         # do not replace it.
+0656:         if out_dir.exists():
+0657:             raise FileExistsError(
+0658:                 f"Output appeared during evaluation: {out_dir}"
+0659:             )
+0660: 
+0661:         os.rename(stage, out_dir)
+0662: 
+0663:     except Exception:
+0664:         shutil.rmtree(stage, ignore_errors=True)
+0665:         raise
+0666: 
+0667:     print(f"CAPABILITY_EVAL: PASS {out_dir}")
+0668: 
+0669: 
+0670: if __name__ == "__main__":
+0671:     main()

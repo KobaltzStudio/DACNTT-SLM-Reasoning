@@ -1,0 +1,11 @@
+{
+  "problem_id": "test_001",
+  "capabilities_manual": [
+    "multiplication",
+    "addition"
+  ],
+  "difficulty_manual": "medium",
+  "notes": "",
+  "annotator_id": "A1",
+  "schema_version": "v1"
+}

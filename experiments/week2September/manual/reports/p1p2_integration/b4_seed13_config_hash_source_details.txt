@@ -1,0 +1,294 @@
+﻿========================================
+FILE: .\scripts\run_experiment.py
+========================================
+
+  scripts\run_experiment.py:41:from pathlib import Path
+  scripts\run_experiment.py:42:
+  scripts\run_experiment.py:43:sys.path.insert(0, str(Path(__file__).resolve().parent))
+  scripts\run_experiment.py:44:from selection import METHODS as SELECTION_METHODS  # noqa: E402
+  scripts\run_experiment.py:45:from select_round import DEFAULT_TOKENS, round_dir  # noqa: E402
+> scripts\run_experiment.py:46:from student_common import CONFIG_PATH, POOL_VERIFIED, load_config, read_jsonl, sha256_file  # noqa: E402
+  scripts\run_experiment.py:47:
+  scripts\run_experiment.py:48:SCRIPTS = Path(__file__).resolve().parent
+  scripts\run_experiment.py:49:METHODS = ("B0",) + SELECTION_METHODS
+  scripts\run_experiment.py:50:SHARED_ROUND0 = {"B4": "B5", "B5": "B4"}
+  scripts\run_experiment.py:51:
+  scripts\run_experiment.py:52:
+  scripts\run_experiment.py:53:class Runner:
+  scripts\run_experiment.py:54:    """Runs steps once, keeps markers and timing."""
+  scripts\run_experiment.py:64:        return self.marker(scope_dir, step).exists()
+  scripts\run_experiment.py:65:
+  scripts\run_experiment.py:66:    def mark(self, scope_dir, step, info):
+  scripts\run_experiment.py:67:        path = self.marker(scope_dir, step)
+  scripts\run_experiment.py:68:        path.parent.mkdir(parents=True, exist_ok=True)
+> scripts\run_experiment.py:69:        path.write_text(json.dumps(info, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+  scripts\run_experiment.py:70:
+  scripts\run_experiment.py:71:    def run(self, scope_dir, step, cmd):
+  scripts\run_experiment.py:72:        printable = " ".join(shlex.quote(str(c)) for c in cmd)
+  scripts\run_experiment.py:73:        if self.is_done(scope_dir, step):
+  scripts\run_experiment.py:74:            print(f"[skip] {scope_dir}/{step}")
+  scripts\run_experiment.py:75:            return
+  scripts\run_experiment.py:76:        print(f"[run] {scope_dir}/{step}\n      {printable}", flush=True)
+  scripts\run_experiment.py:77:        if self.dry_run:
+  scripts\run_experiment.py:80:        subprocess.run([str(c) for c in cmd], check=True)
+  scripts\run_experiment.py:81:        elapsed = round(time.time() - t0, 1)
+  scripts\run_experiment.py:82:        self.mark(scope_dir, step, {"command": printable, "elapsed_seconds": elapsed})
+  scripts\run_experiment.py:83:        self.runs_dir.mkdir(parents=True, exist_ok=True)
+  scripts\run_experiment.py:84:        with (self.runs_dir / "timing.jsonl").open("a", encoding="utf-8") as f:
+> scripts\run_experiment.py:85:            f.write(json.dumps({"scope": str(scope_dir), "step": step, "elapsed_seconds": elapsed}) + "\n")
+  scripts\run_experiment.py:86:
+  scripts\run_experiment.py:87:
+  scripts\run_experiment.py:88:def needs_nll_at(method, t, b2_nll):
+  scripts\run_experiment.py:89:    """NLL at S_{t}, t >= 1 (S_0 is always scored in the shared directory)."""
+  scripts\run_experiment.py:90:    if t not in (1, 2):
+  scripts\run_experiment.py:91:        return False
+  scripts\run_experiment.py:92:    return method in ("B4", "B5", "ablation_shuffled_scores") or (method == "B2" and b2_nll)
+  scripts\run_experiment.py:93:
+  scripts\run_experiment.py:161:    run_dir = runs_dir / tag_run
+  scripts\run_experiment.py:162:    s0 = runs_dir / "S0"
+  scripts\run_experiment.py:163:    n_pool = 0 if args.dry_run else len(read_jsonl(tokens))
+  scripts\run_experiment.py:164:    M = cfg["schedule"]["rounds_M"]
+  scripts\run_experiment.py:165:    ckpt = cfg["schedule"]["checkpoint_name"]
+> scripts\run_experiment.py:166:    config_hash = sha256_file(CONFIG_PATH)
+  scripts\run_experiment.py:167:
+  scripts\run_experiment.py:168:    def evaluate(scope, ckpt_dir, tag, adapter):
+  scripts\run_experiment.py:169:        for split in ("dev", "test"):
+  scripts\run_experiment.py:170:            cmd = [py, SCRIPTS / "eval_student.py", "--tag", tag, "--split", split,
+  scripts\run_experiment.py:171:                   "--out", ckpt_dir / f"eval_{split}.jsonl", *eval_args]
+  scripts\run_experiment.py:172:            runner.run(scope, f"eval_{split}_{tag}", cmd + (["--adapter", adapter] if adapter else []))
+  scripts\run_experiment.py:173:
+  scripts\run_experiment.py:174:    def score(scope, ckpt_dir, tag, adapter):
+  scripts\run_experiment.py:187:        row = {"record_type": "checkpoint", "checkpoint": ckpt.format(t=t), "parent_checkpoint": parent,
+  scripts\run_experiment.py:188:               "round": t, "method": args.method, "training_seed": args.seed, "data_order_seed": args.seed,
+  scripts\run_experiment.py:189:               "cumulative_training_tokens": cumulative_tokens, "cumulative_optimization_steps": cumulative_steps,
+  scripts\run_experiment.py:190:               "selected_trajectory_ids": selected,
+  scripts\run_experiment.py:191:               "beta_est_forward_passes": n_pool if t == 0 or needs_nll_at(args.method, t, args.b2_nll) else 0,
+> scripts\run_experiment.py:192:               "config_hash": config_hash}
+  scripts\run_experiment.py:193:        rows = [r for r in read_jsonl(log_path) if r["checkpoint"] != row["checkpoint"]] if log_path.exists() else []
+> scripts\run_experiment.py:194:        log_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows + [row]), encoding="utf-8")
+  scripts\run_experiment.py:195:
+  scripts\run_experiment.py:196:    log_path = run_dir / "checkpoint_log.jsonl"
+  scripts\run_experiment.py:197:    if not args.dry_run:
+  scripts\run_experiment.py:198:        run_dir.mkdir(parents=True, exist_ok=True)
+  scripts\run_experiment.py:199:        write_checkpoint_record(0, [], None, 0, 0)
+  scripts\run_experiment.py:200:
+  scripts\run_experiment.py:201:    def try_reuse_round0():
+  scripts\run_experiment.py:202:        """Copy S_1 from the other of B4/B5 when its B_0 is identical. True when copied."""
+
+
+
+========================================
+FILE: .\scripts\select_round.py
+========================================
+
+  scripts\select_round.py:23:import sys
+  scripts\select_round.py:24:from pathlib import Path
+  scripts\select_round.py:25:
+  scripts\select_round.py:26:sys.path.insert(0, str(Path(__file__).resolve().parent))
+  scripts\select_round.py:27:from selection import METHODS, NEEDS_NLL, select  # noqa: E402
+> scripts\select_round.py:28:from student_common import CONFIG_PATH, MANUAL_DIR, POOL_VERIFIED, load_config, read_jsonl, sha256_file  # noqa: E402
+  scripts\select_round.py:29:
+  scripts\select_round.py:30:DEFAULT_TOKENS = POOL_VERIFIED.with_name("pool_v1_tokens.jsonl")
+  scripts\select_round.py:31:
+  scripts\select_round.py:32:
+  scripts\select_round.py:33:def round_dir(run_dir, t):
+  scripts\select_round.py:34:    return Path(run_dir) / f"round_{t:03d}"
+  scripts\select_round.py:35:
+  scripts\select_round.py:36:
+  scripts\select_round.py:45:    os.replace(tmp, path)
+  scripts\select_round.py:46:
+  scripts\select_round.py:47:
+  scripts\select_round.py:48:def load_tokens(tokens_path, pool_path):
+  scripts\select_round.py:49:    summary = json.loads(Path(tokens_path).with_suffix(".summary.json").read_text(encoding="utf-8"))
+> scripts\select_round.py:50:    if summary["pool_sha256"] != sha256_file(pool_path):
+  scripts\select_round.py:51:        raise ValueError(f"{tokens_path} was built from another pool")
+  scripts\select_round.py:52:    rows = read_jsonl(tokens_path)
+  scripts\select_round.py:53:    return {r["trajectory_id"]: r["problem_id"] for r in rows}, {r["trajectory_id"]: r["response_tokens"] for r in rows}
+  scripts\select_round.py:54:
+  scripts\select_round.py:55:
+  scripts\select_round.py:56:def load_ell(nll_path, tokens):
+  scripts\select_round.py:57:    """ell by trajectory; the NLL file must cover the pool with the token counts of the budget."""
+  scripts\select_round.py:58:    rows = read_jsonl(nll_path)
+  scripts\select_round.py:97:        trained += json.loads((round_dir(args.run_dir, t) / "train_set.json").read_text(encoding="utf-8"))["trajectory_ids"]
+  scripts\select_round.py:98:    ell = load_ell(args.nll, tokens) if args.method in NEEDS_NLL else None
+  scripts\select_round.py:99:
+  scripts\select_round.py:100:    res = select(args.method, args.round, args.seed, problems, tokens, budget, n_cap, ell, sorted(set(trained)))
+  scripts\select_round.py:101:
+> scripts\select_round.py:102:    config_hash = sha256_file(CONFIG_PATH)
+  scripts\select_round.py:103:    source_t = 0 if args.method == "B4" else args.round  # B4 is ranked at S_0 in every round
+  scripts\select_round.py:104:    source = cfg["schedule"]["checkpoint_name"].format(t=source_t)
+  scripts\select_round.py:105:    out_dir = round_dir(args.run_dir, args.round)
+  scripts\select_round.py:106:    out_dir.mkdir(parents=True, exist_ok=True)
+  scripts\select_round.py:107:    write_atomic(out_dir / "selection_log.jsonl", "".join(
+> scripts\select_round.py:108:        json.dumps({"record_type": "selection", "method": args.method, "round": args.round,
+> scripts\select_round.py:109:                    "source_checkpoint": source, "training_seed": args.seed, **row, "config_hash": config_hash},
+  scripts\select_round.py:110:                   ensure_ascii=False) + "\n"
+  scripts\select_round.py:111:        for row in res["rows"]))
+> scripts\select_round.py:112:    write_atomic(out_dir / "train_set.json", json.dumps({
+  scripts\select_round.py:113:        "pilot": args.pilot,
+  scripts\select_round.py:114:        "method": args.method, "round": args.round, "training_seed": args.seed, "source_checkpoint": source,
+> scripts\select_round.py:115:        "pool": rel(args.pool), "pool_sha256": sha256_file(args.pool),
+> scripts\select_round.py:116:        "config_sha256": config_hash,
+  scripts\select_round.py:117:        "nll_file": rel(args.nll) if ell else None,
+> scripts\select_round.py:118:        "nll_sha256": sha256_file(args.nll) if ell else None,
+  scripts\select_round.py:119:        "ell_star": res["ell_star"], "sigma": res["sigma"], "n_reference": res["n_reference"],
+  scripts\select_round.py:120:        "n_eligible": len(problems), "n_trained_before": len(set(trained)),
+  scripts\select_round.py:121:        "beta_round_tokens": budget, "n_cap": n_cap,
+  scripts\select_round.py:122:        "tokens_used": res["tokens_used"], "n_selected": len(res["selected"]),
+  scripts\select_round.py:123:        "trajectory_ids": res["selected"],
+  scripts\select_round.py:124:    }, ensure_ascii=False, indent=2) + "\n")
+  scripts\select_round.py:125:    print(f"[{args.method} seed {args.seed} round {args.round}] {len(res['selected'])} trajectories, "
+  scripts\select_round.py:126:          f"{res['tokens_used']}/{budget} tokens -> {out_dir}")
+
+
+
+========================================
+FILE: .\scripts\train_round.py
+========================================
+
+  scripts\train_round.py:1:#!/usr/bin/env python3
+  scripts\train_round.py:2:"""
+  scripts\train_round.py:3:Train one round of the Student with LoRA: S_t + B_t -> S_{t+1}.
+  scripts\train_round.py:4:
+> scripts\train_round.py:5:Hyperparameters come from config/experiment_config.json "training" (LoRA r/alpha/dropout/targets,
+  scripts\train_round.py:6:AdamW, constant lr, no warmup, max_grad_norm, effective batch, 1 epoch, max_seq_len,
+  scripts\train_round.py:7:completion-only loss). Effective batch = --micro-batch x gradient accumulation.
+  scripts\train_round.py:8:
+  scripts\train_round.py:9:Loss: token-level mean over all supervised (response) tokens of the effective batch;
+  scripts\train_round.py:10:prompt tokens are masked. Seeds: torch seed (LoRA init, dropout) = data order seed = --seed.
+  scripts\train_round.py:11:
+  scripts\train_round.py:12:Pool: the trajectories are looked up in the pool named by the train set ("pool", checked against
+> scripts\train_round.py:13:"pool_sha256"), so the Task 5 smoke-test train sets still resolve to the preliminary pool; train sets
+  scripts\train_round.py:14:without that field use --pool (default: official pool v1).
+  scripts\train_round.py:15:
+  scripts\train_round.py:16:Outputs:
+  scripts\train_round.py:17:  <adapter-dir>/                 LoRA adapter (safetensors) + tokenizer files
+  scripts\train_round.py:18:  <adapter-dir>/train_log.json   per-step loss, tokens, time; totals; config used
+  scripts\train_round.py:19:
+  scripts\train_round.py:20:Usage (from experiments/week2September/manual/):
+  scripts\train_round.py:21:  python scripts/train_round.py --seed 13 \
+  scripts\train_round.py:33:import torch
+  scripts\train_round.py:34:
+  scripts\train_round.py:35:sys.path.insert(0, str(Path(__file__).resolve().parent))
+  scripts\train_round.py:36:from student_common import (  # noqa: E402
+  scripts\train_round.py:37:    CONFIG_PATH, IGNORE_INDEX, MANUAL_DIR, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example,
+> scripts\train_round.py:38:    environment_info, load_config, load_pool, pick_dtype, sha256_file, student_from_args, write_json,
+  scripts\train_round.py:39:)
+  scripts\train_round.py:40:
+  scripts\train_round.py:41:
+  scripts\train_round.py:42:def collate(examples, pad_id):
+  scripts\train_round.py:43:    width = max(len(e["input_ids"]) for e in examples)
+  scripts\train_round.py:44:    ids, labels, mask = [], [], []
+  scripts\train_round.py:45:    for e in examples:
+  scripts\train_round.py:46:        pad = width - len(e["input_ids"])
+  scripts\train_round.py:85:    train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
+  scripts\train_round.py:86:    if "pool" in train_set:
+  scripts\train_round.py:87:        pool_path = MANUAL_DIR / train_set["pool"]
+  scripts\train_round.py:88:        if args.pool and args.pool.resolve() != pool_path.resolve():
+  scripts\train_round.py:89:            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+> scripts\train_round.py:90:        if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
+  scripts\train_round.py:91:            raise ValueError(f"{pool_path} changed since the train set was drawn")
+  scripts\train_round.py:92:    else:
+  scripts\train_round.py:93:        pool_path = args.pool or POOL_VERIFIED
+  scripts\train_round.py:94:    by_id = {r["trajectory_id"]: r for r in load_pool(pool_path)}
+  scripts\train_round.py:95:    rows = [by_id[t] for t in train_set["trajectory_ids"]]
+  scripts\train_round.py:96:
+  scripts\train_round.py:97:    tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
+  scripts\train_round.py:98:    examples = [encode_example(tok, r["question"], r["raw_generation"]) for r in rows]
+  scripts\train_round.py:159:    model.save_pretrained(args.adapter_dir)
+  scripts\train_round.py:160:    tok.save_pretrained(args.adapter_dir)
+  scripts\train_round.py:161:    write_json(args.adapter_dir / "train_log.json", {
+  scripts\train_round.py:162:        "checkpoint_parent": args.init_adapter or "student_ckpt_000",
+  scripts\train_round.py:163:        "seed": args.seed, "data_order_seed": args.seed,
+> scripts\train_round.py:164:        "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
+> scripts\train_round.py:165:        "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
+  scripts\train_round.py:166:        "n_examples": len(examples), "epochs": epochs, "steps": step,
+  scripts\train_round.py:167:        "effective_batch": eff_batch, "micro_batch": args.micro_batch, "grad_accum": accum,
+  scripts\train_round.py:168:        "learning_rate": lr, "lr_from_config": lr == tc["learning_rate"],
+  scripts\train_round.py:169:        "epochs_from_config": epochs == tc["epochs_per_round"],
+  scripts\train_round.py:170:        "model": model_name, "revision": revision, "dtype": str(dtype).replace("torch.", ""),
+  scripts\train_round.py:171:        "gradient_checkpointing": not args.no_gradient_checkpointing,
+  scripts\train_round.py:172:        "trainable_parameters": n_trainable,
+  scripts\train_round.py:173:        "cumulative_training_tokens": total_sup,
+  scripts\train_round.py:174:        "prompt_tokens_masked": total_prompt,
+  scripts\train_round.py:175:        "trajectory_tokens": sum(e["n_traj"] for e in examples) * epochs,
+  scripts\train_round.py:176:        "beta_round_tokens_config": cfg["budget"]["beta_round_tokens"],
+  scripts\train_round.py:177:        "elapsed_seconds": round(time.time() - t0, 1),
+  scripts\train_round.py:178:        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+> scripts\train_round.py:179:        "config_sha256": sha256_file(CONFIG_PATH),
+  scripts\train_round.py:180:        "environment": environment_info(torch),
+  scripts\train_round.py:181:        "steps_log": log,
+  scripts\train_round.py:182:    })
+  scripts\train_round.py:183:    print(f"saved adapter -> {args.adapter_dir}  ({step} steps, {total_sup} supervised tokens)")
+  scripts\train_round.py:184:
+  scripts\train_round.py:185:
+  scripts\train_round.py:186:if __name__ == "__main__":
+  scripts\train_round.py:187:    main()
+
+
+
+========================================
+FILE: .\scripts\student_common.py
+========================================
+
+  scripts\student_common.py:1:"""
+  scripts\student_common.py:2:Shared helpers for Student evaluation, training and NLL scoring (Task 5 smoke test, reused in Task 7).
+  scripts\student_common.py:3:
+  scripts\student_common.py:4:Everything that must be identical across scripts lives here:
+> scripts\student_common.py:5:  - paths and frozen values read from config/experiment_config.json;
+  scripts\student_common.py:6:  - prompt construction (prompt v1, Qwen chat template), shared with Teacher generation;
+  scripts\student_common.py:7:  - tokenization of (prompt, response) pairs with the response-only loss mask;
+  scripts\student_common.py:8:  - model loading (base model at the pinned revision, optional LoRA adapter) and dtype policy.
+  scripts\student_common.py:9:
+  scripts\student_common.py:10:Run all scripts from experiments/week2September/manual/.
+  scripts\student_common.py:11:"""
+  scripts\student_common.py:12:
+  scripts\student_common.py:13:import ast
+> scripts\student_common.py:14:import hashlib
+  scripts\student_common.py:15:import json
+  scripts\student_common.py:16:import platform
+  scripts\student_common.py:17:import sys
+  scripts\student_common.py:18:from pathlib import Path
+  scripts\student_common.py:19:
+  scripts\student_common.py:20:MANUAL_DIR = Path(__file__).resolve().parent.parent
+> scripts\student_common.py:21:CONFIG_PATH = MANUAL_DIR / "config" / "experiment_config.json"
+  scripts\student_common.py:22:GSM8K_TRAIN = MANUAL_DIR / "data" / "raw" / "gsm8k_train.jsonl"
+  scripts\student_common.py:23:GSM8K_TEST = MANUAL_DIR / "data" / "raw" / "gsm8k_test.jsonl"
+  scripts\student_common.py:24:CAPABILITY_LABELS = MANUAL_DIR / "data" / "supplement" / "supplement_annotations_v2.jsonl"
+  scripts\student_common.py:25:DEV_IDS = MANUAL_DIR / "splits" / "d_dev_ids.txt"
+  scripts\student_common.py:26:TEST_IDS = MANUAL_DIR / "splits" / "d_test_ids.txt"
+  scripts\student_common.py:27:# Official pool (Task 6, task6_decisions.md): default for Task 7 onwards.
+  scripts\student_common.py:28:POOL_VERIFIED = MANUAL_DIR / "trajectory" / "pool" / "pool_v1_verified.jsonl"
+  scripts\student_common.py:29:# Preliminary pool (batch_100, HF): used by the Task 5 smoke test only; pass it explicitly to reproduce it.
+  scripts\student_common.py:60:def load_config():
+  scripts\student_common.py:61:    with CONFIG_PATH.open(encoding="utf-8") as f:
+  scripts\student_common.py:62:        return json.load(f)
+  scripts\student_common.py:63:
+  scripts\student_common.py:64:
+> scripts\student_common.py:65:def sha256_file(path):
+> scripts\student_common.py:66:    h = hashlib.sha256()
+  scripts\student_common.py:67:    with Path(path).open("rb") as f:
+  scripts\student_common.py:68:        for chunk in iter(lambda: f.read(1 << 20), b""):
+  scripts\student_common.py:69:            h.update(chunk)
+  scripts\student_common.py:70:    return h.hexdigest()
+  scripts\student_common.py:71:
+  scripts\student_common.py:72:
+  scripts\student_common.py:73:def read_jsonl(path):
+  scripts\student_common.py:74:    with Path(path).open(encoding="utf-8") as f:
+  scripts\student_common.py:75:        return [json.loads(line) for line in f if line.strip()]
+  scripts\student_common.py:76:
+  scripts\student_common.py:77:
+  scripts\student_common.py:78:def append_jsonl(path, row):
+  scripts\student_common.py:79:    with Path(path).open("a", encoding="utf-8") as f:
+> scripts\student_common.py:80:        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+  scripts\student_common.py:81:
+  scripts\student_common.py:82:
+  scripts\student_common.py:83:def write_json(path, obj):
+  scripts\student_common.py:84:    Path(path).parent.mkdir(parents=True, exist_ok=True)
+  scripts\student_common.py:85:    with Path(path).open("w", encoding="utf-8") as f:
+  scripts\student_common.py:86:        json.dump(obj, f, ensure_ascii=False, indent=2)
+  scripts\student_common.py:87:        f.write("\n")
+  scripts\student_common.py:88:
+
+
+

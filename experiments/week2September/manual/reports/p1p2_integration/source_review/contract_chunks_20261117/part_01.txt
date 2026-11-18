@@ -1,0 +1,400 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261117220016
+Username: KOBALTZ\PC - NGHI
+RunAs User: KOBALTZ\PC - NGHI
+Configuration Name: 
+Machine: KOBALTZ (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 35292
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\controller_runtime_contract_20261117.txt
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "=== PROJECT ROOT ==="
+=== PROJECT ROOT ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host $ProjectRoot
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "`n=== SOURCE FILE CONTENTS ==="
+
+=== SOURCE FILE CONTENTS ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) foreach ($RelativePath in $SourceFiles) {
+    $FullPath = Join-Path $ProjectRoot $RelativePath
+
+    Write-Host "`n============================================================"
+    Write-Host "FILE: $RelativePath"
+    Write-Host "============================================================"
+
+    if (Test-Path -LiteralPath $FullPath -PathType Leaf) {
+        Get-Content -LiteralPath $FullPath -Raw
+    }
+    if (-not (Test-Path -LiteralPath $FullPath -PathType Leaf)) {
+        Write-Host "FILE_MISSING: $RelativePath"
+    }
+}
+
+============================================================
+FILE: scripts\train_round.py
+============================================================
+#!/usr/bin/env python3
+"""
+Train one round of the Student with LoRA: S_t + B_t -> S_{t+1}.
+
+Hyperparameters come from config/experiment_config.json "training" (LoRA r/alpha/dropout/targets,
+AdamW, constant lr, no warmup, max_grad_norm, effective batch, 1 epoch, max_seq_len,
+completion-only loss). Effective batch = --micro-batch x gradient accumulation.
+
+Loss: token-level mean over all supervised (response) tokens of the effective batch;
+prompt tokens are masked. Seeds: torch seed (LoRA init, dropout) = data order seed = --seed.
+
+Pool: the trajectories are looked up in the pool named by the train set ("pool", checked against
+"pool_sha256"), so the Task 5 smoke-test train sets still resolve to the preliminary pool; train sets
+without that field use --pool (default: official pool v1).
+
+Outputs:
+  <adapter-dir>/                 LoRA adapter (safetensors) + tokenizer files
+  <adapter-dir>/train_log.json   per-step loss, tokens, time; totals; config used
+
+Usage (from experiments/week2September/manual/):
+  python scripts/train_round.py --seed 13 \
+      --train-set reports/task5/smoke_test/train_set_seed13.json \
+      --adapter-dir models/smoke/student_ckpt_001_smoke_seed13
+"""
+import argparse
+import json
+import math
+import random
+import sys
+import time
+from pathlib import Path
+
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    CONFIG_PATH, IGNORE_INDEX, MANUAL_DIR, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example,
+    environment_info, load_config, load_pool, pick_dtype, sha256_file, student_from_args, write_json,
+)
+
+
+def collate(examples, pad_id):
+    width = max(len(e["input_ids"]) for e in examples)
+    ids, labels, mask = [], [], []
+    for e in examples:
+        pad = width - len(e["input_ids"])
+        ids.append(e["input_ids"] + [pad_id] * pad)          # right padding for training
+        labels.append(e["labels"] + [IGNORE_INDEX] * pad)
+        mask.append([1] * len(e["input_ids"]) + [0] * pad)
+    return torch.tensor(ids), torch.tensor(labels), torch.tensor(mask)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--seed", type=int, required=True)
+    ap.add_argument("--train-set", required=True, type=Path, help="JSON with trajectory_ids (select_smoke_train_set.py)")
+    ap.add_argument("--adapter-dir", required=True, type=Path)
+    ap.add_argument("--init-adapter", default=None, help="continue from an existing adapter (round t > 0)")
+    ap.add_argument("--micro-batch", type=int, default=4)
+    ap.add_argument("--epochs", type=int, default=None, help="default: config training.epochs_per_round")
+    ap.add_argument("--lr", type=float, default=None, help="default: config training.learning_rate")
+    ap.add_argument("--no-gradient-checkpointing", action="store_true")
+    ap.add_argument("--pool", type=Path, default=None,
+                    help="pool for train sets without a 'pool' field (default: official pool v1)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    tc = cfg["training"]
+    if tc["loss"].split()[0] != "completion-only" or tc["lr_scheduler"] != "constant" or tc["warmup_steps"] != 0:
+        raise ValueError("config training block differs from what this script implements")
+    eff_batch = tc["batch_size"]
+    if eff_batch % args.micro_batch:
+        raise ValueError(f"--micro-batch must divide the effective batch {eff_batch}")
+    accum = eff_batch // args.micro_batch
+    epochs = args.epochs or tc["epochs_per_round"]
+    lr = args.lr or tc["learning_rate"]
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+
+    from peft import LoraConfig, PeftModel, get_peft_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
+    if "pool" in train_set:
+        pool_path = MANUAL_DIR / train_set["pool"]
+        if args.pool and args.pool.resolve() != pool_path.resolve():
+            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+        if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
+            raise ValueError(f"{pool_path} changed since the train set was drawn")
+    else:
+        pool_path = args.pool or POOL_VERIFIED
+    by_id = {r["trajectory_id"]: r for r in load_pool(pool_path)}
+    rows = [by_id[t] for t in train_set["trajectory_ids"]]
+
+    tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
+    examples = [encode_example(tok, r["question"], r["raw_generation"]) for r in rows]
+    too_long = [r["trajectory_id"] for r, e in zip(rows, examples) if len(e["input_ids"]) > tc["max_seq_len"]]
+    if too_long:
+        raise ValueError(f"{len(too_long)} examples exceed max_seq_len {tc['max_seq_len']}: {too_long[:3]}")
+
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    model = AutoModelForCausalLM.from_pretrained(model_name, revision=revision, dtype=dtype)
+    if not args.no_gradient_checkpointing:
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        model.enable_input_require_grads()
+    if args.init_adapter:
+        model = PeftModel.from_pretrained(model, args.init_adapter, is_trainable=True)
+    else:
+        model = get_peft_model(model, LoraConfig(
+            r=tc["lora_r"], lora_alpha=tc["lora_alpha"], lora_dropout=tc["lora_dropout"],
+            target_modules=tc["lora_target_modules"], bias="none", task_type="CAUSAL_LM",
+        ))
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device)
+    model.train()
+    trainable = [p for p in model.parameters() if p.requires_grad]
+    n_trainable = sum(p.numel() for p in trainable)
+    opt = torch.optim.AdamW(trainable, lr=lr, betas=(tc["adam_beta1"], tc["adam_beta2"]),
+                            weight_decay=tc["weight_decay"])  # fresh optimizer state each round (config)
+
+    order_rng = random.Random(args.seed)  # data_order_seed = training_seed
+    log, step, t0 = [], 0, time.time()
+    total_sup, total_prompt = 0, 0
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    for epoch in range(epochs):
+        order = list(range(len(examples)))
+        order_rng.shuffle(order)
+        for start in range(0, len(order), eff_batch):
+            eff = [examples[i] for i in order[start: start + eff_batch]]
+            n_sup = sum(e["n_supervised"] for e in eff)
+            loss_sum = 0.0
+            opt.zero_grad(set_to_none=True)
+            for m in range(0, len(eff), args.micro_batch):
+                ids, labels, mask = (x.to(device) for x in collate(eff[m: m + args.micro_batch], tok.pad_token_id))
+                logits = model(input_ids=ids, attention_mask=mask).logits[:, :-1]
+                tgt = labels[:, 1:]
+                sel = tgt != IGNORE_INDEX  # upcast only supervised positions (saves memory)
+                tok_loss = torch.nn.functional.cross_entropy(logits[sel].float(), tgt[sel], reduction="sum")
+                (tok_loss / n_sup).backward()
+                loss_sum += tok_loss.item()
+            grad_norm = torch.nn.utils.clip_grad_norm_(trainable, tc["max_grad_norm"]).item()
+            opt.step()
+            step += 1
+            total_sup += n_sup
+            total_prompt += sum(e["n_prompt"] for e in eff)
+            log.append({"step": step, "epoch": epoch, "loss": loss_sum / n_sup, "grad_norm": grad_norm,
+                        "n_examples": len(eff), "supervised_tokens": n_sup, "lr": lr,
+                        "elapsed_s": round(time.time() - t0, 1)})
+            print(f"step {step:3d}  loss {loss_sum / n_sup:.4f}  grad_norm {grad_norm:.3f}  "
+                  f"tokens {n_sup}  {time.time() - t0:.0f}s", flush=True)
+            if not math.isfinite(loss_sum):
+                raise RuntimeError("non-finite loss")
+
+    args.adapter_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(args.adapter_dir)
+    tok.save_pretrained(args.adapter_dir)
+    write_json(args.adapter_dir / "train_log.json", {
+        "checkpoint_parent": args.init_adapter or "student_ckpt_000",
+        "seed": args.seed, "data_order_seed": args.seed,
+        "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
+        "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
+        "n_examples": len(examples), "epochs": epochs, "steps": step,
+        "effective_batch": eff_batch, "micro_batch": args.micro_batch, "grad_accum": accum,
+        "learning_rate": lr, "lr_from_config": lr == tc["learning_rate"],
+        "epochs_from_config": epochs == tc["epochs_per_round"],
+        "model": model_name, "revision": revision, "dtype": str(dtype).replace("torch.", ""),
+        "gradient_checkpointing": not args.no_gradient_checkpointing,
+        "trainable_parameters": n_trainable,
+        "cumulative_training_tokens": total_sup,
+        "prompt_tokens_masked": total_prompt,
+        "trajectory_tokens": sum(e["n_traj"] for e in examples) * epochs,
+        "beta_round_tokens_config": cfg["budget"]["beta_round_tokens"],
+        "elapsed_seconds": round(time.time() - t0, 1),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "config_sha256": sha256_file(CONFIG_PATH),
+        "environment": environment_info(torch),
+        "steps_log": log,
+    })
+    print(f"saved adapter -> {args.adapter_dir}  ({step} steps, {total_sup} supervised tokens)")
+
+
+if __name__ == "__main__":
+    main()
+
+============================================================
+FILE: scripts\eval_student.py
+============================================================
+#!/usr/bin/env python3
+"""
+Evaluate a Student checkpoint on D_dev or D_test with the frozen evaluation protocol.
+
+Protocol (config/experiment_config.json "evaluation"): prompt v1, greedy decoding,
+max_new_tokens 512, answers scored by answer_utils.evaluate_output
+(invalid_format counts as incorrect; format compliance reported separately).
+
+Greedy is enforced explicitly: the Qwen generation_config ships sampling defaults and
+repetition_penalty 1.05, which would otherwise still apply under do_sample=False.
+
+Also records lenient_correct (last number anywhere in the output, format ignored): the registered
+secondary metric of T7-5, always reported with strict accuracy and format compliance. Accuracy per
+capability is added on D_dev, over the problems with manual labels.
+
+Backends:
+  hf    transformers generate (default; used by the Task 5 smoke test)
+  vllm  vLLM with the same greedy settings; needs a bf16 GPU (L4/A100). A LoRA adapter is merged into a
+        temporary model directory first, exactly as the hf backend merges it before generating.
+
+Output (resumable: problem_ids already in --out are skipped):
+  --out           one JSON line per problem
+  --summary       accuracy, format compliance, output length, timing, memory
+
+Usage (from experiments/week2September/manual/):
+  python scripts/eval_student.py --tag S0 --out reports/task5/smoke_test/eval_S0_dev.jsonl
+  python scripts/eval_student.py --tag S1_seed13 --adapter <adapter_dir> \
+      --out reports/task5/smoke_test/eval_S1_dev_seed13.jsonl
+  python scripts/eval_student.py --split test --backend vllm --tag S1 --adapter <adapter_dir> --out <out.jsonl>
+"""
+import argparse
+import gc
+import os
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+# Deterministic scheduling in offline mode (vLLM docs, Reproducibility); must be set before importing vllm.
+os.environ.setdefault("VLLM_ENABLE_V1_MULTIPROCESSING", "0")
+
+import torch  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_metrics import score_output, summarize  # noqa: E402
+from student_common import (  # noqa: E402
+    add_model_args, append_jsonl, build_prompt, check_prompt_template, end_of_turn_id,
+    environment_info, load_capability_labels, load_config, load_dev_rows, load_model, load_test_rows,
+    load_tokenizer, pick_dtype, read_jsonl_resumable, student_from_args, write_json,
+)
+
+
+def generate_hf(todo, tok, model_name, revision, dtype, adapter, max_new_tokens, batch_size):
+    """Yields lists of (row, text, n_output_tokens), one list per batch."""
+    from transformers import GenerationConfig
+    model = load_model(model_name, revision, dtype, adapter=adapter)
+    gen_cfg = GenerationConfig(
+        do_sample=False,
+        max_new_tokens=max_new_tokens,
+        repetition_penalty=1.0,
+        eos_token_id=[end_of_turn_id(tok), tok.eos_token_id],
+        pad_token_id=tok.pad_token_id,
+    )
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i: i + batch_size]
+        prompts = [build_prompt(tok, r["question"]) for r in batch]
+        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
+        with torch.no_grad():
+            out = model.generate(**enc, generation_config=gen_cfg)
+        results = []
+        for r, ids in zip(batch, out[:, enc["input_ids"].shape[1]:]):
+            ids = ids.tolist()
+            n_out = len(ids)
+            while n_out and ids[n_out - 1] == tok.pad_token_id:
+                n_out -= 1
+            results.append((r, tok.decode(ids[:n_out], skip_special_tokens=True), n_out))
+        yield results
+
+
+def generate_vllm(todo, tok, model_name, revision, adapter, max_new_tokens, batch_size, gpu_memory_utilization):
+    """Same contract as generate_hf. batch_size here is the number of problems per generate() call."""
+    from vllm import LLM, SamplingParams
+    if not torch.cuda.is_available() or not torch.cuda.is_bf16_supported():
+        raise SystemExit("the vllm backend needs a GPU with bf16 (T6-5)")
+    stop_ids = sorted({end_of_turn_id(tok), tok.eos_token_id})
+    params = SamplingParams(n=1, temperature=0.0, top_p=1.0, repetition_penalty=1.0,
+                            max_tokens=max_new_tokens, stop_token_ids=stop_ids)
+    with tempfile.TemporaryDirectory(prefix="merged_student_") as merged:
+        if adapter:
+            model = load_model(model_name, revision, torch.bfloat16, adapter=adapter)
+            model.save_pretrained(merged)
+            tok.save_pretrained(merged)
+            del model
+            gc.collect()
+            torch.cuda.empty_cache()
+            llm = LLM(model=merged, dtype="bfloat16", generation_config="vllm",
+                      gpu_memory_utilization=gpu_memory_utilization)
+        else:
+            llm = LLM(model=model_name, revision=revision, tokenizer_revision=revision, dtype="bfloat16",
+                      generation_config="vllm", gpu_memory_utilization=gpu_memory_utilization)
+        for i in range(0, len(todo), batch_size):
+            batch = todo[i: i + batch_size]
+            outputs = llm.generate([build_prompt(tok, r["question"]) for r in batch], params, use_tqdm=False)
+            yield [(r, o.outputs[0].text, len(o.outputs[0].token_ids)) for r, o in zip(batch, outputs)]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--tag", required=True, help="checkpoint label, e.g. S0 or S1_seed13")
+    ap.add_argument("--adapter", default=None, help="LoRA adapter directory (omit for S_0)")
+    ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--summary", type=Path, default=None, help="default: <out>.summary.json")
+    ap.add_argument("--split", default="dev", choices=["dev", "test"])
+    ap.add_argument("--backend", default="hf", choices=["hf", "vllm"])
+    ap.add_argument("--batch-size", type=int, default=None, help="default: 16 for hf, 200 for vllm")
+    ap.add_argument("--gpu-memory-utilization", type=float, default=0.85, help="vllm backend only")
+    ap.add_argument("--limit", type=int, default=None, help="first N problems only (pipeline tests)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    ev = cfg["evaluation"]
+    if ev["decoding"] != "greedy":
+        raise ValueError("config evaluation.decoding is not greedy")
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+    batch_size = args.batch_size or (200 if args.backend == "vllm" else 16)
+
+    rows = load_dev_rows() if args.split == "dev" else load_test_rows()
+    if args.limit:
+        rows = rows[: args.limit]
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    done = {r["problem_id"] for r in read_jsonl_resumable(args.out)}
+    todo = [r for r in rows if r["problem_id"] not in done]
+    print(f"[{args.tag}] {args.split}: {len(rows)} problems, {len(done)} already done, {len(todo)} to run, "
+          f"backend={args.backend}, dtype={dtype}")
+
+    tok = load_tokenizer(model_name, revision)
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    t0 = time.time()
+    n_done = 0
+    if todo:
+        if args.backend == "vllm":
+            batches = generate_vllm(todo, tok, model_name, revision, args.adapter, ev["max_new_tokens"], batch_size,
+                                    args.gpu_memory_utilization)
+        else:
+            batches = generate_hf(todo, tok, model_name, revision, dtype, args.adapter, ev["max_new_tokens"], batch_size)
+        for batch in batches:
+            for r, text, n_out in batch:
+                append_jsonl(args.out, score_output(r, args.tag, text, n_out, ev["max_new_tokens"]))
+            n_done += len(batch)
+            print(f"[{args.tag}] {n_done}/{len(todo)}  {time.time() - t0:.0f}s", flush=True)
+    elapsed = time.time() - t0
+
+    wanted = {x["problem_id"] for x in rows}
+    results = [r for r in read_jsonl_resumable(args.out) if r["problem_id"] in wanted]

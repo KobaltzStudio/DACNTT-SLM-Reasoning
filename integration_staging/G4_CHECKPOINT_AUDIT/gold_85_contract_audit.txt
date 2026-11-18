@@ -1,0 +1,32 @@
+GOLD 85 CONTRACT AUDIT
+ALL_CHECKS_PASS=True
+
+PASS: gold_rows_85
+PASS: gold_unique_ids_85
+PASS: approval_rows_85
+PASS: approval_unique_ids_85
+PASS: approval_ids_equal_gold_ids
+PASS: gold_subset_of_dev_500
+PASS: gold_equals_dev_graph_85
+PASS: dev_ids_500
+PASS: graph_ids_85
+PASS: no_label_errors
+PASS: all_approval_rows_approved
+PASS: support_matches_evaluator
+PASS: manifest_supplement_count_85
+PASS: manifest_total_count_185
+PASS: provenance_approval_row_count_85
+
+GOLD_ROWS=85
+GOLD_UNIQUE_IDS=85
+APPROVAL_ROWS=85
+APPROVAL_UNIQUE_IDS=85
+GOLD_EQUALS_DEV_GRAPH=True
+
+OBSERVED_SUPPORT:
+{"addition": 30, "division": 47, "fraction": 31, "multiplication": 73, "percentage": 29, "ratio": 30, "subtraction": 51}
+EXPECTED_SUPPORT:
+{"addition": 30, "division": 47, "fraction": 31, "multiplication": 73, "percentage": 29, "ratio": 30, "subtraction": 51}
+
+GOLD_SHA256=0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44
+APPROVAL_SHA256=d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300

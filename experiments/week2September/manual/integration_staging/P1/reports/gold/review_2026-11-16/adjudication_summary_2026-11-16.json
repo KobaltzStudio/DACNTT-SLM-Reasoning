@@ -1,0 +1,26 @@
+{
+  "review_date": "2026-11-16",
+  "worklist_path": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\data\\gold\\review_2026-11-15\\adjudication_worklist_63_pending.csv",
+  "worklist_rows": 63,
+  "decision_rows": 9,
+  "unique_decision_ids": 9,
+  "remaining_unreviewed_rows": 54,
+  "decision_status_counts": {
+    "CONFIRMED": 5,
+    "CONFIRMED_WITH_SOURCE_CAVEAT": 1,
+    "CONFIRMED_WITH_INTERPRETATION": 1,
+    "CONFIRMED_WITH_CATEGORY_ASSUMPTION": 1,
+    "CAPABILITY_REVIEWED_ANSWER_CONDITIONAL": 1
+  },
+  "answer_status_counts": {
+    "CONFIRMED": 2,
+    "SOURCE_REASONING_ACCEPTED_WITH_CAVEAT": 1,
+    "CONFIRMED_UNDER_INTERPRETATION_A": 1,
+    "CONFIRMED_UNDER_DISJOINT_CATEGORY_ASSUMPTION": 1,
+    "KEEP_EXISTING_GOLD_ANSWER": 3,
+    "CONDITIONAL_PENDING_OVERLAP_ASSUMPTION": 1
+  },
+  "gold_vfinal_modified": false,
+  "original_worklist_modified": false,
+  "ledger_path": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\reports\\gold\\review_2026-11-16\\user_adjudication_2026-11-16.csv"
+}

@@ -1,0 +1,29 @@
+{
+  "archive": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\main\\main.zip",
+  "archive_sha256": "a4c657e7d643d4be6839eaf6614485ab3dd0ab26c825765d993c783e9371be9f",
+  "d_dev_unique_ids": 500,
+  "eval_dev_file_count": 36,
+  "train_log_file_count": 36,
+  "done_marker_count": 195,
+  "checkpoint_log_file_count": 12,
+  "prediction_coverage_counts": {
+    "500_UNIQUE_IDS": 36
+  },
+  "prediction_method_counts": {
+    "B2_seed13": 3,
+    "B2_seed2026": 3,
+    "B2_seed42": 3,
+    "B3_seed13": 3,
+    "B3_seed2026": 3,
+    "B3_seed42": 3,
+    "B4_seed13": 3,
+    "B4_seed2026": 3,
+    "B4_seed42": 3,
+    "B5_seed13": 3,
+    "B5_seed2026": 3,
+    "B5_seed42": 3
+  },
+  "all_eval_dev_coverage_valid": true,
+  "train_logs_all_parseable": true,
+  "markers_all_parseable": true
+}

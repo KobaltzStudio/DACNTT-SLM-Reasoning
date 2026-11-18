@@ -1,0 +1,53 @@
+{
+  "checkpoint": "B5_smoke_S1",
+  "split": "dev",
+  "backend": "hf",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "reports\\paper-2026-11-15\\smoke_tests\\training\\B5\\seed_13\\student_ckpt_001_smoke",
+  "dtype": "bfloat16",
+  "n_problems": 5,
+  "accuracy": 1.0,
+  "lenient_accuracy": 1.0,
+  "format_compliance": 1.0,
+  "mean_output_tokens": 185.4,
+  "capability_accuracy": {
+    "division": {
+      "n": 1,
+      "accuracy": 1.0
+    },
+    "multiplication": {
+      "n": 1,
+      "accuracy": 1.0
+    },
+    "ratio": {
+      "n": 1,
+      "accuracy": 1.0
+    },
+    "subtraction": {
+      "n": 1,
+      "accuracy": 1.0
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 1,
+  "limit": 5,
+  "elapsed_seconds_this_run": 133.6,
+  "problems_this_run": 5,
+  "peak_gpu_memory_gb": 2.9,
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.13.0+cu126",
+    "transformers": "5.15.0",
+    "cuda": "12.6",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}

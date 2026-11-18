@@ -1,0 +1,29 @@
+﻿OLD RUN: B4_seed13
+STATUS: NOT_VALIDATED_AS_SINGLE_TRAINING_LINEAGE
+
+RUN ARTIFACTS:
+- runs/main/B4_seed13/round_000/train_set.json
+- runs/main/B4_seed13/round_001/train_set.json
+- runs/main/B4_seed13/round_002/train_set.json
+- runs/main/B4_seed13/checkpoint_log.jsonl
+- runs/main/B4_seed13/round_000/selection_log.jsonl
+- runs/main/B4_seed13/round_001/selection_log.jsonl
+- runs/main/B4_seed13/round_002/selection_log.jsonl
+
+CHECKPOINT TRAINING LOGS:
+- integration_staging/P1/models/task7/B4/seed_13/student_ckpt_001/train_log.json
+- integration_staging/P1/models/task7/B4/seed_13/student_ckpt_002/train_log.json
+- integration_staging/P1/models/task7/B4/seed_13/student_ckpt_003/train_log.json
+
+FINDINGS:
+- Run train sets match selected=true IDs in run selection logs.
+- Run train sets match checkpoint_log selected IDs.
+- Checkpoint train logs match staging train sets.
+- Checkpoint train logs do not match run train sets.
+- Run config hash and checkpoint train-log config hash differ.
+
+DECISION:
+- Preserve all old artifacts.
+- Do not combine the two lineages.
+- Do not use old checkpoints as verified checkpoints for the rebuilt pipeline.
+- New local training must use a separate run directory.

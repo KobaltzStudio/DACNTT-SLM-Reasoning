@@ -1,0 +1,31 @@
+{
+  "release_id": "vFinal_2026-11-16",
+  "created_utc": "2026-11-16T08:23:55.031861+00:00",
+  "semantic_approval_basis": "User confirmed that all 85 rows in the approval CSV were personally reviewed and semantically approved.",
+  "approval_row_count": 85,
+  "approval_unique_problem_ids": 85,
+  "review_status_counts": {
+    "APPROVED_NO_LABEL_CHANGE": 84,
+    "APPROVED_WITH_SOURCE_CLARIFICATION": 1
+  },
+  "human_adjudication_count": 22,
+  "adjudication_interpretation": "The 22 adjudication records overlap the 85 approved Gold IDs; they are additional adjudication evidence, not 22 additional Gold examples.",
+  "files": {
+    "gold_vfinal_manifest.json": {
+      "sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+      "bytes": 945
+    },
+    "supplement_annotations_vfinal.jsonl": {
+      "sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+      "bytes": 29918
+    },
+    "gold_supplement_85_approved_review.csv": {
+      "sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+      "bytes": 76734
+    },
+    "adjudication_human_confirmed.csv": {
+      "sha256": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab",
+      "bytes": 34701
+    }
+  }
+}

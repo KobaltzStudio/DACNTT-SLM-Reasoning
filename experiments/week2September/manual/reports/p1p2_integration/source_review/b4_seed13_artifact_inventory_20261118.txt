@@ -1,0 +1,962 @@
+﻿B4 SEED 13 ARTIFACT INVENTORY
+CREATED: 2026-11-18T10:09:52.4146306+09:00
+IMPORT_MANIFEST: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\b4_seed13_checkpoint_import_manifest.json
+
+=== IMPORTED CHECKPOINT DISK VERIFICATION ===
+student_ckpt_001=PASS
+DESTINATION=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001
+ADAPTER_HASH_MATCH=True
+CONFIG_HASH_MATCH=True
+TRAIN_LOG_HASH_MATCH=True
+
+student_ckpt_002=PASS
+DESTINATION=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002
+ADAPTER_HASH_MATCH=True
+CONFIG_HASH_MATCH=True
+TRAIN_LOG_HASH_MATCH=True
+
+student_ckpt_003=PASS
+DESTINATION=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003
+ADAPTER_HASH_MATCH=True
+CONFIG_HASH_MATCH=True
+TRAIN_LOG_HASH_MATCH=True
+
+=== ARTIFACT CATEGORY COUNTS ===
+DEV_PREDICTION=3
+SELECTION_LOG=5
+CHECKPOINT_LOG=8
+TRAIN_LOG=11
+MANIFEST_OR_CAPABILITY=9
+OTHER=150
+
+=== INVENTORY FILES ===
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\checkpoint_lineage.json
+SIZE=1917
+SHA256=CD2C165D3A88045A0D424182C798ADC6D68D989771C26F12F087243384FC2BA6
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\checkpoint_lineage.json
+SIZE=1917
+SHA256=2A29BB0D11FF2E4D2F262D64DEABBC3AA22E1E31054FEE8E6906C04492C8FA22
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\checkpoint_lineage.json
+SIZE=1418
+SHA256=223143C23A6D135BE8E881E5C12C59886182911D9C10674D4A5A776D19BF80A2
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\checkpoint_lineage.json
+SIZE=1418
+SHA256=2C0DF9EB542688DD74285EE9433AD30A8B9E6607356C6EC6EABDBE1215291FCD
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\checkpoint_lineage.json
+SIZE=1418
+SHA256=19993C7CFD6C34FF32E204B31434EF0F5F4D6F83A8534D7E03D12E2D86C4A59D
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S2\checkpoint_log.jsonl
+SIZE=18339
+SHA256=733CB862C8D8A66DDDB903F36C0FDF1094E31BC028EB5001A2FA6619890DF92B
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S3\checkpoint_log.jsonl
+SIZE=18339
+SHA256=733CB862C8D8A66DDDB903F36C0FDF1094E31BC028EB5001A2FA6619890DF92B
+
+CATEGORY=CHECKPOINT_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\checkpoint_log.jsonl
+SIZE=18339
+SHA256=733CB862C8D8A66DDDB903F36C0FDF1094E31BC028EB5001A2FA6619890DF92B
+
+CATEGORY=DEV_PREDICTION
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\eval_dev.jsonl
+SIZE=479378
+SHA256=0788F385D387178383184450AB9B0897F1ED38A861E06AD088A1135DA70B0351
+
+CATEGORY=DEV_PREDICTION
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\eval_dev.jsonl
+SIZE=518231
+SHA256=8D415A351B7B0C2076FD9DBF18B1D791449B04A4276D2447DDFA9CF18CF9FB84
+
+CATEGORY=DEV_PREDICTION
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\eval_dev.jsonl
+SIZE=491609
+SHA256=5449E166C41741871955B937835223B487787BB03F4CDE3B688126045DDD6654
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\student_capability_evaluation_manifest.json
+SIZE=2324
+SHA256=3BB7EF9B519EBAD0811B9744856A2328A00F4EA23914B9C20F694316D6CD2FE6
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\student_capability_evaluation_manifest.json
+SIZE=2324
+SHA256=BBF4D2370B4CB999CD885A55C266DF72609546B3B9C863CBB70496AC46CDB920
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\artifact_manifest.json
+SIZE=9536
+SHA256=8663FC24BEF558DA500C732E1E1A29CFA514DF92C43BD3FA7480AC4A22C7AB83
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\capability_graph.json
+SIZE=712
+SHA256=5EC2D43B0C3C817FC319FFFF99839A96814A3061FDAAF7A797D5AD93BC61A4F1
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\student_capability_evaluation_manifest.json
+SIZE=2233
+SHA256=0C0F51E6514863D0868A7C5EF0B8D6AE431FE23FED35FAB741B227DAB9D696FA
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\student_capability_evaluation_manifest.json
+SIZE=2233
+SHA256=8BA4039A6D02097348CDA28388AC3F9A6995CF234545D2C82B9D3CCACD4DE77C
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\student_capability_evaluation_manifest.json
+SIZE=2233
+SHA256=F68980725FE21647C92374D42435AF373D9384834DEBF99FAB9954C0B26A467D
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\adapter_manifest.json
+SIZE=2815
+SHA256=741BCD7A5ED19D7A3B685355910FFC59D4FF155347466A65691A02E1E794448E
+
+CATEGORY=MANIFEST_OR_CAPABILITY
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\b4_seed13_checkpoint_import_manifest.json
+SIZE=4227
+SHA256=C5FADE29C6DFA091A5A1F1EB962CEA9F7A8161D636C178271FF30DF84AFB1665
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\adapter_config.json
+SIZE=1207
+SHA256=D5DBB58C5A09C133E2DE10E81E70B80B85E9864519EC28E9827054DC3FC0A2B7
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\adapter_model.safetensors
+SIZE=73911112
+SHA256=8F50D3AB6772C7C01D0C244FD661348A0F61164916CF5396D4F916D7C38C6398
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\adapter_config.json
+SIZE=1207
+SHA256=044459D785FAA7C8AF726B188A0C451FCA2D94AAFA03BA467EAB0E4F34454664
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\adapter_model.safetensors
+SIZE=73911112
+SHA256=759EA14D7A3953B609A70B06B14515D2B309EE209F00843BFF6D70C8508A71FC
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\adapter_config.json
+SIZE=1207
+SHA256=1309487B5674DBAC54B86D92802757ED06D9469C802A3919AB06CE0F5B5590F5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\adapter_model.safetensors
+SIZE=73911112
+SHA256=22D99C60743ED2897586FF22601FF7E8491DBF6495BBAC8E0EDD5C88880B7106
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\capability_metrics.csv
+SIZE=1519
+SHA256=F155C49814AEE69C29DBF3194F5D978206A9DC449AA08E02B2B612280B66F467
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\capability_metrics.jsonl
+SIZE=3030
+SHA256=421BEE548039282AD7DC8CD473754D313C7C58371B46F49FCA98C366CAC7AC36
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\input_fingerprint.json
+SIZE=1077
+SHA256=7DA8D442C0C4C8FCD63368E3EAA16B07E05A2AE22593CDE93F28DBFC85FECDD8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\capability_metrics.csv
+SIZE=1501
+SHA256=68A236040D6332D3D8E5A4DE3F6012231F3C2053D4D7F91DF4CF89CB56C139F9
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\capability_metrics.jsonl
+SIZE=3012
+SHA256=FDD7CA2D3A948F2C62E04BA0199583289EEEB3B60E0831FCD1E9F5893F88172D
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\input_fingerprint.json
+SIZE=1077
+SHA256=C882274C81305B283D477FA1DE65DE22902E68D12315B06FD6527532628357B1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\capability_learning_curves.csv
+SIZE=3081
+SHA256=BF9FB33539CA4887F9689E4B35B49D1F8F482503B3F56DC3A34B0D77E5DF428D
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\graph_evidence_ledger.csv
+SIZE=14714
+SHA256=3422F1B44FE9D1F774470C6810B3550AC60094DD9F40991DD56A3D0B4471AD95
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\input_schema_audit.txt
+SIZE=79022
+SHA256=50772F63103DB444E9133B7572CE066076ECBC9C186AD50D3D5C5BE863BB581F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\student_learning_dynamics.md
+SIZE=5646
+SHA256=E3E77EE84E295B6B337BB87EA6BF4445CCC9AC707FDD9BE995DCBC13DBC74007
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\capability_metrics.csv
+SIZE=1386
+SHA256=C606E42117A9ED4F4A78DA15F2A682422C6763052855669C05DE338B8A0D7D2A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\capability_metrics.jsonl
+SIZE=2897
+SHA256=63F19DDE33EE40D62FB513F747568A253779B2A013DF9DB263D79E4E4F8EB49B
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\input_fingerprint.json
+SIZE=987
+SHA256=67E888C11AA7B268351E4A8BCE96F5E938EF732BDE7125E8CC7DC77C8AEB3EA9
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\capability_metrics.csv
+SIZE=1400
+SHA256=E413D4126BDF047B2E4A20AA4A64D3C568CAC3FAF1EE6683634086A75BF1FE0E
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\capability_metrics.jsonl
+SIZE=2911
+SHA256=E5C987DD8FC0C87C1ED6A14913ACC801877DF323CD9BA1282F6E061611485BBF
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\input_fingerprint.json
+SIZE=987
+SHA256=90E0F2F12D91EFA1B21AE0A49863AE1669164C07BD8072F633ADF19301A4CA7C
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\capability_metrics.csv
+SIZE=1417
+SHA256=63C7444BC5FCDF0ABC175856DA333745DD85762CE3078E0083E5A8B59A3E80A3
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\capability_metrics.jsonl
+SIZE=2928
+SHA256=62218AE4D082E258804D5BDCA39146D323AEB235E6FB1A249D3816B04FCA72C8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\input_fingerprint.json
+SIZE=987
+SHA256=22B07B1B8B72A63885F9DBA247408D3241BFD166A73AB102746F255C6652B59A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_actual_training_lineage_audit.txt
+SIZE=21182
+SHA256=326371C5C81A84B88CFCB646509A3A572A00E190CC2C84D187E4DB9399E1E632
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_hash_audit.csv
+SIZE=992
+SHA256=BB385BA60A013FE44BF994A8CE9396D84F1F39CFD9769C044891B75A48A44705
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_provenance_audit.txt
+SIZE=45930
+SHA256=C5C524278426C31C6F967D2B9A1E1D48D070D4C62D436580BF65364064F691C0
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_provenance_console.txt
+SIZE=92174
+SHA256=3A37D7BEDD4F55EE47BA927F3A561374262A0EDABEABBBBFC1929EA79E0CA5E7
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_lineage_audit.txt
+SIZE=15502
+SHA256=2092A7E34E66A89072D0E043DCD1359C05ED014D28BAB9BB5057F0855FB38507
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_source_details.txt
+SIZE=21412
+SHA256=A0D497DD213716EC64C8D8B4BA550F60EA7AE798091630A52535C67CE12E723E
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_source_search.txt
+SIZE=23823
+SHA256=C3576B327FD5CBA28478C55BE3470AA5C35AC5129BBA1B3D4796F7BF8370C59E
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_candidates_audit.txt
+SIZE=41770
+SHA256=34CCC8383597FEB28228ACC59A615BAA83CA9065B7131CA9307754E235E50BFC
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation.txt
+SIZE=6758
+SHA256=6C9F00B4A6E5D982CD84DA717EBEDC402F46A6085FB935E23748F1A91C2C24CB
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation_fixed.txt
+SIZE=15236
+SHA256=A44CF77AF738DA07A20A2E8A8193F5E2EAFE96FE85372BD229D21DBAF6CD6FFE
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation_fixed_console.txt
+SIZE=30788
+SHA256=27DE690B71EAFA74D7FFE0935C9D59D1A990AB0C00965924BCC7D901C258B953
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_adapter_build.txt
+SIZE=3514
+SHA256=0CCEEB22BE05539D9F76033D61F36654CE30C5D14CA5AE2059AF2A87E7D4C713
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_schema_audit.json
+SIZE=4414
+SHA256=CA68BB11EA207C0C67708A6ED3708D2884A782B172BA98C9B453A6409A24589D
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_schema_audit.txt
+SIZE=6834
+SHA256=6C89ECCF95BB4650ADADC6637605DA4151492E2E511A5C029A761C6587A6D3B7
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_run_train_sets_audit.txt
+SIZE=10954
+SHA256=75C3F68DA301B8F105B2E86A8E4413493D68BBF147FB29D1456B799A0836CD6C
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_training_config_hash_audit.txt
+SIZE=21292
+SHA256=B35C91311BD93AD36C00B4903AE0030AD23BA46E6014CBBFF301E5302948E246
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_verification_status_audit.json
+SIZE=1988
+SHA256=2FC0AC36ABFBFB76FF02D400A05730340124FED42FB37DC42BE05F3F46B837BE
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_verification_status_audit.txt
+SIZE=126866
+SHA256=3FA4C2585B1088B32ED47B9C17F8899F0BEB104BDF018A22939656C2C1128185
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\checkpoint_inventory_audit\prediction_semantics_audit\run_20261117_105855\b4_seed13_comparison.json
+SIZE=35781
+SHA256=6F6A2E44FF2BACF1B836F8D75C6F63956055E77CEA81EF1882ECA646E0334CB5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_001_dev_status.jsonl
+SIZE=589014
+SHA256=F9262326C8207A45665B67C521A1F74A1EABE4F4DFED2E7F49A9D6D17760A4D4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_002_dev_status.jsonl
+SIZE=587266
+SHA256=1C5A7258C83746A7AF63EADB26617AF6E5C3B1EAFF03BCC3C2C9A9CA7B7F5B00
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_003_dev_status.jsonl
+SIZE=563240
+SHA256=3385EB54B0D6FB991728C18AC8FB53043E0EE2C5741D8F0649C6FD68997950D0
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\B4_seed13_S2_hook.log
+SIZE=1934
+SHA256=C5DEF882D7505193647564F2ACC2098AB9E76B78A0614B95D45546D6E525A425
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\B4_seed13_S3_hook.log
+SIZE=1934
+SHA256=EC644EFA25AB021DDD3623D2E19800A904222718B746D6E8032B8B4CED69E752
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\checkpoint_references\B4_seed13_S2.json
+SIZE=3139
+SHA256=432EA85479B86419E33558BF0D5E234E07DAFCA06F7309C7840661CCBAC73DB8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\checkpoint_references\B4_seed13_S3.json
+SIZE=3139
+SHA256=42101E48BBB0583B85DFEC2CE32591F0AB730EE5ED715D0C64D2F95AFFAEF18E
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S2\train_set.json
+SIZE=7323
+SHA256=937DB4B5B6B6D25014FA392DDFE1706FB64D7E52F393554E60317B0D30DACF59
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S3\train_set.json
+SIZE=7253
+SHA256=A6465A20373D1190BB3E228BE23B9635FC4888C6BB7BE854A63ED5D197E0538F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\predictions\B4_seed13_S2.jsonl
+SIZE=518231
+SHA256=8D415A351B7B0C2076FD9DBF18B1D791449B04A4276D2447DDFA9CF18CF9FB84
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\predictions\B4_seed13_S3.jsonl
+SIZE=491609
+SHA256=5449E166C41741871955B937835223B487787BB03F4CDE3B688126045DDD6654
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\legacy_p1_seed13_b4_sha256.csv
+SIZE=1119
+SHA256=E93E0D5315BCE96F256DE697BBC363B3163E66AAADC9DDDF167DB7A479830D94
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\provenance\B4_seed13\b4_seed13_provenance_record.json
+SIZE=4266
+SHA256=252BC2455C0A701545461147580E6BBBC496D677A1D68EEF277FC50CBAEB3510
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\provenance\B4_seed13\b4_seed13_provenance_record.md
+SIZE=2441
+SHA256=CD0A94A72EBD0988B0BBAEC4F2A70C358051D679AE4F8F861B41D20B8536B5E4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\b4_seed13_checkpoint_provenance_audit.csv
+SIZE=2078
+SHA256=939D55277C81AB746D5520788BB0C17309388874F71EAFE9FF44611D694A40C2
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\b4_seed13_checkpoint_provenance_audit.txt
+SIZE=2373
+SHA256=7EEDD4E68A562DBD2E5B71A3362A89A3032E255B92FE89B0FC117F71FA905416
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S1.json
+SIZE=127
+SHA256=9EFF8E5C8BC3AFB8A388D7E4B94004701CE970C6CB8AFDB5F9A2CE50406E76A1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S2.json
+SIZE=300
+SHA256=559BC3294C0D9348F4E4F17ECB92B62DC095E95FE10C20BB3F701E09E0ACA7C9
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S3.json
+SIZE=300
+SHA256=5400F7A895FFB12B6150CE96200E5A3254C82E04B9C7CA59288FB97502F579EB
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S1.json
+SIZE=127
+SHA256=9EFF8E5C8BC3AFB8A388D7E4B94004701CE970C6CB8AFDB5F9A2CE50406E76A1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S2.json
+SIZE=302
+SHA256=F756FEA1F3049296CF2F1AEB8428C6964E7D3DCAD6C6FBF6F4F91E0F95660AB5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S3.json
+SIZE=302
+SHA256=F82A6EA5D2EF5DADBB074E0204936F78357A68CFDA7B073C2E3BC1EA11AC5BD1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\nll_B4_seed13_S1.json
+SIZE=127
+SHA256=9EFF8E5C8BC3AFB8A388D7E4B94004701CE970C6CB8AFDB5F9A2CE50406E76A1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\nll_B4_seed13_S2.json
+SIZE=347
+SHA256=479349597677D077D4F0CB98D17E26BC3B02CB0BF62897ED031CB3B90DDCC252
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\select_0.json
+SIZE=373
+SHA256=E77B62325E9BCC0D08E7E675100197E91135B5F742A17BDC1230E57DD96DE0FA
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\select_1.json
+SIZE=373
+SHA256=A252FD9CCF86BCDB0E842AD9B2AFF29A8F7282A3658FD8B37954A9969B03645F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\select_2.json
+SIZE=373
+SHA256=10C0A985F286BFF433C00BAD2D65E052D898F7AA259830CA3FB257BE2F0911EE
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\train_0.json
+SIZE=127
+SHA256=9EFF8E5C8BC3AFB8A388D7E4B94004701CE970C6CB8AFDB5F9A2CE50406E76A1
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\train_1.json
+SIZE=360
+SHA256=4D7634AE8C9F5555E30116A228BBED351136331B8B0FD16FA08308270247C4CB
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\train_2.json
+SIZE=360
+SHA256=47AA28844704770A727D896486D2FB4F7822EA96118068B107E53C1E9B9FA613
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\validate_log_0.json
+SIZE=368
+SHA256=DB65056C8FA71EEBB5BBE08934D5B2B11CEC03BFE7C084CBD6D01CA5B925D4C5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\validate_log_1.json
+SIZE=368
+SHA256=CD974EF2D8D45A0B68E443A49E3418C9B2C13FCDF569FE7E249A630F7F45C5CE
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\validate_log_2.json
+SIZE=368
+SHA256=8D81D5473F5EBBCA07E7BE67B317259EE64C28ECB4C199327B01388226D087DB
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_000\train_set.json
+SIZE=7216
+SHA256=D28ACF38054A3C18C79741F35F35DAB20CBCB081CB93B6E04AF4DEFB18FFA645
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_001\train_set.json
+SIZE=7323
+SHA256=937DB4B5B6B6D25014FA392DDFE1706FB64D7E52F393554E60317B0D30DACF59
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_002\train_set.json
+SIZE=7253
+SHA256=A6465A20373D1190BB3E228BE23B9635FC4888C6BB7BE854A63ED5D197E0538F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\adapter_config.json
+SIZE=1207
+SHA256=4746F12097A1FF58B1922E649E8C25809F0140BDDD10BAF94F51270F52566301
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\README.md
+SIZE=5412
+SHA256=4B0C41F121FAAAE79D191781536537529C51D3C8B3BA24B6C3FA56D8845F45F5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\tokenizer.json
+SIZE=12179335
+SHA256=D48BEB5DC8838419F34ACC78392A7ACAB120AC7D4425E4EB021C0B5604EE3E0F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\eval_dev.summary.json
+SIZE=2458
+SHA256=4B2E7282B71739FCED2F265656F0B739395631703B26757FCEA069DAAF3B3716
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\eval_test.jsonl
+SIZE=1278358
+SHA256=027E11D07B53FB50BC537481BD3AFD2A68FFD0267B67E4F3DCC0BC05AED3ABA9
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\eval_test.summary.json
+SIZE=1167
+SHA256=158CE24555F0385C1D72784FEE418B4959970642DAA2DD6FFA6D2880A1862412
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\learnability.jsonl
+SIZE=790900
+SHA256=969CEA9CAA66A743E8A9A46340D604A3CABBE02C8865B0F409784DEBF63A9A7A
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\learnability.summary.json
+SIZE=703
+SHA256=5B4EB028102C4C662D5C1491F0456990ED1B5EC8EE461DC9A53302FB53D02FC0
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\nll.jsonl
+SIZE=963773
+SHA256=4A5DD7716A87E2103159BC40B62A1FEC0C238B3801C498C2370ACCABFF26179E
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\nll.summary.json
+SIZE=775
+SHA256=B98AA1539EC38DA8A28900981F898733AA0DF5CAF545727E58E0EDAF530D2087
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\adapter_config.json
+SIZE=1207
+SHA256=A85051C096FD9AD605886F0308A63BF8197263E69FC8E0D915862880FDB7EAE6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\README.md
+SIZE=5412
+SHA256=4B0C41F121FAAAE79D191781536537529C51D3C8B3BA24B6C3FA56D8845F45F5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\tokenizer.json
+SIZE=12179335
+SHA256=D48BEB5DC8838419F34ACC78392A7ACAB120AC7D4425E4EB021C0B5604EE3E0F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\eval_dev.summary.json
+SIZE=2457
+SHA256=0F846E970A4392B4285A7C405A20E2A94A7F334CF1E3C8ECC25EE4E2EECDF5B5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\eval_test.jsonl
+SIZE=1385928
+SHA256=1B93F5B7457217E7B7BB1F6F574FEDB49CDA75878FFE341AE51E2FABE0868A34
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\eval_test.summary.json
+SIZE=1167
+SHA256=707A2AD5A9CCC1BE979C267A60DFE18A773A27F0162EDB0D3E4AFA559541689D
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\learnability.jsonl
+SIZE=791026
+SHA256=8C335D842DB2789C724EDA04ADDD56929E26F7DE1B96C7AEDC087D587F32170F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\learnability.summary.json
+SIZE=702
+SHA256=E9821365FEA8D5B8877D54856D77E81593152EC875D838E53344F88392EBEB61
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\nll.jsonl
+SIZE=963815
+SHA256=AFB547BAC6D8F2C1C7F725866640A2C155A4380CC3FE1825539E5787BAFA55DF
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\nll.summary.json
+SIZE=775
+SHA256=48C7E4A5FE689E4E9D5772DF739B0E3216A406EF340BCEE52DA992DBF120CD5B
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\adapter_config.json
+SIZE=1207
+SHA256=AE2233773DD055B5EBD4F06314B8C0F8711F9FB06EC9E269FD8F2F8224E9D3D6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\README.md
+SIZE=5412
+SHA256=4B0C41F121FAAAE79D191781536537529C51D3C8B3BA24B6C3FA56D8845F45F5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\tokenizer.json
+SIZE=12179335
+SHA256=D48BEB5DC8838419F34ACC78392A7ACAB120AC7D4425E4EB021C0B5604EE3E0F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\eval_dev.summary.json
+SIZE=2368
+SHA256=858BF0F62AA0F2C55AA5205698CE4BD12985F105A3501DE3F148CB0CA1ABFA3B
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\eval_test.jsonl
+SIZE=1306399
+SHA256=B7853FD14A09E9B4F888183FA7C5E2B53B1E7ECACA6B6A2A240AD3D1B98794EC
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\eval_test.summary.json
+SIZE=1168
+SHA256=FE94049BD654502D0C8181CB8CDE9F979D80C705F91488A98F56C0B1AC4F7CEA
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\adapter_config.json
+SIZE=1207
+SHA256=D5DBB58C5A09C133E2DE10E81E70B80B85E9864519EC28E9827054DC3FC0A2B7
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\adapter_model.safetensors
+SIZE=73911112
+SHA256=8F50D3AB6772C7C01D0C244FD661348A0F61164916CF5396D4F916D7C38C6398
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\student_ckpt_001.zip
+SIZE=70403181
+SHA256=851742C95CDC1DBA0333112F35F2F32D7E8CFE2E4235AE2C5DDC535BC2955615
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\adapter_config.json
+SIZE=1207
+SHA256=044459D785FAA7C8AF726B188A0C451FCA2D94AAFA03BA467EAB0E4F34454664
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\adapter_model.safetensors
+SIZE=73911112
+SHA256=759EA14D7A3953B609A70B06B14515D2B309EE209F00843BFF6D70C8508A71FC
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\student_ckpt_002.zip
+SIZE=70502494
+SHA256=8AE764306B33F9456FFD18B09B4824784A87B1E827D15178E8B26BDCBE307F6F
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\adapter_config.json
+SIZE=1207
+SHA256=1309487B5674DBAC54B86D92802757ED06D9469C802A3919AB06CE0F5B5590F5
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\adapter_model.safetensors
+SIZE=73911112
+SHA256=22D99C60743ED2897586FF22601FF7E8491DBF6495BBAC8E0EDD5C88880B7106
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\chat_template.jinja
+SIZE=2561
+SHA256=8AA40CE145ADB73CB3A75194DC0224702A95850EC5275CABB728496BBD749FC6
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\README.md
+SIZE=5206
+SHA256=2DB35A7C784C24C5AAEF702C1BEB778A045DC59EB13CDD9CC2EEE302C7A73DE4
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\student_ckpt_003.zip
+SIZE=70518071
+SHA256=CB55D9D34244F24964882F71A5654744D3D7CAC8CA2ED6D7EBE77DEB36C968DF
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\tokenizer.json
+SIZE=11421892
+SHA256=3FD169731D2CBDE95E10BF356D66D5997FD885DD8DBB6FB4684DA3F23B2585D8
+
+CATEGORY=OTHER
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\tokenizer_config.json
+SIZE=724
+SHA256=154E5FF1E7C152D964EDF30DA854EA62465C767719AC8E97E58BABF2D4FA9079
+
+CATEGORY=SELECTION_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S2\selection_log.jsonl
+SIZE=2315687
+SHA256=5AA9B4356B4259BA65E51525457D970994C61C935ED6A51CEF0BBA819C842978
+
+CATEGORY=SELECTION_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S3\selection_log.jsonl
+SIZE=2315533
+SHA256=38AABB619407CEE4AB8A73E9F39022AD7434A46361B15D64DF2912979F590F71
+
+CATEGORY=SELECTION_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_000\selection_log.jsonl
+SIZE=2315896
+SHA256=4D1438C62CA6C4EC5E55FD2A44D962CA3881FE5868E698E42D07B436757DFAB2
+
+CATEGORY=SELECTION_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_001\selection_log.jsonl
+SIZE=2315687
+SHA256=5AA9B4356B4259BA65E51525457D970994C61C935ED6A51CEF0BBA819C842978
+
+CATEGORY=SELECTION_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_002\selection_log.jsonl
+SIZE=2315533
+SHA256=38AABB619407CEE4AB8A73E9F39022AD7434A46361B15D64DF2912979F590F71
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001\train_log.json
+SIZE=7116
+SHA256=54F595BDBE4C0C010A6B96FF802161DB7CC305D3E098C1513F298D5F2AD3592F
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002\train_log.json
+SIZE=7207
+SHA256=3CE41159B16B4AD56B1EFE7C7704524FB07A9A7B7D233D7B2CDE0A26D770F20A
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003\train_log.json
+SIZE=7210
+SHA256=41AC5184A1145CF6674B8100DADD654C7BC99F9F397D617244FC8D30E7C9FEFB
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S2\train_log.json
+SIZE=7028
+SHA256=56ACD148F399D14F9668E88CE41A83955279DAB4A30A57C9CCC78FC351F09C76
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_117070\lineage\B4_seed13_S3\train_log.json
+SIZE=7029
+SHA256=B8CA1D00F548118FFA8E3267C439C72EA52E1ECA9FF8E236618995C52613588C
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter\train_log.json
+SIZE=6999
+SHA256=2131D6748ED67A3DACF8ABBAF4B0AF426B58DBACC7CEB61AFD26859204EB9935
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter\train_log.json
+SIZE=7028
+SHA256=56ACD148F399D14F9668E88CE41A83955279DAB4A30A57C9CCC78FC351F09C76
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter\train_log.json
+SIZE=7029
+SHA256=B8CA1D00F548118FFA8E3267C439C72EA52E1ECA9FF8E236618995C52613588C
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\train_log.json
+SIZE=7116
+SHA256=54F595BDBE4C0C010A6B96FF802161DB7CC305D3E098C1513F298D5F2AD3592F
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\train_log.json
+SIZE=7207
+SHA256=3CE41159B16B4AD56B1EFE7C7704524FB07A9A7B7D233D7B2CDE0A26D770F20A
+
+CATEGORY=TRAIN_LOG
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\train_log.json
+SIZE=7210
+SHA256=41AC5184A1145CF6674B8100DADD654C7BC99F9F397D617244FC8D30E7C9FEFB
+

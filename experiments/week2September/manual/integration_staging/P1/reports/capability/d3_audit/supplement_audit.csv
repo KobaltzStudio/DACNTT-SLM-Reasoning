@@ -1,0 +1,86 @@
+﻿problem_id,source_line,status,issues,capabilities_manual,available_fields
+gsm8k_train_00116,1,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00155,2,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00166,3,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""fraction"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00239,4,PASS,,"[""addition"", ""subtraction"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00293,5,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00325,6,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00342,7,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00563,8,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00666,9,PASS,,"[""addition"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00678,10,PASS,,"[""addition"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00713,11,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00724,12,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00761,13,PASS,,"[""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00769,14,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00779,15,PASS,,"[""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00818,16,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00830,17,PASS,,"[""addition"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00840,18,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00934,19,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_00942,20,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01013,21,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01200,22,PASS,,"[""addition"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01280,23,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01334,24,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01377,25,PASS,,"[""addition"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01384,26,PASS,,"[""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01600,27,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_01869,28,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02039,29,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02059,30,PASS,,"[""addition"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02327,31,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02342,32,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02359,33,PASS,,"[""addition"", ""multiplication"", ""division"", ""fraction"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02376,34,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02486,35,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02508,36,PASS,,"[""multiplication"", ""division"", ""fraction"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02634,37,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02713,38,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02754,39,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02837,40,PASS,,"[""addition"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02858,41,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02871,42,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02893,43,PASS,,"[""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02919,44,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02960,45,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_02997,46,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03016,47,PASS,,"[""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03048,48,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03116,49,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03125,50,PASS,,"[""addition"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03140,51,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03263,52,PASS,,"[""addition"", ""multiplication"", ""division"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03289,53,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03316,54,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03355,55,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03360,56,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03390,57,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""division"", ""fraction"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03439,58,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03734,59,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03879,60,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03882,61,PASS,,"[""subtraction"", ""multiplication"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_03999,62,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04046,63,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04231,64,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04426,65,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04470,66,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04617,67,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_04862,68,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05030,69,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05194,70,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05287,71,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05356,72,PASS,,"[""addition"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05451,73,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05463,74,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05486,75,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05565,76,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05585,77,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_05715,78,PASS,,"[""addition"", ""subtraction"", ""multiplication"", ""percentage"", ""fraction""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_06274,79,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_06506,80,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_06921,81,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_07080,82,PASS,,"[""subtraction"", ""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_07117,83,PASS,,"[""subtraction"", ""multiplication"", ""percentage""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_07158,84,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
+gsm8k_train_07349,85,PASS,,"[""multiplication"", ""division"", ""ratio""]",annotator_id;capabilities_manual;difficulty_manual;notes;problem_id;schema_version
