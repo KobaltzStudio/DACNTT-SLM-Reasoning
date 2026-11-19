@@ -1,0 +1,3 @@
+# Adapter weights and tokenizer copies stay out of git (about 74 MB per adapter).
+# The SHA of every file is still listed in each bundle's RESULTS_SHA256SUMS.txt.
+*/P2/experiments/week2September/manual/models/

@@ -1,0 +1,64 @@
+{
+  "schema": "p1p2.handoff.execution.v1",
+  "scope": "P1-DEFICIT:13:S2",
+  "index_sha256": "dbe0d5bb0b2b80df5d0b4f41ff57b3318a543c264e2d5b20c5c7f818e0424f62",
+  "work": "/workspace/intake/work",
+  "exit_code": 0,
+  "status": "PASS",
+  "post_validation_error": "",
+  "outputs": {
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl": {
+      "sha256": "4a2800d7ff3c4000d449132bc3a577c523f1d9d80e7ad02416aa1ed52012a5a0",
+      "bytes": 1969
+    },
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/S2/eval_dev.summary.json": {
+      "sha256": "51db3185fb841d41a26f8d5c959404da2247b1027e8a18852e2e4d0a589e3105",
+      "bytes": 2401
+    },
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/S2/eval_dev.jsonl": {
+      "sha256": "6fb59fdf21b1ae853ee15414dd9bf2555e1f497be374d09a64257f25427d2021",
+      "bytes": 502380
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed13/selection_round_003.json": {
+      "sha256": "23455a8dca5171f678bd88f224d31f3b2844604318cb8494dd5c2e545a30bcbf",
+      "bytes": 2625
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/student_capability_evaluation_manifest.json": {
+      "sha256": "ab5cd4a2cd5d27f43dacc254fa3b0048e91bd7ff4ac97cfabee8f7196570d297",
+      "bytes": 2283
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/input_fingerprint.json": {
+      "sha256": "cff5174bf766852f55fecda7fbc1fcafc67aca1bed04f702563d2cdb9a8fdcb4",
+      "bytes": 1061
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/checkpoint_lineage.json": {
+      "sha256": "699ed59f27673afc1ccc36f73b104b60ee0b4ec2633bc47b201fa3734a7b5d9f",
+      "bytes": 1537
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/prediction_coverage_report.json": {
+      "sha256": "7061fcb50120b1f1f614d657647ac8eae5d4e661369d48b6bdfe01ac00eab128",
+      "bytes": 551
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/capability_metrics.jsonl": {
+      "sha256": "e844117833583332d0038e8c7c600ef76c8e4202026d1fd96c28ee6cd1692edd",
+      "bytes": 3130
+    },
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/capability_metrics.csv": {
+      "sha256": "7247b620b220f120a857a52d2cf4af43a8e2ed93a3df27cd8f224f201ce0348b",
+      "bytes": 1626
+    }
+  },
+  "changed_this_attempt": [
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/capability_metrics.csv",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/capability_metrics.jsonl",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/checkpoint_lineage.json",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/input_fingerprint.json",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/prediction_coverage_report.json",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S2/student_capability_evaluation_manifest.json",
+    "P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed13/selection_round_003.json",
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/S2/eval_dev.jsonl",
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/S2/eval_dev.summary.json",
+    "P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl"
+  ],
+  "utc": "2026-11-19T04:31:31.435131+00:00"
+}
