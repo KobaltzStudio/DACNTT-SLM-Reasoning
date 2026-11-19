@@ -1,6 +1,1 @@
-# The parent handoff holds restricted research material. Initialize any public repo under github/.
-/*
-!/.gitignore
-!/.gitattributes
-!/README.md
-!/AGENTS.md
+# Include the complete handoff in this release checkout.

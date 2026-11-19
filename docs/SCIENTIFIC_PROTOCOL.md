@@ -1,0 +1,7 @@
+# Scientific protocol
+
+The sealed experiment is seed 13 with shared Student S0, pinned Qwen/Qwen2.5-1.5B-Instruct revision, fixed token budget and supervised LoRA. The unified controller owns stage order and method/checkpoint linkage. P1 models capability deficits. P2 uses checkpoint-conditioned learnability from Student NLL. A P1-DEFICIT uses deficit only with no NLL. B P1P2 scores 0.5 × P1 deficit plus 0.5 × learnability percentile. Its S2/S3 selection must use fresh NLL tagged S1/S2 from the exact parent adapter.
+
+S1 checkpoints start from S0; subsequent checkpoint adapters chain to the previous verified checkpoint. Integrated round numbering is one-based. The baseline selection adapter preserves its zero-based mapping. Strict D_dev uses `status == valid` on 500 unique IDs, followed by the hook with the 85 approved Gold IDs and seven capabilities. The hook, checkpoint log and capability-state provenance control whether later stages can proceed. B2–B5 appear in baseline source/registry and the CLI. The local dry-run and accepted resume workflows here target A/B seed 13. That evidence does not establish full runtime PASS for B2–B5.
+
+G7 selects on 415 D_dev_select IDs only, strict status, earliest checkpoint tie-break. Final D_test remains NOT RUN; only a locked G7 FINAL selection with independent SHA, evaluator/checkpoint validation and separate approval can enable it. Graph work is proposed and separate from these frozen runs. See [remaining work](REMAINING_WORK.md) and [graph research](../future_research/README.md).

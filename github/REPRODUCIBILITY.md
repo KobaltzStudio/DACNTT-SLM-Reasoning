@@ -1,0 +1,7 @@
+# Reproduce the verified staging layout
+
+1. Obtain the approved immutable runtime from the experiment operator. `manifests/runtime_payload.csv` lists every required path, size and SHA, including all three package indices. Preserve all bytes and the internal relative paths. The public checkout provides source; matching source from it can satisfy manifest rows, while every excluded runtime file still requires the approved private deliverable. Do not substitute a different split, config or checkpoint to satisfy a path.
+2. Verify that release with `bash deployment/verify_package.sh --package <approved-package-root>`. Make the operational copy at a different root using `setup_environment.sh`, then run `linux_cpu_preflight.sh` with the same approved package and operational root. Use a Python 3.11 venv and the dependency lock. The tests in this tree are designed for the fully restored runtime layout, including the versioned configs.
+3. Verify the separate Student snapshot against `manifests/MODEL_CACHE_SHA256SUMS.txt`. Use the matching pinned HF revision and private transfer. Run the verified, bounded wrappers only when authorized. Keep a trusted snapshot of checksums and logs outside the mutable work tree.
+
+No remote locator, private dataset URL or signed credential is part of this candidate. The private operator must supply the exact sealed input package and cache bytes. Neither hash list grants redistribution rights.

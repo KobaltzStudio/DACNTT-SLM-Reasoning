@@ -1,0 +1,250 @@
+﻿python.exe : test_collision_preserves_stage 
+(test_capability_eval_publication.EvaluatorPublicationTests.test_collision_preserves_stage) ... ok
+At line:2 char:112
++ ... KEND='Agg'; & 'C:/KLTN-SLM-Reasoning/.venv/Scripts/python.exe' -B -m  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_collision_...s_stage) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_persistent_permission_error_keeps_stage 
+(test_capability_eval_publication.EvaluatorPublicationTests.test_persistent_permission_error_keeps_stage) ... ok
+test_publish_directory (test_capability_eval_publication.EvaluatorPublicationTests.test_publish_directory) ... ok
+test_transient_permission_error_retries 
+(test_capability_eval_publication.EvaluatorPublicationTests.test_transient_permission_error_retries) ... ok
+test_g7_and_adapter_mismatch_block_evaluator 
+(test_final_d_test.FinalDTestTests.test_g7_and_adapter_mismatch_block_evaluator) ... ok
+test_hash_pins_and_partial_selection_block_evaluator 
+(test_final_d_test.FinalDTestTests.test_hash_pins_and_partial_selection_block_evaluator) ... ok
+test_prediction_validation_rejects_duplicate_and_wrong_tag 
+(test_final_d_test.FinalDTestTests.test_prediction_validation_rejects_duplicate_and_wrong_tag) ... ok
+test_split_accepts_exact_crlf_and_rejects_tamper 
+(test_final_d_test.FinalDTestTests.test_split_accepts_exact_crlf_and_rejects_tamper) ... ok
+test_stub_publishes_strict_metrics_and_refuses_conflicting_output 
+(test_final_d_test.FinalDTestTests.test_stub_publishes_strict_metrics_and_refuses_conflicting_output) ... ok
+test_g6_canonicalizes_exact_duplicates_and_blocks_conflicts 
+(test_p1p2_analysis.AnalysisTests.test_g6_canonicalizes_exact_duplicates_and_blocks_conflicts) ... ok
+test_g6_maps_only_the_expected_external_g4_archive 
+(test_p1p2_analysis.AnalysisTests.test_g6_maps_only_the_expected_external_g4_archive) ... ok
+test_g6_rejects_malformed_manifest_and_sidecar_mutations 
+(test_p1p2_analysis.AnalysisTests.test_g6_rejects_malformed_manifest_and_sidecar_mutations) ... ok
+test_g7_partial_outputs_one_shared_s0_and_never_selects 
+(test_p1p2_analysis.AnalysisTests.test_g7_partial_outputs_one_shared_s0_and_never_selects) ... ok
+test_g7_rejects_foreign_lineage_before_prediction 
+(test_p1p2_analysis.AnalysisTests.test_g7_rejects_foreign_lineage_before_prediction) ... ok
+test_g7_strict_scoring_extra_and_missing_ids_ties_and_duplicates 
+(test_p1p2_analysis.AnalysisTests.test_g7_strict_scoring_extra_and_missing_ids_ties_and_duplicates) ... ok
+test_g8_composition_and_isolated_renderer (test_p1p2_analysis.AnalysisTests.test_g8_composition_and_isolated_renderer) 
+... ok
+test_g8_jaccard_csv_sources_resolve_historical_zero_based_rounds 
+(test_p1p2_analysis.AnalysisTests.test_g8_jaccard_csv_sources_resolve_historical_zero_based_rounds) ... ok
+test_g8_partial_accepts_only_missing_artifacts 
+(test_p1p2_analysis.AnalysisTests.test_g8_partial_accepts_only_missing_artifacts) ... ok
+test_canonical_json_is_key_order_independent 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_canonical_json_is_key_order_independent) ... ok
+test_directory_digest_preserves_the_windows_order_on_any_host 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_directory_digest_preserves_the_windows_order_on_any_host) ... ok
+test_ensure_no_overwrite_rejects_existing_file 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_ensure_no_overwrite_rejects_existing_file) ... ok
+test_fingerprint_and_verify_source_files 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_fingerprint_and_verify_source_files) ... ok
+test_fingerprint_detects_tampering 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_fingerprint_detects_tampering) ... ok
+test_fingerprint_rejects_duplicate_paths 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_fingerprint_rejects_duplicate_paths) ... ok
+test_fingerprint_rejects_missing_input 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_fingerprint_rejects_missing_input) ... ok
+test_publish_bytes_creates_file_and_refuses_overwrite 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_bytes_creates_file_and_refuses_overwrite) ... ok
+test_publish_json_is_valid_json (test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_json_is_valid_json) ... 
+ok
+test_publish_manifest_attaches_fingerprint 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_manifest_attaches_fingerprint) ... ok
+test_publish_pair_creates_both_files 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_pair_creates_both_files) ... ok
+test_publish_pair_refuses_overwrite_without_mutation 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_pair_refuses_overwrite_without_mutation) ... ok
+test_publish_pair_rolls_back_first_if_second_publish_fails 
+(test_p1p2_artifact_manager.ArtifactManagerTests.test_publish_pair_rolls_back_first_if_second_publish_fails) ... ok
+test_sha256_file_matches_hashlib (test_p1p2_artifact_manager.ArtifactManagerTests.test_sha256_file_matches_hashlib) 
+... ok
+test_different_existing_state_is_not_overwritten 
+(test_p1p2_capability_state.CapabilityStateTests.test_different_existing_state_is_not_overwritten) ... ok
+test_exact_existing_state_is_reused 
+(test_p1p2_capability_state.CapabilityStateTests.test_exact_existing_state_is_reused) ... ok
+test_fingerprint_inputs_mismatch_is_rejected 
+(test_p1p2_capability_state.CapabilityStateTests.test_fingerprint_inputs_mismatch_is_rejected) ... ok
+test_manifest_lineage_seed_mismatch_is_rejected 
+(test_p1p2_capability_state.CapabilityStateTests.test_manifest_lineage_seed_mismatch_is_rejected) ... ok
+test_valid_sidecar_creates_state (test_p1p2_capability_state.CapabilityStateTests.test_valid_sidecar_creates_state) 
+... ok
+test_checkpoint_round_mapping (test_p1p2_controller.ControllerPolicyTests.test_checkpoint_round_mapping) ... ok
+test_checkpoint_selection_scores_strict_status_over_full_partition 
+(test_p1p2_controller.ControllerPolicyTests.test_checkpoint_selection_scores_strict_status_over_full_partition) ... ok
+test_dry_run_rejects_s2_without_real_or_planned_s1 
+(test_p1p2_controller.ControllerPolicyTests.test_dry_run_rejects_s2_without_real_or_planned_s1) ... ok
+test_hook_forwards_all_gold_and_dev_inputs 
+(test_p1p2_controller.ControllerPolicyTests.test_hook_forwards_all_gold_and_dev_inputs) ... ok
+test_p1_deficit_command_never_receives_nll 
+(test_p1p2_controller.ControllerPolicyTests.test_p1_deficit_command_never_receives_nll) ... ok
+test_p1_existing_selection_guard_uses_round_no 
+(test_p1p2_controller.ControllerPolicyTests.test_p1_existing_selection_guard_uses_round_no) ... ok
+test_p1p2_selection_requires_current_nll_argument 
+(test_p1p2_controller.ControllerPolicyTests.test_p1p2_selection_requires_current_nll_argument) ... ok
+test_p2_existing_selection_guard_uses_target_checkpoint 
+(test_p1p2_controller.ControllerPolicyTests.test_p2_existing_selection_guard_uses_target_checkpoint) ... ok
+test_b4_b5_nll_policies_are_distinct_and_explicit 
+(test_p1p2_method_registry.MethodRegistryTests.test_b4_b5_nll_policies_are_distinct_and_explicit) ... ok
+test_custom_seed_namespace_is_separate 
+(test_p1p2_method_registry.MethodRegistryTests.test_custom_seed_namespace_is_separate) ... ok
+test_forbidden_namespace_is_runs_main 
+(test_p1p2_method_registry.MethodRegistryTests.test_forbidden_namespace_is_runs_main) ... ok
+test_p1_deficit_does_not_require_nll_or_graph 
+(test_p1p2_method_registry.MethodRegistryTests.test_p1_deficit_does_not_require_nll_or_graph) ... ok
+test_p1_graph_is_disabled_without_evidence 
+(test_p1p2_method_registry.MethodRegistryTests.test_p1_graph_is_disabled_without_evidence) ... ok
+test_p1p2_policy_is_frozen_at_alpha_half 
+(test_p1p2_method_registry.MethodRegistryTests.test_p1p2_policy_is_frozen_at_alpha_half) ... ok
+test_p2_methods_delegate_to_frozen_config 
+(test_p1p2_method_registry.MethodRegistryTests.test_p2_methods_delegate_to_frozen_config) ... ok
+test_registered_seeds_are_frozen (test_p1p2_method_registry.MethodRegistryTests.test_registered_seeds_are_frozen) ... 
+ok
+test_registry_schema_and_version (test_p1p2_method_registry.MethodRegistryTests.test_registry_schema_and_version) ... 
+ok
+test_required_methods_exist (test_p1p2_method_registry.MethodRegistryTests.test_required_methods_exist) ... ok
+test_round_mapping_and_dev_only_evaluation 
+(test_p1p2_method_registry.MethodRegistryTests.test_round_mapping_and_dev_only_evaluation) ... ok
+test_dry_run_never_publishes_checkpoint_log_for_existing_adapter 
+(test_p1p2_no_overwrite.NoOverwriteTests.test_dry_run_never_publishes_checkpoint_log_for_existing_adapter) ... ok
+test_forbidden_namespace_is_rejected (test_p1p2_no_overwrite.NoOverwriteTests.test_forbidden_namespace_is_rejected) 
+... ok
+test_partial_selection_pair_is_rejected 
+(test_p1p2_no_overwrite.NoOverwriteTests.test_partial_selection_pair_is_rejected) ... ok
+test_completed_prediction_is_recognized (test_p1p2_resume.ResumeTests.test_completed_prediction_is_recognized) ... ok
+test_partial_prediction_is_not_complete (test_p1p2_resume.ResumeTests.test_partial_prediction_is_not_complete) ... ok
+test_checkpoint_log_requires_a_line_boundary_before_appending 
+(test_p1p2_runtime.RuntimeTests.test_checkpoint_log_requires_a_line_boundary_before_appending) ... ok
+test_dry_run_creates_no_model_or_run_outputs 
+(test_p1p2_runtime.RuntimeTests.test_dry_run_creates_no_model_or_run_outputs) ... ok
+test_existing_lock_is_preserved (test_p1p2_runtime.RuntimeTests.test_existing_lock_is_preserved) ... ok
+test_hook_rejects_incomplete_input_without_sidecar 
+(test_p1p2_runtime.RuntimeTests.test_hook_rejects_incomplete_input_without_sidecar) ... ok
+test_legacy_path_mapping_is_explicit_and_rejects_ambiguous_paths 
+(test_p1p2_runtime.RuntimeTests.test_legacy_path_mapping_is_explicit_and_rejects_ambiguous_paths) ... ok
+test_log_publication_failure_does_not_retrain 
+(test_p1p2_runtime.RuntimeTests.test_log_publication_failure_does_not_retrain) ... ok
+test_partial_adapter_and_corrupt_intent_are_preserved 
+(test_p1p2_runtime.RuntimeTests.test_partial_adapter_and_corrupt_intent_are_preserved) ... ok
+test_partial_evaluation_requires_newline_before_append 
+(test_p1p2_runtime.RuntimeTests.test_partial_evaluation_requires_newline_before_append) ... ok
+test_partial_prediction_resumes_without_replacing_existing_rows 
+(test_p1p2_runtime.RuntimeTests.test_partial_prediction_resumes_without_replacing_existing_rows) ... ok
+test_subprocess_failures_stop_and_resume (test_p1p2_runtime.RuntimeTests.test_subprocess_failures_stop_and_resume) ... 
+ok
+test_three_rounds_and_exact_resume (test_p1p2_runtime.RuntimeTests.test_three_rounds_and_exact_resume) ... ok
+test_windows_staging_reuses_s1_and_plans_only_remaining_s2_stages 
+(test_p1p2_runtime.RuntimeTests.test_windows_staging_reuses_s1_and_plans_only_remaining_s2_stages) ... ok
+test_cli_does_not_expose_alpha_override (test_p1p2_selector.SelectorUnitTests.test_cli_does_not_expose_alpha_override) 
+... ok
+test_nll_requires_exact_token_coverage (test_p1p2_selector.SelectorUnitTests.test_nll_requires_exact_token_coverage) 
+... ok
+test_nll_validates_supplied_pool_hash_and_checkpoint 
+(test_p1p2_selector.SelectorUnitTests.test_nll_validates_supplied_pool_hash_and_checkpoint) ... ok
+test_p1_is_mean_of_tag_deficits (test_p1p2_selector.SelectorUnitTests.test_p1_is_mean_of_tag_deficits) ... ok
+test_percentile_average_ties (test_p1p2_selector.SelectorUnitTests.test_percentile_average_ties) ... ok
+test_percentile_single_item (test_p1p2_selector.SelectorUnitTests.test_percentile_single_item) ... ok
+test_pool_rejects_unverified (test_p1p2_selector.SelectorUnitTests.test_pool_rejects_unverified) ... ok
+test_previous_train_set_checks_method_seed_round_pool_and_ids 
+(test_p1p2_selector.SelectorUnitTests.test_previous_train_set_checks_method_seed_round_pool_and_ids) ... ok
+test_previous_train_set_requires_complete_round_lineage 
+(test_p1p2_selector.SelectorUnitTests.test_previous_train_set_requires_complete_round_lineage) ... ok
+test_publish_pair_creates_both_outputs (test_p1p2_selector.SelectorUnitTests.test_publish_pair_creates_both_outputs) 
+... ok
+test_publish_pair_refuses_overwrite (test_p1p2_selector.SelectorUnitTests.test_publish_pair_refuses_overwrite) ... ok
+test_budget_and_selector_constants_match_p2 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_budget_and_selector_constants_match_p2) ... ok
+test_default_methods_are_registered_and_enabled 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_default_methods_are_registered_and_enabled) ... ok
+test_dev_and_test_protocol (test_p1p2_unified_config.UnifiedRunConfigTests.test_dev_and_test_protocol) ... ok
+test_dry_run_and_resume_safety (test_p1p2_unified_config.UnifiedRunConfigTests.test_dry_run_and_resume_safety) ... ok
+test_graph_method_remains_disabled (test_p1p2_unified_config.UnifiedRunConfigTests.test_graph_method_remains_disabled) 
+... ok
+test_model_revisions_match_frozen_p2_config 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_model_revisions_match_frozen_p2_config) ... ok
+test_namespace_separation_and_protected_paths 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_namespace_separation_and_protected_paths) ... ok
+test_nll_policies_match_registry (test_p1p2_unified_config.UnifiedRunConfigTests.test_nll_policies_match_registry) ... 
+ok
+test_p1p2_alpha_is_frozen (test_p1p2_unified_config.UnifiedRunConfigTests.test_p1p2_alpha_is_frozen) ... ok
+test_pool_fingerprint_and_verified_filter 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_pool_fingerprint_and_verified_filter) ... ok
+test_post_eval_cli_contract (test_p1p2_unified_config.UnifiedRunConfigTests.test_post_eval_cli_contract) ... ok
+test_registered_seeds_match_registry 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_registered_seeds_match_registry) ... ok
+test_round_and_checkpoint_mapping (test_p1p2_unified_config.UnifiedRunConfigTests.test_round_and_checkpoint_mapping) 
+... ok
+test_schema_and_version (test_p1p2_unified_config.UnifiedRunConfigTests.test_schema_and_version) ... ok
+test_training_parameters_are_not_duplicated 
+(test_p1p2_unified_config.UnifiedRunConfigTests.test_training_parameters_are_not_duplicated) ... ok
+test_invalid_range (test_run_p1_p2_cli.CliTests.test_invalid_range) ... ok
+test_matrix_arguments (test_run_p1_p2_cli.CliTests.test_matrix_arguments) ... ok
+test_range_excludes_start_checkpoint (test_run_p1_p2_cli.CliTests.test_range_excludes_start_checkpoint) ... ok
+test_round_and_range_conflict (test_run_p1_p2_cli.CliTests.test_round_and_range_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 103 tests in 31.931s
+
+OK
+PUBLICATION_RETRY=1/5 DELAY_SECONDS=0.25
+PUBLICATION_RETRY=2/5 DELAY_SECONDS=0.5
+PUBLICATION_RETRY=3/5 DELAY_SECONDS=1.0
+PUBLICATION_RETRY=4/5 DELAY_SECONDS=2.0
+PUBLICATION_RETRY=5/5 DELAY_SECONDS=4.0
+PUBLICATION_RETRY=1/5 DELAY_SECONDS=0.25
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=SHARED_seed0_S0
+SOURCE_METHOD=SHARED
+SOURCE_SEED=0
+SOURCE_ROUND=0
+TARGET_METHOD=P1P2
+TARGET_SEED=13
+SELECTION_ROUND=1
+CAPABILITY_COUNT=7
+STATE_SHA256=48761b89eeab917467f0588dbdd8dbe30a471f0930a845b91eaa2414edb805fb
+STATE_PATH=C:\Users\PC - NGHI\AppData\Local\Temp\p1p2_capability_state_test_lwzawlg5\state\S0_state.json
+CAPABILITY_STATE_VALIDATION=PASS
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=SHARED_seed0_S0
+SOURCE_METHOD=SHARED
+SOURCE_SEED=0
+SOURCE_ROUND=0
+TARGET_METHOD=P1P2
+TARGET_SEED=13
+SELECTION_ROUND=1
+CAPABILITY_COUNT=7
+STATE_SHA256=dfad9904192daa11d4702e69bd2595d56bccb25570abacf675a5107c530a1b44
+STATE_PATH=C:\Users\PC - NGHI\AppData\Local\Temp\p1p2_capability_state_test_tt03yr47\state\S0_state.json
+CAPABILITY_STATE_VALIDATION=PASS
+CAPABILITY_STATE=EXACT_REUSE
+SOURCE_RUN_ID=SHARED_seed0_S0
+SOURCE_METHOD=SHARED
+SOURCE_SEED=0
+SOURCE_ROUND=0
+TARGET_METHOD=P1P2
+TARGET_SEED=13
+SELECTION_ROUND=1
+CAPABILITY_COUNT=7
+STATE_SHA256=dfad9904192daa11d4702e69bd2595d56bccb25570abacf675a5107c530a1b44
+STATE_PATH=C:\Users\PC - NGHI\AppData\Local\Temp\p1p2_capability_state_test_tt03yr47\state\S0_state.json
+CAPABILITY_STATE_VALIDATION=PASS
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=SHARED_seed0_S0
+SOURCE_METHOD=SHARED
+SOURCE_SEED=0
+SOURCE_ROUND=0
+TARGET_METHOD=P1P2
+TARGET_SEED=13
+SELECTION_ROUND=1
+CAPABILITY_COUNT=7
+STATE_SHA256=0aeea7d6859a014ae1f6c0e7cd8cd931bc2c62e505705de978e7125bdd7d7d2c
+STATE_PATH=C:\Users\PC - NGHI\AppData\Local\Temp\p1p2_capability_state_test_l7q4zu6c\state\S0_state.json
+CAPABILITY_STATE_VALIDATION=PASS

@@ -1,0 +1,32 @@
+# Direct dependencies of the project (pinned).
+# Full resolved environment: requirements-lock.txt
+# Install: pip install -r requirements.txt
+# Works on Windows and Linux (x86_64), Python 3.11-3.14, NVIDIA driver with CUDA 12.6+.
+# Team machines: Windows 11 + Python 3.11, Linux + Python 3.14.
+
+# torch/torchvision +cu126 builds are only on the PyTorch index
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+# Models and training
+torch==2.13.0+cu126
+torchvision==0.28.0+cu126
+transformers==5.15.0
+accelerate==1.14.0
+peft==0.20.0
+trl==1.10.0
+bitsandbytes==0.50.2
+
+# Data
+datasets==5.0.1
+huggingface_hub==1.27.0
+
+# Teacher generation through the LM Studio OpenAI-compatible API
+openai==3.3.0
+requests==2.34.2
+
+# Validation, analysis and plots
+jsonschema==4.26.0
+# scipy 1.18 requires Python >= 3.12; 1.17.1 is the last release for 3.11
+scipy==1.17.1
+networkx==3.6.1
+matplotlib==3.11.2

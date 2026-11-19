@@ -1,0 +1,24 @@
+# Defense in depth: stage only audited manifests/public_files.txt.
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+*.pem
+*.key
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.zip
+*.log
+runtime/
+recovery/
+analysis/
+artifacts/
+**/data/
+**/splits/
+**/runs/
+**/models/
+**/reports/
+**/.cache/

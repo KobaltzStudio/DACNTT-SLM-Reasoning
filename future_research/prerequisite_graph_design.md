@@ -1,0 +1,5 @@
+# Directed prerequisite design — PROPOSED
+
+Define a candidate edge u → v as a preregistered claim that improving u causes a meaningful gain on v under a specified task population and intervention. The node metadata must quote a versioned frozen capability definition. Record hypothesis, intervention, outcome set, matched controls, overlap exclusions, effect estimate, interval, and links/checksums for supporting evidence. Evidence status can be proposed, supported, inconclusive, contradicted or replication pending.
+
+Co-occurrence and mastery correlation are descriptive signals for proposing pairs. They cannot establish direction or causality. Reciprocal transfer is possible, and a DAG is an additional model assumption requiring justification. Do not enforce acyclicity by dropping inconvenient hypotheses. Separate graph discovery, model tuning and falsification data, and carry unsupported pairs as missing. Register exclusion rules and multiplicity adjustments before reading outcomes. No edge list is authorized in the current project.

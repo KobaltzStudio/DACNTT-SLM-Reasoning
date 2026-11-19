@@ -1,0 +1,12 @@
+{
+  "fingerprint": "af3ce2a684db803f0b4136b3bae24c884229bf517c672904ab4af23ab56be7cc",
+  "inputs": {
+    "checkpoint": "77cc61ad0f35586c6ad0a688b9515a84ad79912bd149aa4e9fe9be5c37d6548e",
+    "dev_predictions": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "gold_labels": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+    "approval_csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "config": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461"
+  }
+}

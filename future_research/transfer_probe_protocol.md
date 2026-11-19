@@ -1,0 +1,5 @@
+# Causal transfer probe protocol — PROPOSED
+
+Randomize independent starting Student replicas to matched interventions for u, neutral/no added training and a positive control that directly trains v. Include a negative unrelated source and explicit reverse-direction probes. Keep the same parent, token budget, training schedule and model settings. Separate and deduplicate intervention and probe items by task, solution template and source lineage; never use D_test for development. Prevent a matched intervention from implicitly training the outcome skill.
+
+Report pre/post strict accuracy and matched difference-in-differences on held-out v with effect size, intervals and seed variation. Pair results by common items when appropriate and correct for repeated tested edges. Validate treatment exposure and negative controls. Use predeclared minimum meaningful effect and an independent replication. Lock analysis and protocol before unblinding. Do not infer a graph from this project's present single-seed learning curves.
