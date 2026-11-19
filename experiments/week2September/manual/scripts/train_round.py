@@ -62,6 +62,7 @@ def main():
     ap.add_argument("--no-gradient-checkpointing", action="store_true")
     ap.add_argument("--pool", type=Path, default=None,
                     help="pool for train sets without a 'pool' field (default: official pool v1)")
+    ap.add_argument("--legacy-windows-root", help="Explicit archived Windows manual root")
     add_model_args(ap)
     args = ap.parse_args()
 
@@ -81,12 +82,23 @@ def main():
 
     from peft import LoraConfig, PeftModel, get_peft_model
     from transformers import AutoModelForCausalLM, AutoTokenizer
+    from capability_eval import hash_path
 
     train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
     if "pool" in train_set:
-        pool_path = MANUAL_DIR / train_set["pool"]
+        if args.legacy_windows_root:
+            from p1p2_paths import artifact_path, legacy_root
+
+            pool_path = artifact_path(MANUAL_DIR, train_set["pool"], legacy_root(args.legacy_windows_root))
+            if not train_set.get("pool_sha256") or (args.pool and args.pool.resolve() != pool_path):
+                raise ValueError("Mapped train-set pool must match the configured pool and have a recorded SHA-256")
+        else:
+            pool_path = MANUAL_DIR / train_set["pool"]
         if args.pool and args.pool.resolve() != pool_path.resolve():
-            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+            # Migrated runs may retain an absolute path from the original host.
+            if pool_path.exists() or not train_set.get("pool_sha256"):
+                raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+            pool_path = args.pool
         if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
             raise ValueError(f"{pool_path} changed since the train set was drawn")
     else:
@@ -106,6 +118,7 @@ def main():
     if not args.no_gradient_checkpointing:
         model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
         model.enable_input_require_grads()
+    parent_sha256 = hash_path(Path(args.init_adapter)) if args.init_adapter else None
     if args.init_adapter:
         model = PeftModel.from_pretrained(model, args.init_adapter, is_trainable=True)
     else:
@@ -160,6 +173,7 @@ def main():
     tok.save_pretrained(args.adapter_dir)
     write_json(args.adapter_dir / "train_log.json", {
         "checkpoint_parent": args.init_adapter or "student_ckpt_000",
+        "checkpoint_parent_sha256": parent_sha256,
         "seed": args.seed, "data_order_seed": args.seed,
         "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
         "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
@@ -176,6 +190,7 @@ def main():
         "beta_round_tokens_config": cfg["budget"]["beta_round_tokens"],
         "elapsed_seconds": round(time.time() - t0, 1),
         "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "peak_gpu_reserved_bytes": torch.cuda.max_memory_reserved() if torch.cuda.is_available() else None,
         "config_sha256": sha256_file(CONFIG_PATH),
         "environment": environment_info(torch),
         "steps_log": log,

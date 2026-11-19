@@ -1,0 +1,22 @@
+ .../scripts/build_capability_learning_dynamics.py  | 188 +++++++-
+ .../manual/scripts/capability_eval.py              |  34 +-
+ .../week2September/manual/scripts/compute_nll.py   |   4 +
+ .../week2September/manual/scripts/eval_student.py  |   7 +-
+ .../manual/scripts/p1p2_artifact_manager.py        |  22 +
+ .../manual/scripts/p1p2_capability_state.py        |  37 +-
+ .../manual/scripts/p1p2_controller.py              | 491 +++++++++++++++------
+ .../manual/scripts/run_p1p2_post_eval.py           |  36 +-
+ .../week2September/manual/scripts/train_round.py   |  19 +-
+ .../manual/tests/test_p1p2_artifact_manager.py     |  10 +
+ .../manual/tests/test_p1p2_controller.py           |  29 +-
+ .../manual/tests/test_p1p2_no_overwrite.py         |  19 +
+ 12 files changed, 686 insertions(+), 210 deletions(-)
+warning: in the working copy of 'experiments/week2September/manual/scripts/build_capability_learning_dynamics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/scripts/capability_eval.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_artifact_manager.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_capability_state.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_controller.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/scripts/run_p1p2_post_eval.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_artifact_manager.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_controller.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_no_overwrite.py', LF will be replaced by CRLF the next time Git touches it

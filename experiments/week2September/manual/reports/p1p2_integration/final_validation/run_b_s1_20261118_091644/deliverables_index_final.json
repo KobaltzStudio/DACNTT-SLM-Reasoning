@@ -1,0 +1,252 @@
+{
+  "g6": {
+    "raw": 39,
+    "logical": 37,
+    "missing": [
+      [
+        "P1-DEFICIT",
+        "S2"
+      ],
+      [
+        "P1-DEFICIT",
+        "S3"
+      ],
+      [
+        "P1P2",
+        "S2"
+      ],
+      [
+        "P1P2",
+        "S3"
+      ]
+    ]
+  },
+  "g7": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g7\\checkpoint_selection_seed13_partial.json",
+    "sha256": "47e859b90973406e0c9c9780d6da8383fe7726912ccc2385561115b3339c53b0"
+  },
+  "figures": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\figures\\seed13_v2_1\\figure_manifest.json",
+    "sha256": "44805aa33aee94fe4f34b4605b4a218217c1b9430dc90b9863814da121203167"
+  },
+  "generated": [
+    "capability_makeup_seed13",
+    "capability_mastery_seed13",
+    "learnability_distribution_seed13",
+    "p1_capability_learning_curves_seed13",
+    "selection_composition_seed13",
+    "selection_jaccard_seed13",
+    "student_accuracy_seed13"
+  ],
+  "at": "2026-11-18T14:59:09.486928+00:00",
+  "run_b": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_seed13_s1_validation.json",
+    "sha256": "3a3790dbc7dbbe0e52ca6449315a95fb6389ac04831ad2a275c865fa17346aa2"
+  },
+  "deliverables": {
+    "analysis_current_tests.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\analysis_current_tests.log",
+      "sha256": "f4dcce6228c99062f50827149ab384c1a79ca799b8ae6f9230b913d4dfd9bccf"
+    },
+    "analysis_unit_tests.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\analysis_unit_tests.log",
+      "sha256": "488faf481c6e25ba3a7ca0feda38832cb8b641e306488a03557a636534ff5b54"
+    },
+    "audit_cleanup.py": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\audit_cleanup.py",
+      "sha256": "9140dc626d1dd48edb32a0a9f68cbbf2ab7c9ff15cc09df1c0ad1a6336f60951"
+    },
+    "deliverables_index.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\deliverables_index.json",
+      "sha256": "2ac3ae566d38a29cc6b83963e1e5d6717e0a72a98fd8081478e55fd16a5f0d90"
+    },
+    "directory_migration_plan.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\directory_migration_plan.md",
+      "sha256": "22585b194d20a7efde9b53f63e349c5ece0575fb1c3bae1ecee380c54e8f9aa5"
+    },
+    "figures_contact_sheet.png": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\figures_contact_sheet.png",
+      "sha256": "9bcc02ccb0d831212f7e5ae691b32dc4bc30b5d2652f335fb2660ab94ba76cea"
+    },
+    "figure_generation.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\figure_generation.log",
+      "sha256": "35e6229d2db72c76c48ee1b1d3594ec1fd7ef4a8b3dfb566004baba38fee958a"
+    },
+    "figure_preflight_before_b_complete.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\figure_preflight_before_b_complete.json",
+      "sha256": "2692deafce43c7974d8f3d74dcd989a130fc9e4e932959eb4a178213e8b3beb6"
+    },
+    "figure_qa_generation.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\figure_qa_generation.log",
+      "sha256": "3cf8d1d284246c6fc26b8719a560dc0f566143dbdf4642d98b35f401334a6cdb"
+    },
+    "figure_readiness_seed13.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\figure_readiness_seed13.json",
+      "sha256": "d7dbbf7123805503a894e03ce562f57669e04f3dbff1356bc6ce2ba6c57a12c4"
+    },
+    "finalize_b_s1.py": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\finalize_b_s1.py",
+      "sha256": "74ccf0d89c5a6846bd181e5392b4d439772d42d57990bb8c723a939a44178fa0"
+    },
+    "final_all_tests.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\final_all_tests.log",
+      "sha256": "608b212a06461cbc453d20ddb175032ad7385911588aaac76fc1e3594cdebf8c"
+    },
+    "final_qa_tests.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\final_qa_tests.log",
+      "sha256": "65044dda61cb113a744b732c48590fc761d8a4bb7c59f406ecd49af6cf951ea1"
+    },
+    "g6_build.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g6_build.log",
+      "sha256": "5bbae1a09805e091c8b82c41334f4db632447953f9cd9f432df6ea94bf39e15a"
+    },
+    "g6_inventory.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g6_inventory.log",
+      "sha256": "f454aac46c45555adcadb5a9b68d0e700b24fb209599925ad2b819be3325d066"
+    },
+    "g7_partial.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g7_partial.log",
+      "sha256": "7220bf2b4ac14a71ed50590fbde0e13328974568625905f99ee4ee7605735fe7"
+    },
+    "git_diff_check.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\git_diff_check.log",
+      "sha256": "df4e9b4bc0b51543629cce32967938df2a6525553c701e1b746422b3915363d6"
+    },
+    "git_diff_stat.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\git_diff_stat.log",
+      "sha256": "44e61ef8bbbd6fde17ed81bb2b8725dea5ba4d4b90e7c0a346cab857307a09b3"
+    },
+    "git_status.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\git_status.log",
+      "sha256": "8793b75c81144c1f99b81ff917ac0733d371b34bf32ba09dc64856337cf47806"
+    },
+    "post_run_process_gpu.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\post_run_process_gpu.json",
+      "sha256": "85da68a489a61eb1aeec534c0e9eb80b1739bc446eac71bd5885469e44411cd9"
+    },
+    "post_validation_plan_update.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\post_validation_plan_update.md",
+      "sha256": "0baaa6aa052ff24d2ba8c47510d1bf699ec1d8effca9322248b107ca0c603264"
+    },
+    "pre_run_gpu.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\pre_run_gpu.log",
+      "sha256": "0aa68b0b9a27b7dc2a521c264230b6305edf3d1831a735abe7591797bc1016f7"
+    },
+    "protected_artifact_verification.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\protected_artifact_verification.json",
+      "sha256": "d85fba7b1d527d8e88af58ae68a34bc64a4ee925446250d6e179152e2ecf415a"
+    },
+    "repository_cleanup_audit.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\repository_cleanup_audit.log",
+      "sha256": "4f113d81a508084710fb55970bb9800d9b25c7937aaa51173155a48b38862375"
+    },
+    "repository_cleanup_inventory.csv": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\repository_cleanup_inventory.csv",
+      "sha256": "d07a87f5ab9f79c76a9710706003694f25d32a5410cbc0d14dcb30a471a90e7f"
+    },
+    "repository_cleanup_proposal.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\repository_cleanup_proposal.md",
+      "sha256": "ca433a09c432b6a5e3a3dbccb4f3d95c4f1b932db43045d10015c2b6950ec612"
+    },
+    "runpod_commands.ps1": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_commands.ps1",
+      "sha256": "68543cc62ecc8d985502760ff13fc67ec807c19c62a0cb438b88275c7a1800e8"
+    },
+    "runpod_commands.sh": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_commands.sh",
+      "sha256": "f16337eeffeb00fa840c3f8a9df3d0c5731e94486bf2e7976be4b6c054e0d3d5"
+    },
+    "runpod_command_syntax.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_command_syntax.log",
+      "sha256": "92dade1ef4b482a06a7b220abb38fc749b7f9b596187a9d6fd958acc070c75e8"
+    },
+    "runpod_handoff.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_handoff.md",
+      "sha256": "c3d747a28583f6b4a19753e1b7b5d2e9f15c7a652560680cf4096685d0687abf"
+    },
+    "runpod_portability_audit.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_portability_audit.md",
+      "sha256": "c21a7e43dfb4df4a87114c48a7d891c8780a968bdeef4e3a43d05ca06bd79672"
+    },
+    "runpod_sha256sums.txt": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_sha256sums.txt",
+      "sha256": "10bc74c5b3153bf40255d54a1daa1d8237d1a097c6732a94591d26a46e74847e"
+    },
+    "runpod_sha256sums_v2.txt": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_sha256sums_v2.txt",
+      "sha256": "fbe82c33fac0c1e57ca2e3ae7f6377321c655a3759cb0f09b9fbbd54a97447d1"
+    },
+    "runpod_staging_verification.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_staging_verification.json",
+      "sha256": "e3a50730f7be01eeef70f82c91589fe379bb83e1428bfb33c6f623c4b1c63550"
+    },
+    "runpod_student_cache.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_student_cache.json",
+      "sha256": "29f220b25010a5175aaf223842fca5acba7c2cfa1e4fae8b2e6a170908327d9a"
+    },
+    "run_a_stopped_artifact_inventory.csv": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_a_stopped_artifact_inventory.csv",
+      "sha256": "5eb13a301e6f2a16534bc809e73cb32b2011eefa1a490ce3633ad1857056e8b6"
+    },
+    "run_a_stopped_verification.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_a_stopped_verification.json",
+      "sha256": "b1160c4764671d0eb62f3263131fce53464b8cfeca6932597a706848f62b6261"
+    },
+    "run_a_stopped_verification.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_a_stopped_verification.md",
+      "sha256": "f54ed0bfc74db8513fe1416d70f3d20b49416b0e222a5ec0b555160fd62dce9e"
+    },
+    "run_b_s1.py": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_s1.py",
+      "sha256": "8cfa944266c12381f60a70c2b76f1125d6c8deaece50ec06714d9330e02866e0"
+    },
+    "run_b_s1_controller.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_s1_controller.log",
+      "sha256": "a6b0ee0443eab302cbc4be3383d3660f992b14eb2fb66476b2b16a4dc60e1365"
+    },
+    "run_b_s1_dry_run.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_s1_dry_run.log",
+      "sha256": "de865717993905fe165ba63eb4d0955a54b887b80a3814ed2dcbee3f7c64e037"
+    },
+    "run_b_s1_preflight.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_s1_preflight.json",
+      "sha256": "e92e757705b7e14b4a9ba648e3c5afb8d1be931a02bde984f9d423745c59932e"
+    },
+    "run_b_seed13_s1_artifact_inventory.csv": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_seed13_s1_artifact_inventory.csv",
+      "sha256": "29d113978c6b86d176062432dba8dde781f1cdceeaed97cdf74822fe5333874e"
+    },
+    "run_b_seed13_s1_validation.json": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_seed13_s1_validation.json",
+      "sha256": "3a3790dbc7dbbe0e52ca6449315a95fb6389ac04831ad2a275c865fa17346aa2"
+    },
+    "run_b_seed13_s1_validation.md": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_seed13_s1_validation.md",
+      "sha256": "29a07b489c81e42c02564f5a0b62d4975c802c143ff826f486fbd021f1830542"
+    },
+    "seal_evidence.py": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\seal_evidence.py",
+      "sha256": "32fcc942a19bc14bd8e2cdef03cbb8d81443beb4421591c34ea9b8ca647dac1a"
+    },
+    "selector_recheck.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\selector_recheck.log",
+      "sha256": "e78912180019adc7ce403f529ce5cba438ff12ab946f8cbcb52279fa1d763aff"
+    },
+    "unit_tests.log": {
+      "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\unit_tests.log",
+      "sha256": "345b9cf6a4072304d151342db0ecd7dc635de225e8cb19974e3d37368e4fac7c"
+    }
+  },
+  "staging": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_staging_verification.json",
+    "sha256": "e3a50730f7be01eeef70f82c91589fe379bb83e1428bfb33c6f623c4b1c63550"
+  },
+  "final_test_log": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\final_qa_tests.log",
+    "sha256": "65044dda61cb113a744b732c48590fc761d8a4bb7c59f406ecd49af6cf951ea1"
+  },
+  "guide": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\GPTGUIDE.txt",
+    "sha256": "2b004576bab2372020981d9810d8b9773787d91456692de315d80d0b398e312e"
+  }
+}

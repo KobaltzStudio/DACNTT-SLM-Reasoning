@@ -1,0 +1,9 @@
+{
+  "schema": "p1p2.clean-staging.v1",
+  "package": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\p1p2_unified\\runpod_package_20261119_004529",
+  "manual_relative": "P2/experiments/week2September/manual",
+  "files": 650,
+  "bytes": 574830476,
+  "verification": "SOURCE_AND_COPY_MATCH",
+  "inventory_sha256": "96e2092c51179c9701668ef75c9eff532db65efe8d708e461270f8e8298d8a11"
+}

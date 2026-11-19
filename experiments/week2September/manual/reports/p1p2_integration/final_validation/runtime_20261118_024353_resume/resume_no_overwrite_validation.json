@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "scope": "executed fixtures",
+  "dedicated": [
+    {
+      "job": "resume_fixtures",
+      "command": [
+        "C:\\KLTN-SLM-Reasoning\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_p1p2_resume.py",
+        "-v"
+      ],
+      "started_utc": "2026-11-18T02:57:11.335469+00:00",
+      "exit": 0,
+      "summary": [
+        "Ran 2 tests in 0.019s",
+        "OK"
+      ],
+      "log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\windows_publication_retry\\resume_fixtures.log"
+    },
+    {
+      "job": "no_overwrite_fixtures",
+      "command": [
+        "C:\\KLTN-SLM-Reasoning\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_p1p2_no_overwrite.py",
+        "-v"
+      ],
+      "started_utc": "2026-11-18T02:57:11.477717+00:00",
+      "exit": 0,
+      "summary": [
+        "Ran 3 tests in 0.012s",
+        "OK"
+      ],
+      "log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\windows_publication_retry\\no_overwrite_fixtures.log"
+    },
+    {
+      "job": "cli_and_hook_fixtures",
+      "command": [
+        "C:\\KLTN-SLM-Reasoning\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_p1p2_controller.py",
+        "-v"
+      ],
+      "started_utc": "2026-11-18T02:57:11.631758+00:00",
+      "exit": 0,
+      "summary": [
+        "Ran 8 tests in 0.030s",
+        "OK"
+      ],
+      "log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\windows_publication_retry\\cli_and_hook_fixtures.log"
+    }
+  ],
+  "runtime": {
+    "job": "runtime",
+    "command": [
+      "C:\\KLTN-SLM-Reasoning\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_p1p2_runtime.py",
+      "-v"
+    ],
+    "started_utc": "2026-11-18T02:59:26.865697+00:00",
+    "exit": 0,
+    "summary": [
+      "Ran 7 tests in 12.969s",
+      "OK"
+    ],
+    "log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\final_source_check\\runtime.log"
+  },
+  "failure_matrix": "failure_recovery_matrix.csv",
+  "not_run": [
+    "real production round resume",
+    "automatic stale lock clearance"
+  ]
+}

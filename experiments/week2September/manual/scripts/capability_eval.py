@@ -17,6 +17,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from p1p2_artifact_manager import hash_path, sha256_file
+
 CAPABILITIES = (
     "addition",
     "subtraction",
@@ -45,38 +47,6 @@ EXPECTED_SUPPORT = {
     "percentage": 29,
     "ratio": 30,
 }
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def hash_path(path: Path) -> str:
-    path = path.resolve()
-
-    if path.is_file():
-        return sha256_file(path)
-
-    if not path.is_dir():
-        raise FileNotFoundError(f"Input does not exist: {path}")
-
-    files = sorted(p for p in path.rglob("*") if p.is_file())
-    if not files:
-        raise ValueError(f"Checkpoint directory is empty: {path}")
-
-    digest = hashlib.sha256()
-    for file_path in files:
-        relative = file_path.relative_to(path).as_posix()
-        digest.update(relative.encode("utf-8"))
-        digest.update(b"\0")
-        digest.update(sha256_file(file_path).encode("ascii"))
-        digest.update(b"\n")
-
-    return digest.hexdigest()
 
 
 def read_json(path: Path) -> dict[str, Any]:

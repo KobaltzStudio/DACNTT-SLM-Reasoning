@@ -26,7 +26,7 @@ Usage (from experiments/week2September/manual/):
   python scripts/eval_student.py --tag S0 --out reports/task5/smoke_test/eval_S0_dev.jsonl
   python scripts/eval_student.py --tag S1_seed13 --adapter <adapter_dir> \
       --out reports/task5/smoke_test/eval_S1_dev_seed13.jsonl
-  python scripts/eval_student.py --split test --backend vllm --tag S1 --adapter <adapter_dir> --out <out.jsonl>
+  python scripts/run_final_d_test.py --help  # G7-gated final D_test
 """
 import argparse
 import gc
@@ -117,7 +117,12 @@ def main():
     ap.add_argument("--limit", type=int, default=None, help="first N problems only (pipeline tests)")
     add_model_args(ap)
     args = ap.parse_args()
+    if args.split == "test":
+        ap.error("Final D_test must use run_final_d_test.py with a frozen FINAL G7 manifest")
+    evaluate(args)
 
+
+def evaluate(args):
     check_prompt_template()
     cfg = load_config()
     ev = cfg["evaluation"]

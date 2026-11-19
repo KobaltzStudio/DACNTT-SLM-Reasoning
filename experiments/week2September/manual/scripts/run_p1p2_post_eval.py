@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
-import os
 import shutil
 import sys
 import tempfile
@@ -29,7 +28,7 @@ def load_evaluator(script_dir: Path):
         raise RuntimeError(f"Cannot load evaluator module: {evaluator_path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    required = ("build_input_hashes", "build_sidecar", "verify_existing_sidecar")
+    required = ("build_input_hashes", "build_sidecar", "verify_existing_sidecar", "publish_staged_directory")
     missing = [name for name in required if not callable(getattr(module, name, None))]
     if missing:
         raise RuntimeError(f"capability_eval.py API mismatch; missing: {missing}")
@@ -78,7 +77,7 @@ def parse_args() -> argparse.Namespace:
     defaults = {
         "gold_manifest": root / "data/gold_vfinal/gold_vfinal_manifest.json",
         "gold_labels": root / "data/gold_vfinal/supplement_annotations_vfinal.jsonl",
-        "approval_csv": root / "reports/capability/p1_day14_final_2026-11-14/approved/gold_supplement_85_approved_review.csv",
+        "approval_csv": root / "data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv",
         "dev_ids": root / "splits/d_dev_ids.txt",
         "config": root / "config/experiment_config.json",
     }
@@ -94,9 +93,32 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
+def validate_integrated_lineage(args, evaluator, hashes) -> None:
+    if args.method not in {"P1-DEFICIT", "P1P2"}:
+        return
+    if any(row.get("checkpoint") != args.run_id for row in evaluator.read_jsonl(Path(args.prediction))):
+        raise ValueError(f"Prediction checkpoint tag does not match {args.run_id}")
+    if not all((args.train_set, args.selection_log, args.train_log, args.checkpoint_log)):
+        raise ValueError("Integrated hook requires train set, selection log, train log and checkpoint log")
+    checkpoint = f"S{args.round}"
+    if Path(args.checkpoint).name != f"student_ckpt_{args.round:03d}":
+        raise ValueError(f"Adapter directory does not match {checkpoint}")
+    selected = evaluator.read_json(Path(args.train_set))
+    if (selected.get("method"), selected.get("training_seed"), selected.get("round"), selected.get("source_checkpoint")) != (
+            args.method, args.seed, args.round, f"S{args.round-1}"):
+        raise ValueError(f"Train-set lineage does not match {args.run_id}")
+    rows = evaluator.read_jsonl(Path(args.checkpoint_log))
+    candidates = [row for row in rows if row.get("checkpoint") == checkpoint]
+    expected = {"method": args.method, "training_seed": args.seed, "round": args.round,
+                "parent_checkpoint": f"S{args.round-1}", "checkpoint_sha256": hashes["checkpoint"],
+                "train_set_sha256": hashes["train_set"], "selection_log_sha256": hashes["selection_log"],
+                "train_log_sha256": hashes["train_log"]}
+    if len(candidates) != 1 or any(candidates[0].get(key) != value for key, value in expected.items()):
+        raise ValueError(f"Checkpoint log lineage does not match {args.run_id}")
+
+
 def main() -> int:
     args = parse_args()
-    root = Path(args.manual_root).resolve()
     output_dir = Path(args.output_dir)
     if output_dir.name != args.run_id:
         raise ValueError(
@@ -107,6 +129,7 @@ def main() -> int:
     input_hashes = evaluator.build_input_hashes(args)
 
     if output_dir.exists():
+        validate_integrated_lineage(args, evaluator, input_hashes)
         evaluator.verify_existing_sidecar(output_dir, input_hashes)
         print(f"POST_EVAL_HOOK: REUSE_PASS {output_dir}")
         return 0
@@ -115,12 +138,11 @@ def main() -> int:
     stage = Path(tempfile.mkdtemp(prefix=f".{args.run_id}.staging.", dir=output_dir.parent))
     try:
         evaluator.build_sidecar(args, stage, input_hashes)
-        if output_dir.exists():
-            raise FileExistsError(f"Refusing to overwrite sidecar: {output_dir}")
-        os.rename(stage, output_dir)
+        validate_integrated_lineage(args, evaluator, input_hashes)
     except Exception:
         shutil.rmtree(stage, ignore_errors=True)
         raise
+    evaluator.publish_staged_directory(stage, output_dir)
 
     print(f"POST_EVAL_HOOK: PASS {output_dir}")
     print(f"METHOD: {args.method}")

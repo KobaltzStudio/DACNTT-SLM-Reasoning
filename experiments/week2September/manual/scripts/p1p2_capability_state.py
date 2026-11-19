@@ -299,7 +299,12 @@ def main() -> int:
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
 
-    sidecar = Path(args.sidecar_dir).resolve()
+    state = build_state(Path(args.sidecar_dir).resolve(), args.target_method, args.target_seed)
+    return write_state(state, Path(args.out).resolve())
+
+
+def build_state(sidecar: Path, target_method: str, target_seed: int) -> dict[str, Any]:
+    """Validate the sidecar and derive state without writing any artifacts."""
 
     required = {
         "metrics": sidecar / "capability_metrics.jsonl",
@@ -378,15 +383,15 @@ def main() -> int:
 
     by_capability = validate_metrics(required["metrics"])
 
-    if args.target_seed < 0:
+    if target_seed < 0:
         raise ValueError("target-seed must be non-negative")
 
-    state = {
+    return {
         "schema_version": "p1p2.capability-state.v1",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "target": {
-            "method": args.target_method,
-            "seed": args.target_seed,
+            "method": target_method,
+            "seed": target_seed,
             "selection_round": source_round + 1,
         },
         "source": {
@@ -410,7 +415,8 @@ def main() -> int:
         "capabilities": by_capability,
     }
 
-    output = Path(args.out).resolve()
+
+def write_state(state: dict[str, Any], output: Path) -> int:
     content = (
         json.dumps(state, ensure_ascii=False, indent=2) + "\n"
     ).encode("utf-8")
@@ -443,14 +449,15 @@ def main() -> int:
 
             print("CAPABILITY_STATE=EXACT_REUSE")
 
-    print(f"SOURCE_RUN_ID={source_run_id}")
-    print(f"SOURCE_METHOD={source_method}")
-    print(f"SOURCE_SEED={source_seed}")
-    print(f"SOURCE_ROUND={source_round}")
-    print(f"TARGET_METHOD={args.target_method}")
-    print(f"TARGET_SEED={args.target_seed}")
-    print(f"SELECTION_ROUND={source_round + 1}")
-    print(f"CAPABILITY_COUNT={len(by_capability)}")
+    source, target = state["source"], state["target"]
+    print(f"SOURCE_RUN_ID={source['run_id']}")
+    print(f"SOURCE_METHOD={source['method']}")
+    print(f"SOURCE_SEED={source['seed']}")
+    print(f"SOURCE_ROUND={source['round']}")
+    print(f"TARGET_METHOD={target['method']}")
+    print(f"TARGET_SEED={target['seed']}")
+    print(f"SELECTION_ROUND={target['selection_round']}")
+    print(f"CAPABILITY_COUNT={len(state['capabilities'])}")
     print(f"STATE_SHA256={sha256_file(output)}")
     print(f"STATE_PATH={output}")
     print("CAPABILITY_STATE_VALIDATION=PASS")

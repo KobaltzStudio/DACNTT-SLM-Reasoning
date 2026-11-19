@@ -1,0 +1,60 @@
+{
+  "status": "DONE",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_free_bytes": 7451181056,
+  "gpu_total_bytes": 8585216000,
+  "disk_free_bytes": 100394283008,
+  "cuda": "12.6",
+  "versions": {
+    "torch": "2.13.0+cu126",
+    "transformers": "5.15.0",
+    "peft": "0.20.0",
+    "accelerate": "1.14.0",
+    "PyYAML": "6.0.3",
+    "safetensors": "0.8.0"
+  },
+  "student": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "initial_checkpoint": "student_ckpt_000",
+    "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs.",
+    "cached_weights": "C:\\Users\\PC - NGHI\\.cache\\huggingface\\hub\\models--Qwen--Qwen2.5-1.5B-Instruct\\snapshots\\989aa7980e4cf806f80c7fef2b1adb7bc71aa306\\model.safetensors"
+  },
+  "round_1_lengths": {
+    "count": 194,
+    "min": 217,
+    "median": 345,
+    "max": 693
+  },
+  "pool_lengths": {
+    "count": 4353,
+    "max": 697,
+    "above_1024": 0
+  },
+  "probe_sequence_tokens": 1024,
+  "command": [
+    "C:\\KLTN-SLM-Reasoning\\.venv\\Scripts\\python.exe",
+    "-u",
+    "-B",
+    "scripts/train_round.py",
+    "--seed",
+    "13",
+    "--train-set",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\max_length_probe_70sw84zb\\train.json",
+    "--adapter-dir",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\max_length_probe_70sw84zb\\adapter",
+    "--pool",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\max_length_probe_70sw84zb\\pool.jsonl",
+    "--micro-batch",
+    "1",
+    "--dtype",
+    "bf16"
+  ],
+  "exit": 0,
+  "steps": 1,
+  "effective_batch": 8,
+  "loss": 0.07039967006212051,
+  "seconds": 19.7,
+  "peak_allocated_gib": 5.02,
+  "peak_reserved_bytes": 6832521216
+}

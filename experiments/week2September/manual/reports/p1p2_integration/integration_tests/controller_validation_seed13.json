@@ -1,0 +1,70 @@
+{
+  "source_base": "a26f420b0b4203890c2d86be1d3852a645aeb65d",
+  "source_sha256": {
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\compute_nll.py": "f6f113fdf4eaf1122042108234b9722fd1b3c3186592285a6c1dc8a0247fd4a0",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\p1p2_capability_state.py": "bf7601e388dacb0eff76bfd3dc8721fb8b211f5a043152297a657e4c04d945df",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\p1p2_controller.py": "d493fdb8bc97dd8585e121210d607ffdd35ee8f07694bcb0352970b1292b715f",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\train_round.py": "e5fa983456299acf9ef49e70bfc1d67bb7afc758adbf21b342b8a5deb6e412e3",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\select_checkpoint_on_dev.py": "90cb6bef0b126bdec02e28e016c3f755a1b41ab716bb34610431df0b15931ed5",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_controller.py": "3eb9c90eacdbcebaf6553f6eceb279eaeeb0d359ca3456a2c326743fd92ffff6",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_no_overwrite.py": "21a7c834e310baae3b6280d498f406d3d4ce523b4b734b6090693f2197df6efd"
+  },
+  "report_sha256": {
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\controller_b4_b5_seed13_inventory.json": "17e12e2be0714f813b6fc51d5437164d8fe4b209ad4f4690de7507fc68db4f47",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\controller_handoff_seed13.md": "f1d51574cc1dee05c64bd67f95ce1e0871fbc9ad062e66bdca3c5123c8b19df8"
+  },
+  "compile_exit_code": 0,
+  "unittest_exit_code": 0,
+  "unit_test_count": 76,
+  "dry_runs": [
+    {
+      "report": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794968563559893300.json",
+      "sha256": "515c49f8cd78c904728271de24d6e275b584b0e68bfab67911c3f0342ff5082c",
+      "exit_code": 0,
+      "validated_action_count": 20,
+      "methods": [
+        "P1-DEFICIT"
+      ]
+    },
+    {
+      "report": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794968564361474400.json",
+      "sha256": "8d6c3cbfc04d30a1d57d447b0ac96ba22cda3ab74cc3b0e8eb4a0ca4bb27b8ee",
+      "exit_code": 0,
+      "validated_action_count": 22,
+      "methods": [
+        "P1P2"
+      ]
+    },
+    {
+      "report": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794968565235096100.json",
+      "sha256": "497c77c99844ad5049d31952729ca3e1d604676bed7a4f4918fa7d92499a432d",
+      "exit_code": 0,
+      "validated_action_count": 42,
+      "methods": [
+        "P1-DEFICIT",
+        "P1P2"
+      ]
+    }
+  ],
+  "isolated_s2_missing_adapter_exit_code": 1,
+  "g7_real_input_exit_code": 1,
+  "g7_blocker": "B4 S1 prediction hash differs from sidecar",
+  "gpu": {
+    "pytorch": "2.13.0+cu126",
+    "cuda": "12.6",
+    "vram_mib": 8188,
+    "bf16": true
+  },
+  "round_1_tokenization": {
+    "P1-DEFICIT": {
+      "rows": 194,
+      "max_tokens": 693
+    },
+    "P1P2": {
+      "rows": 184,
+      "max_tokens": 673
+    }
+  },
+  "gpu_training_executed": false,
+  "runpod_executed": false
+}

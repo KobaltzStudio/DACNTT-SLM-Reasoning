@@ -1,0 +1,51 @@
+﻿usage: eval_student.py [-h] --tag TAG [--adapter ADAPTER] --out OUT
+                       [--summary SUMMARY] [--split {dev,test}]
+                       [--backend {hf,vllm}] [--batch-size BATCH_SIZE]
+                       [--gpu-memory-utilization GPU_MEMORY_UTILIZATION]
+                       [--limit LIMIT] [--model MODEL] [--revision REVISION]
+                       [--dtype {auto,bf16,fp32,fp16}]
+
+Evaluate a Student checkpoint on D_dev or D_test with the frozen evaluation protocol.
+
+Protocol (config/experiment_config.json "evaluation"): prompt v1, greedy decoding,
+max_new_tokens 512, answers scored by answer_utils.evaluate_output
+(invalid_format counts as incorrect; format compliance reported separately).
+
+Greedy is enforced explicitly: the Qwen generation_config ships sampling defaults and
+repetition_penalty 1.05, which would otherwise still apply under do_sample=False.
+
+Also records lenient_correct (last number anywhere in the output, format ignored): the registered
+secondary metric of T7-5, always reported with strict accuracy and format compliance. Accuracy per
+capability is added on D_dev, over the problems with manual labels.
+
+Backends:
+  hf    transformers generate (default; used by the Task 5 smoke test)
+  vllm  vLLM with the same greedy settings; needs a bf16 GPU (L4/A100). A LoRA adapter is merged into a
+        temporary model directory first, exactly as the hf backend merges it before generating.
+
+Output (resumable: problem_ids already in --out are skipped):
+  --out           one JSON line per problem
+  --summary       accuracy, format compliance, output length, timing, memory
+
+Usage (from experiments/week2September/manual/):
+  python scripts/eval_student.py --tag S0 --out reports/task5/smoke_test/eval_S0_dev.jsonl
+  python scripts/eval_student.py --tag S1_seed13 --adapter <adapter_dir>       --out reports/task5/smoke_test/eval_S1_dev_seed13.jsonl
+  python scripts/run_final_d_test.py --help  # G7-gated final D_test
+
+options:
+  -h, --help            show this help message and exit
+  --tag TAG             checkpoint label, e.g. S0 or S1_seed13
+  --adapter ADAPTER     LoRA adapter directory (omit for S_0)
+  --out OUT
+  --summary SUMMARY     default: <out>.summary.json
+  --split {dev,test}
+  --backend {hf,vllm}
+  --batch-size BATCH_SIZE
+                        default: 16 for hf, 200 for vllm
+  --gpu-memory-utilization GPU_MEMORY_UTILIZATION
+                        vllm backend only
+  --limit LIMIT         first N problems only (pipeline tests)
+  --model MODEL         override the Student model (pipeline tests only;
+                        default: config student.model)
+  --revision REVISION   revision for --model
+  --dtype {auto,bf16,fp32,fp16}

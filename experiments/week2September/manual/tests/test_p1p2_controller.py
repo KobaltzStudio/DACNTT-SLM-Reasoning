@@ -5,8 +5,32 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from p1p2_controller import Controller, parse_checkpoints, build_parser
+from select_checkpoint_on_dev import score
 
 class ControllerPolicyTests(unittest.TestCase):
+    def test_checkpoint_selection_scores_strict_status_over_full_partition(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "predictions.jsonl"
+            rows = [
+                {"problem_id": "strict", "status": "valid"},
+                {"problem_id": "lenient", "status": "invalid_format", "lenient_correct": True},
+                {"problem_id": "outside", "status": "valid"},
+            ]
+            path.write_text("\n".join(map(json.dumps, rows)), encoding="utf-8")
+            actual = score(path, {"strict", "lenient", "missing"})
+            self.assertEqual(actual, {"correct": 1, "incorrect": 1, "missing": 1, "accuracy": 1 / 3})
+
+    def test_dry_run_rejects_s2_without_real_or_planned_s1(self):
+        controller = Controller.__new__(Controller)
+        controller.dry_run = True
+        controller.actions = []
+        with tempfile.TemporaryDirectory() as temporary:
+            controller.root = Path(temporary).resolve()
+            with self.assertRaisesRegex(ValueError, "Missing or empty LoRA weights"):
+                controller.run_method_seed("P1P2", 13, [2])
+            self.assertEqual(controller.actions, [])
+            self.assertFalse((controller.root / "runs").exists())
+
     def test_checkpoint_round_mapping(self):
         cases = [(['--method','P1P2','--seed','13','--round','2'], [2]),
                  (['--method','P1P2','--seed','13','--from-checkpoint','S1','--to-checkpoint','S3'], [2,3]),
@@ -88,10 +112,11 @@ class ControllerPolicyTests(unittest.TestCase):
         obj = Controller.__new__(Controller)
         obj.py = sys.executable
         obj.scripts = Path("/project/scripts")
-        obj.root = Path("/project")
+        obj.dry_run = True
         obj.actions = []
         obj.emit = lambda label, cmd, outputs=(): obj.actions.append([str(x) for x in cmd])
         with tempfile.TemporaryDirectory() as td:
+            obj.root = Path(td).resolve()
             fixture_root = Path(td) / "hook_inputs"
             fixture_root.mkdir(parents=True)
             obj.gold_manifest = fixture_root / "gold_manifest.json"
@@ -104,7 +129,7 @@ class ControllerPolicyTests(unittest.TestCase):
                 path.write_text("fixture", encoding="utf-8")
             run = Path(td) / "run"
             model = Path(td) / "model"
-            report = Path(td) / "report"
+            report = obj.root / "reports/p1p2_integration"
             train_set = Path(td) / "train_set.json"
             selection_log = Path(td) / "selection_log.jsonl"
             train_set.write_text("{}", encoding="utf-8")

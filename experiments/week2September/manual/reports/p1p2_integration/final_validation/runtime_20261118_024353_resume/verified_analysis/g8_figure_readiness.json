@@ -1,0 +1,35 @@
+﻿{
+  "schema_version": "p1p2.descriptive-figures.v1",
+  "generated_at_utc": "2026-11-18T03:00:13.392469+00:00",
+  "scope": "seed 13; one shared S0; descriptive analysis",
+  "figures": {
+    "selection_jaccard_seed13": {
+      "status": "BLOCKED",
+      "reason": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\PC - NGHI\\\\Desktop\\\\Pipeline\\\\P2\\\\experiments\\\\week2September\\\\manual\\\\runs\\\\p1p2_integration\\\\P1-DEFICIT_seed13\\\\round_002\\\\train_set.json'"
+    },
+    "selection_composition_seed13": {
+      "status": "BLOCKED",
+      "reason": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\PC - NGHI\\\\Desktop\\\\Pipeline\\\\P2\\\\experiments\\\\week2September\\\\manual\\\\runs\\\\p1p2_integration\\\\P1-DEFICIT_seed13\\\\round_002\\\\train_set.json'"
+    },
+    "student_accuracy_seed13": {
+      "status": "BLOCKED",
+      "reason": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\PC - NGHI\\\\Desktop\\\\Pipeline\\\\P2\\\\experiments\\\\week2September\\\\manual\\\\reports\\\\p1p2_integration\\\\capability_sidecars\\\\P1-DEFICIT_seed13_S1\\\\checkpoint_lineage.json'"
+    },
+    "capability_mastery_seed13": {
+      "status": "BLOCKED",
+      "reason": "manifest_missing"
+    },
+    "capability_makeup_seed13": {
+      "status": "BLOCKED",
+      "reason": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\PC - NGHI\\\\Desktop\\\\Pipeline\\\\P2\\\\experiments\\\\week2September\\\\manual\\\\runs\\\\p1p2_integration\\\\P1-DEFICIT_seed13\\\\round_002\\\\train_set.json'"
+    },
+    "learnability_distribution_seed13": {
+      "status": "BLOCKED",
+      "reason": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\PC - NGHI\\\\Desktop\\\\Pipeline\\\\P2\\\\experiments\\\\week2September\\\\manual\\\\runs\\\\p1p2_integration\\\\P1P2_seed13\\\\round_002\\\\train_set.json'"
+    },
+    "p1_capability_learning_curves_seed13": {
+      "status": "BLOCKED",
+      "reason": "manifest_missing"
+    }
+  }
+}

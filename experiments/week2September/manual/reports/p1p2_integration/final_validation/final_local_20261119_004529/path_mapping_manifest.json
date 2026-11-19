@@ -1,0 +1,2278 @@
+{
+  "windows_manual_root": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual",
+  "package_manual_relative": "P2/experiments/week2September/manual",
+  "g4_reference_root_under_p2": "integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints",
+  "linux_manual": "<package>/P2/experiments/week2September/manual",
+  "allow_unmapped_runtime": false,
+  "locator_counts": {
+    "PRESENT": 220,
+    "OUTSIDE_MAPPED_ROOT": 6
+  },
+  "runtime_occurrences": 26,
+  "metadata_audit": "prior transfer inventory independently cross-checked for target presence",
+  "all_occurrences": [
+    {
+      "artifact": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001/train_log.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001/train_log.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_002/train_log.json",
+      "json_pointer": "/checkpoint_parent",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001",
+      "staging_base": "manual",
+      "use": "runtime: parent adapter identity",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_002/train_log.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_002\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/round_002/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_002/train_log.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1P2_seed13/student_ckpt_001/train_log.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1P2_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "models/p1p2_integration/P1P2_seed13/student_ckpt_001/train_log.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed13_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed13_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed13_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed13_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed13_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed2026_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed2026_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed2026_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed2026_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed42_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed42_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed42_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed42_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B2_seed42_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed13_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed13_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed13_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed13_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed13_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed2026_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed2026_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed2026_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed2026_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed2026_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed42_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed42_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B3_seed42_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B3_seed42_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B3_seed42_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed13_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed13_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed13_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed13_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed13_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed13_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed2026_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed2026_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed2026_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed2026_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed2026_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed2026_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed42_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed42_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B4_seed42_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed42_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B4_seed42_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B4_seed42_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed13_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed13_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed13_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed13_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed13_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed2026_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed2026_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed2026_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed2026_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed2026_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed42_S1.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S1.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S1/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S1\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S1/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S1/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S1\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S1/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed42_S2.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S2.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S2/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S2\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S2/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S2/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S2\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S2/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B5_seed42_S3.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S3.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S3/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S3\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S3/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S3/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B5_seed42_S3\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/lineage/B5_seed42_S3/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\source_review\\s0_base_model_reference.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/source_review/s0_base_model_reference.json",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S1",
+      "staging_base": "P2",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S1\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/original_train_sets/S1/train_set.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S1/train_log.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\main\\B4_seed13\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/main/B4_seed13/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S2",
+      "staging_base": "P2",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S2\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/original_train_sets/S2/train_set.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S2/train_log.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S2/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\main\\B4_seed13\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/main/B4_seed13/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S3",
+      "staging_base": "P2",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S3\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/original_train_sets/S3/train_set.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "P2/integration_staging/G4_CHECKPOINT_AUDIT/extracted_checkpoints/B4_seed13/S3/train_log.json",
+      "staging_base": "package",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "OUTSIDE_MAPPED_ROOT"
+    },
+    {
+      "artifact": "reports/capability_g4_validation/B4_seed13_S3/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\main\\B4_seed13\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/main/B4_seed13/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1P2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1P2_seed13\\student_ckpt_001",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1P2_seed13/student_ckpt_001",
+      "staging_base": "manual",
+      "use": "analysis: canonical candidate / mapped locator plus SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1P2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1P2_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1P2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/selection_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1P2_seed13\\round_001\\selection_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1P2_seed13/round_001/selection_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1P2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1P2_seed13\\student_ckpt_001\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1P2_seed13/student_ckpt_001/train_log.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "reports/p1p2_integration/capability_sidecars/P1P2_seed13_S1/checkpoint_lineage.json",
+      "json_pointer": "/checkpoint_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1P2_seed13\\checkpoint_log.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1P2_seed13/checkpoint_log.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_000/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_000/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/S0/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/S0/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT",
+      "canonical_lf_sha256": "716af6ae476d8120642d01520a2c0684af4bfecf9f82936bef096f7621799044"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_001/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_001/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/S0/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/S0/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_002/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B4_seed13/round_002/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/S0/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/S0/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_000/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_000/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/S0/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/S0/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_001/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_001/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/B5_seed13/S1/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/B5_seed13/S1/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT",
+      "canonical_lf_sha256": "4d10fb6cd1c7b73a4556b567e02d6b444485841dae4e20a52173db0acb1b9057"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_002/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "trajectory/pool/pool_v1_verified.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/main/B5_seed13/round_002/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "runs/main/B5_seed13/S2/nll.jsonl",
+      "path_kind": "MANUAL_RELATIVE",
+      "staging_relative": "runs/main/B5_seed13/S2/nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT",
+      "canonical_lf_sha256": "33c929eb4ca06ff263496cbf8f18e96d23ef117671e1bb9554d119203989ea92"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1-DEFICIT_seed13/student_ckpt_001/train_log.json",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "json_pointer": "/tokens_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_tokens.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_tokens.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "json_pointer": "/config",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "config/experiment_config.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_001/train_set.json",
+      "json_pointer": "/state_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_state\\P1-DEFICIT_seed13\\S0_state.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/capability_state/P1-DEFICIT_seed13/S0_state.json",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_002/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_002/train_set.json",
+      "json_pointer": "/tokens_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_tokens.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_tokens.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_002/train_set.json",
+      "json_pointer": "/config",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "config/experiment_config.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1-DEFICIT_seed13/round_002/train_set.json",
+      "json_pointer": "/state_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_state\\P1-DEFICIT_seed13\\selection_round_002.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/capability_state/P1-DEFICIT_seed13/selection_round_002.json",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/train_set",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1P2_seed13\\round_001\\train_set.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/checkpoint_path",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1P2_seed13\\student_ckpt_001",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1P2_seed13/student_ckpt_001",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/checkpoint_log.jsonl",
+      "json_pointer": "/0/train_log",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1P2_seed13\\student_ckpt_001\\train_log.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "models/p1p2_integration/P1P2_seed13/student_ckpt_001/train_log.json",
+      "staging_base": "manual",
+      "use": "runtime: normalized locator and original log-prefix SHA",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "json_pointer": "/pool",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_verified.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "json_pointer": "/tokens_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_tokens.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "trajectory/pool/pool_v1_tokens.jsonl",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "json_pointer": "/config",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "config/experiment_config.json",
+      "staging_base": "manual",
+      "use": "audit/provenance; no locator used by mapped controller validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "json_pointer": "/state_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_state\\P1P2_seed13\\S0_state.json",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/capability_state/P1P2_seed13/S0_state.json",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    },
+    {
+      "artifact": "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json",
+      "json_pointer": "/nll_file",
+      "recorded_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\nll\\P1P2_seed13\\S0_nll.jsonl",
+      "path_kind": "WINDOWS_ABSOLUTE",
+      "staging_relative": "reports/p1p2_integration/nll/P1P2_seed13/S0_nll.jsonl",
+      "staging_base": "manual",
+      "use": "runtime: pool, capability or learnability validation",
+      "locator_status": "PRESENT"
+    }
+  ]
+}
