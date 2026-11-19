@@ -1,5 +1,0 @@
-{"problem_id": "gsm8k_train_00501", "matched_ids": ["gsm8k_test_00581"], "example_ngram": "the first movie is 1 hour and 30 minutes long while the second"}
-{"problem_id": "gsm8k_train_01401", "matched_ids": ["gsm8k_test_00602"], "example_ngram": "miles in 3 hours at the same rate how many additional hours would"}
-{"problem_id": "gsm8k_train_01779", "matched_ids": ["gsm8k_train_04791"], "example_ngram": "in the cookie jar doris spent 6 from the cookie jar martha spent"}
-{"problem_id": "gsm8k_train_05199", "matched_ids": ["gsm8k_test_00602"], "example_ngram": "miles in 3 hours at the same rate how many additional hours would"}
-{"problem_id": "gsm8k_train_05217", "matched_ids": ["gsm8k_train_00779"], "example_ngram": "half of the kids are going to soccer camp and 1 4 of"}

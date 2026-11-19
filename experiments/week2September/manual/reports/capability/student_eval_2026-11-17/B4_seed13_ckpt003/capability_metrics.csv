@@ -1,8 +1,0 @@
-﻿checkpoint,method,seed,round,capability,n_support,n_correct,n_incorrect,mastery_accuracy,deficit,ci95_low,ci95_high,ci_method,delta_vs_baseline,delta_note
-B4_seed13_student_ckpt_003,B4,13,round_002,addition,12,5,7,0.4166666666666667,0.5833333333333333,0.19326031365875665,0.6804886874504503,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,subtraction,13,9,4,0.6923076923076923,0.3076923076923077,0.42369343180549035,0.8731929634428948,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,multiplication,11,8,3,0.7272727272727273,0.2727272727272727,0.43435469882387084,0.902539407099751,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,division,12,10,2,0.8333333333333334,0.16666666666666663,0.5519691377470266,0.9530348578161463,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,percentage,9,6,3,0.6666666666666666,0.33333333333333337,0.3542021355803963,0.879416181613089,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,fraction,10,5,5,0.5,0.5,0.236593090512564,0.7634069094874361,Wilson score interval,,Not computed: only one checkpoint has been evaluated.
-B4_seed13_student_ckpt_003,B4,13,round_002,ratio,5,4,1,0.8,0.19999999999999996,0.37553462976252533,0.9637758913675698,Wilson score interval,,Not computed: only one checkpoint has been evaluated.

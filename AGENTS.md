@@ -1,0 +1,3 @@
+# P1/P2 Unified handoff instructions
+
+Treat runtime and its SHA indices as immutable. Use a distinct operational copy for approved execution. Keep the original P1/P2 repositories intact. Validate the supplied package, inputs and model revision before running controller commands. Use CPU-only acceptance and explicit stage approvals. The unified controller evaluates D_dev only. D_test requires G7 FINAL and a separate request. Follow recovery/RECOVERY_GUIDE.md and retain logs, prefix predictions, locks and lineage when jobs are interrupted. Do not initialize Git, publish source or transmit private artifacts without the corresponding approval.

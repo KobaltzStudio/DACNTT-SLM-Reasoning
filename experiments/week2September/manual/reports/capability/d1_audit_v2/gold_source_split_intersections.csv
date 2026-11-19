@@ -1,7 +1,0 @@
-﻿"GoldSource","Split","GoldCount","OverlapCount","GoldIDsOutsideSplit","OverlapPercent"
-"batch_100","D_pool","100","100","0","100"
-"batch_100","D_dev","100","0","100","0"
-"batch_100","D_test","100","0","100","0"
-"supplement","D_pool","85","0","85","0"
-"supplement","D_dev","85","85","0","100"
-"supplement","D_test","85","0","85","0"
