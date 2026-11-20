@@ -1,0 +1,92 @@
+{
+  "schema_version": "p1p2.capability-state.v1",
+  "created_at_utc": "2026-11-20T09:17:59.839573+00:00",
+  "target": {
+    "method": "P1P2",
+    "seed": 42,
+    "selection_round": 4
+  },
+  "source": {
+    "run_id": "P1P2_seed42_S3",
+    "method": "P1P2",
+    "seed": 42,
+    "round": 3,
+    "checkpoint": "S3",
+    "checkpoint_id": "student_ckpt_003",
+    "checkpoint_sha256": "baa844df1dbc47d9c23636dc084747880e692a0ecf7ad7e3f966af5edfd970ff",
+    "sidecar_manifest_sha256": "f607f9ad66745363cf8b343d472a2a9fb28d84b9e974824b0109e6de33c82497",
+    "input_fingerprint": "29b2fcca2421ddf2bb4032f2f3d6759fc691cdad3a07e19cb55ff7a6fb6b2d5c"
+  },
+  "metric_policy": {
+    "correctness": "status == valid",
+    "gold_policy": "approved_85_primary",
+    "lenient_correct_used": false,
+    "mastery": "n_correct / n_support",
+    "deficit": "1 - mastery"
+  },
+  "capabilities": {
+    "addition": {
+      "n_support": 30,
+      "n_correct": 20,
+      "n_incorrect": 10,
+      "mastery": 0.6666666666666666,
+      "deficit": 0.33333333333333337,
+      "ci95_low": 0.4878005164454384,
+      "ci95_high": 0.8076950191632386
+    },
+    "subtraction": {
+      "n_support": 51,
+      "n_correct": 37,
+      "n_incorrect": 14,
+      "mastery": 0.7254901960784313,
+      "deficit": 0.27450980392156865,
+      "ci95_low": 0.5905334923922092,
+      "ci95_high": 0.8288572476535512
+    },
+    "multiplication": {
+      "n_support": 73,
+      "n_correct": 55,
+      "n_incorrect": 18,
+      "mastery": 0.7534246575342466,
+      "deficit": 0.2465753424657534,
+      "ci95_low": 0.6435555465577502,
+      "ci95_high": 0.837955353519482
+    },
+    "division": {
+      "n_support": 47,
+      "n_correct": 35,
+      "n_incorrect": 12,
+      "mastery": 0.7446808510638298,
+      "deficit": 0.25531914893617025,
+      "ci95_low": 0.6049182446958253,
+      "ci95_high": 0.8474684596494529
+    },
+    "percentage": {
+      "n_support": 29,
+      "n_correct": 18,
+      "n_incorrect": 11,
+      "mastery": 0.6206896551724138,
+      "deficit": 0.3793103448275862,
+      "ci95_low": 0.4400254420598852,
+      "ci95_high": 0.7731197789919015
+    },
+    "fraction": {
+      "n_support": 31,
+      "n_correct": 26,
+      "n_incorrect": 5,
+      "mastery": 0.8387096774193549,
+      "deficit": 0.16129032258064513,
+      "ci95_low": 0.6736564604120674,
+      "ci95_high": 0.9290737555663471
+    },
+    "ratio": {
+      "n_support": 30,
+      "n_correct": 24,
+      "n_incorrect": 6,
+      "mastery": 0.8,
+      "deficit": 0.19999999999999996,
+      "ci95_low": 0.6269430358685175,
+      "ci95_high": 0.9049489282271013
+    }
+  }
+}

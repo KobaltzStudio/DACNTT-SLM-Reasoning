@@ -1,0 +1,57 @@
+{
+  "schema_version": "p1p2.capability-manifest.v1",
+  "created_at_utc": "2026-11-20T06:29:20.855788+00:00",
+  "run_id": "P1-DEFICIT_seed42_S2",
+  "method": "P1-DEFICIT",
+  "seed": 42,
+  "round": 2,
+  "checkpoint": "S2",
+  "gold_policy": "approved_85_primary",
+  "strict_metric": "status == valid",
+  "capabilities": [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio"
+  ],
+  "n_capability_rows": 7,
+  "input_hashes": {
+    "checkpoint": "8ee9e421d5e7dd25bff9ccf87b22944dc12eccd2e5e25e7b5cf9249bc08ee4ff",
+    "dev_predictions": "d2906ed96a9f3baf0c737b9074879fa5fe9a07bf4e4606f0662d68bb204d8d03",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "gold_labels": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+    "approval_csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "config": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+    "train_set": "18e93935dcb8896808414db0e0be875ac6810b72f49cd80b52ed3f46dd46076e",
+    "selection_log": "af886eeac153fdaf1caa61bafa6203d22e70d285e3a5b27b39492a11888794e3",
+    "train_log": "04ea8927490daa57e1e8cef6dab825acf3c2f1eac9cee2b285e9dc733848532f",
+    "checkpoint_log": "4e21f1f43ff20aceab265b1523f5a1b0211ef93e9dd7061d41c5403eb74dfb97"
+  },
+  "outputs": {
+    "capability_metrics.csv": {
+      "sha256": "a9354d95d19bb8517127999dc7298288911dc1037804a840bc93ebdae509fb3c",
+      "size_bytes": 1596
+    },
+    "capability_metrics.jsonl": {
+      "sha256": "5c029606e7ce261896f91b16f5d55ad22ea7bf99b3771472f2103414146288ff",
+      "size_bytes": 3100
+    },
+    "prediction_coverage_report.json": {
+      "sha256": "7061fcb50120b1f1f614d657647ac8eae5d4e661369d48b6bdfe01ac00eab128",
+      "size_bytes": 551
+    },
+    "checkpoint_lineage.json": {
+      "sha256": "3982e0288dc238c177bdd28f8e6eb3e2eda4e90167a7c1ad9e66e25c04491640",
+      "size_bytes": 1537
+    },
+    "input_fingerprint.json": {
+      "sha256": "136ce904676467de3a2c3c732367dd3a7e0b0964e09629351a602fb175734959",
+      "size_bytes": 1061
+    }
+  },
+  "overwrite_policy": "immutable_exact_fingerprint_reuse_only"
+}

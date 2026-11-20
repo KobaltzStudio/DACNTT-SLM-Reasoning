@@ -1,0 +1,16 @@
+{
+  "fingerprint": "d646c3e999762ee457d7df0745767b939ee6ac3e3b873b28a7b58176e8edf761",
+  "inputs": {
+    "checkpoint": "b78e4f29cadd9f301fcf2e05de3db7f04b65852994d5842fd3397d3880d97aae",
+    "dev_predictions": "a2e4e4e3ce74fe287e67e47e2d4b829b297daca7fb1140e55c0c9077d812b4cd",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "gold_labels": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+    "approval_csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "config": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+    "train_set": "dc6ab9ee160852ab30d64c95ebf5924d4d908dc097acebacb53676ce8c2a59b2",
+    "selection_log": "f2778f111a1b81414d122089fb56555263a20fb63f8a797f7fee942399c5339a",
+    "train_log": "506f787e8c7775cdec2f36cfcbc671db5bc19208e45500d58c170d73c552908a",
+    "checkpoint_log": "4c6182adacb3557e5251c1a9d3f039b01307a134765e229ba1de535fc74417a7"
+  }
+}

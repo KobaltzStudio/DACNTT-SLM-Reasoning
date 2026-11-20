@@ -1,0 +1,20 @@
+{
+  "run_id": "P1P2_seed2026_S3",
+  "method": "P1P2",
+  "seed": 2026,
+  "round": 3,
+  "checkpoint_id": "student_ckpt_003",
+  "checkpoint_path": "/workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1P2_seed2026/student_ckpt_003",
+  "checkpoint_sha256": "3f0c51ec761b2a4a01f7cead29ea8da3d9cdc3d78ff77c3434b376737e2186e2",
+  "shared_checkpoint_group": null,
+  "train_set": "/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1P2_seed2026/round_003/train_set.json",
+  "selection_log": "/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1P2_seed2026/round_003/selection_log.jsonl",
+  "train_log": "/workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1P2_seed2026/student_ckpt_003/train_log.json",
+  "checkpoint_log": "/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1P2_seed2026/checkpoint_log.jsonl",
+  "config_sha256": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+  "prediction_sha256": "50c6b13fe1ff8f94f10c2e1a10f474eaa6344b446479e08de21203d1588fb394",
+  "gold_manifest_sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+  "gold_labels_sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+  "approval_csv_sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+  "dev_ids_sha256": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30"
+}
