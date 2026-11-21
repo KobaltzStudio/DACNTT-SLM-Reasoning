@@ -1,0 +1,85 @@
+{
+  "checkpoint": "B5_seed13_S2",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B5_seed13/S2/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.826,
+  "lenient_accuracy": 0.832,
+  "format_compliance": 0.968,
+  "lenient_accuracy_exploratory": 0.832,
+  "n_valid": 413,
+  "n_invalid_answer": 71,
+  "n_invalid_format": 16,
+  "mean_output_tokens": 268.37,
+  "n_hit_max_tokens": 16,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.7037037037037037,
+      "lenient_accuracy": 0.7037037037037037,
+      "format_compliance": 0.9629629629629629
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.6808510638297872,
+      "lenient_accuracy": 0.6808510638297872,
+      "format_compliance": 0.8723404255319149
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.8387096774193549,
+      "lenient_accuracy": 0.8387096774193549,
+      "format_compliance": 0.9354838709677419
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.7619047619047619,
+      "lenient_accuracy": 0.7619047619047619,
+      "format_compliance": 0.9285714285714286
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.6206896551724138,
+      "lenient_accuracy": 0.6206896551724138,
+      "format_compliance": 0.9655172413793104
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.8,
+      "lenient_accuracy": 0.8,
+      "format_compliance": 0.8666666666666667
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.6727272727272727,
+      "lenient_accuracy": 0.6727272727272727,
+      "format_compliance": 0.9090909090909091
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 477.8,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}

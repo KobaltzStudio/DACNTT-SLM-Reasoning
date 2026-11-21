@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag S0 --split test --out /workspace/manual/runs/pilot/S0/eval_test.jsonl --backend vllm --dtype auto --limit 50",
+  "elapsed_seconds": 269.4
+}

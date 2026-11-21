@@ -1,0 +1,72 @@
+{
+  "checkpoint_parent": "student_ckpt_000",
+  "seed": 13,
+  "data_order_seed": 13,
+  "train_set": "/workspace/manual/runs/pilot/B5_seed13/round_000/train_set.json",
+  "train_set_sha256": "d6418b9062d2b902fb37027d98aba2bb24695926827735f19b7988edf1ecbf12",
+  "pool": "/workspace/manual/runs/pilot/pilot_pool.jsonl",
+  "pool_sha256": "bb39b108a1a4ca549bee8088dead92076c257217dfb32cdb86e5aaa6bbcb083f",
+  "n_examples": 21,
+  "epochs": 1,
+  "steps": 3,
+  "effective_batch": 8,
+  "micro_batch": 8,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "lr_from_config": true,
+  "epochs_from_config": true,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "gradient_checkpointing": true,
+  "trainable_parameters": 18464768,
+  "cumulative_training_tokens": 4900,
+  "prompt_tokens_masked": 2774,
+  "trajectory_tokens": 4879,
+  "beta_round_tokens_config": 45426,
+  "elapsed_seconds": 9.0,
+  "peak_gpu_memory_gb": 7.76,
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  },
+  "steps_log": [
+    {
+      "step": 1,
+      "epoch": 0,
+      "loss": 0.23141729582677759,
+      "grad_norm": 0.3722403943538666,
+      "n_examples": 8,
+      "supervised_tokens": 1867,
+      "lr": 0.0002,
+      "elapsed_s": 4.4
+    },
+    {
+      "step": 2,
+      "epoch": 0,
+      "loss": 0.2148639393807019,
+      "grad_norm": 0.31267058849334717,
+      "n_examples": 8,
+      "supervised_tokens": 1699,
+      "lr": 0.0002,
+      "elapsed_s": 6.4
+    },
+    {
+      "step": 3,
+      "epoch": 0,
+      "loss": 0.22731246833858462,
+      "grad_norm": 0.394620418548584,
+      "n_examples": 5,
+      "supervised_tokens": 1334,
+      "lr": 0.0002,
+      "elapsed_s": 7.9
+    }
+  ]
+}

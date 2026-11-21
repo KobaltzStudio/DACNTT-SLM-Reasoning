@@ -1,9 +1,7 @@
-import json
+﻿import json
 import sys
 from pathlib import Path
 
-
-BASE = Path(__file__).resolve().parents[1]
 
 VALID_CAPABILITIES = {
     "addition",
@@ -24,13 +22,11 @@ VALID_DIFFICULTIES = {
 
 def load_jsonl(path: Path):
     if not path.exists():
-        raise FileNotFoundError(
-            f"File not found: {path}"
-        )
+        raise FileNotFoundError(f"File not found: {path}")
 
     records = []
 
-    with path.open("r", encoding="utf-8") as f:
+    with path.open("r", encoding="utf-8-sig") as f:
         for line_number, line in enumerate(f, start=1):
             line = line.strip()
 
@@ -45,22 +41,22 @@ def load_jsonl(path: Path):
                     f"{line_number}: {exc}"
                 ) from exc
 
+            if not isinstance(record, dict):
+                raise ValueError(
+                    f"{path}, line {line_number}: "
+                    "each JSONL record must be an object"
+                )
+
             records.append(record)
 
     return records
 
 
-def validate_annotation_file(
-    path: Path,
-    expected_annotator: str,
-):
+def validate_annotation_file(path: Path, expected_annotator: str):
     records = load_jsonl(path)
 
-    if len(records) != 30:
-        raise ValueError(
-            f"{path}: expected 30 records, "
-            f"got {len(records)}"
-        )
+    if not records:
+        raise ValueError(f"{path}: annotation file is empty")
 
     ids = []
 
@@ -82,6 +78,12 @@ def validate_annotation_file(
             )
 
         problem_id = record["problem_id"]
+
+        if not isinstance(problem_id, str) or not problem_id.strip():
+            raise ValueError(
+                f"{path}, record {index}: invalid problem_id"
+            )
+
         ids.append(problem_id)
 
         if record["annotator_id"] != expected_annotator:
@@ -93,17 +95,26 @@ def validate_annotation_file(
 
         if record["schema_version"] != "v1":
             raise ValueError(
-                f"{path}, {problem_id}: "
-                f"unsupported schema_version="
-                f"{record['schema_version']!r}"
+                f"{path}, {problem_id}: unsupported "
+                f"schema_version={record['schema_version']!r}"
             )
 
         capabilities = record["capabilities_manual"]
 
-        if not isinstance(capabilities, list):
+        if not isinstance(capabilities, list) or not capabilities:
             raise ValueError(
                 f"{path}, {problem_id}: "
-                "capabilities_manual must be a list"
+                "capabilities_manual must be a non-empty list"
+            )
+
+        if not all(isinstance(x, str) for x in capabilities):
+            raise ValueError(
+                f"{path}, {problem_id}: capability values must be strings"
+            )
+
+        if len(capabilities) != len(set(capabilities)):
+            raise ValueError(
+                f"{path}, {problem_id}: duplicate capability labels"
             )
 
         unknown = set(capabilities) - VALID_CAPABILITIES
@@ -111,8 +122,7 @@ def validate_annotation_file(
         if unknown:
             raise ValueError(
                 f"{path}, {problem_id}: "
-                f"unknown capabilities: "
-                f"{sorted(unknown)}"
+                f"unknown capabilities: {sorted(unknown)}"
             )
 
         difficulty = record["difficulty_manual"]
@@ -124,17 +134,14 @@ def validate_annotation_file(
             )
 
     duplicates = sorted(
-        {
-            problem_id
-            for problem_id in ids
-            if ids.count(problem_id) > 1
-        }
+        problem_id
+        for problem_id in set(ids)
+        if ids.count(problem_id) > 1
     )
 
     if duplicates:
         raise ValueError(
-            f"{path}: duplicate problem IDs: "
-            f"{duplicates}"
+            f"{path}: duplicate problem IDs: {duplicates}"
         )
 
     return records
@@ -152,15 +159,8 @@ def main():
     a1_path = Path(sys.argv[1])
     a2_path = Path(sys.argv[2])
 
-    a1 = validate_annotation_file(
-        a1_path,
-        "A1",
-    )
-
-    a2 = validate_annotation_file(
-        a2_path,
-        "A2",
-    )
+    a1 = validate_annotation_file(a1_path, "A1")
+    a2 = validate_annotation_file(a2_path, "A2")
 
     ids_a1 = [record["problem_id"] for record in a1]
     ids_a2 = [record["problem_id"] for record in a2]
@@ -170,6 +170,13 @@ def main():
 
     missing_in_a2 = sorted(set_a1 - set_a2)
     missing_in_a1 = sorted(set_a2 - set_a1)
+
+    if len(a1) != len(a2):
+        raise ValueError(
+            "A1/A2 record count mismatch.\n"
+            f"A1 records: {len(a1)}\n"
+            f"A2 records: {len(a2)}"
+        )
 
     if missing_in_a2 or missing_in_a1:
         raise ValueError(

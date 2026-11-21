@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/compute_nll.py --tag S0 --out /workspace/manual/runs/pilot/S0/nll.jsonl --pool /workspace/manual/runs/pilot/pilot_pool.jsonl --batch-size 16 --dtype auto",
+  "elapsed_seconds": 168.8
+}

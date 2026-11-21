@@ -412,7 +412,7 @@ def main():
 
     report = {
         "schema_version": "v1",
-        "annotation_type": "manual_pilot_agreement",
+        "annotation_type": "a1_vs_ai_assisted_a2_agreement",
         "a1_file": str(
             Path(args.a1)
         ),

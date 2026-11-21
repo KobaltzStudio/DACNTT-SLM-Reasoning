@@ -1,0 +1,1 @@
+{"record_type": "checkpoint", "checkpoint": "student_ckpt_000", "parent_checkpoint": null, "round": 0, "method": "B5", "training_seed": 42, "data_order_seed": 42, "cumulative_training_tokens": 0, "cumulative_optimization_steps": 0, "selected_trajectory_ids": [], "beta_est_forward_passes": 4353, "config_hash": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee"}

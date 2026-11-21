@@ -1,0 +1,40 @@
+{
+  "checkpoint": "S0",
+  "split": "test",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": null,
+  "dtype": "bfloat16",
+  "n_problems": 50,
+  "accuracy": 0.62,
+  "lenient_accuracy": 0.66,
+  "format_compliance": 0.92,
+  "lenient_accuracy_exploratory": 0.66,
+  "n_valid": 31,
+  "n_invalid_answer": 15,
+  "n_invalid_format": 4,
+  "mean_output_tokens": 256.46,
+  "n_hit_max_tokens": 2,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": 50,
+  "elapsed_seconds_this_run": 160.3,
+  "problems_this_run": 50,
+  "peak_gpu_memory_gb": 18.29,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}

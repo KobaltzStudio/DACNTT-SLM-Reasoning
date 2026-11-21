@@ -1,0 +1,1145 @@
+
+
+
+==================================================
+FILE: .\scripts\build_gold_vnext_regression_input.py
+==================================================
+#!/usr/bin/env python3
+
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+GOLD_FILES = [
+    BASE / "data" / "gold_vnext" / "batch_100_annotations_vnext.jsonl",
+    BASE / "data" / "gold_vnext" / "supplement_annotations_vnext.jsonl",
+]
+
+SOURCE_FILE = BASE / "data" / "raw" / "gsm8k_train.jsonl"
+
+OUTPUT_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+CAPABILITIES = {
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+}
+
+
+def read_jsonl(path):
+    rows = []
+    with path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSON at {path}:{line_no}"
+                ) from exc
+    return rows
+
+
+def main():
+    if not SOURCE_FILE.exists():
+        raise FileNotFoundError(SOURCE_FILE)
+
+    source_records = read_jsonl(SOURCE_FILE)
+    source_by_id = {
+        row["problem_id"]: row for row in source_records
+    }
+
+    if len(source_by_id) != len(source_records):
+        raise ValueError("Duplicate problem IDs in raw source")
+
+    gold_records = []
+    for path in GOLD_FILES:
+        if not path.exists():
+            raise FileNotFoundError(path)
+        gold_records.extend(read_jsonl(path))
+
+    gold_ids = [row["problem_id"] for row in gold_records]
+    if len(gold_ids) != len(set(gold_ids)):
+        raise ValueError("Duplicate IDs across Gold vNext files")
+
+    output = []
+    missing_source = []
+
+    for gold in gold_records:
+        problem_id = gold["problem_id"]
+        source = source_by_id.get(problem_id)
+
+        if source is None:
+            missing_source.append(problem_id)
+            continue
+
+        question = source.get("question")
+        if not isinstance(question, str) or not question.strip():
+            raise ValueError(f"Missing question for {problem_id}")
+
+        labels = set(gold["capabilities_manual"])
+        unknown = labels - CAPABILITIES
+        if unknown:
+            raise ValueError(
+                f"Unknown labels for {problem_id}: {sorted(unknown)}"
+            )
+
+        output.append({
+            "problem_id": problem_id,
+            "question": question,
+            "gold_capabilities": sorted(labels),
+        })
+
+    if missing_source:
+        raise ValueError(
+            f"Missing raw source records: {missing_source[:10]}"
+        )
+
+    output_ids = [row["problem_id"] for row in output]
+
+    if len(output) != 185:
+        raise ValueError(f"Expected 185 records, got {len(output)}")
+
+    if len(output_ids) != len(set(output_ids)):
+        raise ValueError("Duplicate IDs in D3 evaluation input")
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUTPUT_FILE.open("w", encoding="utf-8") as f:
+        for row in output:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    print("D3 GOLD EVALUATION INPUT")
+    print(f"Gold records: {len(gold_records)}")
+    print(f"Output records: {len(output)}")
+    print(f"Unique IDs: {len(set(output_ids))}")
+    print(f"Missing source records: {len(missing_source)}")
+    print(f"Output: {OUTPUT_FILE}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+==================================================
+FILE: .\scripts\run_extractor_on_gold_vnext.py
+==================================================
+#!/usr/bin/env python3
+
+import json
+import sys
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BASE / "scripts"))
+
+from extract_capabilities_rule_based import (
+    compile_rules,
+    extract_capabilities,
+)
+
+RULES_FILE = BASE / "config" / "capability_rules_v2.json"
+
+INPUT_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+OUTPUT_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_predictions.jsonl"
+)
+
+EVIDENCE_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_evidence.jsonl"
+)
+
+
+def read_jsonl(path):
+    rows = []
+    with path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSON at {path}:{line_no}"
+                ) from exc
+    return rows
+
+
+def main():
+    if not RULES_FILE.exists():
+        raise FileNotFoundError(RULES_FILE)
+
+    if not INPUT_FILE.exists():
+        raise FileNotFoundError(INPUT_FILE)
+
+    rules_data = json.loads(RULES_FILE.read_text(encoding="utf-8"))
+    compiled_rules = compile_rules(rules_data)
+
+    records = read_jsonl(INPUT_FILE)
+
+    predictions = []
+    evidence_records = []
+    seen_ids = set()
+
+    for record in records:
+        problem_id = record["problem_id"]
+        question = record["question"]
+
+        if problem_id in seen_ids:
+            raise ValueError(f"Duplicate ID: {problem_id}")
+        seen_ids.add(problem_id)
+
+        predicted, evidence, rules_fired = extract_capabilities(
+            question,
+            compiled_rules,
+        )
+
+        predicted = sorted(set(predicted))
+
+        predictions.append({
+            "problem_id": problem_id,
+            "predicted_capabilities": predicted,
+        })
+
+        evidence_records.append({
+            "problem_id": problem_id,
+            "predicted_capabilities": predicted,
+            "evidence": evidence,
+            "rules_fired": rules_fired,
+        })
+
+    if len(predictions) != 185:
+        raise ValueError(
+            f"Expected 185 predictions, got {len(predictions)}"
+        )
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUTPUT_FILE.open("w", encoding="utf-8") as f:
+        for row in predictions:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    with EVIDENCE_FILE.open("w", encoding="utf-8") as f:
+        for row in evidence_records:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    print("D3 PROBLEM-LEVEL EXTRACTOR")
+    print(f"Input records: {len(records)}")
+    print(f"Prediction records: {len(predictions)}")
+    print(f"Unique IDs: {len(seen_ids)}")
+    print(f"Rules file: {RULES_FILE}")
+    print(f"Predictions: {OUTPUT_FILE}")
+    print(f"Evidence: {EVIDENCE_FILE}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+==================================================
+FILE: .\scripts\evaluate_extractor_vnext.py
+==================================================
+#!/usr/bin/env python3
+
+import csv
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+INPUT_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+PREDICTIONS_FILE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_predictions.jsonl"
+)
+
+OUTPUT_DIR = BASE / "reports" / "capability" / "d3_regression"
+JSON_REPORT = OUTPUT_DIR / "extractor_vnext_metrics.json"
+CSV_REPORT = OUTPUT_DIR / "capability_metrics.csv"
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+
+def load_jsonl(path):
+    rows = []
+    with path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSON: {path}:{line_no}"
+                ) from exc
+    return rows
+
+
+def safe_divide(numerator, denominator):
+    if denominator == 0:
+        return None
+    return numerator / denominator
+
+
+def calculate_metrics(tp, fp, fn, tn):
+    support = tp + fn
+
+    if support == 0:
+        return {
+            "support": 0,
+            "TP": tp,
+            "FP": fp,
+            "FN": fn,
+            "TN": tn,
+            "precision": None,
+            "recall": None,
+            "f1": None,
+            "status": "N/A_no_positive_gold",
+        }
+
+    precision = safe_divide(tp, tp + fp)
+    recall = safe_divide(tp, tp + fn)
+
+    if precision is None or recall is None:
+        f1 = None
+    elif precision + recall == 0:
+        f1 = 0.0
+    else:
+        f1 = 2 * precision * recall / (precision + recall)
+
+    return {
+        "support": support,
+        "TP": tp,
+        "FP": fp,
+        "FN": fn,
+        "TN": tn,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "status": "ok",
+    }
+
+
+def main():
+    if not INPUT_FILE.exists():
+        raise FileNotFoundError(INPUT_FILE)
+    if not PREDICTIONS_FILE.exists():
+        raise FileNotFoundError(PREDICTIONS_FILE)
+
+    gold_records = load_jsonl(INPUT_FILE)
+    prediction_records = load_jsonl(PREDICTIONS_FILE)
+
+    gold = {}
+    for row in gold_records:
+        problem_id = row["problem_id"]
+
+        if problem_id in gold:
+            raise ValueError(f"Duplicate Gold ID: {problem_id}")
+
+        labels = set(row["gold_capabilities"])
+        unknown = labels - set(CAPABILITIES)
+        if unknown:
+            raise ValueError(
+                f"Unknown Gold labels for {problem_id}: {sorted(unknown)}"
+            )
+
+        gold[problem_id] = labels
+
+    predicted_by_id = {}
+    for row in prediction_records:
+        problem_id = row["problem_id"]
+
+        if problem_id in predicted_by_id:
+            raise ValueError(f"Duplicate prediction ID: {problem_id}")
+
+        labels = set(row["predicted_capabilities"])
+        unknown = labels - set(CAPABILITIES)
+        if unknown:
+            raise ValueError(
+                f"Unknown predicted labels for {problem_id}: "
+                f"{sorted(unknown)}"
+            )
+
+        predicted_by_id[problem_id] = labels
+
+    gold_ids = set(gold)
+    prediction_ids = set(predicted_by_id)
+
+    missing = sorted(gold_ids - prediction_ids)
+    extra = sorted(prediction_ids - gold_ids)
+
+    if missing or extra:
+        raise ValueError(
+            "Gold/prediction ID mismatch\n"
+            f"Missing predictions: {missing[:10]}\n"
+            f"Extra predictions: {extra[:10]}"
+        )
+
+    if len(gold) != 185:
+        raise ValueError(f"Expected 185 Gold records, got {len(gold)}")
+
+    counts = {
+        capability: {"TP": 0, "FP": 0, "FN": 0, "TN": 0}
+        for capability in CAPABILITIES
+    }
+
+    exact_matches = 0
+
+    for problem_id, truth in gold.items():
+        predicted = predicted_by_id[problem_id]
+
+        if predicted == truth:
+            exact_matches += 1
+
+        for capability in CAPABILITIES:
+            p = capability in predicted
+            y = capability in truth
+
+            if p and y:
+                counts[capability]["TP"] += 1
+            elif p and not y:
+                counts[capability]["FP"] += 1
+            elif not p and y:
+                counts[capability]["FN"] += 1
+            else:
+                counts[capability]["TN"] += 1
+
+    metrics = {}
+    for capability in CAPABILITIES:
+        c = counts[capability]
+        metrics[capability] = calculate_metrics(
+            c["TP"], c["FP"], c["FN"], c["TN"]
+        )
+
+    total_tp = sum(x["TP"] for x in counts.values())
+    total_fp = sum(x["FP"] for x in counts.values())
+    total_fn = sum(x["FN"] for x in counts.values())
+
+    micro_precision = safe_divide(total_tp, total_tp + total_fp)
+    micro_recall = safe_divide(total_tp, total_tp + total_fn)
+
+    if micro_precision is None or micro_recall is None:
+        micro_f1 = None
+    elif micro_precision + micro_recall == 0:
+        micro_f1 = 0.0
+    else:
+        micro_f1 = (
+            2 * micro_precision * micro_recall
+            / (micro_precision + micro_recall)
+        )
+
+    valid_f1 = [
+        item["f1"]
+        for item in metrics.values()
+        if item["f1"] is not None
+    ]
+
+    macro_f1 = (
+        sum(valid_f1) / len(valid_f1)
+        if valid_f1 else None
+    )
+
+    exact_match_rate = exact_matches / len(gold)
+
+    report = {
+        "schema_version": "v1",
+        "evaluation_unit": "problem",
+        "gold_version": "vNext",
+        "gold_status": "AI_adjudicated_pending_human_confirmation",
+        "rules_file": "config/capability_rules_v2.json",
+        "guideline_version": "v3",
+        "gold_records": len(gold),
+        "prediction_records": len(predicted_by_id),
+        "unique_problem_ids": len(gold),
+        "exact_matches": exact_matches,
+        "exact_match_rate": exact_match_rate,
+        "micro": {
+            "TP": total_tp,
+            "FP": total_fp,
+            "FN": total_fn,
+            "precision": micro_precision,
+            "recall": micro_recall,
+            "f1": micro_f1,
+        },
+        "macro_f1": macro_f1,
+        "macro_f1_capabilities_included": len(valid_f1),
+        "capabilities": metrics,
+    }
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    JSON_REPORT.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    with CSV_REPORT.open(
+        "w", newline="", encoding="utf-8-sig"
+    ) as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "capability", "support", "TP", "FP", "FN", "TN",
+            "precision", "recall", "F1", "status",
+        ])
+
+        for capability in CAPABILITIES:
+            m = metrics[capability]
+            writer.writerow([
+                capability,
+                m["support"],
+                m["TP"],
+                m["FP"],
+                m["FN"],
+                m["TN"],
+                m["precision"],
+                m["recall"],
+                m["f1"],
+                m["status"],
+            ])
+
+    def fmt(value):
+        return "N/A" if value is None else f"{value:.4f}"
+
+    print("\nD3 EXTRACTOR EVALUATION � GOLD vNext")
+    print(f"Gold records: {len(gold)}")
+    print(f"Prediction records: {len(predicted_by_id)}")
+    print(f"Exact matches: {exact_matches}")
+    print()
+    print(
+        f"{'Capability':<16}{'Support':>9}{'TP':>6}"
+        f"{'FP':>6}{'FN':>6}{'P':>9}{'R':>9}{'F1':>9}"
+    )
+
+    for capability in CAPABILITIES:
+        m = metrics[capability]
+        print(
+            f"{capability:<16}{m['support']:>9}{m['TP']:>6}"
+            f"{m['FP']:>6}{m['FN']:>6}"
+            f"{fmt(m['precision']):>9}{fmt(m['recall']):>9}"
+            f"{fmt(m['f1']):>9}"
+        )
+
+    print()
+    print(f"Micro Precision: {fmt(micro_precision)}")
+    print(f"Micro Recall:    {fmt(micro_recall)}")
+    print(f"Micro F1:        {fmt(micro_f1)}")
+    print(f"Macro F1:        {fmt(macro_f1)}")
+    print(f"Exact Match Rate:{exact_match_rate:.4f}")
+    print(f"JSON report: {JSON_REPORT}")
+    print(f"CSV report: {CSV_REPORT}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+==================================================
+FILE: .\scripts\compare_d2_d3.py
+==================================================
+#!/usr/bin/env python3
+
+import csv
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parents[1]
+
+D2_REPORT = (
+    BASE / "reports" / "capability" / "d2_regression"
+    / "extractor_baseline.json"
+)
+
+D3_REPORT = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_vnext_metrics.json"
+)
+
+D3_INPUT = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "gold_evaluation_input.jsonl"
+)
+
+D3_PREDICTIONS = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_predictions.jsonl"
+)
+
+D3_EVIDENCE = (
+    BASE / "reports" / "capability" / "d3_regression"
+    / "extractor_evidence.jsonl"
+)
+
+OUTPUT_DIR = BASE / "reports" / "capability" / "d3_regression"
+
+COMPARISON_CSV = OUTPUT_DIR / "d2_d3_comparison.csv"
+COMPARISON_JSON = OUTPUT_DIR / "d2_d3_comparison.json"
+ERROR_CSV = OUTPUT_DIR / "error_analysis.csv"
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+
+def load_json(path):
+    if not path.exists():
+        raise FileNotFoundError(path)
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_jsonl(path):
+    if not path.exists():
+        raise FileNotFoundError(path)
+
+    rows = []
+    with path.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSON: {path}:{line_no}"
+                ) from exc
+    return rows
+
+
+def metric_value(report, key):
+    if key == "micro_precision":
+        return report["micro"]["precision"]
+    if key == "micro_recall":
+        return report["micro"]["recall"]
+    if key == "micro_f1":
+        return report["micro"]["f1"]
+    if key == "macro_f1":
+        return report["macro_f1"]
+    if key == "exact_match_rate":
+        return report["exact_match_rate"]
+    raise KeyError(key)
+
+
+def main():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    d2 = load_json(D2_REPORT)
+    d3 = load_json(D3_REPORT)
+
+    # Aggregate comparison
+    aggregate_keys = [
+        "micro_precision",
+        "micro_recall",
+        "micro_f1",
+        "macro_f1",
+        "exact_match_rate",
+    ]
+
+    comparison_rows = []
+
+    for key in aggregate_keys:
+        d2_value = metric_value(d2, key)
+        d3_value = metric_value(d3, key)
+
+        delta = (
+            d3_value - d2_value
+            if d2_value is not None and d3_value is not None
+            else None
+        )
+
+        comparison_rows.append({
+            "level": "aggregate",
+            "metric": key,
+            "capability": "",
+            "d2": d2_value,
+            "d3": d3_value,
+            "delta_d3_minus_d2": delta,
+        })
+
+    # Per-capability comparison
+    for capability in CAPABILITIES:
+        d2_metric = d2["capabilities"][capability]
+        d3_metric = d3["capabilities"][capability]
+
+        for metric in [
+            "support", "TP", "FP", "FN",
+            "precision", "recall", "f1",
+        ]:
+            d2_value = d2_metric[metric]
+            d3_value = d3_metric[metric]
+
+            delta = (
+                d3_value - d2_value
+                if isinstance(d2_value, (int, float))
+                and isinstance(d3_value, (int, float))
+                else None
+            )
+
+            comparison_rows.append({
+                "level": "capability",
+                "metric": metric,
+                "capability": capability,
+                "d2": d2_value,
+                "d3": d3_value,
+                "delta_d3_minus_d2": delta,
+            })
+
+    with COMPARISON_CSV.open(
+        "w", newline="", encoding="utf-8-sig"
+    ) as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "level", "metric", "capability",
+                "d2", "d3", "delta_d3_minus_d2",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(comparison_rows)
+
+    comparison_json = {
+        "comparison": "D2 Gold v2 vs D3 Gold vNext",
+        "interpretation": (
+            "The extractor and rules are held constant. "
+            "Metric differences reflect evaluation against different "
+            "Gold annotation versions and must not be interpreted as "
+            "an extractor improvement."
+        ),
+        "d2_gold_records": d2["gold_records"],
+        "d3_gold_records": d3["gold_records"],
+        "aggregate": comparison_rows[:len(aggregate_keys)],
+        "per_capability": comparison_rows[len(aggregate_keys):],
+    }
+
+    COMPARISON_JSON.write_text(
+        json.dumps(comparison_json, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    # Error analysis for D3
+    inputs = load_jsonl(D3_INPUT)
+    predictions = load_jsonl(D3_PREDICTIONS)
+    evidence_rows = load_jsonl(D3_EVIDENCE)
+
+    input_by_id = {row["problem_id"]: row for row in inputs}
+    prediction_by_id = {
+        row["problem_id"]: row for row in predictions
+    }
+    evidence_by_id = {
+        row["problem_id"]: row for row in evidence_rows
+    }
+
+    if len(input_by_id) != len(inputs):
+        raise ValueError("Duplicate IDs in D3 input")
+    if len(prediction_by_id) != len(predictions):
+        raise ValueError("Duplicate IDs in D3 predictions")
+    if len(evidence_by_id) != len(evidence_rows):
+        raise ValueError("Duplicate IDs in D3 evidence")
+
+    if (
+        set(input_by_id) != set(prediction_by_id)
+        or set(input_by_id) != set(evidence_by_id)
+    ):
+        raise ValueError("Input/prediction/evidence ID mismatch")
+
+    error_rows = []
+
+    for problem_id, input_row in input_by_id.items():
+        gold = set(input_row["gold_capabilities"])
+        predicted = set(
+            prediction_by_id[problem_id]["predicted_capabilities"]
+        )
+
+        false_negatives = sorted(gold - predicted)
+        false_positives = sorted(predicted - gold)
+
+        if not false_negatives and not false_positives:
+            continue
+
+        evidence = evidence_by_id[problem_id]
+
+        error_rows.append({
+            "problem_id": problem_id,
+            "question": input_row["question"],
+            "gold_capabilities": json.dumps(
+                sorted(gold), ensure_ascii=False
+            ),
+            "predicted_capabilities": json.dumps(
+                sorted(predicted), ensure_ascii=False
+            ),
+            "false_negatives": json.dumps(
+                false_negatives, ensure_ascii=False
+            ),
+            "false_positives": json.dumps(
+                false_positives, ensure_ascii=False
+            ),
+            "exact_match": False,
+            "evidence": json.dumps(
+                evidence.get("evidence", {}),
+                ensure_ascii=False,
+            ),
+            "rules_fired": json.dumps(
+                evidence.get("rules_fired", {}),
+                ensure_ascii=False,
+            ),
+        })
+
+    error_fields = [
+        "problem_id",
+        "question",
+        "gold_capabilities",
+        "predicted_capabilities",
+        "false_negatives",
+        "false_positives",
+        "exact_match",
+        "evidence",
+        "rules_fired",
+    ]
+
+    with ERROR_CSV.open(
+        "w", newline="", encoding="utf-8-sig"
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=error_fields)
+        writer.writeheader()
+        writer.writerows(error_rows)
+
+    print("D2 vs D3 COMPARISON")
+    print(f"D2 Gold records: {d2['gold_records']}")
+    print(f"D3 Gold records: {d3['gold_records']}")
+    print(f"Comparison rows: {len(comparison_rows)}")
+    print(f"D3 error records: {len(error_rows)}")
+    print(f"Comparison CSV: {COMPARISON_CSV}")
+    print(f"Comparison JSON: {COMPARISON_JSON}")
+    print(f"Error analysis CSV: {ERROR_CSV}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+==================================================
+FILE: .\scripts\generate_d3_completion_report.py
+==================================================
+import csv
+import json
+from pathlib import Path
+from datetime import date
+
+BASE = Path(__file__).resolve().parents[1]
+REPORT_DIR = BASE / "reports" / "capability"
+D3_DIR = REPORT_DIR / "d3_regression"
+
+D2_JSON = REPORT_DIR / "d2_regression" / "extractor_baseline.json"
+D3_JSON = D3_DIR / "extractor_vnext_metrics.json"
+COMPARISON_CSV = D3_DIR / "d2_d3_comparison.csv"
+ERROR_CSV = D3_DIR / "error_analysis.csv"
+
+OUTPUT = REPORT_DIR / "D3_completion_report.md"
+
+
+def read_csv(path):
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def fmt(value):
+    if value is None:
+        return "N/A"
+    if isinstance(value, float):
+        return f"{value:.4f}"
+    return str(value)
+
+
+def main():
+    for path in [D2_JSON, D3_JSON, COMPARISON_CSV, ERROR_CSV]:
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Required D3 output is missing: {path}"
+            )
+
+    d2 = json.loads(D2_JSON.read_text(encoding="utf-8"))
+    d3 = json.loads(D3_JSON.read_text(encoding="utf-8"))
+    comparison = read_csv(COMPARISON_CSV)
+    errors = read_csv(ERROR_CSV)
+
+    if d2["gold_records"] != 185 or d3["gold_records"] != 185:
+        raise ValueError("Expected 185 Gold records in both D2 and D3")
+
+    if d3["prediction_records"] != 185:
+        raise ValueError("Expected 185 D3 predictions")
+
+    if d3["unique_problem_ids"] != 185:
+        raise ValueError("Expected 185 unique D3 problem IDs")
+
+    lines = [
+        "# D3 Completion Report",
+        "",
+        f"Report generated: {date.today().isoformat()}",
+        "",
+        "## 1. Objective",
+        "",
+        "D3 evaluates the rule-based capability extractor against Gold vNext. "
+        "The purpose is to measure extractor behavior under the updated "
+        "problem-level annotations produced through the D3 adjudication process.",
+        "",
+        "## 2. Gold vNext",
+        "",
+        f"- Total Gold records: {d3['gold_records']}",
+        f"- Unique problem IDs: {d3['unique_problem_ids']}",
+        f"- Guideline version: {d3.get('guideline_version', 'Not recorded')}",
+        f"- Gold status: {d3.get('gold_status', 'Not recorded')}",
+        "- Gold vNext contains AI-adjudicated cases pending human confirmation.",
+        "",
+        "## 3. Experimental Configuration",
+        "",
+        "- Extractor: `scripts/extract_capabilities_rule_based.py`",
+        "- Rules: `config/capability_rules_v2.json`",
+        "- Evaluation unit: problem-level",
+        "- D3 Gold: Gold vNext",
+        "- D2 reference Gold: Gold v2",
+        "- Extractor implementation and rules are unchanged between D2 and D3.",
+        "",
+        "## 4. D3 Evaluation Results",
+        "",
+        "| Metric | D3 result |",
+        "|---|---:|",
+        f"| Gold records | {d3['gold_records']} |",
+        f"| Prediction records | {d3['prediction_records']} |",
+        f"| Exact matches | {d3['exact_matches']} |",
+        f"| Exact match rate | {fmt(d3['exact_match_rate'])} |",
+        f"| Micro Precision | {fmt(d3['micro']['precision'])} |",
+        f"| Micro Recall | {fmt(d3['micro']['recall'])} |",
+        f"| Micro F1 | {fmt(d3['micro']['f1'])} |",
+        f"| Macro F1 | {fmt(d3['macro_f1'])} |",
+        "",
+        "### 4.1 Per-capability metrics",
+        "",
+        "| Capability | Support | TP | FP | FN | Precision | Recall | F1 |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+
+    for capability, metric in d3["capabilities"].items():
+        lines.append(
+            f"| {capability} | {metric['support']} | "
+            f"{metric['TP']} | {metric['FP']} | {metric['FN']} | "
+            f"{fmt(metric['precision'])} | {fmt(metric['recall'])} | "
+            f"{fmt(metric['f1'])} |"
+        )
+
+    lines.extend([
+        "",
+        "## 5. D2 and D3 Comparison",
+        "",
+        "| Level | Metric | Capability | D2 | D3 | Delta (D3-D2) |",
+        "|---|---|---|---:|---:|---:|",
+    ])
+
+    for row in comparison:
+        lines.append(
+            f"| {row['level']} | {row['metric']} | "
+            f"{row['capability']} | {row['d2']} | {row['d3']} | "
+            f"{row['delta_d3_minus_d2']} |"
+        )
+
+    lines.extend([
+        "",
+        "### Interpretation",
+        "",
+        "D2 uses Gold v2, whereas D3 uses Gold vNext. The extractor "
+        "implementation and rule configuration are held constant. Therefore, "
+        "differences in measured metrics indicate sensitivity to the updated "
+        "Gold annotations; they must not be interpreted as an improvement "
+        "or degradation of the extractor itself.",
+        "",
+        "## 6. Error Analysis",
+        "",
+        f"- Number of problem records with at least one capability error: {len(errors)}",
+        f"- Error analysis file: `d3_regression/error_analysis.csv`",
+        "",
+        "The error analysis records false positives, false negatives, "
+        "the original question, matched evidence, and fired rules for each "
+        "problem with an incorrect prediction.",
+        "",
+        "## 7. Output Artifacts",
+        "",
+        "| Artifact | Path |",
+        "|---|---|",
+        "| D3 evaluation input | `d3_regression/gold_evaluation_input.jsonl` |",
+        "| D3 predictions | `d3_regression/extractor_predictions.jsonl` |",
+        "| D3 evidence | `d3_regression/extractor_evidence.jsonl` |",
+        "| D3 metrics JSON | `d3_regression/extractor_vnext_metrics.json` |",
+        "| D3 capability metrics | `d3_regression/capability_metrics.csv` |",
+        "| D2-D3 comparison CSV | `d3_regression/d2_d3_comparison.csv` |",
+        "| D2-D3 comparison JSON | `d3_regression/d2_d3_comparison.json` |",
+        "| D3 error analysis | `d3_regression/error_analysis.csv` |",
+        "",
+        "## 8. Limitations",
+        "",
+        "1. Gold vNext includes AI-adjudicated labels that are pending human confirmation.",
+        "2. The evaluation measures a rule-based extractor against problem-level labels; "
+        "it does not establish that every matched lexical pattern represents "
+        "a mathematically necessary capability.",
+        "3. D2-D3 metric differences are affected by the change in Gold annotations.",
+        "4. Error analysis identifies prediction mismatches but does not automatically "
+        "establish whether the Gold label or extractor rule is responsible.",
+        "",
+        "## 9. Completion Status",
+        "",
+        "- [x] Gold vNext evaluation input generated.",
+        "- [x] Extractor predictions and evidence generated.",
+        "- [x] D3 metrics calculated.",
+        "- [x] D2-D3 comparison generated.",
+        "- [x] D3 error analysis generated.",
+        "- [x] Completion report generated.",
+        "",
+        "Human confirmation of the AI-adjudicated cases remains a separate "
+        "validation activity and is not claimed as completed by this report.",
+        "",
+    ])
+
+    OUTPUT.write_text("\n".join(lines), encoding="utf-8")
+
+    print("D3 COMPLETION REPORT")
+    print(f"Output: {OUTPUT}")
+    print(f"D3 records: {d3['gold_records']}")
+    print(f"D3 error records: {len(errors)}")
+    print("[PASS]")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+==================================================
+FILE: .\config\capability_rules_v2.json
+==================================================
+{
+    "schema_version": "v2",
+    "taxonomy": [
+        "addition",
+        "subtraction",
+        "multiplication",
+        "division",
+        "percentage",
+        "fraction",
+        "ratio"
+    ],
+    "normalization": {
+        "lowercase": true,
+        "unicode_math": true,
+        "collapse_whitespace": true
+    },
+    "rules": {
+        "addition": {
+            "patterns": [
+                "\\b(?:add|added|adding|sum|summed|plus|combined|combine|together)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*\\+\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+            ],
+            "notes": "Prefer explicit addition evidence; 'total' is weak contextual evidence.",
+            "negative_patterns": []
+        },
+        "subtraction": {
+            "patterns": [
+                "\\b(?:subtract|subtracted|subtracting|minus|difference|decrease|decreased|remaining|remains|left|less)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?(?:\\s+[a-z]+)?\\s*-\\s*\\d+(?:\\.\\d+)?(?!\\w)"
+            ],
+            "notes": "Use explicit subtraction/difference evidence; remaining/left are contextual cues.",
+            "negative_patterns": []
+        },
+        "multiplication": {
+            "patterns": [
+                "(?:\\d+(?:\\.\\d+)?(?:\\s+[a-z]+(?:/[a-z]+)?)?|\\))\\s*(?:\\*|×|x|✕|·|times)\\s*(?:\\d+(?:\\.\\d+)?|\\()",
+                "\\b(?:multiply|multiplied|multiplying|times|double|twice|triple|tripled)\\b",
+                "\\b(?:groups?|batches?|sets?)\\s+of\\b"
+            ],
+            "notes": "Recognizes explicit multiplication, including parenthesized expressions and quantities with units between the number and operator. 'twice/double/triple' implies scaling, not ratio.",
+            "negative_patterns": []
+        },
+        "division": {
+            "patterns": [
+                "(?:(?<![\\d.,])(?<!\\btimes )(?<!\\bx )(?<!\\* )(?<!\\bof )\\d+(?:,\\d{3})*(?:\\.\\d+)?|\\))\\s*(?:/|÷|⁄)\\s*(?:\\d+(?:\\.\\d+)?(?![\\d.])|\\()(?!\\)?\\s*(?:(?:times|x|of)\\b|\\*))",
+                "\\b(?:divide|divided|dividing|quotient|equal(?:ly)?\\s+(?:among|between|into)|split\\s+(?:equally|evenly))\\b",
+                "(?<![\\d.,])\\d+(?:,\\d{3})*(?:\\.\\d+)?\\s+[a-z]+\\s*/\\s*\\d+(?:\\.\\d+)?(?![\\d.])"
+            ],
+            "notes": "APPROVED 2026-10-12 (part A + part B; task4_decisions.md). v2 (Task 4 adjudication): rule_1 ignores a / b used as a fraction/percentage multiplier (preceded or followed by 'times'/'x'/'*'/'of', e.g. '2 / 5 times 400', '10 / 100 times 40', '92 times 1 / 4'), per guideline_v2 Rule 3/Rule 5. Bare 'per' removed from rule_2: it marks a rate unit, not a division operation (17 adjudicated FALSE_LEXICAL_TRIGGER cases). rule_3 added for unit-bearing division such as '210 points / 5 games' or '504 ounces / 84', which v1 only caught through 'per'.",
+            "negative_patterns": []
+        },
+        "percentage": {
+            "patterns": [
+                "\\b(?:percentage|percent|pct|per\\s+hundred|out\\s+of\\s+100)\\b",
+                "(?<!\\w)\\d+(?:\\.\\d+)?\\s*%",
+                "(?<!\\w)\\d+(?:\\.\\d+)?\\s*/\\s*100\\b"
+            ],
+            "notes": "Percentage is explicit; decimals alone do not imply percentage.",
+            "negative_patterns": []
+        },
+        "fraction": {
+            "patterns": [
+                "\\b(?:fraction|fractional|half|halves|one[-\\s]half|one[-\\s]third|one[-\\s]quarter|two[-\\s]fifths|three[-\\s]quarters|a\\s+third|a\\s+quarter)\\b",
+                "(?<!\\w)(?:(?:\\(\\s*(?:1|2|3)\\s*\\)\\s*/\\s*\\(\\s*(?:2|3|4|5)\\s*\\))|(?:(?:1\\s*/\\s*[2-4]|2\\s*/\\s*3|3\\s*/\\s*4|2\\s*/\\s*5)))(?!\\w)"
+            ],
+            "notes": "Use explicit fractional language or common proper fractions. Bare ordinal words such as 'third' are not sufficient. A numeric fraction such as 1/2 can still be semantically ambiguous without context.",
+            "negative_patterns": []
+        },
+        "ratio": {
+            "patterns": [
+                "\\b(?:ratio|proportional|in\\s+the\\s+ratio\\s+of)\\b|\\bproportion\\b(?!\\s+of\\b)",
+                "(?<!\\w)\\d+:\\d+(?!\\w)",
+                "(?<!\\w)\\d+\\s+:\\s+\\d+(?!\\w)"
+            ],
+            "notes": "Colon-form ratio accepts 3:2 or 3 : 2; one-sided whitespace is rejected to avoid 'Step 3: 12'. Clock-like HH:MM values are suppressed. Do not infer ratio from twice/double/ordinary division. APPROVED 2026-10-12: 'the proportion of X' (share/fraction wording) no longer triggers ratio; guideline_v2 Rule 6 (gsm8k_train_00087).",
+            "negative_patterns": [
+                "\\b(?:ratio|proportion)\\b\\s+(?:is\\s+)?(?:not|unnecessary|irrelevant)\\b",
+                "\\bnot\\s+(?:a\\s+)?ratio\\b",
+                "\\bratio\\s+(?:is\\s+)?not\\s+(?:needed|required|used)\\b",
+                "(?<!\\w)(?:[01]?\\d|2[0-3]):[0-5]\\d(?!\\w)"
+            ]
+        }
+    }
+}
+
