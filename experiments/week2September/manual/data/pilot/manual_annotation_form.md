@@ -1,7 +1,7 @@
-MANUAL ANNOTATION — SEMANTICS PILOT
+MANUAL ANNOTATION: SEMANTICS PILOT
 Version: v0.4
 
-1. CASE 1 — gsm8k_train_00000
+1. CASE 1: gsm8k_train_00000
 
 Problem:
 Mimi picked up 2 dozen seashells. Kyle found twice as many shells as Mimi.
@@ -94,7 +94,7 @@ Student Learnability:
 Reason:
 The Student successfully reproduces the reasoning on this problem, providing positive transfer evidence. However, one successful problem is insufficient to determine general Student learnability. Learnability requires evidence across multiple problems or training/transfer observations.
 
-2. CASE 2 — gsm8k_train_00001
+2. CASE 2: gsm8k_train_00001
 
 Problem:
 Frankie's parents let him have many pets. He has six more snakes than cats,
@@ -191,7 +191,7 @@ Student Learnability:
 Reason:
 The Student shows partial transfer but fails to correctly interpret the relationships between quantities. This single failure does not establish low learnability. General learnability requires evidence across multiple problems or training/transfer observations.
 
-3. CASE 3 — gsm8k_train_00002
+3. CASE 3: gsm8k_train_00002
 
 Problem:
 Olaf has 150 cars. Grandpa gives twice as many as the uncle.

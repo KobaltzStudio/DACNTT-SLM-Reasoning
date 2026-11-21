@@ -1,4 +1,4 @@
-# Proposal 1 — Student-Specific Capability Dependency, Transfer, and Learning Dynamics Protocol
+# Proposal 1: Student-Specific Capability Dependency, Transfer, and Learning Dynamics Protocol
 
 ## 1. Objective
 
@@ -643,7 +643,7 @@ For example, one capability may improve while another decreases, producing an ap
 
 The system contains two distinct visual artifacts.
 
-### Artifact A — Dependency / Transfer Graph
+### Artifact A: Dependency / Transfer Graph
 
 Question:
 
@@ -660,7 +660,7 @@ Output:
     graph representation
 
 
-### Artifact B — Student Learning Dynamics
+### Artifact B: Student Learning Dynamics
 
 Question:
 

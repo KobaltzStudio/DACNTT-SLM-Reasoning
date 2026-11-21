@@ -59,7 +59,7 @@ def main():
     # 5. Create Markdown report
     # ---------------------------------------------------------
     lines = [
-        "# Teacher–Student Baseline Comparison",
+        "# Teacher-Student Baseline Comparison",
         "",
         "## Overall Results",
         "",

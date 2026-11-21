@@ -52,7 +52,7 @@ Q4_K_M in LM Studio
 Inference status:
 Verified.
 
-## Teacher–Student Relationship
+## Teacher-Student Relationship
 
 Teacher:
 Qwen2.5-3B-Instruct

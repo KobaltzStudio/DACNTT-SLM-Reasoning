@@ -1,0 +1,8 @@
+﻿capability,FP,FN,total_errors
+addition,54,16,70
+subtraction,31,9,40
+multiplication,37,24,61
+division,113,5,118
+percentage,0,4,4
+fraction,10,1,11
+ratio,2,0,2

@@ -68,7 +68,7 @@ def main():
         ground_truth = sample["ground_truth"]
 
         print("=" * 60)
-        print(f"{i}/{len(samples)} — {sample_id}")
+        print(f"{i}/{len(samples)} - {sample_id}")
         print("=" * 60)
 
         prompt = STUDENT_PROMPT_TEMPLATE.format(

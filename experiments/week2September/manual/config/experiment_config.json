@@ -1,0 +1,170 @@
+{
+  "config_version": "v1",
+  "status": "FROZEN v1 (2026-10-14): no TBD. task5_decisions.md section I: I1, I2, I6, I7, I8 approved by the group; I3 (budget), I4 (probe b), I5 (hyperparameters) are provisional pending a smoke test on D_dev. Changes require a new config version with rationale.",
+  "sources": {
+    "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
+    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14"
+  },
+  "splits": {
+    "manifest": "splits/split_manifest.json",
+    "manifest_sha256": "8bac2c8d43eae6df53b63f97f353ed6006551f44d5562b74941455301fec09a3",
+    "split_seed": 363636,
+    "n_dev": 500,
+    "near_duplicate_ngram": 13
+  },
+  "teacher": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "K": 5,
+    "temperature": 0.7,
+    "max_new_tokens": 512,
+    "generation_seed_base": 20261009,
+    "generation_seed_rule": "generation_seed_base + problem_index * K + k (problem_index = row order of the input file, k = 0..K-1)",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "revision_note": "Not recorded at generation time. HF repo last modified 2024-09-25 (before generation in 2026-10), so main == this sha if the model was loaded from HF main."
+  },
+  "student": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "initial_checkpoint": "student_ckpt_000",
+    "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs."
+  },
+  "schedule": {
+    "rounds_M": 3,
+    "checkpoint_name": "student_ckpt_{t:03d}"
+  },
+  "budget": {
+    "unit": "supervised (loss-bearing) response tokens under the Student tokenizer; prompt tokens are masked from the loss and logged separately",
+    "beta_round_rule": "n_round * mean token length of verified trajectories",
+    "n_round": 200,
+    "beta_round_tokens": 45426,
+    "beta_total_tokens": 136278,
+    "probe_budget_b_steps": 7,
+    "probe_budget_note": "b = one epoch over a 50-trajectory group at effective batch 8 (= ceil(50/8) = 7 steps), same regime as one training round",
+    "l_emp_checkpoints": [
+      "student_ckpt_000"
+    ],
+    "l_emp_groups": "5 token-length quintile bins of the eligible pool at S_0; 50 trajectories sampled per bin with seed 363636",
+    "report_beta_est": true,
+    "pool_token_stats": "reports/task5/pool_token_stats.json (Student tokenizer; response mean 227.13, with prompt mean 359.6)",
+    "L_bar_response_tokens": 227.13,
+    "L_bar_source": "reports/task5/pool_token_stats.json (480 verified trajectories of the preliminary pool, Student tokenizer)",
+    "pool_requirement": "Task 6 official D_pool trajectory pool must cover >= 1000 problems (5 x n_round with n_cap = 1); otherwise revise via config v2 before training",
+    "b1_exception": "B1 trains on the full pool once per round (reference, higher cost), not budget-matched",
+    "probe_group_size": 50
+  },
+  "training": {
+    "method": "LoRA",
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "optimizer": "adamw_torch",
+    "batch_size": 8,
+    "epochs_per_round": 1,
+    "max_seq_len": 1024,
+    "tuned": false,
+    "official_runs": "cloud",
+    "local_runs": "smoke test only (QLoRA, RTX 3050 Ti 4GB)",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "lr_scheduler": "constant",
+    "warmup_steps": 0,
+    "batch_size_note": "effective batch size (per-device x gradient accumulation)",
+    "loss": "completion-only (prompt tokens masked)",
+    "precision": "bf16",
+    "adapter_across_rounds": "continue the same LoRA adapter from S_t; optimizer state re-initialized each round",
+    "hyperparameter_source": "QLoRA (Dettmers et al., 2023, arXiv 2305.14314) Appendix: LoRA on all linear layers, dropout 0.1 for models up to 13B, constant LR schedule, Adam beta2 0.999, max grad norm 0.3"
+  },
+  "seeds": {
+    "training_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "data_order_seed_rule": "data_order_seed = training_seed",
+    "optional_extra_seeds": [
+      7,
+      77
+    ],
+    "optional_extra_seeds_rule": "run only if compute allows, and then for every method"
+  },
+  "learnability": {
+    "proxy": "ell = length-normalized NLL of tau under S_t; L_proxy = exp(-(ell - ell_star_t)^2 / (2 sigma_t^2))",
+    "ell_star_rule": "median of ell over eligible pool at S_t",
+    "sigma_rule": "IQR of ell over eligible pool at S_t / 1.349",
+    "eligible": "verified trajectories only"
+  },
+  "selection": {
+    "n_cap": 1,
+    "alpha": 0.5,
+    "alpha_tuned": false,
+    "alpha_tuning_grid": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "retention_r": 0.5,
+    "retention_scope": [
+      "B6"
+    ],
+    "allow_reselect_across_rounds": true,
+    "max_total_reselect": null,
+    "tie_break": "trajectory_id ascending",
+    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; if over budget: shuffle problems with seed, fill until beta_round; computed once, reused for all rounds",
+    "b3_problem_order_seed": "training_seed",
+    "b2_seed_rule": "random.Random(training_seed * 100 + round)",
+    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)"
+  },
+  "evaluation": {
+    "decoding": "greedy",
+    "max_new_tokens": 512,
+    "prompt_version": "v1",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "answer_extractor": "scripts/answer_utils.py:split_response + final_number",
+    "answer_verifier": "scripts/answer_utils.py:evaluate_output (invalid_format counts as incorrect; format compliance reported separately)",
+    "dev_checkpoints": "all",
+    "test_checkpoints": [
+      "student_ckpt_000",
+      "student_ckpt_001",
+      "student_ckpt_002",
+      "student_ckpt_003"
+    ],
+    "decisions_use": "D_dev only"
+  },
+  "methods": {
+    "required": [
+      "B0",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "recommended": [
+      "ablation_shuffled_scores"
+    ],
+    "optional": [
+      "B1",
+      "B6"
+    ]
+  },
+  "analysis": {
+    "primary_metric": "exact-match accuracy on D_test",
+    "primary_comparison": "B5 vs B4",
+    "within_seed_test": "McNemar on paired per-problem correctness",
+    "across_seed": "mean of paired differences with 95% CI",
+    "significance_alpha": 0.05,
+    "plan": "analysis_plan.md"
+  }
+}
