@@ -12,11 +12,15 @@ import csv
 import hashlib
 import json
 import math
-import os
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
+
+from capability_eval import load_approved_gold, validate_manifest_count
+from p1p2_controller import sha256
+from p1p2_paths import artifact_path, legacy_root
+from select_checkpoint_on_dev import verified_prediction
 
 CAPABILITIES = (
     "addition", "subtraction", "multiplication", "division",
@@ -27,6 +31,7 @@ EXPECTED_SUPPORT = {
     "division": 47, "percentage": 29, "fraction": 31, "ratio": 30,
 }
 MANIFEST_NAME = "student_capability_evaluation_manifest.json"
+G4_CHECKPOINTS = ("integration_staging", "G4_CHECKPOINT_AUDIT", "extracted_checkpoints")
 REQUIRED_FILES = (
     "capability_metrics.jsonl",
     "prediction_coverage_report.json",
@@ -37,7 +42,7 @@ OUTPUT_NAMES = (
     "capability_learning_dynamics_seed13.csv",
     "capability_learning_dynamics_seed13.json",
     "capability_learning_dynamics_seed13.md",
-    "capability_sidecar_inventory_seed13.json",
+    "capability_sidecar_inventory_seed13.csv",
 )
 
 def sha256_file(path: Path) -> str:
@@ -97,6 +102,8 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     if not manifest_path.is_file():
         raise ValueError("manifest_missing")
     manifest = read_json(manifest_path)
+    if manifest.get("schema_version") != "p1p2.capability-manifest.v1":
+        raise ValueError(f"invalid_manifest_schema:{manifest_path}")
 
     file_paths = {name: sidecar / name for name in REQUIRED_FILES}
     missing = [name for name, p in file_paths.items() if not p.is_file()]
@@ -114,10 +121,12 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         problems.append("fingerprint_inputs_missing")
         inputs = {}
     manifest_inputs = manifest.get("input_hashes")
-    if isinstance(manifest_inputs, dict) and manifest_inputs != inputs:
+    if manifest_inputs != inputs:
         problems.append("manifest_fingerprint_inputs_mismatch")
 
     recorded_fingerprint = fingerprint.get("fingerprint")
+    if not recorded_fingerprint:
+        problems.append("fingerprint_missing")
     if recorded_fingerprint:
         canonical = json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode("utf-8")
         expected_fp = hashlib.sha256(canonical).hexdigest()
@@ -126,14 +135,16 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
     # Validate sidecar output hashes if present. Manifest does not hash itself.
     outputs = manifest.get("outputs", {})
-    if isinstance(outputs, dict):
+    if not isinstance(outputs, dict) or set(outputs) != {*REQUIRED_FILES, "capability_metrics.csv"}:
+        problems.append("manifest_output_inventory_mismatch")
+    else:
         for name, meta in outputs.items():
             path = sidecar / name
             if not path.is_file():
                 problems.append(f"manifest_output_missing:{name}")
                 continue
             expected_hash = meta.get("sha256") if isinstance(meta, dict) else None
-            if expected_hash and sha256_file(path) != expected_hash:
+            if not expected_hash or sha256_file(path) != expected_hash:
                 problems.append(f"manifest_output_hash_mismatch:{name}")
 
     method = str(first_value(manifest.get("method"), lineage.get("method"), "UNKNOWN"))
@@ -151,6 +162,14 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         lineage.get("checkpoint"),
     )
     checkpoint_label = normalize_round(round_value, checkpoint)
+    expected_round = int(checkpoint_label[1:]) if checkpoint_label in ("S0", "S1", "S2", "S3") else None
+    if (expected_round is None or manifest.get("checkpoint") != checkpoint_label
+            or (lineage.get("method"), lineage.get("seed"), lineage.get("round"))
+            != (method, seed, expected_round)
+            or manifest.get("round") != expected_round
+            or lineage.get("run_id") != manifest.get("run_id")
+            or (checkpoint_label == "S0") != (method == "SHARED" and seed == 0)):
+        problems.append("manifest_lineage_identity_mismatch")
 
     # Require the approved-85 capability evaluation protocol, not legacy 22-row data.
     gold_n = first_value(coverage.get("gold_records"), coverage.get("gold_unique_ids"),
@@ -175,9 +194,12 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         problems.append("prediction_coverage_fields_missing")
     if status not in {"PASS", "PASS_WITH_COVERAGE_REPORTED"}:
         problems.append(f"coverage_status_not_pass:{status or 'missing'}")
-    if "status" not in policy.lower() or "valid" not in policy.lower():
+    if policy != "status == valid" or coverage.get("lenient_correct_excluded") is not True:
         problems.append(f"strict_correctness_policy_unrecognized:{policy}")
-    if gold_policy and "approved_85" not in gold_policy.lower():
+    if (coverage.get("split") != "D_dev" or coverage.get("gold_unique_ids") != 85
+            or coverage.get("gold_matched_prediction_ids") != 85):
+        problems.append("gold_or_dev_coverage_mismatch")
+    if gold_policy != "approved_85_primary":
         problems.append(f"gold_policy_not_approved_85:{gold_policy}")
 
     # Cross-check lineage hashes against fingerprint aliases where available.
@@ -233,7 +255,7 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
             problems.append(f"support_mismatch:{cap}:{support}")
         if correct + incorrect != support:
             problems.append(f"correctness_count_mismatch:{cap}")
-        if not math.isclose(mastery, correct / support, rel_tol=1e-8, abs_tol=1e-8):
+        if support <= 0 or not math.isclose(mastery, correct / support, rel_tol=1e-8, abs_tol=1e-8):
             problems.append(f"mastery_mismatch:{cap}")
         if not (0.0 <= ci_low <= ci_high <= 1.0):
             problems.append(f"invalid_ci:{cap}")
@@ -268,6 +290,8 @@ def validate_one(sidecar: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
     record = {
         "sidecar_source": str(sidecar.resolve()),
+        "sidecar_manifest_sha256": sha256_file(manifest_path),
+        "input_hashes": inputs,
         "manifest_schema": manifest.get("schema_version", manifest.get("schema", "unspecified")),
         "method": method,
         "seed": seed,
@@ -309,8 +333,87 @@ def discover(roots: list[Path]) -> list[Path]:
             continue
         if root.is_dir():
             for manifest in root.rglob(MANIFEST_NAME):
-                found.add(manifest.parent.resolve())
+                directories = manifest.relative_to(root).parts[:-1]
+                if not any(part.startswith(".") for part in directories):
+                    found.add(manifest.parent.resolve())
     return sorted(found, key=lambda p: str(p).lower())
+
+
+def canonicalize(inventory, preferred=None):
+    preferred = preferred or {}
+    groups = {}
+    for row in inventory:
+        if row.get("valid"):
+            key = row["method"], row["seed"], row["checkpoint"]
+            groups.setdefault(key, []).append(row)
+    chosen = set()
+    for key, group in groups.items():
+        identities = {(row["prediction_sha256"], row["checkpoint_sha256"], row["fingerprint"]) for row in group}
+        canonical = group[0]["sidecar_source"]
+        if len(identities) != 1:
+            expected = preferred.get(key)
+            matches = [row for row in group
+                       if (row["prediction_sha256"], row["checkpoint_sha256"]) == expected]
+            if len(matches) != 1:
+                for row in group:
+                    row["valid"] = False
+                    row["reasons"].append("conflicting_logical_checkpoint")
+                continue
+            canonical = matches[0]["sidecar_source"]
+        chosen.add(canonical)
+        for row in group:
+            row["canonical_source"] = canonical
+            row["duplicate"] = row["sidecar_source"] != canonical and len(identities) == 1
+            row["alternate_provenance"] = row["sidecar_source"] != canonical and len(identities) > 1
+    return chosen
+
+
+def gold_inputs(manual):
+    paths = {
+        "gold_manifest": manual / "data/gold_vfinal/gold_vfinal_manifest.json",
+        "gold_labels": manual / "data/gold_vfinal/supplement_annotations_vfinal.jsonl",
+        "approval_csv": manual / "data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv",
+        "dev_ids": manual / "splits/d_dev_ids.txt",
+    }
+    validate_manifest_count(paths["gold_manifest"])
+    dev_ids = set(paths["dev_ids"].read_text(encoding="utf-8-sig").split())
+    load_approved_gold(paths["gold_labels"], paths["approval_csv"], dev_ids)
+    return {name: sha256_file(path) for name, path in paths.items()}
+
+
+def locate_prediction(manual, row, source_root=None):
+    method, seed, checkpoint = row["method"], row["seed"], row["checkpoint"]
+    group = f"{method}_seed{seed}"
+    candidates = []
+    if row.get("prediction_path"):
+        if source_root is None:
+            locator = Path(row["prediction_path"])
+            candidates.append(locator if locator.is_absolute() else manual / locator)
+        else:
+            candidates.append(artifact_path(manual, row["prediction_path"], source_root))
+    if method == "SHARED":
+        candidates.append(manual / "runs/main/S0/eval_dev.jsonl")
+    else:
+        namespace = "p1p2_integration" if method in {"P1-DEFICIT", "P1P2"} else "main"
+        candidates.append(manual / "runs" / namespace / group / checkpoint / "eval_dev.jsonl")
+        if method == "B4" and checkpoint in {"S1", "S2", "S3"}:
+            candidates.append(manual / "reports/p1p2_integration/derived_predictions" / group
+                              / f"eval_student_ckpt_{int(checkpoint[1:]):03d}_dev_status.jsonl")
+    existing = [path for path in candidates if path.is_file()]
+    matched = next((path for path in existing if sha256_file(path) == row["prediction_sha256"]), None)
+    if matched is None:
+        reason = "prediction_bytes_mismatch" if existing else "prediction_bytes_missing"
+        raise SidecarRejected({**row, "valid": False, "reasons": [reason]})
+    return matched
+
+
+def mapped_checkpoint_path(manual: Path, recorded: str, source_root: PureWindowsPath) -> Path:
+    """Map the manual tree and the separate, fingerprinted G4 checkpoint archive."""
+    if len(source_root.parents) > 2 and len(manual.parents) > 2:
+        g4_source = source_root.parents[2].joinpath(*G4_CHECKPOINTS)
+        if PureWindowsPath(recorded).is_relative_to(g4_source):
+            return artifact_path(manual.parents[2].joinpath(*G4_CHECKPOINTS), recorded, g4_source)
+    return artifact_path(manual, recorded, source_root)
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     fields = [
@@ -331,7 +434,10 @@ def main() -> int:
     ap.add_argument("--manual", required=True, help="Canonical P2 manual directory")
     ap.add_argument("--output", default=None)
     ap.add_argument("--extra-root", action="append", default=[])
-    ap.add_argument("--expected-sidecars", type=int, default=33)
+    ap.add_argument("--legacy-windows-root", type=legacy_root,
+                    help="Map archived Windows prediction/checkpoint paths to the staged manual root")
+    ap.add_argument("--expected-sidecars", type=int, help="Optional historical count for comparison")
+    ap.add_argument("--inventory-only", action="store_true")
     ap.add_argument("--seed", type=int, default=13)
     args = ap.parse_args()
 
@@ -344,6 +450,7 @@ def main() -> int:
         manual / "reports/capability/g5_9_real_data_s0",
         manual / "reports/capability/g5_9_historical_20261117",
         manual / "reports/capability_g4_validation",
+        manual / "reports/p1p2_integration/capability_sidecars",
     ]
     roots.extend(Path(x).resolve() for x in args.extra_root)
     roots = list(dict.fromkeys(roots))
@@ -359,14 +466,27 @@ def main() -> int:
 
     inventory: list[dict[str, Any]] = []
     accepted_metrics: list[dict[str, Any]] = []
-    accepted_count = 0
+    expected_gold = gold_inputs(manual)
 
     for sidecar in sidecars:
         try:
             metrics, record = validate_one(sidecar)
+            if any(record["input_hashes"].get(key) != value for key, value in expected_gold.items()):
+                raise SidecarRejected({**record, "valid": False, "reasons": ["gold_input_provenance_mismatch"]})
+            prediction = locate_prediction(manual, record, args.legacy_windows_root)
+            record["verified_prediction_path"] = str(prediction)
+            for row in metrics:
+                row["prediction_path"] = str(prediction)
+            checkpoint = record.get("checkpoint_path")
+            if checkpoint:
+                checkpoint = (mapped_checkpoint_path(manual, checkpoint, args.legacy_windows_root)
+                              if args.legacy_windows_root else Path(checkpoint))
+                if args.legacy_windows_root and not checkpoint.exists():
+                    raise SidecarRejected({**record, "valid": False, "reasons": ["checkpoint_bytes_missing"]})
+                if checkpoint.exists() and sha256(checkpoint) != record["checkpoint_sha256"]:
+                    raise SidecarRejected({**record, "valid": False, "reasons": ["checkpoint_bytes_mismatch"]})
             inventory.append(record)
             accepted_metrics.extend(metrics)
-            accepted_count += 1
         except SidecarRejected as exc:
             inventory.append(exc.record)
         except Exception as exc:
@@ -376,6 +496,19 @@ def main() -> int:
                 "reasons": [f"read_error:{type(exc).__name__}:{exc}"],
             })
 
+    preferred = {}
+    for method in ("B4", "B5", "P1-DEFICIT", "P1P2"):
+        for checkpoint in (1, 2, 3):
+            if args.seed != 13:
+                continue
+            try:
+                prediction, lineage = verified_prediction(manual, method, checkpoint)
+            except (OSError, ValueError, KeyError):
+                continue
+            preferred[method, 13, f"S{checkpoint}"] = sha256(prediction), lineage["checkpoint_sha256"]
+    canonical = canonicalize(inventory, preferred)
+    accepted_count = sum(bool(row.get("valid")) for row in inventory)
+    accepted_metrics = [row for row in accepted_metrics if row["sidecar_source"] in canonical]
     print(f"G6_ACCEPTED_SIDECARS: {accepted_count}")
     print(f"G6_REJECTED_SIDECARS: {len(inventory) - accepted_count}")
 
@@ -434,6 +567,22 @@ def main() -> int:
         key=lambda item: (item[0], {"S0": 0, "S1": 1, "S2": 2, "S3": 3}.get(item[1], 99)),
     )
 
+    if args.inventory_only:
+        output.mkdir(parents=True, exist_ok=True)
+        report = output / "g6_pretraining_inventory.json"
+        with report.open("x", encoding="utf-8") as stream:
+            json.dump({
+                "status": "PARTIAL" if missing_pairs else "PASS",
+                "raw_sidecars": len(sidecars), "accepted_sidecars": accepted_count,
+                "logical_sidecars": len(canonical),
+                "duplicates": sum(bool(row.get("duplicate")) for row in inventory),
+                "alternate_provenance_sidecars": sum(bool(row.get("alternate_provenance")) for row in inventory),
+                "missing_method_checkpoint_pairs": missing_pairs,
+                "gold_input_sha256": expected_gold, "sidecars": inventory, "rows": seed_rows,
+            }, stream, indent=2)
+        print(f"G6_INVENTORY={report}")
+        return 0
+
     if not seed_rows:
         output.mkdir(parents=True, exist_ok=True)
         diagnostic = output / f"g6_sidecar_discovery_diagnostic_seed{args.seed}.json"
@@ -453,7 +602,7 @@ def main() -> int:
         print(f"G6_DIAGNOSTIC: {diagnostic}")
         return 2
 
-    discovery_ok = len(sidecars) == args.expected_sidecars
+    discovery_ok = args.expected_sidecars is None or len(sidecars) == args.expected_sidecars
     validation_ok = accepted_count == len(sidecars)
     matrix_ok = not missing_pairs
     gate_complete = discovery_ok and validation_ok and matrix_ok
@@ -472,7 +621,10 @@ def main() -> int:
         status = "PARTIAL"
 
     target_paths = [output / name for name in names]
+    inventory_csv = output / "capability_sidecar_inventory_seed13.csv"
     existing = [str(path) for path in target_paths if path.exists()]
+    if not gate_complete and inventory_csv.exists():
+        existing.append(str(inventory_csv))
     if existing:
         print("G6_OUTPUT_EXISTS_NO_OVERWRITE:")
         for path in existing:
@@ -540,7 +692,13 @@ def main() -> int:
 
     write_csv(target_paths[0], seed_rows)
     target_paths[1].write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    target_paths[3].write_text(json.dumps(inventory_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    fields = sorted({key for row in inventory for key in row})
+    with inventory_csv.open("x", encoding="utf-8-sig", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(inventory)
+    if not gate_complete:
+        target_paths[3].write_text(json.dumps(inventory_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     lines = [
         f"# Capability learning dynamics — seed {args.seed}",

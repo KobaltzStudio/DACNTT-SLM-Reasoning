@@ -20,6 +20,28 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def hash_path(path: Path) -> str:
+    """Hash directory bytes with the case-insensitive order of archived Windows runs."""
+    root = Path(path).resolve()
+    if root.is_file():
+        return sha256_file(root)
+    if not root.is_dir():
+        raise FileNotFoundError(root)
+    files = [p.relative_to(root) for p in root.rglob("*") if p.is_file()]
+    if not files:
+        raise ValueError(f"Empty checkpoint directory: {root}")
+    normalized = [tuple(part.lower() for part in relative.parts) for relative in files]
+    if len(set(normalized)) != len(files):
+        raise ValueError(f"Case-colliding checkpoint paths: {root}")
+    digest = hashlib.sha256()
+    for relative in sorted(files, key=lambda p: tuple(part.lower() for part in p.parts)):
+        digest.update(relative.as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(sha256_file(root / relative).encode("ascii"))
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
 def canonical_json_bytes(value: Any) -> bytes:
     """Serialize JSON deterministically for stable fingerprints."""
     return (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")

@@ -1,0 +1,36 @@
+{
+  "controller_plans": {
+    "P1-DEFICIT:[1]": [],
+    "P1P2:[1]": [],
+    "P1-DEFICIT:[2]": [
+      "eval_dev_P1-DEFICIT_seed13_S2",
+      "checkpoint_log_P1-DEFICIT_seed13_S2",
+      "post_eval_P1-DEFICIT_seed13_S2",
+      "capability_state_P1-DEFICIT_seed13_selection_3"
+    ],
+    "P1P2:[2, 3]": [
+      "compute_nll_S1",
+      "select_P1P2_round_2",
+      "train_P1P2_seed13_S2",
+      "eval_intent_P1P2_seed13_S2",
+      "eval_dev_P1P2_seed13_S2",
+      "checkpoint_log_P1P2_seed13_S2",
+      "post_eval_P1P2_seed13_S2",
+      "capability_state_P1P2_seed13_selection_3",
+      "compute_nll_S2",
+      "select_P1P2_round_3",
+      "train_P1P2_seed13_S3",
+      "eval_intent_P1P2_seed13_S3",
+      "eval_dev_P1P2_seed13_S3",
+      "checkpoint_log_P1P2_seed13_S3",
+      "post_eval_P1P2_seed13_S3",
+      "capability_state_P1P2_seed13_selection_4"
+    ]
+  },
+  "D_TEST_EXECUTION": "NOT_RUN",
+  "test_ids": 1319,
+  "g6_status": "PARTIAL",
+  "g7_rows": 9,
+  "g8_preflight_exit": 0,
+  "status": "PASS"
+}

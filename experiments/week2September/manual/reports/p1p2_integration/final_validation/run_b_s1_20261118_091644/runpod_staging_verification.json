@@ -1,0 +1,25 @@
+{
+  "status": "PASS_LOCAL_FILE_CHECKS",
+  "runpod_status": "NOT RUN / DELEGATED",
+  "staged_files_checked": 582,
+  "staging_map": "Preserve each listed path relative to MANUAL_ROOT",
+  "manifest": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_sha256sums_v2.txt",
+    "sha256": "fbe82c33fac0c1e57ca2e3ae7f6377321c655a3759cb0f09b9fbbd54a97447d1"
+  },
+  "model_cache": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_student_cache.json",
+    "sha256": "29f220b25010a5175aaf223842fca5acba7c2cfa1e4fae8b2e6a170908327d9a"
+  },
+  "maintained_source_updates": [
+    {
+      "path": "scripts/build_p1p2_analysis_figures.py",
+      "previous": "c6f8a15023461cbe086b5ac251bba7b9a09b0f1735a078356ae2cdacf49ce811",
+      "current": "b22bf3581838d0dbc7c5697de28d23d6f2ea5fc35f0665970a3734587f7c688a"
+    }
+  ],
+  "syntax_checks": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\runpod_command_syntax.log",
+    "sha256": "92dade1ef4b482a06a7b220abb38fc749b7f9b596187a9d6fd958acc070c75e8"
+  }
+}

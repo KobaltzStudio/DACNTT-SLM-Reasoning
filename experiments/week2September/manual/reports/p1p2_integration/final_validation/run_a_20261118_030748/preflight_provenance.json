@@ -1,0 +1,4427 @@
+{
+  "source_sha256": {
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\build_capability_learning_dynamics.py": "a1264a7fcbdeeedb47429559cbb8c0a27f3d807e1e5665e75e845d8d11f6226f",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\build_p1p2_analysis_figures.py": "219957778c09aa451f4ca09f828970e5f15ea39bcd2716a95cb8607c8e58b940",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\compute_nll.py": "f6f113fdf4eaf1122042108234b9722fd1b3c3186592285a6c1dc8a0247fd4a0",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\p1p2_capability_state.py": "bf7601e388dacb0eff76bfd3dc8721fb8b211f5a043152297a657e4c04d945df",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\p1p2_controller.py": "539181a31df7268bc640a65de5ad18303f977543ad8998a4ed822748a9265eba",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\run_p1_p2.py": "e1a68636ebd6d40ec713424e98cd48113cbd5ce7920fd6b1c32986fa739c35da",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\run_p1p2_post_eval.py": "8893a3e932ed97c729928ae74838b500af929fe9d2a0ad8c18685896d14f0993",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\select_checkpoint_on_dev.py": "93d20866c38895eb869d76f803fabcdf9383614c763e40c03c7ab927dcfec1f6",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\train_round.py": "0b9ef7970dae0a86ed4a085019c1ca69c094fbecb2239089b08b24fb275216a8",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_analysis.py": "784974e5b70d688da9ebd55d8600e9e1c5a028b4d7d79ef32aea594a8e132db1",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_controller.py": "3eb9c90eacdbcebaf6553f6eceb279eaeeb0d359ca3456a2c326743fd92ffff6",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_no_overwrite.py": "21a7c834e310baae3b6280d498f406d3d4ce523b4b734b6090693f2197df6efd",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\tests\\test_p1p2_runtime.py": "40db317996ebcf5aa943d7e47603830e3ddb9ae340aaa86c8a4383221e6a1592",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\p1p2_method_registry.yaml": "50ce9fadae09b21e96eeeb555004908fd755c4a1f30af0e248ca4953321343fe",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\p1p2_unified_run.yaml": "4d3e85d23a4dc642d89f0a81fb71a7b9632d0d65f3b5e617f7563d331707de48",
+    "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461"
+  },
+  "protected": {
+    "file_size_and_mtime": {
+      "config/capability_config.json": [
+        5580,
+        1794716141759906700
+      ],
+      "config/capability_rules_v1.json": [
+        3707,
+        1794716141760905800
+      ],
+      "config/capability_rules_v2.json": [
+        4965,
+        1794716141760905800
+      ],
+      "config/config_p2.zip": [
+        247261,
+        1794845028078446200
+      ],
+      "config/experiment_config.json": [
+        10235,
+        1794716141761904900
+      ],
+      "config/experiment_config_v1.json": [
+        7263,
+        1794716141762902700
+      ],
+      "config/guideline_v2.md": [
+        15598,
+        1794716141762902700
+      ],
+      "config/guideline_v3.md": [
+        18911,
+        1794716141765142300
+      ],
+      "config/image.png": [
+        214839,
+        1794716141769142200
+      ],
+      "config/p1p2_method_registry.yaml": [
+        3916,
+        1794884166000000000
+      ],
+      "config/p1p2_unified_run.yaml": [
+        7651,
+        1794884572000000000
+      ],
+      "config/proposal1_graph_protocol.md": [
+        17635,
+        1794716141770145100
+      ],
+      "config/proposal2_full_protocol.md": [
+        13922,
+        1794716141770145100
+      ],
+      "config/proposal2_trajectory_protocol.md": [
+        2301,
+        1794716141771142600
+      ],
+      "splits/d_dev_ids.txt": [
+        9500,
+        1794716146315742000
+      ],
+      "splits/d_pool_ids.txt": [
+        132392,
+        1794716146316741700
+      ],
+      "splits/d_test_ids.txt": [
+        23742,
+        1794716146316741700
+      ],
+      "splits/near_duplicates.jsonl": [
+        785,
+        1794716146317741900
+      ],
+      "splits/p1p2_vfinal_2026-11-16/d_dev_graph_ids.txt": [
+        1615,
+        1794817435105382600
+      ],
+      "splits/p1p2_vfinal_2026-11-16/d_dev_select_ids.txt": [
+        7885,
+        1794817435106390400
+      ],
+      "splits/p1p2_vfinal_2026-11-16/split_manifest.json": [
+        1009,
+        1794817435175989700
+      ],
+      "splits/split_manifest.json": [
+        2363,
+        1794716146318741800
+      ],
+      "data/annotation/a1_supplement_agreement_25.jsonl": [
+        7563,
+        1794716141773142800
+      ],
+      "data/annotation/a2_supplement_annotations.jsonl": [
+        11306,
+        1794716141773142800
+      ],
+      "data/annotation/a2_supplement_annotations_template.jsonl": [
+        3700,
+        1794716141774188800
+      ],
+      "data/annotation/a2_supplement_manifest.csv": [
+        6495,
+        1794716141775187500
+      ],
+      "data/annotation/a2_supplement_tasks.jsonl": [
+        8296,
+        1794716141776193200
+      ],
+      "data/batch_100/batch_100.jsonl": [
+        30716,
+        1794716141779188300
+      ],
+      "data/batch_100/batch_100_annotations.jsonl": [
+        30312,
+        1794716141779188300
+      ],
+      "data/batch_100/batch_100_annotations_partial.jsonl": [
+        20623,
+        1794716141782187600
+      ],
+      "data/batch_100/batch_100_annotations_v2.jsonl": [
+        31399,
+        1794716141783186700
+      ],
+      "data/extractor/trajectory_example_input.jsonl": [
+        308,
+        1794716141784306500
+      ],
+      "data/gold_releases/vFinal_2026-11-16/adjudication_human_confirmed.csv": [
+        34701,
+        1794716141912818100
+      ],
+      "data/gold_releases/vFinal_2026-11-16/gold_release_provenance.json": [
+        1279,
+        1794817435104229000
+      ],
+      "data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv": [
+        76734,
+        1794716196378570400
+      ],
+      "data/gold_releases/vFinal_2026-11-16/gold_vfinal_manifest.json": [
+        945,
+        1794716141786310500
+      ],
+      "data/gold_releases/vFinal_2026-11-16/supplement_annotations_vfinal.jsonl": [
+        29918,
+        1794716141787311400
+      ],
+      "data/gold_vfinal/batch_100_annotations_vfinal.jsonl": [
+        31399,
+        1794716141786310500
+      ],
+      "data/gold_vfinal/gold_vfinal_manifest.json": [
+        945,
+        1794716141786310500
+      ],
+      "data/gold_vfinal/supplement_annotations_vfinal.jsonl": [
+        29918,
+        1794716141787311400
+      ],
+      "data/gold_vnext/batch_100_annotations_vnext.jsonl": [
+        31399,
+        1794716141789311600
+      ],
+      "data/gold_vnext/gold_vnext_manifest.json": [
+        981,
+        1794716141789311600
+      ],
+      "data/gold_vnext/supplement_annotations_vnext.jsonl": [
+        29918,
+        1794716141790311300
+      ],
+      "data/issues/ambiguous_cases.jsonl": [
+        6612,
+        1794716141791313300
+      ],
+      "data/issues/ambiguous_cases_audited.jsonl": [
+        3389,
+        1794716141792819000
+      ],
+      "data/pilot/manual_annotation_form.md": [
+        10572,
+        1794716141793827200
+      ],
+      "data/pilot/pilot_30.jsonl": [
+        9925,
+        1794716141796825000
+      ],
+      "data/pilot/pilot_30_annotations.jsonl": [
+        9745,
+        1794716141797825200
+      ],
+      "data/pilot/pilot_30_annotations_A2.jsonl": [
+        8915,
+        1794716141798826800
+      ],
+      "data/pilot/test_annotation.json": [
+        207,
+        1794716141799825100
+      ],
+      "data/raw/gsm8k_test.jsonl": [
+        441588,
+        1794716141802827700
+      ],
+      "data/raw/gsm8k_test_source.json": [
+        339,
+        1794716141802827700
+      ],
+      "data/raw/gsm8k_train.jsonl": [
+        2475025,
+        1794716141834172100
+      ],
+      "data/raw/supplement_annotations.jsonl": [
+        30615,
+        1794716141844681600
+      ],
+      "data/raw/supplement_candidates.jsonl": [
+        1148154,
+        1794716141851686800
+      ],
+      "data/raw/supplement_candidates_filtered.jsonl": [
+        1135560,
+        1794716141857239700
+      ],
+      "data/raw/supplement_selected.jsonl": [
+        36900,
+        1794716141859239000
+      ],
+      "data/regression/capability_regression_cases_v1.jsonl": [
+        7260,
+        1794716141860239200
+      ],
+      "data/supplement/supplement_annotations.jsonl": [
+        24223,
+        1794716141861237500
+      ],
+      "data/supplement/supplement_annotations_v2.jsonl": [
+        24461,
+        1794716141864750900
+      ],
+      "trajectory/examples/trajectory_example.json": [
+        578,
+        1794716146324252900
+      ],
+      "trajectory/pool/batch_100_capability_predictions.jsonl": [
+        463340,
+        1794716146327254400
+      ],
+      "trajectory/pool/batch_100_teacher_raw.jsonl": [
+        1162651,
+        1794716146353790900
+      ],
+      "trajectory/pool/batch_100_teacher_raw.jsonl.backup": [
+        1162651,
+        1794716146358794700
+      ],
+      "trajectory/pool/batch_100_teacher_raw.jsonl.before_retry.bak": [
+        1162651,
+        1794716146361795600
+      ],
+      "trajectory/pool/batch_100_teacher_raw_recovered.jsonl": [
+        1059315,
+        1794716146366307000
+      ],
+      "trajectory/pool/batch_100_teacher_raw_recovered_v2.jsonl": [
+        1058211,
+        1794716146369306000
+      ],
+      "trajectory/pool/batch_100_teacher_retry_98.jsonl": [
+        185703,
+        1794716146371307000
+      ],
+      "trajectory/pool/batch_100_teacher_retry_remaining.jsonl": [
+        43985,
+        1794716146373819200
+      ],
+      "trajectory/pool/batch_100_teacher_verified.jsonl": [
+        1013352,
+        1794716146375822300
+      ],
+      "trajectory/pool/pool_v1_candidate_order.txt": [
+        130492,
+        1794716146377824500
+      ],
+      "trajectory/pool/pool_v1_capability_predictions.jsonl": [
+        4179180,
+        1794716146384331100
+      ],
+      "trajectory/pool/pool_v1_excluded.jsonl": [
+        128538,
+        1794716146385330600
+      ],
+      "trajectory/pool/pool_v1_input.jsonl": [
+        384762,
+        1794716146388331100
+      ],
+      "trajectory/pool/pool_v1_input_manifest.json": [
+        1342,
+        1794716146388331100
+      ],
+      "trajectory/pool/pool_v1_manifest.json": [
+        3475,
+        1794716146389331300
+      ],
+      "trajectory/pool/pool_v1_teacher_raw.jsonl": [
+        13786429,
+        1794716146414051400
+      ],
+      "trajectory/pool/pool_v1_teacher_raw.jsonl.run_0_100.json": [
+        938,
+        1794716146415055500
+      ],
+      "trajectory/pool/pool_v1_teacher_raw.jsonl.run_100_1100.json": [
+        943,
+        1794716146416057300
+      ],
+      "trajectory/pool/pool_v1_tokens.jsonl": [
+        470105,
+        1794716146418056600
+      ],
+      "trajectory/pool/pool_v1_tokens.summary.json": [
+        313,
+        1794909148757466800
+      ],
+      "trajectory/pool/pool_v1_tokens.summary.pre_sync_20261117T095228Z.json": [
+        321,
+        1794909148751422900
+      ],
+      "trajectory/pool/pool_v1_verified.jsonl": [
+        10690884,
+        1794716146444289200
+      ],
+      "trajectory/pool/README.md": [
+        2401,
+        1794716146325258100
+      ],
+      "trajectory/pool/trajectory_example_input.jsonl": [
+        308,
+        1794716146446289200
+      ],
+      "runs/main/.s0.lock": [
+        0,
+        1794716142092851900
+      ],
+      "runs/main/B2_seed13/.done/eval_dev_B2_seed13_S1.json": [
+        300,
+        1794716142094260600
+      ],
+      "runs/main/B2_seed13/.done/eval_dev_B2_seed13_S2.json": [
+        300,
+        1794716142094260600
+      ],
+      "runs/main/B2_seed13/.done/eval_dev_B2_seed13_S3.json": [
+        300,
+        1794716142095260300
+      ],
+      "runs/main/B2_seed13/.done/eval_test_B2_seed13_S1.json": [
+        302,
+        1794716142095260300
+      ],
+      "runs/main/B2_seed13/.done/eval_test_B2_seed13_S2.json": [
+        302,
+        1794716142096262800
+      ],
+      "runs/main/B2_seed13/.done/eval_test_B2_seed13_S3.json": [
+        302,
+        1794716142097259000
+      ],
+      "runs/main/B2_seed13/.done/select_0.json": [
+        326,
+        1794716142097259000
+      ],
+      "runs/main/B2_seed13/.done/select_1.json": [
+        326,
+        1794716142098259100
+      ],
+      "runs/main/B2_seed13/.done/select_2.json": [
+        326,
+        1794716142098259100
+      ],
+      "runs/main/B2_seed13/.done/train_0.json": [
+        296,
+        1794716142099258400
+      ],
+      "runs/main/B2_seed13/.done/train_1.json": [
+        360,
+        1794716142099258400
+      ],
+      "runs/main/B2_seed13/.done/train_2.json": [
+        360,
+        1794716142100259400
+      ],
+      "runs/main/B2_seed13/.done/validate_log_0.json": [
+        368,
+        1794716142100259400
+      ],
+      "runs/main/B2_seed13/.done/validate_log_1.json": [
+        368,
+        1794716142101258700
+      ],
+      "runs/main/B2_seed13/.done/validate_log_2.json": [
+        368,
+        1794716142101258700
+      ],
+      "runs/main/B2_seed13/checkpoint_log.jsonl": [
+        18213,
+        1794716142345293700
+      ],
+      "runs/main/B2_seed13/round_000/selection_log.jsonl": [
+        2004571,
+        1794716142365891200
+      ],
+      "runs/main/B2_seed13/round_000/train_set.json": [
+        7315,
+        1794716142366893700
+      ],
+      "runs/main/B2_seed13/round_001/selection_log.jsonl": [
+        2004634,
+        1794716142370891700
+      ],
+      "runs/main/B2_seed13/round_001/train_set.json": [
+        7107,
+        1794716142371892400
+      ],
+      "runs/main/B2_seed13/round_002/selection_log.jsonl": [
+        2004718,
+        1794716142374402500
+      ],
+      "runs/main/B2_seed13/round_002/train_set.json": [
+        6897,
+        1794716142375403200
+      ],
+      "runs/main/B2_seed13/S1/adapter/adapter_config.json": [
+        1207,
+        1794716142103771200
+      ],
+      "runs/main/B2_seed13/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716142103771200
+      ],
+      "runs/main/B2_seed13/S1/adapter/README.md": [
+        5412,
+        1794716142102762300
+      ],
+      "runs/main/B2_seed13/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716142175538000
+      ],
+      "runs/main/B2_seed13/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716142175538000
+      ],
+      "runs/main/B2_seed13/S1/adapter/train_log.json": [
+        7000,
+        1794716142176537100
+      ],
+      "runs/main/B2_seed13/S1/eval_dev.jsonl": [
+        515152,
+        1794716142177537700
+      ],
+      "runs/main/B2_seed13/S1/eval_dev.summary.json": [
+        2413,
+        1794716142178537600
+      ],
+      "runs/main/B2_seed13/S1/eval_test.jsonl": [
+        1376291,
+        1794716142192044400
+      ],
+      "runs/main/B2_seed13/S1/eval_test.summary.json": [
+        1165,
+        1794716142193046600
+      ],
+      "runs/main/B2_seed13/S2/adapter/adapter_config.json": [
+        1207,
+        1794716142195161000
+      ],
+      "runs/main/B2_seed13/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716142196158600
+      ],
+      "runs/main/B2_seed13/S2/adapter/README.md": [
+        5412,
+        1794716142195161000
+      ],
+      "runs/main/B2_seed13/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716142259622900
+      ],
+      "runs/main/B2_seed13/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716142260607100
+      ],
+      "runs/main/B2_seed13/S2/adapter/train_log.json": [
+        7029,
+        1794716142261607400
+      ],
+      "runs/main/B2_seed13/S2/eval_dev.jsonl": [
+        512787,
+        1794716142264119300
+      ],
+      "runs/main/B2_seed13/S2/eval_dev.summary.json": [
+        2472,
+        1794716142265121700
+      ],
+      "runs/main/B2_seed13/S2/eval_test.jsonl": [
+        1368686,
+        1794716142273118000
+      ],
+      "runs/main/B2_seed13/S2/eval_test.summary.json": [
+        1167,
+        1794716142274345600
+      ],
+      "runs/main/B2_seed13/S3/adapter/adapter_config.json": [
+        1207,
+        1794716142276347000
+      ],
+      "runs/main/B2_seed13/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716142277347000
+      ],
+      "runs/main/B2_seed13/S3/adapter/README.md": [
+        5412,
+        1794716142276347000
+      ],
+      "runs/main/B2_seed13/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716142331762500
+      ],
+      "runs/main/B2_seed13/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716142332732600
+      ],
+      "runs/main/B2_seed13/S3/adapter/train_log.json": [
+        6797,
+        1794716142333778900
+      ],
+      "runs/main/B2_seed13/S3/eval_dev.jsonl": [
+        509571,
+        1794716142335777600
+      ],
+      "runs/main/B2_seed13/S3/eval_dev.summary.json": [
+        2396,
+        1794716142336777700
+      ],
+      "runs/main/B2_seed13/S3/eval_test.jsonl": [
+        1358680,
+        1794716142343287600
+      ],
+      "runs/main/B2_seed13/S3/eval_test.summary.json": [
+        1166,
+        1794716142344295000
+      ],
+      "runs/main/B2_seed2026/.done/eval_dev_B2_seed2026_S1.json": [
+        306,
+        1794716142376400700
+      ],
+      "runs/main/B2_seed2026/.done/eval_dev_B2_seed2026_S2.json": [
+        306,
+        1794716142377400800
+      ],
+      "runs/main/B2_seed2026/.done/eval_dev_B2_seed2026_S3.json": [
+        306,
+        1794716142377400800
+      ],
+      "runs/main/B2_seed2026/.done/eval_test_B2_seed2026_S1.json": [
+        308,
+        1794716142378400900
+      ],
+      "runs/main/B2_seed2026/.done/eval_test_B2_seed2026_S2.json": [
+        308,
+        1794716142379402900
+      ],
+      "runs/main/B2_seed2026/.done/eval_test_B2_seed2026_S3.json": [
+        308,
+        1794716142379402900
+      ],
+      "runs/main/B2_seed2026/.done/select_0.json": [
+        330,
+        1794716142380400700
+      ],
+      "runs/main/B2_seed2026/.done/select_1.json": [
+        330,
+        1794716142380400700
+      ],
+      "runs/main/B2_seed2026/.done/select_2.json": [
+        330,
+        1794716142381400800
+      ],
+      "runs/main/B2_seed2026/.done/train_0.json": [
+        302,
+        1794716142381400800
+      ],
+      "runs/main/B2_seed2026/.done/train_1.json": [
+        368,
+        1794716142381400800
+      ],
+      "runs/main/B2_seed2026/.done/train_2.json": [
+        368,
+        1794716142382904300
+      ],
+      "runs/main/B2_seed2026/.done/validate_log_0.json": [
+        370,
+        1794716142382904300
+      ],
+      "runs/main/B2_seed2026/.done/validate_log_1.json": [
+        370,
+        1794716142383909400
+      ],
+      "runs/main/B2_seed2026/.done/validate_log_2.json": [
+        370,
+        1794716142383909400
+      ],
+      "runs/main/B2_seed2026/checkpoint_log.jsonl": [
+        18439,
+        1794716142666141000
+      ],
+      "runs/main/B2_seed2026/round_000/selection_log.jsonl": [
+        2013354,
+        1794716142677648000
+      ],
+      "runs/main/B2_seed2026/round_000/train_set.json": [
+        7072,
+        1794716142678648400
+      ],
+      "runs/main/B2_seed2026/round_001/selection_log.jsonl": [
+        2013289,
+        1794716142684158600
+      ],
+      "runs/main/B2_seed2026/round_001/train_set.json": [
+        7214,
+        1794716142687157200
+      ],
+      "runs/main/B2_seed2026/round_002/selection_log.jsonl": [
+        2013273,
+        1794716142693157800
+      ],
+      "runs/main/B2_seed2026/round_002/train_set.json": [
+        7284,
+        1794716142693661900
+      ],
+      "runs/main/B2_seed2026/S1/adapter/adapter_config.json": [
+        1207,
+        1794716142385909300
+      ],
+      "runs/main/B2_seed2026/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716142386909200
+      ],
+      "runs/main/B2_seed2026/S1/adapter/README.md": [
+        5412,
+        1794716142384909400
+      ],
+      "runs/main/B2_seed2026/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716142472838200
+      ],
+      "runs/main/B2_seed2026/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716142473842700
+      ],
+      "runs/main/B2_seed2026/S1/adapter/train_log.json": [
+        6770,
+        1794716142473842700
+      ],
+      "runs/main/B2_seed2026/S1/eval_dev.jsonl": [
+        495031,
+        1794716142477843600
+      ],
+      "runs/main/B2_seed2026/S1/eval_dev.summary.json": [
+        2415,
+        1794716142478846600
+      ],
+      "runs/main/B2_seed2026/S1/eval_test.jsonl": [
+        1309204,
+        1794716142489354600
+      ],
+      "runs/main/B2_seed2026/S1/eval_test.summary.json": [
+        1172,
+        1794716142490374900
+      ],
+      "runs/main/B2_seed2026/S2/adapter/adapter_config.json": [
+        1207,
+        1794716142492859300
+      ],
+      "runs/main/B2_seed2026/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716142492859300
+      ],
+      "runs/main/B2_seed2026/S2/adapter/README.md": [
+        5412,
+        1794716142491355100
+      ],
+      "runs/main/B2_seed2026/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716142558182100
+      ],
+      "runs/main/B2_seed2026/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716142560180400
+      ],
+      "runs/main/B2_seed2026/S2/adapter/train_log.json": [
+        7035,
+        1794716142560180400
+      ],
+      "runs/main/B2_seed2026/S2/eval_dev.jsonl": [
+        527732,
+        1794716142563692800
+      ],
+      "runs/main/B2_seed2026/S2/eval_dev.summary.json": [
+        2428,
+        1794716142564692300
+      ],
+      "runs/main/B2_seed2026/S2/eval_test.jsonl": [
+        1404079,
+        1794716142570696700
+      ],
+      "runs/main/B2_seed2026/S2/eval_test.summary.json": [
+        1170,
+        1794716142571709600
+      ],
+      "runs/main/B2_seed2026/S3/adapter/adapter_config.json": [
+        1207,
+        1794716142573731500
+      ],
+      "runs/main/B2_seed2026/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716142574732200
+      ],
+      "runs/main/B2_seed2026/S3/adapter/README.md": [
+        5412,
+        1794716142572692700
+      ],
+      "runs/main/B2_seed2026/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716142646697900
+      ],
+      "runs/main/B2_seed2026/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716142649700000
+      ],
+      "runs/main/B2_seed2026/S3/adapter/train_log.json": [
+        7026,
+        1794716142650698900
+      ],
+      "runs/main/B2_seed2026/S3/eval_dev.jsonl": [
+        523120,
+        1794716142653991700
+      ],
+      "runs/main/B2_seed2026/S3/eval_dev.summary.json": [
+        2417,
+        1794716142653991700
+      ],
+      "runs/main/B2_seed2026/S3/eval_test.jsonl": [
+        1391611,
+        1794716142664136900
+      ],
+      "runs/main/B2_seed2026/S3/eval_test.summary.json": [
+        1172,
+        1794716142665142000
+      ],
+      "runs/main/B2_seed42/.done/eval_dev_B2_seed42_S1.json": [
+        300,
+        1794716142697668100
+      ],
+      "runs/main/B2_seed42/.done/eval_dev_B2_seed42_S2.json": [
+        300,
+        1794716142698666600
+      ],
+      "runs/main/B2_seed42/.done/eval_dev_B2_seed42_S3.json": [
+        300,
+        1794716142698666600
+      ],
+      "runs/main/B2_seed42/.done/eval_test_B2_seed42_S1.json": [
+        302,
+        1794716142699665700
+      ],
+      "runs/main/B2_seed42/.done/eval_test_B2_seed42_S2.json": [
+        302,
+        1794716142700668300
+      ],
+      "runs/main/B2_seed42/.done/eval_test_B2_seed42_S3.json": [
+        302,
+        1794716142700668300
+      ],
+      "runs/main/B2_seed42/.done/select_0.json": [
+        326,
+        1794716142701667200
+      ],
+      "runs/main/B2_seed42/.done/select_1.json": [
+        326,
+        1794716142703171200
+      ],
+      "runs/main/B2_seed42/.done/select_2.json": [
+        326,
+        1794716142704175700
+      ],
+      "runs/main/B2_seed42/.done/train_0.json": [
+        296,
+        1794716142705174700
+      ],
+      "runs/main/B2_seed42/.done/train_1.json": [
+        360,
+        1794716142707176000
+      ],
+      "runs/main/B2_seed42/.done/train_2.json": [
+        360,
+        1794716142707176000
+      ],
+      "runs/main/B2_seed42/.done/validate_log_0.json": [
+        368,
+        1794716142708679900
+      ],
+      "runs/main/B2_seed42/.done/validate_log_1.json": [
+        368,
+        1794716142708679900
+      ],
+      "runs/main/B2_seed42/.done/validate_log_2.json": [
+        368,
+        1794716142709684300
+      ],
+      "runs/main/B2_seed42/checkpoint_log.jsonl": [
+        17733,
+        1794716142942756800
+      ],
+      "runs/main/B2_seed42/round_000/selection_log.jsonl": [
+        2004621,
+        1794716142950768700
+      ],
+      "runs/main/B2_seed42/round_000/train_set.json": [
+        7070,
+        1794716142952776700
+      ],
+      "runs/main/B2_seed42/round_001/selection_log.jsonl": [
+        2004813,
+        1794716142957288400
+      ],
+      "runs/main/B2_seed42/round_001/train_set.json": [
+        6652,
+        1794716142958287800
+      ],
+      "runs/main/B2_seed42/round_002/selection_log.jsonl": [
+        2004677,
+        1794716142966804800
+      ],
+      "runs/main/B2_seed42/round_002/train_set.json": [
+        7037,
+        1794716142967805000
+      ],
+      "runs/main/B2_seed42/S1/adapter/adapter_config.json": [
+        1207,
+        1794716142710683900
+      ],
+      "runs/main/B2_seed42/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716142711683700
+      ],
+      "runs/main/B2_seed42/S1/adapter/README.md": [
+        5412,
+        1794716142710683900
+      ],
+      "runs/main/B2_seed42/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716142770597600
+      ],
+      "runs/main/B2_seed42/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716142771597500
+      ],
+      "runs/main/B2_seed42/S1/adapter/train_log.json": [
+        6758,
+        1794716142771597500
+      ],
+      "runs/main/B2_seed42/S1/eval_dev.jsonl": [
+        509935,
+        1794716142774106200
+      ],
+      "runs/main/B2_seed42/S1/eval_dev.summary.json": [
+        2440,
+        1794716142775110800
+      ],
+      "runs/main/B2_seed42/S1/eval_test.jsonl": [
+        1356759,
+        1794716142777112600
+      ],
+      "runs/main/B2_seed42/S1/eval_test.summary.json": [
+        1167,
+        1794716142778114800
+      ],
+      "runs/main/B2_seed42/S2/adapter/adapter_config.json": [
+        1207,
+        1794716142780111200
+      ],
+      "runs/main/B2_seed42/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716142781111100
+      ],
+      "runs/main/B2_seed42/S2/adapter/README.md": [
+        5412,
+        1794716142780111200
+      ],
+      "runs/main/B2_seed42/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716142841108700
+      ],
+      "runs/main/B2_seed42/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716142843105300
+      ],
+      "runs/main/B2_seed42/S2/adapter/train_log.json": [
+        6565,
+        1794716142844448500
+      ],
+      "runs/main/B2_seed42/S2/eval_dev.jsonl": [
+        529542,
+        1794716142846448500
+      ],
+      "runs/main/B2_seed42/S2/eval_dev.summary.json": [
+        2441,
+        1794716142847447100
+      ],
+      "runs/main/B2_seed42/S2/eval_test.jsonl": [
+        1408855,
+        1794716142852954800
+      ],
+      "runs/main/B2_seed42/S2/eval_test.summary.json": [
+        1167,
+        1794716142853961300
+      ],
+      "runs/main/B2_seed42/S3/adapter/adapter_config.json": [
+        1207,
+        1794716142854959800
+      ],
+      "runs/main/B2_seed42/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716142855960300
+      ],
+      "runs/main/B2_seed42/S3/adapter/README.md": [
+        5412,
+        1794716142854959800
+      ],
+      "runs/main/B2_seed42/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716142924732200
+      ],
+      "runs/main/B2_seed42/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716142928736800
+      ],
+      "runs/main/B2_seed42/S3/adapter/train_log.json": [
+        6795,
+        1794716142930737900
+      ],
+      "runs/main/B2_seed42/S3/eval_dev.jsonl": [
+        514491,
+        1794716142931738200
+      ],
+      "runs/main/B2_seed42/S3/eval_dev.summary.json": [
+        2456,
+        1794716142932738600
+      ],
+      "runs/main/B2_seed42/S3/eval_test.jsonl": [
+        1392687,
+        1794716142941250900
+      ],
+      "runs/main/B2_seed42/S3/eval_test.summary.json": [
+        1168,
+        1794716142942756800
+      ],
+      "runs/main/B3_seed13/.done/eval_dev_B3_seed13_S1.json": [
+        300,
+        1794716142968803500
+      ],
+      "runs/main/B3_seed13/.done/eval_dev_B3_seed13_S2.json": [
+        300,
+        1794716142968803500
+      ],
+      "runs/main/B3_seed13/.done/eval_dev_B3_seed13_S3.json": [
+        300,
+        1794716142969802800
+      ],
+      "runs/main/B3_seed13/.done/eval_test_B3_seed13_S1.json": [
+        302,
+        1794716142969802800
+      ],
+      "runs/main/B3_seed13/.done/eval_test_B3_seed13_S2.json": [
+        302,
+        1794716142970802200
+      ],
+      "runs/main/B3_seed13/.done/eval_test_B3_seed13_S3.json": [
+        302,
+        1794716142970802200
+      ],
+      "runs/main/B3_seed13/.done/select_0.json": [
+        326,
+        1794716142972803900
+      ],
+      "runs/main/B3_seed13/.done/select_1.json": [
+        326,
+        1794716142973311800
+      ],
+      "runs/main/B3_seed13/.done/select_2.json": [
+        326,
+        1794716142974312500
+      ],
+      "runs/main/B3_seed13/.done/train_0.json": [
+        296,
+        1794716142974312500
+      ],
+      "runs/main/B3_seed13/.done/train_1.json": [
+        360,
+        1794716142974312500
+      ],
+      "runs/main/B3_seed13/.done/train_2.json": [
+        360,
+        1794716142977312900
+      ],
+      "runs/main/B3_seed13/.done/validate_log_0.json": [
+        368,
+        1794716142977312900
+      ],
+      "runs/main/B3_seed13/.done/validate_log_1.json": [
+        368,
+        1794716142978313900
+      ],
+      "runs/main/B3_seed13/.done/validate_log_2.json": [
+        368,
+        1794716142978313900
+      ],
+      "runs/main/B3_seed13/checkpoint_log.jsonl": [
+        20583,
+        1794716143260364200
+      ],
+      "runs/main/B3_seed13/round_000/selection_log.jsonl": [
+        1992109,
+        1794716143265874700
+      ],
+      "runs/main/B3_seed13/round_000/train_set.json": [
+        8120,
+        1794716143265874700
+      ],
+      "runs/main/B3_seed13/round_001/selection_log.jsonl": [
+        1991898,
+        1794716143271898100
+      ],
+      "runs/main/B3_seed13/round_001/train_set.json": [
+        8017,
+        1794716143271898100
+      ],
+      "runs/main/B3_seed13/round_002/selection_log.jsonl": [
+        1991689,
+        1794716143278905800
+      ],
+      "runs/main/B3_seed13/round_002/train_set.json": [
+        7947,
+        1794716143279906900
+      ],
+      "runs/main/B3_seed13/S1/adapter/adapter_config.json": [
+        1207,
+        1794716142980313500
+      ],
+      "runs/main/B3_seed13/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716142980313500
+      ],
+      "runs/main/B3_seed13/S1/adapter/README.md": [
+        5412,
+        1794716142979313400
+      ],
+      "runs/main/B3_seed13/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716143063409200
+      ],
+      "runs/main/B3_seed13/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716143064416200
+      ],
+      "runs/main/B3_seed13/S1/adapter/train_log.json": [
+        7695,
+        1794716143064416200
+      ],
+      "runs/main/B3_seed13/S1/eval_dev.jsonl": [
+        474889,
+        1794716143065422000
+      ],
+      "runs/main/B3_seed13/S1/eval_dev.summary.json": [
+        2439,
+        1794716143066423500
+      ],
+      "runs/main/B3_seed13/S1/eval_test.jsonl": [
+        1255530,
+        1794716143071420900
+      ],
+      "runs/main/B3_seed13/S1/eval_test.summary.json": [
+        1167,
+        1794716143072926000
+      ],
+      "runs/main/B3_seed13/S2/adapter/adapter_config.json": [
+        1207,
+        1794716143074930800
+      ],
+      "runs/main/B3_seed13/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716143075931200
+      ],
+      "runs/main/B3_seed13/S2/adapter/README.md": [
+        5412,
+        1794716143074930800
+      ],
+      "runs/main/B3_seed13/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716143162113700
+      ],
+      "runs/main/B3_seed13/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716143164622100
+      ],
+      "runs/main/B3_seed13/S2/adapter/train_log.json": [
+        7721,
+        1794716143165627600
+      ],
+      "runs/main/B3_seed13/S2/eval_dev.jsonl": [
+        462645,
+        1794716143168628100
+      ],
+      "runs/main/B3_seed13/S2/eval_dev.summary.json": [
+        2454,
+        1794716143169629200
+      ],
+      "runs/main/B3_seed13/S2/eval_test.jsonl": [
+        1253058,
+        1794716143178157500
+      ],
+      "runs/main/B3_seed13/S2/eval_test.summary.json": [
+        1168,
+        1794716143179157300
+      ],
+      "runs/main/B3_seed13/S3/adapter/adapter_config.json": [
+        1207,
+        1794716143182156500
+      ],
+      "runs/main/B3_seed13/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716143182156500
+      ],
+      "runs/main/B3_seed13/S3/adapter/README.md": [
+        5412,
+        1794716143181156300
+      ],
+      "runs/main/B3_seed13/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716143244850100
+      ],
+      "runs/main/B3_seed13/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716143248849900
+      ],
+      "runs/main/B3_seed13/S3/adapter/train_log.json": [
+        7726,
+        1794716143249879600
+      ],
+      "runs/main/B3_seed13/S3/eval_dev.jsonl": [
+        498882,
+        1794716143251851500
+      ],
+      "runs/main/B3_seed13/S3/eval_dev.summary.json": [
+        2469,
+        1794716143253351800
+      ],
+      "runs/main/B3_seed13/S3/eval_test.jsonl": [
+        1345866,
+        1794716143258362700
+      ],
+      "runs/main/B3_seed13/S3/eval_test.summary.json": [
+        1167,
+        1794716143259363400
+      ],
+      "runs/main/B3_seed2026/.done/eval_dev_B3_seed2026_S1.json": [
+        306,
+        1794716143282903500
+      ],
+      "runs/main/B3_seed2026/.done/eval_dev_B3_seed2026_S2.json": [
+        306,
+        1794716143284268700
+      ],
+      "runs/main/B3_seed2026/.done/eval_dev_B3_seed2026_S3.json": [
+        306,
+        1794716143285269200
+      ],
+      "runs/main/B3_seed2026/.done/eval_test_B3_seed2026_S1.json": [
+        308,
+        1794716143285269200
+      ],
+      "runs/main/B3_seed2026/.done/eval_test_B3_seed2026_S2.json": [
+        308,
+        1794716143286268100
+      ],
+      "runs/main/B3_seed2026/.done/eval_test_B3_seed2026_S3.json": [
+        308,
+        1794716143287268500
+      ],
+      "runs/main/B3_seed2026/.done/select_0.json": [
+        330,
+        1794716143287268500
+      ],
+      "runs/main/B3_seed2026/.done/select_1.json": [
+        330,
+        1794716143288267500
+      ],
+      "runs/main/B3_seed2026/.done/select_2.json": [
+        330,
+        1794716143288267500
+      ],
+      "runs/main/B3_seed2026/.done/train_0.json": [
+        302,
+        1794716143289268200
+      ],
+      "runs/main/B3_seed2026/.done/train_1.json": [
+        368,
+        1794716143289268200
+      ],
+      "runs/main/B3_seed2026/.done/train_2.json": [
+        368,
+        1794716143290269000
+      ],
+      "runs/main/B3_seed2026/.done/validate_log_0.json": [
+        370,
+        1794716143290269000
+      ],
+      "runs/main/B3_seed2026/.done/validate_log_1.json": [
+        370,
+        1794716143291269200
+      ],
+      "runs/main/B3_seed2026/.done/validate_log_2.json": [
+        370,
+        1794716143291269200
+      ],
+      "runs/main/B3_seed2026/checkpoint_log.jsonl": [
+        20539,
+        1794716143530501000
+      ],
+      "runs/main/B3_seed2026/round_000/selection_log.jsonl": [
+        2000820,
+        1794716143536015500
+      ],
+      "runs/main/B3_seed2026/round_000/train_set.json": [
+        7947,
+        1794716143536015500
+      ],
+      "runs/main/B3_seed2026/round_001/selection_log.jsonl": [
+        2000616,
+        1794716143541017000
+      ],
+      "runs/main/B3_seed2026/round_001/train_set.json": [
+        7774,
+        1794716143543014900
+      ],
+      "runs/main/B3_seed2026/round_002/selection_log.jsonl": [
+        2000397,
+        1794716143550170100
+      ],
+      "runs/main/B3_seed2026/round_002/train_set.json": [
+        8299,
+        1794716143551172000
+      ],
+      "runs/main/B3_seed2026/S1/adapter/adapter_config.json": [
+        1207,
+        1794716143293784100
+      ],
+      "runs/main/B3_seed2026/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716143294800600
+      ],
+      "runs/main/B3_seed2026/S1/adapter/README.md": [
+        5412,
+        1794716143292774300
+      ],
+      "runs/main/B3_seed2026/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716143356766100
+      ],
+      "runs/main/B3_seed2026/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716143356766100
+      ],
+      "runs/main/B3_seed2026/S1/adapter/train_log.json": [
+        7692,
+        1794716143357765400
+      ],
+      "runs/main/B3_seed2026/S1/eval_dev.jsonl": [
+        434388,
+        1794716143362763300
+      ],
+      "runs/main/B3_seed2026/S1/eval_dev.summary.json": [
+        2462,
+        1794716143363942600
+      ],
+      "runs/main/B3_seed2026/S1/eval_test.jsonl": [
+        1155246,
+        1794716143379452900
+      ],
+      "runs/main/B3_seed2026/S1/eval_test.summary.json": [
+        1170,
+        1794716143380452700
+      ],
+      "runs/main/B3_seed2026/S2/adapter/adapter_config.json": [
+        1207,
+        1794716143381454400
+      ],
+      "runs/main/B3_seed2026/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716143382958700
+      ],
+      "runs/main/B3_seed2026/S2/adapter/README.md": [
+        5412,
+        1794716143381454400
+      ],
+      "runs/main/B3_seed2026/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716143442953700
+      ],
+      "runs/main/B3_seed2026/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716143444181100
+      ],
+      "runs/main/B3_seed2026/S2/adapter/train_log.json": [
+        7500,
+        1794716143444181100
+      ],
+      "runs/main/B3_seed2026/S2/eval_dev.jsonl": [
+        464003,
+        1794716143445178900
+      ],
+      "runs/main/B3_seed2026/S2/eval_dev.summary.json": [
+        2432,
+        1794716143446182000
+      ],
+      "runs/main/B3_seed2026/S2/eval_test.jsonl": [
+        1253678,
+        1794716143449181900
+      ],
+      "runs/main/B3_seed2026/S2/eval_test.summary.json": [
+        1167,
+        1794716143450182700
+      ],
+      "runs/main/B3_seed2026/S3/adapter/adapter_config.json": [
+        1207,
+        1794716143454692200
+      ],
+      "runs/main/B3_seed2026/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716143455692000
+      ],
+      "runs/main/B3_seed2026/S3/adapter/README.md": [
+        5412,
+        1794716143453692800
+      ],
+      "runs/main/B3_seed2026/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716143513987600
+      ],
+      "runs/main/B3_seed2026/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716143515987300
+      ],
+      "runs/main/B3_seed2026/S3/adapter/train_log.json": [
+        7964,
+        1794716143516989700
+      ],
+      "runs/main/B3_seed2026/S3/eval_dev.jsonl": [
+        477194,
+        1794716143518989300
+      ],
+      "runs/main/B3_seed2026/S3/eval_dev.summary.json": [
+        2446,
+        1794716143519987400
+      ],
+      "runs/main/B3_seed2026/S3/eval_test.jsonl": [
+        1277436,
+        1794716143528498000
+      ],
+      "runs/main/B3_seed2026/S3/eval_test.summary.json": [
+        1170,
+        1794716143529499300
+      ],
+      "runs/main/B3_seed42/.done/eval_dev_B3_seed42_S1.json": [
+        300,
+        1794716143553684200
+      ],
+      "runs/main/B3_seed42/.done/eval_dev_B3_seed42_S2.json": [
+        300,
+        1794716143553684200
+      ],
+      "runs/main/B3_seed42/.done/eval_dev_B3_seed42_S3.json": [
+        300,
+        1794716143554683100
+      ],
+      "runs/main/B3_seed42/.done/eval_test_B3_seed42_S1.json": [
+        302,
+        1794716143555684000
+      ],
+      "runs/main/B3_seed42/.done/eval_test_B3_seed42_S2.json": [
+        302,
+        1794716143555684000
+      ],
+      "runs/main/B3_seed42/.done/eval_test_B3_seed42_S3.json": [
+        302,
+        1794716143555684000
+      ],
+      "runs/main/B3_seed42/.done/select_0.json": [
+        326,
+        1794716143556685400
+      ],
+      "runs/main/B3_seed42/.done/select_1.json": [
+        326,
+        1794716143556685400
+      ],
+      "runs/main/B3_seed42/.done/select_2.json": [
+        326,
+        1794716143557685300
+      ],
+      "runs/main/B3_seed42/.done/train_0.json": [
+        296,
+        1794716143557685300
+      ],
+      "runs/main/B3_seed42/.done/train_1.json": [
+        360,
+        1794716143557685300
+      ],
+      "runs/main/B3_seed42/.done/train_2.json": [
+        360,
+        1794716143558684900
+      ],
+      "runs/main/B3_seed42/.done/validate_log_0.json": [
+        368,
+        1794716143558684900
+      ],
+      "runs/main/B3_seed42/.done/validate_log_1.json": [
+        368,
+        1794716143559684400
+      ],
+      "runs/main/B3_seed42/.done/validate_log_2.json": [
+        368,
+        1794716143559684400
+      ],
+      "runs/main/B3_seed42/checkpoint_log.jsonl": [
+        20553,
+        1794716143800568500
+      ],
+      "runs/main/B3_seed42/round_000/selection_log.jsonl": [
+        1992113,
+        1794716143806093900
+      ],
+      "runs/main/B3_seed42/round_000/train_set.json": [
+        7980,
+        1794716143807098200
+      ],
+      "runs/main/B3_seed42/round_001/selection_log.jsonl": [
+        1991909,
+        1794716143810605300
+      ],
+      "runs/main/B3_seed42/round_001/train_set.json": [
+        7772,
+        1794716143811606200
+      ],
+      "runs/main/B3_seed42/round_002/selection_log.jsonl": [
+        1991690,
+        1794716143818124200
+      ],
+      "runs/main/B3_seed42/round_002/train_set.json": [
+        8297,
+        1794716143818124200
+      ],
+      "runs/main/B3_seed42/S1/adapter/adapter_config.json": [
+        1207,
+        1794716143560683800
+      ],
+      "runs/main/B3_seed42/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716143561685500
+      ],
+      "runs/main/B3_seed42/S1/adapter/README.md": [
+        5412,
+        1794716143560683800
+      ],
+      "runs/main/B3_seed42/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716143621876400
+      ],
+      "runs/main/B3_seed42/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716143623983400
+      ],
+      "runs/main/B3_seed42/S1/adapter/train_log.json": [
+        7692,
+        1794716143623983400
+      ],
+      "runs/main/B3_seed42/S1/eval_dev.jsonl": [
+        469512,
+        1794716143626984200
+      ],
+      "runs/main/B3_seed42/S1/eval_dev.summary.json": [
+        2363,
+        1794716143627982500
+      ],
+      "runs/main/B3_seed42/S1/eval_test.jsonl": [
+        1262748,
+        1794716143632981300
+      ],
+      "runs/main/B3_seed42/S1/eval_test.summary.json": [
+        1168,
+        1794716143632981300
+      ],
+      "runs/main/B3_seed42/S2/adapter/adapter_config.json": [
+        1207,
+        1794716143635272000
+      ],
+      "runs/main/B3_seed42/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716143636266900
+      ],
+      "runs/main/B3_seed42/S2/adapter/README.md": [
+        5412,
+        1794716143635272000
+      ],
+      "runs/main/B3_seed42/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716143699818500
+      ],
+      "runs/main/B3_seed42/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716143700817800
+      ],
+      "runs/main/B3_seed42/S2/adapter/train_log.json": [
+        7496,
+        1794716143702817700
+      ],
+      "runs/main/B3_seed42/S2/eval_dev.jsonl": [
+        483904,
+        1794716143704011100
+      ],
+      "runs/main/B3_seed42/S2/eval_dev.summary.json": [
+        2398,
+        1794716143705010900
+      ],
+      "runs/main/B3_seed42/S2/eval_test.jsonl": [
+        1309044,
+        1794716143708010600
+      ],
+      "runs/main/B3_seed42/S2/eval_test.summary.json": [
+        1168,
+        1794716143709011400
+      ],
+      "runs/main/B3_seed42/S3/adapter/adapter_config.json": [
+        1207,
+        1794716143712161400
+      ],
+      "runs/main/B3_seed42/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716143713160000
+      ],
+      "runs/main/B3_seed42/S3/adapter/README.md": [
+        5412,
+        1794716143711161500
+      ],
+      "runs/main/B3_seed42/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716143786026900
+      ],
+      "runs/main/B3_seed42/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716143787028200
+      ],
+      "runs/main/B3_seed42/S3/adapter/train_log.json": [
+        7960,
+        1794716143788050300
+      ],
+      "runs/main/B3_seed42/S3/eval_dev.jsonl": [
+        470355,
+        1794716143792029000
+      ],
+      "runs/main/B3_seed42/S3/eval_dev.summary.json": [
+        2426,
+        1794716143793055800
+      ],
+      "runs/main/B3_seed42/S3/eval_test.jsonl": [
+        1264610,
+        1794716143798568900
+      ],
+      "runs/main/B3_seed42/S3/eval_test.summary.json": [
+        1167,
+        1794716143799569200
+      ],
+      "runs/main/B4_seed13/.done/eval_dev_B4_seed13_S1.json": [
+        127,
+        1794716143819119200
+      ],
+      "runs/main/B4_seed13/.done/eval_dev_B4_seed13_S2.json": [
+        300,
+        1794716143820119200
+      ],
+      "runs/main/B4_seed13/.done/eval_dev_B4_seed13_S3.json": [
+        300,
+        1794716143821118000
+      ],
+      "runs/main/B4_seed13/.done/eval_test_B4_seed13_S1.json": [
+        127,
+        1794716143821118000
+      ],
+      "runs/main/B4_seed13/.done/eval_test_B4_seed13_S2.json": [
+        302,
+        1794716143822118200
+      ],
+      "runs/main/B4_seed13/.done/eval_test_B4_seed13_S3.json": [
+        302,
+        1794716143822118200
+      ],
+      "runs/main/B4_seed13/.done/nll_B4_seed13_S1.json": [
+        127,
+        1794716143822118200
+      ],
+      "runs/main/B4_seed13/.done/nll_B4_seed13_S2.json": [
+        347,
+        1794716143823118100
+      ],
+      "runs/main/B4_seed13/.done/select_0.json": [
+        373,
+        1794716143823118100
+      ],
+      "runs/main/B4_seed13/.done/select_1.json": [
+        373,
+        1794716143823118100
+      ],
+      "runs/main/B4_seed13/.done/select_2.json": [
+        373,
+        1794716143824197100
+      ],
+      "runs/main/B4_seed13/.done/train_0.json": [
+        127,
+        1794716143824197100
+      ],
+      "runs/main/B4_seed13/.done/train_1.json": [
+        360,
+        1794716143825203000
+      ],
+      "runs/main/B4_seed13/.done/train_2.json": [
+        360,
+        1794716143825203000
+      ],
+      "runs/main/B4_seed13/.done/validate_log_0.json": [
+        368,
+        1794716143825203000
+      ],
+      "runs/main/B4_seed13/.done/validate_log_1.json": [
+        368,
+        1794716143826203200
+      ],
+      "runs/main/B4_seed13/.done/validate_log_2.json": [
+        368,
+        1794716143826203200
+      ],
+      "runs/main/B4_seed13/B4_seed13.zip": [
+        8682815,
+        1794964400260667100
+      ],
+      "runs/main/B4_seed13/checkpoint_log.jsonl": [
+        18339,
+        1794716144342057300
+      ],
+      "runs/main/B4_seed13/round_000/selection_log.jsonl": [
+        2315896,
+        1794716144351547700
+      ],
+      "runs/main/B4_seed13/round_000/train_set.json": [
+        7216,
+        1794716144353053400
+      ],
+      "runs/main/B4_seed13/round_001/selection_log.jsonl": [
+        2315687,
+        1794716144475157100
+      ],
+      "runs/main/B4_seed13/round_001/train_set.json": [
+        7323,
+        1794716144475157100
+      ],
+      "runs/main/B4_seed13/round_002/selection_log.jsonl": [
+        2315533,
+        1794716144482157100
+      ],
+      "runs/main/B4_seed13/round_002/train_set.json": [
+        7253,
+        1794716144484695100
+      ],
+      "runs/main/B4_seed13/S1/adapter/adapter_config.json": [
+        1207,
+        1794716143827201700
+      ],
+      "runs/main/B4_seed13/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716143827201700
+      ],
+      "runs/main/B4_seed13/S1/adapter/README.md": [
+        5412,
+        1794716143827201700
+      ],
+      "runs/main/B4_seed13/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716143908069300
+      ],
+      "runs/main/B4_seed13/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716143909069900
+      ],
+      "runs/main/B4_seed13/S1/adapter/train_log.json": [
+        6999,
+        1794716143914851500
+      ],
+      "runs/main/B4_seed13/S1/eval_dev.jsonl": [
+        479378,
+        1794716143916851200
+      ],
+      "runs/main/B4_seed13/S1/eval_dev.summary.json": [
+        2458,
+        1794716143918852900
+      ],
+      "runs/main/B4_seed13/S1/eval_test.jsonl": [
+        1278358,
+        1794716143924931700
+      ],
+      "runs/main/B4_seed13/S1/eval_test.summary.json": [
+        1167,
+        1794716143925928300
+      ],
+      "runs/main/B4_seed13/S1/learnability.jsonl": [
+        790900,
+        1794716143931930300
+      ],
+      "runs/main/B4_seed13/S1/learnability.summary.json": [
+        703,
+        1794716143933445600
+      ],
+      "runs/main/B4_seed13/S1/nll.jsonl": [
+        963773,
+        1794716143944977700
+      ],
+      "runs/main/B4_seed13/S1/nll.summary.json": [
+        775,
+        1794716143945964900
+      ],
+      "runs/main/B4_seed13/S2/adapter/adapter_config.json": [
+        1207,
+        1794716143948968800
+      ],
+      "runs/main/B4_seed13/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716143949965700
+      ],
+      "runs/main/B4_seed13/S2/adapter/README.md": [
+        5412,
+        1794716143947964900
+      ],
+      "runs/main/B4_seed13/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716144016115900
+      ],
+      "runs/main/B4_seed13/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716144018116500
+      ],
+      "runs/main/B4_seed13/S2/adapter/train_log.json": [
+        7028,
+        1794716144019115600
+      ],
+      "runs/main/B4_seed13/S2/eval_dev.jsonl": [
+        518231,
+        1794716144021117100
+      ],
+      "runs/main/B4_seed13/S2/eval_dev.summary.json": [
+        2457,
+        1794716144022116700
+      ],
+      "runs/main/B4_seed13/S2/eval_test.jsonl": [
+        1385928,
+        1794716144027622400
+      ],
+      "runs/main/B4_seed13/S2/eval_test.summary.json": [
+        1167,
+        1794716144029622400
+      ],
+      "runs/main/B4_seed13/S2/learnability.jsonl": [
+        791026,
+        1794716144227948500
+      ],
+      "runs/main/B4_seed13/S2/learnability.summary.json": [
+        702,
+        1794716144228950500
+      ],
+      "runs/main/B4_seed13/S2/nll.jsonl": [
+        963815,
+        1794716144232948300
+      ],
+      "runs/main/B4_seed13/S2/nll.summary.json": [
+        775,
+        1794716144235416400
+      ],
+      "runs/main/B4_seed13/S3/adapter/adapter_config.json": [
+        1207,
+        1794716144237415800
+      ],
+      "runs/main/B4_seed13/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716144237415800
+      ],
+      "runs/main/B4_seed13/S3/adapter/README.md": [
+        5412,
+        1794716144236415500
+      ],
+      "runs/main/B4_seed13/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716144304979800
+      ],
+      "runs/main/B4_seed13/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716144307978900
+      ],
+      "runs/main/B4_seed13/S3/adapter/train_log.json": [
+        7029,
+        1794716144307978900
+      ],
+      "runs/main/B4_seed13/S3/eval_dev.jsonl": [
+        491609,
+        1794716144327516500
+      ],
+      "runs/main/B4_seed13/S3/eval_dev.summary.json": [
+        2368,
+        1794716144328517900
+      ],
+      "runs/main/B4_seed13/S3/eval_test.jsonl": [
+        1306399,
+        1794716144338031600
+      ],
+      "runs/main/B4_seed13/S3/eval_test.summary.json": [
+        1168,
+        1794716144341032100
+      ],
+      "runs/main/B4_seed2026/.done/eval_dev_B4_seed2026_S1.json": [
+        129,
+        1794716144485684700
+      ],
+      "runs/main/B4_seed2026/.done/eval_dev_B4_seed2026_S2.json": [
+        306,
+        1794716144486685400
+      ],
+      "runs/main/B4_seed2026/.done/eval_dev_B4_seed2026_S3.json": [
+        306,
+        1794716144486685400
+      ],
+      "runs/main/B4_seed2026/.done/eval_test_B4_seed2026_S1.json": [
+        129,
+        1794716144487685600
+      ],
+      "runs/main/B4_seed2026/.done/eval_test_B4_seed2026_S2.json": [
+        308,
+        1794716144487685600
+      ],
+      "runs/main/B4_seed2026/.done/eval_test_B4_seed2026_S3.json": [
+        308,
+        1794716144487685600
+      ],
+      "runs/main/B4_seed2026/.done/nll_B4_seed2026_S1.json": [
+        129,
+        1794716144488685600
+      ],
+      "runs/main/B4_seed2026/.done/nll_B4_seed2026_S2.json": [
+        353,
+        1794716144488685600
+      ],
+      "runs/main/B4_seed2026/.done/select_0.json": [
+        377,
+        1794716144489683300
+      ],
+      "runs/main/B4_seed2026/.done/select_1.json": [
+        377,
+        1794716144489683300
+      ],
+      "runs/main/B4_seed2026/.done/select_2.json": [
+        377,
+        1794716144490710300
+      ],
+      "runs/main/B4_seed2026/.done/train_0.json": [
+        129,
+        1794716144490710300
+      ],
+      "runs/main/B4_seed2026/.done/train_1.json": [
+        368,
+        1794716144491701700
+      ],
+      "runs/main/B4_seed2026/.done/train_2.json": [
+        368,
+        1794716144491701700
+      ],
+      "runs/main/B4_seed2026/.done/validate_log_0.json": [
+        370,
+        1794716144491701700
+      ],
+      "runs/main/B4_seed2026/.done/validate_log_1.json": [
+        370,
+        1794716144491701700
+      ],
+      "runs/main/B4_seed2026/.done/validate_log_2.json": [
+        370,
+        1794716144493210500
+      ],
+      "runs/main/B4_seed2026/checkpoint_log.jsonl": [
+        18355,
+        1794716144734018600
+      ],
+      "runs/main/B4_seed2026/round_000/selection_log.jsonl": [
+        2324602,
+        1794716144741017900
+      ],
+      "runs/main/B4_seed2026/round_000/train_set.json": [
+        7218,
+        1794716144742017000
+      ],
+      "runs/main/B4_seed2026/round_001/selection_log.jsonl": [
+        2324393,
+        1794716144749075000
+      ],
+      "runs/main/B4_seed2026/round_001/train_set.json": [
+        7325,
+        1794716144750073200
+      ],
+      "runs/main/B4_seed2026/round_002/selection_log.jsonl": [
+        2324239,
+        1794716144754581900
+      ],
+      "runs/main/B4_seed2026/round_002/train_set.json": [
+        7255,
+        1794716144755586900
+      ],
+      "runs/main/B4_seed2026/S1/adapter/adapter_config.json": [
+        1207,
+        1794716144496238300
+      ],
+      "runs/main/B4_seed2026/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716144497224200
+      ],
+      "runs/main/B4_seed2026/S1/adapter/README.md": [
+        5412,
+        1794716144496238300
+      ],
+      "runs/main/B4_seed2026/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716144562835800
+      ],
+      "runs/main/B4_seed2026/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716144565144500
+      ],
+      "runs/main/B4_seed2026/S1/adapter/train_log.json": [
+        6996,
+        1794716144566105300
+      ],
+      "runs/main/B4_seed2026/S1/eval_dev.jsonl": [
+        551075,
+        1794716144568104800
+      ],
+      "runs/main/B4_seed2026/S1/eval_dev.summary.json": [
+        2477,
+        1794716144568104800
+      ],
+      "runs/main/B4_seed2026/S1/eval_test.jsonl": [
+        1479362,
+        1794716144570130200
+      ],
+      "runs/main/B4_seed2026/S1/eval_test.summary.json": [
+        1171,
+        1794716144571104000
+      ],
+      "runs/main/B4_seed2026/S1/learnability.jsonl": [
+        790961,
+        1794716144573660500
+      ],
+      "runs/main/B4_seed2026/S1/learnability.summary.json": [
+        708,
+        1794716144574673500
+      ],
+      "runs/main/B4_seed2026/S1/nll.jsonl": [
+        972658,
+        1794716144580654500
+      ],
+      "runs/main/B4_seed2026/S1/nll.summary.json": [
+        779,
+        1794716144581656900
+      ],
+      "runs/main/B4_seed2026/S2/adapter/adapter_config.json": [
+        1207,
+        1794716144584172400
+      ],
+      "runs/main/B4_seed2026/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716144584172400
+      ],
+      "runs/main/B4_seed2026/S2/adapter/README.md": [
+        5412,
+        1794716144583161900
+      ],
+      "runs/main/B4_seed2026/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716144645913600
+      ],
+      "runs/main/B4_seed2026/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716144647913500
+      ],
+      "runs/main/B4_seed2026/S2/adapter/train_log.json": [
+        7039,
+        1794716144648913700
+      ],
+      "runs/main/B4_seed2026/S2/eval_dev.jsonl": [
+        474774,
+        1794716144651915400
+      ],
+      "runs/main/B4_seed2026/S2/eval_dev.summary.json": [
+        2444,
+        1794716144652915800
+      ],
+      "runs/main/B4_seed2026/S2/eval_test.jsonl": [
+        1261019,
+        1794716144659434000
+      ],
+      "runs/main/B4_seed2026/S2/eval_test.summary.json": [
+        1170,
+        1794716144660431000
+      ],
+      "runs/main/B4_seed2026/S2/learnability.jsonl": [
+        791123,
+        1794716144661431700
+      ],
+      "runs/main/B4_seed2026/S2/learnability.summary.json": [
+        707,
+        1794716144662937300
+      ],
+      "runs/main/B4_seed2026/S2/nll.jsonl": [
+        972727,
+        1794716144663945500
+      ],
+      "runs/main/B4_seed2026/S2/nll.summary.json": [
+        779,
+        1794716144664946700
+      ],
+      "runs/main/B4_seed2026/S3/adapter/adapter_config.json": [
+        1207,
+        1794716144666943300
+      ],
+      "runs/main/B4_seed2026/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716144667943200
+      ],
+      "runs/main/B4_seed2026/S3/adapter/README.md": [
+        5412,
+        1794716144665942900
+      ],
+      "runs/main/B4_seed2026/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716144724507600
+      ],
+      "runs/main/B4_seed2026/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716144726508100
+      ],
+      "runs/main/B4_seed2026/S3/adapter/train_log.json": [
+        7031,
+        1794716144726508100
+      ],
+      "runs/main/B4_seed2026/S3/eval_dev.jsonl": [
+        490354,
+        1794716144730506300
+      ],
+      "runs/main/B4_seed2026/S3/eval_dev.summary.json": [
+        2384,
+        1794716144730506300
+      ],
+      "runs/main/B4_seed2026/S3/eval_test.jsonl": [
+        1306515,
+        1794716144733013000
+      ],
+      "runs/main/B4_seed2026/S3/eval_test.summary.json": [
+        1170,
+        1794716144733013000
+      ],
+      "runs/main/B4_seed42/.done/eval_dev_B4_seed42_S1.json": [
+        127,
+        1794716144756586300
+      ],
+      "runs/main/B4_seed42/.done/eval_dev_B4_seed42_S2.json": [
+        301,
+        1794716144756586300
+      ],
+      "runs/main/B4_seed42/.done/eval_dev_B4_seed42_S3.json": [
+        300,
+        1794716144757585800
+      ],
+      "runs/main/B4_seed42/.done/eval_test_B4_seed42_S1.json": [
+        127,
+        1794716144758586100
+      ],
+      "runs/main/B4_seed42/.done/eval_test_B4_seed42_S2.json": [
+        302,
+        1794716144758586100
+      ],
+      "runs/main/B4_seed42/.done/eval_test_B4_seed42_S3.json": [
+        302,
+        1794716144758586100
+      ],
+      "runs/main/B4_seed42/.done/nll_B4_seed42_S1.json": [
+        127,
+        1794716144759586100
+      ],
+      "runs/main/B4_seed42/.done/nll_B4_seed42_S2.json": [
+        347,
+        1794716144759586100
+      ],
+      "runs/main/B4_seed42/.done/select_0.json": [
+        373,
+        1794716144759586100
+      ],
+      "runs/main/B4_seed42/.done/select_1.json": [
+        373,
+        1794716144759586100
+      ],
+      "runs/main/B4_seed42/.done/select_2.json": [
+        373,
+        1794716144761587000
+      ],
+      "runs/main/B4_seed42/.done/train_0.json": [
+        127,
+        1794716144761587000
+      ],
+      "runs/main/B4_seed42/.done/train_1.json": [
+        360,
+        1794716144763091000
+      ],
+      "runs/main/B4_seed42/.done/train_2.json": [
+        360,
+        1794716144764095300
+      ],
+      "runs/main/B4_seed42/.done/validate_log_0.json": [
+        368,
+        1794716144764095300
+      ],
+      "runs/main/B4_seed42/.done/validate_log_1.json": [
+        368,
+        1794716144765120500
+      ],
+      "runs/main/B4_seed42/.done/validate_log_2.json": [
+        368,
+        1794716144765120500
+      ],
+      "runs/main/B4_seed42/checkpoint_log.jsonl": [
+        18339,
+        1794716145020178200
+      ],
+      "runs/main/B4_seed42/round_000/selection_log.jsonl": [
+        2315896,
+        1794716145024711900
+      ],
+      "runs/main/B4_seed42/round_000/train_set.json": [
+        7216,
+        1794716145024711900
+      ],
+      "runs/main/B4_seed42/round_001/selection_log.jsonl": [
+        2315687,
+        1794716145031687200
+      ],
+      "runs/main/B4_seed42/round_001/train_set.json": [
+        7323,
+        1794716145031687200
+      ],
+      "runs/main/B4_seed42/round_002/selection_log.jsonl": [
+        2315533,
+        1794716145038195700
+      ],
+      "runs/main/B4_seed42/round_002/train_set.json": [
+        7253,
+        1794716145039195400
+      ],
+      "runs/main/B4_seed42/S1/adapter/adapter_config.json": [
+        1207,
+        1794716144768095000
+      ],
+      "runs/main/B4_seed42/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716144769097500
+      ],
+      "runs/main/B4_seed42/S1/adapter/README.md": [
+        5412,
+        1794716144767095100
+      ],
+      "runs/main/B4_seed42/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716144827761300
+      ],
+      "runs/main/B4_seed42/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716144829746200
+      ],
+      "runs/main/B4_seed42/S1/adapter/train_log.json": [
+        7000,
+        1794716144830745300
+      ],
+      "runs/main/B4_seed42/S1/eval_dev.jsonl": [
+        475090,
+        1794716144832745900
+      ],
+      "runs/main/B4_seed42/S1/eval_dev.summary.json": [
+        2427,
+        1794716144832745900
+      ],
+      "runs/main/B4_seed42/S1/eval_test.jsonl": [
+        1260365,
+        1794716144839981000
+      ],
+      "runs/main/B4_seed42/S1/eval_test.summary.json": [
+        1164,
+        1794716144839981000
+      ],
+      "runs/main/B4_seed42/S1/learnability.jsonl": [
+        790951,
+        1794716144843520800
+      ],
+      "runs/main/B4_seed42/S1/learnability.summary.json": [
+        703,
+        1794716144844512000
+      ],
+      "runs/main/B4_seed42/S1/nll.jsonl": [
+        963848,
+        1794716144850512600
+      ],
+      "runs/main/B4_seed42/S1/nll.summary.json": [
+        775,
+        1794716144851511400
+      ],
+      "runs/main/B4_seed42/S2/adapter/adapter_config.json": [
+        1207,
+        1794716144854021800
+      ],
+      "runs/main/B4_seed42/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716144854021800
+      ],
+      "runs/main/B4_seed42/S2/adapter/README.md": [
+        5412,
+        1794716144853015400
+      ],
+      "runs/main/B4_seed42/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716144914967900
+      ],
+      "runs/main/B4_seed42/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716144915968400
+      ],
+      "runs/main/B4_seed42/S2/adapter/train_log.json": [
+        7032,
+        1794716144916968000
+      ],
+      "runs/main/B4_seed42/S2/eval_dev.jsonl": [
+        505645,
+        1794716144918965900
+      ],
+      "runs/main/B4_seed42/S2/eval_dev.summary.json": [
+        2458,
+        1794716144919966200
+      ],
+      "runs/main/B4_seed42/S2/eval_test.jsonl": [
+        1342717,
+        1794716144927231900
+      ],
+      "runs/main/B4_seed42/S2/eval_test.summary.json": [
+        1168,
+        1794716144928235100
+      ],
+      "runs/main/B4_seed42/S2/learnability.jsonl": [
+        791049,
+        1794716144932737100
+      ],
+      "runs/main/B4_seed42/S2/learnability.summary.json": [
+        704,
+        1794716144933742700
+      ],
+      "runs/main/B4_seed42/S2/nll.jsonl": [
+        963912,
+        1794716144937742300
+      ],
+      "runs/main/B4_seed42/S2/nll.summary.json": [
+        775,
+        1794716144938742600
+      ],
+      "runs/main/B4_seed42/S3/adapter/adapter_config.json": [
+        1207,
+        1794716144941742900
+      ],
+      "runs/main/B4_seed42/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716144941742900
+      ],
+      "runs/main/B4_seed42/S3/adapter/README.md": [
+        5412,
+        1794716144940744500
+      ],
+      "runs/main/B4_seed42/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716145007373100
+      ],
+      "runs/main/B4_seed42/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716145008371700
+      ],
+      "runs/main/B4_seed42/S3/adapter/train_log.json": [
+        7032,
+        1794716145008371700
+      ],
+      "runs/main/B4_seed42/S3/eval_dev.jsonl": [
+        492101,
+        1794716145011663000
+      ],
+      "runs/main/B4_seed42/S3/eval_dev.summary.json": [
+        2442,
+        1794716145011663000
+      ],
+      "runs/main/B4_seed42/S3/eval_test.jsonl": [
+        1302189,
+        1794716145018179700
+      ],
+      "runs/main/B4_seed42/S3/eval_test.summary.json": [
+        1168,
+        1794716145019178600
+      ],
+      "runs/main/B5_seed13/.done/eval_dev_B5_seed13_S1.json": [
+        300,
+        1794716145040196000
+      ],
+      "runs/main/B5_seed13/.done/eval_dev_B5_seed13_S2.json": [
+        300,
+        1794716145041195900
+      ],
+      "runs/main/B5_seed13/.done/eval_dev_B5_seed13_S3.json": [
+        301,
+        1794716145041195900
+      ],
+      "runs/main/B5_seed13/.done/eval_test_B5_seed13_S1.json": [
+        302,
+        1794716145042195600
+      ],
+      "runs/main/B5_seed13/.done/eval_test_B5_seed13_S2.json": [
+        303,
+        1794716145042195600
+      ],
+      "runs/main/B5_seed13/.done/eval_test_B5_seed13_S3.json": [
+        303,
+        1794716145042195600
+      ],
+      "runs/main/B5_seed13/.done/nll_B5_seed13_S1.json": [
+        347,
+        1794716145043196400
+      ],
+      "runs/main/B5_seed13/.done/nll_B5_seed13_S2.json": [
+        347,
+        1794716145043196400
+      ],
+      "runs/main/B5_seed13/.done/select_0.json": [
+        373,
+        1794716145043196400
+      ],
+      "runs/main/B5_seed13/.done/select_1.json": [
+        383,
+        1794716145043196400
+      ],
+      "runs/main/B5_seed13/.done/select_2.json": [
+        383,
+        1794716145044257400
+      ],
+      "runs/main/B5_seed13/.done/train_0.json": [
+        296,
+        1794716145044257400
+      ],
+      "runs/main/B5_seed13/.done/train_1.json": [
+        360,
+        1794716145045258000
+      ],
+      "runs/main/B5_seed13/.done/train_2.json": [
+        360,
+        1794716145046258000
+      ],
+      "runs/main/B5_seed13/.done/validate_log_0.json": [
+        368,
+        1794716145046258000
+      ],
+      "runs/main/B5_seed13/.done/validate_log_1.json": [
+        368,
+        1794716145047257700
+      ],
+      "runs/main/B5_seed13/.done/validate_log_2.json": [
+        368,
+        1794716145047257700
+      ],
+      "runs/main/B5_seed13/checkpoint_log.jsonl": [
+        18099,
+        1794716145277495900
+      ],
+      "runs/main/B5_seed13/round_000/selection_log.jsonl": [
+        2315896,
+        1794716145286011200
+      ],
+      "runs/main/B5_seed13/round_000/train_set.json": [
+        7216,
+        1794716145290011500
+      ],
+      "runs/main/B5_seed13/round_001/selection_log.jsonl": [
+        2311727,
+        1794716145310585500
+      ],
+      "runs/main/B5_seed13/round_001/train_set.json": [
+        7087,
+        1794716145311601500
+      ],
+      "runs/main/B5_seed13/round_002/selection_log.jsonl": [
+        2320349,
+        1794716145321115800
+      ],
+      "runs/main/B5_seed13/round_002/train_set.json": [
+        7229,
+        1794716145322117100
+      ],
+      "runs/main/B5_seed13/S1/adapter/adapter_config.json": [
+        1207,
+        1794716145048258500
+      ],
+      "runs/main/B5_seed13/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716145049258200
+      ],
+      "runs/main/B5_seed13/S1/adapter/README.md": [
+        5412,
+        1794716145048258500
+      ],
+      "runs/main/B5_seed13/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716145101299400
+      ],
+      "runs/main/B5_seed13/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716145103813500
+      ],
+      "runs/main/B5_seed13/S1/adapter/train_log.json": [
+        6999,
+        1794716145104811300
+      ],
+      "runs/main/B5_seed13/S1/eval_dev.jsonl": [
+        479378,
+        1794716145108811000
+      ],
+      "runs/main/B5_seed13/S1/eval_dev.summary.json": [
+        2458,
+        1794716145110315900
+      ],
+      "runs/main/B5_seed13/S1/eval_test.jsonl": [
+        1278358,
+        1794716145115857300
+      ],
+      "runs/main/B5_seed13/S1/eval_test.summary.json": [
+        1167,
+        1794716145116857500
+      ],
+      "runs/main/B5_seed13/S1/learnability.jsonl": [
+        790900,
+        1794716145120856000
+      ],
+      "runs/main/B5_seed13/S1/learnability.summary.json": [
+        703,
+        1794716145120856000
+      ],
+      "runs/main/B5_seed13/S1/nll.jsonl": [
+        963773,
+        1794716145124383100
+      ],
+      "runs/main/B5_seed13/S1/nll.summary.json": [
+        775,
+        1794716145124383100
+      ],
+      "runs/main/B5_seed13/S2/adapter/adapter_config.json": [
+        1207,
+        1794716145126383100
+      ],
+      "runs/main/B5_seed13/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716145126383100
+      ],
+      "runs/main/B5_seed13/S2/adapter/README.md": [
+        5412,
+        1794716145126383100
+      ],
+      "runs/main/B5_seed13/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716145182977300
+      ],
+      "runs/main/B5_seed13/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716145183480800
+      ],
+      "runs/main/B5_seed13/S2/adapter/train_log.json": [
+        6798,
+        1794716145183480800
+      ],
+      "runs/main/B5_seed13/S2/eval_dev.jsonl": [
+        540803,
+        1794716145185486000
+      ],
+      "runs/main/B5_seed13/S2/eval_dev.summary.json": [
+        2444,
+        1794716145186484800
+      ],
+      "runs/main/B5_seed13/S2/eval_test.jsonl": [
+        1443547,
+        1794716145190485100
+      ],
+      "runs/main/B5_seed13/S2/eval_test.summary.json": [
+        1167,
+        1794716145190485100
+      ],
+      "runs/main/B5_seed13/S2/learnability.jsonl": [
+        791105,
+        1794716145195019800
+      ],
+      "runs/main/B5_seed13/S2/learnability.summary.json": [
+        705,
+        1794716145195996300
+      ],
+      "runs/main/B5_seed13/S2/nll.jsonl": [
+        964029,
+        1794716145196994400
+      ],
+      "runs/main/B5_seed13/S2/nll.summary.json": [
+        775,
+        1794716145197995100
+      ],
+      "runs/main/B5_seed13/S3/adapter/adapter_config.json": [
+        1207,
+        1794716145200995700
+      ],
+      "runs/main/B5_seed13/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716145200995700
+      ],
+      "runs/main/B5_seed13/S3/adapter/README.md": [
+        5412,
+        1794716145199995100
+      ],
+      "runs/main/B5_seed13/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716145257437700
+      ],
+      "runs/main/B5_seed13/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716145262945300
+      ],
+      "runs/main/B5_seed13/S3/adapter/train_log.json": [
+        7026,
+        1794716145264955000
+      ],
+      "runs/main/B5_seed13/S3/eval_dev.jsonl": [
+        514315,
+        1794716145267963800
+      ],
+      "runs/main/B5_seed13/S3/eval_dev.summary.json": [
+        2411,
+        1794716145268967300
+      ],
+      "runs/main/B5_seed13/S3/eval_test.jsonl": [
+        1362029,
+        1794716145274494900
+      ],
+      "runs/main/B5_seed13/S3/eval_test.summary.json": [
+        1168,
+        1794716145276494300
+      ],
+      "runs/main/B5_seed2026/.done/eval_dev_B5_seed2026_S1.json": [
+        306,
+        1794716145324629200
+      ],
+      "runs/main/B5_seed2026/.done/eval_dev_B5_seed2026_S2.json": [
+        306,
+        1794716145325635300
+      ],
+      "runs/main/B5_seed2026/.done/eval_dev_B5_seed2026_S3.json": [
+        306,
+        1794716145325635300
+      ],
+      "runs/main/B5_seed2026/.done/eval_test_B5_seed2026_S1.json": [
+        308,
+        1794716145327634800
+      ],
+      "runs/main/B5_seed2026/.done/eval_test_B5_seed2026_S2.json": [
+        308,
+        1794716145329637000
+      ],
+      "runs/main/B5_seed2026/.done/eval_test_B5_seed2026_S3.json": [
+        308,
+        1794716145331634500
+      ],
+      "runs/main/B5_seed2026/.done/nll_B5_seed2026_S1.json": [
+        353,
+        1794716145331634500
+      ],
+      "runs/main/B5_seed2026/.done/nll_B5_seed2026_S2.json": [
+        353,
+        1794716145331634500
+      ],
+      "runs/main/B5_seed2026/.done/select_0.json": [
+        377,
+        1794716145333139600
+      ],
+      "runs/main/B5_seed2026/.done/select_1.json": [
+        389,
+        1794716145333139600
+      ],
+      "runs/main/B5_seed2026/.done/select_2.json": [
+        389,
+        1794716145334146800
+      ],
+      "runs/main/B5_seed2026/.done/train_0.json": [
+        302,
+        1794716145335152500
+      ],
+      "runs/main/B5_seed2026/.done/train_1.json": [
+        368,
+        1794716145336151700
+      ],
+      "runs/main/B5_seed2026/.done/train_2.json": [
+        368,
+        1794716145338150800
+      ],
+      "runs/main/B5_seed2026/.done/validate_log_0.json": [
+        370,
+        1794716145338150800
+      ],
+      "runs/main/B5_seed2026/.done/validate_log_1.json": [
+        370,
+        1794716145339155700
+      ],
+      "runs/main/B5_seed2026/.done/validate_log_2.json": [
+        370,
+        1794716145341153000
+      ],
+      "runs/main/B5_seed2026/checkpoint_log.jsonl": [
+        18025,
+        1794716145626463000
+      ],
+      "runs/main/B5_seed2026/round_000/selection_log.jsonl": [
+        2324602,
+        1794716145631464100
+      ],
+      "runs/main/B5_seed2026/round_000/train_set.json": [
+        7218,
+        1794716145632970700
+      ],
+      "runs/main/B5_seed2026/round_001/selection_log.jsonl": [
+        2324884,
+        1794716145644109400
+      ],
+      "runs/main/B5_seed2026/round_001/train_set.json": [
+        7127,
+        1794716145645115000
+      ],
+      "runs/main/B5_seed2026/round_002/selection_log.jsonl": [
+        2329052,
+        1794716145649115600
+      ],
+      "runs/main/B5_seed2026/round_002/train_set.json": [
+        7093,
+        1794716145650113300
+      ],
+      "runs/main/B5_seed2026/S1/adapter/adapter_config.json": [
+        1207,
+        1794716145343151700
+      ],
+      "runs/main/B5_seed2026/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716145344493700
+      ],
+      "runs/main/B5_seed2026/S1/adapter/README.md": [
+        5412,
+        1794716145343151700
+      ],
+      "runs/main/B5_seed2026/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716145422984300
+      ],
+      "runs/main/B5_seed2026/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716145423499900
+      ],
+      "runs/main/B5_seed2026/S1/adapter/train_log.json": [
+        6996,
+        1794716145424500100
+      ],
+      "runs/main/B5_seed2026/S1/eval_dev.jsonl": [
+        551075,
+        1794716145425501600
+      ],
+      "runs/main/B5_seed2026/S1/eval_dev.summary.json": [
+        2477,
+        1794716145427502200
+      ],
+      "runs/main/B5_seed2026/S1/eval_test.jsonl": [
+        1479362,
+        1794716145438018300
+      ],
+      "runs/main/B5_seed2026/S1/eval_test.summary.json": [
+        1171,
+        1794716145439023700
+      ],
+      "runs/main/B5_seed2026/S1/learnability.jsonl": [
+        790961,
+        1794716145443522600
+      ],
+      "runs/main/B5_seed2026/S1/learnability.summary.json": [
+        708,
+        1794716145444527300
+      ],
+      "runs/main/B5_seed2026/S1/nll.jsonl": [
+        972658,
+        1794716145449528600
+      ],
+      "runs/main/B5_seed2026/S1/nll.summary.json": [
+        779,
+        1794716145451528600
+      ],
+      "runs/main/B5_seed2026/S2/adapter/adapter_config.json": [
+        1207,
+        1794716145456045100
+      ],
+      "runs/main/B5_seed2026/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716145457044100
+      ],
+      "runs/main/B5_seed2026/S2/adapter/README.md": [
+        5412,
+        1794716145456045100
+      ],
+      "runs/main/B5_seed2026/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716145527133200
+      ],
+      "runs/main/B5_seed2026/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716145528131000
+      ],
+      "runs/main/B5_seed2026/S2/adapter/train_log.json": [
+        6809,
+        1794716145529132700
+      ],
+      "runs/main/B5_seed2026/S2/eval_dev.jsonl": [
+        509731,
+        1794716145532132900
+      ],
+      "runs/main/B5_seed2026/S2/eval_dev.summary.json": [
+        2418,
+        1794716145533133900
+      ],
+      "runs/main/B5_seed2026/S2/eval_test.jsonl": [
+        1345710,
+        1794716145539177800
+      ],
+      "runs/main/B5_seed2026/S2/eval_test.summary.json": [
+        1172,
+        1794716145540176900
+      ],
+      "runs/main/B5_seed2026/S2/learnability.jsonl": [
+        791033,
+        1794716145548693500
+      ],
+      "runs/main/B5_seed2026/S2/learnability.summary.json": [
+        710,
+        1794716145550693500
+      ],
+      "runs/main/B5_seed2026/S2/nll.jsonl": [
+        972506,
+        1794716145551694400
+      ],
+      "runs/main/B5_seed2026/S2/nll.summary.json": [
+        779,
+        1794716145553200300
+      ],
+      "runs/main/B5_seed2026/S3/adapter/adapter_config.json": [
+        1207,
+        1794716145556205900
+      ],
+      "runs/main/B5_seed2026/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716145557205400
+      ],
+      "runs/main/B5_seed2026/S3/adapter/README.md": [
+        5412,
+        1794716145556205900
+      ],
+      "runs/main/B5_seed2026/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716145615954000
+      ],
+      "runs/main/B5_seed2026/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716145616953800
+      ],
+      "runs/main/B5_seed2026/S3/adapter/train_log.json": [
+        6803,
+        1794716145618955100
+      ],
+      "runs/main/B5_seed2026/S3/eval_dev.jsonl": [
+        553487,
+        1794716145620953800
+      ],
+      "runs/main/B5_seed2026/S3/eval_dev.summary.json": [
+        2446,
+        1794716145621955200
+      ],
+      "runs/main/B5_seed2026/S3/eval_test.jsonl": [
+        1453156,
+        1794716145625462800
+      ],
+      "runs/main/B5_seed2026/S3/eval_test.summary.json": [
+        1171,
+        1794716145626463000
+      ],
+      "runs/main/B5_seed42/.done/eval_dev_B5_seed42_S1.json": [
+        300,
+        1794716145651116000
+      ],
+      "runs/main/B5_seed42/.done/eval_dev_B5_seed42_S2.json": [
+        300,
+        1794716145652113800
+      ],
+      "runs/main/B5_seed42/.done/eval_dev_B5_seed42_S3.json": [
+        301,
+        1794716145652113800
+      ],
+      "runs/main/B5_seed42/.done/eval_test_B5_seed42_S1.json": [
+        302,
+        1794716145653113700
+      ],
+      "runs/main/B5_seed42/.done/eval_test_B5_seed42_S2.json": [
+        302,
+        1794716145653113700
+      ],
+      "runs/main/B5_seed42/.done/eval_test_B5_seed42_S3.json": [
+        303,
+        1794716145654165100
+      ],
+      "runs/main/B5_seed42/.done/nll_B5_seed42_S1.json": [
+        347,
+        1794716145654165100
+      ],
+      "runs/main/B5_seed42/.done/nll_B5_seed42_S2.json": [
+        347,
+        1794716145655160700
+      ],
+      "runs/main/B5_seed42/.done/select_0.json": [
+        373,
+        1794716145655160700
+      ],
+      "runs/main/B5_seed42/.done/select_1.json": [
+        383,
+        1794716145656160600
+      ],
+      "runs/main/B5_seed42/.done/select_2.json": [
+        383,
+        1794716145656160600
+      ],
+      "runs/main/B5_seed42/.done/train_0.json": [
+        296,
+        1794716145656160600
+      ],
+      "runs/main/B5_seed42/.done/train_1.json": [
+        360,
+        1794716145657161000
+      ],
+      "runs/main/B5_seed42/.done/train_2.json": [
+        360,
+        1794716145657161000
+      ],
+      "runs/main/B5_seed42/.done/validate_log_0.json": [
+        368,
+        1794716145657161000
+      ],
+      "runs/main/B5_seed42/.done/validate_log_1.json": [
+        368,
+        1794716145658161200
+      ],
+      "runs/main/B5_seed42/.done/validate_log_2.json": [
+        368,
+        1794716145658161200
+      ],
+      "runs/main/B5_seed42/checkpoint_log.jsonl": [
+        18249,
+        1794716145919439900
+      ],
+      "runs/main/B5_seed42/round_000/selection_log.jsonl": [
+        2315896,
+        1794716145925959400
+      ],
+      "runs/main/B5_seed42/round_000/train_set.json": [
+        7216,
+        1794716145926960300
+      ],
+      "runs/main/B5_seed42/round_001/selection_log.jsonl": [
+        2316142,
+        1794716145930955900
+      ],
+      "runs/main/B5_seed42/round_001/train_set.json": [
+        7228,
+        1794716145930955900
+      ],
+      "runs/main/B5_seed42/round_002/selection_log.jsonl": [
+        2315865,
+        1794716145939281600
+      ],
+      "runs/main/B5_seed42/round_002/train_set.json": [
+        7263,
+        1794716145941282200
+      ],
+      "runs/main/B5_seed42/S1/adapter/adapter_config.json": [
+        1207,
+        1794716145661160400
+      ],
+      "runs/main/B5_seed42/S1/adapter/chat_template.jinja": [
+        2561,
+        1794716145661160400
+      ],
+      "runs/main/B5_seed42/S1/adapter/README.md": [
+        5412,
+        1794716145660163200
+      ],
+      "runs/main/B5_seed42/S1/adapter/tokenizer.json": [
+        12179335,
+        1794716145719094200
+      ],
+      "runs/main/B5_seed42/S1/adapter/tokenizer_config.json": [
+        724,
+        1794716145720094600
+      ],
+      "runs/main/B5_seed42/S1/adapter/train_log.json": [
+        7000,
+        1794716145721093600
+      ],
+      "runs/main/B5_seed42/S1/eval_dev.jsonl": [
+        475090,
+        1794716145723095400
+      ],
+      "runs/main/B5_seed42/S1/eval_dev.summary.json": [
+        2427,
+        1794716145723095400
+      ],
+      "runs/main/B5_seed42/S1/eval_test.jsonl": [
+        1260365,
+        1794716145729139600
+      ],
+      "runs/main/B5_seed42/S1/eval_test.summary.json": [
+        1164,
+        1794716145730140500
+      ],
+      "runs/main/B5_seed42/S1/learnability.jsonl": [
+        790951,
+        1794716145733854800
+      ],
+      "runs/main/B5_seed42/S1/learnability.summary.json": [
+        703,
+        1794716145733854800
+      ],
+      "runs/main/B5_seed42/S1/nll.jsonl": [
+        963848,
+        1794716145738855600
+      ],
+      "runs/main/B5_seed42/S1/nll.summary.json": [
+        775,
+        1794716145739855400
+      ],
+      "runs/main/B5_seed42/S2/adapter/adapter_config.json": [
+        1207,
+        1794716145741855300
+      ],
+      "runs/main/B5_seed42/S2/adapter/chat_template.jinja": [
+        2561,
+        1794716145742856100
+      ],
+      "runs/main/B5_seed42/S2/adapter/README.md": [
+        5412,
+        1794716145741855300
+      ],
+      "runs/main/B5_seed42/S2/adapter/tokenizer.json": [
+        12179335,
+        1794716145802821600
+      ],
+      "runs/main/B5_seed42/S2/adapter/tokenizer_config.json": [
+        724,
+        1794716145804964600
+      ],
+      "runs/main/B5_seed42/S2/adapter/train_log.json": [
+        7028,
+        1794716145807939600
+      ],
+      "runs/main/B5_seed42/S2/eval_dev.jsonl": [
+        494680,
+        1794716145811442800
+      ],
+      "runs/main/B5_seed42/S2/eval_dev.summary.json": [
+        2441,
+        1794716145811442800
+      ],
+      "runs/main/B5_seed42/S2/eval_test.jsonl": [
+        1334275,
+        1794716145822972400
+      ],
+      "runs/main/B5_seed42/S2/eval_test.summary.json": [
+        1167,
+        1794716145824047700
+      ],
+      "runs/main/B5_seed42/S2/learnability.jsonl": [
+        791007,
+        1794716145828052300
+      ],
+      "runs/main/B5_seed42/S2/learnability.summary.json": [
+        704,
+        1794716145829053300
+      ],
+      "runs/main/B5_seed42/S2/nll.jsonl": [
+        964023,
+        1794716145832051300
+      ],
+      "runs/main/B5_seed42/S2/nll.summary.json": [
+        775,
+        1794716145833055100
+      ],
+      "runs/main/B5_seed42/S3/adapter/adapter_config.json": [
+        1207,
+        1794716145835368700
+      ],
+      "runs/main/B5_seed42/S3/adapter/chat_template.jinja": [
+        2561,
+        1794716145835368700
+      ],
+      "runs/main/B5_seed42/S3/adapter/README.md": [
+        5412,
+        1794716145834368700
+      ],
+      "runs/main/B5_seed42/S3/adapter/tokenizer.json": [
+        12179335,
+        1794716145902175400
+      ],
+      "runs/main/B5_seed42/S3/adapter/tokenizer_config.json": [
+        724,
+        1794716145903681000
+      ],
+      "runs/main/B5_seed42/S3/adapter/train_log.json": [
+        7034,
+        1794716145905688100
+      ],
+      "runs/main/B5_seed42/S3/eval_dev.jsonl": [
+        488191,
+        1794716145906686200
+      ],
+      "runs/main/B5_seed42/S3/eval_dev.summary.json": [
+        2429,
+        1794716145906686200
+      ],
+      "runs/main/B5_seed42/S3/eval_test.jsonl": [
+        1308510,
+        1794716145915439600
+      ],
+      "runs/main/B5_seed42/S3/eval_test.summary.json": [
+        1169,
+        1794716145918441600
+      ],
+      "runs/main/log_seed13.txt": [
+        505373,
+        1794716145971839200
+      ],
+      "runs/main/log_seed2026.txt": [
+        462411,
+        1794716145977364500
+      ],
+      "runs/main/log_seed42.txt": [
+        463071,
+        1794716145979364800
+      ],
+      "runs/main/main.zip": [
+        99221246,
+        1794832718025366700
+      ],
+      "runs/main/S0/.done/eval_dev_S0.json": [
+        221,
+        1794716145942787800
+      ],
+      "runs/main/S0/.done/eval_test_S0.json": [
+        223,
+        1794716145943793300
+      ],
+      "runs/main/S0/.done/nll_S0.json": [
+        268,
+        1794716145944793000
+      ],
+      "runs/main/S0/eval_dev.jsonl": [
+        476971,
+        1794716145948796600
+      ],
+      "runs/main/S0/eval_dev.summary.json": [
+        2402,
+        1794716145948796600
+      ],
+      "runs/main/S0/eval_test.jsonl": [
+        1259656,
+        1794716145957324300
+      ],
+      "runs/main/S0/eval_test.summary.json": [
+        1108,
+        1794716145958328200
+      ],
+      "runs/main/S0/learnability.jsonl": [
+        790491,
+        1794716145961325900
+      ],
+      "runs/main/S0/learnability.summary.json": [
+        684,
+        1794716145962830300
+      ],
+      "runs/main/S0/nll.jsonl": [
+        919574,
+        1794716145968835300
+      ],
+      "runs/main/S0/nll.summary.json": [
+        719,
+        1794716145969837100
+      ],
+      "runs/main/timing.jsonl": [
+        16106,
+        1794716145980358300
+      ],
+      "reports/capability/capability_gap_audit.json": [
+        16399,
+        1794716141887907400
+      ],
+      "reports/capability/capability_gap_audit.md": [
+        817,
+        1794716141887907400
+      ],
+      "reports/capability/D1_2026-11-04_completion_report.md": [
+        10416,
+        1794716141882786900
+      ],
+      "reports/capability/d1_audit_v2/capability_artifact_audit.json": [
+        15278,
+        1794716141890907600
+      ],
+      "reports/capability/d1_audit_v2/capability_artifact_audit.md": [
+        2131,
+        1794716141891907100
+      ],
+      "reports/capability/d1_audit_v2/gold_record_inventory.csv": [
+        13929,
+        1794716141892907600
+      ],
+      "reports/capability/d1_audit_v2/gold_source_split_intersections.csv": [
+        342,
+        1794716141893415600
+      ],
+      "reports/capability/d1_audit_v2/source_capability_support.csv": [
+        741,
+        1794716141898421700
+      ],
+      "reports/capability/d1_audit_v2/split_capability_support.csv": [
+        672,
+        1794716141898421700
+      ],
+      "reports/capability/D2_2026-11-05_completion_report.md": [
+        9103,
+        1794716141882786900
+      ],
+      "reports/capability/d2_regression/baseline_error_analysis.jsonl": [
+        124354,
+        1794716141901446500
+      ],
+      "reports/capability/d2_regression/baseline_error_analysis.md": [
+        114897,
+        1794716141901446500
+      ],
+      "reports/capability/d2_regression/capability_metrics.csv": [
+        520,
+        1794716141902956500
+      ],
+      "reports/capability/d2_regression/d2_error_analysis_summary.md": [
+        10144,
+        1794716141903964800
+      ],
+      "reports/capability/d2_regression/extractor_baseline.json": [
+        2204,
+        1794716141904963300
+      ],
+      "reports/capability/d2_regression/extractor_evidence.jsonl": [
+        54730,
+        1794716141904963300
+      ],
+      "reports/capability/d2_regression/extractor_predictions.jsonl": [
+        14939,
+        1794716141905964000
+      ],
+      "reports/capability/d2_regression/gold_evaluation_input.jsonl": [
+        63726,
+        1794716141906963200
+      ],
+      "reports/capability/d2_regression/guideline_rules_review.md": [
+        7194,
+        1794716141907964100
+      ],
+      "reports/capability/d2_regression/regression_failure_analysis.md": [
+        2700,
+        1794716141907964100
+      ],
+      "reports/capability/d2_regression/regression_test_results.json": [
+        13790,
+        1794716141908962500
+      ],
+      "reports/capability/d3_audit/a2_validation_report.json": [
+        543,
+        1794716141908962500
+      ],
+      "reports/capability/d3_audit/adjudication_decisions.json": [
+        9616,
+        1794716141910307600
+      ],
+      "reports/capability/d3_audit/adjudication_evidence.csv": [
+        21883,
+        1794716141911307500
+      ],
+      "reports/capability/d3_audit/adjudication_final_ai.csv": [
+        29489,
+        1794716141911307500
+      ],
+      "reports/capability/d3_audit/adjudication_human_confirmed.csv": [
+        34701,
+        1794716141912818100
+      ],
+      "reports/capability/d3_audit/adjudication_human_review.csv": [
+        29863,
+        1794716141913825300
+      ],
+      "reports/capability/d3_audit/adjudication_proposals.csv": [
+        28871,
+        1794716141914825600
+      ],
+      "reports/capability/d3_audit/adjudication_queue.csv": [
+        16120,
+        1794716141914825600
+      ],
+      "reports/capability/d3_audit/adjudication_working.csv": [
+        16365,
+        1794716141915828600
+      ],
+      "reports/capability/d3_audit/agreement_supplement_25.json": [
+        6111,
+        1794716141915828600
+      ],
+      "reports/capability/d3_audit/d3_final_source_review.txt": [
+        36789,
+        1794716141916825800
+      ],
+      "reports/capability/d3_audit/d3_regression_source_review.txt": [
+        29643,
+        1794716141917828100
+      ],
+      "reports/capability/d3_audit/gold_vfinal_validation.json": [
+        710,
+        1794716141918825600
+      ],
+      "reports/capability/d3_audit/gold_vnext_validation.json": [
+        1516,
+        1794716141918825600
+      ],
+      "reports/capability/d3_audit/schema_validation.json": [
+        11070,
+        1794716141921827100
+      ],
+      "reports/capability/d3_audit/semantic_review_85.csv": [
+        63125,
+        1794716141922829500
+      ],
+      "reports/capability/d3_audit/semantic_review_85_completed.csv": [
+        63128,
+        1794716141925347000
+      ],
+      "reports/capability/d3_audit/supplement_audit.csv": [
+        14638,
+        1794716141926343800
+      ],
+      "reports/capability/d3_audit/supplement_audit_summary.json": [
+        646,
+        1794716141927344100
+      ],
+      "reports/capability/D3_completion_report.md": [
+        7424,
+        1794716141883896900
+      ],
+      "reports/capability/d3_final_regression/capability_metrics.csv": [
+        511,
+        1794716141929343600
+      ],
+      "reports/capability/d3_final_regression/d2_vfinal_comparison.csv": [
+        2794,
+        1794716141930344900
+      ],
+      "reports/capability/d3_final_regression/d2_vfinal_comparison.json": [
+        10961,
+        1794716141931344600
+      ],
+      "reports/capability/d3_final_regression/D3_final_completion_report.md": [
+        8163,
+        1794716141928343800
+      ],
+      "reports/capability/d3_final_regression/error_analysis.csv": [
+        98804,
+        1794716141931344600
+      ],
+      "reports/capability/d3_final_regression/error_analysis_by_capability.csv": [
+        133,
+        1794716141932848800
+      ],
+      "reports/capability/d3_final_regression/extractor_evidence.jsonl": [
+        54730,
+        1794716141932848800
+      ],
+      "reports/capability/d3_final_regression/extractor_predictions.jsonl": [
+        14939,
+        1794716141933854900
+      ],
+      "reports/capability/d3_final_regression/extractor_vfinal_metrics.json": [
+        2272,
+        1794716141934858100
+      ],
+      "reports/capability/d3_final_regression/gold_evaluation_input.jsonl": [
+        63504,
+        1794716141935854800
+      ],
+      "reports/capability/d3_final_regression/priority_error_review.csv": [
+        99533,
+        1794716141935854800
+      ],
+      "reports/capability/d3_final_regression/priority_error_review_annotated.csv": [
+        100836,
+        1794716141936852800
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_01.csv": [
+        14244,
+        1794716141937853700
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_02.csv": [
+        13099,
+        1794716141939855100
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_03.csv": [
+        11778,
+        1794716141940855000
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_04.csv": [
+        14328,
+        1794716141941861700
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_05.csv": [
+        17811,
+        1794716141942854200
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_06.csv": [
+        18052,
+        1794716141947140900
+      ],
+      "reports/capability/d3_final_regression/review_batches/priority_review_batch_07.csv": [
+        13132,
+        1794716141948141000
+      ],
+      "reports/capability/D3_next_steps_2026-11-09.md": [
+        2333,
+        1794716141886913500
+      ],
+      "reports/capability/d3_regression/capability_metrics.csv": [
+        511,
+        1794716141949142300
+      ],
+      "reports/capability/d3_regression/d2_d3_comparison.csv": [
+        2783,
+        1794716141950144500
+      ],
+      "reports/capability/d3_regression/d2_d3_comparison.json": [
+        10274,
+        1794716141951144800
+      ],
+      "reports/capability/d3_regression/error_analysis.csv": [
+        98804,
+        1794716141952140500
+      ],
+      "reports/capability/d3_regression/error_analysis_by_capability.csv": [
+        133,
+        1794716141952140500
+      ],
+      "reports/capability/d3_regression/error_analysis_summary.md": [
+        1022,
+        1794716141953141000
+      ],
+      "reports/capability/d3_regression/extractor_evidence.jsonl": [
+        54730,
+        1794716141954650400
+      ],
+      "reports/capability/d3_regression/extractor_predictions.jsonl": [
+        14939,
+        1794716141954650400
+      ],
+      "reports/capability/d3_regression/extractor_vnext_metrics.json": [
+        2255,
+        1794716141955650500
+      ],
+      "reports/capability/d3_regression/gold_evaluation_input.jsonl": [
+        63504,
+        1794716141955650500
+      ],
+      "reports/capability/d3_regression/priority_error_review.csv": [
+        98505,
+        1794716141956650200
+      ],
+      "reports/capability/d3_regression/priority_error_review_annotated.csv": [
+        99808,
+        1794716141957649600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/capability_metrics.csv": [
+        1503,
+        1794900953335526300
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/capability_metrics.jsonl": [
+        3014,
+        1794900953335526300
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/checkpoint_lineage.json": [
+        1917,
+        1794900953340548800
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/input_fingerprint.json": [
+        1077,
+        1794900953346106900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/prediction_coverage_report.json": [
+        574,
+        1794900953336528000
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900953505595600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/capability_metrics.csv": [
+        1519,
+        1794900953912296600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/capability_metrics.jsonl": [
+        3030,
+        1794900953913296100
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/checkpoint_lineage.json": [
+        1917,
+        1794900953914799700
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/input_fingerprint.json": [
+        1077,
+        1794900953915804900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/prediction_coverage_report.json": [
+        574,
+        1794900953914799700
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900954012149300
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/capability_metrics.csv": [
+        1505,
+        1794900954403334400
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/capability_metrics.jsonl": [
+        3016,
+        1794900954404841400
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/checkpoint_lineage.json": [
+        1917,
+        1794900954405846300
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/input_fingerprint.json": [
+        1077,
+        1794900954406846900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/prediction_coverage_report.json": [
+        574,
+        1794900954405846300
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed13_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900954458331500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/capability_metrics.csv": [
+        1556,
+        1794900956845063600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/capability_metrics.jsonl": [
+        3067,
+        1794900956846204500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/checkpoint_lineage.json": [
+        1933,
+        1794900956847204400
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/input_fingerprint.json": [
+        1077,
+        1794900956848224200
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/prediction_coverage_report.json": [
+        574,
+        1794900956846204500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S1/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900956889448000
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/capability_metrics.csv": [
+        1562,
+        1794900957261165600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/capability_metrics.jsonl": [
+        3073,
+        1794900957262166900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/checkpoint_lineage.json": [
+        1933,
+        1794900957263168500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/input_fingerprint.json": [
+        1077,
+        1794900957264676000
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/prediction_coverage_report.json": [
+        574,
+        1794900957263168500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S2/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900957300363500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/capability_metrics.csv": [
+        1532,
+        1794900957713685600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/capability_metrics.jsonl": [
+        3043,
+        1794900957716867200
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/checkpoint_lineage.json": [
+        1933,
+        1794900957719885800
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/input_fingerprint.json": [
+        1077,
+        1794900957720871800
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/prediction_coverage_report.json": [
+        574,
+        1794900957717866000
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed2026_S3/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900957812159600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/capability_metrics.csv": [
+        1517,
+        1794900955013264600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/capability_metrics.jsonl": [
+        3028,
+        1794900955013264600
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/checkpoint_lineage.json": [
+        1917,
+        1794900955018816200
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/input_fingerprint.json": [
+        1077,
+        1794900955020804500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/prediction_coverage_report.json": [
+        574,
+        1794900955016817500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900955188499400
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/capability_metrics.csv": [
+        1501,
+        1794900955552139200
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/capability_metrics.jsonl": [
+        3012,
+        1794900955554660700
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/checkpoint_lineage.json": [
+        1917,
+        1794900955557687900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/input_fingerprint.json": [
+        1077,
+        1794900955560689000
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/prediction_coverage_report.json": [
+        574,
+        1794900955555686900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900955649592100
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/capability_metrics.csv": [
+        1518,
+        1794900956304147800
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/capability_metrics.jsonl": [
+        3029,
+        1794900956304147800
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/checkpoint_lineage.json": [
+        1917,
+        1794900956309188500
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/input_fingerprint.json": [
+        1077,
+        1794900956310200700
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/prediction_coverage_report.json": [
+        574,
+        1794900956307195900
+      ],
+      "reports/capability/g5_9_historical_20261117/B2_seed42_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900956441774100
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/capability_metrics.csv": [
+        1519,
+        1794900958411994100
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/capability_metrics.jsonl": [
+        3030,
+        1794900958413008300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/checkpoint_lineage.json": [
+        1917,
+        1794900958413989400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/input_fingerprint.json": [
+        1077,
+        1794900958414974300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/prediction_coverage_report.json": [
+        574,
+        1794900958413989400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900958555232500
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/capability_metrics.csv": [
+        1499,
+        1794900958880412100
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/capability_metrics.jsonl": [
+        3010,
+        1794900958881443700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/checkpoint_lineage.json": [
+        1917,
+        1794900958883437800
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/input_fingerprint.json": [
+        1077,
+        1794900958883437800
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/prediction_coverage_report.json": [
+        574,
+        1794900958882418400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900958973762400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/capability_metrics.csv": [
+        1524,
+        1794900959700783700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/capability_metrics.jsonl": [
+        3035,
+        1794900959701776900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/checkpoint_lineage.json": [
+        1917,
+        1794900959703777700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/input_fingerprint.json": [
+        1077,
+        1794900959704739300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/prediction_coverage_report.json": [
+        574,
+        1794900959702777000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed13_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900959795078400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/capability_metrics.csv": [
+        1560,
+        1794900961684816300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/capability_metrics.jsonl": [
+        3071,
+        1794900961686304500
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/checkpoint_lineage.json": [
+        1933,
+        1794900961688315400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/input_fingerprint.json": [
+        1077,
+        1794900961688315400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/prediction_coverage_report.json": [
+        574,
+        1794900961687316500
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S1/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900961733472200
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/capability_metrics.csv": [
+        1533,
+        1794900962329679900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/capability_metrics.jsonl": [
+        3044,
+        1794900962331188600
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/checkpoint_lineage.json": [
+        1933,
+        1794900962333197300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/input_fingerprint.json": [
+        1077,
+        1794900962333197300
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/prediction_coverage_report.json": [
+        574,
+        1794900962332200400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S2/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900962402054900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/capability_metrics.csv": [
+        1545,
+        1794900962956764400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/capability_metrics.jsonl": [
+        3056,
+        1794900962956764400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/checkpoint_lineage.json": [
+        1933,
+        1794900962958708700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/input_fingerprint.json": [
+        1077,
+        1794900962958708700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/prediction_coverage_report.json": [
+        574,
+        1794900962957760100
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed2026_S3/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900963030625500
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/capability_metrics.csv": [
+        1515,
+        1794900960047219900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/capability_metrics.jsonl": [
+        3026,
+        1794900960050452000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/checkpoint_lineage.json": [
+        1917,
+        1794900960051835900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/input_fingerprint.json": [
+        1077,
+        1794900960053290000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/prediction_coverage_report.json": [
+        574,
+        1794900960051835900
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900960126107600
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/capability_metrics.csv": [
+        1511,
+        1794900960553257000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/capability_metrics.jsonl": [
+        3022,
+        1794900960553257000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/checkpoint_lineage.json": [
+        1917,
+        1794900960561784600
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/input_fingerprint.json": [
+        1077,
+        1794900960561784600
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/prediction_coverage_report.json": [
+        574,
+        1794900960560788800
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900960809327700
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/capability_metrics.csv": [
+        1504,
+        1794900961181743200
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/capability_metrics.jsonl": [
+        3015,
+        1794900961182743000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/checkpoint_lineage.json": [
+        1917,
+        1794900961184745400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/input_fingerprint.json": [
+        1077,
+        1794900961184745400
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/prediction_coverage_report.json": [
+        574,
+        1794900961183743000
+      ],
+      "reports/capability/g5_9_historical_20261117/B3_seed42_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900961219589800
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/capability_metrics.csv": [
+        1519,
+        1794900963501231900
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/capability_metrics.jsonl": [
+        3030,
+        1794900963502243600
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/checkpoint_lineage.json": [
+        1917,
+        1794900963503243400
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/input_fingerprint.json": [
+        1077,
+        1794900963503766600
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/prediction_coverage_report.json": [
+        574,
+        1794900963503243400
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900963544072700
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/capability_metrics.csv": [
+        1501,
+        1794900963878989700
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/capability_metrics.jsonl": [
+        3012,
+        1794900963879988200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/checkpoint_lineage.json": [
+        1917,
+        1794900963885031000
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/input_fingerprint.json": [
+        1077,
+        1794900963885539100
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/prediction_coverage_report.json": [
+        574,
+        1794900963884038700
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed13_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900963940146400
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/capability_metrics.csv": [
+        1544,
+        1794900965598032800
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/capability_metrics.jsonl": [
+        3055,
+        1794900965599033000
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/checkpoint_lineage.json": [
+        1933,
+        1794900965606186300
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/input_fingerprint.json": [
+        1077,
+        1794900965607192500
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/prediction_coverage_report.json": [
+        574,
+        1794900965605061800
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S2/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900965743105400
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/capability_metrics.csv": [
+        1548,
+        1794900966499896300
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/capability_metrics.jsonl": [
+        3059,
+        1794900966500896900
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/checkpoint_lineage.json": [
+        1933,
+        1794900966502896200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/input_fingerprint.json": [
+        1077,
+        1794900966503895800
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/prediction_coverage_report.json": [
+        574,
+        1794900966501895700
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed2026_S3/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900966578919200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/capability_metrics.csv": [
+        1507,
+        1794900964154844600
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/capability_metrics.jsonl": [
+        3018,
+        1794900964156001800
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/checkpoint_lineage.json": [
+        1917,
+        1794900964157899200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/input_fingerprint.json": [
+        1077,
+        1794900964157899200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/prediction_coverage_report.json": [
+        574,
+        1794900964156900200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900964215663500
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/capability_metrics.csv": [
+        1520,
+        1794902765090293000
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/capability_metrics.jsonl": [
+        3031,
+        1794902765090293000
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/checkpoint_lineage.json": [
+        1917,
+        1794902765092307200
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/input_fingerprint.json": [
+        1077,
+        1794902765093300400
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/prediction_coverage_report.json": [
+        574,
+        1794902765091301300
+      ],
+      "reports/capability/g5_9_historical_20261117/B4_seed42_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794902765109954800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/capability_metrics.csv": [
+        1514,
+        1794900967047146200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/capability_metrics.jsonl": [
+        3025,
+        1794900967048145500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/checkpoint_lineage.json": [
+        1917,
+        1794900967050148200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/input_fingerprint.json": [
+        1077,
+        1794900967050148200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/prediction_coverage_report.json": [
+        574,
+        1794900967049146700
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900967095921300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/capability_metrics.csv": [
+        1505,
+        1794900967724869200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/capability_metrics.jsonl": [
+        3016,
+        1794900967725994500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/checkpoint_lineage.json": [
+        1917,
+        1794900967727485500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/input_fingerprint.json": [
+        1077,
+        1794900967727485500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/prediction_coverage_report.json": [
+        574,
+        1794900967725994500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900967762733800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/capability_metrics.csv": [
+        1504,
+        1794900968456052300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/capability_metrics.jsonl": [
+        3015,
+        1794900968456052300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/checkpoint_lineage.json": [
+        1917,
+        1794900968461609100
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/input_fingerprint.json": [
+        1077,
+        1794900968462593200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/prediction_coverage_report.json": [
+        574,
+        1794900968460600000
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed13_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900968527776300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/capability_metrics.csv": [
+        1549,
+        1794900971158581400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/capability_metrics.jsonl": [
+        3060,
+        1794900971164304600
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/checkpoint_lineage.json": [
+        1933,
+        1794900971166724400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/input_fingerprint.json": [
+        1077,
+        1794900971168757100
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/prediction_coverage_report.json": [
+        574,
+        1794900971165687200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S1/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900971311498800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/capability_metrics.csv": [
+        1565,
+        1794900971648880200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/capability_metrics.jsonl": [
+        3076,
+        1794900971652886800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/checkpoint_lineage.json": [
+        1933,
+        1794900971658305500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/input_fingerprint.json": [
+        1077,
+        1794900971661305900
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/prediction_coverage_report.json": [
+        574,
+        1794900971656305900
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S2/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900971777127400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/capability_metrics.csv": [
+        1561,
+        1794900972234028400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/capability_metrics.jsonl": [
+        3072,
+        1794900972234028400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/checkpoint_lineage.json": [
+        1933,
+        1794900972236538800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/input_fingerprint.json": [
+        1077,
+        1794900972238036900
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/prediction_coverage_report.json": [
+        574,
+        1794900972235532900
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed2026_S3/student_capability_evaluation_manifest.json": [
+        2328,
+        1794900972275143800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/capability_metrics.csv": [
+        1507,
+        1794900969454872200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/capability_metrics.jsonl": [
+        3018,
+        1794900969454872200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/checkpoint_lineage.json": [
+        1917,
+        1794900969459353300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/input_fingerprint.json": [
+        1077,
+        1794900969461910500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/prediction_coverage_report.json": [
+        574,
+        1794900969457374600
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S1/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900969625231600
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/capability_metrics.csv": [
+        1519,
+        1794900970239667300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/capability_metrics.jsonl": [
+        3030,
+        1794900970239667300
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/checkpoint_lineage.json": [
+        1917,
+        1794900970242652500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/input_fingerprint.json": [
+        1077,
+        1794900970242652500
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/prediction_coverage_report.json": [
+        574,
+        1794900970241678900
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S2/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900970359491200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/capability_metrics.csv": [
+        1489,
+        1794900970759359800
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/capability_metrics.jsonl": [
+        3000,
+        1794900970760360400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/checkpoint_lineage.json": [
+        1917,
+        1794900970761865200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/input_fingerprint.json": [
+        1077,
+        1794900970761865200
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/prediction_coverage_report.json": [
+        574,
+        1794900970760360400
+      ],
+      "reports/capability/g5_9_historical_20261117/B5_seed42_S3/student_capability_evaluation_manifest.json": [
+        2324,
+        1794900970799108000
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/capability_metrics.csv": [
+        1636,
+        1794896773354854900
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/capability_metrics.jsonl": [
+        3147,
+        1794896773354854900
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/checkpoint_lineage.json": [
+        1095,
+        1794896773355864800
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/input_fingerprint.json": [
+        724,
+        1794896773357337300
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/prediction_coverage_report.json": [
+        574,
+        1794896773355864800
+      ],
+      "reports/capability/g5_9_real_data_s0/SHARED_seed0_S0/student_capability_evaluation_manifest.json": [
+        1976,
+        1794896773531004200
+      ],
+      "reports/capability/legacy_p1_seed13_b4/artifact_manifest.json": [
+        9536,
+        1794716196629948800
+      ],
+      "reports/capability/legacy_p1_seed13_b4/capability_graph.json": [
+        712,
+        1794716196630949300
+      ],
+      "reports/capability/legacy_p1_seed13_b4/capability_learning_curves.csv": [
+        3081,
+        1794716196630949300
+      ],
+      "reports/capability/legacy_p1_seed13_b4/graph_evidence_ledger.csv": [
+        14714,
+        1794716196634993100
+      ],
+      "reports/capability/legacy_p1_seed13_b4/input_schema_audit.txt": [
+        79022,
+        1794716196635994100
+      ],
+      "reports/capability/legacy_p1_seed13_b4/student_learning_dynamics.md": [
+        5646,
+        1794716196636998200
+      ],
+      "reports/capability/p1_gold_audit_2026-11-14/gold_inventory.json": [
+        11379,
+        1794814770817621800
+      ],
+      "reports/capability/p1_gold_audit_2026-11-14/gold_review_queue.csv": [
+        39294,
+        1794814770443161200
+      ],
+      "reports/capability/p1_gold_audit_2026-11-14/p1_gold_audit.md": [
+        3156,
+        1794814770819620800
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/capability_metrics.csv": [
+        1386,
+        1794843315959792400
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/capability_metrics.jsonl": [
+        2897,
+        1794843315961817400
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/checkpoint_lineage.json": [
+        1418,
+        1794843315973358900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/input_fingerprint.json": [
+        987,
+        1794843315977913900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/prediction_coverage_report.json": [
+        574,
+        1794843315968365100
+      ],
+      "reports/capability_g4_validation/B4_seed13_S1/student_capability_evaluation_manifest.json": [
+        2233,
+        1794843316151393400
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/capability_metrics.csv": [
+        1400,
+        1794843317420009100
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/capability_metrics.jsonl": [
+        2911,
+        1794843317423584700
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/checkpoint_lineage.json": [
+        1418,
+        1794843317429173500
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/input_fingerprint.json": [
+        987,
+        1794843317430152200
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/prediction_coverage_report.json": [
+        574,
+        1794843317427172900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S2/student_capability_evaluation_manifest.json": [
+        2233,
+        1794843317605952900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/capability_metrics.csv": [
+        1417,
+        1794843319470452400
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/capability_metrics.jsonl": [
+        2928,
+        1794843319471455200
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/checkpoint_lineage.json": [
+        1418,
+        1794843319472790900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/input_fingerprint.json": [
+        987,
+        1794843319472790900
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/prediction_coverage_report.json": [
+        574,
+        1794843319471455200
+      ],
+      "reports/capability_g4_validation/B4_seed13_S3/student_capability_evaluation_manifest.json": [
+        2233,
+        1794843319524029600
+      ],
+      "runs/p1p2_integration/P1P2_seed13/round_001/selection_log.jsonl": [
+        2365442,
+        1794919507541141200
+      ],
+      "runs/p1p2_integration/P1P2_seed13/round_001/train_set.json": [
+        8205,
+        1794919507539140900
+      ],
+      "reports/p1p2_integration/derived_predictions/B4_seed13/adapter_manifest.json": [
+        2815,
+        1794821629598987700
+      ],
+      "reports/p1p2_integration/derived_predictions/B4_seed13/eval_student_ckpt_001_dev_status.jsonl": [
+        589014,
+        1794821628788774200
+      ],
+      "reports/p1p2_integration/derived_predictions/B4_seed13/eval_student_ckpt_002_dev_status.jsonl": [
+        587266,
+        1794821629339671700
+      ],
+      "reports/p1p2_integration/derived_predictions/B4_seed13/eval_student_ckpt_003_dev_status.jsonl": [
+        563240,
+        1794821629375888400
+      ]
+    },
+    "anchor_sha256": {
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_tokens.jsonl": "5d3dbf340e64832384e8fdbc5166913ccf88c22d68e27078ed98b903b4c62933",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\splits\\d_dev_ids.txt": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\gold_vfinal_manifest.json": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\supplement_annotations_vfinal.jsonl": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_releases\\vFinal_2026-11-16\\gold_supplement_85_approved_review.csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\source_review\\s0_base_model_reference.json": "77cc61ad0f35586c6ad0a688b9515a84ad79912bd149aa4e9fe9be5c37d6548e",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\main\\S0\\eval_dev.jsonl": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\capability\\g5_9_real_data_s0\\SHARED_seed0_S0": "6dae2ad1648a18a8fd8fc6e268968d5d6215e0f9afa618b9783bd3417b2b1ede",
+      "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001": "63d36641d233e42ada11fcc67111c322efcaec6572cf24097c0b3dc5b44c5391"
+    }
+  },
+  "dry_run_report": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794971503344688700.json",
+  "dry_run_sha256": "f171cffd9d84b32453d2829999da763f8c49795a408afe1b406f7cb716a4ba89"
+}

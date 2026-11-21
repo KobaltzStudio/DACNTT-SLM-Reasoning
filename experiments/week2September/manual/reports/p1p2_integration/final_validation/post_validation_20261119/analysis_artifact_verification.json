@@ -1,0 +1,77 @@
+{
+  "g6": {
+    "status": "PARTIAL",
+    "valid": 39,
+    "logical": 37,
+    "exact_duplicate": 0,
+    "alternate_provenance": 2,
+    "seed13_metric_rows": 63,
+    "missing": [
+      {
+        "method": "P1-DEFICIT",
+        "checkpoint": "S2"
+      },
+      {
+        "method": "P1-DEFICIT",
+        "checkpoint": "S3"
+      },
+      {
+        "method": "P1P2",
+        "checkpoint": "S2"
+      },
+      {
+        "method": "P1P2",
+        "checkpoint": "S3"
+      }
+    ]
+  },
+  "g7": {
+    "status": "PARTIAL",
+    "observations": 9,
+    "denominator": 415,
+    "s1_scores": {
+      "B4": 324,
+      "B5": 349,
+      "P1-DEFICIT": 347,
+      "P1P2": 340
+    },
+    "alias_sha_match": false,
+    "split_ids_sha256": "c08527e9c90181d2a35e037dc314fe17d8681aaf5ae57b7d6ee041ed014b6508",
+    "split_manifest_sha256": "526b76686b5ee7dc55771ba12e245f02fd21f0ca647484e23c19a6f629925e2f"
+  },
+  "g8": {
+    "status": "PARTIAL",
+    "figure_count": 7,
+    "source_input_files_rehashed": 38,
+    "new_vs_previous_output_bytes_identical": {
+      "capability_makeup_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "capability_mastery_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "learnability_distribution_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "p1_capability_learning_curves_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "selection_composition_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "selection_jaccard_seed13": {
+        ".csv": true,
+        ".png": true
+      },
+      "student_accuracy_seed13": {
+        ".csv": true,
+        ".png": true
+      }
+    }
+  }
+}

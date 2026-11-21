@@ -1,0 +1,309 @@
+{
+  "updated_utc": "2026-11-18T14:59:09.483411+00:00",
+  "items": [
+    {
+      "id": "Source audit",
+      "status": "DONE",
+      "completed": "Verified source bytes match earlier 88-test baseline",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\preflight_provenance.json",
+      "exit_code": 0,
+      "sha256": "c62ab129cfa0d2322e07fb1a38718ac0df7d91343b25f494e24c4e2497109206",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Shared S0",
+      "status": "DONE",
+      "completed": "Shared S0 capability state validated by exact Run A preflight",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794971503344688700.json",
+      "exit_code": 0,
+      "sha256": "f171cffd9d84b32453d2829999da763f8c49795a408afe1b406f7cb716a4ba89",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Gold/split",
+      "status": "DONE",
+      "completed": "Frozen Gold and D_dev inputs validated",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794971503344688700.json",
+      "exit_code": 0,
+      "sha256": "f171cffd9d84b32453d2829999da763f8c49795a408afe1b406f7cb716a4ba89",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Controller",
+      "status": "DONE",
+      "completed": "Synthetic runtime S1 to S3 verified",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\runtime_integration_validation.json",
+      "exit_code": 0,
+      "sha256": "f580de60497aaf2cc49f578f51514aaff3de2da8d5046fe1dcef63ffbd5f801c",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Unified CLI",
+      "status": "DONE",
+      "completed": "CLI and dry-run verified",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\test_execution_log.md",
+      "exit_code": 0,
+      "sha256": "a8ab644654600821723376fbb47a61fbd259e6d779783ecba77dc90fd47fffd2",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Post-evaluation hook",
+      "status": "DONE",
+      "completed": "Real hook executed on fixtures",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\runtime_integration_validation.json",
+      "exit_code": 0,
+      "sha256": "f580de60497aaf2cc49f578f51514aaff3de2da8d5046fe1dcef63ffbd5f801c",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Runtime tests",
+      "status": "DONE",
+      "completed": "91 tests passed on reviewed final source",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\final_qa_tests.log",
+      "sha256": "65044dda61cb113a744b732c48590fc761d8a4bb7c59f406ecd49af6cf951ea1",
+      "exit_code": 0,
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "Resume/no-overwrite",
+      "status": "DONE",
+      "completed": "Safe retry and verified fixture reuse",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\resume_no_overwrite_validation.json",
+      "exit_code": 0,
+      "sha256": "9d4939e1352924a1516fb710fe4ba72924da57fd012fb527406b5c62a7cc3387",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "LoRA smoke",
+      "status": "DONE",
+      "completed": "One real BF16 LoRA optimizer step, save, reload and inference",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\lora_smoke_test_report.json",
+      "exit_code": 0,
+      "sha256": "c8504b9e7795da6a215b4d565f6c70a8c19d3808f361140721192a313d6fd312",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Dry-run P1-DEFICIT",
+      "status": "DONE",
+      "completed": "Three rounds, D_dev only, full hook CLI, no NLL",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794971503344688700.json",
+      "exit_code": 0,
+      "sha256": "f171cffd9d84b32453d2829999da763f8c49795a408afe1b406f7cb716a4ba89",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Dry-run P1P2",
+      "status": "DONE",
+      "completed": "22 validated stages",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\integration_tests\\dry_run_1794970648339461400.json",
+      "exit_code": 0,
+      "sha256": "8d6c3cbfc04d30a1d57d447b0ac96ba22cda3ab74cc3b0e8eb4a0ca4bb27b8ee",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Max-length preflight",
+      "status": "DONE",
+      "completed": "Eight 1024-token samples, one BF16 LoRA step at effective batch 8",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\max_length_probe.json",
+      "exit_code": 0,
+      "sha256": "fb344af5e307a5cabe40cb0a73f0ead960a70cb10929c4ab6d4a42a3435d568c",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Run A S1",
+      "status": "DONE",
+      "completed": "Real training, D_dev, hook, state and parent lineage verified",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\S1_audit.json",
+      "exit_code": 0,
+      "sha256": "76e125c710aedfd93ef93b0d164e5d7d332c1983a880bdf83ef1ca142c18f7f4",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Run A S2",
+      "status": "PARTIAL",
+      "completed": "Controlled stop; 26 training steps, 75/500 prediction rows",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_a_stopped_verification.md",
+      "sha256": "f54ed0bfc74db8513fe1416d70f3d20b49416b0e222a5ec0b555160fd62dce9e",
+      "exit_code": 1,
+      "remaining_work": "Separate approval for evaluation resume",
+      "next_action": "Separate approval for evaluation resume",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "Run A S3",
+      "status": "NOT RUN",
+      "completed": "No production validation in this task yet",
+      "evidence": null,
+      "exit_code": null,
+      "sha256": null,
+      "remaining_work": "Train, evaluate and audit",
+      "next_action": "",
+      "phase": "run_a_task"
+    },
+    {
+      "id": "Run B S1",
+      "status": "DONE",
+      "completed": "LoRA, D_dev 81.2%, Gold sidecar and next state verified",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\run_b_seed13_s1_validation.json",
+      "sha256": "3a3790dbc7dbbe0e52ca6449315a95fb6389ac04831ad2a275c865fa17346aa2",
+      "exit_code": 0,
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "Run B S2",
+      "status": "NOT RUN",
+      "completed": "Outside current authorization",
+      "evidence": null,
+      "exit_code": null,
+      "sha256": null,
+      "remaining_work": "Separate authorization",
+      "next_action": "Stop after Run A",
+      "phase": "prior_task"
+    },
+    {
+      "id": "Run B S3",
+      "status": "NOT RUN",
+      "completed": "Outside current authorization",
+      "evidence": null,
+      "exit_code": null,
+      "sha256": null,
+      "remaining_work": "Separate authorization",
+      "next_action": "Stop after Run A",
+      "phase": "prior_task"
+    },
+    {
+      "id": "G6",
+      "status": "PARTIAL",
+      "completed": "39 raw and 37 logical sidecars",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g6\\g6_partial_learning_dynamics_seed13.json",
+      "sha256": "fee23b7b543fc49fae111abba169cd2f7c11e247e59477340b1ef99404881712",
+      "exit_code": 4,
+      "remaining_work": "Complete missing S2/S3 sidecars",
+      "next_action": "Complete missing S2/S3 sidecars",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "G7",
+      "status": "PARTIAL",
+      "completed": "9 observed checkpoint scores, 415 verified IDs each",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_b_s1_20261118_091644\\g7\\checkpoint_selection_seed13_partial.json",
+      "sha256": "47e859b90973406e0c9c9780d6da8383fe7726912ccc2385561115b3339c53b0",
+      "exit_code": 0,
+      "remaining_work": "Both integrated method series still lack S2/S3",
+      "next_action": "Both integrated method series still lack S2/S3",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "G8",
+      "status": "PARTIAL",
+      "completed": "Seven real-data PNG/CSV pairs checked; gaps explicit at S2/S3",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\figures\\seed13_v2_1\\figure_manifest.json",
+      "sha256": "44805aa33aee94fe4f34b4605b4a218217c1b9430dc90b9863814da121203167",
+      "exit_code": 4,
+      "remaining_work": "Complete S2/S3 before full regeneration",
+      "next_action": "Complete S2/S3 before full regeneration",
+      "phase": "controlled_run_b_s1"
+    },
+    {
+      "id": "G9",
+      "status": "DELEGATED",
+      "completed": "Local handoff documented; RunPod not executed",
+      "evidence": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\runtime_20261118_024353_resume\\runpod_portability_audit.md",
+      "exit_code": null,
+      "sha256": "411717fbe1e22417a1b3133163f783dfd6376cf35cdc35303f6e76a2fff9e0f3",
+      "remaining_work": "",
+      "next_action": "",
+      "phase": "prior_task"
+    }
+  ],
+  "checkpoints": [
+    {
+      "checkpoint": "S1",
+      "status": "DONE",
+      "exit_code": 0,
+      "run_log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\final_validation\\run_a_20261118_030748\\S1_controller.log",
+      "train_seconds": 280.0,
+      "train_final_loss": 0.13701814237292906,
+      "peak_gpu_allocated_gib": 4.27,
+      "peak_gpu_reserved_bytes": 8069840896,
+      "d_dev_strict_accuracy": 0.832,
+      "eval_seconds": 19622.0,
+      "parent": "student_ckpt_000",
+      "parent_sha256": null,
+      "adapter_load_evidence": "SafeTensors header inspected and D_dev evaluation with this adapter succeeded",
+      "resume": "No pending controller actions",
+      "lineage": "verified",
+      "protected_inputs": "verified",
+      "artifacts": {
+        "adapter": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001",
+          "sha256": "8399305cfbb35587db44139428b29ca797d6c3c4bd59354512a129e0db960cdd"
+        },
+        "adapter_weights": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001\\adapter_model.safetensors",
+          "sha256": "ab3b7c4eea7236802004d336e8878fc2e609b321794faf1eec6d2f355f4701c0"
+        },
+        "prediction": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\S1\\eval_dev.jsonl",
+          "sha256": "f16e52ecebb9ffd659614f929ccff202e359e453efd5e9656d94256a7ce7152e"
+        },
+        "sidecar": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_sidecars\\P1-DEFICIT_seed13_S1",
+          "sha256": "34675be5051a98173fadc2d5f8811060c3956d347e42fa2c2e7667e9429ddef7"
+        },
+        "sidecar_manifest": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_sidecars\\P1-DEFICIT_seed13_S1\\student_capability_evaluation_manifest.json",
+          "sha256": "0095757a9c213a5b90104514e6101c7fcfb82edad770b2ad163d9625ffed1985"
+        },
+        "train_set": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\train_set.json",
+          "sha256": "ae9f00120e885b588b7cf8119b4fcdd716c12ecbe8a483c7661d32880610f08d"
+        },
+        "selection_log": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\round_001\\selection_log.jsonl",
+          "sha256": "9421cd039f032cec113e1f18d9490b4247777c00759109431ff5dddbf71cda7c"
+        },
+        "capability_state": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\capability_state\\P1-DEFICIT_seed13\\selection_round_002.json",
+          "sha256": "d853019cac6abaf3c648ac598c6a696eb75101ba735a6e3be3cbcec72bdba8b4"
+        },
+        "train_log": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\P1-DEFICIT_seed13\\student_ckpt_001\\train_log.json",
+          "sha256": "6d1f5dc1a57a430305cec142c6c7e6b03188d0114c882772d9cc34eeede4b934"
+        },
+        "summary": {
+          "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\runs\\p1p2_integration\\P1-DEFICIT_seed13\\S1\\eval_dev.summary.json",
+          "sha256": "0bfb30228ef8c3d1123a5b797c136cc9691bc06a72e0553400aa411bfa86f803"
+        }
+      }
+    }
+  ]
+}

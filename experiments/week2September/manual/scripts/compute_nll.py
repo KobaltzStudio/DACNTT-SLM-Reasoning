@@ -59,6 +59,9 @@ def main():
         pool = pool[: args.limit]
 
     tok = load_tokenizer(model_name, revision)
+    from capability_eval import hash_path
+
+    adapter_sha256 = hash_path(Path(args.adapter)) if args.adapter else None
     model = load_model(model_name, revision, dtype, adapter=args.adapter)
     examples = [encode_example(tok, r["question"], r["raw_generation"], add_eos=False) for r in pool]
 
@@ -96,6 +99,7 @@ def main():
     elapsed = time.time() - t0
     write_json(args.out.with_suffix(".summary.json"), {
         "checkpoint": args.tag, "adapter": args.adapter, "model": model_name, "revision": revision,
+        "adapter_sha256": adapter_sha256,
         "dtype": str(dtype).replace("torch.", ""), "n_trajectories": len(examples),
         "pool": str(args.pool), "pool_sha256": sha256_file(args.pool),
         "forward_passes": len(examples), "elapsed_seconds": round(elapsed, 1),

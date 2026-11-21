@@ -1,0 +1,54 @@
+## codex/controller-dryrun-fix
+ M scripts/build_capability_learning_dynamics.py
+ M scripts/capability_eval.py
+ M scripts/compute_nll.py
+ M scripts/p1p2_artifact_manager.py
+ M scripts/p1p2_capability_state.py
+ M scripts/p1p2_controller.py
+ M scripts/run_p1p2_post_eval.py
+ M scripts/train_round.py
+ M tests/test_p1p2_artifact_manager.py
+ M tests/test_p1p2_controller.py
+ M tests/test_p1p2_no_overwrite.py
+?? models/p1p2_integration/P1-DEFICIT_seed13/
+?? models/p1p2_integration/P1P2_seed13/
+?? reports/p1p2_integration/capability_sidecars/
+?? reports/p1p2_integration/capability_state/P1-DEFICIT_seed13/selection_round_002.json
+?? reports/p1p2_integration/capability_state/P1P2_seed13/selection_round_002.json
+?? reports/p1p2_integration/final_validation/controller_b4_b5_seed13_inventory.json
+?? reports/p1p2_integration/final_validation/controller_handoff_seed13.md
+?? reports/p1p2_integration/final_validation/figures/
+?? reports/p1p2_integration/final_validation/final_local_20261119_004529/
+?? reports/p1p2_integration/final_validation/p1p2_master_progress_seed13.json
+?? reports/p1p2_integration/final_validation/p1p2_master_progress_seed13.md
+?? reports/p1p2_integration/final_validation/post_validation_20261119/
+?? reports/p1p2_integration/final_validation/run_a_20261118_030748/
+?? reports/p1p2_integration/final_validation/run_b_s1_20261118_091644/
+?? reports/p1p2_integration/final_validation/runtime_20261118_024353_resume/
+?? reports/p1p2_integration/integration_tests/controller_validation_seed13.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968343514224500.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968344115527400.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968344755101900.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968563559893300.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968564361474400.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794968565235096100.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970512235114800.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970512866620300.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970513591621700.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970647621778200.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970648339461400.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794970649235678000.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794971503344688700.json
+?? reports/p1p2_integration/integration_tests/dry_run_1794993603194562700.json
+?? reports/p1p2_integration/session_recovery/
+?? runs/p1p2_integration/P1-DEFICIT_seed13/S1/
+?? runs/p1p2_integration/P1-DEFICIT_seed13/S2/
+?? runs/p1p2_integration/P1-DEFICIT_seed13/checkpoint_log.jsonl
+?? runs/p1p2_integration/P1-DEFICIT_seed13/round_002/
+?? runs/p1p2_integration/P1P2_seed13/S1/
+?? runs/p1p2_integration/P1P2_seed13/checkpoint_log.jsonl
+?? scripts/build_p1p2_analysis_figures.py
+?? scripts/p1p2_paths.py
+?? scripts/select_checkpoint_on_dev.py
+?? tests/test_p1p2_analysis.py
+?? tests/test_p1p2_runtime.py

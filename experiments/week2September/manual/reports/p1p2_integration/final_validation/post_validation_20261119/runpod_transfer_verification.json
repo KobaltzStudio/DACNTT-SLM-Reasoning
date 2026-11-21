@@ -1,0 +1,109 @@
+{
+  "utc": "2026-11-18T15:24:19.254337+00:00",
+  "prior_entries": 582,
+  "prior_unchanged_sha256": 572,
+  "updated_source_sha256": {
+    "scripts/build_capability_learning_dynamics.py": {
+      "previous": "86a91078126415fab460570c26358f0954866a8bb45b417488083f3bdd364468",
+      "current": "55695d2e6f9bb118ee6ca448ff08f3c7426f844a7d414de4619199c8917b3fcd"
+    },
+    "scripts/capability_eval.py": {
+      "previous": "34bd941657131476748ad34e392086cf5b8259105f264c90fbe798a737925cfb",
+      "current": "e28216575be7e6834090ac665909cc7974ab41aecb0ea6c01b29815c20afe8f1"
+    },
+    "scripts/p1p2_artifact_manager.py": {
+      "previous": "595922be866268f27382ae05d479bbc29cd72e93c0031c1d93058a1e025a3f8f",
+      "current": "3f0193580e4e9468fcdc2a6eec1a2d577b9f149bf9096b0105a458a9781762bd"
+    },
+    "scripts/p1p2_controller.py": {
+      "previous": "539181a31df7268bc640a65de5ad18303f977543ad8998a4ed822748a9265eba",
+      "current": "d1b42b8fe054732fa5aed3300d40d7f3646ac88eaf6eed0d44fb2fbea93e0337"
+    },
+    "scripts/run_p1p2_post_eval.py": {
+      "previous": "8893a3e932ed97c729928ae74838b500af929fe9d2a0ad8c18685896d14f0993",
+      "current": "c68fa9fb19c9747593dc168ba009e539bcdffea026a78281dee6a81efdac2f51"
+    },
+    "scripts/select_checkpoint_on_dev.py": {
+      "previous": "68c45010d10568e983b2746be0b1a7d5e8a2f03283ac476f1ad2a88f583faa04",
+      "current": "69096a07d02ce8c7e7b2e4ca3687924c31e867bff42593324e8ccfb8a4ac419b"
+    },
+    "scripts/train_round.py": {
+      "previous": "0b9ef7970dae0a86ed4a085019c1ca69c094fbecb2239089b08b24fb275216a8",
+      "current": "7deb1b5a13ec17fc3b57a5a4b34fa26d92a4efd31872b5955576b55f1322a5b3"
+    },
+    "tests/test_p1p2_analysis.py": {
+      "previous": "8cd919f9d02fa7ecab0449b3bee250efbd7a594024cd5a3502b654394fe7135c",
+      "current": "a5f43839519aac65daf3e283848b8546b6548bb67ba8068b0f03f4e1f3a3ba71"
+    },
+    "tests/test_p1p2_artifact_manager.py": {
+      "previous": "6dc3938c8bc411b36ba741cf0df5bfe522bed7c87becacac9185a8bdf0a38dc5",
+      "current": "cee45500746f2aaf262f3c91d5133ffa4d4c1cd1608cf83662cfa6ee63e3bbed"
+    },
+    "tests/test_p1p2_runtime.py": {
+      "previous": "40db317996ebcf5aa943d7e47603830e3ddb9ae340aaa86c8a4383221e6a1592",
+      "current": "fbeb9f5a0fbcd39d678e74d6a7cde7f7c0a329440e74e62de64499ac62ecf830"
+    }
+  },
+  "staging_files": 616,
+  "additional_files": [
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed13_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed2026_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B2_seed42_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed13_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed2026_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B3_seed42_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed13_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed13_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed2026_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed2026_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed42_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B4_seed42_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed13_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed2026_S3.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S1.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S2.json",
+    "reports/p1p2_integration/historical_g59_inputs/run_20261117_073550_117070/checkpoint_references/B5_seed42_S3.json",
+    "scripts/p1p2_paths.py"
+  ],
+  "total_bytes": 315441169,
+  "p2_auxiliary_files": 22,
+  "p2_auxiliary_bytes": 256053270,
+  "path_occurrences": 226,
+  "path_status": {
+    "PRESENT": 220,
+    "OUTSIDE_MAPPED_ROOT": 6
+  },
+  "requirements_lock": {
+    "path": "P2/requirements-lock.txt",
+    "sha256": "3d7a37d59288c6cb0b5c2b589634881794d74e9d0e7e976a1866b87aa3520f25"
+  },
+  "python_windows": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "dependency_versions_windows": {
+    "torch": "2.13.0+cu126",
+    "transformers": "5.15.0",
+    "peft": "0.20.0",
+    "accelerate": "1.14.0",
+    "PyYAML": "6.0.3",
+    "safetensors": "0.8.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.4.6",
+    "datasets": "5.0.1",
+    "huggingface-hub": "1.27.0"
+  }
+}

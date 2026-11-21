@@ -21,6 +21,16 @@ class ArtifactManagerTests(unittest.TestCase):
             path.write_bytes(b"abc")
             self.assertEqual(manager.sha256_file(path), hashlib.sha256(b"abc").hexdigest())
 
+    def test_directory_digest_preserves_the_windows_order_on_any_host(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_bytes(b"metadata")
+            (root / "adapter_config.json").write_bytes(b"config")
+            digest = hashlib.sha256()
+            for name, content in (("adapter_config.json", b"config"), ("README.md", b"metadata")):
+                digest.update(name.encode() + b"\0" + hashlib.sha256(content).hexdigest().encode() + b"\n")
+            self.assertEqual(manager.hash_path(root), digest.hexdigest())
+
     def test_canonical_json_is_key_order_independent(self):
         self.assertEqual(manager.sha256_json({"a": 1, "b": 2}), manager.sha256_json({"b": 2, "a": 1}))
 

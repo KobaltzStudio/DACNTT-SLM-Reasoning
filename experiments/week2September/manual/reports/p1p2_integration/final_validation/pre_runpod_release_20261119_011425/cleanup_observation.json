@@ -1,0 +1,15 @@
+{
+  "prior_inventory_count": 4919,
+  "recount_same_scope": 4919,
+  "added_since_snapshot": [],
+  "removed_since_snapshot": [],
+  "zip_count": 65,
+  "verified_zip_sha": 65,
+  "manual_members_verified": 735,
+  "bytecode_candidates": 213,
+  "bytecode_bytes": 2356666,
+  "prior_reference_files": 596,
+  "same_reference_still_observed": 596,
+  "prior_reference_changes": [],
+  "original_actions": 0
+}

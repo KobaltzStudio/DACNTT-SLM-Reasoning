@@ -1,0 +1,10 @@
+﻿{
+    "active_controller_processes":  [
+
+                                    ],
+    "gpu":  [
+                "name, memory.total [MiB], memory.free [MiB], utilization.gpu [%]",
+                "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB, 6136 MiB, 1 %"
+            ],
+    "at":  "2026-11-18T23:54:13.6528448+09:00"
+}
