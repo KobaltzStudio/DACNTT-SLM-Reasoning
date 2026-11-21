@@ -4,6 +4,11 @@ Deterministic trajectory-level capability extractor.
 
 Supports plain-text and common LaTeX arithmetic in Teacher reasoning traces.
 Predictions are rule-based and include auditable evidence.
+
+--source reasoning (default, as evaluated in Task 4): reasoning_trace + " ANSWER " + answer.
+--source raw: the whole Teacher output (raw_generation), i.e. the text the Student is trained on;
+  used for the Task 6 pool because some outputs solve the problem before "REASONING:" and keep
+  only a verbal summary after it (task6_decisions.md, "Kết quả chạy").
 """
 import argparse
 import json
@@ -135,7 +140,7 @@ def extract_capabilities(text, compiled_rules):
             rules_fired[capability] = fired
     return predictions, evidence, rules_fired
 
-def process_record(record, compiled_rules):
+def process_record(record, compiled_rules, source="reasoning"):
     problem_id = record.get("problem_id") or record.get("question_id")
     raw_tid = record.get("trajectory_id")
     if isinstance(raw_tid, int):
@@ -151,6 +156,8 @@ def process_record(record, compiled_rules):
         source_text = problem
     elif answer:
         source_text = f"{source_text} ANSWER {answer}"
+    if source == "raw":
+        source_text = record["raw_generation"]
 
     capabilities, evidence, rules_fired = extract_capabilities(source_text, compiled_rules)
     return {
@@ -169,6 +176,8 @@ def main():
     parser.add_argument("--rules", type=Path,
                         default=Path(__file__).resolve().parents[1] /
                                 "config" / "capability_rules_v1.json")
+    parser.add_argument("--source", choices=["reasoning", "raw"], default="reasoning",
+                        help="text to extract from: reasoning_trace + answer (Task 4) or raw_generation")
     args = parser.parse_args()
     rule_data = json.loads(args.rules.read_text(encoding="utf-8"))
     compiled_rules = compile_rules(rule_data)
@@ -187,7 +196,7 @@ def main():
                 raise ValueError(
                     f"Missing problem_id/trajectory_id (or legacy question_id/trajectory_id) at line {line_no}"
                 )
-            result = process_record(record, compiled_rules)
+            result = process_record(record, compiled_rules, args.source)
             fout.write(json.dumps(result, ensure_ascii=False) + "\n")
             n += 1
     print(f"Extracted: {n} trajectories")

@@ -1,12 +1,13 @@
 # Analysis Plan (Proposal 2: Dynamic Learnability-Aware CoT Distillation)
 
-Trạng thái: **FROZEN v1** (2026-10-14, không còn TBD). Đề xuất [ĐX #I1, I2, I6, I7, I8] đã được nhóm chốt; [ĐX #I3, I4, I5] là giá trị tạm, chờ smoke test. Thay đổi sau freeze phải tạo version mới kèm lý do.
-Ngày: 2026-10-14.
+Trạng thái: **FROZEN v2** (2026-11-01), đi cùng `config/experiment_config.json` v2, chốt trước mọi lần chạy chính. Thay đổi so với v1 và lý do: `task7_decisions.md` [T7-x]; bản v1 lưu ở `analysis_plan_v1.md`. I4 (b = 7) vẫn tạm. Thay đổi sau freeze phải tạo version mới kèm lý do.
+Ngày: 2026-11-01 (v1: 2026-10-14).
 
 Nguồn:
 - [README CŨ §x]: `readme.md` gốc trước commit 3f7dce4 (`git show 3f7dce4^:readme.md`), trích nguyên văn ở `config/proposal2_full_protocol.md`. Nhóm đã xác nhận các định nghĩa này còn hiệu lực (2026-10-14).
 - [QĐ #x]: `task5_decisions.md` mục A–G (nhóm chốt).
 - [ĐX #Ix]: `task5_decisions.md` mục I (đề xuất có lập luận).
+- [T7-x]: `task7_decisions.md`.
 - Tham số cụ thể: `config/experiment_config.json`.
 
 ## 1. Giả thuyết
@@ -46,7 +47,7 @@ Ghi log theo `schemas/selection_log_schema.json`.
 **L_proxy** [README CŨ §9.1(a)]:
 - ℓ(τ | S_t) = −(1/|τ|) Σ log p_{S_t}(τ_i | x, τ_<i)
 - L_proxy(τ | S_t) = exp(−(ℓ − ℓ*_t)² / (2σ_t²))
-- ℓ*_t = median, σ_t = IQR / 1.349 của ℓ trên pool eligible tại S_t [QĐ #18]. Quy tắc cố định; chỉ giá trị tính lại mỗi checkpoint.
+- ℓ*_t = median, σ_t = IQR / 1.349 của ℓ trên tập tham chiếu tại S_t [QĐ #18, T7-3]: các trajectory eligible chưa được train trong lần chạy đó (tại S_0 là toàn bộ eligible). L_proxy vẫn tính cho mọi trajectory eligible. Quy tắc cố định; chỉ giá trị tính lại mỗi checkpoint.
 - Chỉ chấm trajectory đã verify.
 
 **L_emp** [README CŨ §9.1(b)]:
@@ -63,13 +64,13 @@ Mọi phương pháp dùng chung pool, lịch checkpoint, budget và seed [READM
 | B0 | Không train | - | S_0 | bắt buộc |
 | B1 | Toàn pool | - | mọi trajectory verify (tham chiếu, tốn hơn) | nếu đủ tài nguyên |
 | B2 | Random | mỗi vòng | ngẫu nhiên, cùng budget | bắt buộc |
-| B3 | Heuristic | 1 lần | trajectory đúng ngắn nhất mỗi bài [QĐ #24] | bắt buộc |
-| B4 | Static learnability | 1 lần tại S_0 | L_proxy(τ \| S_0) | bắt buộc |
+| B3 | Heuristic | 1 lần, đi tiếp theo thứ tự qua các vòng [T7-2] | trajectory đúng ngắn nhất mỗi bài [QĐ #24] | bắt buộc |
+| B4 | Static learnability | xếp hạng 1 lần tại S_0, đi tiếp theo thứ hạng qua các vòng [T7-1] | L_proxy(τ \| S_0) | bắt buộc |
 | B5 | Dynamic learnability | mỗi checkpoint | L_proxy(τ \| S_t) | bắt buộc |
 | B6 | Dynamic + bottleneck | mỗi checkpoint | L_proxy · [α·1{c*_t ∈ C(τ)} + (1−α)·cov(τ)] | nếu đủ tài nguyên |
 | - | Ablation: dynamic với điểm bị xáo trộn | mỗi checkpoint | L_proxy xáo trộn | nên có |
 
-Ràng buộc chọn [README CŨ §16.1, QĐ #20–23]: n_cap = 1; được chọn lại qua các vòng; hòa điểm theo trajectory_id; lấp đầy tới beta_round token.
+Ràng buộc chọn [README CŨ §16.1, QĐ #20–23]: n_cap = 1; được chọn lại qua các vòng (B2, B5, ablation); hòa điểm theo trajectory_id; lấp đầy tới beta_round token. B3 và B4 không lặp trajectory: mỗi vòng đi tiếp từ chỗ vòng trước dừng; trajectory bị n_cap bỏ qua trong một vòng vẫn còn cho vòng sau [T7-1, T7-2].
 Retention quota r = 50% [QĐ #21; TiC-LM α_t = 1/2], **chỉ áp dụng cho B6** [ĐX #I7], để B4, B5 và ablation chỉ khác nhau ở tín hiệu learnability.
 Budget: beta_round = 45.426 token response/vòng (n_round = 200 × L̄ = 227.13), tổng 136.278; token prompt bị mask khỏi loss và không tính vào budget [ĐX #I2, #I3]. B1 là ngoại lệ (toàn pool, không cùng budget).
 Train: LoRA r16/α32 trên mọi lớp linear, dropout 0.1, AdamW, lr 2e-4 cố định, batch 8, 1 epoch/vòng, completion-only loss, tiếp tục cùng adapter qua các vòng [QĐ #14, ĐX #I5].
@@ -81,7 +82,8 @@ So sánh phụ: B4 vs B3 (nhìn vào Student có lợi hơn heuristic không), B
 
 [README CŨ §10.1]
 - **Chính:** exact-match accuracy trên D_test.
-- **Phụ:** accuracy theo capability trên D_dev; tỉ lệ trích được đáp án; độ dài output trung bình của Student.
+- **Phụ:** accuracy chấm nới [T7-5]; accuracy theo capability trên D_dev; tỉ lệ trích được đáp án; độ dài output trung bình của Student.
+- **Accuracy chấm nới:** số cuối cùng ở bất kỳ đâu trong output khớp đáp án, bỏ qua định dạng (`answer_utils.answers_match`, như `eval_student.py`). Luôn báo cáo cùng accuracy chặt và tỉ lệ đúng định dạng. McNemar và CI qua seed cho B5 vs B4 trên chỉ số này là phân tích phụ, không thay kết luận chính; nếu hai chỉ số ngược nhau thì báo cáo cả hai. Đọc thủ công nhóm `invalid_format` có `lenient_correct = True` trên D_test tại S_0 và S_3 (tối đa 100 trường hợp mỗi checkpoint) để ước lượng tỉ lệ đúng nhầm.
 - **Dynamic learnability:** Spearman ρ giữa L(·|S_t) và L(·|S_{t+1}); Jaccard(B_t, B_{t+1}); tỉ lệ trajectory vào/ra dải learnability; phân loại profile (tăng/giảm/ổn định/không đơn điệu) theo ε.
 - **Hiệu quả:** accuracy D_test theo cumulative training tokens và diện tích dưới đường cong; beta_est (số forward pass để tính lại L_proxy).
 
@@ -94,8 +96,12 @@ Pre-registration [README CŨ §19.1]: chốt trước khi chạy metric chính (
 
 - **Trong một seed:** McNemar trên đúng/sai theo từng bài (paired) [QĐ #30].
 - **Qua các seed:** trung bình chênh lệch paired, kèm 95% CI; training seeds [13, 42, 2026] dùng chung cho mọi phương pháp [QĐ #16]. Kết luận phải nhất quán qua các seed, không chỉ ở trung bình.
-- **Tolerance ε cho "xấp xỉ bằng"** [README CŨ §19.1]: đo L cho cùng checkpoint hai lần (khác training seed hoặc subsample pool), tính ρ_noise test-retest và độ lệch chuẩn theo trajectory; ε = nửa độ rộng 95% của nhiễu đo. Một thay đổi |L(τ|S_{t+1}) − L(τ|S_t)| chỉ tính là thật nếu > ε.
-- **Kiểm định H:** Wilcoxon signed-rank cho thay đổi theo trajectory giữa các checkpoint; H chỉ được ủng hộ nếu ρ(L_t, L_{t+1}) thấp hơn có ý nghĩa so với ρ_noise (không chỉ thấp hơn 1).
+- **Phép đo lặp** [T7-6]: các lần chạy B4 của ba training seed (cùng dữ liệu, khác seed; phải kiểm tra selection log trùng nhau). U = các trajectory chưa được train trong B4 tính đến checkpoint sau của cặp đang xét.
+- **Tolerance ε cho "xấp xỉ bằng"** [README CŨ §19.1, T7-6]: ε = phân vị 95% của |L(τ|S_1^a) − L(τ|S_1^b)| trên U, gộp mọi cặp seed. Báo cáo kèm 2,77·s_w (Bland & Altman) và CI bootstrap theo bài. Một thay đổi |L(τ|S_{t+1}) − L(τ|S_t)| chỉ tính là vượt nhiễu nếu > ε; báo cáo tỉ lệ vượt ε so với mốc 5%. Phân loại profile theo từng trajectory chỉ mang tính mô tả.
+- **Kiểm định H** [T7-4, T7-7]: cho S_0→S_1 và S_1→S_2, trên B4. ρ_change^a = Spearman(L|S_t^a, L|S_{t+1}^a); ρ_noise^a = trung bình Spearman(L|S_{t+1}^a, L|S_{t+1}^b), b ≠ a; Δ^a = ρ_noise^a − ρ_change^a, tính trên U. Suy luận bằng bootstrap theo cụm `problem_id`, 10.000 lần, seed 363636, cùng mẫu cho mọi seed. H được ủng hộ ở một cặp khi **mọi** seed có cận dưới một phía 95% của Δ^a > 0 và Δ^a ≥ 0,05 (quy ước của nhóm, không có nguồn).
+- **Thang đo quyết định** [T7-7]: L_proxy. Δ trên thứ hạng ℓ báo cáo kèm CI. Nếu L_proxy đạt mà ℓ không đạt thì chỉ kết luận "thứ hạng theo khoảng cách tới trung vị thay đổi", không kết luận learnability của trajectory thay đổi.
+- **Mô tả và độ nhạy:** Wilcoxon signed-rank kèm effect size chỉ để mô tả. Độ nhạy: mốc √ρ_noise ở S_0→S_1; kiểm định Steiger; U bỏ các bài có trajectory đã train; lặp lại trên B2. Bootstrap chỉ phản ánh lấy mẫu bài toán; về seed chỉ có 3 giá trị.
+- **Độ nhạy của việc chọn với nhiễu:** Jaccard giữa tập chọn vòng 2 của B5 ở các seed, so với mức ngẫu nhiên khoảng 0,02 [T7-8].
 - **Proxy validity:** Spearman giữa L_proxy trung bình theo nhóm và L_emp, kèm bootstrap CI.
 - **Nhiều so sánh:** Holm-Bonferroni qua các baseline và các phân tích theo capability.
 - **Báo cáo:** effect size và CI đi kèm p-value.

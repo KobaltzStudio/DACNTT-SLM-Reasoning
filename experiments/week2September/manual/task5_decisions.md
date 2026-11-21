@@ -3,6 +3,7 @@
 Ngày: 2026-10-14.
 Phạm vi: các quyết định cần chốt trước khi freeze (`task5_todo.txt`).
 Trạng thái: config v1 không còn TBD (`--frozen` PASS). Thay đổi sau freeze phải tạo config version mới kèm lý do.
+Cập nhật 2026-10-20: smoke test xong, I3 và I5 đã chốt, I4 giữ tạm (mục J). Đo Teacher trên D_dev: giữ cặp 3B → 1.5B (mục K).
 
 Nhãn nguồn:
 - [README CŨ]: lấy từ `readme.md` gốc trước commit 3f7dce4 (`git show 3f7dce4^:readme.md`), có ghi mục.
@@ -144,6 +145,8 @@ Trạng thái duyệt (nhóm, 2026-10-14):
 |---|---|
 | I1, I2, I6, I7, I8 | **ĐÃ CHỐT** |
 | I3, I4, I5 | **CHƯA CHỐT, chờ smoke test** trên D_dev (README.txt mục 0, Task 5 "Còn lại"). Giá trị dưới đây là giá trị tạm trong config v1; nếu smoke test cho kết quả khác thì đổi bằng config v2 kèm lý do, trước thí nghiệm chính |
+| I3, I5 | **ĐÃ CHỐT sau smoke test** (2026-10-20), giữ nguyên giá trị config v1. Xem mục J |
+| I4 | **TẠM**, smoke test không kiểm tra; chốt khi đo L_emp (`Task.md` mục 2.2). Xem mục J |
 
 Các giá trị dưới đây đã điền vào `config/experiment_config.json` để config không còn TBD (`validate_experiment_config.py --frozen`: PASS).
 
@@ -156,19 +159,19 @@ Các giá trị dưới đây đã điền vào `config/experiment_config.json` 
 - README cũ §11.1 chọn token làm đơn vị vì "a count-based budget silently gives long trajectories more training exposure". Exposure là số token được học (có gradient); token prompt không có gradient khi train completion-only.
 - Prompt gần như giống nhau giữa các trajectory của cùng bài, nên nếu đếm prompt thì budget phạt các phương pháp chọn nhiều bài khác nhau, không liên quan tới độ dài lời giải.
 
-**I3 [CHỜ SMOKE TEST]. n_round, beta_round (#12)** → n_round = 200; beta_round = round(200 × 227.13) = **45.426** token response/vòng; tổng 3 vòng 136.278. Yêu cầu kèm theo: pool chính thức ở Task 6 phải phủ **≥ 1000 bài**.
+**I3 [ĐÃ CHỐT SAU SMOKE TEST, mục J]. n_round, beta_round (#12)** → n_round = 200; beta_round = round(200 × 227.13) = **45.426** token response/vòng; tổng 3 vòng 136.278. Yêu cầu kèm theo: pool chính thức ở Task 6 phải phủ **≥ 1000 bài**.
 - Ràng buộc nhóm đã chốt (#12): pool ≥ 3–5 × n_round. Với n_cap = 1, số trajectory chọn được mỗi vòng ≤ số bài. Pool sơ bộ 98 bài chỉ cho n_round ≤ 32 (khoảng 7.300 token/vòng), quá nhỏ để thấy khác biệt giữa các phương pháp, nên dù chọn số nào Task 6 cũng phải mở rộng pool.
 - Chi phí lớn nhất của thí nghiệm là **eval**, không phải train: 4 phương pháp × 3 seed × 4 checkpoint × (500 dev + 1319 test) ≈ 87.000 lần sinh greedy ≤ 512 token. Train 136K token/run là rẻ. Sinh pool 1000 bài × K=5 = 5.000 lần sinh, cũng nhỏ so với eval. Vì vậy tăng n_round không làm thí nghiệm đắt hơn đáng kể; giới hạn thực tế là kích thước pool.
 - Chọn hệ số 5× (cận trên của 3–5×) để mỗi vòng chỉ chọn 20% số bài, selection có nhiều lựa chọn.
 - L̄ cố định từ pool sơ bộ (227.13, đã hash). Nếu pool chính thức có L̄ khác, beta_round vẫn giữ nguyên số đã freeze.
 - Rủi ro: 600 trajectory sau 3 vòng có thể vẫn làm accuracy thay đổi ít. Nếu smoke test cho thấy vậy, phải đổi bằng config v2 kèm lý do **trước** khi chạy thí nghiệm chính, không đổi sau khi thấy kết quả.
 
-**I4 [CHỜ SMOKE TEST]. Probe budget b (#13)** → nhóm G = 50 trajectory (cận trên khoảng 20–50 của README cũ §9.1(b)); 5 nhóm theo ngũ phân vị độ dài token tại S_0, lấy mẫu với seed 363636; **b = ceil(50/8) = 7 step** (1 epoch).
+**I4 [TẠM, chốt ở `Task.md` 2.2, mục J]. Probe budget b (#13)** → nhóm G = 50 trajectory (cận trên khoảng 20–50 của README cũ §9.1(b)); 5 nhóm theo ngũ phân vị độ dài token tại S_0, lấy mẫu với seed 363636; **b = ceil(50/8) = 7 step** (1 epoch).
 - L_emp dùng để kiểm tra L_proxy có dự đoán được mức học trong **chính chế độ train của thí nghiệm** không. Chế độ đó là 1 epoch/vòng, batch 8, cùng lr. Train probe nhiều epoch hơn sẽ đo một chế độ khác (dễ overfit nhóm 50 trajectory).
 - Rủi ro: tín hiệu có thể nhỏ hơn nhiễu, khi đó kiểm tra proxy validity cho kết quả không kết luận được. README cũ §19 yêu cầu giữ lại kết quả null.
 - Thay cho giá trị "thử từ 50 step" ở #13: 50 step × batch 8 = 400 lượt trên nhóm 50 trajectory = 8 epoch.
 
-**I5 [CHỜ SMOKE TEST]. Hyperparameters (#14)**: giữ r=16, alpha=32, lr 2e-4, 1 epoch/vòng, max_seq_len 1024 (nhóm đã chốt, #14), thêm:
+**I5 [ĐÃ CHỐT SAU SMOKE TEST, mục J]. Hyperparameters (#14)**: giữ r=16, alpha=32, lr 2e-4, 1 epoch/vòng, max_seq_len 1024 (nhóm đã chốt, #14), thêm:
 | Tham số | Giá trị | Lý do |
 |---|---|---|
 | target modules | q,k,v,o,gate,up,down_proj (mọi lớp linear trừ lm_head; tên lấy từ config Qwen2.5-1.5B @989aa79) | QLoRA: "LoRA on all linear transformer block layers are required to match full finetuning performance" |
@@ -191,6 +194,72 @@ Các giá trị dưới đây đã điền vào `config/experiment_config.json` 
 
 **I8 [ĐÃ CHỐT]. Khôi phục protocol (#32)** → `config/proposal2_full_protocol.md`: trích **nguyên văn** các mục §5.1, §9, §10.1, §11.1, §13.1–13.2, §16.1–16.2, §19–19.1 từ `3f7dce4^:readme.md`; đã diff, khớp 100%. Đầu file ghi nguồn và lệnh tái tạo.
 
+## J. Sau smoke test (2026-10-20)
+
+Báo cáo đầy đủ: `reports/task5/smoke_test_report.md`. Dữ liệu: `reports/task5/smoke_test/results/`.
+
+Smoke test chạy trên Colab (Tesla T4, bf16, không dùng QLoRA như dự kiến ở #15), config v1 (SHA-256 `ba200e09…`), Student `Qwen2.5-1.5B-Instruct` @989aa79, 1 vòng LoRA trên 200 trajectory chọn ngẫu nhiên từ pool sơ bộ (bỏ `n_cap`), seed 13 và 42, đánh giá trên D_dev 500 câu [TÍNH]:
+
+| | Seed 13 | Seed 42 |
+|---|---|---|
+| Accuracy S_0 → S_1 | 0,712 → 0,830 (+11,8 điểm %) | 0,712 → 0,818 (+10,6 điểm %) |
+| McNemar p | 5,7e-8 | 8,0e-7 |
+| Accuracy lỏng (exploratory) | 0,762 → 0,830 | 0,762 → 0,830 |
+| Loss đầu → cuối | 0,225 → 0,189 | 0,235 → 0,208 |
+
+Quyết định theo ngưỡng đã chốt trước (≥ 2 điểm % hoặc McNemar p < 0,1): **`keep`**, không tạo config v2.
+
+**I3 → ĐÃ CHỐT.** Accuracy tăng rõ ở cả hai seed sau 1 vòng với `n_round = 200`, nên rủi ro "accuracy thay đổi ít" ghi ở I3 không xảy ra. Giữ `n_round = 200`, `beta_round = 45.426`. Điều kiện pool ≥ 1000 bài (T6) vẫn giữ.
+
+**I5 → ĐÃ CHỐT.** Loss giảm ổn định, không dao động, hai seed lệch nhau 1,2 điểm %. Giữ r = 16, alpha = 32, lr 2e-4, batch 8, 1 epoch và các tham số bổ sung trong bảng I5.
+
+**I4 → GIỮ TẠM.** Smoke test không chạy probe L_emp nên b = 7 chưa được kiểm tra. Số liệu smoke test cho thấy hai rủi ro [SUY RA]:
+- 25 step trên 200 trajectory cho khoảng +11 điểm %; nếu tỉ lệ thuận, 7 step trên 50 trajectory chỉ khoảng +3 điểm %, mà hai seed đã lệch nhau 1,2 điểm %. Khác biệt giữa 5 nhóm có thể nhỏ hơn nhiễu.
+- Tại S_0 có 8,4% câu sai định dạng; probe ngắn trên nhóm nào cũng sửa định dạng trước, nên L_emp có thể chủ yếu đo việc học định dạng.
+
+Chốt I4 ở `Task.md` mục 2.2: chạy thử 1–2 nhóm probe trên D_dev, so với nhiễu giữa seed, rồi giữ b = 7 hoặc đổi qua config v2. Cân nhắc tính L_emp bằng accuracy lỏng. Thay thế mốc "b chốt sau smoke test" ở #13.
+
+**Ghi nhận thêm, cần đưa vào analysis plan hoặc config v2 trước thí nghiệm chính:**
+- Khoảng 40% mức tăng là do học định dạng (21/89 và 17/84 câu sai → đúng chỉ nhờ sửa định dạng). Đề xuất thêm accuracy lỏng làm metric phụ.
+- Nhóm trajectory đã huấn luyện giảm NLL gấp khoảng 2,5 lần nhóm chưa huấn luyện. Đề xuất phân tích H chính trên nhóm chưa được chọn huấn luyện (`Task.md` 2.4).
+- Chọn theo số lượng làm token thực tế lệch −2,6% đến +4,5% so với `beta_round`. Script chọn dữ liệu của thí nghiệm chính phải dừng theo ngân sách token (đúng I2).
+- ~~Chưa đo accuracy của Teacher trên D_dev~~. Đã đo 2026-10-20, xem mục K.
+
+## K. Trần accuracy: đo Teacher trên D_dev (2026-10-20)
+
+Báo cáo đầy đủ: `reports/task5/smoke_test_report.md` mục 4.3. Dữ liệu: `reports/task5/teacher_dev/`.
+
+Lý do: sau 1 vòng S_1 đã đạt 0,82–0,83. Nếu Teacher không hơn rõ thì vòng 2–3 đụng trần và B5, B4 khó tách nhau. Phải quyết định trước Task 6, vì sau khi sinh pool chính thức gần như không đổi được cặp mô hình.
+
+Quy tắc quyết định (đặt trước khi xem kết quả): Teacher − S_1 (accuracy chính thức, trung bình 2 seed của smoke test):
+- ≥ 5 điểm %: giữ cặp mô hình;
+- 2 đến 5 điểm %: nhóm thảo luận, xem thêm số câu Teacher đúng, S_1 sai;
+- < 2 điểm %: đổi Teacher (Qwen2.5-7B-Instruct hoặc Qwen2.5-Math-7B-Instruct) bằng config v2, chạy lại smoke test.
+
+Cách đo: `eval_student.py --model Qwen/Qwen2.5-3B-Instruct --revision aa8e725…` trên D_dev 500 câu, cùng prompt v1, greedy, tối đa 512 token và cùng `answer_utils.py` như khi đánh giá Student. Colab Tesla T4, bf16, khoảng 65 phút. Không sửa code, dùng lại bundle smoke test.
+
+Kết quả [TÍNH]:
+| | Accuracy | Accuracy lỏng | Đúng định dạng |
+|---|---|---|---|
+| Teacher 3B | 0,886 | 0,904 | 0,968 |
+| S_0 | 0,712 | 0,762 | 0,916 |
+| S_1 seed 13 / seed 42 | 0,830 / 0,818 | 0,830 / 0,830 | 0,996 / 0,966 |
+
+| | Teacher đúng, Student sai | Student đúng, Teacher sai | McNemar p |
+|---|---|---|---|
+| Teacher với S_0 | 104 | 17 | 2e-16 |
+| Teacher với S_1 seed 13 | 53 | 25 | 0,002 |
+| Teacher với S_1 seed 42 | 57 | 23 | 0,0002 |
+
+**Quyết định: GIỮ cặp Teacher Qwen2.5-3B-Instruct → Student Qwen2.5-1.5B-Instruct**, không tạo config v2. Teacher hơn S_1 trung bình 6,2 điểm % (7,4 điểm % theo accuracy lỏng), trên ngưỡng 5 điểm %.
+
+Rủi ro ghi nhận [SUY RA]:
+- Khoảng trống hẹp: một vòng đã thu hẹp khoảng 2/3 khoảng cách (17,4 → 6,2 điểm %), chỉ còn khoảng 55/500 câu Teacher đúng mà S_1 sai. Khác biệt B5 so với B4 có thể chỉ khoảng 1–2 điểm %. Phải nêu rủi ro này khi diễn giải kết quả chính, kể cả khi kết quả null.
+- Trần thực tế có thể cao hơn 0,886, vì Student học các trajectory đã chấm đúng trong K = 5 lần sinh ở T = 0,7, không phải lời giải greedy. Chưa đo tỉ lệ câu có ít nhất một trajectory đúng trên D_dev.
+- Phương án dự phòng (Teacher 7B) chỉ còn khả thi trước Task 6.
+
+Ghi nhận thêm (exploratory, `smoke_test_report.md` mục 4.2): trên 158 trajectory không được huấn luyện ở cả hai seed, Spearman của L_proxy giữa S_1 seed 13 và seed 42 là 0,855, còn giữa S_0 và S_1 là 0,62–0,69. Đây là tín hiệu sơ bộ ủng hộ H, không thay cho ρ_noise chính thức (`Task.md` 2.2).
+
 ## Còn mở
 
 Trạng thái 2026-10-14: config v1 hết TBD (`--frozen` PASS).
@@ -200,5 +269,8 @@ Trạng thái 2026-10-14: config v1 hết TBD (`--frozen` PASS).
 Còn lại:
 | # | Vấn đề | Ghi chú |
 |---|---|---|
-| I3, I4, I5 | Budget mỗi vòng, probe budget b, hyperparameters | Chờ smoke test trên D_dev |
+| ~~I3, I5~~ | ~~Budget mỗi vòng, hyperparameters~~ | Đã chốt sau smoke test (2026-10-20, mục J) |
+| I4 | Probe budget b | Tạm b = 7; chốt khi đo L_emp (`Task.md` 2.2) |
+| ~~K~~ | ~~Trần accuracy, cặp Teacher/Student~~ | Giữ 3B → 1.5B (2026-10-20, mục K) |
+| AP | Cập nhật analysis plan trước thí nghiệm chính: accuracy lỏng, phân tích H trên nhóm chưa huấn luyện, chọn theo ngân sách token, cách đo ρ_noise | Mục J, K; tạo config v2 hoặc cập nhật `analysis_plan.md` trước `Task.md` 2.3 |
 | T6 | Task 6 phải tạo pool chính thức ≥ 1000 bài D_pool (điều kiện của I3) | Nếu không đủ tài nguyên: giảm n_round (sửa I3, config v2) |

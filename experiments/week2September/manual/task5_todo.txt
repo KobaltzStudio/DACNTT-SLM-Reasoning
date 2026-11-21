@@ -2,6 +2,8 @@ TASK 5: TODO (Freeze setup trước training: split, config, selection schema, a
 Ngày lập: 2026-10-13
 Trạng thái hiện tại (cập nhật 2026-10-14): FROZEN v1. Mọi artifact đủ; config --frozen PASS.
   Đã chốt: nguồn README cũ (#1), đề xuất I1, I2, I6, I7, I8. Còn: smoke test để chốt I3, I4, I5 (README.txt mục 0). Quyết định và kết quả: task5_decisions.md. Thay đổi: task5_changelog.txt.
+Cập nhật 2026-10-20: smoke test xong (keep, không config v2). I3, I5 đã chốt; I4 giữ tạm, chốt ở Task.md 2.2. Báo cáo: reports/task5/smoke_test_report.md.
+  Đã sửa status trong config (--frozen PASS) và tạo lại SHA256SUMS_task5.txt (33/33 OK).
 Nguồn yêu cầu: README.txt mục 5 (dòng ~394-414) và checklist 12.
 
 ======================================================================

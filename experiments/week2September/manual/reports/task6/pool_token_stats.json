@@ -1,0 +1,53 @@
+{
+  "pool": "trajectory/pool/pool_v1_verified.jsonl",
+  "student_tokenizer": "Qwen/Qwen2.5-1.5B-Instruct",
+  "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+  "n_problems": 1032,
+  "response_tokens": {
+    "n": 4353,
+    "sum": 1069804,
+    "mean": 245.76,
+    "median": 232,
+    "q1": 187.0,
+    "q3": 288.0,
+    "min": 79,
+    "max": 512
+  },
+  "total_tokens_with_prompt": {
+    "n": 4353,
+    "sum": 1637106,
+    "mean": 376.09,
+    "median": 361,
+    "q1": 309.0,
+    "q3": 427.0,
+    "min": 181,
+    "max": 698
+  },
+  "teacher_token_length_metadata": {
+    "n": 4353,
+    "sum": 1074152,
+    "mean": 246.76,
+    "median": 233,
+    "q1": 188.0,
+    "q3": 289.0,
+    "min": 80,
+    "max": 512
+  },
+  "teacher_minus_response_tokens": {
+    "-2": 1,
+    "0": 3,
+    "1": 4348,
+    "2": 1
+  },
+  "b3_shortest_per_problem_response_tokens": {
+    "n": 1032,
+    "sum": 222521,
+    "mean": 215.62,
+    "median": 203.0,
+    "q1": 164.0,
+    "q3": 248.75,
+    "min": 79,
+    "max": 496
+  }
+}

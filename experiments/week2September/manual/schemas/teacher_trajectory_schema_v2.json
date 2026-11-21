@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Teacher Reasoning Trajectory (v2, verified pool)",
+  "description": "One row of trajectory/pool/pool_v1_verified.jsonl. v1 (teacher_trajectory_schema.json) is kept unchanged; v2 adds the fields training needs (question, raw_generation) and the ground truth, and only admits valid trajectories (task6_decisions.md, T6-6 and schema note).",
+  "type": "object",
+  "required": [
+    "problem_id",
+    "teacher_model",
+    "trajectory_id",
+    "checkpoint",
+    "question",
+    "reasoning_trace",
+    "answer",
+    "ground_truth",
+    "capabilities",
+    "metadata",
+    "raw_generation"
+  ],
+  "properties": {
+    "problem_id": {
+      "type": "string",
+      "pattern": "^gsm8k_train_[0-9]{5}$"
+    },
+    "teacher_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trajectory_id": {
+      "type": "string",
+      "pattern": "^gsm8k_train_[0-9]{5}_traj_[0-9]{3}$"
+    },
+    "checkpoint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reasoning_trace": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ground_truth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "addition",
+          "subtraction",
+          "multiplication",
+          "division",
+          "percentage",
+          "fraction",
+          "ratio"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "num_steps",
+        "token_length",
+        "generation_seed",
+        "verification_status"
+      ],
+      "properties": {
+        "num_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "token_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "generation_seed": {
+          "type": "integer"
+        },
+        "verification_status": {
+          "const": "valid"
+        }
+      },
+      "additionalProperties": true
+    },
+    "raw_generation": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

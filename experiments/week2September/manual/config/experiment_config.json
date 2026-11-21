@@ -1,9 +1,11 @@
 {
-  "config_version": "v1",
-  "status": "FROZEN v1 (2026-10-14): no TBD. task5_decisions.md section I: I1, I2, I6, I7, I8 approved by the group; I3 (budget), I4 (probe b), I5 (hyperparameters) are provisional pending a smoke test on D_dev. Changes require a new config version with rationale.",
+  "config_version": "v2",
+  "status": "FROZEN v2 (2026-11-01): supersedes v1 before any main-experiment run. Only selection schedules of B3/B4, the reference set of ell_star/sigma and the H-testing rules changed; budget, training, seeds, evaluation and primary comparison are unchanged. Rationale: task7_decisions.md. v1 is archived byte-identical at config/experiment_config_v1.json (used by the smoke test and Task 6 pool). I4 (probe b = 7) remains provisional until the L_emp probe check.",
   "sources": {
     "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
-    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14"
+    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14",
+    "decisions_v2": "task7_decisions.md",
+    "previous_version": "config/experiment_config_v1.json (sha256 7c5aa72d68be56de6ce0a4425635462a223ed540fd02d6e0e9806497ee382df5)"
   },
   "splits": {
     "manifest": "splits/split_manifest.json",
@@ -102,9 +104,10 @@
   },
   "learnability": {
     "proxy": "ell = length-normalized NLL of tau under S_t; L_proxy = exp(-(ell - ell_star_t)^2 / (2 sigma_t^2))",
-    "ell_star_rule": "median of ell over eligible pool at S_t",
-    "sigma_rule": "IQR of ell over eligible pool at S_t / 1.349",
-    "eligible": "verified trajectories only"
+    "ell_star_rule": "median of ell over the reference set at S_t",
+    "sigma_rule": "IQR of ell over the reference set at S_t / 1.349",
+    "eligible": "verified trajectories only",
+    "reference_set": "eligible trajectories not yet trained in this run (at S_0: all eligible). L_proxy is still computed for every eligible trajectory."
   },
   "selection": {
     "n_cap": 1,
@@ -122,10 +125,12 @@
     "allow_reselect_across_rounds": true,
     "max_total_reselect": null,
     "tie_break": "trajectory_id ascending",
-    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; if over budget: shuffle problems with seed, fill until beta_round; computed once, reused for all rounds",
+    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; shuffle problems once with seed; walk that order across rounds, each round continuing where the previous stopped and filling until beta_round; no trajectory repeats",
     "b3_problem_order_seed": "training_seed",
     "b2_seed_rule": "random.Random(training_seed * 100 + round)",
-    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)"
+    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)",
+    "b4_rule": "rank all eligible trajectories once by L_proxy(tau | S_0) descending, tie_break applied; walk that ranking across rounds, each round continuing with the remaining trajectories and filling until beta_round; a trajectory skipped by n_cap in a round stays available for later rounds; no trajectory repeats; identical across training seeds",
+    "allow_reselect_note": "applies to B2, B5 and the ablation; the B3 and B4 schedules never repeat a trajectory"
   },
   "evaluation": {
     "decoding": "greedy",
@@ -165,6 +170,45 @@
     "within_seed_test": "McNemar on paired per-problem correctness",
     "across_seed": "mean of paired differences with 95% CI",
     "significance_alpha": 0.05,
-    "plan": "analysis_plan.md"
+    "plan": "analysis_plan.md",
+    "secondary_metrics": {
+      "lenient_accuracy": "last number anywhere in the output matches ground truth, format ignored (answer_utils.answers_match, as in eval_student.py); registered secondary metric, does not replace the primary metric",
+      "report_together": [
+        "strict accuracy",
+        "lenient accuracy",
+        "format compliance"
+      ]
+    },
+    "noise": {
+      "test_retest_runs": "B4 runs of the training seeds (same selected data, different training seed); selection logs must match",
+      "analysis_set_U": "trajectories not trained in B4 up to the later checkpoint of the pair",
+      "epsilon_rule": "95th percentile of |L_proxy(tau|S_1^a) - L_proxy(tau|S_1^b)| over U and all seed pairs; also report 2.77*s_w and a bootstrap CI",
+      "epsilon_use": "report the share of U with |change| > epsilon against the 5% expected from noise; per-trajectory profiles are descriptive"
+    },
+    "h_test": {
+      "pairs": [
+        "S_0->S_1",
+        "S_1->S_2"
+      ],
+      "runs": "B4, for both rho_change and rho_noise",
+      "delta": "Delta^a = rho_noise^a - rho_change^a; rho_change^a = Spearman(L|S_t^a, L|S_{t+1}^a); rho_noise^a = mean Spearman(L|S_{t+1}^a, L|S_{t+1}^b) over b != a; on U",
+      "inference": "cluster bootstrap over problem_id, same resamples for all seeds",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 363636,
+      "supported_if": "for every training seed: one-sided 95% lower bound of Delta^a > 0 and Delta^a >= min_delta",
+      "min_delta": 0.05,
+      "min_delta_source": "group convention, no literature source",
+      "decision_scale": "L_proxy; rank of ell is reported with CI. If L_proxy meets the rule and ell does not, report only that the ranking by distance to the median changed.",
+      "descriptive_only": [
+        "Wilcoxon signed-rank with effect size"
+      ],
+      "sensitivity": [
+        "sqrt(rho_noise) benchmark at S_0->S_1",
+        "Steiger test",
+        "U without problems having a trained trajectory",
+        "B2 runs"
+      ]
+    },
+    "selection_noise_check": "Jaccard of the round-2 B5 selections between seeds, against the chance level of about 0.02"
   }
 }
