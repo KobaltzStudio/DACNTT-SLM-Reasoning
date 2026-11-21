@@ -5,7 +5,7 @@ while true; do
   clear; date -u +%FT%TZ
   for f in "$LOG_ROOT"/seeds/*.status; do [ -e "$f" ] && printf '%-14s %s\n' "$(basename "$f" .status)" "$(cat "$f")"; done
   echo; nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader 2>/dev/null; echo
-  for m in P1-DEFICIT P1P2; do for s in 42 2026; do for k in 1 2 3; do
+  for m in P1-DEFICIT P1P2; do for s in ${SEEDS:-42 2026}; do for k in 1 2 3; do
     p="$R/${m}_seed$s/S$k/eval_dev.jsonl"; [ -f "$p" ] && echo "${m}_seed$s/S$k: $(wc -l < "$p")/500"
   done; done; done
   last=$(ls -td "$LOG_ROOT"/seeds/*/attempt* 2>/dev/null | head -1)
