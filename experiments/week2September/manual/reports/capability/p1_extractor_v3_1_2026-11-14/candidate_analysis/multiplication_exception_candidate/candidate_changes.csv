@@ -1,0 +1,2 @@
+﻿problem_id,gold_capabilities,question,baseline_predictions,candidate_predictions,baseline_rules_fired,candidate_rules_fired
+gsm8k_train_00011,"[""division"", ""percentage""]",A library has a number of books. 35% of them are intended for children and 104 of them are for adults. How many books are in the library?,"[""multiplication"", ""percentage""]","[""percentage""]","{""multiplication"": [""rule_5""], ""percentage"": [""rule_2""]}","{""percentage"": [""rule_2""]}"

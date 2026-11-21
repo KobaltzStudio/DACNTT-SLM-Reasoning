@@ -1,0 +1,38 @@
+﻿P1 EXTRACTOR V3 - DAY 14 STATUS
+
+Dataset validation: PASS 30/30 records
+Extractor unit test: PASS 28/28
+D2 regression v3: PASS 30/30
+
+Approved development records: 170
+Unique problem IDs: 170
+
+V2:
+TP=166 FP=17 FN=337
+Precision=0.9071
+Recall=0.3300
+F1=0.4840
+Exact Match=0/170
+
+V3:
+TP=177 FP=19 FN=326
+Precision=0.9031
+Recall=0.3519
+F1=0.5064
+Exact Match=1/170
+
+Changed prediction records: 13
+Division TP increase: 11
+Division FP increase: 2
+
+D2 / approved 170 ID overlap: 0
+
+Evaluation input: question-only
+Evaluation status: development-set comparison, provisional
+
+Remaining:
+1. Adjudicate 13 changed predictions.
+2. Analyze remaining FN, especially multiplication, addition, subtraction.
+3. Verify D2 construction history and methodological independence.
+4. Finalize P1 Extractor v3 report.
+5. Decide whether v3 is accepted or requires v3.1.

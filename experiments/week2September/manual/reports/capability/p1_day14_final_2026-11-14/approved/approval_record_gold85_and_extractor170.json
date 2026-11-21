@@ -1,0 +1,35 @@
+{
+  "recorded_date": "2026-11-12",
+  "project_workday": "2026-11-14",
+  "gold_supplement_review": {
+    "records": 85,
+    "unique_problem_ids": 85,
+    "status": "APPROVED",
+    "approval_basis": "User explicitly requested approval for the 85 Gold supplement records.",
+    "approved_status": "AI review and unchanged Gold labels as presented, with source clarification for gsm8k_train_00830."
+  },
+  "extractor_priority_review": {
+    "records": 170,
+    "unique_problem_ids": 170,
+    "status": "APPROVED",
+    "approval_basis": "User explicitly stated agreement with the 170-record review."
+  },
+  "gsm8k_train_00830": {
+    "replacement_by_Janet": false,
+    "status": "SOURCE_CLARIFIED_NO_REPLACEMENT",
+    "user_provided_trace_summary": "Hilary buys 3 samosas at $2, 4 pakora orders at $3, subtotal $18; 25% tip calculated as $4.50; total equation $25 = $18 + $4.50 + lassi; lassi=$2.50.",
+    "current_gold_capabilities": [
+      "addition",
+      "multiplication",
+      "percentage"
+    ],
+    "action": "Preserve existing Gold labels and source; do not replace with Janet scenario.",
+    "caveat": "The supplied trace applies tip to the $18 subtotal before lassi and does not separately model tax. Preserve this as the supplied reasoning assumption; do not silently correct it."
+  },
+  "scope_exclusions": [
+    "No modification to raw GSM8K source or Gold vFinal source files.",
+    "No extractor rule changes.",
+    "No training/evaluation/RunPod artifacts modified.",
+    "No historical D3 outputs rewritten."
+  ]
+}
