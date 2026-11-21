@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Tables and paper figures from a runs directory (Plan.docx section 6: Figures 1-4, Tables 2-5). Missing runs
 are reported and left out; nothing is imputed. Run score_learnability.py first for the learnability parts.
@@ -194,45 +194,202 @@ def selection_table(runs, runs_dir):
 
 
 # --------------------------------------------------------------------------------------------- figures
+
 def style(ax, title=None):
     ax.set_facecolor(SURFACE)
+
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
+
     for side in ("left", "bottom"):
         ax.spines[side].set_color(GRID)
-    ax.tick_params(colors=INK2, labelsize=9)
-    ax.grid(axis="y", color=GRID, linewidth=0.8)
+        ax.spines[side].set_linewidth(0.9)
+
+    ax.tick_params(
+        axis="both",
+        colors=INK2,
+        labelsize=10,
+        length=3.5,
+        width=0.8,
+        pad=4,
+    )
+
+    ax.grid(
+        axis="y",
+        color=GRID,
+        linewidth=0.75,
+        alpha=0.85,
+    )
+
     ax.set_axisbelow(True)
+
     if title:
-        ax.set_title(title, color=INK, fontsize=11, loc="left")
+        ax.set_title(
+            title,
+            color=INK,
+            fontsize=12,
+            fontweight="semibold",
+            loc="left",
+            pad=9,
+        )
+
+
 
 
 def fig_accuracy(plt, summary, out):
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4), facecolor=SURFACE)
+    from matplotlib.ticker import PercentFormatter
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(11, 4.8),
+        facecolor=SURFACE,
+        sharey=True,
+    )
+
     for ax, split in zip(axes, ("dev", "test")):
         style(ax, f"D_{split}")
-        base = [r for r in summary if r["method"] == "B0" and r["split"] == split]
+
+        base = [
+            r for r in summary
+            if r["method"] == "B0" and r["split"] == split
+        ]
+
         for m in METHODS:
-            pts = sorted((r for r in summary if r["method"] == m and r["split"] == split), key=lambda r: r["checkpoint"])
+            pts = sorted(
+                (
+                    r for r in summary
+                    if r["method"] == m and r["split"] == split
+                ),
+                key=lambda r: r["checkpoint"],
+            )
+
             if not pts:
                 continue
-            xs = [0] + [r["checkpoint"] for r in pts] if base else [r["checkpoint"] for r in pts]
-            ys = ([base[0]["accuracy_mean"]] if base else []) + [r["accuracy_mean"] for r in pts]
-            sds = ([0.0] if base else []) + [0.0 if math.isnan(r["accuracy_sd"]) else r["accuracy_sd"] for r in pts]
-            ax.plot(xs, ys, color=COLOR[m], linewidth=2, marker=MARKER[m], markersize=7,
-                    markeredgecolor=SURFACE, markeredgewidth=2, label=LABEL[m], zorder=3)
-            ax.fill_between(xs, [y - s for y, s in zip(ys, sds)], [y + s for y, s in zip(ys, sds)],
-                            color=COLOR[m], alpha=0.12, linewidth=0)
-        ax.set_xticks([0, 1, 2, 3], ["S0\n(B0)", "S1", "S2", "S3"])
-        ax.set_ylabel("strict accuracy", color=INK2, fontsize=9)
+
+            xs = (
+                [0] + [r["checkpoint"] for r in pts]
+                if base else
+                [r["checkpoint"] for r in pts]
+            )
+
+            ys = (
+                [base[0]["accuracy_mean"]]
+                if base else []
+            ) + [r["accuracy_mean"] for r in pts]
+
+            sds = (
+                [0.0] if base else []
+            ) + [
+                0.0 if math.isnan(r["accuracy_sd"]) else r["accuracy_sd"]
+                for r in pts
+            ]
+
+            ax.plot(
+                xs,
+                ys,
+                color=COLOR[m],
+                linewidth=2.2,
+                marker=MARKER[m],
+                markersize=7,
+                markeredgecolor=SURFACE,
+                markeredgewidth=1.5,
+                label=LABEL[m],
+                zorder=4,
+            )
+
+            lower = [
+                max(0.0, y - sd)
+                for y, sd in zip(ys, sds)
+            ]
+
+            upper = [
+                min(1.0, y + sd)
+                for y, sd in zip(ys, sds)
+            ]
+
+            ax.fill_between(
+                xs,
+                lower,
+                upper,
+                color=COLOR[m],
+                alpha=0.10,
+                linewidth=0,
+                zorder=2,
+            )
+
+        ax.set_xticks(
+            [0, 1, 2, 3],
+            ["S0\n(B0)", "S1", "S2", "S3"],
+        )
+
+        ax.set_xlim(-0.15, 3.15)
+        ax.set_ylabel(
+            "Strict exact-match accuracy",
+            color=INK2,
+            fontsize=10,
+            labelpad=7,
+        )
+
+        ax.yaxis.set_major_formatter(
+            PercentFormatter(xmax=1.0)
+        )
+
+        ax.margins(y=0.08)
+
     handles, labels = axes[0].get_legend_handles_labels()
+
     if handles:
-        fig.legend(handles, labels, loc="lower center", ncol=len(handles), frameon=False, fontsize=9,
-                   labelcolor=INK)
-    fig.suptitle("Student accuracy by checkpoint (mean ± SD over seeds)", color=INK, fontsize=12, x=0.01, ha="left")
-    fig.tight_layout(rect=(0, 0.08, 1, 0.95))
-    fig.savefig(out, dpi=200, facecolor=SURFACE)
+        fig.legend(
+            handles,
+            labels,
+            loc="lower center",
+            ncol=4,
+            frameon=False,
+            fontsize=9.5,
+            labelcolor=INK,
+            bbox_to_anchor=(0.5, 0.005),
+            columnspacing=1.5,
+            handlelength=2.4,
+        )
+
+    fig.suptitle(
+        "Student accuracy by checkpoint",
+        color=INK,
+        fontsize=13,
+        fontweight="semibold",
+        x=0.06,
+        ha="left",
+    )
+
+    fig.text(
+        0.06,
+        0.925,
+        "Mean Â± SD across three training seeds",
+        fontsize=9.5,
+        color=INK2,
+    )
+
+    fig.tight_layout(
+        rect=(0.035, 0.13, 0.99, 0.89),
+        w_pad=2.0,
+    )
+
+    fig.savefig(
+        out,
+        dpi=300,
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+
+    fig.savefig(
+        out.with_suffix(".pdf"),
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+
     plt.close(fig)
+
 
 
 def fig_learnability(plt, scores, runs, out):
@@ -260,7 +417,7 @@ def fig_learnability(plt, scores, runs, out):
             patch.set_alpha(0.35)
             patch.set_edgecolor(COLOR[m])
         ax.set_xticks(range(1, len(labels) + 1), labels)
-        ax.set_ylabel("length-normalized NLL ℓ", color=INK2, fontsize=9)
+        ax.set_ylabel("length-normalized NLL â„“", color=INK2, fontsize=9)
     if drawn:
         fig.suptitle("Learnability distribution across checkpoints (all seeds pooled, whiskers 1.5 IQR)",
                      color=INK, fontsize=12, x=0.01, ha="left")
@@ -270,47 +427,220 @@ def fig_learnability(plt, scores, runs, out):
     return drawn
 
 
+
 def fig_selection(plt, runs, sel_rows, out):
     b5 = [r for r in runs if r.method == "B5"]
+
     if not b5:
         return False
+
     n_rounds = min(len(r.rounds()) for r in b5)
+
     if n_rounds < 2:
         return False
-    mat = [[statistics.mean(jaccard(r.train_set(i)["trajectory_ids"], r.train_set(j)["trajectory_ids"]) for r in b5)
-            for j in range(n_rounds)] for i in range(n_rounds)]
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4), facecolor=SURFACE,
-                                   gridspec_kw={"width_ratios": [1, 1.3]})
-    im = ax1.imshow(mat, cmap="Blues", vmin=0, vmax=1)
-    ax1.set_xticks(range(n_rounds), [f"round {i}" for i in range(n_rounds)])
-    ax1.set_yticks(range(n_rounds), [f"round {i}" for i in range(n_rounds)])
+
+    # Preserve the original pairwise Jaccard calculation.
+    mat = [
+        [
+            statistics.mean(
+                jaccard(
+                    r.train_set(i)["trajectory_ids"],
+                    r.train_set(j)["trajectory_ids"],
+                )
+                for r in b5
+            )
+            for j in range(n_rounds)
+        ]
+        for i in range(n_rounds)
+    ]
+
+    # Wider figure and more space between panels.
+    fig, (ax1, ax2) = plt.subplots(
+        1,
+        2,
+        figsize=(12.8, 5.0),
+        facecolor=SURFACE,
+        gridspec_kw={"width_ratios": [1, 1.55]},
+    )
+
+    # Reserve a dedicated top band for the legend.
+    fig.subplots_adjust(
+        left=0.075,
+        right=0.985,
+        bottom=0.16,
+        top=0.77,
+        wspace=0.48,
+    )
+
+    # Left panel: Jaccard heatmap.
+    im = ax1.imshow(
+        mat,
+        cmap="Blues",
+        vmin=0,
+        vmax=1,
+        aspect="equal",
+    )
+
+    round_labels = [f"Round {i}" for i in range(n_rounds)]
+
+    ax1.set_xticks(
+        range(n_rounds),
+        round_labels,
+        rotation=25,
+        ha="right",
+    )
+    ax1.set_yticks(range(n_rounds), round_labels)
+    ax1.tick_params(axis="both", labelsize=9.5, colors=INK2)
+
     for i in range(n_rounds):
         for j in range(n_rounds):
-            ax1.text(j, i, f"{mat[i][j]:.2f}", ha="center", va="center", fontsize=9,
-                     color=SURFACE if mat[i][j] > 0.6 else INK)
-    ax1.set_title("B5: Jaccard between selected sets", color=INK, fontsize=11, loc="left")
-    ax1.tick_params(colors=INK2, labelsize=9)
-    fig.colorbar(im, ax=ax1, fraction=0.046)
+            value = mat[i][j]
+            ax1.text(
+                j,
+                i,
+                f"{value:.3f}",
+                ha="center",
+                va="center",
+                fontsize=10,
+                fontweight="bold",
+                color=SURFACE if value > 0.55 else INK,
+            )
 
-    style(ax2, "B5: trajectories per round (mean over seeds)")
-    parts = (("new", "#2a78d6"), ("retained", "#eb6834"), ("readmitted", "#1baf7a"))
+    ax1.set_title(
+        "Jaccard overlap between selected sets",
+        color=INK,
+        fontsize=11.5,
+        fontweight="bold",
+        loc="left",
+        pad=10,
+    )
+
+    for spine in ax1.spines.values():
+        spine.set_visible(False)
+
+    cbar = fig.colorbar(im, ax=ax1, fraction=0.046, pad=0.04)
+    cbar.set_label("Jaccard similarity", fontsize=9, color=INK2)
+    cbar.ax.tick_params(labelsize=9, colors=INK2)
+
+    # Right panel: trajectory composition.
+    style(ax2, "Selected trajectories per round")
+
+    parts = (
+        ("new", "#2a78d6", "New"),
+        ("retained", "#eb6834", "Retained"),
+        ("readmitted", "#1baf7a", "Readmitted"),
+    )
+
     bottoms = [0.0] * n_rounds
-    for key, color in parts:
-        vals = [statistics.mean(r[key] for r in sel_rows if r["method"] == "B5" and r["round"] == t)
-                for t in range(n_rounds)]
-        ax2.bar(range(n_rounds), vals, bottom=bottoms, color=color, width=0.6, label=key,
-                edgecolor=SURFACE, linewidth=2)
+    totals = [0.0] * n_rounds
+
+    for key, color, label in parts:
+        vals = [
+            statistics.mean(
+                r[key]
+                for r in sel_rows
+                if r["method"] == "B5" and r["round"] == t
+            )
+            for t in range(n_rounds)
+        ]
+
+        ax2.bar(
+            range(n_rounds),
+            vals,
+            bottom=bottoms,
+            color=color,
+            width=0.62,
+            label=label,
+            edgecolor=SURFACE,
+            linewidth=1.2,
+            zorder=3,
+        )
+
         bottoms = [b + v for b, v in zip(bottoms, vals)]
-    ax2.set_xticks(range(n_rounds), [f"round {t}" for t in range(n_rounds)])
-    ax2.set_ylabel("trajectories", color=INK2, fontsize=9)
-    ax2.legend(frameon=False, fontsize=9, labelcolor=INK, loc="upper left", bbox_to_anchor=(1.0, 1.0))
-    fig.tight_layout()
-    fig.savefig(out, dpi=200, facecolor=SURFACE)
+        totals = [total + value for total, value in zip(totals, vals)]
+
+    # Keep total labels above each stacked bar.
+    for x, total in enumerate(totals):
+        ax2.annotate(
+            f"{total:.0f}",
+            (x, total),
+            xytext=(0, 5),
+            textcoords="offset points",
+            ha="center",
+            va="bottom",
+            fontsize=9.5,
+            color=INK,
+            fontweight="bold",
+            zorder=5,
+        )
+
+    ax2.set_xticks(
+        range(n_rounds),
+        [f"Round {t}" for t in range(n_rounds)],
+    )
+    ax2.set_ylabel(
+        "Number of trajectories",
+        color=INK2,
+        fontsize=10,
+        labelpad=7,
+    )
+
+    # Extra vertical headroom prevents labels from touching the top.
+    # Reserve whitespace between the panel title and the bar columns.
+    ax2.set_ylim(
+        0,
+        max(totals) * 1.38 if totals else 1,
+    )
+
+    # Place all legend entries inside the reserved upper whitespace.
+    # This keeps the legend below the panel title and above the bars.
+    ax2.legend(
+        frameon=False,
+        fontsize=9.5,
+        labelcolor=INK,
+        loc="upper right",
+        bbox_to_anchor=(0.99, 0.92),
+        ncol=3,
+        borderaxespad=0.0,
+        columnspacing=1.0,
+        handlelength=1.5,
+    )
+
+    fig.suptitle(
+        "B5 selection dynamics",
+        color=INK,
+        fontsize=13,
+        fontweight="bold",
+        x=0.06,
+        y=0.985,
+        ha="left",
+    )
+
+    fig.text(
+        0.06,
+        0.88,
+        "Jaccard overlap and trajectory composition (mean across seeds)",
+        fontsize=9.5,
+        color=INK2,
+    )
+
+    fig.savefig(
+        out,
+        dpi=300,
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+    fig.savefig(
+        out.with_suffix(".pdf"),
+        bbox_inches="tight",
+        facecolor=SURFACE,
+    )
+
     plt.close(fig)
     return True
 
-
 def fig_final(plt, acc_rows, final_t, out):
+    from matplotlib.ticker import PercentFormatter
     fig, ax = plt.subplots(figsize=(6, 4), facecolor=SURFACE)
     style(ax, f"D_test accuracy at S{final_t} (equal token budget)")
     base = [r for r in acc_rows if r["method"] == "B0" and r["split"] == "test"]
@@ -325,10 +655,11 @@ def fig_final(plt, acc_rows, final_t, out):
         mean, sd = mean_sd(vals)
         ax.errorbar([x + 0.18], [mean], yerr=[0 if math.isnan(sd) else sd], fmt=MARKER.get(m, "o"), color=color,
                     markersize=8, capsize=4, linewidth=2, zorder=4)
-        ax.annotate(f"{mean:.3f}", (x + 0.3, mean), color=INK, fontsize=9, va="center")
+        ax.annotate(f"{mean * 100:.1f}%", (x + 0.3, mean), color=INK, fontsize=9, va="center")
     ax.set_xticks(range(len(names)), ["B0\n(S0)" if m == "B0" else m for m in names])
     ax.set_xlim(-0.5, len(names) - 0.2)
-    ax.set_ylabel("strict accuracy", color=INK2, fontsize=9)
+    ax.set_ylabel("Strict accuracy (%)", color=INK2, fontsize=9)
+    ax.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
     fig.tight_layout()
     fig.savefig(out, dpi=200, facecolor=SURFACE)
     plt.close(fig)
@@ -374,3 +705,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
