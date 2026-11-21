@@ -1,0 +1,4 @@
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/compute_nll.py --tag B5_seed2026_S1 --out /workspace/manual/runs/main/B5_seed2026/S1/nll.jsonl --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --batch-size 16 --dtype auto --adapter /workspace/manual/runs/main/B5_seed2026/S1/adapter",
+  "elapsed_seconds": 366.7
+}
