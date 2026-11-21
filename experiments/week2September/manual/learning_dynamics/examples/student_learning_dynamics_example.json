@@ -1,0 +1,79 @@
+{
+  "example_type": "synthetic",
+  "status": "non_empirical",
+  "description": "Synthetic example of student capability learning dynamics across checkpoints.",
+  "student_id": "example_student",
+  "checkpoints": [
+    "ckpt_000",
+    "ckpt_001",
+    "ckpt_002",
+    "ckpt_003",
+    "ckpt_004",
+    "ckpt_005"
+  ],
+  "anomaly_threshold": 0.20,
+  "capabilities": {
+    "addition": [
+      0.72,
+      0.75,
+      0.78,
+      0.79,
+      0.80,
+      0.81
+    ],
+    "subtraction": [
+      0.58,
+      0.61,
+      0.64,
+      0.63,
+      0.64,
+      0.65
+    ],
+    "multiplication": [
+      0.42,
+      0.47,
+      0.73,
+      0.76,
+      0.77,
+      0.78
+    ],
+    "division": [
+      0.35,
+      0.38,
+      0.42,
+      0.66,
+      0.68,
+      0.69
+    ],
+    "fraction": [
+      0.25,
+      0.31,
+      0.47,
+      0.44,
+      0.38,
+      0.36
+    ]
+  },
+  "overall_mastery": [
+    0.464,
+    0.504,
+    0.608,
+    0.616,
+    0.614,
+    0.618
+  ],
+  "events": [
+    {
+      "checkpoint": "ckpt_002",
+      "capability": "multiplication",
+      "type": "sudden_gain",
+      "delta": 0.26
+    },
+    {
+      "checkpoint": "ckpt_003",
+      "capability": "division",
+      "type": "sudden_gain",
+      "delta": 0.24
+    }
+  ]
+}

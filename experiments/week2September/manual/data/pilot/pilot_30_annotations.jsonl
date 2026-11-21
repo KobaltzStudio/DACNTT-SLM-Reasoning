@@ -1,0 +1,59 @@
+{"problem_id": "gsm8k_train_00000", "capabilities_manual": ["multiplication", "division", "fraction"], "difficulty_manual": "medium", "notes": "One-third is explicitly treated as a fraction and as a required division operation. Solve: 2 dozen = 24; Kyle = 24 x 2 = 48; Leigh = 48 / 3 = 16.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00001", "capabilities_manual": ["addition", "subtraction"], "difficulty_manual": "medium", "notes": "Annotate arithmetic capabilities actually used. The problem requires interpreting relationships between cats, snakes, parrots, and dogs, but relationship interpretation itself is not a capability label in the current schema.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00002", "capabilities_manual": ["multiplication", "addition", "subtraction"], "difficulty_manual": "medium", "notes": "Truth is 196. Compute uncle = 5, grandpa = 10, aunt = 6, dad = 10, mum = 15; total = 150 + 10 + 5 + 10 + 15 + 6 = 196.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00003", "capabilities_manual": ["multiplication", "subtraction", "division"], "difficulty_manual": "medium", "notes": "Division is annotated even though it is used to determine the remainder. Weekly spending = 7 x 8 = 56; remaining = 100 - 56 = 44; 44 / 5 gives 8 full bills with remainder 4. Division is therefore required.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00004", "capabilities_manual": ["division", "fraction", "subtraction"], "difficulty_manual": "medium", "notes": "Half is treated as fraction (1/2). Division may also be annotated because half is operationally obtained through division. Second day = 50 / 2 = 25; third day = 50 - 10 - 25 = 15.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00005", "capabilities_manual": ["multiplication", "addition", "subtraction", "division"], "difficulty_manual": "medium", "notes": "Multi-step dependency. Day 2 = 50 x 3 = 150; day 3 = 150 - 50 = 100; remaining total = 500 - 50 - 150 - 100 = 200; 4 remaining days means 200 / 4 = 50 per day.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00006", "capabilities_manual": ["addition", "fraction"], "difficulty_manual": "easy", "notes": "Third dart is half of 50, so 25; final score = 50 + 25 + 0 = 75.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00007", "capabilities_manual": ["multiplication", "addition", "fraction"], "difficulty_manual": "medium", "notes": "Compute 6 x 1/4 + 3 x 1/2 + 2 x 2 = 1.5 + 1.5 + 4 = 7.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00008", "capabilities_manual": ["multiplication", "division"], "difficulty_manual": "medium", "notes": "Dozen conversion requires 3 x 12 = 36 eggs; 36 / 4 = 9 omelets; 9 / 3 = 3 omelets per person. The multiplication step is retained because it makes the conversion explicit and supports later error localization.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00009", "capabilities_manual": ["addition", "subtraction", "multiplication"], "difficulty_manual": "medium", "notes": "Second = 7 + 3 = 10; third = 10 - 6 = 4; fourth = 4 + 10 = 14; fifth = 2 x 10 = 20; total = 7 + 10 + 4 + 14 + 20 = 55.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00010", "capabilities_manual": ["addition", "division"], "difficulty_manual": "easy", "notes": "Gordon's bags weigh 3 + 7 = 10 pounds. Five Trace bags have the same total weight, so one weighs 10 / 5 = 2 pounds. Ratio is not annotated because ratio is not the primary reasoning object under the current guideline.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00011", "capabilities_manual": ["division", "percentage"], "difficulty_manual": "medium", "notes": "35% are children, so adults are 65%. The total is obtained from 104 / 0.65 = 160. Division is retained because it is the final required computational step.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00012", "capabilities_manual": ["multiplication", "subtraction"], "difficulty_manual": "easy", "notes": "Cost of two cards = 2 x 8 = 16; profit = 21 - 16 = 5.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00013", "capabilities_manual": ["addition", "division"], "difficulty_manual": "medium", "notes": "Total = 130 + 145 + 85 + 60 + 180 = 600 seconds. Average = 600 / 5 = 120 seconds = 2 minutes. Division is required for the average and unit conversion.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00014", "capabilities_manual": ["addition", "percentage", "division"], "difficulty_manual": "medium", "notes": "This is a multi-capability calibration case. Meal total = 10 + 20 + 30 = 60; 20% tip = 12; evenly split among 3 people = 12 / 3 = 4.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00015", "capabilities_manual": ["multiplication", "percentage", "addition"], "difficulty_manual": "medium", "notes": "Four pairs produce 25% of 2 dollars = 0.50 profit each, giving 2 dollars. Five pairs give 0.20 each, giving 1 dollar. Total profit = 3 dollars.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00016", "capabilities_manual": ["multiplication", "fraction", "subtraction"], "difficulty_manual": "medium", "notes": "Short students = 400 x 2/5 = 160. Average-height students = 400 - 160 - 90 = 150.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00017", "capabilities_manual": ["multiplication", "fraction", "division"], "difficulty_manual": "hard", "notes": "Fractional increase must be interpreted to determine the appreciated value, then the number of coins needed to recover the original investment is calculated. Fraction is explicitly retained as a capability.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00018", "capabilities_manual": ["multiplication", "percentage", "addition"], "difficulty_manual": "medium", "notes": "50% of 12 = 6; 50% of 18 = 9; 25% of 20 = 5; 25% of 8 = 2; total = 22.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00019", "capabilities_manual": ["subtraction", "division"], "difficulty_manual": "easy", "notes": "Large lemonade revenue = 50 - 11 - 24 = 15; large cups sold = 15 / 3 = 5.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00020", "capabilities_manual": ["multiplication", "subtraction"], "difficulty_manual": "medium", "notes": "Second part = 25 x 2 = 50 minutes. Total time = 2 x 60 = 120 minutes. Third part = 120 - 25 - 50 = 45. The key capability addition is multiplication; no separate capability is introduced for unit conversion.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00021", "capabilities_manual": ["multiplication", "addition"], "difficulty_manual": "easy", "notes": "Two tickets = 2 x 10 = 20; two candies = 2 x 2.50 = 5; total = 20 + 11 + 5 = 36.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00022", "capabilities_manual": ["multiplication", "subtraction", "fraction"], "difficulty_manual": "medium", "notes": "Red = 572 x 1/4 = 143; remaining = 429; white = 429 x 1/3 = 143; remaining = 286; green = 286 x 1/2 = 143.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00023", "capabilities_manual": ["multiplication", "addition", "subtraction", "division"], "difficulty_manual": "hard", "notes": "The Ford/Chevy relationship is linguistically awkward and requires coupled equations. Keep as a calibration/review case and consider whether the current capability set is sufficient after the pilot.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00024", "capabilities_manual": ["subtraction", "division"], "difficulty_manual": "easy", "notes": "Remaining amount needed = 5000 - 2900 = 2100; months = 2100 / 700 = 3.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00025", "capabilities_manual": ["addition", "division", "percentage"], "difficulty_manual": "easy", "notes": "Accounting-related years = 25 + 15 = 40; 40 / 80 = 0.5 = 50%.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00026", "capabilities_manual": ["subtraction", "multiplication"], "difficulty_manual": "easy", "notes": "Last year actual runners = 200 - 40 = 160. This year = 160 x 2 = 320.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00027", "capabilities_manual": ["multiplication", "fraction", "subtraction"], "difficulty_manual": "medium", "notes": "Total fruits = 8 x 200 = 1600. Picked = 1600 x 2/5 = 640. Remaining = 1600 - 640 = 960. Subtraction is explicitly retained because it is required to obtain the final quantity.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00028", "capabilities_manual": ["addition"], "difficulty_manual": "easy", "notes": "Cards traded are 2 + 10 + 8 + 15 = 35. Current annotation focuses on the explicit arithmetic operations represented in the solution.", "annotator_id": "A1", "schema_version": "v1"}
+
+{"problem_id": "gsm8k_train_00029", "capabilities_manual": ["multiplication", "division", "addition"], "difficulty_manual": "hard", "notes": "Requires manual verification of the literal interpretation and the supplied ground truth. The distance/time calculation and gate count should be checked before treating this annotation as final.", "annotator_id": "A1", "schema_version": "v1"}
