@@ -1,5 +1,0 @@
-# NEXT_SESSION_START_HERE
-
-Open the handoff root from this file's parent, then read AGENTS, recovery/CURRENT_STATE.json, the release checklist and operator handoff. The current runtime is a byte-copied sealed intake; verify `manifests/SHA256SUMS.txt` and the nested original package before use. Revalidate live processes, controller locks, frozen inputs and the detached source. No stage was run in this handoff. Prior state is A S1 PASS, A S2 adapter plus 75/500 D_dev, and B S1 PASS.
-
-Next actions are approval of rights for the GitHub publication candidate, or approval of the destination and private RunPod upload. Use the appropriate independent allowlist. For RunPod, transfer exactly the seven cache files separately, then verify actual Linux CPU and work-root preflight. Run checkpoints independently with explicit scope. Wait for a live job. Preserve logs, hashes, lock and predictions if a task was interrupted. A later Codex session must not assume that the last snapshot or an approval is current. D_test only after G7 FINAL with a separately pinned hash and approval. Original cleanup stays pending.
