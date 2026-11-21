@@ -1,0 +1,23 @@
+﻿{
+  "D_TEST_EXECUTION": "NOT_RUN",
+  "n_test": 1319,
+  "split": {
+    "split_manifest": "85f4559246542d197c427318afb3eefb8b8492573b69ac23e691fc19ce93bbda",
+    "p1p2_split_manifest": "526b76686b5ee7dc55771ba12e245f02fd21f0ca647484e23c19a6f629925e2f",
+    "d_test_ids": "305bd0be7e7e531803f5b691426136364579a151712e07676c334d11d37935ba",
+    "d_dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "d_pool_ids": "d57abf1957afc82e8c61b2b600afc4ddae21191ec7f27007f754886e21d9ad71",
+    "gsm8k_test": "eb9f5bc9cd082aa00329060b3ad88aaec3134539d9d6fce2f9fba057637c4ee5"
+  },
+  "evaluator_fingerprint_sha256": "5f74e091e0e3faa90e2abe8008f0708925b91eb94725b309923eef77b90780a6",
+  "evaluator_files": {
+    "scripts/run_final_d_test.py": "48d913e0bbc89f33ebf8b8d2821a959e2d2b3eb89027e46e83d59d84b7c20bfd",
+    "scripts/eval_student.py": "4b96ffcdb97d7634617b343e242e6af311d534f922cf0d85667008287bfd4c73",
+    "scripts/eval_metrics.py": "ae716cb42a06215e33515dfe8460b3d26209b3a33fa64e10237f2a7c1da9b0a9",
+    "scripts/answer_utils.py": "22a3a97819efcf0f21d4c28cbf22b900cbd76671a7f1984ca469d00a75968042",
+    "scripts/student_common.py": "c3bf2dfcdf0525b481cf25f467e39a09748b4fd48dc905dc3edd3c03ac8983fb",
+    "scripts/generate_teacher_trajectories_batch.py": "253be59f9c1bc4bf42428640dfdba0b9fbd35e251b65c9bfa2713ec966cf64a7",
+    "scripts/select_checkpoint_on_dev.py": "ac471796533350a0db3bbc7fcce3997832ef028c7a20cb254f5887dbd1e070a0",
+    "config/experiment_config.json": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461"
+  }
+}

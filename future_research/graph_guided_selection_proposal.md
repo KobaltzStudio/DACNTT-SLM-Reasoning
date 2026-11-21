@@ -1,0 +1,5 @@
+# Graph-guided selection — PROPOSED
+
+If future transfer experiments support some directed edges, freeze a new, separately versioned candidate graph from those experiments alone. A graph-aware, budget-constrained selector could prioritize deficits whose upstream interventions have supported transfer. Preserve eligible pool, budget, Student and evaluation protocol across comparator arms. Propagate uncertainty or abstain for unsupported pairs. Do not choose edges, thresholds or weights using G7 outcomes or final D_test.
+
+Compare deficit-only, dynamic-learnability-only, their current combination, graph-aware and graph-randomized variants. Include edge-removal, reversed edges and a no-edge fall-back as ablations. Test for budget and coverage changes. A gain could reflect altered data composition or easier items rather than the directed mechanism, so require matched comparisons and transfer probes. This document supplies a design hypothesis. The sealed controller and frozen configs are unchanged.

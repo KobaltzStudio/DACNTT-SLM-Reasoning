@@ -1,0 +1,27 @@
+﻿python.exe : test_a_s2_training_and_foreign_eval_split_rejected 
+(test_deployment_ops.DeploymentSafetyTests.test_a_s2_training_and_foreign_eval_split_rejected) ... ok
+At line:16 char:1
++ & 'C:/KLTN-SLM-Reasoning/.venv/Scripts/python.exe' -B -m unittest dis ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_a_s2_train...ejected) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_append_only_prefix_allowed_and_overwrite_rejected 
+(test_deployment_ops.DeploymentSafetyTests.test_append_only_prefix_allowed_and_overwrite_rejected) ... ok
+test_collect_verify_then_block_overwrite_and_tamper 
+(test_deployment_ops.DeploymentSafetyTests.test_collect_verify_then_block_overwrite_and_tamper) ... ok
+test_manual_live_approval_is_required_before_touching_package 
+(test_deployment_ops.DeploymentSafetyTests.test_manual_live_approval_is_required_before_touching_package) ... ok
+test_p1p2_must_use_parent_checkpoint_nll 
+(test_deployment_ops.DeploymentSafetyTests.test_p1p2_must_use_parent_checkpoint_nll) ... ok
+test_traversal_and_case_collision_rejected 
+(test_deployment_ops.DeploymentSafetyTests.test_traversal_and_case_collision_rejected) ... ok
+test_windows_receipt_cannot_authorize_linux_run 
+(test_deployment_ops.DeploymentSafetyTests.test_windows_receipt_cannot_authorize_linux_run) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.155s
+
+OK
+Pin this result index out of band: 64769206f6d7cbe8c7f32e20bac7280cecd8a5fcffb054226f9d9a4e8c1493af
+Return bundle verified: 5 files

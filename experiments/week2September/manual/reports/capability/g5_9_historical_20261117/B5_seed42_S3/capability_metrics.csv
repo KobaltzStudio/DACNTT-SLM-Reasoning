@@ -1,8 +1,0 @@
-﻿run_id,method,seed,checkpoint,checkpoint_id,capability,n_support,n_correct,n_incorrect,mastery,deficit,ci95_low,ci95_high,ci_method,strict_metric,gold_policy
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,addition,30,21,9,0.7,0.30000000000000004,0.5212421254128504,0.8333525173175619,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,subtraction,51,40,11,0.7843137254901961,0.21568627450980393,0.6537364041400255,0.8750606159176724,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,multiplication,73,57,16,0.7808219178082192,0.2191780821917808,0.673227338877521,0.8603387936404931,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,division,47,37,10,0.7872340425531915,0.21276595744680848,0.6509597329080159,0.88010292001905,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,percentage,29,20,9,0.6896551724137931,0.31034482758620685,0.5076986576690685,0.8272438325551679,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,fraction,31,25,6,0.8064516129032258,0.19354838709677424,0.6371974218820453,0.908129916384139,Wilson_95_percent,status_equals_valid,approved_85_primary
-B5_seed42_S3,B5,42,S3,B5_seed42_S3.json,ratio,30,24,6,0.8,0.19999999999999996,0.6269430358685175,0.9049489282271013,Wilson_95_percent,status_equals_valid,approved_85_primary

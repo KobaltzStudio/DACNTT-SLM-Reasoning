@@ -1,0 +1,29 @@
+{
+  "runtime_files": 658,
+  "runtime_bytes": 575403394,
+  "runtime_roles": {
+    "frozen_config": 13,
+    "frozen_input_pool_or_gold": 11,
+    "checkpoint_support": 36,
+    "adapter_weights": 6,
+    "sealed_provenance_or_runtime": 331,
+    "D_dev_prediction": 43,
+    "checkpoint_NLL_or_metadata": 8,
+    "SEALED_HISTORICAL_SOURCE": 166,
+    "ACTIVE_SOURCE_CLOSURE": 22,
+    "frozen_split": 8,
+    "sealed_test": 14
+  },
+  "active_source_closure": 22,
+  "source_rows": 266,
+  "github_candidates": 57,
+  "github_rights_approved": 0,
+  "git_adapters_or_data_files": 0,
+  "runpod_transfer_files": 681,
+  "cache_external_files": 7,
+  "cache_external_bytes": 3098955668,
+  "internal_figures": 7,
+  "analysis_files": 23,
+  "copied_byte_matches": 731,
+  "observed_workspace_size_before_seal": 593478834
+}

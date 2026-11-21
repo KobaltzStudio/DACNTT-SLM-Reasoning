@@ -1,6 +1,0 @@
-﻿"name","relative_path","bundle_sha256","repository_sha256","comparison"
-"checkpoint_prediction_inventory.json","integration_staging\P1\reports\capability\student_eval_2026-11-17\checkpoint_prediction_inventory.json","b50711647090dc8102124ea472e9fec43f5a1787d11f8dd89de582fb0a4f1c97","b50711647090dc8102124ea472e9fec43f5a1787d11f8dd89de582fb0a4f1c97","MATCH"
-"student_capability_input_inventory.json","integration_staging\P1\reports\capability\student_eval_2026-11-17\student_capability_input_inventory.json","8b131a2da02bc90fb62972271daed66a62ec922a7fa4be87041f313e19fb655b","8b131a2da02bc90fb62972271daed66a62ec922a7fa4be87041f313e19fb655b","MATCH"
-"student_eval_source_inspection.json","integration_staging\P1\reports\capability\student_eval_2026-11-17\student_eval_source_inspection.json","9b5cab123730436ce14e688696647e0b89f2b1debfb0dfe11c988d0174a3035c","9b5cab123730436ce14e688696647e0b89f2b1debfb0dfe11c988d0174a3035c","MATCH"
-"capability_eval.py","scripts\capability_eval.py","db62d84497eda50baf73025387db6db7be6dc314ee8cc1b5c0346a1150cfa47d","db62d84497eda50baf73025387db6db7be6dc314ee8cc1b5c0346a1150cfa47d","MATCH"
-"test_capability_eval.py","scripts\test_capability_eval.py","65f069a3129d4ba5d69a173c11f3b01e5e83e637c2d09cf67c9a809d5dd437a0","65f069a3129d4ba5d69a173c11f3b01e5e83e637c2d09cf67c9a809d5dd437a0","MATCH"

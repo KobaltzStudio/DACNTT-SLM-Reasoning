@@ -1,0 +1,85 @@
+{
+  "checkpoint": "P1P2_seed2026_S3",
+  "split": "dev",
+  "backend": "hf",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1P2_seed2026/student_ckpt_003",
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.81,
+  "lenient_accuracy": 0.814,
+  "format_compliance": 0.982,
+  "lenient_accuracy_exploratory": 0.814,
+  "n_valid": 405,
+  "n_invalid_answer": 86,
+  "n_invalid_format": 9,
+  "mean_output_tokens": 263.968,
+  "n_hit_max_tokens": 10,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.8148148148148148,
+      "lenient_accuracy": 0.8148148148148148,
+      "format_compliance": 0.9629629629629629
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.7021276595744681,
+      "lenient_accuracy": 0.7021276595744681,
+      "format_compliance": 0.8936170212765957
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.8064516129032258,
+      "lenient_accuracy": 0.8064516129032258,
+      "format_compliance": 0.9354838709677419
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.7738095238095238,
+      "lenient_accuracy": 0.7738095238095238,
+      "format_compliance": 0.9404761904761905
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.7241379310344828,
+      "lenient_accuracy": 0.7241379310344828,
+      "format_compliance": 0.9655172413793104
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.7666666666666667,
+      "lenient_accuracy": 0.7666666666666667,
+      "format_compliance": 0.8666666666666667
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7090909090909091,
+      "lenient_accuracy": 0.7090909090909091,
+      "format_compliance": 0.9090909090909091
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 1,
+  "limit": null,
+  "elapsed_seconds_this_run": 2254.4,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 2.91,
+  "environment": {
+    "python": "3.11.17",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu126",
+    "transformers": "5.15.0",
+    "cuda": "12.6",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}

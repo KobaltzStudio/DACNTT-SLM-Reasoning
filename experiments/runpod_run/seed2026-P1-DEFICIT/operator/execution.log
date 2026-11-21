@@ -1,0 +1,1745 @@
+[RUN] capability_state_P1-DEFICIT_seed2026_selection_1
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_capability_state.py --sidecar-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/capability/g5_9_real_data_s0/SHARED_seed0_S0 --target-method P1-DEFICIT --target-seed 2026 --out /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_001.json
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=SHARED_seed0_S0
+SOURCE_METHOD=SHARED
+SOURCE_SEED=0
+SOURCE_ROUND=0
+TARGET_METHOD=P1-DEFICIT
+TARGET_SEED=2026
+SELECTION_ROUND=1
+CAPABILITY_COUNT=7
+STATE_SHA256=616b191223ff2c6f0a5e26db698ff5b66dfc740457ab58b8f7f823b8a1b3efed
+STATE_PATH=/workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_001.json
+CAPABILITY_STATE_VALIDATION=PASS
+[RUN] select_P1-DEFICIT_round_1
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_selector.py --method P1-DEFICIT --seed 2026 --round 1 --state /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_001.json --out-dir /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_tokens.jsonl --d-pool /workspace/intake/work/P2/experiments/week2September/manual/splits/d_pool_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json
+METHOD=P1-DEFICIT
+SEED=2026
+ROUND=1
+SOURCE_CHECKPOINT=S0
+N_ELIGIBLE=4353
+N_TRAINED_BEFORE=0
+N_SELECTED=194
+TOKENS_USED=45412
+BUDGET=45426
+TRAIN_SET=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/train_set.json
+SELECTION_LOG=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/selection_log.jsonl
+P1P2_SELECTION=PASS
+[REUSE] P1 selection round 1: preserving validated train set/log
+[RUN] train_P1-DEFICIT_seed2026_S1
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/train_round.py --seed 2026 --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/train_set.json --adapter-dir /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001 --micro-batch 1 --dtype bf16 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --legacy-windows-root "C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual"
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 56/338 [00:00<00:00, 556.52it/s]Loading weights:  34%|███▍      | 116/338 [00:00<00:00, 576.96it/s]Loading weights:  51%|█████▏    | 174/338 [00:00<00:00, 566.43it/s]Loading weights:  68%|██████▊   | 231/338 [00:00<00:00, 552.01it/s]Loading weights:  86%|████████▌ | 291/338 [00:00<00:00, 568.79it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 563.46it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+step   1  loss 0.2725  grad_norm 0.366  tokens 2095  6s
+step   2  loss 0.2603  grad_norm 0.307  tokens 1744  8s
+step   3  loss 0.2269  grad_norm 0.377  tokens 1812  9s
+step   4  loss 0.2497  grad_norm 0.300  tokens 2123  11s
+step   5  loss 0.1678  grad_norm 0.253  tokens 1780  12s
+step   6  loss 0.2154  grad_norm 0.264  tokens 1910  14s
+step   7  loss 0.2132  grad_norm 0.294  tokens 1822  15s
+step   8  loss 0.2358  grad_norm 0.252  tokens 2182  17s
+step   9  loss 0.2340  grad_norm 0.254  tokens 2082  19s
+step  10  loss 0.1833  grad_norm 0.275  tokens 1629  20s
+step  11  loss 0.2084  grad_norm 0.299  tokens 1534  22s
+step  12  loss 0.1867  grad_norm 0.258  tokens 2056  23s
+step  13  loss 0.1900  grad_norm 0.278  tokens 1856  25s
+step  14  loss 0.1940  grad_norm 0.270  tokens 1919  26s
+step  15  loss 0.1990  grad_norm 0.284  tokens 1586  28s
+step  16  loss 0.2162  grad_norm 0.300  tokens 1669  30s
+step  17  loss 0.1847  grad_norm 0.267  tokens 1721  31s
+step  18  loss 0.1937  grad_norm 0.247  tokens 1714  33s
+step  19  loss 0.2231  grad_norm 0.316  tokens 1696  34s
+step  20  loss 0.2115  grad_norm 0.270  tokens 1689  36s
+step  21  loss 0.2321  grad_norm 0.253  tokens 1794  37s
+step  22  loss 0.2212  grad_norm 0.226  tokens 2000  39s
+step  23  loss 0.2399  grad_norm 0.241  tokens 2082  41s
+step  24  loss 0.2173  grad_norm 0.218  tokens 2449  43s
+step  25  loss 0.2207  grad_norm 0.419  tokens 662  43s
+/workspace/intake/venv/lib/python3.11/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in Qwen/Qwen2.5-1.5B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+saved adapter -> /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001  (25 steps, 45606 supervised tokens)
+[RUN] eval_dev_P1-DEFICIT_seed2026_S1
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/eval_student.py --tag P1-DEFICIT_seed2026_S1 --split dev --out /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S1/eval_dev.jsonl --backend hf --dtype bf16 --batch-size 1 --adapter /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001
+[P1-DEFICIT_seed2026_S1] dev: 500 problems, 0 already done, 500 to run, backend=hf, dtype=torch.bfloat16
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 93/338 [00:00<00:00, 652.74it/s]Loading weights:  47%|████▋     | 159/338 [00:00<00:00, 619.84it/s]Loading weights:  65%|██████▌   | 221/338 [00:00<00:00, 612.20it/s]Loading weights:  87%|████████▋ | 294/338 [00:00<00:00, 654.05it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 660.10it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[P1-DEFICIT_seed2026_S1] 1/500  60s
+[P1-DEFICIT_seed2026_S1] 2/500  65s
+[P1-DEFICIT_seed2026_S1] 3/500  68s
+[P1-DEFICIT_seed2026_S1] 4/500  69s
+[P1-DEFICIT_seed2026_S1] 5/500  72s
+[P1-DEFICIT_seed2026_S1] 6/500  76s
+[P1-DEFICIT_seed2026_S1] 7/500  84s
+[P1-DEFICIT_seed2026_S1] 8/500  90s
+[P1-DEFICIT_seed2026_S1] 9/500  95s
+[P1-DEFICIT_seed2026_S1] 10/500  98s
+[P1-DEFICIT_seed2026_S1] 11/500  102s
+[P1-DEFICIT_seed2026_S1] 12/500  106s
+[P1-DEFICIT_seed2026_S1] 13/500  111s
+[P1-DEFICIT_seed2026_S1] 14/500  117s
+[P1-DEFICIT_seed2026_S1] 15/500  120s
+[P1-DEFICIT_seed2026_S1] 16/500  122s
+[P1-DEFICIT_seed2026_S1] 17/500  126s
+[P1-DEFICIT_seed2026_S1] 18/500  130s
+[P1-DEFICIT_seed2026_S1] 19/500  132s
+[P1-DEFICIT_seed2026_S1] 20/500  138s
+[P1-DEFICIT_seed2026_S1] 21/500  142s
+[P1-DEFICIT_seed2026_S1] 22/500  145s
+[P1-DEFICIT_seed2026_S1] 23/500  149s
+[P1-DEFICIT_seed2026_S1] 24/500  154s
+[P1-DEFICIT_seed2026_S1] 25/500  159s
+[P1-DEFICIT_seed2026_S1] 26/500  166s
+[P1-DEFICIT_seed2026_S1] 27/500  171s
+[P1-DEFICIT_seed2026_S1] 28/500  177s
+[P1-DEFICIT_seed2026_S1] 29/500  182s
+[P1-DEFICIT_seed2026_S1] 30/500  187s
+[P1-DEFICIT_seed2026_S1] 31/500  190s
+[P1-DEFICIT_seed2026_S1] 32/500  193s
+[P1-DEFICIT_seed2026_S1] 33/500  199s
+[P1-DEFICIT_seed2026_S1] 34/500  204s
+[P1-DEFICIT_seed2026_S1] 35/500  208s
+[P1-DEFICIT_seed2026_S1] 36/500  213s
+[P1-DEFICIT_seed2026_S1] 37/500  216s
+[P1-DEFICIT_seed2026_S1] 38/500  220s
+[P1-DEFICIT_seed2026_S1] 39/500  223s
+[P1-DEFICIT_seed2026_S1] 40/500  229s
+[P1-DEFICIT_seed2026_S1] 41/500  234s
+[P1-DEFICIT_seed2026_S1] 42/500  236s
+[P1-DEFICIT_seed2026_S1] 43/500  240s
+[P1-DEFICIT_seed2026_S1] 44/500  245s
+[P1-DEFICIT_seed2026_S1] 45/500  250s
+[P1-DEFICIT_seed2026_S1] 46/500  254s
+[P1-DEFICIT_seed2026_S1] 47/500  259s
+[P1-DEFICIT_seed2026_S1] 48/500  262s
+[P1-DEFICIT_seed2026_S1] 49/500  268s
+[P1-DEFICIT_seed2026_S1] 50/500  276s
+[P1-DEFICIT_seed2026_S1] 51/500  278s
+[P1-DEFICIT_seed2026_S1] 52/500  281s
+[P1-DEFICIT_seed2026_S1] 53/500  286s
+[P1-DEFICIT_seed2026_S1] 54/500  290s
+[P1-DEFICIT_seed2026_S1] 55/500  294s
+[P1-DEFICIT_seed2026_S1] 56/500  297s
+[P1-DEFICIT_seed2026_S1] 57/500  305s
+[P1-DEFICIT_seed2026_S1] 58/500  310s
+[P1-DEFICIT_seed2026_S1] 59/500  312s
+[P1-DEFICIT_seed2026_S1] 60/500  315s
+[P1-DEFICIT_seed2026_S1] 61/500  318s
+[P1-DEFICIT_seed2026_S1] 62/500  323s
+[P1-DEFICIT_seed2026_S1] 63/500  326s
+[P1-DEFICIT_seed2026_S1] 64/500  333s
+[P1-DEFICIT_seed2026_S1] 65/500  336s
+[P1-DEFICIT_seed2026_S1] 66/500  340s
+[P1-DEFICIT_seed2026_S1] 67/500  342s
+[P1-DEFICIT_seed2026_S1] 68/500  345s
+[P1-DEFICIT_seed2026_S1] 69/500  348s
+[P1-DEFICIT_seed2026_S1] 70/500  355s
+[P1-DEFICIT_seed2026_S1] 71/500  360s
+[P1-DEFICIT_seed2026_S1] 72/500  364s
+[P1-DEFICIT_seed2026_S1] 73/500  367s
+[P1-DEFICIT_seed2026_S1] 74/500  371s
+[P1-DEFICIT_seed2026_S1] 75/500  376s
+[P1-DEFICIT_seed2026_S1] 76/500  381s
+[P1-DEFICIT_seed2026_S1] 77/500  384s
+[P1-DEFICIT_seed2026_S1] 78/500  388s
+[P1-DEFICIT_seed2026_S1] 79/500  392s
+[P1-DEFICIT_seed2026_S1] 80/500  396s
+[P1-DEFICIT_seed2026_S1] 81/500  399s
+[P1-DEFICIT_seed2026_S1] 82/500  402s
+[P1-DEFICIT_seed2026_S1] 83/500  407s
+[P1-DEFICIT_seed2026_S1] 84/500  410s
+[P1-DEFICIT_seed2026_S1] 85/500  414s
+[P1-DEFICIT_seed2026_S1] 86/500  418s
+[P1-DEFICIT_seed2026_S1] 87/500  420s
+[P1-DEFICIT_seed2026_S1] 88/500  424s
+[P1-DEFICIT_seed2026_S1] 89/500  428s
+[P1-DEFICIT_seed2026_S1] 90/500  432s
+[P1-DEFICIT_seed2026_S1] 91/500  436s
+[P1-DEFICIT_seed2026_S1] 92/500  440s
+[P1-DEFICIT_seed2026_S1] 93/500  445s
+[P1-DEFICIT_seed2026_S1] 94/500  451s
+[P1-DEFICIT_seed2026_S1] 95/500  454s
+[P1-DEFICIT_seed2026_S1] 96/500  458s
+[P1-DEFICIT_seed2026_S1] 97/500  464s
+[P1-DEFICIT_seed2026_S1] 98/500  469s
+[P1-DEFICIT_seed2026_S1] 99/500  473s
+[P1-DEFICIT_seed2026_S1] 100/500  476s
+[P1-DEFICIT_seed2026_S1] 101/500  479s
+[P1-DEFICIT_seed2026_S1] 102/500  485s
+[P1-DEFICIT_seed2026_S1] 103/500  488s
+[P1-DEFICIT_seed2026_S1] 104/500  490s
+[P1-DEFICIT_seed2026_S1] 105/500  494s
+[P1-DEFICIT_seed2026_S1] 106/500  497s
+[P1-DEFICIT_seed2026_S1] 107/500  501s
+[P1-DEFICIT_seed2026_S1] 108/500  503s
+[P1-DEFICIT_seed2026_S1] 109/500  506s
+[P1-DEFICIT_seed2026_S1] 110/500  510s
+[P1-DEFICIT_seed2026_S1] 111/500  516s
+[P1-DEFICIT_seed2026_S1] 112/500  520s
+[P1-DEFICIT_seed2026_S1] 113/500  525s
+[P1-DEFICIT_seed2026_S1] 114/500  528s
+[P1-DEFICIT_seed2026_S1] 115/500  533s
+[P1-DEFICIT_seed2026_S1] 116/500  536s
+[P1-DEFICIT_seed2026_S1] 117/500  540s
+[P1-DEFICIT_seed2026_S1] 118/500  545s
+[P1-DEFICIT_seed2026_S1] 119/500  548s
+[P1-DEFICIT_seed2026_S1] 120/500  551s
+[P1-DEFICIT_seed2026_S1] 121/500  555s
+[P1-DEFICIT_seed2026_S1] 122/500  558s
+[P1-DEFICIT_seed2026_S1] 123/500  560s
+[P1-DEFICIT_seed2026_S1] 124/500  564s
+[P1-DEFICIT_seed2026_S1] 125/500  567s
+[P1-DEFICIT_seed2026_S1] 126/500  571s
+[P1-DEFICIT_seed2026_S1] 127/500  575s
+[P1-DEFICIT_seed2026_S1] 128/500  578s
+[P1-DEFICIT_seed2026_S1] 129/500  583s
+[P1-DEFICIT_seed2026_S1] 130/500  588s
+[P1-DEFICIT_seed2026_S1] 131/500  592s
+[P1-DEFICIT_seed2026_S1] 132/500  596s
+[P1-DEFICIT_seed2026_S1] 133/500  603s
+[P1-DEFICIT_seed2026_S1] 134/500  607s
+[P1-DEFICIT_seed2026_S1] 135/500  612s
+[P1-DEFICIT_seed2026_S1] 136/500  614s
+[P1-DEFICIT_seed2026_S1] 137/500  618s
+[P1-DEFICIT_seed2026_S1] 138/500  626s
+[P1-DEFICIT_seed2026_S1] 139/500  633s
+[P1-DEFICIT_seed2026_S1] 140/500  636s
+[P1-DEFICIT_seed2026_S1] 141/500  639s
+[P1-DEFICIT_seed2026_S1] 142/500  642s
+[P1-DEFICIT_seed2026_S1] 143/500  645s
+[P1-DEFICIT_seed2026_S1] 144/500  648s
+[P1-DEFICIT_seed2026_S1] 145/500  651s
+[P1-DEFICIT_seed2026_S1] 146/500  656s
+[P1-DEFICIT_seed2026_S1] 147/500  661s
+[P1-DEFICIT_seed2026_S1] 148/500  666s
+[P1-DEFICIT_seed2026_S1] 149/500  670s
+[P1-DEFICIT_seed2026_S1] 150/500  677s
+[P1-DEFICIT_seed2026_S1] 151/500  681s
+[P1-DEFICIT_seed2026_S1] 152/500  686s
+[P1-DEFICIT_seed2026_S1] 153/500  689s
+[P1-DEFICIT_seed2026_S1] 154/500  692s
+[P1-DEFICIT_seed2026_S1] 155/500  696s
+[P1-DEFICIT_seed2026_S1] 156/500  701s
+[P1-DEFICIT_seed2026_S1] 157/500  705s
+[P1-DEFICIT_seed2026_S1] 158/500  709s
+[P1-DEFICIT_seed2026_S1] 159/500  713s
+[P1-DEFICIT_seed2026_S1] 160/500  717s
+[P1-DEFICIT_seed2026_S1] 161/500  720s
+[P1-DEFICIT_seed2026_S1] 162/500  725s
+[P1-DEFICIT_seed2026_S1] 163/500  728s
+[P1-DEFICIT_seed2026_S1] 164/500  732s
+[P1-DEFICIT_seed2026_S1] 165/500  734s
+[P1-DEFICIT_seed2026_S1] 166/500  739s
+[P1-DEFICIT_seed2026_S1] 167/500  743s
+[P1-DEFICIT_seed2026_S1] 168/500  748s
+[P1-DEFICIT_seed2026_S1] 169/500  750s
+[P1-DEFICIT_seed2026_S1] 170/500  753s
+[P1-DEFICIT_seed2026_S1] 171/500  758s
+[P1-DEFICIT_seed2026_S1] 172/500  761s
+[P1-DEFICIT_seed2026_S1] 173/500  765s
+[P1-DEFICIT_seed2026_S1] 174/500  768s
+[P1-DEFICIT_seed2026_S1] 175/500  770s
+[P1-DEFICIT_seed2026_S1] 176/500  773s
+[P1-DEFICIT_seed2026_S1] 177/500  777s
+[P1-DEFICIT_seed2026_S1] 178/500  780s
+[P1-DEFICIT_seed2026_S1] 179/500  784s
+[P1-DEFICIT_seed2026_S1] 180/500  790s
+[P1-DEFICIT_seed2026_S1] 181/500  796s
+[P1-DEFICIT_seed2026_S1] 182/500  801s
+[P1-DEFICIT_seed2026_S1] 183/500  806s
+[P1-DEFICIT_seed2026_S1] 184/500  810s
+[P1-DEFICIT_seed2026_S1] 185/500  813s
+[P1-DEFICIT_seed2026_S1] 186/500  819s
+[P1-DEFICIT_seed2026_S1] 187/500  821s
+[P1-DEFICIT_seed2026_S1] 188/500  827s
+[P1-DEFICIT_seed2026_S1] 189/500  831s
+[P1-DEFICIT_seed2026_S1] 190/500  835s
+[P1-DEFICIT_seed2026_S1] 191/500  839s
+[P1-DEFICIT_seed2026_S1] 192/500  843s
+[P1-DEFICIT_seed2026_S1] 193/500  847s
+[P1-DEFICIT_seed2026_S1] 194/500  853s
+[P1-DEFICIT_seed2026_S1] 195/500  857s
+[P1-DEFICIT_seed2026_S1] 196/500  861s
+[P1-DEFICIT_seed2026_S1] 197/500  865s
+[P1-DEFICIT_seed2026_S1] 198/500  868s
+[P1-DEFICIT_seed2026_S1] 199/500  872s
+[P1-DEFICIT_seed2026_S1] 200/500  877s
+[P1-DEFICIT_seed2026_S1] 201/500  879s
+[P1-DEFICIT_seed2026_S1] 202/500  885s
+[P1-DEFICIT_seed2026_S1] 203/500  888s
+[P1-DEFICIT_seed2026_S1] 204/500  891s
+[P1-DEFICIT_seed2026_S1] 205/500  895s
+[P1-DEFICIT_seed2026_S1] 206/500  900s
+[P1-DEFICIT_seed2026_S1] 207/500  907s
+[P1-DEFICIT_seed2026_S1] 208/500  910s
+[P1-DEFICIT_seed2026_S1] 209/500  915s
+[P1-DEFICIT_seed2026_S1] 210/500  921s
+[P1-DEFICIT_seed2026_S1] 211/500  925s
+[P1-DEFICIT_seed2026_S1] 212/500  933s
+[P1-DEFICIT_seed2026_S1] 213/500  936s
+[P1-DEFICIT_seed2026_S1] 214/500  941s
+[P1-DEFICIT_seed2026_S1] 215/500  949s
+[P1-DEFICIT_seed2026_S1] 216/500  952s
+[P1-DEFICIT_seed2026_S1] 217/500  956s
+[P1-DEFICIT_seed2026_S1] 218/500  960s
+[P1-DEFICIT_seed2026_S1] 219/500  963s
+[P1-DEFICIT_seed2026_S1] 220/500  967s
+[P1-DEFICIT_seed2026_S1] 221/500  972s
+[P1-DEFICIT_seed2026_S1] 222/500  976s
+[P1-DEFICIT_seed2026_S1] 223/500  980s
+[P1-DEFICIT_seed2026_S1] 224/500  984s
+[P1-DEFICIT_seed2026_S1] 225/500  989s
+[P1-DEFICIT_seed2026_S1] 226/500  994s
+[P1-DEFICIT_seed2026_S1] 227/500  998s
+[P1-DEFICIT_seed2026_S1] 228/500  1003s
+[P1-DEFICIT_seed2026_S1] 229/500  1006s
+[P1-DEFICIT_seed2026_S1] 230/500  1009s
+[P1-DEFICIT_seed2026_S1] 231/500  1012s
+[P1-DEFICIT_seed2026_S1] 232/500  1014s
+[P1-DEFICIT_seed2026_S1] 233/500  1017s
+[P1-DEFICIT_seed2026_S1] 234/500  1022s
+[P1-DEFICIT_seed2026_S1] 235/500  1027s
+[P1-DEFICIT_seed2026_S1] 236/500  1031s
+[P1-DEFICIT_seed2026_S1] 237/500  1038s
+[P1-DEFICIT_seed2026_S1] 238/500  1042s
+[P1-DEFICIT_seed2026_S1] 239/500  1047s
+[P1-DEFICIT_seed2026_S1] 240/500  1050s
+[P1-DEFICIT_seed2026_S1] 241/500  1056s
+[P1-DEFICIT_seed2026_S1] 242/500  1059s
+[P1-DEFICIT_seed2026_S1] 243/500  1063s
+[P1-DEFICIT_seed2026_S1] 244/500  1066s
+[P1-DEFICIT_seed2026_S1] 245/500  1073s
+[P1-DEFICIT_seed2026_S1] 246/500  1079s
+[P1-DEFICIT_seed2026_S1] 247/500  1084s
+[P1-DEFICIT_seed2026_S1] 248/500  1087s
+[P1-DEFICIT_seed2026_S1] 249/500  1091s
+[P1-DEFICIT_seed2026_S1] 250/500  1100s
+[P1-DEFICIT_seed2026_S1] 251/500  1104s
+[P1-DEFICIT_seed2026_S1] 252/500  1107s
+[P1-DEFICIT_seed2026_S1] 253/500  1110s
+[P1-DEFICIT_seed2026_S1] 254/500  1117s
+[P1-DEFICIT_seed2026_S1] 255/500  1121s
+[P1-DEFICIT_seed2026_S1] 256/500  1126s
+[P1-DEFICIT_seed2026_S1] 257/500  1130s
+[P1-DEFICIT_seed2026_S1] 258/500  1134s
+[P1-DEFICIT_seed2026_S1] 259/500  1137s
+[P1-DEFICIT_seed2026_S1] 260/500  1141s
+[P1-DEFICIT_seed2026_S1] 261/500  1145s
+[P1-DEFICIT_seed2026_S1] 262/500  1152s
+[P1-DEFICIT_seed2026_S1] 263/500  1158s
+[P1-DEFICIT_seed2026_S1] 264/500  1163s
+[P1-DEFICIT_seed2026_S1] 265/500  1166s
+[P1-DEFICIT_seed2026_S1] 266/500  1170s
+[P1-DEFICIT_seed2026_S1] 267/500  1175s
+[P1-DEFICIT_seed2026_S1] 268/500  1180s
+[P1-DEFICIT_seed2026_S1] 269/500  1185s
+[P1-DEFICIT_seed2026_S1] 270/500  1189s
+[P1-DEFICIT_seed2026_S1] 271/500  1192s
+[P1-DEFICIT_seed2026_S1] 272/500  1195s
+[P1-DEFICIT_seed2026_S1] 273/500  1199s
+[P1-DEFICIT_seed2026_S1] 274/500  1203s
+[P1-DEFICIT_seed2026_S1] 275/500  1207s
+[P1-DEFICIT_seed2026_S1] 276/500  1210s
+[P1-DEFICIT_seed2026_S1] 277/500  1215s
+[P1-DEFICIT_seed2026_S1] 278/500  1219s
+[P1-DEFICIT_seed2026_S1] 279/500  1224s
+[P1-DEFICIT_seed2026_S1] 280/500  1231s
+[P1-DEFICIT_seed2026_S1] 281/500  1235s
+[P1-DEFICIT_seed2026_S1] 282/500  1237s
+[P1-DEFICIT_seed2026_S1] 283/500  1242s
+[P1-DEFICIT_seed2026_S1] 284/500  1245s
+[P1-DEFICIT_seed2026_S1] 285/500  1251s
+[P1-DEFICIT_seed2026_S1] 286/500  1255s
+[P1-DEFICIT_seed2026_S1] 287/500  1258s
+[P1-DEFICIT_seed2026_S1] 288/500  1263s
+[P1-DEFICIT_seed2026_S1] 289/500  1265s
+[P1-DEFICIT_seed2026_S1] 290/500  1269s
+[P1-DEFICIT_seed2026_S1] 291/500  1271s
+[P1-DEFICIT_seed2026_S1] 292/500  1274s
+[P1-DEFICIT_seed2026_S1] 293/500  1278s
+[P1-DEFICIT_seed2026_S1] 294/500  1283s
+[P1-DEFICIT_seed2026_S1] 295/500  1287s
+[P1-DEFICIT_seed2026_S1] 296/500  1292s
+[P1-DEFICIT_seed2026_S1] 297/500  1296s
+[P1-DEFICIT_seed2026_S1] 298/500  1300s
+[P1-DEFICIT_seed2026_S1] 299/500  1306s
+[P1-DEFICIT_seed2026_S1] 300/500  1310s
+[P1-DEFICIT_seed2026_S1] 301/500  1314s
+[P1-DEFICIT_seed2026_S1] 302/500  1318s
+[P1-DEFICIT_seed2026_S1] 303/500  1323s
+[P1-DEFICIT_seed2026_S1] 304/500  1326s
+[P1-DEFICIT_seed2026_S1] 305/500  1328s
+[P1-DEFICIT_seed2026_S1] 306/500  1332s
+[P1-DEFICIT_seed2026_S1] 307/500  1339s
+[P1-DEFICIT_seed2026_S1] 308/500  1343s
+[P1-DEFICIT_seed2026_S1] 309/500  1349s
+[P1-DEFICIT_seed2026_S1] 310/500  1353s
+[P1-DEFICIT_seed2026_S1] 311/500  1357s
+[P1-DEFICIT_seed2026_S1] 312/500  1359s
+[P1-DEFICIT_seed2026_S1] 313/500  1364s
+[P1-DEFICIT_seed2026_S1] 314/500  1368s
+[P1-DEFICIT_seed2026_S1] 315/500  1371s
+[P1-DEFICIT_seed2026_S1] 316/500  1374s
+[P1-DEFICIT_seed2026_S1] 317/500  1377s
+[P1-DEFICIT_seed2026_S1] 318/500  1383s
+[P1-DEFICIT_seed2026_S1] 319/500  1387s
+[P1-DEFICIT_seed2026_S1] 320/500  1392s
+[P1-DEFICIT_seed2026_S1] 321/500  1395s
+[P1-DEFICIT_seed2026_S1] 322/500  1400s
+[P1-DEFICIT_seed2026_S1] 323/500  1403s
+[P1-DEFICIT_seed2026_S1] 324/500  1406s
+[P1-DEFICIT_seed2026_S1] 325/500  1409s
+[P1-DEFICIT_seed2026_S1] 326/500  1412s
+[P1-DEFICIT_seed2026_S1] 327/500  1416s
+[P1-DEFICIT_seed2026_S1] 328/500  1422s
+[P1-DEFICIT_seed2026_S1] 329/500  1426s
+[P1-DEFICIT_seed2026_S1] 330/500  1430s
+[P1-DEFICIT_seed2026_S1] 331/500  1433s
+[P1-DEFICIT_seed2026_S1] 332/500  1438s
+[P1-DEFICIT_seed2026_S1] 333/500  1441s
+[P1-DEFICIT_seed2026_S1] 334/500  1446s
+[P1-DEFICIT_seed2026_S1] 335/500  1451s
+[P1-DEFICIT_seed2026_S1] 336/500  1454s
+[P1-DEFICIT_seed2026_S1] 337/500  1456s
+[P1-DEFICIT_seed2026_S1] 338/500  1462s
+[P1-DEFICIT_seed2026_S1] 339/500  1467s
+[P1-DEFICIT_seed2026_S1] 340/500  1471s
+[P1-DEFICIT_seed2026_S1] 341/500  1474s
+[P1-DEFICIT_seed2026_S1] 342/500  1477s
+[P1-DEFICIT_seed2026_S1] 343/500  1479s
+[P1-DEFICIT_seed2026_S1] 344/500  1483s
+[P1-DEFICIT_seed2026_S1] 345/500  1490s
+[P1-DEFICIT_seed2026_S1] 346/500  1494s
+[P1-DEFICIT_seed2026_S1] 347/500  1497s
+[P1-DEFICIT_seed2026_S1] 348/500  1501s
+[P1-DEFICIT_seed2026_S1] 349/500  1506s
+[P1-DEFICIT_seed2026_S1] 350/500  1508s
+[P1-DEFICIT_seed2026_S1] 351/500  1511s
+[P1-DEFICIT_seed2026_S1] 352/500  1515s
+[P1-DEFICIT_seed2026_S1] 353/500  1519s
+[P1-DEFICIT_seed2026_S1] 354/500  1523s
+[P1-DEFICIT_seed2026_S1] 355/500  1526s
+[P1-DEFICIT_seed2026_S1] 356/500  1531s
+[P1-DEFICIT_seed2026_S1] 357/500  1535s
+[P1-DEFICIT_seed2026_S1] 358/500  1540s
+[P1-DEFICIT_seed2026_S1] 359/500  1545s
+[P1-DEFICIT_seed2026_S1] 360/500  1548s
+[P1-DEFICIT_seed2026_S1] 361/500  1553s
+[P1-DEFICIT_seed2026_S1] 362/500  1557s
+[P1-DEFICIT_seed2026_S1] 363/500  1561s
+[P1-DEFICIT_seed2026_S1] 364/500  1565s
+[P1-DEFICIT_seed2026_S1] 365/500  1570s
+[P1-DEFICIT_seed2026_S1] 366/500  1574s
+[P1-DEFICIT_seed2026_S1] 367/500  1577s
+[P1-DEFICIT_seed2026_S1] 368/500  1581s
+[P1-DEFICIT_seed2026_S1] 369/500  1584s
+[P1-DEFICIT_seed2026_S1] 370/500  1592s
+[P1-DEFICIT_seed2026_S1] 371/500  1594s
+[P1-DEFICIT_seed2026_S1] 372/500  1598s
+[P1-DEFICIT_seed2026_S1] 373/500  1601s
+[P1-DEFICIT_seed2026_S1] 374/500  1604s
+[P1-DEFICIT_seed2026_S1] 375/500  1607s
+[P1-DEFICIT_seed2026_S1] 376/500  1611s
+[P1-DEFICIT_seed2026_S1] 377/500  1615s
+[P1-DEFICIT_seed2026_S1] 378/500  1618s
+[P1-DEFICIT_seed2026_S1] 379/500  1622s
+[P1-DEFICIT_seed2026_S1] 380/500  1625s
+[P1-DEFICIT_seed2026_S1] 381/500  1630s
+[P1-DEFICIT_seed2026_S1] 382/500  1636s
+[P1-DEFICIT_seed2026_S1] 383/500  1641s
+[P1-DEFICIT_seed2026_S1] 384/500  1646s
+[P1-DEFICIT_seed2026_S1] 385/500  1652s
+[P1-DEFICIT_seed2026_S1] 386/500  1657s
+[P1-DEFICIT_seed2026_S1] 387/500  1661s
+[P1-DEFICIT_seed2026_S1] 388/500  1665s
+[P1-DEFICIT_seed2026_S1] 389/500  1669s
+[P1-DEFICIT_seed2026_S1] 390/500  1673s
+[P1-DEFICIT_seed2026_S1] 391/500  1678s
+[P1-DEFICIT_seed2026_S1] 392/500  1680s
+[P1-DEFICIT_seed2026_S1] 393/500  1683s
+[P1-DEFICIT_seed2026_S1] 394/500  1686s
+[P1-DEFICIT_seed2026_S1] 395/500  1689s
+[P1-DEFICIT_seed2026_S1] 396/500  1692s
+[P1-DEFICIT_seed2026_S1] 397/500  1694s
+[P1-DEFICIT_seed2026_S1] 398/500  1699s
+[P1-DEFICIT_seed2026_S1] 399/500  1703s
+[P1-DEFICIT_seed2026_S1] 400/500  1709s
+[P1-DEFICIT_seed2026_S1] 401/500  1713s
+[P1-DEFICIT_seed2026_S1] 402/500  1716s
+[P1-DEFICIT_seed2026_S1] 403/500  1724s
+[P1-DEFICIT_seed2026_S1] 404/500  1726s
+[P1-DEFICIT_seed2026_S1] 405/500  1730s
+[P1-DEFICIT_seed2026_S1] 406/500  1735s
+[P1-DEFICIT_seed2026_S1] 407/500  1737s
+[P1-DEFICIT_seed2026_S1] 408/500  1739s
+[P1-DEFICIT_seed2026_S1] 409/500  1743s
+[P1-DEFICIT_seed2026_S1] 410/500  1751s
+[P1-DEFICIT_seed2026_S1] 411/500  1754s
+[P1-DEFICIT_seed2026_S1] 412/500  1759s
+[P1-DEFICIT_seed2026_S1] 413/500  1765s
+[P1-DEFICIT_seed2026_S1] 414/500  1771s
+[P1-DEFICIT_seed2026_S1] 415/500  1773s
+[P1-DEFICIT_seed2026_S1] 416/500  1776s
+[P1-DEFICIT_seed2026_S1] 417/500  1780s
+[P1-DEFICIT_seed2026_S1] 418/500  1786s
+[P1-DEFICIT_seed2026_S1] 419/500  1790s
+[P1-DEFICIT_seed2026_S1] 420/500  1795s
+[P1-DEFICIT_seed2026_S1] 421/500  1798s
+[P1-DEFICIT_seed2026_S1] 422/500  1802s
+[P1-DEFICIT_seed2026_S1] 423/500  1804s
+[P1-DEFICIT_seed2026_S1] 424/500  1808s
+[P1-DEFICIT_seed2026_S1] 425/500  1812s
+[P1-DEFICIT_seed2026_S1] 426/500  1815s
+[P1-DEFICIT_seed2026_S1] 427/500  1819s
+[P1-DEFICIT_seed2026_S1] 428/500  1825s
+[P1-DEFICIT_seed2026_S1] 429/500  1830s
+[P1-DEFICIT_seed2026_S1] 430/500  1834s
+[P1-DEFICIT_seed2026_S1] 431/500  1838s
+[P1-DEFICIT_seed2026_S1] 432/500  1843s
+[P1-DEFICIT_seed2026_S1] 433/500  1846s
+[P1-DEFICIT_seed2026_S1] 434/500  1851s
+[P1-DEFICIT_seed2026_S1] 435/500  1854s
+[P1-DEFICIT_seed2026_S1] 436/500  1858s
+[P1-DEFICIT_seed2026_S1] 437/500  1863s
+[P1-DEFICIT_seed2026_S1] 438/500  1868s
+[P1-DEFICIT_seed2026_S1] 439/500  1875s
+[P1-DEFICIT_seed2026_S1] 440/500  1877s
+[P1-DEFICIT_seed2026_S1] 441/500  1881s
+[P1-DEFICIT_seed2026_S1] 442/500  1884s
+[P1-DEFICIT_seed2026_S1] 443/500  1888s
+[P1-DEFICIT_seed2026_S1] 444/500  1897s
+[P1-DEFICIT_seed2026_S1] 445/500  1900s
+[P1-DEFICIT_seed2026_S1] 446/500  1906s
+[P1-DEFICIT_seed2026_S1] 447/500  1910s
+[P1-DEFICIT_seed2026_S1] 448/500  1912s
+[P1-DEFICIT_seed2026_S1] 449/500  1916s
+[P1-DEFICIT_seed2026_S1] 450/500  1919s
+[P1-DEFICIT_seed2026_S1] 451/500  1924s
+[P1-DEFICIT_seed2026_S1] 452/500  1928s
+[P1-DEFICIT_seed2026_S1] 453/500  1932s
+[P1-DEFICIT_seed2026_S1] 454/500  1936s
+[P1-DEFICIT_seed2026_S1] 455/500  1939s
+[P1-DEFICIT_seed2026_S1] 456/500  1942s
+[P1-DEFICIT_seed2026_S1] 457/500  1947s
+[P1-DEFICIT_seed2026_S1] 458/500  1950s
+[P1-DEFICIT_seed2026_S1] 459/500  1953s
+[P1-DEFICIT_seed2026_S1] 460/500  1956s
+[P1-DEFICIT_seed2026_S1] 461/500  1960s
+[P1-DEFICIT_seed2026_S1] 462/500  1963s
+[P1-DEFICIT_seed2026_S1] 463/500  1966s
+[P1-DEFICIT_seed2026_S1] 464/500  1970s
+[P1-DEFICIT_seed2026_S1] 465/500  1974s
+[P1-DEFICIT_seed2026_S1] 466/500  1979s
+[P1-DEFICIT_seed2026_S1] 467/500  1982s
+[P1-DEFICIT_seed2026_S1] 468/500  1989s
+[P1-DEFICIT_seed2026_S1] 469/500  1991s
+[P1-DEFICIT_seed2026_S1] 470/500  1995s
+[P1-DEFICIT_seed2026_S1] 471/500  1998s
+[P1-DEFICIT_seed2026_S1] 472/500  2003s
+[P1-DEFICIT_seed2026_S1] 473/500  2005s
+[P1-DEFICIT_seed2026_S1] 474/500  2008s
+[P1-DEFICIT_seed2026_S1] 475/500  2014s
+[P1-DEFICIT_seed2026_S1] 476/500  2017s
+[P1-DEFICIT_seed2026_S1] 477/500  2024s
+[P1-DEFICIT_seed2026_S1] 478/500  2029s
+[P1-DEFICIT_seed2026_S1] 479/500  2034s
+[P1-DEFICIT_seed2026_S1] 480/500  2040s
+[P1-DEFICIT_seed2026_S1] 481/500  2047s
+[P1-DEFICIT_seed2026_S1] 482/500  2049s
+[P1-DEFICIT_seed2026_S1] 483/500  2052s
+[P1-DEFICIT_seed2026_S1] 484/500  2055s
+[P1-DEFICIT_seed2026_S1] 485/500  2058s
+[P1-DEFICIT_seed2026_S1] 486/500  2061s
+[P1-DEFICIT_seed2026_S1] 487/500  2063s
+[P1-DEFICIT_seed2026_S1] 488/500  2066s
+[P1-DEFICIT_seed2026_S1] 489/500  2069s
+[P1-DEFICIT_seed2026_S1] 490/500  2074s
+[P1-DEFICIT_seed2026_S1] 491/500  2078s
+[P1-DEFICIT_seed2026_S1] 492/500  2080s
+[P1-DEFICIT_seed2026_S1] 493/500  2083s
+[P1-DEFICIT_seed2026_S1] 494/500  2086s
+[P1-DEFICIT_seed2026_S1] 495/500  2091s
+[P1-DEFICIT_seed2026_S1] 496/500  2097s
+[P1-DEFICIT_seed2026_S1] 497/500  2100s
+[P1-DEFICIT_seed2026_S1] 498/500  2104s
+[P1-DEFICIT_seed2026_S1] 499/500  2109s
+[P1-DEFICIT_seed2026_S1] 500/500  2112s
+[P1-DEFICIT_seed2026_S1] accuracy 0.8220  lenient 0.8220  format 0.9940  mean_len 247.8  -> /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S1/eval_dev.summary.json
+[RUN] post_eval_P1-DEFICIT_seed2026_S1
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/run_p1p2_post_eval.py --method P1-DEFICIT --seed 2026 --round 1 --prediction /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S1/eval_dev.jsonl --checkpoint /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001 --output-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S1 --manual-root /workspace/intake/work/P2/experiments/week2September/manual --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/train_set.json --selection-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/selection_log.jsonl --train-log /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001/train_log.json --checkpoint-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/checkpoint_log.jsonl --gold-manifest /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/gold_vfinal_manifest.json --gold-labels /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/supplement_annotations_vfinal.jsonl --approval-csv /workspace/intake/work/P2/experiments/week2September/manual/data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv --dev-ids /workspace/intake/work/P2/experiments/week2September/manual/splits/d_dev_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json
+POST_EVAL_HOOK: PASS /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S1
+METHOD: P1-DEFICIT
+SEED: 2026
+ROUND: 1 -> S1
+PREDICTION: /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S1/eval_dev.jsonl
+CHECKPOINT: /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001
+CORRECTNESS: status == valid
+GOLD_SCOPE: approved 85; D_dev prediction coverage: 500
+[RUN] capability_state_P1-DEFICIT_seed2026_selection_2
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_capability_state.py --sidecar-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S1 --target-method P1-DEFICIT --target-seed 2026 --out /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_002.json
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=P1-DEFICIT_seed2026_S1
+SOURCE_METHOD=P1-DEFICIT
+SOURCE_SEED=2026
+SOURCE_ROUND=1
+TARGET_METHOD=P1-DEFICIT
+TARGET_SEED=2026
+SELECTION_ROUND=2
+CAPABILITY_COUNT=7
+STATE_SHA256=9025f7f11b3c3503dd0a9f2fcdac6c69a4f9bfdb0ae6ec8cdeb065f57ed4df35
+STATE_PATH=/workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_002.json
+CAPABILITY_STATE_VALIDATION=PASS
+[RUN] select_P1-DEFICIT_round_2
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_selector.py --method P1-DEFICIT --seed 2026 --round 2 --state /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_002.json --out-dir /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_tokens.jsonl --d-pool /workspace/intake/work/P2/experiments/week2September/manual/splits/d_pool_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json --previous-train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/train_set.json
+METHOD=P1-DEFICIT
+SEED=2026
+ROUND=2
+SOURCE_CHECKPOINT=S1
+N_ELIGIBLE=4353
+N_TRAINED_BEFORE=194
+N_SELECTED=196
+TOKENS_USED=45230
+BUDGET=45426
+TRAIN_SET=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/train_set.json
+SELECTION_LOG=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/selection_log.jsonl
+P1P2_SELECTION=PASS
+[REUSE] P1 selection round 2: preserving validated train set/log
+[RUN] train_P1-DEFICIT_seed2026_S2
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/train_round.py --seed 2026 --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/train_set.json --adapter-dir /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002 --micro-batch 1 --dtype bf16 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --init-adapter /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_001 --legacy-windows-root "C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual"
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 59/338 [00:00<00:00, 515.16it/s]Loading weights:  35%|███▍      | 118/338 [00:00<00:00, 523.28it/s]Loading weights:  51%|█████▏    | 174/338 [00:00<00:00, 520.83it/s]Loading weights:  70%|███████   | 238/338 [00:00<00:00, 534.11it/s]Loading weights:  87%|████████▋ | 294/338 [00:00<00:00, 527.71it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 554.78it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+step   1  loss 0.1550  grad_norm 0.187  tokens 1980  6s
+step   2  loss 0.1566  grad_norm 0.267  tokens 1590  7s
+step   3  loss 0.1787  grad_norm 0.263  tokens 2208  9s
+step   4  loss 0.1919  grad_norm 0.302  tokens 1797  11s
+step   5  loss 0.1687  grad_norm 0.308  tokens 1774  12s
+step   6  loss 0.1648  grad_norm 0.291  tokens 1932  14s
+step   7  loss 0.1954  grad_norm 0.325  tokens 1659  15s
+step   8  loss 0.1469  grad_norm 0.287  tokens 1534  17s
+step   9  loss 0.1350  grad_norm 0.242  tokens 1886  19s
+step  10  loss 0.1284  grad_norm 0.215  tokens 2046  20s
+step  11  loss 0.1662  grad_norm 0.235  tokens 2069  22s
+step  12  loss 0.1783  grad_norm 0.353  tokens 1515  24s
+step  13  loss 0.1770  grad_norm 0.268  tokens 1978  25s
+step  14  loss 0.1297  grad_norm 0.273  tokens 1651  27s
+step  15  loss 0.1761  grad_norm 0.293  tokens 2023  28s
+step  16  loss 0.1434  grad_norm 0.260  tokens 2271  30s
+step  17  loss 0.2074  grad_norm 0.348  tokens 1747  32s
+step  18  loss 0.1677  grad_norm 0.255  tokens 2063  33s
+step  19  loss 0.1505  grad_norm 0.256  tokens 1848  35s
+step  20  loss 0.1428  grad_norm 0.276  tokens 1646  36s
+step  21  loss 0.1865  grad_norm 0.329  tokens 1524  38s
+step  22  loss 0.1509  grad_norm 0.272  tokens 1820  40s
+step  23  loss 0.1762  grad_norm 0.256  tokens 1944  41s
+step  24  loss 0.1303  grad_norm 0.242  tokens 1866  42s
+step  25  loss 0.2572  grad_norm 0.421  tokens 1055  44s
+/workspace/intake/venv/lib/python3.11/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in Qwen/Qwen2.5-1.5B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+saved adapter -> /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002  (25 steps, 45426 supervised tokens)
+[RUN] eval_dev_P1-DEFICIT_seed2026_S2
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/eval_student.py --tag P1-DEFICIT_seed2026_S2 --split dev --out /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S2/eval_dev.jsonl --backend hf --dtype bf16 --batch-size 1 --adapter /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002
+[P1-DEFICIT_seed2026_S2] dev: 500 problems, 0 already done, 500 to run, backend=hf, dtype=torch.bfloat16
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 77/338 [00:00<00:00, 708.31it/s]Loading weights:  45%|████▍     | 151/338 [00:00<00:00, 718.04it/s]Loading weights:  66%|██████▌   | 223/338 [00:00<00:00, 691.82it/s]Loading weights:  87%|████████▋ | 293/338 [00:00<00:00, 624.08it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 685.79it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[P1-DEFICIT_seed2026_S2] 1/500  59s
+[P1-DEFICIT_seed2026_S2] 2/500  63s
+[P1-DEFICIT_seed2026_S2] 3/500  66s
+[P1-DEFICIT_seed2026_S2] 4/500  69s
+[P1-DEFICIT_seed2026_S2] 5/500  71s
+[P1-DEFICIT_seed2026_S2] 6/500  76s
+[P1-DEFICIT_seed2026_S2] 7/500  83s
+[P1-DEFICIT_seed2026_S2] 8/500  88s
+[P1-DEFICIT_seed2026_S2] 9/500  92s
+[P1-DEFICIT_seed2026_S2] 10/500  96s
+[P1-DEFICIT_seed2026_S2] 11/500  101s
+[P1-DEFICIT_seed2026_S2] 12/500  103s
+[P1-DEFICIT_seed2026_S2] 13/500  108s
+[P1-DEFICIT_seed2026_S2] 14/500  115s
+[P1-DEFICIT_seed2026_S2] 15/500  119s
+[P1-DEFICIT_seed2026_S2] 16/500  122s
+[P1-DEFICIT_seed2026_S2] 17/500  126s
+[P1-DEFICIT_seed2026_S2] 18/500  131s
+[P1-DEFICIT_seed2026_S2] 19/500  133s
+[P1-DEFICIT_seed2026_S2] 20/500  138s
+[P1-DEFICIT_seed2026_S2] 21/500  143s
+[P1-DEFICIT_seed2026_S2] 22/500  147s
+[P1-DEFICIT_seed2026_S2] 23/500  150s
+[P1-DEFICIT_seed2026_S2] 24/500  155s
+[P1-DEFICIT_seed2026_S2] 25/500  160s
+[P1-DEFICIT_seed2026_S2] 26/500  165s
+[P1-DEFICIT_seed2026_S2] 27/500  170s
+[P1-DEFICIT_seed2026_S2] 28/500  174s
+[P1-DEFICIT_seed2026_S2] 29/500  178s
+[P1-DEFICIT_seed2026_S2] 30/500  183s
+[P1-DEFICIT_seed2026_S2] 31/500  186s
+[P1-DEFICIT_seed2026_S2] 32/500  188s
+[P1-DEFICIT_seed2026_S2] 33/500  194s
+[P1-DEFICIT_seed2026_S2] 34/500  198s
+[P1-DEFICIT_seed2026_S2] 35/500  202s
+[P1-DEFICIT_seed2026_S2] 36/500  207s
+[P1-DEFICIT_seed2026_S2] 37/500  210s
+[P1-DEFICIT_seed2026_S2] 38/500  215s
+[P1-DEFICIT_seed2026_S2] 39/500  218s
+[P1-DEFICIT_seed2026_S2] 40/500  224s
+[P1-DEFICIT_seed2026_S2] 41/500  229s
+[P1-DEFICIT_seed2026_S2] 42/500  231s
+[P1-DEFICIT_seed2026_S2] 43/500  236s
+[P1-DEFICIT_seed2026_S2] 44/500  241s
+[P1-DEFICIT_seed2026_S2] 45/500  246s
+[P1-DEFICIT_seed2026_S2] 46/500  250s
+[P1-DEFICIT_seed2026_S2] 47/500  255s
+[P1-DEFICIT_seed2026_S2] 48/500  258s
+[P1-DEFICIT_seed2026_S2] 49/500  264s
+[P1-DEFICIT_seed2026_S2] 50/500  269s
+[P1-DEFICIT_seed2026_S2] 51/500  272s
+[P1-DEFICIT_seed2026_S2] 52/500  275s
+[P1-DEFICIT_seed2026_S2] 53/500  281s
+[P1-DEFICIT_seed2026_S2] 54/500  285s
+[P1-DEFICIT_seed2026_S2] 55/500  288s
+[P1-DEFICIT_seed2026_S2] 56/500  292s
+[P1-DEFICIT_seed2026_S2] 57/500  299s
+[P1-DEFICIT_seed2026_S2] 58/500  303s
+[P1-DEFICIT_seed2026_S2] 59/500  306s
+[P1-DEFICIT_seed2026_S2] 60/500  309s
+[P1-DEFICIT_seed2026_S2] 61/500  312s
+[P1-DEFICIT_seed2026_S2] 62/500  317s
+[P1-DEFICIT_seed2026_S2] 63/500  320s
+[P1-DEFICIT_seed2026_S2] 64/500  325s
+[P1-DEFICIT_seed2026_S2] 65/500  329s
+[P1-DEFICIT_seed2026_S2] 66/500  333s
+[P1-DEFICIT_seed2026_S2] 67/500  336s
+[P1-DEFICIT_seed2026_S2] 68/500  338s
+[P1-DEFICIT_seed2026_S2] 69/500  344s
+[P1-DEFICIT_seed2026_S2] 70/500  350s
+[P1-DEFICIT_seed2026_S2] 71/500  358s
+[P1-DEFICIT_seed2026_S2] 72/500  362s
+[P1-DEFICIT_seed2026_S2] 73/500  366s
+[P1-DEFICIT_seed2026_S2] 74/500  372s
+[P1-DEFICIT_seed2026_S2] 75/500  376s
+[P1-DEFICIT_seed2026_S2] 76/500  381s
+[P1-DEFICIT_seed2026_S2] 77/500  385s
+[P1-DEFICIT_seed2026_S2] 78/500  389s
+[P1-DEFICIT_seed2026_S2] 79/500  394s
+[P1-DEFICIT_seed2026_S2] 80/500  397s
+[P1-DEFICIT_seed2026_S2] 81/500  400s
+[P1-DEFICIT_seed2026_S2] 82/500  403s
+[P1-DEFICIT_seed2026_S2] 83/500  407s
+[P1-DEFICIT_seed2026_S2] 84/500  410s
+[P1-DEFICIT_seed2026_S2] 85/500  414s
+[P1-DEFICIT_seed2026_S2] 86/500  420s
+[P1-DEFICIT_seed2026_S2] 87/500  422s
+[P1-DEFICIT_seed2026_S2] 88/500  426s
+[P1-DEFICIT_seed2026_S2] 89/500  429s
+[P1-DEFICIT_seed2026_S2] 90/500  433s
+[P1-DEFICIT_seed2026_S2] 91/500  436s
+[P1-DEFICIT_seed2026_S2] 92/500  441s
+[P1-DEFICIT_seed2026_S2] 93/500  446s
+[P1-DEFICIT_seed2026_S2] 94/500  452s
+[P1-DEFICIT_seed2026_S2] 95/500  455s
+[P1-DEFICIT_seed2026_S2] 96/500  460s
+[P1-DEFICIT_seed2026_S2] 97/500  464s
+[P1-DEFICIT_seed2026_S2] 98/500  468s
+[P1-DEFICIT_seed2026_S2] 99/500  472s
+[P1-DEFICIT_seed2026_S2] 100/500  476s
+[P1-DEFICIT_seed2026_S2] 101/500  479s
+[P1-DEFICIT_seed2026_S2] 102/500  485s
+[P1-DEFICIT_seed2026_S2] 103/500  488s
+[P1-DEFICIT_seed2026_S2] 104/500  491s
+[P1-DEFICIT_seed2026_S2] 105/500  496s
+[P1-DEFICIT_seed2026_S2] 106/500  500s
+[P1-DEFICIT_seed2026_S2] 107/500  505s
+[P1-DEFICIT_seed2026_S2] 108/500  507s
+[P1-DEFICIT_seed2026_S2] 109/500  510s
+[P1-DEFICIT_seed2026_S2] 110/500  514s
+[P1-DEFICIT_seed2026_S2] 111/500  520s
+[P1-DEFICIT_seed2026_S2] 112/500  526s
+[P1-DEFICIT_seed2026_S2] 113/500  531s
+[P1-DEFICIT_seed2026_S2] 114/500  534s
+[P1-DEFICIT_seed2026_S2] 115/500  541s
+[P1-DEFICIT_seed2026_S2] 116/500  546s
+[P1-DEFICIT_seed2026_S2] 117/500  549s
+[P1-DEFICIT_seed2026_S2] 118/500  555s
+[P1-DEFICIT_seed2026_S2] 119/500  558s
+[P1-DEFICIT_seed2026_S2] 120/500  562s
+[P1-DEFICIT_seed2026_S2] 121/500  566s
+[P1-DEFICIT_seed2026_S2] 122/500  570s
+[P1-DEFICIT_seed2026_S2] 123/500  573s
+[P1-DEFICIT_seed2026_S2] 124/500  577s
+[P1-DEFICIT_seed2026_S2] 125/500  580s
+[P1-DEFICIT_seed2026_S2] 126/500  584s
+[P1-DEFICIT_seed2026_S2] 127/500  587s
+[P1-DEFICIT_seed2026_S2] 128/500  590s
+[P1-DEFICIT_seed2026_S2] 129/500  594s
+[P1-DEFICIT_seed2026_S2] 130/500  597s
+[P1-DEFICIT_seed2026_S2] 131/500  601s
+[P1-DEFICIT_seed2026_S2] 132/500  606s
+[P1-DEFICIT_seed2026_S2] 133/500  612s
+[P1-DEFICIT_seed2026_S2] 134/500  618s
+[P1-DEFICIT_seed2026_S2] 135/500  623s
+[P1-DEFICIT_seed2026_S2] 136/500  627s
+[P1-DEFICIT_seed2026_S2] 137/500  631s
+[P1-DEFICIT_seed2026_S2] 138/500  637s
+[P1-DEFICIT_seed2026_S2] 139/500  643s
+[P1-DEFICIT_seed2026_S2] 140/500  648s
+[P1-DEFICIT_seed2026_S2] 141/500  650s
+[P1-DEFICIT_seed2026_S2] 142/500  653s
+[P1-DEFICIT_seed2026_S2] 143/500  656s
+[P1-DEFICIT_seed2026_S2] 144/500  660s
+[P1-DEFICIT_seed2026_S2] 145/500  663s
+[P1-DEFICIT_seed2026_S2] 146/500  667s
+[P1-DEFICIT_seed2026_S2] 147/500  671s
+[P1-DEFICIT_seed2026_S2] 148/500  675s
+[P1-DEFICIT_seed2026_S2] 149/500  679s
+[P1-DEFICIT_seed2026_S2] 150/500  686s
+[P1-DEFICIT_seed2026_S2] 151/500  690s
+[P1-DEFICIT_seed2026_S2] 152/500  694s
+[P1-DEFICIT_seed2026_S2] 153/500  697s
+[P1-DEFICIT_seed2026_S2] 154/500  700s
+[P1-DEFICIT_seed2026_S2] 155/500  704s
+[P1-DEFICIT_seed2026_S2] 156/500  709s
+[P1-DEFICIT_seed2026_S2] 157/500  713s
+[P1-DEFICIT_seed2026_S2] 158/500  717s
+[P1-DEFICIT_seed2026_S2] 159/500  720s
+[P1-DEFICIT_seed2026_S2] 160/500  724s
+[P1-DEFICIT_seed2026_S2] 161/500  726s
+[P1-DEFICIT_seed2026_S2] 162/500  732s
+[P1-DEFICIT_seed2026_S2] 163/500  734s
+[P1-DEFICIT_seed2026_S2] 164/500  738s
+[P1-DEFICIT_seed2026_S2] 165/500  740s
+[P1-DEFICIT_seed2026_S2] 166/500  745s
+[P1-DEFICIT_seed2026_S2] 167/500  749s
+[P1-DEFICIT_seed2026_S2] 168/500  756s
+[P1-DEFICIT_seed2026_S2] 169/500  759s
+[P1-DEFICIT_seed2026_S2] 170/500  763s
+[P1-DEFICIT_seed2026_S2] 171/500  766s
+[P1-DEFICIT_seed2026_S2] 172/500  768s
+[P1-DEFICIT_seed2026_S2] 173/500  771s
+[P1-DEFICIT_seed2026_S2] 174/500  774s
+[P1-DEFICIT_seed2026_S2] 175/500  777s
+[P1-DEFICIT_seed2026_S2] 176/500  780s
+[P1-DEFICIT_seed2026_S2] 177/500  785s
+[P1-DEFICIT_seed2026_S2] 178/500  787s
+[P1-DEFICIT_seed2026_S2] 179/500  791s
+[P1-DEFICIT_seed2026_S2] 180/500  797s
+[P1-DEFICIT_seed2026_S2] 181/500  801s
+[P1-DEFICIT_seed2026_S2] 182/500  806s
+[P1-DEFICIT_seed2026_S2] 183/500  810s
+[P1-DEFICIT_seed2026_S2] 184/500  814s
+[P1-DEFICIT_seed2026_S2] 185/500  817s
+[P1-DEFICIT_seed2026_S2] 186/500  822s
+[P1-DEFICIT_seed2026_S2] 187/500  825s
+[P1-DEFICIT_seed2026_S2] 188/500  831s
+[P1-DEFICIT_seed2026_S2] 189/500  836s
+[P1-DEFICIT_seed2026_S2] 190/500  841s
+[P1-DEFICIT_seed2026_S2] 191/500  845s
+[P1-DEFICIT_seed2026_S2] 192/500  854s
+[P1-DEFICIT_seed2026_S2] 193/500  858s
+[P1-DEFICIT_seed2026_S2] 194/500  863s
+[P1-DEFICIT_seed2026_S2] 195/500  868s
+[P1-DEFICIT_seed2026_S2] 196/500  872s
+[P1-DEFICIT_seed2026_S2] 197/500  875s
+[P1-DEFICIT_seed2026_S2] 198/500  879s
+[P1-DEFICIT_seed2026_S2] 199/500  882s
+[P1-DEFICIT_seed2026_S2] 200/500  888s
+[P1-DEFICIT_seed2026_S2] 201/500  891s
+[P1-DEFICIT_seed2026_S2] 202/500  896s
+[P1-DEFICIT_seed2026_S2] 203/500  899s
+[P1-DEFICIT_seed2026_S2] 204/500  902s
+[P1-DEFICIT_seed2026_S2] 205/500  906s
+[P1-DEFICIT_seed2026_S2] 206/500  911s
+[P1-DEFICIT_seed2026_S2] 207/500  918s
+[P1-DEFICIT_seed2026_S2] 208/500  922s
+[P1-DEFICIT_seed2026_S2] 209/500  927s
+[P1-DEFICIT_seed2026_S2] 210/500  932s
+[P1-DEFICIT_seed2026_S2] 211/500  937s
+[P1-DEFICIT_seed2026_S2] 212/500  945s
+[P1-DEFICIT_seed2026_S2] 213/500  948s
+[P1-DEFICIT_seed2026_S2] 214/500  952s
+[P1-DEFICIT_seed2026_S2] 215/500  958s
+[P1-DEFICIT_seed2026_S2] 216/500  962s
+[P1-DEFICIT_seed2026_S2] 217/500  965s
+[P1-DEFICIT_seed2026_S2] 218/500  969s
+[P1-DEFICIT_seed2026_S2] 219/500  972s
+[P1-DEFICIT_seed2026_S2] 220/500  976s
+[P1-DEFICIT_seed2026_S2] 221/500  981s
+[P1-DEFICIT_seed2026_S2] 222/500  986s
+[P1-DEFICIT_seed2026_S2] 223/500  989s
+[P1-DEFICIT_seed2026_S2] 224/500  992s
+[P1-DEFICIT_seed2026_S2] 225/500  998s
+[P1-DEFICIT_seed2026_S2] 226/500  1003s
+[P1-DEFICIT_seed2026_S2] 227/500  1008s
+[P1-DEFICIT_seed2026_S2] 228/500  1012s
+[P1-DEFICIT_seed2026_S2] 229/500  1015s
+[P1-DEFICIT_seed2026_S2] 230/500  1018s
+[P1-DEFICIT_seed2026_S2] 231/500  1020s
+[P1-DEFICIT_seed2026_S2] 232/500  1023s
+[P1-DEFICIT_seed2026_S2] 233/500  1026s
+[P1-DEFICIT_seed2026_S2] 234/500  1032s
+[P1-DEFICIT_seed2026_S2] 235/500  1038s
+[P1-DEFICIT_seed2026_S2] 236/500  1041s
+[P1-DEFICIT_seed2026_S2] 237/500  1048s
+[P1-DEFICIT_seed2026_S2] 238/500  1052s
+[P1-DEFICIT_seed2026_S2] 239/500  1058s
+[P1-DEFICIT_seed2026_S2] 240/500  1061s
+[P1-DEFICIT_seed2026_S2] 241/500  1067s
+[P1-DEFICIT_seed2026_S2] 242/500  1069s
+[P1-DEFICIT_seed2026_S2] 243/500  1073s
+[P1-DEFICIT_seed2026_S2] 244/500  1078s
+[P1-DEFICIT_seed2026_S2] 245/500  1084s
+[P1-DEFICIT_seed2026_S2] 246/500  1090s
+[P1-DEFICIT_seed2026_S2] 247/500  1094s
+[P1-DEFICIT_seed2026_S2] 248/500  1098s
+[P1-DEFICIT_seed2026_S2] 249/500  1102s
+[P1-DEFICIT_seed2026_S2] 250/500  1110s
+[P1-DEFICIT_seed2026_S2] 251/500  1113s
+[P1-DEFICIT_seed2026_S2] 252/500  1116s
+[P1-DEFICIT_seed2026_S2] 253/500  1120s
+[P1-DEFICIT_seed2026_S2] 254/500  1126s
+[P1-DEFICIT_seed2026_S2] 255/500  1130s
+[P1-DEFICIT_seed2026_S2] 256/500  1133s
+[P1-DEFICIT_seed2026_S2] 257/500  1137s
+[P1-DEFICIT_seed2026_S2] 258/500  1142s
+[P1-DEFICIT_seed2026_S2] 259/500  1146s
+[P1-DEFICIT_seed2026_S2] 260/500  1149s
+[P1-DEFICIT_seed2026_S2] 261/500  1153s
+[P1-DEFICIT_seed2026_S2] 262/500  1160s
+[P1-DEFICIT_seed2026_S2] 263/500  1165s
+[P1-DEFICIT_seed2026_S2] 264/500  1169s
+[P1-DEFICIT_seed2026_S2] 265/500  1175s
+[P1-DEFICIT_seed2026_S2] 266/500  1179s
+[P1-DEFICIT_seed2026_S2] 267/500  1184s
+[P1-DEFICIT_seed2026_S2] 268/500  1188s
+[P1-DEFICIT_seed2026_S2] 269/500  1193s
+[P1-DEFICIT_seed2026_S2] 270/500  1197s
+[P1-DEFICIT_seed2026_S2] 271/500  1200s
+[P1-DEFICIT_seed2026_S2] 272/500  1203s
+[P1-DEFICIT_seed2026_S2] 273/500  1208s
+[P1-DEFICIT_seed2026_S2] 274/500  1214s
+[P1-DEFICIT_seed2026_S2] 275/500  1218s
+[P1-DEFICIT_seed2026_S2] 276/500  1222s
+[P1-DEFICIT_seed2026_S2] 277/500  1226s
+[P1-DEFICIT_seed2026_S2] 278/500  1230s
+[P1-DEFICIT_seed2026_S2] 279/500  1235s
+[P1-DEFICIT_seed2026_S2] 280/500  1242s
+[P1-DEFICIT_seed2026_S2] 281/500  1247s
+[P1-DEFICIT_seed2026_S2] 282/500  1249s
+[P1-DEFICIT_seed2026_S2] 283/500  1253s
+[P1-DEFICIT_seed2026_S2] 284/500  1257s
+[P1-DEFICIT_seed2026_S2] 285/500  1260s
+[P1-DEFICIT_seed2026_S2] 286/500  1264s
+[P1-DEFICIT_seed2026_S2] 287/500  1267s
+[P1-DEFICIT_seed2026_S2] 288/500  1271s
+[P1-DEFICIT_seed2026_S2] 289/500  1275s
+[P1-DEFICIT_seed2026_S2] 290/500  1279s
+[P1-DEFICIT_seed2026_S2] 291/500  1282s
+[P1-DEFICIT_seed2026_S2] 292/500  1285s
+[P1-DEFICIT_seed2026_S2] 293/500  1288s
+[P1-DEFICIT_seed2026_S2] 294/500  1296s
+[P1-DEFICIT_seed2026_S2] 295/500  1299s
+[P1-DEFICIT_seed2026_S2] 296/500  1304s
+[P1-DEFICIT_seed2026_S2] 297/500  1309s
+[P1-DEFICIT_seed2026_S2] 298/500  1312s
+[P1-DEFICIT_seed2026_S2] 299/500  1319s
+[P1-DEFICIT_seed2026_S2] 300/500  1324s
+[P1-DEFICIT_seed2026_S2] 301/500  1327s
+[P1-DEFICIT_seed2026_S2] 302/500  1331s
+[P1-DEFICIT_seed2026_S2] 303/500  1336s
+[P1-DEFICIT_seed2026_S2] 304/500  1340s
+[P1-DEFICIT_seed2026_S2] 305/500  1343s
+[P1-DEFICIT_seed2026_S2] 306/500  1348s
+[P1-DEFICIT_seed2026_S2] 307/500  1353s
+[P1-DEFICIT_seed2026_S2] 308/500  1358s
+[P1-DEFICIT_seed2026_S2] 309/500  1365s
+[P1-DEFICIT_seed2026_S2] 310/500  1368s
+[P1-DEFICIT_seed2026_S2] 311/500  1372s
+[P1-DEFICIT_seed2026_S2] 312/500  1376s
+[P1-DEFICIT_seed2026_S2] 313/500  1383s
+[P1-DEFICIT_seed2026_S2] 314/500  1388s
+[P1-DEFICIT_seed2026_S2] 315/500  1391s
+[P1-DEFICIT_seed2026_S2] 316/500  1394s
+[P1-DEFICIT_seed2026_S2] 317/500  1397s
+[P1-DEFICIT_seed2026_S2] 318/500  1403s
+[P1-DEFICIT_seed2026_S2] 319/500  1405s
+[P1-DEFICIT_seed2026_S2] 320/500  1410s
+[P1-DEFICIT_seed2026_S2] 321/500  1413s
+[P1-DEFICIT_seed2026_S2] 322/500  1418s
+[P1-DEFICIT_seed2026_S2] 323/500  1421s
+[P1-DEFICIT_seed2026_S2] 324/500  1424s
+[P1-DEFICIT_seed2026_S2] 325/500  1427s
+[P1-DEFICIT_seed2026_S2] 326/500  1431s
+[P1-DEFICIT_seed2026_S2] 327/500  1434s
+[P1-DEFICIT_seed2026_S2] 328/500  1442s
+[P1-DEFICIT_seed2026_S2] 329/500  1445s
+[P1-DEFICIT_seed2026_S2] 330/500  1448s
+[P1-DEFICIT_seed2026_S2] 331/500  1453s
+[P1-DEFICIT_seed2026_S2] 332/500  1457s
+[P1-DEFICIT_seed2026_S2] 333/500  1461s
+[P1-DEFICIT_seed2026_S2] 334/500  1466s
+[P1-DEFICIT_seed2026_S2] 335/500  1470s
+[P1-DEFICIT_seed2026_S2] 336/500  1473s
+[P1-DEFICIT_seed2026_S2] 337/500  1476s
+[P1-DEFICIT_seed2026_S2] 338/500  1481s
+[P1-DEFICIT_seed2026_S2] 339/500  1488s
+[P1-DEFICIT_seed2026_S2] 340/500  1492s
+[P1-DEFICIT_seed2026_S2] 341/500  1495s
+[P1-DEFICIT_seed2026_S2] 342/500  1498s
+[P1-DEFICIT_seed2026_S2] 343/500  1501s
+[P1-DEFICIT_seed2026_S2] 344/500  1505s
+[P1-DEFICIT_seed2026_S2] 345/500  1512s
+[P1-DEFICIT_seed2026_S2] 346/500  1516s
+[P1-DEFICIT_seed2026_S2] 347/500  1518s
+[P1-DEFICIT_seed2026_S2] 348/500  1524s
+[P1-DEFICIT_seed2026_S2] 349/500  1528s
+[P1-DEFICIT_seed2026_S2] 350/500  1531s
+[P1-DEFICIT_seed2026_S2] 351/500  1533s
+[P1-DEFICIT_seed2026_S2] 352/500  1538s
+[P1-DEFICIT_seed2026_S2] 353/500  1542s
+[P1-DEFICIT_seed2026_S2] 354/500  1549s
+[P1-DEFICIT_seed2026_S2] 355/500  1551s
+[P1-DEFICIT_seed2026_S2] 356/500  1556s
+[P1-DEFICIT_seed2026_S2] 357/500  1560s
+[P1-DEFICIT_seed2026_S2] 358/500  1565s
+[P1-DEFICIT_seed2026_S2] 359/500  1570s
+[P1-DEFICIT_seed2026_S2] 360/500  1573s
+[P1-DEFICIT_seed2026_S2] 361/500  1577s
+[P1-DEFICIT_seed2026_S2] 362/500  1582s
+[P1-DEFICIT_seed2026_S2] 363/500  1586s
+[P1-DEFICIT_seed2026_S2] 364/500  1589s
+[P1-DEFICIT_seed2026_S2] 365/500  1593s
+[P1-DEFICIT_seed2026_S2] 366/500  1597s
+[P1-DEFICIT_seed2026_S2] 367/500  1601s
+[P1-DEFICIT_seed2026_S2] 368/500  1605s
+[P1-DEFICIT_seed2026_S2] 369/500  1608s
+[P1-DEFICIT_seed2026_S2] 370/500  1615s
+[P1-DEFICIT_seed2026_S2] 371/500  1617s
+[P1-DEFICIT_seed2026_S2] 372/500  1621s
+[P1-DEFICIT_seed2026_S2] 373/500  1624s
+[P1-DEFICIT_seed2026_S2] 374/500  1628s
+[P1-DEFICIT_seed2026_S2] 375/500  1631s
+[P1-DEFICIT_seed2026_S2] 376/500  1636s
+[P1-DEFICIT_seed2026_S2] 377/500  1641s
+[P1-DEFICIT_seed2026_S2] 378/500  1646s
+[P1-DEFICIT_seed2026_S2] 379/500  1650s
+[P1-DEFICIT_seed2026_S2] 380/500  1654s
+[P1-DEFICIT_seed2026_S2] 381/500  1658s
+[P1-DEFICIT_seed2026_S2] 382/500  1664s
+[P1-DEFICIT_seed2026_S2] 383/500  1667s
+[P1-DEFICIT_seed2026_S2] 384/500  1672s
+[P1-DEFICIT_seed2026_S2] 385/500  1678s
+[P1-DEFICIT_seed2026_S2] 386/500  1684s
+[P1-DEFICIT_seed2026_S2] 387/500  1687s
+[P1-DEFICIT_seed2026_S2] 388/500  1691s
+[P1-DEFICIT_seed2026_S2] 389/500  1696s
+[P1-DEFICIT_seed2026_S2] 390/500  1700s
+[P1-DEFICIT_seed2026_S2] 391/500  1705s
+[P1-DEFICIT_seed2026_S2] 392/500  1708s
+[P1-DEFICIT_seed2026_S2] 393/500  1712s
+[P1-DEFICIT_seed2026_S2] 394/500  1716s
+[P1-DEFICIT_seed2026_S2] 395/500  1718s
+[P1-DEFICIT_seed2026_S2] 396/500  1721s
+[P1-DEFICIT_seed2026_S2] 397/500  1723s
+[P1-DEFICIT_seed2026_S2] 398/500  1729s
+[P1-DEFICIT_seed2026_S2] 399/500  1733s
+[P1-DEFICIT_seed2026_S2] 400/500  1740s
+[P1-DEFICIT_seed2026_S2] 401/500  1745s
+[P1-DEFICIT_seed2026_S2] 402/500  1749s
+[P1-DEFICIT_seed2026_S2] 403/500  1756s
+[P1-DEFICIT_seed2026_S2] 404/500  1758s
+[P1-DEFICIT_seed2026_S2] 405/500  1761s
+[P1-DEFICIT_seed2026_S2] 406/500  1765s
+[P1-DEFICIT_seed2026_S2] 407/500  1769s
+[P1-DEFICIT_seed2026_S2] 408/500  1771s
+[P1-DEFICIT_seed2026_S2] 409/500  1774s
+[P1-DEFICIT_seed2026_S2] 410/500  1782s
+[P1-DEFICIT_seed2026_S2] 411/500  1786s
+[P1-DEFICIT_seed2026_S2] 412/500  1791s
+[P1-DEFICIT_seed2026_S2] 413/500  1797s
+[P1-DEFICIT_seed2026_S2] 414/500  1803s
+[P1-DEFICIT_seed2026_S2] 415/500  1807s
+[P1-DEFICIT_seed2026_S2] 416/500  1810s
+[P1-DEFICIT_seed2026_S2] 417/500  1813s
+[P1-DEFICIT_seed2026_S2] 418/500  1821s
+[P1-DEFICIT_seed2026_S2] 419/500  1825s
+[P1-DEFICIT_seed2026_S2] 420/500  1832s
+[P1-DEFICIT_seed2026_S2] 421/500  1835s
+[P1-DEFICIT_seed2026_S2] 422/500  1839s
+[P1-DEFICIT_seed2026_S2] 423/500  1842s
+[P1-DEFICIT_seed2026_S2] 424/500  1847s
+[P1-DEFICIT_seed2026_S2] 425/500  1851s
+[P1-DEFICIT_seed2026_S2] 426/500  1855s
+[P1-DEFICIT_seed2026_S2] 427/500  1859s
+[P1-DEFICIT_seed2026_S2] 428/500  1865s
+[P1-DEFICIT_seed2026_S2] 429/500  1870s
+[P1-DEFICIT_seed2026_S2] 430/500  1874s
+[P1-DEFICIT_seed2026_S2] 431/500  1878s
+[P1-DEFICIT_seed2026_S2] 432/500  1883s
+[P1-DEFICIT_seed2026_S2] 433/500  1886s
+[P1-DEFICIT_seed2026_S2] 434/500  1891s
+[P1-DEFICIT_seed2026_S2] 435/500  1896s
+[P1-DEFICIT_seed2026_S2] 436/500  1899s
+[P1-DEFICIT_seed2026_S2] 437/500  1904s
+[P1-DEFICIT_seed2026_S2] 438/500  1909s
+[P1-DEFICIT_seed2026_S2] 439/500  1913s
+[P1-DEFICIT_seed2026_S2] 440/500  1915s
+[P1-DEFICIT_seed2026_S2] 441/500  1919s
+[P1-DEFICIT_seed2026_S2] 442/500  1921s
+[P1-DEFICIT_seed2026_S2] 443/500  1925s
+[P1-DEFICIT_seed2026_S2] 444/500  1930s
+[P1-DEFICIT_seed2026_S2] 445/500  1934s
+[P1-DEFICIT_seed2026_S2] 446/500  1938s
+[P1-DEFICIT_seed2026_S2] 447/500  1941s
+[P1-DEFICIT_seed2026_S2] 448/500  1942s
+[P1-DEFICIT_seed2026_S2] 449/500  1947s
+[P1-DEFICIT_seed2026_S2] 450/500  1950s
+[P1-DEFICIT_seed2026_S2] 451/500  1957s
+[P1-DEFICIT_seed2026_S2] 452/500  1960s
+[P1-DEFICIT_seed2026_S2] 453/500  1964s
+[P1-DEFICIT_seed2026_S2] 454/500  1968s
+[P1-DEFICIT_seed2026_S2] 455/500  1972s
+[P1-DEFICIT_seed2026_S2] 456/500  1976s
+[P1-DEFICIT_seed2026_S2] 457/500  1982s
+[P1-DEFICIT_seed2026_S2] 458/500  1985s
+[P1-DEFICIT_seed2026_S2] 459/500  1988s
+[P1-DEFICIT_seed2026_S2] 460/500  1991s
+[P1-DEFICIT_seed2026_S2] 461/500  1996s
+[P1-DEFICIT_seed2026_S2] 462/500  2000s
+[P1-DEFICIT_seed2026_S2] 463/500  2005s
+[P1-DEFICIT_seed2026_S2] 464/500  2009s
+[P1-DEFICIT_seed2026_S2] 465/500  2012s
+[P1-DEFICIT_seed2026_S2] 466/500  2016s
+[P1-DEFICIT_seed2026_S2] 467/500  2022s
+[P1-DEFICIT_seed2026_S2] 468/500  2028s
+[P1-DEFICIT_seed2026_S2] 469/500  2031s
+[P1-DEFICIT_seed2026_S2] 470/500  2034s
+[P1-DEFICIT_seed2026_S2] 471/500  2038s
+[P1-DEFICIT_seed2026_S2] 472/500  2043s
+[P1-DEFICIT_seed2026_S2] 473/500  2046s
+[P1-DEFICIT_seed2026_S2] 474/500  2050s
+[P1-DEFICIT_seed2026_S2] 475/500  2056s
+[P1-DEFICIT_seed2026_S2] 476/500  2060s
+[P1-DEFICIT_seed2026_S2] 477/500  2066s
+[P1-DEFICIT_seed2026_S2] 478/500  2072s
+[P1-DEFICIT_seed2026_S2] 479/500  2076s
+[P1-DEFICIT_seed2026_S2] 480/500  2080s
+[P1-DEFICIT_seed2026_S2] 481/500  2086s
+[P1-DEFICIT_seed2026_S2] 482/500  2089s
+[P1-DEFICIT_seed2026_S2] 483/500  2092s
+[P1-DEFICIT_seed2026_S2] 484/500  2094s
+[P1-DEFICIT_seed2026_S2] 485/500  2097s
+[P1-DEFICIT_seed2026_S2] 486/500  2099s
+[P1-DEFICIT_seed2026_S2] 487/500  2102s
+[P1-DEFICIT_seed2026_S2] 488/500  2105s
+[P1-DEFICIT_seed2026_S2] 489/500  2109s
+[P1-DEFICIT_seed2026_S2] 490/500  2113s
+[P1-DEFICIT_seed2026_S2] 491/500  2117s
+[P1-DEFICIT_seed2026_S2] 492/500  2119s
+[P1-DEFICIT_seed2026_S2] 493/500  2122s
+[P1-DEFICIT_seed2026_S2] 494/500  2125s
+[P1-DEFICIT_seed2026_S2] 495/500  2131s
+[P1-DEFICIT_seed2026_S2] 496/500  2135s
+[P1-DEFICIT_seed2026_S2] 497/500  2141s
+[P1-DEFICIT_seed2026_S2] 498/500  2145s
+[P1-DEFICIT_seed2026_S2] 499/500  2152s
+[P1-DEFICIT_seed2026_S2] 500/500  2155s
+[P1-DEFICIT_seed2026_S2] accuracy 0.8180  lenient 0.8200  format 0.9940  mean_len 252.0  -> /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S2/eval_dev.summary.json
+[RUN] post_eval_P1-DEFICIT_seed2026_S2
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/run_p1p2_post_eval.py --method P1-DEFICIT --seed 2026 --round 2 --prediction /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S2/eval_dev.jsonl --checkpoint /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002 --output-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S2 --manual-root /workspace/intake/work/P2/experiments/week2September/manual --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/train_set.json --selection-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/selection_log.jsonl --train-log /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002/train_log.json --checkpoint-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/checkpoint_log.jsonl --gold-manifest /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/gold_vfinal_manifest.json --gold-labels /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/supplement_annotations_vfinal.jsonl --approval-csv /workspace/intake/work/P2/experiments/week2September/manual/data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv --dev-ids /workspace/intake/work/P2/experiments/week2September/manual/splits/d_dev_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json
+POST_EVAL_HOOK: PASS /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S2
+METHOD: P1-DEFICIT
+SEED: 2026
+ROUND: 2 -> S2
+PREDICTION: /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S2/eval_dev.jsonl
+CHECKPOINT: /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002
+CORRECTNESS: status == valid
+GOLD_SCOPE: approved 85; D_dev prediction coverage: 500
+[RUN] capability_state_P1-DEFICIT_seed2026_selection_3
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_capability_state.py --sidecar-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S2 --target-method P1-DEFICIT --target-seed 2026 --out /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_003.json
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=P1-DEFICIT_seed2026_S2
+SOURCE_METHOD=P1-DEFICIT
+SOURCE_SEED=2026
+SOURCE_ROUND=2
+TARGET_METHOD=P1-DEFICIT
+TARGET_SEED=2026
+SELECTION_ROUND=3
+CAPABILITY_COUNT=7
+STATE_SHA256=2454678fb0de3b07470ffe607cbb9d308c67e1211dc4de312cbbe47b9475ec6f
+STATE_PATH=/workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_003.json
+CAPABILITY_STATE_VALIDATION=PASS
+[RUN] select_P1-DEFICIT_round_3
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_selector.py --method P1-DEFICIT --seed 2026 --round 3 --state /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_003.json --out-dir /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_tokens.jsonl --d-pool /workspace/intake/work/P2/experiments/week2September/manual/splits/d_pool_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json --previous-train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_001/train_set.json --previous-train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_002/train_set.json
+METHOD=P1-DEFICIT
+SEED=2026
+ROUND=3
+SOURCE_CHECKPOINT=S2
+N_ELIGIBLE=4353
+N_TRAINED_BEFORE=233
+N_SELECTED=185
+TOKENS_USED=45355
+BUDGET=45426
+TRAIN_SET=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003/train_set.json
+SELECTION_LOG=/workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003/selection_log.jsonl
+P1P2_SELECTION=PASS
+[REUSE] P1 selection round 3: preserving validated train set/log
+[RUN] train_P1-DEFICIT_seed2026_S3
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/train_round.py --seed 2026 --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003/train_set.json --adapter-dir /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003 --micro-batch 1 --dtype bf16 --pool /workspace/intake/work/P2/experiments/week2September/manual/trajectory/pool/pool_v1_verified.jsonl --init-adapter /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_002 --legacy-windows-root "C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual"
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 73/338 [00:00<00:00, 584.54it/s]Loading weights:  39%|███▉      | 132/338 [00:00<00:00, 536.35it/s]Loading weights:  57%|█████▋    | 192/338 [00:00<00:00, 539.70it/s]Loading weights:  74%|███████▎  | 249/338 [00:00<00:00, 546.59it/s]Loading weights:  93%|█████████▎| 314/338 [00:00<00:00, 581.42it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 576.15it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+step   1  loss 0.1516  grad_norm 0.262  tokens 2008  6s
+step   2  loss 0.1140  grad_norm 0.209  tokens 2377  8s
+step   3  loss 0.0760  grad_norm 0.198  tokens 2088  9s
+step   4  loss 0.1560  grad_norm 0.441  tokens 1800  11s
+step   5  loss 0.1655  grad_norm 0.365  tokens 2001  13s
+step   6  loss 0.1631  grad_norm 0.522  tokens 1657  14s
+step   7  loss 0.1156  grad_norm 0.288  tokens 1931  16s
+step   8  loss 0.1922  grad_norm 0.350  tokens 2311  18s
+step   9  loss 0.1886  grad_norm 0.421  tokens 1797  19s
+step  10  loss 0.1492  grad_norm 0.320  tokens 1902  21s
+step  11  loss 0.1656  grad_norm 0.369  tokens 1754  22s
+step  12  loss 0.1356  grad_norm 0.245  tokens 2298  24s
+step  13  loss 0.1407  grad_norm 0.277  tokens 1687  26s
+step  14  loss 0.1854  grad_norm 0.309  tokens 1911  27s
+step  15  loss 0.1279  grad_norm 0.225  tokens 2198  29s
+step  16  loss 0.1850  grad_norm 0.494  tokens 1724  31s
+step  17  loss 0.1571  grad_norm 0.258  tokens 2531  32s
+step  18  loss 0.1224  grad_norm 0.255  tokens 1823  34s
+step  19  loss 0.1723  grad_norm 0.352  tokens 1841  36s
+step  20  loss 0.1211  grad_norm 0.255  tokens 2071  37s
+step  21  loss 0.1324  grad_norm 0.285  tokens 2110  39s
+step  22  loss 0.1045  grad_norm 0.273  tokens 1703  41s
+step  23  loss 0.1425  grad_norm 0.333  tokens 1687  42s
+step  24  loss 0.1179  grad_norm 0.831  tokens 330  43s
+/workspace/intake/venv/lib/python3.11/site-packages/peft/utils/save_and_load.py:438: UserWarning: Could not find a config file in Qwen/Qwen2.5-1.5B-Instruct - will assume that the vocabulary was not modified.
+  warnings.warn(
+saved adapter -> /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003  (24 steps, 45540 supervised tokens)
+[RUN] eval_dev_P1-DEFICIT_seed2026_S3
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/eval_student.py --tag P1-DEFICIT_seed2026_S3 --split dev --out /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S3/eval_dev.jsonl --backend hf --dtype bf16 --batch-size 1 --adapter /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003
+[P1-DEFICIT_seed2026_S3] dev: 500 problems, 0 already done, 500 to run, backend=hf, dtype=torch.bfloat16
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:  30%|██▉       | 101/338 [00:00<00:00, 750.37it/s]Loading weights:  52%|█████▏    | 177/338 [00:00<00:00, 744.91it/s]Loading weights:  75%|███████▍  | 253/338 [00:00<00:00, 746.61it/s]Loading weights: 100%|██████████| 338/338 [00:00<00:00, 779.39it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[P1-DEFICIT_seed2026_S3] 1/500  59s
+[P1-DEFICIT_seed2026_S3] 2/500  64s
+[P1-DEFICIT_seed2026_S3] 3/500  68s
+[P1-DEFICIT_seed2026_S3] 4/500  71s
+[P1-DEFICIT_seed2026_S3] 5/500  73s
+[P1-DEFICIT_seed2026_S3] 6/500  78s
+[P1-DEFICIT_seed2026_S3] 7/500  84s
+[P1-DEFICIT_seed2026_S3] 8/500  88s
+[P1-DEFICIT_seed2026_S3] 9/500  93s
+[P1-DEFICIT_seed2026_S3] 10/500  97s
+[P1-DEFICIT_seed2026_S3] 11/500  101s
+[P1-DEFICIT_seed2026_S3] 12/500  104s
+[P1-DEFICIT_seed2026_S3] 13/500  109s
+[P1-DEFICIT_seed2026_S3] 14/500  115s
+[P1-DEFICIT_seed2026_S3] 15/500  120s
+[P1-DEFICIT_seed2026_S3] 16/500  122s
+[P1-DEFICIT_seed2026_S3] 17/500  127s
+[P1-DEFICIT_seed2026_S3] 18/500  131s
+[P1-DEFICIT_seed2026_S3] 19/500  133s
+[P1-DEFICIT_seed2026_S3] 20/500  138s
+[P1-DEFICIT_seed2026_S3] 21/500  142s
+[P1-DEFICIT_seed2026_S3] 22/500  145s
+[P1-DEFICIT_seed2026_S3] 23/500  149s
+[P1-DEFICIT_seed2026_S3] 24/500  155s
+[P1-DEFICIT_seed2026_S3] 25/500  159s
+[P1-DEFICIT_seed2026_S3] 26/500  164s
+[P1-DEFICIT_seed2026_S3] 27/500  168s
+[P1-DEFICIT_seed2026_S3] 28/500  174s
+[P1-DEFICIT_seed2026_S3] 29/500  179s
+[P1-DEFICIT_seed2026_S3] 30/500  184s
+[P1-DEFICIT_seed2026_S3] 31/500  186s
+[P1-DEFICIT_seed2026_S3] 32/500  189s
+[P1-DEFICIT_seed2026_S3] 33/500  195s
+[P1-DEFICIT_seed2026_S3] 34/500  200s
+[P1-DEFICIT_seed2026_S3] 35/500  204s
+[P1-DEFICIT_seed2026_S3] 36/500  209s
+[P1-DEFICIT_seed2026_S3] 37/500  212s
+[P1-DEFICIT_seed2026_S3] 38/500  216s
+[P1-DEFICIT_seed2026_S3] 39/500  219s
+[P1-DEFICIT_seed2026_S3] 40/500  224s
+[P1-DEFICIT_seed2026_S3] 41/500  231s
+[P1-DEFICIT_seed2026_S3] 42/500  233s
+[P1-DEFICIT_seed2026_S3] 43/500  239s
+[P1-DEFICIT_seed2026_S3] 44/500  243s
+[P1-DEFICIT_seed2026_S3] 45/500  250s
+[P1-DEFICIT_seed2026_S3] 46/500  253s
+[P1-DEFICIT_seed2026_S3] 47/500  258s
+[P1-DEFICIT_seed2026_S3] 48/500  262s
+[P1-DEFICIT_seed2026_S3] 49/500  268s
+[P1-DEFICIT_seed2026_S3] 50/500  276s
+[P1-DEFICIT_seed2026_S3] 51/500  279s
+[P1-DEFICIT_seed2026_S3] 52/500  282s
+[P1-DEFICIT_seed2026_S3] 53/500  287s
+[P1-DEFICIT_seed2026_S3] 54/500  291s
+[P1-DEFICIT_seed2026_S3] 55/500  295s
+[P1-DEFICIT_seed2026_S3] 56/500  299s
+[P1-DEFICIT_seed2026_S3] 57/500  307s
+[P1-DEFICIT_seed2026_S3] 58/500  312s
+[P1-DEFICIT_seed2026_S3] 59/500  315s
+[P1-DEFICIT_seed2026_S3] 60/500  318s
+[P1-DEFICIT_seed2026_S3] 61/500  321s
+[P1-DEFICIT_seed2026_S3] 62/500  326s
+[P1-DEFICIT_seed2026_S3] 63/500  329s
+[P1-DEFICIT_seed2026_S3] 64/500  334s
+[P1-DEFICIT_seed2026_S3] 65/500  338s
+[P1-DEFICIT_seed2026_S3] 66/500  342s
+[P1-DEFICIT_seed2026_S3] 67/500  345s
+[P1-DEFICIT_seed2026_S3] 68/500  348s
+[P1-DEFICIT_seed2026_S3] 69/500  352s
+[P1-DEFICIT_seed2026_S3] 70/500  359s
+[P1-DEFICIT_seed2026_S3] 71/500  364s
+[P1-DEFICIT_seed2026_S3] 72/500  368s
+[P1-DEFICIT_seed2026_S3] 73/500  371s
+[P1-DEFICIT_seed2026_S3] 74/500  378s
+[P1-DEFICIT_seed2026_S3] 75/500  383s
+[P1-DEFICIT_seed2026_S3] 76/500  389s
+[P1-DEFICIT_seed2026_S3] 77/500  392s
+[P1-DEFICIT_seed2026_S3] 78/500  397s
+[P1-DEFICIT_seed2026_S3] 79/500  402s
+[P1-DEFICIT_seed2026_S3] 80/500  405s
+[P1-DEFICIT_seed2026_S3] 81/500  409s
+[P1-DEFICIT_seed2026_S3] 82/500  412s
+[P1-DEFICIT_seed2026_S3] 83/500  416s
+[P1-DEFICIT_seed2026_S3] 84/500  419s
+[P1-DEFICIT_seed2026_S3] 85/500  423s
+[P1-DEFICIT_seed2026_S3] 86/500  430s
+[P1-DEFICIT_seed2026_S3] 87/500  432s
+[P1-DEFICIT_seed2026_S3] 88/500  436s
+[P1-DEFICIT_seed2026_S3] 89/500  440s
+[P1-DEFICIT_seed2026_S3] 90/500  443s
+[P1-DEFICIT_seed2026_S3] 91/500  448s
+[P1-DEFICIT_seed2026_S3] 92/500  452s
+[P1-DEFICIT_seed2026_S3] 93/500  456s
+[P1-DEFICIT_seed2026_S3] 94/500  462s
+[P1-DEFICIT_seed2026_S3] 95/500  466s
+[P1-DEFICIT_seed2026_S3] 96/500  471s
+[P1-DEFICIT_seed2026_S3] 97/500  475s
+[P1-DEFICIT_seed2026_S3] 98/500  479s
+[P1-DEFICIT_seed2026_S3] 99/500  483s
+[P1-DEFICIT_seed2026_S3] 100/500  487s
+[P1-DEFICIT_seed2026_S3] 101/500  490s
+[P1-DEFICIT_seed2026_S3] 102/500  497s
+[P1-DEFICIT_seed2026_S3] 103/500  500s
+[P1-DEFICIT_seed2026_S3] 104/500  503s
+[P1-DEFICIT_seed2026_S3] 105/500  507s
+[P1-DEFICIT_seed2026_S3] 106/500  512s
+[P1-DEFICIT_seed2026_S3] 107/500  515s
+[P1-DEFICIT_seed2026_S3] 108/500  518s
+[P1-DEFICIT_seed2026_S3] 109/500  520s
+[P1-DEFICIT_seed2026_S3] 110/500  523s
+[P1-DEFICIT_seed2026_S3] 111/500  529s
+[P1-DEFICIT_seed2026_S3] 112/500  534s
+[P1-DEFICIT_seed2026_S3] 113/500  538s
+[P1-DEFICIT_seed2026_S3] 114/500  541s
+[P1-DEFICIT_seed2026_S3] 115/500  549s
+[P1-DEFICIT_seed2026_S3] 116/500  553s
+[P1-DEFICIT_seed2026_S3] 117/500  556s
+[P1-DEFICIT_seed2026_S3] 118/500  561s
+[P1-DEFICIT_seed2026_S3] 119/500  565s
+[P1-DEFICIT_seed2026_S3] 120/500  569s
+[P1-DEFICIT_seed2026_S3] 121/500  573s
+[P1-DEFICIT_seed2026_S3] 122/500  575s
+[P1-DEFICIT_seed2026_S3] 123/500  579s
+[P1-DEFICIT_seed2026_S3] 124/500  583s
+[P1-DEFICIT_seed2026_S3] 125/500  587s
+[P1-DEFICIT_seed2026_S3] 126/500  590s
+[P1-DEFICIT_seed2026_S3] 127/500  594s
+[P1-DEFICIT_seed2026_S3] 128/500  597s
+[P1-DEFICIT_seed2026_S3] 129/500  603s
+[P1-DEFICIT_seed2026_S3] 130/500  606s
+[P1-DEFICIT_seed2026_S3] 131/500  611s
+[P1-DEFICIT_seed2026_S3] 132/500  616s
+[P1-DEFICIT_seed2026_S3] 133/500  623s
+[P1-DEFICIT_seed2026_S3] 134/500  627s
+[P1-DEFICIT_seed2026_S3] 135/500  631s
+[P1-DEFICIT_seed2026_S3] 136/500  637s
+[P1-DEFICIT_seed2026_S3] 137/500  640s
+[P1-DEFICIT_seed2026_S3] 138/500  646s
+[P1-DEFICIT_seed2026_S3] 139/500  653s
+[P1-DEFICIT_seed2026_S3] 140/500  656s
+[P1-DEFICIT_seed2026_S3] 141/500  659s
+[P1-DEFICIT_seed2026_S3] 142/500  662s
+[P1-DEFICIT_seed2026_S3] 143/500  665s
+[P1-DEFICIT_seed2026_S3] 144/500  668s
+[P1-DEFICIT_seed2026_S3] 145/500  671s
+[P1-DEFICIT_seed2026_S3] 146/500  675s
+[P1-DEFICIT_seed2026_S3] 147/500  681s
+[P1-DEFICIT_seed2026_S3] 148/500  684s
+[P1-DEFICIT_seed2026_S3] 149/500  687s
+[P1-DEFICIT_seed2026_S3] 150/500  694s
+[P1-DEFICIT_seed2026_S3] 151/500  699s
+[P1-DEFICIT_seed2026_S3] 152/500  704s
+[P1-DEFICIT_seed2026_S3] 153/500  708s
+[P1-DEFICIT_seed2026_S3] 154/500  710s
+[P1-DEFICIT_seed2026_S3] 155/500  714s
+[P1-DEFICIT_seed2026_S3] 156/500  722s
+[P1-DEFICIT_seed2026_S3] 157/500  725s
+[P1-DEFICIT_seed2026_S3] 158/500  729s
+[P1-DEFICIT_seed2026_S3] 159/500  733s
+[P1-DEFICIT_seed2026_S3] 160/500  737s
+[P1-DEFICIT_seed2026_S3] 161/500  739s
+[P1-DEFICIT_seed2026_S3] 162/500  748s
+[P1-DEFICIT_seed2026_S3] 163/500  750s
+[P1-DEFICIT_seed2026_S3] 164/500  754s
+[P1-DEFICIT_seed2026_S3] 165/500  755s
+[P1-DEFICIT_seed2026_S3] 166/500  761s
+[P1-DEFICIT_seed2026_S3] 167/500  766s
+[P1-DEFICIT_seed2026_S3] 168/500  775s
+[P1-DEFICIT_seed2026_S3] 169/500  777s
+[P1-DEFICIT_seed2026_S3] 170/500  781s
+[P1-DEFICIT_seed2026_S3] 171/500  784s
+[P1-DEFICIT_seed2026_S3] 172/500  786s
+[P1-DEFICIT_seed2026_S3] 173/500  790s
+[P1-DEFICIT_seed2026_S3] 174/500  793s
+[P1-DEFICIT_seed2026_S3] 175/500  796s
+[P1-DEFICIT_seed2026_S3] 176/500  798s
+[P1-DEFICIT_seed2026_S3] 177/500  803s
+[P1-DEFICIT_seed2026_S3] 178/500  806s
+[P1-DEFICIT_seed2026_S3] 179/500  809s
+[P1-DEFICIT_seed2026_S3] 180/500  815s
+[P1-DEFICIT_seed2026_S3] 181/500  819s
+[P1-DEFICIT_seed2026_S3] 182/500  823s
+[P1-DEFICIT_seed2026_S3] 183/500  827s
+[P1-DEFICIT_seed2026_S3] 184/500  831s
+[P1-DEFICIT_seed2026_S3] 185/500  835s
+[P1-DEFICIT_seed2026_S3] 186/500  840s
+[P1-DEFICIT_seed2026_S3] 187/500  842s
+[P1-DEFICIT_seed2026_S3] 188/500  847s
+[P1-DEFICIT_seed2026_S3] 189/500  852s
+[P1-DEFICIT_seed2026_S3] 190/500  856s
+[P1-DEFICIT_seed2026_S3] 191/500  861s
+[P1-DEFICIT_seed2026_S3] 192/500  866s
+[P1-DEFICIT_seed2026_S3] 193/500  870s
+[P1-DEFICIT_seed2026_S3] 194/500  873s
+[P1-DEFICIT_seed2026_S3] 195/500  879s
+[P1-DEFICIT_seed2026_S3] 196/500  883s
+[P1-DEFICIT_seed2026_S3] 197/500  887s
+[P1-DEFICIT_seed2026_S3] 198/500  891s
+[P1-DEFICIT_seed2026_S3] 199/500  894s
+[P1-DEFICIT_seed2026_S3] 200/500  899s
+[P1-DEFICIT_seed2026_S3] 201/500  902s
+[P1-DEFICIT_seed2026_S3] 202/500  911s
+[P1-DEFICIT_seed2026_S3] 203/500  914s
+[P1-DEFICIT_seed2026_S3] 204/500  917s
+[P1-DEFICIT_seed2026_S3] 205/500  921s
+[P1-DEFICIT_seed2026_S3] 206/500  926s
+[P1-DEFICIT_seed2026_S3] 207/500  931s
+[P1-DEFICIT_seed2026_S3] 208/500  935s
+[P1-DEFICIT_seed2026_S3] 209/500  941s
+[P1-DEFICIT_seed2026_S3] 210/500  947s
+[P1-DEFICIT_seed2026_S3] 211/500  952s
+[P1-DEFICIT_seed2026_S3] 212/500  959s
+[P1-DEFICIT_seed2026_S3] 213/500  962s
+[P1-DEFICIT_seed2026_S3] 214/500  965s
+[P1-DEFICIT_seed2026_S3] 215/500  971s
+[P1-DEFICIT_seed2026_S3] 216/500  975s
+[P1-DEFICIT_seed2026_S3] 217/500  978s
+[P1-DEFICIT_seed2026_S3] 218/500  980s
+[P1-DEFICIT_seed2026_S3] 219/500  983s
+[P1-DEFICIT_seed2026_S3] 220/500  988s
+[P1-DEFICIT_seed2026_S3] 221/500  992s
+[P1-DEFICIT_seed2026_S3] 222/500  997s
+[P1-DEFICIT_seed2026_S3] 223/500  1001s
+[P1-DEFICIT_seed2026_S3] 224/500  1004s
+[P1-DEFICIT_seed2026_S3] 225/500  1010s
+[P1-DEFICIT_seed2026_S3] 226/500  1015s
+[P1-DEFICIT_seed2026_S3] 227/500  1019s
+[P1-DEFICIT_seed2026_S3] 228/500  1023s
+[P1-DEFICIT_seed2026_S3] 229/500  1027s
+[P1-DEFICIT_seed2026_S3] 230/500  1035s
+[P1-DEFICIT_seed2026_S3] 231/500  1038s
+[P1-DEFICIT_seed2026_S3] 232/500  1040s
+[P1-DEFICIT_seed2026_S3] 233/500  1044s
+[P1-DEFICIT_seed2026_S3] 234/500  1049s
+[P1-DEFICIT_seed2026_S3] 235/500  1053s
+[P1-DEFICIT_seed2026_S3] 236/500  1056s
+[P1-DEFICIT_seed2026_S3] 237/500  1063s
+[P1-DEFICIT_seed2026_S3] 238/500  1067s
+[P1-DEFICIT_seed2026_S3] 239/500  1072s
+[P1-DEFICIT_seed2026_S3] 240/500  1075s
+[P1-DEFICIT_seed2026_S3] 241/500  1081s
+[P1-DEFICIT_seed2026_S3] 242/500  1083s
+[P1-DEFICIT_seed2026_S3] 243/500  1087s
+[P1-DEFICIT_seed2026_S3] 244/500  1090s
+[P1-DEFICIT_seed2026_S3] 245/500  1096s
+[P1-DEFICIT_seed2026_S3] 246/500  1102s
+[P1-DEFICIT_seed2026_S3] 247/500  1106s
+[P1-DEFICIT_seed2026_S3] 248/500  1109s
+[P1-DEFICIT_seed2026_S3] 249/500  1114s
+[P1-DEFICIT_seed2026_S3] 250/500  1121s
+[P1-DEFICIT_seed2026_S3] 251/500  1125s
+[P1-DEFICIT_seed2026_S3] 252/500  1128s
+[P1-DEFICIT_seed2026_S3] 253/500  1131s
+[P1-DEFICIT_seed2026_S3] 254/500  1139s
+[P1-DEFICIT_seed2026_S3] 255/500  1143s
+[P1-DEFICIT_seed2026_S3] 256/500  1147s
+[P1-DEFICIT_seed2026_S3] 257/500  1151s
+[P1-DEFICIT_seed2026_S3] 258/500  1155s
+[P1-DEFICIT_seed2026_S3] 259/500  1161s
+[P1-DEFICIT_seed2026_S3] 260/500  1165s
+[P1-DEFICIT_seed2026_S3] 261/500  1170s
+[P1-DEFICIT_seed2026_S3] 262/500  1176s
+[P1-DEFICIT_seed2026_S3] 263/500  1182s
+[P1-DEFICIT_seed2026_S3] 264/500  1187s
+[P1-DEFICIT_seed2026_S3] 265/500  1191s
+[P1-DEFICIT_seed2026_S3] 266/500  1196s
+[P1-DEFICIT_seed2026_S3] 267/500  1200s
+[P1-DEFICIT_seed2026_S3] 268/500  1205s
+[P1-DEFICIT_seed2026_S3] 269/500  1211s
+[P1-DEFICIT_seed2026_S3] 270/500  1215s
+[P1-DEFICIT_seed2026_S3] 271/500  1218s
+[P1-DEFICIT_seed2026_S3] 272/500  1221s
+[P1-DEFICIT_seed2026_S3] 273/500  1225s
+[P1-DEFICIT_seed2026_S3] 274/500  1230s
+[P1-DEFICIT_seed2026_S3] 275/500  1234s
+[P1-DEFICIT_seed2026_S3] 276/500  1237s
+[P1-DEFICIT_seed2026_S3] 277/500  1240s
+[P1-DEFICIT_seed2026_S3] 278/500  1244s
+[P1-DEFICIT_seed2026_S3] 279/500  1249s
+[P1-DEFICIT_seed2026_S3] 280/500  1257s
+[P1-DEFICIT_seed2026_S3] 281/500  1262s
+[P1-DEFICIT_seed2026_S3] 282/500  1265s
+[P1-DEFICIT_seed2026_S3] 283/500  1269s
+[P1-DEFICIT_seed2026_S3] 284/500  1272s
+[P1-DEFICIT_seed2026_S3] 285/500  1276s
+[P1-DEFICIT_seed2026_S3] 286/500  1281s
+[P1-DEFICIT_seed2026_S3] 287/500  1285s
+[P1-DEFICIT_seed2026_S3] 288/500  1290s
+[P1-DEFICIT_seed2026_S3] 289/500  1292s
+[P1-DEFICIT_seed2026_S3] 290/500  1296s
+[P1-DEFICIT_seed2026_S3] 291/500  1298s
+[P1-DEFICIT_seed2026_S3] 292/500  1301s
+[P1-DEFICIT_seed2026_S3] 293/500  1304s
+[P1-DEFICIT_seed2026_S3] 294/500  1313s
+[P1-DEFICIT_seed2026_S3] 295/500  1316s
+[P1-DEFICIT_seed2026_S3] 296/500  1321s
+[P1-DEFICIT_seed2026_S3] 297/500  1325s
+[P1-DEFICIT_seed2026_S3] 298/500  1328s
+[P1-DEFICIT_seed2026_S3] 299/500  1334s
+[P1-DEFICIT_seed2026_S3] 300/500  1338s
+[P1-DEFICIT_seed2026_S3] 301/500  1342s
+[P1-DEFICIT_seed2026_S3] 302/500  1347s
+[P1-DEFICIT_seed2026_S3] 303/500  1352s
+[P1-DEFICIT_seed2026_S3] 304/500  1355s
+[P1-DEFICIT_seed2026_S3] 305/500  1358s
+[P1-DEFICIT_seed2026_S3] 306/500  1362s
+[P1-DEFICIT_seed2026_S3] 307/500  1366s
+[P1-DEFICIT_seed2026_S3] 308/500  1372s
+[P1-DEFICIT_seed2026_S3] 309/500  1379s
+[P1-DEFICIT_seed2026_S3] 310/500  1382s
+[P1-DEFICIT_seed2026_S3] 311/500  1385s
+[P1-DEFICIT_seed2026_S3] 312/500  1389s
+[P1-DEFICIT_seed2026_S3] 313/500  1394s
+[P1-DEFICIT_seed2026_S3] 314/500  1398s
+[P1-DEFICIT_seed2026_S3] 315/500  1401s
+[P1-DEFICIT_seed2026_S3] 316/500  1404s
+[P1-DEFICIT_seed2026_S3] 317/500  1408s
+[P1-DEFICIT_seed2026_S3] 318/500  1413s
+[P1-DEFICIT_seed2026_S3] 319/500  1418s
+[P1-DEFICIT_seed2026_S3] 320/500  1423s
+[P1-DEFICIT_seed2026_S3] 321/500  1428s
+[P1-DEFICIT_seed2026_S3] 322/500  1432s
+[P1-DEFICIT_seed2026_S3] 323/500  1436s
+[P1-DEFICIT_seed2026_S3] 324/500  1439s
+[P1-DEFICIT_seed2026_S3] 325/500  1442s
+[P1-DEFICIT_seed2026_S3] 326/500  1446s
+[P1-DEFICIT_seed2026_S3] 327/500  1449s
+[P1-DEFICIT_seed2026_S3] 328/500  1454s
+[P1-DEFICIT_seed2026_S3] 329/500  1458s
+[P1-DEFICIT_seed2026_S3] 330/500  1462s
+[P1-DEFICIT_seed2026_S3] 331/500  1467s
+[P1-DEFICIT_seed2026_S3] 332/500  1471s
+[P1-DEFICIT_seed2026_S3] 333/500  1475s
+[P1-DEFICIT_seed2026_S3] 334/500  1480s
+[P1-DEFICIT_seed2026_S3] 335/500  1484s
+[P1-DEFICIT_seed2026_S3] 336/500  1488s
+[P1-DEFICIT_seed2026_S3] 337/500  1490s
+[P1-DEFICIT_seed2026_S3] 338/500  1495s
+[P1-DEFICIT_seed2026_S3] 339/500  1501s
+[P1-DEFICIT_seed2026_S3] 340/500  1505s
+[P1-DEFICIT_seed2026_S3] 341/500  1508s
+[P1-DEFICIT_seed2026_S3] 342/500  1511s
+[P1-DEFICIT_seed2026_S3] 343/500  1514s
+[P1-DEFICIT_seed2026_S3] 344/500  1518s
+[P1-DEFICIT_seed2026_S3] 345/500  1526s
+[P1-DEFICIT_seed2026_S3] 346/500  1530s
+[P1-DEFICIT_seed2026_S3] 347/500  1533s
+[P1-DEFICIT_seed2026_S3] 348/500  1538s
+[P1-DEFICIT_seed2026_S3] 349/500  1543s
+[P1-DEFICIT_seed2026_S3] 350/500  1546s
+[P1-DEFICIT_seed2026_S3] 351/500  1548s
+[P1-DEFICIT_seed2026_S3] 352/500  1552s
+[P1-DEFICIT_seed2026_S3] 353/500  1557s
+[P1-DEFICIT_seed2026_S3] 354/500  1563s
+[P1-DEFICIT_seed2026_S3] 355/500  1566s
+[P1-DEFICIT_seed2026_S3] 356/500  1572s
+[P1-DEFICIT_seed2026_S3] 357/500  1576s
+[P1-DEFICIT_seed2026_S3] 358/500  1581s
+[P1-DEFICIT_seed2026_S3] 359/500  1586s
+[P1-DEFICIT_seed2026_S3] 360/500  1590s
+[P1-DEFICIT_seed2026_S3] 361/500  1594s
+[P1-DEFICIT_seed2026_S3] 362/500  1599s
+[P1-DEFICIT_seed2026_S3] 363/500  1603s
+[P1-DEFICIT_seed2026_S3] 364/500  1607s
+[P1-DEFICIT_seed2026_S3] 365/500  1611s
+[P1-DEFICIT_seed2026_S3] 366/500  1615s
+[P1-DEFICIT_seed2026_S3] 367/500  1618s
+[P1-DEFICIT_seed2026_S3] 368/500  1622s
+[P1-DEFICIT_seed2026_S3] 369/500  1625s
+[P1-DEFICIT_seed2026_S3] 370/500  1634s
+[P1-DEFICIT_seed2026_S3] 371/500  1637s
+[P1-DEFICIT_seed2026_S3] 372/500  1642s
+[P1-DEFICIT_seed2026_S3] 373/500  1644s
+[P1-DEFICIT_seed2026_S3] 374/500  1648s
+[P1-DEFICIT_seed2026_S3] 375/500  1651s
+[P1-DEFICIT_seed2026_S3] 376/500  1656s
+[P1-DEFICIT_seed2026_S3] 377/500  1660s
+[P1-DEFICIT_seed2026_S3] 378/500  1665s
+[P1-DEFICIT_seed2026_S3] 379/500  1669s
+[P1-DEFICIT_seed2026_S3] 380/500  1673s
+[P1-DEFICIT_seed2026_S3] 381/500  1677s
+[P1-DEFICIT_seed2026_S3] 382/500  1683s
+[P1-DEFICIT_seed2026_S3] 383/500  1686s
+[P1-DEFICIT_seed2026_S3] 384/500  1692s
+[P1-DEFICIT_seed2026_S3] 385/500  1698s
+[P1-DEFICIT_seed2026_S3] 386/500  1701s
+[P1-DEFICIT_seed2026_S3] 387/500  1705s
+[P1-DEFICIT_seed2026_S3] 388/500  1709s
+[P1-DEFICIT_seed2026_S3] 389/500  1714s
+[P1-DEFICIT_seed2026_S3] 390/500  1718s
+[P1-DEFICIT_seed2026_S3] 391/500  1724s
+[P1-DEFICIT_seed2026_S3] 392/500  1726s
+[P1-DEFICIT_seed2026_S3] 393/500  1732s
+[P1-DEFICIT_seed2026_S3] 394/500  1736s
+[P1-DEFICIT_seed2026_S3] 395/500  1739s
+[P1-DEFICIT_seed2026_S3] 396/500  1742s
+[P1-DEFICIT_seed2026_S3] 397/500  1744s
+[P1-DEFICIT_seed2026_S3] 398/500  1750s
+[P1-DEFICIT_seed2026_S3] 399/500  1755s
+[P1-DEFICIT_seed2026_S3] 400/500  1761s
+[P1-DEFICIT_seed2026_S3] 401/500  1766s
+[P1-DEFICIT_seed2026_S3] 402/500  1770s
+[P1-DEFICIT_seed2026_S3] 403/500  1777s
+[P1-DEFICIT_seed2026_S3] 404/500  1779s
+[P1-DEFICIT_seed2026_S3] 405/500  1783s
+[P1-DEFICIT_seed2026_S3] 406/500  1787s
+[P1-DEFICIT_seed2026_S3] 407/500  1790s
+[P1-DEFICIT_seed2026_S3] 408/500  1793s
+[P1-DEFICIT_seed2026_S3] 409/500  1797s
+[P1-DEFICIT_seed2026_S3] 410/500  1803s
+[P1-DEFICIT_seed2026_S3] 411/500  1806s
+[P1-DEFICIT_seed2026_S3] 412/500  1810s
+[P1-DEFICIT_seed2026_S3] 413/500  1814s
+[P1-DEFICIT_seed2026_S3] 414/500  1820s
+[P1-DEFICIT_seed2026_S3] 415/500  1823s
+[P1-DEFICIT_seed2026_S3] 416/500  1827s
+[P1-DEFICIT_seed2026_S3] 417/500  1830s
+[P1-DEFICIT_seed2026_S3] 418/500  1837s
+[P1-DEFICIT_seed2026_S3] 419/500  1842s
+[P1-DEFICIT_seed2026_S3] 420/500  1847s
+[P1-DEFICIT_seed2026_S3] 421/500  1850s
+[P1-DEFICIT_seed2026_S3] 422/500  1854s
+[P1-DEFICIT_seed2026_S3] 423/500  1858s
+[P1-DEFICIT_seed2026_S3] 424/500  1863s
+[P1-DEFICIT_seed2026_S3] 425/500  1867s
+[P1-DEFICIT_seed2026_S3] 426/500  1870s
+[P1-DEFICIT_seed2026_S3] 427/500  1874s
+[P1-DEFICIT_seed2026_S3] 428/500  1878s
+[P1-DEFICIT_seed2026_S3] 429/500  1885s
+[P1-DEFICIT_seed2026_S3] 430/500  1890s
+[P1-DEFICIT_seed2026_S3] 431/500  1894s
+[P1-DEFICIT_seed2026_S3] 432/500  1899s
+[P1-DEFICIT_seed2026_S3] 433/500  1904s
+[P1-DEFICIT_seed2026_S3] 434/500  1909s
+[P1-DEFICIT_seed2026_S3] 435/500  1913s
+[P1-DEFICIT_seed2026_S3] 436/500  1917s
+[P1-DEFICIT_seed2026_S3] 437/500  1921s
+[P1-DEFICIT_seed2026_S3] 438/500  1927s
+[P1-DEFICIT_seed2026_S3] 439/500  1932s
+[P1-DEFICIT_seed2026_S3] 440/500  1935s
+[P1-DEFICIT_seed2026_S3] 441/500  1938s
+[P1-DEFICIT_seed2026_S3] 442/500  1941s
+[P1-DEFICIT_seed2026_S3] 443/500  1945s
+[P1-DEFICIT_seed2026_S3] 444/500  1949s
+[P1-DEFICIT_seed2026_S3] 445/500  1953s
+[P1-DEFICIT_seed2026_S3] 446/500  1959s
+[P1-DEFICIT_seed2026_S3] 447/500  1962s
+[P1-DEFICIT_seed2026_S3] 448/500  1965s
+[P1-DEFICIT_seed2026_S3] 449/500  1971s
+[P1-DEFICIT_seed2026_S3] 450/500  1974s
+[P1-DEFICIT_seed2026_S3] 451/500  1979s
+[P1-DEFICIT_seed2026_S3] 452/500  1982s
+[P1-DEFICIT_seed2026_S3] 453/500  1986s
+[P1-DEFICIT_seed2026_S3] 454/500  1991s
+[P1-DEFICIT_seed2026_S3] 455/500  1994s
+[P1-DEFICIT_seed2026_S3] 456/500  1997s
+[P1-DEFICIT_seed2026_S3] 457/500  2002s
+[P1-DEFICIT_seed2026_S3] 458/500  2006s
+[P1-DEFICIT_seed2026_S3] 459/500  2009s
+[P1-DEFICIT_seed2026_S3] 460/500  2012s
+[P1-DEFICIT_seed2026_S3] 461/500  2016s
+[P1-DEFICIT_seed2026_S3] 462/500  2020s
+[P1-DEFICIT_seed2026_S3] 463/500  2025s
+[P1-DEFICIT_seed2026_S3] 464/500  2030s
+[P1-DEFICIT_seed2026_S3] 465/500  2034s
+[P1-DEFICIT_seed2026_S3] 466/500  2039s
+[P1-DEFICIT_seed2026_S3] 467/500  2045s
+[P1-DEFICIT_seed2026_S3] 468/500  2050s
+[P1-DEFICIT_seed2026_S3] 469/500  2053s
+[P1-DEFICIT_seed2026_S3] 470/500  2056s
+[P1-DEFICIT_seed2026_S3] 471/500  2060s
+[P1-DEFICIT_seed2026_S3] 472/500  2065s
+[P1-DEFICIT_seed2026_S3] 473/500  2068s
+[P1-DEFICIT_seed2026_S3] 474/500  2071s
+[P1-DEFICIT_seed2026_S3] 475/500  2077s
+[P1-DEFICIT_seed2026_S3] 476/500  2081s
+[P1-DEFICIT_seed2026_S3] 477/500  2089s
+[P1-DEFICIT_seed2026_S3] 478/500  2094s
+[P1-DEFICIT_seed2026_S3] 479/500  2098s
+[P1-DEFICIT_seed2026_S3] 480/500  2105s
+[P1-DEFICIT_seed2026_S3] 481/500  2113s
+[P1-DEFICIT_seed2026_S3] 482/500  2116s
+[P1-DEFICIT_seed2026_S3] 483/500  2118s
+[P1-DEFICIT_seed2026_S3] 484/500  2122s
+[P1-DEFICIT_seed2026_S3] 485/500  2125s
+[P1-DEFICIT_seed2026_S3] 486/500  2127s
+[P1-DEFICIT_seed2026_S3] 487/500  2130s
+[P1-DEFICIT_seed2026_S3] 488/500  2134s
+[P1-DEFICIT_seed2026_S3] 489/500  2137s
+[P1-DEFICIT_seed2026_S3] 490/500  2143s
+[P1-DEFICIT_seed2026_S3] 491/500  2147s
+[P1-DEFICIT_seed2026_S3] 492/500  2150s
+[P1-DEFICIT_seed2026_S3] 493/500  2154s
+[P1-DEFICIT_seed2026_S3] 494/500  2157s
+[P1-DEFICIT_seed2026_S3] 495/500  2164s
+[P1-DEFICIT_seed2026_S3] 496/500  2167s
+[P1-DEFICIT_seed2026_S3] 497/500  2171s
+[P1-DEFICIT_seed2026_S3] 498/500  2175s
+[P1-DEFICIT_seed2026_S3] 499/500  2179s
+[P1-DEFICIT_seed2026_S3] 500/500  2181s
+[P1-DEFICIT_seed2026_S3] accuracy 0.8660  lenient 0.8660  format 0.9900  mean_len 256.4  -> /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S3/eval_dev.summary.json
+[RUN] post_eval_P1-DEFICIT_seed2026_S3
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/run_p1p2_post_eval.py --method P1-DEFICIT --seed 2026 --round 3 --prediction /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S3/eval_dev.jsonl --checkpoint /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003 --output-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S3 --manual-root /workspace/intake/work/P2/experiments/week2September/manual --train-set /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003/train_set.json --selection-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/round_003/selection_log.jsonl --train-log /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003/train_log.json --checkpoint-log /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/checkpoint_log.jsonl --gold-manifest /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/gold_vfinal_manifest.json --gold-labels /workspace/intake/work/P2/experiments/week2September/manual/data/gold_vfinal/supplement_annotations_vfinal.jsonl --approval-csv /workspace/intake/work/P2/experiments/week2September/manual/data/gold_releases/vFinal_2026-11-16/gold_supplement_85_approved_review.csv --dev-ids /workspace/intake/work/P2/experiments/week2September/manual/splits/d_dev_ids.txt --config /workspace/intake/work/P2/experiments/week2September/manual/config/experiment_config.json
+POST_EVAL_HOOK: PASS /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S3
+METHOD: P1-DEFICIT
+SEED: 2026
+ROUND: 3 -> S3
+PREDICTION: /workspace/intake/work/P2/experiments/week2September/manual/runs/p1p2_integration/P1-DEFICIT_seed2026/S3/eval_dev.jsonl
+CHECKPOINT: /workspace/intake/work/P2/experiments/week2September/manual/models/p1p2_integration/P1-DEFICIT_seed2026/student_ckpt_003
+CORRECTNESS: status == valid
+GOLD_SCOPE: approved 85; D_dev prediction coverage: 500
+[RUN] capability_state_P1-DEFICIT_seed2026_selection_4
+  /workspace/intake/venv/bin/python /workspace/intake/work/P2/experiments/week2September/manual/scripts/p1p2_capability_state.py --sidecar-dir /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_sidecars/P1-DEFICIT_seed2026_S3 --target-method P1-DEFICIT --target-seed 2026 --out /workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_004.json
+CAPABILITY_STATE=CREATED
+SOURCE_RUN_ID=P1-DEFICIT_seed2026_S3
+SOURCE_METHOD=P1-DEFICIT
+SOURCE_SEED=2026
+SOURCE_ROUND=3
+TARGET_METHOD=P1-DEFICIT
+TARGET_SEED=2026
+SELECTION_ROUND=4
+CAPABILITY_COUNT=7
+STATE_SHA256=a488c6accbe857ae66c06271af13fc64077097eda4058d4a149fc3542ae5aac5
+STATE_PATH=/workspace/intake/work/P2/experiments/week2September/manual/reports/p1p2_integration/capability_state/P1-DEFICIT_seed2026/selection_round_004.json
+CAPABILITY_STATE_VALIDATION=PASS
+P1P2_CONTROLLER=PASS

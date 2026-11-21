@@ -1,6 +1,0 @@
-﻿archive_path,member_path,size_bytes,classification,crc
-C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,reports/p1p2_integration/g5_preflight_audit.zip,10704,NESTED_ARCHIVE,6523269c
-C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,integration_staging/P1/reports/capability/p1_day14_final_2026-11-14/incoming/P1_adjudication_review_2026-11-14.zip,18689,NESTED_ARCHIVE,b30f4bdd
-C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,integration_staging/P1/reports/capability/p1_day14_final_2026-11-14/incoming/P1_day14_final_2026-11-14.zip,61273,NESTED_ARCHIVE,3c5b2d60
-C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,integration_staging/P1/reports/capability/p1_extractor_v3_2026-11-14/P1_extractor_v3_working_2026-11-14.zip,66390,NESTED_ARCHIVE,1d318037
-C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,integration_staging/P1/reports/task7/B4/seed_13/seed_13.zip,872416,NESTED_ARCHIVE,ffee91e9

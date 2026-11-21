@@ -1,0 +1,165 @@
+{
+  "branch": "main",
+  "commit": null,
+  "excluded_from_self_hash": [
+    "manifests/GITHUB_RELEASE_MANIFEST.json"
+  ],
+  "files_sha256": {
+    ".gitattributes": "f37af5f77d556dbf6b07134f00610bf530755e7bb9af642e3fdd37eed316ec70",
+    ".gitignore": "a01ee787aeda5a8f1142c03134bd233d0abbd725cc7936d3ffebb8ef9482c6f5",
+    "CONTRIBUTING.md": "5e538bed24d306872b5e6ebca34470b8f8af4725a58e4ffd30ac129a721be5cf",
+    "P2/experiments/week2September/manual/scripts/answer_utils.py": "22a3a97819efcf0f21d4c28cbf22b900cbd76671a7f1984ca469d00a75968042",
+    "P2/experiments/week2September/manual/scripts/build_capability_learning_dynamics.py": "55695d2e6f9bb118ee6ca448ff08f3c7426f844a7d414de4619199c8917b3fcd",
+    "P2/experiments/week2September/manual/scripts/build_p1p2_analysis_figures.py": "b22bf3581838d0dbc7c5697de28d23d6f2ea5fc35f0665970a3734587f7c688a",
+    "P2/experiments/week2September/manual/scripts/capability_eval.py": "e28216575be7e6834090ac665909cc7974ab41aecb0ea6c01b29815c20afe8f1",
+    "P2/experiments/week2September/manual/scripts/compute_nll.py": "f6f113fdf4eaf1122042108234b9722fd1b3c3186592285a6c1dc8a0247fd4a0",
+    "P2/experiments/week2September/manual/scripts/eval_metrics.py": "ae716cb42a06215e33515dfe8460b3d26209b3a33fa64e10237f2a7c1da9b0a9",
+    "P2/experiments/week2September/manual/scripts/eval_student.py": "4b96ffcdb97d7634617b343e242e6af311d534f922cf0d85667008287bfd4c73",
+    "P2/experiments/week2September/manual/scripts/generate_teacher_trajectories_batch.py": "253be59f9c1bc4bf42428640dfdba0b9fbd35e251b65c9bfa2713ec966cf64a7",
+    "P2/experiments/week2September/manual/scripts/learnability.py": "a97f44c5905bf3779ba1909c28174c4cf96e31e06c83c4ffefe1858c7420e4c3",
+    "P2/experiments/week2September/manual/scripts/p1p2_artifact_manager.py": "3f0193580e4e9468fcdc2a6eec1a2d577b9f149bf9096b0105a458a9781762bd",
+    "P2/experiments/week2September/manual/scripts/p1p2_capability_state.py": "bf7601e388dacb0eff76bfd3dc8721fb8b211f5a043152297a657e4c04d945df",
+    "P2/experiments/week2September/manual/scripts/p1p2_controller.py": "d1b42b8fe054732fa5aed3300d40d7f3646ac88eaf6eed0d44fb2fbea93e0337",
+    "P2/experiments/week2September/manual/scripts/p1p2_paths.py": "2cc69dfc6d75015bad15ffa95c3e23cff7a75c2d8c54b4c6cd6e02a67190a4be",
+    "P2/experiments/week2September/manual/scripts/p1p2_selector.py": "0ad9cc280996620ef7c364c2d4bba200745599e9688c49636bff106876101fde",
+    "P2/experiments/week2September/manual/scripts/run_final_d_test.py": "48d913e0bbc89f33ebf8b8d2821a959e2d2b3eb89027e46e83d59d84b7c20bfd",
+    "P2/experiments/week2September/manual/scripts/run_p1_p2.py": "e1a68636ebd6d40ec713424e98cd48113cbd5ce7920fd6b1c32986fa739c35da",
+    "P2/experiments/week2September/manual/scripts/run_p1p2_post_eval.py": "c68fa9fb19c9747593dc168ba009e539bcdffea026a78281dee6a81efdac2f51",
+    "P2/experiments/week2September/manual/scripts/select_checkpoint_on_dev.py": "ac471796533350a0db3bbc7fcce3997832ef028c7a20cb254f5887dbd1e070a0",
+    "P2/experiments/week2September/manual/scripts/select_round.py": "06ced4de235c2e22223810e8c52c14e02b943223e02c5b0712b1f45303de8281",
+    "P2/experiments/week2September/manual/scripts/selection.py": "586b36254a10b5a144abb0559d90057a56dfc59c33b7fca6c233502b4f10deae",
+    "P2/experiments/week2September/manual/scripts/student_common.py": "c3bf2dfcdf0525b481cf25f467e39a09748b4fd48dc905dc3edd3c03ac8983fb",
+    "P2/experiments/week2September/manual/scripts/train_round.py": "7deb1b5a13ec17fc3b57a5a4b34fa26d92a4efd31872b5955576b55f1322a5b3",
+    "P2/experiments/week2September/manual/tests/test_capability_eval_publication.py": "b996eaf5de0d910fb38e4d11bf0a4ddd3e9f26b39fbcdc60f4aaa5544948605e",
+    "P2/experiments/week2September/manual/tests/test_final_d_test.py": "11b1315c5c2d7718abfd71dfaad3cc30d709294e67114273c89764af199c4397",
+    "P2/experiments/week2September/manual/tests/test_p1p2_analysis.py": "7f0c702a6f0566ba2d4d8069ee052fa289f08b89316bbef720c20b5e9e6c8b34",
+    "P2/experiments/week2September/manual/tests/test_p1p2_artifact_manager.py": "cee45500746f2aaf262f3c91d5133ffa4d4c1cd1608cf83662cfa6ee63e3bbed",
+    "P2/experiments/week2September/manual/tests/test_p1p2_capability_state.py": "5a6c8f3909c0ba38fef40426a29e548e78c9ed8f5138a6e18ae070fb67f0b734",
+    "P2/experiments/week2September/manual/tests/test_p1p2_controller.py": "3eb9c90eacdbcebaf6553f6eceb279eaeeb0d359ca3456a2c326743fd92ffff6",
+    "P2/experiments/week2September/manual/tests/test_p1p2_method_registry.py": "944fac717fb1cbdf0dfdb9768e8cad6ed2f00970edd0fee00c1119ddf6107191",
+    "P2/experiments/week2September/manual/tests/test_p1p2_no_overwrite.py": "21a7c834e310baae3b6280d498f406d3d4ce523b4b734b6090693f2197df6efd",
+    "P2/experiments/week2September/manual/tests/test_p1p2_resume.py": "4d5d25cb513de3ef0dde3169cc1af13779b088b8cc6878dbb770e0746dd668df",
+    "P2/experiments/week2September/manual/tests/test_p1p2_runtime.py": "2ec4d2c4c48524606abe2f422e73e071c086813f1be81b3a48cfa6b602220976",
+    "P2/experiments/week2September/manual/tests/test_p1p2_selector.py": "c498e9f9b5c8a0294328cb020128ae7e3cf830808a4ecb6c03bece36a46b7779",
+    "P2/experiments/week2September/manual/tests/test_p1p2_unified_config.py": "35e3d1f4b8f2879cc7fc301bec5434eab7cdf4e5fa395d1e57298fb9300c0e11",
+    "P2/experiments/week2September/manual/tests/test_run_p1_p2_cli.py": "eb06371ec701c9482e1d1f4065f07ec28ef450448ce85370ebaa5e8f3517ed74",
+    "P2/requirements-lock.txt": "3d7a37d59288c6cb0b5c2b589634881794d74e9d0e7e976a1866b87aa3520f25",
+    "P2/requirements.txt": "c506672236de6fb8f9ede07becf30ccf37b1cee256ac3fedab0557cd7537f600",
+    "README.md": "354d5da4ea68d1cdedfedd89044351a40f2c695a9d4ce52bb2d9f348e2e32fc8",
+    "REPRODUCIBILITY.md": "5c1bf7f1d94d8966be80484d5a77bdf627ac8673e2b1269e4b7b29ec167c9f63",
+    "SECURITY_AND_DATA_POLICY.md": "5779459a665bd78c398617e2d70808ead0131ad8180501ead80a34c2137cd9e5",
+    "deployment/collect_results.sh": "9d69eb0a478bf93ee3eeb00667f0c1fcfa0d86324bb3b2c84728dff268ce3dc9",
+    "deployment/linux_cpu_preflight.sh": "29327f4f0f6c3acc65b7027b5e98b99b5d2daff64d1257e137d00d5ce8fc212c",
+    "deployment/ops.py": "a406ff10f846da3b949d6a1996661370e4742914141245c30e9cc6ff847ad0c5",
+    "deployment/run_a_s2.sh": "43c320f880499bb59b79606bc05db6dd93610d16f9f9c0cec0391f59e7e886de",
+    "deployment/run_a_s3.sh": "59b018b8d225772eb1d7d7bd58422fc8f3f966f72c72a16aa2bdefd5f6bc224c",
+    "deployment/run_b_s2.sh": "bfac77393aca4ab3afd85ef14b4ef60451f2eccd79063158f53db589ac44778c",
+    "deployment/run_b_s3.sh": "e802b7859a8125befd470c0ae61541de0b13190a8b3d8154258d311287ccb80b",
+    "deployment/setup_environment.sh": "2b47d1380b589cb70374af4428cb047e91b066e281496ba83bc78a0a7fa06c76",
+    "deployment/verify_model_cache.sh": "8b412c1a54d8695d9cffc9197551f1036f59fb30bd7ce9d81837dabb1bcd563b",
+    "deployment/verify_package.sh": "7c38f12ab067c75e6263f8cfbaba7c4b13677fdec26b516f4e56c217fb60a58e",
+    "deployment/verify_results.sh": "44b6b30874f23d566c6558ecda40f7d1724395ec7690a5e83de0ff465ced5ac6",
+    "docs/GITHUB_RELEASE_CHECKLIST.md": "0d6d5a54570fe0ae482af93ce61d18e12628474b6774769f9274add09d8f3588",
+    "docs/GITHUB_TO_RUNPOD_WORKFLOW.md": "fd0f8b3206d955e94a6ea074ae1732645542e7f900c0a4f84e90d3e2b55a88f6",
+    "docs/PRE_PUSH_AUDIT.md": "1eab1ec0ecfe4307cf287707f2e88633b9dcbe08ec2885a82c7ca467a79827f8",
+    "manifests/MODEL_CACHE_SHA256SUMS.txt": "97b5db3ae70d9a73a0961c2c56424eff49cb8da9324d455356c8c049adb31630",
+    "manifests/public_files.txt": "287b4c3540559d2d1ac14d0ede47094555795b532ef2d1718b15829433b4bbf3",
+    "manifests/runtime_payload.csv": "f298c12036b957280b01aa9e92660d5e933a4c3f5b9cd6c674de9e05f43331bb",
+    "tests/test_deployment_ops.py": "3d8bc472d2ee9fb5e51d55640f9f12770ed509250aea41d9a8e37313b50fb5b0",
+    "tools/preflight.py": "0f2e30c73acc224c85ac5a59097c45b62f4ec8b5941f521638c1d9a17de1aae3"
+  },
+  "git_root": ".",
+  "observed_at_utc": "2026-11-19T01:25:30.286188+00:00",
+  "publication": {
+    "license_granted": false,
+    "rights": "Owner, source, third-party and metadata permission remains to be established.",
+    "technology": "Text-only source, tests, deployment, documentation, redacted manifest paths and checksums."
+  },
+  "pushed": false,
+  "release_dependencies": {
+    "environment": "Python 3.11; P2/requirements-lock.txt; released backend hf",
+    "frozen_configs": [
+      "p1p2_method_registry.yaml",
+      "p1p2_unified_run.yaml",
+      "experiment_config.json"
+    ],
+    "private_inputs": [
+      "trajectory pool",
+      "token table",
+      "Gold and split files",
+      "historical predictions and sidecars",
+      "run selection and checkpoint lineage",
+      "trained adapters",
+      "offline Student model and tokenizer",
+      "scientific evaluation artifacts"
+    ],
+    "runtime_payload_csv": "manifests/runtime_payload.csv",
+    "sealed_runtime_index_sha256": "dbe0d5bb0b2b80df5d0b4f41ff57b3318a543c264e2d5b20c5c7f818e0424f62",
+    "sealed_runtime_sum_sha256": "bf0c50c301de9e2b78d9533a6a995733a431a6834d8ad019926e1c826af07798",
+    "student_cache_entries": 7,
+    "student_cache_sums": "manifests/MODEL_CACHE_SHA256SUMS.txt"
+  },
+  "remote": null,
+  "schema": "p1p2.github-release-manifest.v1",
+  "staged_count": 63,
+  "statuses": {
+    "D_TEST_EXECUTION": "NOT_RUN",
+    "G6": "PARTIAL",
+    "G7": "PARTIAL",
+    "G8": "PARTIAL",
+    "G9": "NOT_RUN",
+    "GITHUB_CLEAN_CLONE": "PASS_WINDOWS_INDEX_EXPORT",
+    "GITHUB_LICENSE_AUDIT": "PENDING",
+    "GITHUB_PUSHED": "NO",
+    "GITHUB_RUNPOD_COMPATIBILITY": "PASS_WINDOWS_READ_ONLY",
+    "GITHUB_SECURITY_AUDIT": "PASS_STATIC",
+    "GITHUB_SOURCE_COMPLETE": "PASS",
+    "GITHUB_STAGING_READY": "PASS",
+    "GITHUB_TECHNICAL_READY": "PASS",
+    "LINUX_CPU_VALIDATION": "PENDING",
+    "PUBLICATION_APPROVAL": "PENDING",
+    "RUNPOD_GPU_EXECUTION": "NOT_RUN"
+  },
+  "verification": {
+    "bundle_preflight": {
+      "blocked_model_subprocesses": true,
+      "exit": 0,
+      "plan_actions": [
+        0,
+        0,
+        4,
+        16
+      ]
+    },
+    "cli_help": {
+      "count": 11,
+      "exit": 0
+    },
+    "deployment_bash_syntax": {
+      "count": 10,
+      "exit": 0
+    },
+    "deployment_tests": {
+      "count": 7,
+      "exit": 0
+    },
+    "handoff_non_github_matches": 743,
+    "missing_bundle": {
+      "diagnostic": "BUNDLE_REQUIRED",
+      "exit": 2
+    },
+    "missing_local_imports": 0,
+    "private_frozen_config_tests": {
+      "count": 26,
+      "exit": 0
+    },
+    "protected_original_matches": 52,
+    "sealed_core_matches": 37,
+    "sealed_files": 658,
+    "source_modules": 22,
+    "source_only_runtime_tests": {
+      "count": 77,
+      "exit": 0
+    }
+  }
+}

@@ -1,4 +1,0 @@
-{
-  "command": "/workspace/venv/bin/python -c 'import subprocess,sys;r=subprocess.run([sys.executable,sys.argv[1],sys.argv[2]],capture_output=True,text=True);print(r.stdout.splitlines()[-1]);sys.exit(r.returncode)' /workspace/manual/scripts/validate_selection_log.py /workspace/manual/runs/main/B3_seed2026/round_002/selection_log.jsonl",
-  "elapsed_seconds": 2.5
-}

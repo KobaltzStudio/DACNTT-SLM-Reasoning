@@ -1,4 +1,0 @@
-﻿seed,B4_rows,B5_rows,B4_unique_ids,B5_unique_ids,shared_ids,B4_only_ids,B5_only_ids,field_difference_counts,exact_compared_content_match,examples
-13,500,500,500,500,500,0,0,{},True,[]
-42,500,500,500,500,500,0,0,{},True,[]
-2026,500,500,500,500,500,0,0,{},True,[]

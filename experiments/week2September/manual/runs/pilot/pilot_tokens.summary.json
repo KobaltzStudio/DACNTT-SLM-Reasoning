@@ -1,8 +1,0 @@
-{
-  "pool": "/workspace/manual/runs/pilot/pilot_pool.jsonl",
-  "pool_sha256": "bb39b108a1a4ca549bee8088dead92076c257217dfb32cdb86e5aaa6bbcb083f",
-  "tokenizer": "Qwen/Qwen2.5-1.5B-Instruct",
-  "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
-  "n_trajectories": 841,
-  "response_tokens_sum": 201183
-}

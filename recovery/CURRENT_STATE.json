@@ -1,0 +1,197 @@
+{
+  "worktree": ".",
+  "runtime": "runtime",
+  "package": "runpod_package_20261119_004529",
+  "inherited_source_branch": "codex/controller-dryrun-fix",
+  "inherited_source_head": "a26f420b0b4203890c2d86be1d3852a645aeb65d",
+  "phases": {
+    "A": {
+      "phase": "A",
+      "topic": "Layout",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "read-only audit, independent New-Item and layout creation",
+      "evidence_sha256": {
+        "README.md": "eae5b7eb23267ded5a7378f842ad2c149ba921fe26780122ca1a99df5c85caca",
+        "AGENTS.md": "d26ffbe3a54f748b5a7b7ec1165fdb3df0068b3c490ea398bac8571def5f1938",
+        ".gitignore": "aa4acd4f02eeb93317be22d97cc6838a676bd7e37a432d2e16a4573145029f7d",
+        ".gitattributes": "689c81043fcb2f1b040887ef93719afe92cfee8cadddcb7a62107734d878e371",
+        "docs/INITIAL_AUDIT.md": "dcb8a2a914b7a8693d4d8ba262627ec0f397565fa3824f84ac57965a1972c92d"
+      },
+      "blocker": "Linux target and publication pending",
+      "next": "Source consolidation",
+      "utc": "2026-11-19T00:54:04.005002+00:00"
+    },
+    "B": {
+      "phase": "B",
+      "topic": "Source consolidation",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "build_inputs.py exclusive copy from sealed manifest; verified every copied SHA",
+      "evidence_sha256": {
+        "recovery/build_inputs.py": "2d80c092d900a017adc0d5b96d69ff15e636cd14bfe62bf39c888864f355ec39",
+        "manifests/copied_inputs.json": "2f84ccb00b9a195339bda79d2803179aca233eb98c3ec246ab884092779237c4"
+      },
+      "blocker": "No source diff; Linux pending",
+      "next": "Artifact and visibility checks",
+      "utc": "2026-11-19T00:58:43.133379+00:00"
+    },
+    "C": {
+      "phase": "C",
+      "topic": "Artifact and visibility checks",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Frozen runtime and G6/G7/G8 copies remain private; allowlisted source/tests separated",
+      "evidence_sha256": {
+        "manifests/copied_inputs.json": "2f84ccb00b9a195339bda79d2803179aca233eb98c3ec246ab884092779237c4",
+        "github/manifests/runtime_payload.csv": "f298c12036b957280b01aa9e92660d5e933a4c3f5b9cd6c674de9e05f43331bb",
+        "manifests/MODEL_CACHE_TRANSFER_MANIFEST.csv": "6653c3624f9c31bf5fd34f437cc27f7244f8b8528e7a2cf84c86cf0c4ea303ac"
+      },
+      "blocker": "No public redistribution evidence",
+      "next": "Deployment",
+      "utc": "2026-11-19T00:58:43.334725+00:00"
+    },
+    "D": {
+      "phase": "D",
+      "topic": "Deployment",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Created ten non-autostart wrappers and deployment ops; 7 Temp-only guard tests passed",
+      "evidence_sha256": {
+        "deployment/ops.py": "a406ff10f846da3b949d6a1996661370e4742914141245c30e9cc6ff847ad0c5",
+        "deployment/README_RUNPOD.md": "479bf1670c7f91b48c68b44cf715daffc1954999e92e47bfe5aa0db969f4ded8",
+        "tests/test_deployment_ops.py": "3d8bc472d2ee9fb5e51d55640f9f12770ed509250aea41d9a8e37313b50fb5b0"
+      },
+      "blocker": "Linux receipt and operator GPU approvals pending",
+      "next": "Remaining analysis",
+      "utc": "2026-11-19T01:02:53.951277+00:00"
+    },
+    "E": {
+      "phase": "E",
+      "topic": "Remaining analysis",
+      "status": "PARTIAL",
+      "exit_code": 0,
+      "command_or_check": "Verified and documented observed G6/G7/G8 artifacts and missing checkpoints",
+      "evidence_sha256": {
+        "docs/REMAINING_WORK.md": "e66834591f430f5fc1a399526f9e40585b96513c6679db04f52805b1e7424e74",
+        "analysis/g8/figure_manifest.json": "9164b08a05bff8fad4dcd106660ca7a632405bc3b0fb8145a214cdc030a03523"
+      },
+      "blocker": "A S2/S3 and B S2/S3 scientific scope still incomplete",
+      "next": "Future research",
+      "utc": "2026-11-19T01:02:54.188121+00:00"
+    },
+    "F": {
+      "phase": "F",
+      "topic": "Future research",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Created six future research specification documents; no graph or results generated",
+      "evidence_sha256": {
+        "future_research/README.md": "d48dddea66560262484db7da11f57ecabbc68e35004fc892747785234e93cd36",
+        "future_research/prerequisite_graph_design.md": "338a62c36459987d45d422bde7dc3e01864c49a8361328103c44d901afc2d7b8",
+        "future_research/graph_annotation_protocol.md": "49b8828213c56f23d9dc074e1b9b295284ad47390bf393b48b98cf693bcf81ca",
+        "future_research/transfer_probe_protocol.md": "51011b5febf7b266e2a31e88ba69bde66c34edd0c2a9a8eb79e55eac56e19862",
+        "future_research/graph_guided_selection_proposal.md": "817a93a7f6c58ddded3767de4bac6af27bd659f667ab90fefa6369e19b4212f3",
+        "future_research/future_experiment_matrix.md": "c8cdd3995fbc2dfd760f74ccc8a643cb559fe7e217ed0abe5774c8db4bb3919b"
+      },
+      "blocker": "Future study approval pending",
+      "next": "GitHub",
+      "utc": "2026-11-19T01:02:54.387630+00:00"
+    },
+    "G": {
+      "phase": "G",
+      "topic": "GitHub",
+      "status": "BLOCKED",
+      "exit_code": 0,
+      "command_or_check": "Audited exact GitHub candidate allowlist and pinned files; no Git mutations",
+      "evidence_sha256": {
+        "docs/GITHUB_PUBLICATION.md": "8c46f232399144cbac98c53ed3bb6e31b21924ceb366551004ed06c1c898b15f",
+        "manifests/github_candidate_audit.json": "7b9a1a68955b9b8d57960d7914b41f575f554467ebde8dc9682eeca7c79c7a6c",
+        "github/manifests/public_files.txt": "6bf102ddbc85d59d66200f46478bf90089a62c30d4105b51be1fe073e28cd94d"
+      },
+      "blocker": "Owner/third-party licensing and publication approval pending",
+      "next": "Acceptance",
+      "utc": "2026-11-19T01:03:31.011962+00:00"
+    },
+    "H": {
+      "phase": "H",
+      "topic": "Acceptance",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Temp-only runtime unittest 103, deployment unittest 7, Bash syntax/source safety, 0/0/4/16 plans and original SHA recheck",
+      "evidence_sha256": {
+        "docs/evidence/runtime_unittest.log": "f5f6a23ab405445b14fcfe067259879fd5e715a72e20060897573cdcf5bbb349",
+        "docs/evidence/deployment_unittest.log": "4f3fe0100d742264aff4a03f1a733ba53e4ffa150391c16b41a6d3842078810a",
+        "docs/evidence/plans.log": "3e7724f82435e48a14b21ff76d69c5c6d8724130835b9ca0d466c3ecba605a89",
+        "docs/evidence/bash.log": "b49586c81a7bf254b119de6831ea692fe4fb8fbcf12beca2e7e59313b8bb0ec8",
+        "docs/evidence/cache.log": "ecfd17f46bdee61e1c4af15f039bce2e346a0a1677c72fb7b12e077e0d5b4fa8",
+        "docs/evidence/closing_original.log": "227bf658bc5f9d4cb9d64ff0967822617410127b7b7d5b96499be01bb50ec22a",
+        "docs/evidence/round_scope.log": "0abcd3fe64cb3e1013e9484180c137ff7b5eb02081a02219967f7a5e60aac250"
+      },
+      "blocker": "Windows CPU only; Linux fixture/environment acceptance pending",
+      "next": "Operator handoff",
+      "utc": "2026-11-19T01:09:05.550119+00:00"
+    },
+    "I": {
+      "phase": "I",
+      "topic": "Operator handoff",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Created operator, architecture, provenance, protocol and next-session handoff",
+      "evidence_sha256": {
+        "docs/HANDOFF_FOR_RUNPOD_OPERATOR.md": "9c7d357d787df004be746dbab6c27c9c2ea32c6b559f53ea33ca62e38c7e0231",
+        "docs/ARCHITECTURE.md": "94dded61b217b1caee4e618d12371f14cf15bd63a0078225d5c4f4a013767595",
+        "docs/SCIENTIFIC_PROTOCOL.md": "061717ed6e5f87a84ac3f676a36b5ba66612c1e4d164b6c87621a0a4c8dd034f",
+        "docs/ARTIFACT_PROVENANCE.md": "637c69ea8f751fffdef0aa4bb5fd282090af8584b4396d15c47a7265f91a0a6f",
+        "docs/FINAL_RELEASE_CHECKLIST.md": "f6ed85ec526cc84337c22e80016c79865af77884bbd94e8f0088008582b460f6",
+        "docs/NEXT_SESSION_HANDOFF.md": "7335bc5e70551f1bd1d890dc60077de3f2c00b0b0cb2fef982960c1656debd2f"
+      },
+      "blocker": "Approvals for upload, licence, actual jobs and cleanup pending",
+      "next": "Release report",
+      "utc": "2026-11-19T01:09:05.988192+00:00"
+    },
+    "J": {
+      "phase": "J",
+      "topic": "Release report",
+      "status": "PASS",
+      "exit_code": 0,
+      "command_or_check": "Final report, exact upload allowlist, workspace SHA seal and verification",
+      "evidence_sha256": {
+        "docs/FINAL_HANDOFF_REPORT.md": "94a8185258ce34b5893955f10dd3ebcf040cd7c9413e5557109fa1b02b16bd3b",
+        "manifests/SHA256SUMS.txt": "09e72a59464ee6ab291653f208d4f377bb9f2c7749f23d9589409b0b34579d91",
+        "manifests/inventory_counts.json": "971a7cee54ce09d8ea9716e1ec612f6fef3a633664a4fe145c81d76865598eab",
+        "manifests/source_inventory.csv": "b5b0ae45f7e8324db99e9190dee4ea028cc8bdfaae2acf0f6a31b47bab899eed",
+        "manifests/artifact_inventory.csv": "a7d15bdbde38044ffabfc9aa4ccf66fc561aeee165d5f7f3412acf0dc292cb95",
+        "manifests/github_inclusion_manifest.csv": "29f7ee7c47b4ac4f5e4ca77b8f49cfc11ad74605c906b2001017a1dd79b67575",
+        "manifests/runpod_inclusion_manifest.csv": "0b234ec96b2c71a19f63ecfd5d8fc13ff611345b17a4ae00caf59dfa6c0684bd",
+        "manifests/source_to_handoff_mapping.csv": "da0006e7ee85887d46e2565db125d5c225641f2239e7fa9ccb2930179f745471"
+      },
+      "blocker": "Publication rights, Linux host/upload and every live operation pending",
+      "next": "Obtain publication/transfer approval; verify the Linux CPU working tree.",
+      "utc": "2026-11-19T01:10:31.848535+00:00"
+    }
+  },
+  "linux": "PENDING",
+  "gpu": "NOT_RUN",
+  "d_test": "NOT_RUN",
+  "last": {
+    "phase": "J",
+    "topic": "Release report",
+    "status": "PASS",
+    "exit_code": 0,
+    "command_or_check": "Final report, exact upload allowlist, workspace SHA seal and verification",
+    "evidence_sha256": {
+      "docs/FINAL_HANDOFF_REPORT.md": "94a8185258ce34b5893955f10dd3ebcf040cd7c9413e5557109fa1b02b16bd3b",
+      "manifests/SHA256SUMS.txt": "09e72a59464ee6ab291653f208d4f377bb9f2c7749f23d9589409b0b34579d91",
+      "manifests/inventory_counts.json": "971a7cee54ce09d8ea9716e1ec612f6fef3a633664a4fe145c81d76865598eab",
+      "manifests/source_inventory.csv": "b5b0ae45f7e8324db99e9190dee4ea028cc8bdfaae2acf0f6a31b47bab899eed",
+      "manifests/artifact_inventory.csv": "a7d15bdbde38044ffabfc9aa4ccf66fc561aeee165d5f7f3412acf0dc292cb95",
+      "manifests/github_inclusion_manifest.csv": "29f7ee7c47b4ac4f5e4ca77b8f49cfc11ad74605c906b2001017a1dd79b67575",
+      "manifests/runpod_inclusion_manifest.csv": "0b234ec96b2c71a19f63ecfd5d8fc13ff611345b17a4ae00caf59dfa6c0684bd",
+      "manifests/source_to_handoff_mapping.csv": "da0006e7ee85887d46e2565db125d5c225641f2239e7fa9ccb2930179f745471"
+    },
+    "blocker": "Publication rights, Linux host/upload and every live operation pending",
+    "next": "Obtain publication/transfer approval; verify the Linux CPU working tree.",
+    "utc": "2026-11-19T01:10:31.848535+00:00"
+  }
+}

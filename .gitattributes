@@ -1,0 +1,3 @@
+# Preserve checked bytes except for authored shell scripts, which must stay LF.
+* -text
+*.sh text eol=lf

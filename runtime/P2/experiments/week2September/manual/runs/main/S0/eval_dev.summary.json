@@ -1,0 +1,85 @@
+{
+  "checkpoint": "S0",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": null,
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.714,
+  "lenient_accuracy": 0.764,
+  "format_compliance": 0.916,
+  "lenient_accuracy_exploratory": 0.764,
+  "n_valid": 357,
+  "n_invalid_answer": 101,
+  "n_invalid_format": 42,
+  "mean_output_tokens": 239.046,
+  "n_hit_max_tokens": 7,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.5925925925925926,
+      "lenient_accuracy": 0.7407407407407407,
+      "format_compliance": 0.8148148148148148
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.723404255319149,
+      "lenient_accuracy": 0.8723404255319149,
+      "format_compliance": 0.8085106382978723
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.7741935483870968,
+      "lenient_accuracy": 0.9032258064516129,
+      "format_compliance": 0.8387096774193549
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.7380952380952381,
+      "lenient_accuracy": 0.8571428571428571,
+      "format_compliance": 0.8571428571428571
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.6551724137931034,
+      "lenient_accuracy": 0.7586206896551724,
+      "format_compliance": 0.896551724137931
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.7333333333333333,
+      "lenient_accuracy": 0.8666666666666667,
+      "format_compliance": 0.8
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7090909090909091,
+      "lenient_accuracy": 0.8181818181818182,
+      "format_compliance": 0.8545454545454545
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 360.9,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.29,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}

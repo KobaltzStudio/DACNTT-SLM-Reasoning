@@ -1,9 +1,0 @@
-warning: in the working copy of 'experiments/week2September/manual/scripts/build_capability_learning_dynamics.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/scripts/capability_eval.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_artifact_manager.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_capability_state.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/scripts/p1p2_controller.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/scripts/run_p1p2_post_eval.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_artifact_manager.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_controller.py', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'experiments/week2September/manual/tests/test_p1p2_no_overwrite.py', LF will be replaced by CRLF the next time Git touches it

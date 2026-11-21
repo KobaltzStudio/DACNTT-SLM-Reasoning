@@ -1,9 +1,0 @@
-# Phase 6 — Safe cleanup
-
-**PASS for the cleaned copy. PENDING APPROVAL for originals.** Created an independent allowlisted package under `Pipeline/p1p2_unified`. Package preservation is based on byte-level copy verification and CPU plans from the copied tree. It excludes historical ZIPs, 213 bytecode candidates, temporary logs, historical test outputs and five legacy source backups found in the prior allowlist. No original file was removed, renamed or moved.
-
-The original workspace census classifies 4,919 regular files. It contains 231 KEEP_ACTIVE, 4,030 KEEP_REPRODUCIBILITY, 85 ARCHIVE_CANDIDATE, 213 DELETE_SAFE_CANDIDATE and 360 UNKNOWN_REQUIRES_REVIEW. See CLEANUP_FINAL_INVENTORY.csv. Reparse points, Git internals, environments/tool caches, this report and the detached package are outside the original-file census. Candidates are recommendations with source/Git evidence, not permission to remove.
-
-All 65 ZIPs were rehashed. For the P1 manual ZIP, SHA-256 now matches 735/735 members against their extracted copies. The previously unchecked 15 files were larger than the old 8 MiB audit cap (13 tokenizer files and two trajectory pool files). The improved read-only comparison streamed members and did not extract files. This establishes current content redundancy for this ZIP. It remains an original research archive and was retained, with no deletion authorized. The two other archives named manual.zip are different artifacts. See zip_redundancy_audit.csv and manual_zip_member_audit.csv.
-
-Keep active code/tests, frozen configs, datasets, Gold/splits, adapters, checkpoints, partial predictions, selection logs, NLL metadata, lineage, historical results and reports. Preserve G4 original train sets and B4/B5 NLL where referenced. All 65 original ZIPs and the original 213 candidates stay in place. Archive planning needs a verified destination, reviewed file list and owner approval. See migration_dependency_report.md and ROLLBACK_PLAN.md.
