@@ -1,1 +1,7 @@
 # Include the complete handoff in this release checkout.
+.venv/
+__pycache__/
+*.pyc
+.env
+.vscode/
+.claude/
