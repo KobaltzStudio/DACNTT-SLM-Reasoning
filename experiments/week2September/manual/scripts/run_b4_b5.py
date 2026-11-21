@@ -71,6 +71,23 @@ def main():
     cfg=json.loads(a.config.read_text(encoding='utf-8'))
     if cfg.get('config_version')!='v2' or cfg['budget']['beta_round_tokens']!=45426 or cfg['schedule']['rounds_M']!=3:
         raise RuntimeError('experiment config does not match the frozen v2 B4/B5 protocol')
+
+        # LINEAGE_VALIDATION_V1
+        if a.micro_batch <= 0:
+            raise ValueError('--micro-batch must be a positive integer')
+        effective_batch = int(cfg['training']['batch_size'])
+        if effective_batch <= 0 or effective_batch % a.micro_batch != 0:
+            raise ValueError(
+                f'--micro-batch={a.micro_batch} must be positive and divide '
+                f'effective_batch={effective_batch}'
+            )
+        grad_accum = effective_batch // a.micro_batch
+        print(
+            f'[CONFIG] method={method} seed={seed} round={rnd} '
+            f'effective_batch={effective_batch} '
+            f'micro_batch={a.micro_batch} grad_accum={grad_accum}',
+            flush=True,
+        )
     if method=='B4':
         score_dir=a.reports_dir/'shared'
         checkpoint='student_ckpt_000'
@@ -132,10 +149,30 @@ def main():
     if adapter_out.exists():
         train_log=adapter_out/'train_log.json'
         if not train_log.exists(): raise RuntimeError(f'incomplete adapter directory exists: {adapter_out}; no overwrite')
-        logged=json.loads(train_log.read_text(encoding='utf-8'))
-        if logged.get('train_set_sha256')!=__import__('hashlib').sha256(train_set.read_bytes()).hexdigest():
-            raise RuntimeError(f'existing checkpoint was trained from a different train set: {adapter_out}')
-        print(f'[RESUME] Reusing completed adapter {adapter_out}')
+        logged = json.loads(train_log.read_text(encoding='utf-8'))
+        expected_train_hash = __import__('hashlib').sha256(train_set.read_bytes()).hexdigest()
+        if logged.get('train_set_sha256') != expected_train_hash:
+            raise RuntimeError(f'existing checkpoint has a different train set: {adapter_out}')
+        if int(logged.get('seed', -1)) != seed:
+            raise RuntimeError(f'checkpoint seed mismatch: expected={seed}, found={logged.get("seed")}')
+        if int(logged.get('effective_batch', -1)) != effective_batch:
+            raise RuntimeError(f'checkpoint effective batch mismatch: expected={effective_batch}, found={logged.get("effective_batch")}')
+        if int(logged.get('micro_batch', -1)) != a.micro_batch:
+            raise RuntimeError(f'checkpoint micro-batch mismatch: requested={a.micro_batch}, found={logged.get("micro_batch")}')
+        if int(logged.get('grad_accum', -1)) != grad_accum:
+            raise RuntimeError(f'checkpoint grad_accum mismatch: expected={grad_accum}, found={logged.get("grad_accum")}')
+        expected_parent_name = f'student_ckpt_{rnd:03d}'
+        logged_parent = str(logged.get('checkpoint_parent', '')).strip()
+        if not logged_parent:
+            raise RuntimeError('checkpoint_parent is missing from train_log.json')
+        if rnd == 0:
+            parent_ok = Path(logged_parent).name == expected_parent_name
+        else:
+            expected_parent = (a.models_dir / method / f'seed_{seed:02d}' / expected_parent_name).resolve()
+            parent_ok = Path(logged_parent).resolve() == expected_parent
+        if not parent_ok:
+            raise RuntimeError(f'checkpoint parent mismatch: expected={expected_parent_name if rnd == 0 else expected_parent}, found={logged_parent}')
+        print(f'[RESUME] Reusing verified adapter {adapter_out}')
     else:
         cmd=[sys.executable,HERE/'train_round.py','--seed',str(seed),'--train-set',train_set,'--adapter-dir',adapter_out,'--micro-batch',str(a.micro_batch)]
         if rnd>0:
