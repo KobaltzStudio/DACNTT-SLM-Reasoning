@@ -1,0 +1,138 @@
+{
+  "thresholds": {
+    "delta_clear": 0.02,
+    "mcnemar_p_clear": 0.1
+  },
+  "seeds": {
+    "13": {
+      "accuracy": {
+        "n": 500,
+        "acc_S0": 0.712,
+        "acc_S1": 0.83,
+        "delta": 0.118,
+        "wrong_to_right": 89,
+        "right_to_wrong": 30,
+        "mcnemar_exact_p": 5.6882868507839105e-08,
+        "format_S0": 0.916,
+        "format_S1": 0.996,
+        "mean_len_S0": 238.538,
+        "mean_len_S1": 211.05,
+        "lenient_acc_S0_exploratory": 0.762,
+        "lenient_acc_S1_exploratory": 0.83,
+        "clear_change": true,
+        "format_confound": true
+      },
+      "training": {
+        "steps": 25,
+        "loss_first": 0.22547730519388184,
+        "loss_last": 0.18923942983463424,
+        "loss_decreasing": true,
+        "max_loss": 0.295233442853269,
+        "supervised_tokens": 44463,
+        "beta_round_tokens_config": 45426,
+        "train_seconds": 499.2,
+        "peak_gpu_memory_gb": 6.13
+      },
+      "decision": "keep",
+      "decision_text": "Accuracy tăng rõ, loss giảm: giữ I3/I4/I5 (CẢNH BÁO: tỉ lệ đúng định dạng đổi ≥ 5 điểm %, so với accuracy lỏng trước khi kết luận)",
+      "nll_exploratory": {
+        "all": {
+          "n": 480,
+          "spearman_ell": 0.8572986427892482,
+          "mean_ell_S0": 0.2423817837181799,
+          "mean_ell_S1": 0.18373981330290728,
+          "mean_delta_ell": -0.05864197041527263
+        },
+        "trained": {
+          "n": 200,
+          "spearman_ell": 0.9020040501012526,
+          "mean_ell_S0": 0.24362787172556702,
+          "mean_ell_S1": 0.15299276322306735,
+          "mean_delta_ell": -0.09063510850249967
+        },
+        "untrained": {
+          "n": 280,
+          "spearman_ell": 0.9443424023265603,
+          "mean_ell_S0": 0.24149172085576054,
+          "mean_ell_S1": 0.20570199193136435,
+          "mean_delta_ell": -0.03578972892439617
+        },
+        "l_proxy": {
+          "ell_star_S0": 0.23297824127704142,
+          "sigma_S0": 0.07165368208610012,
+          "ell_star_S1": 0.16880443492121072,
+          "sigma_S1": 0.07136773700245089,
+          "spearman_l_proxy": 0.5745826031462052,
+          "top_n": 200,
+          "jaccard_top_n": 0.43884892086330934
+        }
+      }
+    },
+    "42": {
+      "accuracy": {
+        "n": 500,
+        "acc_S0": 0.712,
+        "acc_S1": 0.818,
+        "delta": 0.10599999999999998,
+        "wrong_to_right": 84,
+        "right_to_wrong": 31,
+        "mcnemar_exact_p": 8.028561762207067e-07,
+        "format_S0": 0.916,
+        "format_S1": 0.966,
+        "mean_len_S0": 238.538,
+        "mean_len_S1": 247.306,
+        "lenient_acc_S0_exploratory": 0.762,
+        "lenient_acc_S1_exploratory": 0.83,
+        "clear_change": true,
+        "format_confound": false
+      },
+      "training": {
+        "steps": 25,
+        "loss_first": 0.23522540559592423,
+        "loss_last": 0.20785289288577607,
+        "loss_decreasing": true,
+        "max_loss": 0.2870146848575017,
+        "supervised_tokens": 47667,
+        "beta_round_tokens_config": 45426,
+        "train_seconds": 508.6,
+        "peak_gpu_memory_gb": 6.46
+      },
+      "decision": "keep",
+      "decision_text": "Accuracy tăng rõ, loss giảm: giữ I3/I4/I5",
+      "nll_exploratory": {
+        "all": {
+          "n": 480,
+          "spearman_ell": 0.8686415739651646,
+          "mean_ell_S0": 0.2423817837181799,
+          "mean_ell_S1": 0.18554729917869386,
+          "mean_delta_ell": -0.056834484539486044
+        },
+        "trained": {
+          "n": 200,
+          "spearman_ell": 0.8878466961674042,
+          "mean_ell_S0": 0.2420108303108539,
+          "mean_ell_S1": 0.1554673003997176,
+          "mean_delta_ell": -0.0865435299111363
+        },
+        "untrained": {
+          "n": 280,
+          "spearman_ell": 0.9499188218508617,
+          "mean_ell_S0": 0.24264675043769848,
+          "mean_ell_S1": 0.20703301259224832,
+          "mean_delta_ell": -0.03561373784545014
+        },
+        "l_proxy": {
+          "ell_star_S0": 0.23297824127704142,
+          "sigma_S0": 0.07165368208610012,
+          "ell_star_S1": 0.173626033789627,
+          "sigma_S1": 0.07314043265279505,
+          "spearman_l_proxy": 0.6461818218710705,
+          "top_n": 200,
+          "jaccard_top_n": 0.5094339622641509
+        }
+      }
+    }
+  },
+  "seed_spread_delta": 0.01200000000000001,
+  "overall_decision": "keep"
+}

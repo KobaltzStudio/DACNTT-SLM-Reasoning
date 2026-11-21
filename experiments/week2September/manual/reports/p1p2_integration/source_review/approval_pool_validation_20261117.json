@@ -1,0 +1,80 @@
+{
+  "schema_version": "p1p2.approval-pool-audit.v1",
+  "read_only": true,
+  "approval": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_releases\\vFinal_2026-11-16\\gold_supplement_85_approved_review.csv",
+    "sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "expected_sha256_match": true,
+    "rows": 85,
+    "unique_problem_ids": 85,
+    "columns": [
+      "record_no",
+      "problem_id",
+      "question",
+      "ground_truth_final_answer_only",
+      "gold_capabilities_current",
+      "proposed_capabilities",
+      "difficulty_current",
+      "review_status",
+      "ai_review_confidence",
+      "issue_flags",
+      "ai_review_rationale",
+      "gold_annotator_id",
+      "gold_annotation_notes_source",
+      "vnext_same_labels_and_notes",
+      "a1_annotation_available",
+      "a2_annotation_available",
+      "solution_trace_available_in_uploaded_source",
+      "human_approval"
+    ],
+    "approval_status_counts": {
+      "APPROVED_BY_USER_2026-11-12": 85
+    },
+    "unapproved_rows": [],
+    "exact_id_match_with_gold": true
+  },
+  "gold": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\supplement_annotations_vfinal.jsonl",
+    "rows": 85,
+    "unique_problem_ids": 85,
+    "sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44"
+  },
+  "splits": {
+    "d_pool_count": 6968,
+    "d_dev_count": 500,
+    "d_test_count": 1319,
+    "pool_problem_count": 1032,
+    "pool_problem_ids_subset_of_d_pool": true,
+    "pool_d_dev_overlap": 0,
+    "pool_d_test_overlap": 0
+  },
+  "pool": {
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+    "sha256": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+    "records": 4353,
+    "unique_trajectory_ids": 4353,
+    "unique_problem_ids": 1032,
+    "capability_type_counts": {
+      "list": 4353
+    },
+    "capability_counts": {
+      "multiplication": 3483,
+      "division": 1775,
+      "fraction": 829,
+      "addition": 2800,
+      "subtraction": 2202,
+      "percentage": 525,
+      "ratio": 37
+    },
+    "empty_capability_rows": 0,
+    "unknown_capabilities": {},
+    "verification_status_counts": {
+      "valid": 4353
+    },
+    "capability_extractor_counts": {
+      "rules_v2/raw_generation": 4353
+    },
+    "all_trajectories_valid": true
+  },
+  "protected_artifacts_modified": false
+}

@@ -1,0 +1,974 @@
+﻿=== CONTROLLER IMPLEMENTATION INPUTS ===
+
+=== 1. PYTHON ENVIRONMENT ===
+Python 3.11.9
+
+
+=== 2. CONFIG FILES ===
+
+--- config\p1p2_method_registry.yaml ---
+schema_version: p1p2.method-registry.v1
+registry_version: 1
+status: frozen_protocol_registry
+
+source_of_truth:
+  p2_config: config/experiment_config.json
+  p2_config_version: v2
+  note: >-
+    B2/B3/B4/B5 retain their existing P2 definitions and implementations.
+    This registry identifies dispatch and integration metadata only; it does
+    not redefine or override the frozen P2 experiment configuration.
+
+registered_seeds:
+  - 13
+  - 42
+  - 2026
+custom_seed_policy:
+  enabled: true
+  namespace_suffix: custom
+  registered_namespace: p1p2_integration
+  custom_namespace: p1p2_integration_custom
+  registered_seed_values_are_reserved: true
+
+checkpoint_protocol:
+  baseline: S0
+  rounds:
+    1: S1
+    2: S2
+    3: S3
+  total_rounds: 3
+  p2_round_index_offset: -1
+  evaluation_split: dev
+  test_evaluation_during_rounds: false
+
+methods:
+  B2:
+    enabled: true
+    family: p2_baseline
+    implementation: existing_p2
+    source_config: config/experiment_config.json
+    selection_policy: frozen_p2_b2
+    requires_capability_state: false
+    requires_nll: false
+    graph_evidence_required: false
+    output_method_id: B2
+
+  B3:
+    enabled: true
+    family: p2_baseline
+    implementation: existing_p2
+    source_config: config/experiment_config.json
+    selection_policy: frozen_p2_b3
+    requires_capability_state: false
+    requires_nll: false
+    graph_evidence_required: false
+    output_method_id: B3
+
+  B4:
+    enabled: true
+    family: p2_baseline
+    implementation: existing_p2
+    source_config: config/experiment_config.json
+    selection_policy: frozen_p2_b4
+    requires_capability_state: false
+    requires_nll: true
+    nll_checkpoint_policy: S0
+    graph_evidence_required: false
+    output_method_id: B4
+    shared_checkpoint_alias:
+      alias_group: B4_B5_seed_scoped_S1
+      canonical_method: B5
+      checkpoint: S1
+
+  B5:
+    enabled: true
+    family: p2_baseline
+    implementation: existing_p2
+    source_config: config/experiment_config.json
+    selection_policy: frozen_p2_b5
+    requires_capability_state: false
+    requires_nll: true
+    nll_checkpoint_policy: current_checkpoint
+    graph_evidence_required: false
+    output_method_id: B5
+    shared_checkpoint_alias:
+      alias_group: B4_B5_seed_scoped_S1
+      canonical_method: B5
+      checkpoint: S1
+
+  P1-DEFICIT:
+    enabled: true
+    family: p1_baseline
+    implementation: p1p2_selector
+    selection_policy: capability_deficit_only
+    requires_capability_state: true
+    requires_nll: false
+    graph_evidence_required: false
+    output_method_id: P1-DEFICIT
+
+  P1P2:
+    enabled: true
+    family: integrated_method
+    implementation: p1p2_selector
+    selection_policy: capability_deficit_plus_dynamic_learnability
+    requires_capability_state: true
+    requires_nll: true
+    nll_checkpoint_policy: current_checkpoint_each_round
+    priority_policy:
+      policy_id: p1p2_alpha_050_v1
+      alpha: 0.5
+      alpha_tuned: false
+      formula: alpha * p1_deficit + (1 - alpha) * percentile_rank_l_proxy
+    graph_evidence_required: false
+    output_method_id: P1P2
+
+  P1-GRAPH:
+    enabled: false
+    status: NOT_RUN_NOT_APPLICABLE_PENDING_GRAPH_EVIDENCE
+    family: graph_guided_method
+    implementation: not_configured
+    selection_policy: unsupported_until_graph_evidence_passes
+    requires_capability_state: true
+    requires_nll: false
+    graph_evidence_required: true
+    output_method_id: P1-GRAPH
+    enablement_requirements:
+      - graph_edges_have_evidence_references
+      - graph_edges_have_source_hashes
+      - annotation_and_probe_completion_is_verified
+      - edge_thresholds_are_evaluated
+
+output_namespaces:
+  registered:
+    runs: runs/p1p2_integration
+    models: models/p1p2_integration
+    reports: reports/p1p2_integration
+  custom:
+    runs: runs/p1p2_integration_custom
+    models: models/p1p2_integration_custom
+    reports: reports/p1p2_integration_custom
+  forbidden:
+    - runs/main
+
+
+--- config\p1p2_unified_run.yaml ---
+schema_version: p1p2.unified-run.v1
+config_version: 1
+status: frozen_integration_protocol
+
+source_of_truth:
+  method_registry: config/p1p2_method_registry.yaml
+  p2_experiment_config: config/experiment_config.json
+  p2_config_version: v2
+  rule: >-
+    This file defines integration orchestration and protocol constraints.
+    It does not override or duplicate P2 training hyperparameters or method
+    selection implementations in config/experiment_config.json.
+
+execution:
+  default_methods:
+    - B2
+    - B3
+    - B4
+    - B5
+    - P1-DEFICIT
+    - P1P2
+  default_seeds:
+    - 13
+    - 42
+    - 2026
+  custom_seed:
+    enabled: true
+    registered_seeds_are_reserved: true
+    namespace_from_registry: custom
+  rounds:
+    first: 1
+    last: 3
+    total: 3
+    user_round_numbering: 1_based
+    checkpoint_by_round:
+      0: S0
+      1: S1
+      2: S2
+      3: S3
+    p2_round_index_offset: -1
+  dry_run:
+    supported: true
+    must_not_train: true
+    must_not_write_model_checkpoints: true
+    may_write_only_under: reports/p1p2_integration/integration_tests
+  resume:
+    supported_by_target_controller: true
+    require_valid_parent_checkpoint: true
+    require_matching_run_fingerprint: true
+    never_overwrite_completed_round: true
+
+models:
+  teacher:
+    model_id: Qwen/Qwen2.5-3B-Instruct
+    revision: aa8e72537993ba99e69dfaafa59ed015b17504d1
+  student:
+    model_id: Qwen/Qwen2.5-1.5B-Instruct
+    revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+    initial_checkpoint: student_ckpt_000
+  benchmark: GSM8K
+
+data:
+  verified_pool:
+    path: trajectory/pool/pool_v1_verified.jsonl
+    required_verification_status: valid
+    expected_records: 4353
+    expected_sha256: 95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04
+  token_table:
+    path: reports/task5/pool_v1_tokens.jsonl
+    required_fields:
+      - trajectory_id
+      - problem_id
+      - response_tokens
+    token_source: student_tokenizer
+  d_pool:
+    path: splits/d_pool_ids.txt
+    required: true
+  dev:
+    path: splits/d_dev_ids.txt
+    expected_count: 500
+  dev_select:
+    path: splits/p1p2_vfinal_2026-11-16/d_dev_select_ids.txt
+    expected_count: 415
+    purpose: checkpoint_selection_only
+  dev_graph:
+    path: splits/p1p2_vfinal_2026-11-16/d_dev_graph_ids.txt
+    expected_count: 85
+    purpose: primary_capability_evaluation
+  split_constraints:
+    dev_select_and_dev_graph_disjoint: true
+    dev_select_union_dev_graph_equals_dev: true
+    primary_correctness_field: status
+    primary_correctness_value: valid
+    lenient_correctness_is_primary: false
+  test:
+    path: splits/d_test_ids.txt
+    allowed_during_training_rounds: false
+    allowed_for_checkpoint_selection_or_tuning: false
+    allowed_only_after_policy_and_checkpoint_selection_frozen: true
+
+selection:
+  budget:
+    source: config/experiment_config.json
+    unit: supervised_response_tokens_student_tokenizer
+    beta_round_tokens: 45426
+    beta_total_tokens: 136278
+  n_cap: 1
+  tie_break: trajectory_id ascending
+  allow_reselect_across_rounds: true
+  reselect_semantics: >-
+    Previously selected trajectory IDs remain eligible as candidates in later
+    rounds; for learnability percentile/reference computation, previously
+    trained IDs are excluded from the reference set as implemented by the
+    P2 learnability API.
+  budget_fill_semantics: stop_at_first_candidate_that_exceeds_remaining_budget
+  pool_constraints:
+    only_verified_pool_records: true
+    require_nonempty_capabilities: true
+    allowed_capabilities:
+      - addition
+      - subtraction
+      - multiplication
+      - division
+      - percentage
+      - fraction
+      - ratio
+    token_count_must_come_from_token_table: true
+  p1p2_priority:
+    policy_id: p1p2_alpha_050_v1
+    alpha: 0.5
+    alpha_tuned: false
+    formula: alpha * p1_deficit + (1 - alpha) * percentile_rank_l_proxy
+    nll_policy: recompute_on_current_student_checkpoint_each_round
+  p1_deficit:
+    nll_required: false
+    graph_required: false
+  p1_graph:
+    enabled: false
+    enable_only_after_graph_evidence_validation: true
+
+method_runtime:
+  B2:
+    dispatch: existing_p2_method
+    nll_policy: none
+    capability_state_required: false
+  B3:
+    dispatch: existing_p2_method
+    nll_policy: none
+    capability_state_required: false
+  B4:
+    dispatch: existing_p2_method
+    nll_policy: S0
+    capability_state_required: false
+    shared_s1_alias_group: B4_B5_seed_scoped_S1
+  B5:
+    dispatch: existing_p2_method
+    nll_policy: current_checkpoint
+    capability_state_required: false
+    shared_s1_alias_group: B4_B5_seed_scoped_S1
+  P1-DEFICIT:
+    dispatch: p1p2_selector
+    nll_policy: none
+    capability_state_required: true
+    graph_required: false
+  P1P2:
+    dispatch: p1p2_selector
+    nll_policy: current_checkpoint_each_round
+    capability_state_required: true
+    graph_required: false
+  P1-GRAPH:
+    enabled: false
+    dispatch: blocked_pending_graph_evidence
+    graph_required: true
+
+round_protocol:
+  evaluation_split: dev
+  evaluation_command_intent: eval_student.py --split dev
+  prohibit_full_p2_runner_during_integrated_rounds: true
+  reason: >-
+    The full P2 experiment runner may evaluate D_test at each checkpoint.
+    Integrated rounds must evaluate D_dev only; D_test is deferred until
+    checkpoint selection and policy are frozen.
+  stages:
+    - compute_required_nll
+    - calculate_p1_capability_priority_when_required
+    - calculate_p2_dynamic_learnability_when_required
+    - select_from_verified_d_pool
+    - publish_train_set_and_selection_log
+    - train_with_canonical_p2_engine
+    - publish_checkpoint_and_lineage
+    - evaluate_dev_only
+    - run_p1_post_evaluation_hook_when_required
+    - update_capability_state_when_required
+  checkpoint_selection:
+    metric: strict_exact_match_accuracy
+    split: dev_select
+    record_count: 415
+    tie_break: earliest_checkpoint
+    d_test_allowed: false
+
+training:
+  implementation: scripts/train_round.py
+  configuration_source: config/experiment_config.json
+  do_not_duplicate_hyperparameters: true
+  continue_same_lora_adapter_across_rounds: true
+  optimizer_state_reinitialized_each_round: true
+
+post_evaluation_hook:
+  implementation: scripts/run_p1p2_post_eval.py
+  required_cli_inputs:
+    - method
+    - seed
+    - round
+    - prediction
+    - checkpoint
+    - output_dir
+  supported_round_values:
+    - 0
+    - 1
+    - 2
+    - 3
+  round_zero_means: S0
+  methods:
+    - B2
+    - B3
+    - B4
+    - B5
+    - P1-DEFICIT
+    - P1P2
+  p1_graph_allowed: false
+  must_preserve_method_seed_round_checkpoint_lineage: true
+
+artifacts:
+  registered:
+    runs_root: runs/p1p2_integration
+    models_root: models/p1p2_integration
+    reports_root: reports/p1p2_integration
+  custom:
+    runs_root: runs/p1p2_integration_custom
+    models_root: models/p1p2_integration_custom
+    reports_root: reports/p1p2_integration_custom
+  forbidden_write_roots:
+    - runs/main
+    - models/task7
+  publication:
+    fingerprint_required: true
+    no_overwrite: true
+    atomic_publish: true
+    preserve_historical_artifacts: true
+
+protected_inputs:
+  - config/experiment_config.json
+  - config/experiment_config_v1.json
+  - trajectory/pool/pool_v1_verified.jsonl
+  - splits/split_manifest.json
+  - splits/d_pool_ids.txt
+  - splits/d_dev_ids.txt
+  - splits/d_test_ids.txt
+  - runs/main
+  - models/task7
+
+validation:
+  require_registry_consistency: true
+  require_frozen_p2_config_consistency: true
+  require_pool_fingerprint_match: true
+  require_dev_split_counts_and_disjointness: true
+  require_no_test_evaluation_during_rounds: true
+  require_method_nll_policy_consistency: true
+  require_registered_custom_namespace_separation: true
+
+
+--- config\experiment_config.json ---
+{
+  "config_version": "v2",
+  "status": "FROZEN v2 (2026-11-01): supersedes v1 before any main-experiment run. Only selection schedules of B3/B4, the reference set of ell_star/sigma and the H-testing rules changed; budget, training, seeds, evaluation and primary comparison are unchanged. Rationale: task7_decisions.md. v1 is archived byte-identical at config/experiment_config_v1.json (used by the smoke test and Task 6 pool). I4 (probe b = 7) remains provisional until the L_emp probe check.",
+  "sources": {
+    "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
+    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14",
+    "decisions_v2": "task7_decisions.md",
+    "previous_version": "config/experiment_config_v1.json (sha256 7c5aa72d68be56de6ce0a4425635462a223ed540fd02d6e0e9806497ee382df5)"
+  },
+  "splits": {
+    "manifest": "splits/split_manifest.json",
+    "manifest_sha256": "8bac2c8d43eae6df53b63f97f353ed6006551f44d5562b74941455301fec09a3",
+    "split_seed": 363636,
+    "n_dev": 500,
+    "near_duplicate_ngram": 13
+  },
+  "teacher": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "K": 5,
+    "temperature": 0.7,
+    "max_new_tokens": 512,
+    "generation_seed_base": 20261009,
+    "generation_seed_rule": "generation_seed_base + problem_index * K + k (problem_index = row order of the input file, k = 0..K-1)",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "revision_note": "Not recorded at generation time. HF repo last modified 2024-09-25 (before generation in 2026-10), so main == this sha if the model was loaded from HF main."
+  },
+  "student": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "initial_checkpoint": "student_ckpt_000",
+    "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs."
+  },
+  "schedule": {
+    "rounds_M": 3,
+    "checkpoint_name": "student_ckpt_{t:03d}"
+  },
+  "budget": {
+    "unit": "supervised (loss-bearing) response tokens under the Student tokenizer; prompt tokens are masked from the loss and logged separately",
+    "beta_round_rule": "n_round * mean token length of verified trajectories",
+    "n_round": 200,
+    "beta_round_tokens": 45426,
+    "beta_total_tokens": 136278,
+    "probe_budget_b_steps": 7,
+    "probe_budget_note": "b = one epoch over a 50-trajectory group at effective batch 8 (= ceil(50/8) = 7 steps), same regime as one training round",
+    "l_emp_checkpoints": [
+      "student_ckpt_000"
+    ],
+    "l_emp_groups": "5 token-length quintile bins of the eligible pool at S_0; 50 trajectories sampled per bin with seed 363636",
+    "report_beta_est": true,
+    "pool_token_stats": "reports/task5/pool_token_stats.json (Student tokenizer; response mean 227.13, with prompt mean 359.6)",
+    "L_bar_response_tokens": 227.13,
+    "L_bar_source": "reports/task5/pool_token_stats.json (480 verified trajectories of the preliminary pool, Student tokenizer)",
+    "pool_requirement": "Task 6 official D_pool trajectory pool must cover >= 1000 problems (5 x n_round with n_cap = 1); otherwise revise via config v2 before training",
+    "b1_exception": "B1 trains on the full pool once per round (reference, higher cost), not budget-matched",
+    "probe_group_size": 50
+  },
+  "training": {
+    "method": "LoRA",
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "optimizer": "adamw_torch",
+    "batch_size": 8,
+    "epochs_per_round": 1,
+    "max_seq_len": 1024,
+    "tuned": false,
+    "official_runs": "cloud",
+    "local_runs": "smoke test only (QLoRA, RTX 3050 Ti 4GB)",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "lr_scheduler": "constant",
+    "warmup_steps": 0,
+    "batch_size_note": "effective batch size (per-device x gradient accumulation)",
+    "loss": "completion-only (prompt tokens masked)",
+    "precision": "bf16",
+    "adapter_across_rounds": "continue the same LoRA adapter from S_t; optimizer state re-initialized each round",
+    "hyperparameter_source": "QLoRA (Dettmers et al., 2023, arXiv 2305.14314) Appendix: LoRA on all linear layers, dropout 0.1 for models up to 13B, constant LR schedule, Adam beta2 0.999, max grad norm 0.3"
+  },
+  "seeds": {
+    "training_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "data_order_seed_rule": "data_order_seed = training_seed",
+    "optional_extra_seeds": [
+      7,
+      77
+    ],
+    "optional_extra_seeds_rule": "run only if compute allows, and then for every method"
+  },
+  "learnability": {
+    "proxy": "ell = length-normalized NLL of tau under S_t; L_proxy = exp(-(ell - ell_star_t)^2 / (2 sigma_t^2))",
+    "ell_star_rule": "median of ell over the reference set at S_t",
+    "sigma_rule": "IQR of ell over the reference set at S_t / 1.349",
+    "eligible": "verified trajectories only",
+    "reference_set": "eligible trajectories not yet trained in this run (at S_0: all eligible). L_proxy is still computed for every eligible trajectory."
+  },
+  "selection": {
+    "n_cap": 1,
+    "alpha": 0.5,
+    "alpha_tuned": false,
+    "alpha_tuning_grid": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "retention_r": 0.5,
+    "retention_scope": [
+      "B6"
+    ],
+    "allow_reselect_across_rounds": true,
+    "max_total_reselect": null,
+    "tie_break": "trajectory_id ascending",
+    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; shuffle problems once with seed; walk that order across rounds, each round continuing where the previous stopped and filling until beta_round; no trajectory repeats",
+    "b3_problem_order_seed": "training_seed",
+    "b2_seed_rule": "random.Random(training_seed * 100 + round)",
+    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)",
+    "b4_rule": "rank all eligible trajectories once by L_proxy(tau | S_0) descending, tie_break applied; walk that ranking across rounds, each round continuing with the remaining trajectories and filling until beta_round; a trajectory skipped by n_cap in a round stays available for later rounds; no trajectory repeats; identical across training seeds",
+    "allow_reselect_note": "applies to B2, B5 and the ablation; the B3 and B4 schedules never repeat a trajectory"
+  },
+  "evaluation": {
+    "decoding": "greedy",
+    "max_new_tokens": 512,
+    "prompt_version": "v1",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "answer_extractor": "scripts/answer_utils.py:split_response + final_number",
+    "answer_verifier": "scripts/answer_utils.py:evaluate_output (invalid_format counts as incorrect; format compliance reported separately)",
+    "dev_checkpoints": "all",
+    "test_checkpoints": [
+      "student_ckpt_000",
+      "student_ckpt_001",
+      "student_ckpt_002",
+      "student_ckpt_003"
+    ],
+    "decisions_use": "D_dev only"
+  },
+  "methods": {
+    "required": [
+      "B0",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "recommended": [
+      "ablation_shuffled_scores"
+    ],
+    "optional": [
+      "B1",
+      "B6"
+    ]
+  },
+  "analysis": {
+    "primary_metric": "exact-match accuracy on D_test",
+    "primary_comparison": "B5 vs B4",
+    "within_seed_test": "McNemar on paired per-problem correctness",
+    "across_seed": "mean of paired differences with 95% CI",
+    "significance_alpha": 0.05,
+    "plan": "analysis_plan.md",
+    "secondary_metrics": {
+      "lenient_accuracy": "last number anywhere in the output matches ground truth, format ignored (answer_utils.answers_match, as in eval_student.py); registered secondary metric, does not replace the primary metric",
+      "report_together": [
+        "strict accuracy",
+        "lenient accuracy",
+        "format compliance"
+      ]
+    },
+    "noise": {
+      "test_retest_runs": "B4 runs of the training seeds (same selected data, different training seed); selection logs must match",
+      "analysis_set_U": "trajectories not trained in B4 up to the later checkpoint of the pair",
+      "epsilon_rule": "95th percentile of |L_proxy(tau|S_1^a) - L_proxy(tau|S_1^b)| over U and all seed pairs; also report 2.77*s_w and a bootstrap CI",
+      "epsilon_use": "report the share of U with |change| > epsilon against the 5% expected from noise; per-trajectory profiles are descriptive"
+    },
+    "h_test": {
+      "pairs": [
+        "S_0->S_1",
+        "S_1->S_2"
+      ],
+      "runs": "B4, for both rho_change and rho_noise",
+      "delta": "Delta^a = rho_noise^a - rho_change^a; rho_change^a = Spearman(L|S_t^a, L|S_{t+1}^a); rho_noise^a = mean Spearman(L|S_{t+1}^a, L|S_{t+1}^b) over b != a; on U",
+      "inference": "cluster bootstrap over problem_id, same resamples for all seeds",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 363636,
+      "supported_if": "for every training seed: one-sided 95% lower bound of Delta^a > 0 and Delta^a >= min_delta",
+      "min_delta": 0.05,
+      "min_delta_source": "group convention, no literature source",
+      "decision_scale": "L_proxy; rank of ell is reported with CI. If L_proxy meets the rule and ell does not, report only that the ranking by distance to the median changed.",
+      "descriptive_only": [
+        "Wilcoxon signed-rank with effect size"
+      ],
+      "sensitivity": [
+        "sqrt(rho_noise) benchmark at S_0->S_1",
+        "Steiger test",
+        "U without problems having a trained trajectory",
+        "B2 runs"
+      ]
+    },
+    "selection_noise_check": "Jaccard of the round-2 B5 selections between seeds, against the chance level of about 0.02"
+  }
+}
+
+
+=== 3. P2 SELECTOR CLI ===
+usage: select_round.py [-h] --method {B2,B3,B4,B5,ablation_shuffled_scores}
+                       --seed SEED --round ROUND --run-dir RUN_DIR
+                       [--pool POOL] [--tokens TOKENS] [--nll NLL]
+                       [--budget BUDGET] [--pilot]
+
+Select B_t for one method, seed and round; writes the train set and the selection log (selection.py has the rules).
+
+Reads:
+  --tokens          token table of the pool (build_pool_tokens.py)
+  --nll             compute_nll.py output: at S_t for B5 and the ablation, at S_0 for B4 in every round
+  <run-dir>/round_NNN/train_set.json of earlier rounds (trajectories already trained in this run, T7-3)
+
+Writes (atomically):
+  <run-dir>/round_NNN/train_set.json       input of train_round.py
+  <run-dir>/round_NNN/selection_log.jsonl  one record per eligible trajectory (selection_log_schema.json)
+
+--pilot allows a smaller budget and seeds outside the config; the output is marked and is not a result.
+
+Usage (from experiments/week2September/manual/):
+  python scripts/select_round.py --method B5 --seed 13 --round 1 --run-dir runs/main/B5_seed13       --nll runs/main/B5_seed13/S1/nll.jsonl
+
+options:
+  -h, --help            show this help message and exit
+  --method {B2,B3,B4,B5,ablation_shuffled_scores}
+  --seed SEED
+  --round ROUND
+  --run-dir RUN_DIR
+  --pool POOL
+  --tokens TOKENS
+  --nll NLL
+  --budget BUDGET       pilot only (default: config beta_round_tokens)
+  --pilot
+
+
+=== 4. P1 SELECTOR CLI ===
+usage: p1p2_selector.py [-h] --method {P1-DEFICIT,P1P2} --seed SEED --round
+                        {1,2,3} --state STATE --out-dir OUT_DIR [--nll NLL]
+                        [--previous-train-set PREVIOUS_TRAIN_SET]
+                        [--pool POOL] [--tokens TOKENS] [--d-pool D_POOL]
+                        [--config CONFIG]
+
+P1-DEFICIT/P1P2 selector using canonical P2 selection primitives.
+
+options:
+  -h, --help            show this help message and exit
+  --method {P1-DEFICIT,P1P2}
+  --seed SEED
+  --round {1,2,3}
+  --state STATE
+  --out-dir OUT_DIR
+  --nll NLL
+  --previous-train-set PREVIOUS_TRAIN_SET
+  --pool POOL
+  --tokens TOKENS
+  --d-pool D_POOL
+  --config CONFIG
+
+
+=== 5. CAPABILITY STATE CLI ===
+usage: p1p2_capability_state.py [-h] --sidecar-dir SIDECAR_DIR --target-method
+                                {P1-DEFICIT,P1P2} --target-seed TARGET_SEED
+                                --out OUT
+
+Create immutable capability state from a sidecar
+
+options:
+  -h, --help            show this help message and exit
+  --sidecar-dir SIDECAR_DIR
+  --target-method {P1-DEFICIT,P1P2}
+  --target-seed TARGET_SEED
+  --out OUT
+
+
+=== 6. POST EVALUATION HOOK CLI ===
+usage: run_p1p2_post_eval.py [-h] --method
+                             {P1-DEFICIT,P1P2,B2,B3,B4,B5,SHARED} --seed SEED
+                             --round {0,1,2,3} --prediction PREDICTION
+                             --checkpoint CHECKPOINT --output-dir OUTPUT_DIR
+                             [--manual-root MANUAL_ROOT]
+                             [--train-set TRAIN_SET]
+                             [--selection-log SELECTION_LOG]
+                             [--train-log TRAIN_LOG]
+                             [--checkpoint-log CHECKPOINT_LOG]
+                             [--shared-checkpoint-group SHARED_CHECKPOINT_GROUP]
+                             [--gold-manifest GOLD_MANIFEST]
+                             [--gold-labels GOLD_LABELS]
+                             [--approval-csv APPROVAL_CSV] [--dev-ids DEV_IDS]
+                             [--config CONFIG]
+
+Run approved-85 capability evaluation after D_dev prediction completes.
+
+options:
+  -h, --help            show this help message and exit
+  --method {P1-DEFICIT,P1P2,B2,B3,B4,B5,SHARED}
+  --seed SEED
+  --round {0,1,2,3}
+  --prediction PREDICTION
+                        Completed D_dev prediction JSONL
+  --checkpoint CHECKPOINT
+                        Exact checkpoint directory or S0 reference file
+  --output-dir OUTPUT_DIR
+                        New immutable sidecar directory
+  --manual-root MANUAL_ROOT
+  --train-set TRAIN_SET
+  --selection-log SELECTION_LOG
+  --train-log TRAIN_LOG
+  --checkpoint-log CHECKPOINT_LOG
+  --shared-checkpoint-group SHARED_CHECKPOINT_GROUP
+  --gold-manifest GOLD_MANIFEST
+  --gold-labels GOLD_LABELS
+  --approval-csv APPROVAL_CSV
+  --dev-ids DEV_IDS
+  --config CONFIG
+
+
+=== 7. P2 AND SHARED S0 ARTIFACT CANDIDATES ===
+
+--- ROOT=runs PATTERN=*S0*nll*.jsonl ---
+
+
+--- ROOT=runs PATTERN=*S0*nll*.summary.json ---
+
+
+--- ROOT=runs PATTERN=*S0*eval*dev*.jsonl ---
+
+
+--- ROOT=runs PATTERN=*S0*manifest*.json ---
+
+
+--- ROOT=runs PATTERN=*B4*seed13* ---
+
+FullName                                                                                                                       Length LastWriteT
+                                                                                                                                      ime       
+--------                                                                                                                       ------ ----------
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S1.json     127 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S2.json     300 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_dev_B4_seed13_S3.json     300 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S1.json    127 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S2.json    302 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\eval_test_B4_seed13_S3.json    302 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\nll_B4_seed13_S1.json          127 11/15/2...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done\nll_B4_seed13_S2.json          347 11/15/2...
+
+
+
+
+--- ROOT=runs PATTERN=*B5*seed13* ---
+
+FullName                                                                                                                        Length LastWrite
+                                                                                                                                       Time     
+--------                                                                                                                        ------ ---------
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_dev_B5_seed13_S1.json      300 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_dev_B5_seed13_S2.json      300 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_dev_B5_seed13_S3.json      301 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_test_B5_seed13_S1.json     302 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_test_B5_seed13_S2.json     303 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\eval_test_B5_seed13_S3.json     303 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\nll_B5_seed13_S1.json           347 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done\nll_B5_seed13_S2.json           347 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_dev_B5_seed13_S1.json     313 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_dev_B5_seed13_S2.json     313 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_dev_B5_seed13_S3.json     313 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_test_B5_seed13_S1.json    315 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_test_B5_seed13_S2.json    315 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\eval_test_B5_seed13_S3.json    315 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\nll_B5_seed13_S1.json          338 11/15/...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done\nll_B5_seed13_S2.json          338 11/15/...
+
+
+
+
+--- ROOT=reports PATTERN=*S0*nll*.jsonl ---
+
+FullName                                                                                                                       Length LastWriteT
+                                                                                                                                      ime       
+--------                                                                                                                       ------ ----------
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\nll\P1P2_seed13\S0_nll.jsonl 919652 11/17/2...
+
+
+
+
+--- ROOT=reports PATTERN=*S0*nll*.summary.json ---
+
+FullName                                                                                                                              Length Las
+                                                                                                                                             tWr
+                                                                                                                                             ite
+                                                                                                                                             Tim
+                                                                                                                                             e  
+--------                                                                                                                              ------ ---
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\nll\P1P2_seed13\S0_nll.summary.json    708 11/
+
+
+
+
+--- ROOT=reports PATTERN=*S0*eval*dev*.jsonl ---
+
+FullName                                                                                                                                        
+--------                                                                                                                                        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\source_review\run_g59_lineage_audit_2026111...
+
+
+
+
+--- ROOT=reports PATTERN=*S0*manifest*.json ---
+
+
+--- ROOT=reports PATTERN=*B4*seed13* ---
+
+FullName                                                                                                                                        
+--------                                                                                                                                        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_actual_training_lineage_audit.txt   
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_hash_audit.csv           
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_provenance_audit.txt     
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_checkpoint_provenance_console.txt   
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_lineage_audit.txt       
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_source_details.txt      
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_config_hash_source_search.txt       
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_candidates_audit.txt        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation.txt          
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation_fixed.txt    
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_lineage_reconciliation_fixed_cons...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_adapter_build.txt        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_schema_audit.json        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_prediction_schema_audit.txt         
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_run_train_sets_audit.txt            
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_training_config_hash_audit.txt      
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_verification_status_audit.json      
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\b4_seed13_verification_status_audit.txt       
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\checkpoint_inventory_audit\prediction_seman...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\provenance\B4_seed13\b4_seed13_provenance_r...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\provenance\B4_seed13\b4_seed13_provenance_r...
+
+
+
+
+--- ROOT=reports PATTERN=*B5*seed13* ---
+
+FullName                                                                                                                                        
+--------                                                                                                                                        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+
+
+
+
+=== 8. B4/B5 S1 CHECKPOINT CANDIDATES ===
+
+FullName                                                                                                 LastWriteTime        
+--------                                                                                                 -------------        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13             11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13             11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\.done       11/15/2026 1:15:43 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_000   11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_001   11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\round_002   11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1          11/15/2026 1:15:43 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2          11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3          11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S1\adapter  11/15/2026 1:15:43 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S2\adapter  11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B4_seed13\S3\adapter  11/15/2026 1:15:44 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\.done       11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\round_000   11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\round_001   11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\round_002   11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S1          11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S2          11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S3          11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S1\adapter  11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S2\adapter  11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\B5_seed13\S3\adapter  11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13            11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\.done      11/15/2026 1:15:45 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\round_000  11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\round_001  11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\round_002  11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S1         11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S2         11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S3         11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S1\adapter 11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S2\adapter 11/15/2026 1:15:46 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\pilot\B5_seed13\S3\adapter 11/15/2026 1:15:46 PM
+
+
+
+
+FullName                                                                                                                                        
+--------                                                                                                                                        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S2               
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B4_seed13_S3               
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B5_seed13_S1               
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B5_seed13_S2               
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_historical_20261117\B5_seed13_S3               
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1                          
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2                          
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3                          
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13                 
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\historical_g59_inputs\run_20261117_073550_1...
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\provenance\B4_seed13                          
+
+
+
+
+=== 9. REQUIRED SCRIPT EXISTENCE ===
+[FOUND] scripts\select_round.py SHA256=06CED4DE235C2E22223810E8C52C14E02B943223E02C5B0712B1F45303DE8281
+[FOUND] scripts\train_round.py SHA256=D78E7E329BA49E7C17E16265EE49B40E113F6B9EFCB65BEF9BF574C50BEF95FE
+[FOUND] scripts\eval_student.py SHA256=52A653F64D8EC720BF340F3F258B6C779BAFEA63B9E1A333539675DFEC31A5F8
+[FOUND] scripts\compute_nll.py SHA256=DDF62BF5CAF5E3DF8D5187F5A0D6CB980B7A26FDB39EC0B8CE2AEE6AA1D25741
+[FOUND] scripts\p1p2_selector.py SHA256=0AD9CC280996620EF7C364C2D4BBA200745599E9688C49636BFF106876101FDE
+[FOUND] scripts\p1p2_capability_state.py SHA256=12FA7C26861B41F432F231B3F44DBE707686E81614CDB50896E14D994DED61A2
+[FOUND] scripts\p1p2_artifact_manager.py SHA256=595922BE866268F27382AE05D479BBC29CD72E93C0031C1D93058A1E025A3F8F
+[FOUND] scripts\run_p1p2_post_eval.py SHA256=B2142F20F28E99BF2ABDEB0261C9BF2796A85DAF9122C4A5B66A3299C39FABB0
+
+=== END ===

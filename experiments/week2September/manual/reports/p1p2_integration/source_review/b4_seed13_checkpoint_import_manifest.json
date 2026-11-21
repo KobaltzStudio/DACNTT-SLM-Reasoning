@@ -1,0 +1,49 @@
+﻿{
+    "created_at":  "2026-11-18T10:07:40.1591599+09:00",
+    "method":  "B4",
+    "seed":  13,
+    "source":  "integration_staging/P1/models/task7/B4/seed_13",
+    "destination":  "models/p1p2_integration/B4_seed13",
+    "import_policy":  "no_overwrite",
+    "checkpoints":  [
+                        {
+                            "Checkpoint":  "student_ckpt_001",
+                            "SourceArchive":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\P1\\models\\task7\\B4\\seed_13\\student_ckpt_001\\student_ckpt_001.zip",
+                            "SourceArchiveSHA256":  "851742C95CDC1DBA0333112F35F2F32D7E8CFE2E4235AE2C5DDC535BC2955615",
+                            "Destination":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\B4_seed13\\student_ckpt_001",
+                            "AdapterSHA256":  "8F50D3AB6772C7C01D0C244FD661348A0F61164916CF5396D4F916D7C38C6398",
+                            "AdapterConfigSHA256":  "D5DBB58C5A09C133E2DE10E81E70B80B85E9864519EC28E9827054DC3FC0A2B7",
+                            "TrainLogSHA256":  "54F595BDBE4C0C010A6B96FF802161DB7CC305D3E098C1513F298D5F2AD3592F",
+                            "Seed":  13,
+                            "Parent":  "student_ckpt_000",
+                            "TrainSetSHA256":  "614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006",
+                            "Status":  "IMPORTED_AND_VERIFIED"
+                        },
+                        {
+                            "Checkpoint":  "student_ckpt_002",
+                            "SourceArchive":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\P1\\models\\task7\\B4\\seed_13\\student_ckpt_002\\student_ckpt_002.zip",
+                            "SourceArchiveSHA256":  "8AE764306B33F9456FFD18B09B4824784A87B1E827D15178E8B26BDCBE307F6F",
+                            "Destination":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\B4_seed13\\student_ckpt_002",
+                            "AdapterSHA256":  "759EA14D7A3953B609A70B06B14515D2B309EE209F00843BFF6D70C8508A71FC",
+                            "AdapterConfigSHA256":  "044459D785FAA7C8AF726B188A0C451FCA2D94AAFA03BA467EAB0E4F34454664",
+                            "TrainLogSHA256":  "3CE41159B16B4AD56B1EFE7C7704524FB07A9A7B7D233D7B2CDE0A26D770F20A",
+                            "Seed":  13,
+                            "Parent":  "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_001",
+                            "TrainSetSHA256":  "cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a",
+                            "Status":  "IMPORTED_AND_VERIFIED"
+                        },
+                        {
+                            "Checkpoint":  "student_ckpt_003",
+                            "SourceArchive":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\P1\\models\\task7\\B4\\seed_13\\student_ckpt_003\\student_ckpt_003.zip",
+                            "SourceArchiveSHA256":  "CB55D9D34244F24964882F71A5654744D3D7CAC8CA2ED6D7EBE77DEB36C968DF",
+                            "Destination":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\models\\p1p2_integration\\B4_seed13\\student_ckpt_003",
+                            "AdapterSHA256":  "22D99C60743ED2897586FF22601FF7E8491DBF6495BBAC8E0EDD5C88880B7106",
+                            "AdapterConfigSHA256":  "1309487B5674DBAC54B86D92802757ED06D9469C802A3919AB06CE0F5B5590F5",
+                            "TrainLogSHA256":  "41AC5184A1145CF6674B8100DADD654C7BC99F9F397D617244FC8D30E7C9FEFB",
+                            "Seed":  13,
+                            "Parent":  "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_002",
+                            "TrainSetSHA256":  "f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e",
+                            "Status":  "IMPORTED_AND_VERIFIED"
+                        }
+                    ]
+}

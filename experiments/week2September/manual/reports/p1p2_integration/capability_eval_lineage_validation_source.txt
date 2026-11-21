@@ -1,0 +1,94 @@
+﻿
+  scripts\capability_eval.py:29:
+  scripts\capability_eval.py:30:REQUIRED_OUTPUTS = (
+  scripts\capability_eval.py:31:    "capability_metrics.csv",
+  scripts\capability_eval.py:32:    "capability_metrics.jsonl",
+  scripts\capability_eval.py:33:    "prediction_coverage_report.json",
+> scripts\capability_eval.py:34:    "checkpoint_lineage.json",
+  scripts\capability_eval.py:35:    "input_fingerprint.json",
+  scripts\capability_eval.py:36:    "student_capability_evaluation_manifest.json",
+  scripts\capability_eval.py:37:)
+  scripts\capability_eval.py:38:
+  scripts\capability_eval.py:39:EXPECTED_SUPPORT = {
+  scripts\capability_eval.py:40:    "addition": 30,
+  scripts\capability_eval.py:41:    "subtraction": 51,
+  scripts\capability_eval.py:42:    "multiplication": 73,
+  scripts\capability_eval.py:43:    "division": 47,
+  scripts\capability_eval.py:44:    "fraction": 31,
+  scripts\capability_eval.py:269:            )
+  scripts\capability_eval.py:270:
+  scripts\capability_eval.py:271:    return gold_by_id
+  scripts\capability_eval.py:272:
+  scripts\capability_eval.py:273:
+> scripts\capability_eval.py:274:def build_input_hashes(args: argparse.Namespace) -> dict[str, str]:
+  scripts\capability_eval.py:275:    input_paths = {
+  scripts\capability_eval.py:276:        "checkpoint": Path(args.checkpoint),
+  scripts\capability_eval.py:277:        "dev_predictions": Path(args.dev_predictions),
+  scripts\capability_eval.py:278:        "gold_manifest": Path(args.gold_manifest),
+  scripts\capability_eval.py:279:        "gold_labels": Path(args.gold_labels),
+  scripts\capability_eval.py:280:        "approval_csv": Path(args.approval_csv),
+  scripts\capability_eval.py:281:        "dev_ids": Path(args.dev_ids),
+  scripts\capability_eval.py:282:        "config": Path(args.config),
+  scripts\capability_eval.py:283:    }
+  scripts\capability_eval.py:284:
+  scripts\capability_eval.py:285:    optional_paths = {
+> scripts\capability_eval.py:286:        "train_set": args.train_set,
+  scripts\capability_eval.py:287:        "selection_log": args.selection_log,
+> scripts\capability_eval.py:288:        "train_log": args.train_log,
+> scripts\capability_eval.py:289:        "checkpoint_log": args.checkpoint_log,
+  scripts\capability_eval.py:290:    }
+  scripts\capability_eval.py:291:
+  scripts\capability_eval.py:292:    for name, value in optional_paths.items():
+  scripts\capability_eval.py:293:        if value:
+  scripts\capability_eval.py:294:            input_paths[name] = Path(value)
+  scripts\capability_eval.py:295:
+  scripts\capability_eval.py:296:    hashes: dict[str, str] = {}
+  scripts\capability_eval.py:297:    for name, path in input_paths.items():
+  scripts\capability_eval.py:298:        if not path.exists():
+  scripts\capability_eval.py:299:            raise FileNotFoundError(f"Missing input {name}: {path}")
+  scripts\capability_eval.py:460:        "round": args.round,
+  scripts\capability_eval.py:461:        "checkpoint_id": Path(args.checkpoint).name,
+  scripts\capability_eval.py:462:        "checkpoint_path": str(Path(args.checkpoint)),
+  scripts\capability_eval.py:463:        "checkpoint_sha256": input_hashes["checkpoint"],
+  scripts\capability_eval.py:464:        "shared_checkpoint_group": args.shared_checkpoint_group,
+> scripts\capability_eval.py:465:        "train_set": args.train_set,
+  scripts\capability_eval.py:466:        "selection_log": args.selection_log,
+> scripts\capability_eval.py:467:        "train_log": args.train_log,
+> scripts\capability_eval.py:468:        "checkpoint_log": args.checkpoint_log,
+> scripts\capability_eval.py:469:        "config_sha256": input_hashes["config"],
+  scripts\capability_eval.py:470:        "prediction_sha256": input_hashes["dev_predictions"],
+  scripts\capability_eval.py:471:        "gold_manifest_sha256": input_hashes["gold_manifest"],
+  scripts\capability_eval.py:472:        "gold_labels_sha256": input_hashes["gold_labels"],
+  scripts\capability_eval.py:473:        "approval_csv_sha256": input_hashes["approval_csv"],
+  scripts\capability_eval.py:474:        "dev_ids_sha256": input_hashes["dev_ids"],
+  scripts\capability_eval.py:475:    }
+  scripts\capability_eval.py:476:
+> scripts\capability_eval.py:477:    (stage / "checkpoint_lineage.json").write_text(
+  scripts\capability_eval.py:478:        json.dumps(lineage, ensure_ascii=False, indent=2) + "\n",
+  scripts\capability_eval.py:479:        encoding="utf-8",
+  scripts\capability_eval.py:480:    )
+  scripts\capability_eval.py:481:
+  scripts\capability_eval.py:482:    fingerprint = hashlib.sha256(
+  scripts\capability_eval.py:483:        json.dumps(
+  scripts\capability_eval.py:484:            input_hashes,
+  scripts\capability_eval.py:485:            sort_keys=True,
+  scripts\capability_eval.py:486:            separators=(",", ":"),
+  scripts\capability_eval.py:487:        ).encode("utf-8")
+  scripts\capability_eval.py:632:
+  scripts\capability_eval.py:633:
+  scripts\capability_eval.py:634:def main() -> None:
+  scripts\capability_eval.py:635:    args = parse_args()
+  scripts\capability_eval.py:636:
+> scripts\capability_eval.py:637:    input_hashes = build_input_hashes(args)
+  scripts\capability_eval.py:638:    out_dir = Path(args.out_root) / args.run_id
+  scripts\capability_eval.py:639:
+  scripts\capability_eval.py:640:    if out_dir.exists():
+  scripts\capability_eval.py:641:        verify_existing_sidecar(out_dir, input_hashes)
+  scripts\capability_eval.py:642:        return
+  scripts\capability_eval.py:643:
+  scripts\capability_eval.py:644:    out_dir.parent.mkdir(parents=True, exist_ok=True)
+  scripts\capability_eval.py:645:
+  scripts\capability_eval.py:646:    stage = Path(tempfile.mkdtemp(
+  scripts\capability_eval.py:647:        prefix=f".{args.run_id}.staging.",
+
+

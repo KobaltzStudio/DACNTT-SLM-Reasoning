@@ -1,0 +1,14 @@
+{
+  "schema": "p1p2.base_model_reference.v1",
+  "reference_type": "immutable_huggingface_model_revision",
+  "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": null,
+  "physical_weights_included": false,
+  "note": "Identity/provenance descriptor for the shared S0 base model. This file is not a physical model checkpoint or weights archive.",
+  "evaluation_marker_sha256": "2544e350bb5ce4ce5cb44ee2406fb82e6d47c91ceee160aac0466106c08a6d5d",
+  "evaluation_summary_sha256": "30a7dbba52c47bbeecf0ee4ae9d6c3488e848124d1ee123b6b01dadaba29c12c",
+  "evaluation_prediction_sha256": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+  "prediction_records": 500,
+  "prediction_unique_ids": 500
+}

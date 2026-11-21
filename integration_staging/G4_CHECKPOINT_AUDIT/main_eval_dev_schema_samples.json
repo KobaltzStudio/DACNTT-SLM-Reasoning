@@ -1,0 +1,1186 @@
+{
+  "B2_seed13/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed13_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 355,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since Johnson's share is $2500 and the ratio of their shares is 2:5, we can set up a proportion to find the total profit.\n2. Let the total profit be \\( P \\). According to the ratio, Johnson's share is \\( \\frac{5}{7} \\) of the total profit (since the sum of the parts in the ratio is 2 + 5 = 7). Therefore, we can write the equation:\n   \\[\n   \\frac{5}{7}P = 2500\n   \\]\n3. To find \\( P \\), we solve for \\( P \\) by multiplying both sides of the equation by \\( \\frac{7}{5} \\):\n   \\[\n   P = 2500 \\times \\frac{7}{5} = 3500\n   \\]\n4. Now that we know the total profit is $3500, we can determine Mike's share. Mike's share is \\( \\frac{2}{7} \\) of the total profit:\n   \\[\n   \\text{Mike's share} = 3500 \\times \\frac{2}{7} = 1000\n   \\]\n5. Next, we need to find out how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share:\n   \\[\n   \\text{Mike's remaining amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed13_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 319,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back from work: 2 hours\n   - Total time walking per trip: \\(2 + 2 = 4\\) hours\n   - Total time walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back from work: 1 hour\n   - Total time biking per trip: \\(1 + 1 = 2\\) hours\n   - Total time biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total time spent commuting:**\n   - Total time walking in a week: 12 hours\n   - Total time biking in a week: 4 hours\n   - Total time commuting in a week: \\(12 + 4 = 16\\) hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed13/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed13_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 269,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total ratio of the profit shared between Mike and Johnson. The ratio given is 2:5, which means for every 2 parts of the profit that Mike gets, Johnson gets 5 parts.\n2. Johnson's share is given as $2500. Since Johnson's share corresponds to 5 parts of the total ratio, we can set up a proportion to find out how much each part represents.\n3. Let's denote the value of one part as \\( x \\). Therefore, Johnson's share can be expressed as \\( 5x = 2500 \\). Solving for \\( x \\), we get \\( x = \\frac{2500}{5} = 500 \\).\n4. Now, we know that Mike's share is 2 parts of the total ratio. So, Mike's share is \\( 2x = 2 \\times 500 = 1000 \\).\n5. Mike spends $200 on a shirt. Therefore, the remaining amount Mike has after the purchase is \\( 1000 - 200 = 800 \\).\n\nANSWER:\nMike will have $800 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed13_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 310,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back home each day.\n   - He walks to work in 2 hours.\n   - He walks back home in 2 hours.\n   - Therefore, the total time spent walking each day is \\(2 + 2 = 4\\) hours.\n   - Since he walks to and from work three times a week, the total time spent walking in a week is \\(4 \\times 3 = 12\\) hours.\n\n2. **Time spent biking:**\n   - Roque bikes to work and back home each day.\n   - He bikes to work in 1 hour.\n   - He bikes back home in 1 hour.\n   - Therefore, the total time spent biking each day is \\(1 + 1 = 2\\) hours.\n   - Since he bikes to and from work twice a week, the total time spent biking in a week is \\(2 \\times 2 = 4\\) hours.\n\n3. **Total time spent commuting:**\n   - To find the total time spent commuting in a week, we add the time spent walking and the time spent biking.\n   - Total time = Time spent walking + Time spent biking = \\(12 + 4 = 16\\) hours.\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed13/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed13_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 286,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total ratio of the profit share between Mike and Johnson. The ratio given is 2:5, which means for every 2 parts Mike gets, Johnson gets 5 parts.\n2. Johnson's share is given as $2500. Since Johnson's share corresponds to 5 parts of the total ratio, we can set up a proportion to find out how much each part represents.\n3. Let's denote the value of one part as \\( x \\). Therefore, Johnson's share can be expressed as \\( 5x = 2500 \\). Solving for \\( x \\), we get \\( x = \\frac{2500}{5} = 500 \\).\n4. Now that we know the value of one part, we can calculate Mike's share. Mike's share corresponds to 2 parts, so his share is \\( 2x = 2 \\times 500 = 1000 \\).\n5. Mike spends $200 on a shirt. To find out how much money Mike has left after the purchase, we subtract the cost of the shirt from his share: \\( 1000 - 200 = 800 \\).\n\nANSWER:\nMike will have $800 left after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed13_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 302,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back home each day.\n   - He walks to work in 2 hours.\n   - He walks back home in another 2 hours.\n   - Therefore, the total time spent walking each day is \\(2 + 2 = 4\\) hours.\n   - Since he walks to and from work three times a week, the total time spent walking in a week is \\(4 \\times 3 = 12\\) hours.\n\n2. **Time spent biking:**\n   - Roque bikes to work and back home each day.\n   - He bikes to work in 1 hour.\n   - He bikes back home in another 1 hour.\n   - Therefore, the total time spent biking each day is \\(1 + 1 = 2\\) hours.\n   - Since he bikes to and from work twice a week, the total time spent biking in a week is \\(2 \\times 2 = 4\\) hours.\n\n3. **Total time spent commuting:**\n   - Add the total time spent walking to the total time spent biking.\n   - Total time = Time spent walking + Time spent biking = \\(12 + 4 = 16\\) hours.\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed2026/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed2026_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 237,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since Johnson's share is $2500 and his share corresponds to the 5 part of the ratio, we can find the value of one part of the ratio by dividing Johnson's share by 5.\n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n2. Next, we calculate Mike's share of the profit. Since Mike's share corresponds to the 2 part of the ratio, we multiply the value of one part by 2.\n   \\[\n   \\text{Mike's share} = 500 \\times 2 = 1000\n   \\]\n3. Now, we need to find out how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share.\n   \\[\n   \\text{Remaining amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed2026_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 204,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. **Walking Time Calculation:**\n   - Roque walks to work in 2 hours.\n   - He walks to and from work three times a week.\n   - Therefore, the total walking time per week is \\(2 \\text{ hours} \\times 3 = 6 \\text{ hours}\\).\n\n2. **Biking Time Calculation:**\n   - Roque rides his bike to work in 1 hour.\n   - He rides his bike to and from work twice a week.\n   - Therefore, the total biking time per week is \\(1 \\text{ hour} \\times 2 = 2 \\text{ hours}\\).\n\n3. **Total Time Calculation:**\n   - Adding the walking and biking times together gives us the total time spent commuting per week.\n   - Total time = Walking time + Biking time = \\(6 \\text{ hours} + 2 \\text{ hours} = 8 \\text{ hours}\\).\n\nANSWER:\n8"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed2026/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 273,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and Johnson's share.\n2. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n3. Johnson's share is $2500, which corresponds to 5 parts of the total profit. To find the value of one part, we divide Johnson's share by 5: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n4. Now, we can find Mike's share by multiplying his part of the ratio (2) by the value of one part (500):\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n5. Next, we need to account for the cost of the shirt that Mike spent. The shirt costs $200, so we subtract this amount from Mike's share:\n   \\[\n   \\text{Remaining amount for Mike} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed2026_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 230,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Each round trip takes 2 hours (1 hour walking + 1 hour walking).\n   - Therefore, the total time spent walking in a week is \\(3 \\times 2 = 6\\) hours.\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Each round trip takes 1 hour (1 hour riding + 1 hour riding).\n   - Therefore, the total time spent biking in a week is \\(2 \\times 1 = 2\\) hours.\n\n3. **Total time spent commuting:**\n   - Add the time spent walking and the time spent biking to get the total commuting time.\n   - Total time = Time spent walking + Time spent biking = \\(6 + 2 = 8\\) hours.\n\nANSWER:\n8"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed2026/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 351,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and the amount Johnson received.\n2. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n3. Johnson received $2500, which corresponds to 5 parts of the total profit. Therefore, we can set up the equation to find the value of one part of the profit.\n4. Let \\( P \\) be the total profit. Since Johnson's share is 5 parts and he received $2500, we have:\n   \\[\n   5P = 2500\n   \\]\n5. Solving for \\( P \\):\n   \\[\n   P = \\frac{2500}{5} = 500\n   \\]\n6. Now that we know the total profit \\( P \\) is $500, we can find out how much Mike received. Mike's share is 2 parts of the total profit:\n   \\[\n   \\text{Mike's share} = 2P = 2 \\times 500 = 1000\n   \\]\n7. Mike then spends $200 on a shirt. Therefore, the remaining amount Mike has is:\n   \\[\n   \\text{Remaining amount} = \\text{Mike's share} - \\text{Cost of shirt} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 230,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to and from work three times a week.\n   - Each round trip (to and from) takes 2 hours.\n   - Therefore, the total time spent walking in a week is \\(3 \\times 2 = 6\\) hours.\n\n2. **Time spent biking:**\n   - Roque rides his bike to and from work twice a week.\n   - Each round trip (to and from) takes 1 hour.\n   - Therefore, the total time spent biking in a week is \\(2 \\times 1 = 2\\) hours.\n\n3. **Total commuting time:**\n   - The total time spent commuting in a week is the sum of the time spent walking and the time spent biking.\n   - Total commuting time = Time spent walking + Time spent biking = \\(6 + 2 = 8\\) hours.\n\nANSWER:\n8 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed42/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed42_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 299,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 2 parts of profit Mike gets, Johnson gets 5 parts.\n2. We know that Johnson received $2500, which corresponds to 5 parts of the total profit. To find out how much one part is worth, we divide $2500 by 5: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n3. Since Mike's share is 2 parts, we multiply the value of one part by 2 to find out Mike's total profit:\n   \\[\n   \\text{Mike's total profit} = 2 \\times 500 = 1000\n   \\]\n4. Next, we need to account for the cost of the shirt that Mike spent. The shirt costs $200.\n5. To find out how much money Mike has left after buying the shirt, we subtract the cost of the shirt from his total profit:\n   \\[\n   \\text{Money left with Mike} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 left after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 262,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to calculate the total time Roque spends walking to and from work in a week.\n   - He walks to work and back home three times a week.\n   - It takes him 2 hours to walk to work and 2 hours to walk back home.\n   - Therefore, the total time spent walking each week is \\(3 \\times (2 + 2) = 3 \\times 4 = 12\\) hours.\n\n2. Next, we calculate the total time Roque spends biking to and from work in a week.\n   - He bikes to work and back home twice a week.\n   - It takes him 1 hour to bike to work and 1 hour to bike back home.\n   - Therefore, the total time spent biking each week is \\(2 \\times (1 + 1) = 2 \\times 2 = 4\\) hours.\n\n3. Finally, we add the total time spent walking and biking to get the overall time spent on commuting in a week.\n   - Total time spent walking = 12 hours\n   - Total time spent biking = 4 hours\n   - Total time spent commuting = 12 + 4 = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed42/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed42_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 282,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n2. We know that Johnson received $2500, which corresponds to 5 parts of the total profit. To find out how much one part is worth, we divide $2500 by 5.\n3. Calculation: \\( \\frac{2500}{5} = 500 \\). So, each part of the profit is worth $500.\n4. Since Mike gets 2 parts of the profit, we multiply the value of one part by 2 to find out how much Mike received initially.\n5. Calculation: \\( 500 \\times 2 = 1000 \\). Therefore, Mike initially received $1000.\n6. Next, Mike spends $200 on a shirt. To find out how much money Mike has left, we subtract the cost of the shirt from his initial amount.\n7. Calculation: \\( 1000 - 200 = 800 \\).\n\nANSWER:\nMike will have $800 left after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed42_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 291,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Time to walk to work: 2 hours\n   - Time to walk back home: 2 hours\n   - Total time walking to and from work: \\(2 + 2 = 4\\) hours per day\n   - Since Roque walks to and from work three times a week, the total time spent walking in a week is \\(4 \\times 3 = 12\\) hours.\n\n2. **Time spent biking:**\n   - Time to bike to work: 1 hour\n   - Time to bike back home: 1 hour\n   - Total time biking to and from work: \\(1 + 1 = 2\\) hours per day\n   - Since Roque bikes to and from work twice a week, the total time spent biking in a week is \\(2 \\times 2 = 4\\) hours.\n\n3. **Total time spent commuting:**\n   - Total time spent walking in a week: 12 hours\n   - Total time spent biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 + 4 = 16\\) hours.\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B2_seed42/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B2_seed42_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 259,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit (2 + 5), Mike gets 2 parts and Johnson gets 5 parts.\n2. We know that Johnson received $2500, which corresponds to 5 parts of the total profit. Therefore, we can set up the equation to find the value of one part:\n   \\[\n   \\text{Value of one part} = \\frac{\\$2500}{5} = \\$500\n   \\]\n3. Since Mike gets 2 parts, we can calculate his share of the profit:\n   \\[\n   \\text{Mike's share} = 2 \\times \\$500 = \\$1000\n   \\]\n4. Next, we need to determine how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share:\n   \\[\n   \\text{Mike's remaining amount} = \\$1000 - \\$200 = \\$800\n   \\]\n\nANSWER:\n\\$800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B2_seed42_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 248,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - It takes Roque 2 hours to walk to work.\n   - He walks to and from work three times a week.\n   - Therefore, the total time spent walking in a week is \\(2 \\text{ hours} \\times 3 = 6 \\text{ hours}\\).\n\n2. **Time spent biking:**\n   - It takes Roque 1 hour to ride his bike to work.\n   - He rides his bike to and from work twice a week.\n   - Therefore, the total time spent biking in a week is \\(1 \\text{ hour} \\times 2 = 2 \\text{ hours}\\).\n\n3. **Total time spent commuting:**\n   - Add the total time spent walking and the total time spent biking.\n   - Total time = Time spent walking + Time spent biking = \\(6 \\text{ hours} + 2 \\text{ hours} = 8 \\text{ hours}\\).\n\nANSWER:\n8 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed13/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed13_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 314,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 2 parts of profit Mike gets, Johnson gets 5 parts.\n2. Johnson's share of the profit is given as $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up the proportion to find the total profit.\n3. Let's denote the total profit as \\( P \\). According to the ratio, we have:\n   \\[\n   \\frac{2}{5} = \\frac{2500}{P}\n   \\]\n4. Solving for \\( P \\):\n   \\[\n   P = \\frac{2500 \\times 5}{2} = 6250\n   \\]\n   So, the total profit is $6250.\n5. Mike's share of the profit is \\( \\frac{2}{5} \\) of the total profit:\n   \\[\n   \\text{Mike's share} = \\frac{2}{5} \\times 6250 = 2500\n   \\]\n6. Mike spends $200 on a shirt. Therefore, the remaining amount Mike has is:\n   \\[\n   \\text{Remaining amount} = 2500 - 200 = 2300\n   \\]\n\nANSWER:\n2300"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed13_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 226,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - Walking to work: 2 hours per trip * 3 trips = 6 hours\n   - Walking back home: 2 hours per trip * 3 trips = 6 hours\n   - Total walking time per week: 6 hours + 6 hours = 12 hours\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - Biking to work: 1 hour per trip * 2 trips = 2 hours\n   - Biking back home: 1 hour per trip * 2 trips = 2 hours\n   - Total biking time per week: 2 hours + 2 hours = 4 hours\n\n3. Add the total walking time and the total biking time to find the total time spent on both modes of transportation in one week.\n   - Total time spent per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed13/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed13_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 370,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 2 parts of profit Mike gets, Johnson gets 5 parts.\n2. Johnson's share of the profit is given as $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up a proportion to find out how much each part represents.\n3. Let's denote the total profit as \\( P \\). According to the ratio, \\( P = 2x + 5x = 7x \\), where \\( x \\) is the value of one part of the profit.\n4. Since Johnson's share is \\( 5x = 2500 \\), we can solve for \\( x \\):\n   \\[\n   5x = 2500 \\implies x = \\frac{2500}{5} = 500\n   \\]\n5. Now that we know \\( x = 500 \\), we can find the total profit \\( P \\):\n   \\[\n   P = 7x = 7 \\times 500 = 3500\n   \\]\n6. Mike's share of the profit is \\( 2x = 2 \\times 500 = 1000 \\).\n7. Mike spends $200 on a shirt, so we subtract this amount from his share:\n   \\[\n   \\text{Mike's remaining profit} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 left after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed13_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 284,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo find out how many hours Roque spends commuting to and from work in a week, we need to calculate the time spent walking and biking separately and then sum them up.\n\n1. **Walking Time:**\n   - Time to walk to work: 2 hours\n   - Time to walk back home: 2 hours\n   - Total time per round trip (to and from work): 2 + 2 = 4 hours\n   - Number of round trips per week: 3\n   - Total walking time per week: 4 hours/round trip * 3 round trips = 12 hours\n\n2. **Biking Time:**\n   - Time to bike to work: 1 hour\n   - Time to bike back home: 1 hour\n   - Total time per round trip (to and from work): 1 + 1 = 2 hours\n   - Number of round trips per week: 2\n   - Total biking time per week: 2 hours/round trip * 2 round trips = 4 hours\n\n3. **Total Commuting Time:**\n   - Total walking time per week: 12 hours\n   - Total biking time per week: 4 hours\n   - Total commuting time per week: 12 hours + 4 hours = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed13/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed13_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 386,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Given that Johnson's share is $2500 and the ratio of their shares is 2:5, we can set up a proportion to find out Mike's share.\n2. The ratio 2:5 means that for every 2 parts Mike gets, Johnson gets 5 parts. Therefore, the total number of parts is \\(2 + 5 = 7\\).\n3. Since Johnson's share is $2500, we can calculate the value of one part by dividing Johnson's share by the total number of parts: \\(\\frac{2500}{7}\\).\n4. Now, we can find Mike's share by multiplying his part by the total number of parts: \\(2 \\times \\frac{2500}{7} = \\frac{5000}{7}\\).\n5. After calculating Mike's share, we need to subtract the cost of the shirt ($200) from his share to find out how much Mike will have left: \\(\\frac{5000}{7} - 200\\).\n\nANSWER:\nMike will have \\(\\frac{5000}{7} - 200\\) dollars left after buying the shirt. To simplify this, we can convert 200 to a fraction with a denominator of 7: \\(200 = \\frac{1400}{7}\\).\n6. Now, subtracting the cost of the shirt from Mike's share: \\(\\frac{5000}{7} - \\frac{1400}{7} = \\frac{3600}{7}\\).\n\nTherefore, Mike will have \\(\\frac{3600}{7}\\) dollars left after buying the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed13_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 233,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - Walking time per trip: 2 hours\n   - Number of trips per week: 3\n   - Total walking time per week: \\(2 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 6 \\text{ hours/week}\\)\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - Biking time per trip: 1 hour\n   - Number of trips per week: 2\n   - Total biking time per week: \\(1 \\text{ hour/trip} \\times 2 \\text{ trips/week} = 2 \\text{ hours/week}\\)\n\n3. Add the total walking time and the total biking time to find the total time spent on both modes of transportation in one week.\n   - Total time per week: \\(6 \\text{ hours/week} + 2 \\text{ hours/week} = 8 \\text{ hours/week}\\)\n\nANSWER:\n8 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed2026/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed2026_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 173,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. The profit is shared between Mike and Johnson in the ratio 2:5.\n2. Johnson's share is $2500, which corresponds to the 5 parts of the ratio.\n3. To find out how much each part of the ratio represents, we divide Johnson's share by 5: \\( \\frac{2500}{5} = 500 \\).\n4. Therefore, Mike's share is \\( 2 \\times 500 = 1000 \\).\n5. Mike spends $200 on a shirt, so we subtract this amount from Mike's share: \\( 1000 - 200 = 800 \\).\n\nANSWER:\nMike will have $800 left after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed2026_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 227,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work per week.\n   - Walking time per trip: 2 hours\n   - Number of trips per week: 3\n   - Total walking time per week: \\(2 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 6 \\text{ hours/week}\\)\n\n2. Calculate the total time Roque spends biking to and from work per week.\n   - Biking time per trip: 1 hour\n   - Number of trips per week: 2\n   - Total biking time per week: \\(1 \\text{ hour/trip} \\times 2 \\text{ trips/week} = 2 \\text{ hours/week}\\)\n\n3. Add the total walking time and biking time to find the total time spent on both modes of transportation per week.\n   - Total time per week: \\(6 \\text{ hours/week} + 2 \\text{ hours/week} = 8 \\text{ hours/week}\\)\n\nANSWER:\n8"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed2026/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 181,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n2. We know that Johnson received $2500, which corresponds to 5 parts of the total profit. Therefore, each part of the profit is worth $2500 / 5 = $500.\n3. Since Mike's share is 2 parts, his total profit before spending is 2 * $500 = $1000.\n4. Mike then spends $200 on a shirt. So, the remaining amount Mike has is $1000 - $200 = $800.\n\nANSWER:\n$800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 292,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work each week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Walking Time:**\n   - Time to walk to work: 2 hours\n   - Time to walk back home: 2 hours\n   - Total time per round trip (to and from work): 2 + 2 = 4 hours\n   - Number of round trips per week: 3\n   - Total walking time per week: 4 hours/round trip * 3 round trips/week = 12 hours\n\n2. **Biking Time:**\n   - Time to bike to work: 1 hour\n   - Time to bike back home: 1 hour\n   - Total time per round trip (to and from work): 1 + 1 = 2 hours\n   - Number of round trips per week: 2\n   - Total biking time per week: 2 hours/round trip * 2 round trips/week = 4 hours\n\n3. **Total Commuting Time:**\n   - Total time spent walking per week: 12 hours\n   - Total time spent biking per week: 4 hours\n   - Total commuting time per week: 12 hours + 4 hours = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed2026/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 280,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n2. Johnson's share of the profit is given as $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up the equation: \\( \\frac{5}{7} \\times \\text{Total Profit} = 2500 \\).\n3. Solving for the Total Profit, we get: \\( \\text{Total Profit} = 2500 \\times \\frac{7}{5} = 3500 \\).\n4. Now, we know the total profit is $3500. Mike's share is 2 parts out of the 7 parts, so his share is \\( \\frac{2}{7} \\times 3500 = 1000 \\).\n5. Mike spends $200 on a shirt, so we subtract this amount from his share: \\( 1000 - 200 = 800 \\).\n\nANSWER:\nMike will have $800 left after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 237,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - Walking time per trip: 2 hours\n   - Number of trips per week: 3\n   - Total walking time per week: \\( 2 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 6 \\text{ hours/week} \\)\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - Biking time per trip: 1 hour\n   - Number of trips per week: 2\n   - Total biking time per week: \\( 1 \\text{ hour/trip} \\times 2 \\text{ trips/week} = 2 \\text{ hours/week} \\)\n\n3. Add the total walking time and biking time to find the total time spent on both modes of transportation in one week.\n   - Total time per week: \\( 6 \\text{ hours/week} + 2 \\text{ hours/week} = 8 \\text{ hours/week} \\)\n\nANSWER:\n8 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed42/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 260,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit (2 + 5), Mike gets 2 parts and Johnson gets 5 parts.\n2. Johnson's share is given as $2500, which corresponds to 5 parts of the total profit. Therefore, we can set up the equation to find the value of one part: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n3. Since Mike's share is 2 parts, we calculate Mike's initial profit:\n   \\[\n   \\text{Mike's initial profit} = 2 \\times 500 = 1000\n   \\]\n4. Mike then spends $200 on a shirt. To find out how much Mike has left, we subtract the cost of the shirt from his initial profit:\n   \\[\n   \\text{Mike's remaining profit} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n$800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 220,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work each week:\n   - Walking to work: 2 hours per trip * 3 trips = 6 hours\n   - Walking back home: 2 hours per trip * 3 trips = 6 hours\n   - Total walking time per week: 6 hours + 6 hours = 12 hours\n\n2. Calculate the total time Roque spends biking to and from work each week:\n   - Biking to work: 1 hour per trip * 2 trips = 2 hours\n   - Biking back home: 1 hour per trip * 2 trips = 2 hours\n   - Total biking time per week: 2 hours + 2 hours = 4 hours\n\n3. Add the total walking time and the total biking time to find the total time spent on both modes of transportation:\n   - Total time per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed42/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed42_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 292,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and Johnson's share.\n2. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the profit (2 parts for Mike + 5 parts for Johnson), Johnson gets 5 parts.\n3. Johnson's share is given as $2500, which corresponds to 5 parts of the total profit.\n4. To find the value of one part, we divide Johnson's share by 5: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n5. Now, we can find Mike's share by multiplying his part of the ratio (2 parts) by the value of one part:\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n6. Mike then spends $200 on a shirt. To find out how much Mike has left after the purchase, we subtract the cost of the shirt from his share:\n   \\[\n   \\text{Remaining amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 left after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed42_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 338,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back home: 2 hours\n   - Total time for one round trip (to and from work): \\(2 + 2 = 4\\) hours\n   - Total time spent walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back home: 1 hour\n   - Total time for one round trip (to and from work): \\(1 + 1 = 2\\) hours\n   - Total time spent biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total time spent commuting:**\n   - Total time spent walking in a week: 12 hours\n   - Total time spent biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 + 4 = 16 \\text{ hours/week}\\)\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B3_seed42/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B3_seed42_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 307,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since Johnson's share is $2500 and the ratio of their shares is 2:5, we can set up a proportion to find out Mike's share.\n2. Let's denote Mike's share as \\( M \\) and Johnson's share as \\( J \\). According to the ratio, \\( M : J = 2 : 5 \\). This means that for every 2 parts Mike gets, Johnson gets 5 parts.\n3. We know that Johnson's share \\( J \\) is $2500. To find out how many parts this represents, we divide $2500 by 5 (since Johnson's share corresponds to 5 parts).\n4. \\( \\frac{2500}{5} = 500 \\). This means each part is worth $500.\n5. Now, to find Mike's share \\( M \\), we multiply his part by the value of each part: \\( M = 2 \\times 500 = 1000 \\). So, Mike's share is $1000.\n6. Next, we need to determine how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share: \\( 1000 - 200 = 800 \\).\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B3_seed42_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 246,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - Roque walks to work and back three times a week.\n   - Time spent walking to work: 2 hours * 3 = 6 hours.\n   - Time spent walking back home: 2 hours * 3 = 6 hours.\n   - Total time spent walking in one week: 6 hours + 6 hours = 12 hours.\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - Roque bikes to work and back twice a week.\n   - Time spent biking to work: 1 hour * 2 = 2 hours.\n   - Time spent biking back home: 1 hour * 2 = 2 hours.\n   - Total time spent biking in one week: 2 hours + 2 hours = 4 hours.\n\n3. Add the total time spent walking and biking to find the total time spent on both modes of transportation in one week.\n   - Total time spent walking and biking in one week: 12 hours + 4 hours = 16 hours.\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed13/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed13_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 347,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson.\n2. The ratio of their shares is given as 2:5. This means for every 2 parts Mike gets, Johnson gets 5 parts.\n3. Johnson's share is given as $2500. Since Johnson's share corresponds to 5 parts of the total, we can set up the equation: \\(5 \\times \\text{Johnson's share} = \\text{Total profit}\\).\n4. Substituting Johnson's share into the equation gives us: \\(5 \\times 2500 = \\text{Total profit}\\).\n5. Calculating the total profit: \\(5 \\times 2500 = 12500\\).\n6. Now, we know the total profit is $12500.\n7. Mike's share is 2 parts out of the total 7 parts (2 for Mike + 5 for Johnson).\n8. To find Mike's share, we calculate: \\(\\text{Mike's share} = 2 \\times \\frac{12500}{7}\\).\n9. Simplifying this, we get: \\(\\text{Mike's share} = \\frac{25000}{7} \\approx 3571.43\\).\n10. Mike spends $200 on a shirt.\n11. Therefore, the remaining amount Mike has after spending on the shirt is: \\(3571.43 - 200 = 3371.43\\).\n\nANSWER:\n3371.43"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed13_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 342,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these amounts.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time taken to walk to work: 2 hours.\n   - Time taken to walk back from work: 2 hours.\n   - Total time spent walking per trip: \\(2 + 2 = 4\\) hours.\n   - Total time spent walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\).\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time taken to bike to work: 1 hour.\n   - Time taken to bike back from work: 1 hour.\n   - Total time spent biking per trip: \\(1 + 1 = 2\\) hours.\n   - Total time spent biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\).\n\n3. **Total time spent commuting:**\n   - Total time spent walking in a week: 12 hours.\n   - Total time spent biking in a week: 4 hours.\n   - Total time spent commuting in a week: \\(12 \\text{ hours} + 4 \\text{ hours} = 16 \\text{ hours}\\).\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed13/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed13_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 189,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. We know that Johnson's share is $2500 and his share corresponds to the 5 parts of the ratio. Therefore, each part of the ratio represents \\( \\frac{2500}{5} = 500 \\) dollars.\n2. Since Mike's share corresponds to the 2 parts of the ratio, his share is \\( 2 \\times 500 = 1000 \\) dollars.\n3. Next, we need to find out how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share: \\( 1000 - 200 = 800 \\) dollars.\n\nANSWER:\nMike will have $800 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed13_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 275,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - Roque walks to work and back home three times a week.\n   - Time taken for one round trip by walking = 2 hours (to work) + 2 hours (back home) = 4 hours.\n   - Total time spent walking in one week = 4 hours/round trip * 3 round trips = 12 hours.\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - Roque bikes to work and back home twice a week.\n   - Time taken for one round trip by biking = 1 hour (to work) + 1 hour (back home) = 2 hours.\n   - Total time spent biking in one week = 2 hours/round trip * 2 round trips = 4 hours.\n\n3. Add the total time spent walking and biking to get the overall time taken to get to and from work in one week.\n   - Total time spent walking in one week = 12 hours.\n   - Total time spent biking in one week = 4 hours.\n   - Total time spent in one week = 12 hours (walking) + 4 hours (biking) = 16 hours.\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed13/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed13_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 337,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means for every 2 parts of profit Mike gets, Johnson gets 5 parts.\n2. We know that Johnson received $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up the equation: \\( \\frac{5}{2} \\times \\text{Total Profit} = 2500 \\).\n3. Solving for the total profit, we get: \\( \\text{Total Profit} = \\frac{2500 \\times 2}{5} = 1000 \\times 2 = 2000 \\).\n4. Now that we know the total profit is $2000, we can find out how much Mike received. Since Mike's share corresponds to 2 parts of the total profit, we calculate: \\( \\text{Mike's Share} = \\frac{2}{2+5} \\times 2000 = \\frac{2}{7} \\times 2000 = \\frac{4000}{7} \\approx 571.43 \\).\n5. Mike then spends $200 on a shirt. Therefore, the remaining amount Mike has is: \\( 571.43 - 200 = 371.43 \\).\n\nANSWER:\nMike will have approximately $371.43 after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed13_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 233,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Walking Time:**\n   - Roque walks to work and back three times a week.\n   - Each round trip takes 2 hours (1 hour to walk and 1 hour to walk back).\n   - Therefore, the total time spent walking in a week is \\(3 \\times 2 = 6\\) hours.\n\n2. **Biking Time:**\n   - Roque bikes to work and back twice a week.\n   - Each round trip takes 1 hour (1 hour to ride and 1 hour to ride back).\n   - Therefore, the total time spent biking in a week is \\(2 \\times 1 = 2\\) hours.\n\n3. **Total Time:**\n   - Adding the walking and biking times together gives us the total commuting time in a week.\n   - Total time = Walking time + Biking time = \\(6 + 2 = 8\\) hours.\n\nANSWER:\n8 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed2026/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed2026_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 259,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. We know that Johnson's share is $2500 and that his share corresponds to the 5 parts of the ratio 2:5.\n2. To find out how much each part of the ratio represents, we divide Johnson's share by the number of parts he has: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n3. Since Mike's share corresponds to 2 parts of the ratio, we multiply the value of one part by 2:\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n4. Next, we need to account for the cost of the shirt that Mike spent. The shirt costs $200.\n5. To find out how much money Mike has left after buying the shirt, we subtract the cost of the shirt from his share:\n   \\[\n   \\text{Money left with Mike} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed2026_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 333,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back from work: 2 hours\n   - Total time walking per trip: \\(2 + 2 = 4\\) hours\n   - Total time walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back from work: 1 hour\n   - Total time biking per trip: \\(1 + 1 = 2\\) hours\n   - Total time biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total time spent commuting:**\n   - Total time walking in a week: 12 hours\n   - Total time biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 \\text{ hours} + 4 \\text{ hours} = 16 \\text{ hours}\\)\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed2026/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed2026_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 350,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. We know that Johnson's share is $2500 and his share corresponds to the 5 part of the ratio 2:5. Therefore, we can set up the equation:\n   \\[\n   \\text{Johnson's share} = \\frac{5}{2} \\times \\text{Total Profit}\n   \\]\n   Given Johnson's share is $2500, we can solve for the total profit:\n   \\[\n   2500 = \\frac{5}{2} \\times \\text{Total Profit}\n   \\]\n   \\[\n   \\text{Total Profit} = \\frac{2500 \\times 2}{5} = 1000\n   \\]\n\n2. Next, we calculate Mike's share of the total profit. Since Mike's share corresponds to the 2 part of the ratio 2:5, we use the ratio to find Mike's share:\n   \\[\n   \\text{Mike's share} = \\frac{2}{5} \\times \\text{Total Profit} = \\frac{2}{5} \\times 1000 = 400\n   \\]\n\n3. Finally, we determine how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share:\n   \\[\n   \\text{Remaining amount} = \\text{Mike's share} - \\text{Cost of shirt} = 400 - 200 = 200\n   \\]\n\nANSWER:\n200"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 268,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week.\n   - He walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back from work: 2 hours\n   - Total time walking per day: 2 + 2 = 4 hours\n   - Total time walking in one week: 4 hours/day * 3 days/week = 12 hours\n\n2. Calculate the total time Roque spends biking to and from work in one week.\n   - He bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back from work: 1 hour\n   - Total time biking per day: 1 + 1 = 2 hours\n   - Total time biking in one week: 2 hours/day * 2 days/week = 4 hours\n\n3. Add the total time spent walking and biking to find the overall time spent commuting in one week.\n   - Total time walking: 12 hours\n   - Total time biking: 4 hours\n   - Total time commuting: 12 hours + 4 hours = 16 hours\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed2026/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 347,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and Johnson's share.\n2. The ratio of profit sharing between Mike and Johnson is 2:5. This means for every 2 parts of the profit that Mike gets, Johnson gets 5 parts.\n3. Johnson's share is given as $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up the equation: \\( \\frac{5}{2} \\times \\text{Total Profit} = 2500 \\).\n4. Solving for the Total Profit: \\( \\text{Total Profit} = \\frac{2500 \\times 2}{5} = 1000 \\times 2 = 2000 \\).\n5. Now that we know the total profit is $2000, we can find out how much Mike's share is. Since Mike's share corresponds to 2 parts of the total profit, his share is \\( \\frac{2}{2+5} \\times 2000 = \\frac{2}{7} \\times 2000 = 571.43 \\) (rounded to two decimal places).\n6. Next, we need to determine how much Mike will have after spending $200 on a shirt.\n7. Subtracting the cost of the shirt from Mike's share: \\( 571.43 - 200 = 371.43 \\).\n\nANSWER:\nMike will have $371.43 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 297,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the time Roque spends walking to and from work each week.\n   - Walking to work: 2 hours one way, so 2 * 2 = 4 hours per day.\n   - Walking back home: 2 hours one way, so 2 * 2 = 4 hours per day.\n   - Total walking time per day: 4 + 4 = 8 hours.\n   - Since he walks three times a week, the total walking time per week is 8 * 3 = 24 hours.\n\n2. Next, we need to determine the time Roque spends biking to and from work each week.\n   - Biking to work: 1 hour one way, so 1 * 2 = 2 hours per day.\n   - Biking back home: 1 hour one way, so 1 * 2 = 2 hours per day.\n   - Total biking time per day: 2 + 2 = 4 hours.\n   - Since he bikes twice a week, the total biking time per week is 4 * 2 = 8 hours.\n\n3. Finally, we add the total walking time and the total biking time to find the total time spent commuting each week.\n   - Total commuting time per week: 24 (walking) + 8 (biking) = 32 hours.\n\nANSWER:\n32 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed42/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 256,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since Johnson's share is $2500 and his share is 5 parts out of the total 7 parts (2 + 5), we can set up the equation:\n   \\[\n   \\frac{5}{7} \\times \\text{Total Profit} = 2500\n   \\]\n2. Solving for the total profit:\n   \\[\n   \\text{Total Profit} = 2500 \\times \\frac{7}{5} = 3500\n   \\]\n3. Now, we know that Mike's share is 2 parts out of the total 7 parts. Therefore, Mike's share is:\n   \\[\n   \\text{Mike's Share} = 3500 \\times \\frac{2}{7} = 1000\n   \\]\n4. Mike spends $200 on a shirt, so we subtract this amount from his share:\n   \\[\n   \\text{Mike's Remaining Amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 217,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week:\n   - Walking to work: 2 hours per trip * 3 trips = 6 hours\n   - Walking back home: 2 hours per trip * 3 trips = 6 hours\n   - Total walking time per week: 6 hours + 6 hours = 12 hours\n\n2. Calculate the total time Roque spends biking to and from work in one week:\n   - Biking to work: 1 hour per trip * 2 trips = 2 hours\n   - Biking back home: 1 hour per trip * 2 trips = 2 hours\n   - Total biking time per week: 2 hours + 2 hours = 4 hours\n\n3. Add the total walking time and biking time to get the overall time spent on commuting:\n   - Total commuting time per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed42/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed42_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 193,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. We know that Johnson's share is $2500 and his share corresponds to the ratio part of 5. Therefore, Mike's share would be calculated as follows:\n   - Mike's share = (2/5) * Johnson's share\n   - Mike's share = (2/5) * $2500\n   - Mike's share = $1000\n\n2. Next, we need to find out how much Mike will have left after spending $200 on a shirt. We subtract the cost of the shirt from Mike's total share:\n   - Remaining amount for Mike = Mike's share - Cost of shirt\n   - Remaining amount for Mike = $1000 - $200\n   - Remaining amount for Mike = $800\n\nANSWER:\n$800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed42_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 267,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Walking Time:**\n   - Roque walks to work and back three times a week.\n   - Time taken to walk to work: 2 hours.\n   - Time taken to walk back home: 2 hours.\n   - Total time spent walking to and from work per week: \\(3 \\times (2 + 2) = 3 \\times 4 = 12\\) hours.\n\n2. **Biking Time:**\n   - Roque bikes to work and back twice a week.\n   - Time taken to bike to work: 1 hour.\n   - Time taken to bike back home: 1 hour.\n   - Total time spent biking to and from work per week: \\(2 \\times (1 + 1) = 2 \\times 2 = 4\\) hours.\n\n3. **Total Time:**\n   - Total commuting time per week = Time spent walking + Time spent biking.\n   - Total commuting time per week = 12 hours (walking) + 4 hours (biking) = 16 hours.\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B4_seed42/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B4_seed42_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 282,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since the ratio of their shares is 2:5, we can represent Mike's share as \\(2x\\) and Johnson's share as \\(5x\\), where \\(x\\) is a common multiplier.\n2. We know that Johnson's share is $2500. Therefore, we can set up the equation \\(5x = 2500\\).\n3. Solving for \\(x\\), we divide both sides of the equation by 5: \\(x = \\frac{2500}{5} = 500\\).\n4. Now that we have the value of \\(x\\), we can find Mike's share. Since Mike's share is \\(2x\\), we substitute \\(x = 500\\) into the equation: \\(2x = 2 \\times 500 = 1000\\).\n5. Mike initially has $1000. He spends $200 on a shirt. To find out how much he has left, we subtract the cost of the shirt from his initial share: \\(1000 - 200 = 800\\).\n\nANSWER:\nMike will have $800 left after spending $200 on the shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B4_seed42_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 218,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the time Roque spends walking to and from work each week:\n   - Walking to work: 2 hours per trip * 3 trips = 6 hours\n   - Walking back home: 2 hours per trip * 3 trips = 6 hours\n   - Total walking time per week: 6 hours + 6 hours = 12 hours\n\n2. Calculate the time Roque spends biking to and from work each week:\n   - Biking to work: 1 hour per trip * 2 trips = 2 hours\n   - Biking back home: 1 hour per trip * 2 trips = 2 hours\n   - Total biking time per week: 2 hours + 2 hours = 4 hours\n\n3. Add the total walking time and the total biking time to find the total time spent on commuting each week:\n   - Total commuting time per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed13/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed13_S1",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 347,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson.\n2. The ratio of their shares is given as 2:5. This means for every 2 parts Mike gets, Johnson gets 5 parts.\n3. Johnson's share is given as $2500. Since Johnson's share corresponds to 5 parts of the total, we can set up the equation: \\(5 \\times \\text{Johnson's share} = \\text{Total profit}\\).\n4. Substituting Johnson's share into the equation gives us: \\(5 \\times 2500 = \\text{Total profit}\\).\n5. Calculating the total profit: \\(5 \\times 2500 = 12500\\).\n6. Now, we know the total profit is $12500.\n7. Mike's share is 2 parts out of the total 7 parts (2 for Mike + 5 for Johnson).\n8. To find Mike's share, we calculate: \\(\\text{Mike's share} = 2 \\times \\frac{12500}{7}\\).\n9. Simplifying this, we get: \\(\\text{Mike's share} = \\frac{25000}{7} \\approx 3571.43\\).\n10. Mike spends $200 on a shirt.\n11. Therefore, the remaining amount Mike has after spending on the shirt is: \\(3571.43 - 200 = 3371.43\\).\n\nANSWER:\n3371.43"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed13_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 342,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these amounts.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time taken to walk to work: 2 hours.\n   - Time taken to walk back from work: 2 hours.\n   - Total time spent walking per trip: \\(2 + 2 = 4\\) hours.\n   - Total time spent walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\).\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time taken to bike to work: 1 hour.\n   - Time taken to bike back from work: 1 hour.\n   - Total time spent biking per trip: \\(1 + 1 = 2\\) hours.\n   - Total time spent biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\).\n\n3. **Total time spent commuting:**\n   - Total time spent walking in a week: 12 hours.\n   - Total time spent biking in a week: 4 hours.\n   - Total time spent commuting in a week: \\(12 \\text{ hours} + 4 \\text{ hours} = 16 \\text{ hours}\\).\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed13/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed13_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 280,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and Johnson's share.\n2. The ratio of profit between Mike and Johnson is 2:5. This means for every 7 parts of the total profit, Mike gets 2 parts and Johnson gets 5 parts.\n3. Johnson's share is given as $2500, which corresponds to 5 parts of the total profit.\n4. To find the value of one part, we divide Johnson's share by 5: \n   \\[\n   \\text{Value of one part} = \\frac{\\$2500}{5} = \\$500\n   \\]\n5. Since Mike's share is 2 parts, we calculate Mike's initial profit:\n   \\[\n   \\text{Mike's initial profit} = 2 \\times \\$500 = \\$1000\n   \\]\n6. Mike then spends $200 on a shirt. To find out how much he has left, we subtract the cost of the shirt from his initial profit:\n   \\[\n   \\text{Amount left with Mike} = \\$1000 - \\$200 = \\$800\n   \\]\n\nANSWER:\nMike will have $800 left after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed13_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 322,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Walking Time:**\n   - Time taken to walk to work: 2 hours\n   - Time taken to walk back home: 2 hours\n   - Total time per round trip (to and from work): \\(2 + 2 = 4\\) hours\n   - Number of round trips per week: 3\n   - Total walking time per week: \\(4 \\text{ hours/round trip} \\times 3 \\text{ round trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Biking Time:**\n   - Time taken to bike to work: 1 hour\n   - Time taken to bike back home: 1 hour\n   - Total time per round trip (to and from work): \\(1 + 1 = 2\\) hours\n   - Number of round trips per week: 2\n   - Total biking time per week: \\(2 \\text{ hours/round trip} \\times 2 \\text{ round trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total Time:**\n   - Total commuting time per week: \\(12 \\text{ hours/week (walking)} + 4 \\text{ hours/week (biking)} = 16 \\text{ hours/week}\\)\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed13/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed13_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 307,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total ratio of the profit share between Mike and Johnson. The ratio given is 2:5.\n2. To find out how much of the total profit Johnson received, we use the ratio. Since Johnson's share is 5 parts out of the total 7 parts (2 + 5), we can set up the proportion: \n   \\[\n   \\frac{5}{7} = \\frac{2500}{\\text{Total Profit}}\n   \\]\n3. Solving for the total profit, we get:\n   \\[\n   \\text{Total Profit} = \\frac{2500 \\times 7}{5} = 3500\n   \\]\n4. Now that we know the total profit is $3500, we can find out how much Mike's share is. Mike's share is 2 parts out of the total 7 parts:\n   \\[\n   \\text{Mike's Share} = \\frac{2}{7} \\times 3500 = 1000\n   \\]\n5. Next, we need to determine how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share:\n   \\[\n   \\text{Remaining Amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed13_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 285,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one day:\n   - Walking time to work: 2 hours\n   - Walking time back home: 2 hours\n   - Total walking time per day: 2 + 2 = 4 hours\n\n2. Calculate the total time Roque spends walking to and from work in one week:\n   - He walks three times a week.\n   - Total walking time per week: 4 hours/day * 3 days/week = 12 hours/week\n\n3. Calculate the total time Roque spends biking to and from work in one day:\n   - Biking time to work: 1 hour\n   - Biking time back home: 1 hour\n   - Total biking time per day: 1 + 1 = 2 hours\n\n4. Calculate the total time Roque spends biking to and from work in one week:\n   - He bikes twice a week.\n   - Total biking time per week: 2 hours/day * 2 days/week = 4 hours/week\n\n5. Add the total walking time and biking time to find the total time spent on both modes of transportation in one week:\n   - Total time per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed2026/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed2026_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 259,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. We know that Johnson's share is $2500 and that his share corresponds to the 5 parts of the ratio 2:5.\n2. To find out how much each part of the ratio represents, we divide Johnson's share by the number of parts he has: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n3. Since Mike's share corresponds to 2 parts of the ratio, we multiply the value of one part by 2:\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n4. Next, we need to account for the cost of the shirt that Mike spent. The shirt costs $200.\n5. To find out how much money Mike has left after buying the shirt, we subtract the cost of the shirt from his share:\n   \\[\n   \\text{Money left with Mike} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed2026_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 333,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back from work: 2 hours\n   - Total time walking per trip: \\(2 + 2 = 4\\) hours\n   - Total time walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back from work: 1 hour\n   - Total time biking per trip: \\(1 + 1 = 2\\) hours\n   - Total time biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total time spent commuting:**\n   - Total time walking in a week: 12 hours\n   - Total time biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 \\text{ hours} + 4 \\text{ hours} = 16 \\text{ hours}\\)\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed2026/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 256,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. The profit is shared between Mike and Johnson in the ratio 2:5.\n2. Johnson's share is given as $2500.\n3. To find Mike's share, we first determine the total parts of the ratio. The ratio 2:5 means there are 2 + 5 = 7 parts in total.\n4. Since Johnson's share corresponds to 5 parts, we can set up the proportion to find out how much each part represents: \n   \\[\n   \\frac{5 \\text{ parts}}{2500 \\text{ dollars}} = \\frac{1 \\text{ part}}{500 \\text{ dollars}}\n   \\]\n5. Therefore, Mike's share is:\n   \\[\n   2 \\text{ parts} \\times 500 \\text{ dollars/part} = 1000 \\text{ dollars}\n   \\]\n6. After spending $200 on a shirt, Mike's remaining amount is:\n   \\[\n   1000 \\text{ dollars} - 200 \\text{ dollars} = 800 \\text{ dollars}\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed2026_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 319,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to work and back three times a week.\n   - Time to walk to work: 2 hours\n   - Time to walk back from work: 2 hours\n   - Total time walking per trip: \\(2 + 2 = 4\\) hours\n   - Total time walking in a week: \\(4 \\text{ hours/trip} \\times 3 \\text{ trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Time spent biking:**\n   - Roque bikes to work and back twice a week.\n   - Time to bike to work: 1 hour\n   - Time to bike back from work: 1 hour\n   - Total time biking per trip: \\(1 + 1 = 2\\) hours\n   - Total time biking in a week: \\(2 \\text{ hours/trip} \\times 2 \\text{ trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total time spent commuting:**\n   - Total time walking in a week: 12 hours\n   - Total time biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 + 4 = 16\\) hours\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed2026/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed2026_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 323,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. The ratio of their shares is given as 2:5. This means for every 2 parts that Mike gets, Johnson gets 5 parts.\n2. We know that Johnson received $2500. Since Johnson's share corresponds to 5 parts of the total profit, we can set up a proportion to find out how much each part is worth.\n3. Let's denote the value of each part as \\( x \\). Then, we have:\n   \\[\n   5x = 2500\n   \\]\n4. Solving for \\( x \\):\n   \\[\n   x = \\frac{2500}{5} = 500\n   \\]\n5. Now that we know each part is worth $500, we can calculate Mike's share. Since Mike's share corresponds to 2 parts, we multiply \\( x \\) by 2:\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n6. Next, we need to determine how much Mike will have after spending $200 on a shirt. We subtract the cost of the shirt from Mike's share:\n   \\[\n   \\text{Remaining amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed2026_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 355,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Time taken to walk to work: 2 hours\n   - Time taken to walk back home: 2 hours\n   - Total time spent walking to and from work: \\(2 \\text{ hours} + 2 \\text{ hours} = 4 \\text{ hours}\\)\n   - Since Roque walks to and from work three times a week, the total time spent walking in a week is \\(4 \\text{ hours} \\times 3 = 12 \\text{ hours}\\).\n\n2. **Time spent biking:**\n   - Time taken to ride his bike to work: 1 hour\n   - Time taken to ride his bike back home: 1 hour\n   - Total time spent biking to and from work: \\(1 \\text{ hour} + 1 \\text{ hour} = 2 \\text{ hours}\\)\n   - Since Roque rides his bike to and from work twice a week, the total time spent biking in a week is \\(2 \\text{ hours} \\times 2 = 4 \\text{ hours}\\).\n\n3. **Total time spent commuting:**\n   - Total time spent walking in a week: 12 hours\n   - Total time spent biking in a week: 4 hours\n   - Total time spent commuting in a week: \\(12 \\text{ hours} + 4 \\text{ hours} = 16 \\text{ hours}\\)\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed42/S1/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 256,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit shared between Mike and Johnson. Since Johnson's share is $2500 and his share is 5 parts out of the total 7 parts (2 + 5), we can set up the equation:\n   \\[\n   \\frac{5}{7} \\times \\text{Total Profit} = 2500\n   \\]\n2. Solving for the total profit:\n   \\[\n   \\text{Total Profit} = 2500 \\times \\frac{7}{5} = 3500\n   \\]\n3. Now, we know that Mike's share is 2 parts out of the total 7 parts. Therefore, Mike's share is:\n   \\[\n   \\text{Mike's Share} = 3500 \\times \\frac{2}{7} = 1000\n   \\]\n4. Mike spends $200 on a shirt, so we subtract this amount from his share:\n   \\[\n   \\text{Mike's Remaining Amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed42_S1",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 217,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in one week:\n   - Walking to work: 2 hours per trip * 3 trips = 6 hours\n   - Walking back home: 2 hours per trip * 3 trips = 6 hours\n   - Total walking time per week: 6 hours + 6 hours = 12 hours\n\n2. Calculate the total time Roque spends biking to and from work in one week:\n   - Biking to work: 1 hour per trip * 2 trips = 2 hours\n   - Biking back home: 1 hour per trip * 2 trips = 2 hours\n   - Total biking time per week: 2 hours + 2 hours = 4 hours\n\n3. Add the total walking time and biking time to get the overall time spent on commuting:\n   - Total commuting time per week: 12 hours (walking) + 4 hours (biking) = 16 hours\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed42/S2/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed42_S2",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "800",
+      "n_output_tokens": 275,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the ratio given. The ratio of profit between Mike and Johnson is 2:5. This means that for every 7 parts of the profit, Mike gets 2 parts and Johnson gets 5 parts.\n2. We know that Johnson received $2500, which corresponds to 5 parts of the total profit. To find out how much each part is worth, we divide $2500 by 5: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n3. Since Mike's share is 2 parts, we multiply the value of one part by 2 to find out how much Mike initially had:\n   \\[\n   \\text{Mike's initial share} = 2 \\times 500 = 1000\n   \\]\n4. Mike then spends $200 on a shirt. To find out how much money Mike has left after the purchase, we subtract the cost of the shirt from his initial share:\n   \\[\n   \\text{Money left with Mike} = 1000 - 200 = 800\n   \\]\n\nANSWER:\n800"
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed42_S2",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "16",
+      "n_output_tokens": 212,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Time spent walking:**\n   - Roque walks to and from work three times a week.\n   - Each trip takes 2 hours.\n   - Therefore, the total time spent walking in a week is \\(3 \\times 2 = 6\\) hours.\n\n2. **Time spent biking:**\n   - Roque rides his bike to and from work twice a week.\n   - Each trip takes 1 hour.\n   - Therefore, the total time spent biking in a week is \\(2 \\times 1 = 2\\) hours.\n\n3. **Total time spent commuting:**\n   - The total time is the sum of the time spent walking and the time spent biking.\n   - Total time = Time spent walking + Time spent biking = \\(6 + 2 = 8\\) hours.\n\nANSWER:\n8"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "B5_seed42/S3/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "B5_seed42_S3",
+      "status": "invalid_answer",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 273,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. First, we need to determine the total profit based on the given ratio and Johnson's share.\n2. The ratio of profit between Mike and Johnson is 2:5. This means for every 2 parts Mike gets, Johnson gets 5 parts.\n3. Johnson's share is given as $2500, which corresponds to 5 parts of the total profit.\n4. To find the value of one part, we divide Johnson's share by 5: \n   \\[\n   \\text{Value of one part} = \\frac{2500}{5} = 500\n   \\]\n5. Now, we can calculate Mike's share, which is 2 parts of the total profit:\n   \\[\n   \\text{Mike's share} = 2 \\times 500 = 1000\n   \\]\n6. Mike then spends $200 on a shirt. To find out how much he has left after the purchase, we subtract the cost of the shirt from his share:\n   \\[\n   \\text{Remaining amount} = 1000 - 200 = 800\n   \\]\n\nANSWER:\nMike will have $800 left after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "B5_seed42_S3",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 355,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\nTo determine the total time Roque spends commuting to and from work in a week, we need to calculate the time spent walking and the time spent biking separately, and then sum these times.\n\n1. **Walking Time:**\n   - Time taken to walk to work: 2 hours\n   - Time taken to walk back from work: 2 hours\n   - Total time per round trip (to and from work): \\(2 + 2 = 4\\) hours\n   - Roque walks to and from work three times a week.\n   - Total walking time per week: \\(4 \\text{ hours/round trip} \\times 3 \\text{ round trips/week} = 12 \\text{ hours/week}\\)\n\n2. **Biking Time:**\n   - Time taken to ride his bike to work: 1 hour\n   - Time taken to ride his bike back from work: 1 hour\n   - Total time per round trip (to and from work): \\(1 + 1 = 2\\) hours\n   - Roque rides his bike to and from work twice a week.\n   - Total biking time per week: \\(2 \\text{ hours/round trip} \\times 2 \\text{ round trips/week} = 4 \\text{ hours/week}\\)\n\n3. **Total Commuting Time:**\n   - Total walking time per week: 12 hours\n   - Total biking time per week: 4 hours\n   - Total commuting time per week: \\(12 \\text{ hours/week} + 4 \\text{ hours/week} = 16 \\text{ hours/week}\\)\n\nANSWER:\n16"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  },
+  "S0/eval_dev.jsonl": {
+    "first_row": {
+      "problem_id": "gsm8k_train_00116",
+      "checkpoint": "S0",
+      "status": "invalid_format",
+      "lenient_correct": false,
+      "ground_truth": "800",
+      "n_output_tokens": 293,
+      "hit_max_tokens": false,
+      "raw_output": "To solve this problem, we need to follow these steps:\n\n1. **Determine the total profit:**\n   - Johnson's share is $2500.\n   - The ratio of their shares is 2:5.\n   - Let the total profit be \\( P \\).\n\n2. **Set up the ratio equation:**\n   - The ratio 2:5 means that for every 2 parts of profit that Mike gets, Johnson gets 5 parts.\n   - Therefore, the total parts of profit are \\( 2 + 5 = 7 \\) parts.\n\n3. **Calculate the value of one part:**\n   - Johnson's share is $2500, which corresponds to 5 parts.\n   - Value of one part = \\( \\frac{2500}{5} = 500 \\) dollars.\n\n4. **Calculate Mike's share:**\n   - Mike's share is 2 parts.\n   - Value of Mike's share = \\( 2 \\times 500 = 1000 \\) dollars.\n\n5. **Subtract the cost of the shirt:**\n   - Mike spends $200 on a shirt.\n   - Remaining amount = \\( 1000 - 200 = 800 \\) dollars.\n\n**Final Answer:**\nMike will have $800 after spending $200 on a shirt."
+    },
+    "second_row": {
+      "problem_id": "gsm8k_train_00118",
+      "checkpoint": "S0",
+      "status": "valid",
+      "lenient_correct": true,
+      "ground_truth": "16",
+      "n_output_tokens": 247,
+      "hit_max_tokens": false,
+      "raw_output": "REASONING:\n1. Calculate the total time Roque spends walking to and from work in a week:\n   - Walking to work: 2 hours/day * 3 days/week = 6 hours/week\n   - Walking back home: 2 hours/day * 3 days/week = 6 hours/week\n   - Total walking time: 6 hours/week + 6 hours/week = 12 hours/week\n\n2. Calculate the total time Roque spends biking to and from work in a week:\n   - Biking to work: 1 hour/day * 2 days/week = 2 hours/week\n   - Biking back home: 1 hour/day * 2 days/week = 2 hours/week\n   - Total biking time: 2 hours/week + 2 hours/week = 4 hours/week\n\n3. Add the total walking time and biking time to get the total time spent on both modes of transportation in a week:\n   - Total time: 12 hours/week (walking) + 4 hours/week (biking) = 16 hours/week\n\nANSWER:\n16 hours"
+    },
+    "top_level_keys": [
+      "checkpoint",
+      "ground_truth",
+      "hit_max_tokens",
+      "lenient_correct",
+      "n_output_tokens",
+      "problem_id",
+      "raw_output",
+      "status"
+    ]
+  }
+}

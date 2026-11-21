@@ -1,0 +1,58 @@
+{
+  "schema": "p1p2.historical_checkpoint_reference.v2",
+  "reference_type": "main_zip_checkpoint_metadata_reference",
+  "method": "B4",
+  "seed": 2026,
+  "round": 3,
+  "run_id": "B4_seed2026_S3",
+  "checkpoint": "student_ckpt_003",
+  "physical_weights_included": false,
+  "source_archive": "runs/main/main.zip",
+  "source_archive_sha256": "a4c657e7d643d4be6839eaf6614485ab3dd0ab26c825765d993c783e9371be9f",
+  "archive_members": {
+    "prediction": "B4_seed2026/S3/eval_dev.jsonl",
+    "train_log": "B4_seed2026/S3/adapter/train_log.json",
+    "adapter_config": "B4_seed2026/S3/adapter/adapter_config.json",
+    "checkpoint_log": "B4_seed2026/checkpoint_log.jsonl",
+    "train_set": "B4_seed2026/round_002/train_set.json",
+    "selection_log": "B4_seed2026/round_002/selection_log.jsonl",
+    "eval_marker": "B4_seed2026/.done/eval_dev_B4_seed2026_S3.json"
+  },
+  "archive_member_sha256": {
+    "prediction": "2631d14973ab206e2d05752ff56c93f583f34a3dd4a7729effb3a8f9f2a1e274",
+    "train_log": "10e7dd6bf3c8f06bab32e2df655e573c39e4d80b70ca911edcdae57d51c94bce",
+    "adapter_config": "bc845f28b894392892396e6b05309906cb1eb15151d6847b8773433f4382b374",
+    "checkpoint_log": "690c5c55158c09de8990427dfc52b556429ad64835f10a06dc3f46b00919c0df",
+    "train_set": "e701ed53e4a2164b068630709992a7792abbc8f6887cac6918def04b97866644",
+    "selection_log": "dc8a54b4127e1e1344bd8bd5c52a07c161919120d79ac1a53eef53deb4fafce0",
+    "eval_marker": "6fb3bd23663d027d7995217846a5d1bfd63ab166998dee54e769e8fb84f1d8a5"
+  },
+  "training_metadata": {
+    "student_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "student_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "training_seed": 2026,
+    "data_order_seed": 2026,
+    "checkpoint_parent": "student_ckpt_002",
+    "train_set_sha256_archived": "e701ed53e4a2164b068630709992a7792abbc8f6887cac6918def04b97866644",
+    "train_set_sha256_logged": "498f1a58ec1759a695f43bf6e3a54f17c66078ec9e45227516d581847aaee1a9",
+    "train_set_hash_comparison": "DIFFERENT_ARCHIVED_AND_TRAIN_TIME_BYTES",
+    "training_config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+    "training_pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+    "n_examples": 186,
+    "steps": 24,
+    "selection_log_rows": 4353,
+    "adapter_config_sha256": "bc845f28b894392892396e6b05309906cb1eb15151d6847b8773433f4382b374"
+  },
+  "evaluation_metadata": {
+    "prediction_sha256": "2631d14973ab206e2d05752ff56c93f583f34a3dd4a7729effb3a8f9f2a1e274",
+    "prediction_rows": 500,
+    "prediction_unique_ids": 500,
+    "strict_metric": "status == valid",
+    "evaluation_command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B4_seed2026_S3 --split dev --out /workspace/manual/runs/main/B4_seed2026/S3/eval_dev.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B4_seed2026/S3/adapter"
+  },
+  "limitations": [
+    "Metadata reference only; physical adapter weights are not included.",
+    "Archived train-set bytes and train-time hash are both preserved.",
+    "Historical training pool/config hashes are recorded, not independently reconstructed."
+  ]
+}

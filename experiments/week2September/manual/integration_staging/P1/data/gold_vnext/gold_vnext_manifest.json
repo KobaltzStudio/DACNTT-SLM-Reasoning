@@ -1,0 +1,34 @@
+{
+  "dataset_name": "Gold vNext",
+  "version": "vNext",
+  "records": 185,
+  "batch_100_records": 100,
+  "supplement_records": 85,
+  "adjudicated_records": 22,
+  "adjudication_method": "AI-assisted adjudication; pending human confirmation",
+  "source_files": [
+    "data\\batch_100\\batch_100_annotations_v2.jsonl",
+    "data\\supplement\\supplement_annotations_v2.jsonl"
+  ],
+  "adjudication_decisions": "reports\\capability\\d3_audit\\adjudication_decisions.json",
+  "output_files": [
+    "data\\gold_vnext\\batch_100_annotations_vnext.jsonl",
+    "data\\gold_vnext\\supplement_annotations_vnext.jsonl"
+  ],
+  "ground_truth_modified": false,
+  "non_adjudicated_labels_modified": false,
+  "capability_support": {
+    "multiplication": 144,
+    "fraction": 49,
+    "addition": 81,
+    "subtraction": 102,
+    "division": 89,
+    "percentage": 41,
+    "ratio": 30
+  },
+  "difficulty_support": {
+    "medium": 100,
+    "easy": 69,
+    "hard": 16
+  }
+}

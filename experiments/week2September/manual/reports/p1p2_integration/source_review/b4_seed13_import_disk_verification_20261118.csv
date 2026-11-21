@@ -1,0 +1,4 @@
+﻿"Checkpoint","Destination","AdapterExists","ConfigExists","TrainLogExists","AdapterHashMatch","ConfigHashMatch","TrainLogHashMatch","Status"
+"student_ckpt_001","C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_001","True","True","True","True","True","True","PASS"
+"student_ckpt_002","C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_002","True","True","True","True","True","True","PASS"
+"student_ckpt_003","C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\p1p2_integration\B4_seed13\student_ckpt_003","True","True","True","True","True","True","PASS"

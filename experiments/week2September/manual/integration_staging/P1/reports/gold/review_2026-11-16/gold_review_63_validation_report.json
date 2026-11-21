@@ -1,0 +1,336 @@
+{
+  "review_date": "2026-11-16",
+  "status": "PASS",
+  "freeze_status": "NOT_FROZEN",
+  "candidate_status": "VALIDATED_PENDING_USER_APPROVAL",
+  "counts": {
+    "batch": 100,
+    "supplement": 85,
+    "total": 185,
+    "reviewed_pending": 63,
+    "user_confirmed_decisions": 22,
+    "reviewed_no_change": 41,
+    "capability_changed_records": 17,
+    "ambiguity_flagged_records": 5,
+    "human_confirmed_preserved": 22
+  },
+  "changed_capability_ids": [
+    "gsm8k_train_00155",
+    "gsm8k_train_00779",
+    "gsm8k_train_00818",
+    "gsm8k_train_00830",
+    "gsm8k_train_00840",
+    "gsm8k_train_01869",
+    "gsm8k_train_02837",
+    "gsm8k_train_02893",
+    "gsm8k_train_02960",
+    "gsm8k_train_03289",
+    "gsm8k_train_03316",
+    "gsm8k_train_03734",
+    "gsm8k_train_03879",
+    "gsm8k_train_03882",
+    "gsm8k_train_06921",
+    "gsm8k_train_07158",
+    "gsm8k_train_07349"
+  ],
+  "ambiguity_ids": [
+    "gsm8k_train_00239",
+    "gsm8k_train_00713",
+    "gsm8k_train_00830",
+    "gsm8k_train_01200",
+    "gsm8k_train_03048"
+  ],
+  "source_hashes_before_build": {
+    "batch": {
+      "path": "data\\gold_vfinal\\batch_100_annotations_vfinal.jsonl",
+      "actual_sha256": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+      "inspection_sha256": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+      "matches_inspection": true
+    },
+    "supplement": {
+      "path": "data\\gold_vfinal\\supplement_annotations_vfinal.jsonl",
+      "actual_sha256": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+      "inspection_sha256": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+      "matches_inspection": true
+    },
+    "gold_manifest": {
+      "path": "data\\gold_vfinal\\gold_vfinal_manifest.json",
+      "actual_sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+      "inspection_sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+      "matches_inspection": true
+    },
+    "raw_train": {
+      "path": "data\\raw\\gsm8k_train.jsonl",
+      "actual_sha256": "771125f195aa72606ce2844ccbd9826e1f2cc3c0e6d4b882f7f2f5ec20fc1754",
+      "inspection_sha256": "771125f195aa72606ce2844ccbd9826e1f2cc3c0e6d4b882f7f2f5ec20fc1754",
+      "matches_inspection": true
+    },
+    "supplement_raw": {
+      "path": "data\\raw\\supplement_selected.jsonl",
+      "actual_sha256": "32f464e3db07fbad83928e87048cae73be18ffad1d115dca181dea6741629f0e",
+      "inspection_sha256": "32f464e3db07fbad83928e87048cae73be18ffad1d115dca181dea6741629f0e",
+      "matches_inspection": true
+    },
+    "human_confirmed": {
+      "path": "reports\\capability\\d3_audit\\adjudication_human_confirmed.csv",
+      "actual_sha256": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab",
+      "inspection_sha256": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab",
+      "matches_inspection": true
+    }
+  },
+  "checks": [
+    {
+      "name": "batch_count",
+      "passed": true,
+      "detail": 100
+    },
+    {
+      "name": "supplement_count",
+      "passed": true,
+      "detail": 85
+    },
+    {
+      "name": "gold_total_unique_ids",
+      "passed": true,
+      "detail": 185
+    },
+    {
+      "name": "batch_supplement_disjoint",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "worklist_63_unique",
+      "passed": true,
+      "detail": {
+        "rows": 63,
+        "unique": 63
+      }
+    },
+    {
+      "name": "queue_185_unique",
+      "passed": true,
+      "detail": {
+        "rows": 185,
+        "unique": 185
+      }
+    },
+    {
+      "name": "human_confirmed_22_unique",
+      "passed": true,
+      "detail": {
+        "rows": 22,
+        "unique": 22
+      }
+    },
+    {
+      "name": "worklist_is_supplement_subset",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "pending_and_human_confirmed_disjoint",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "all_explicit_decisions_in_worklist",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "explicit_decision_count",
+      "passed": true,
+      "detail": 22
+    },
+    {
+      "name": "queue_status_distribution",
+      "passed": true,
+      "detail": {
+        "excluded": 100,
+        "pending": 63,
+        "confirmed": 22
+      }
+    },
+    {
+      "name": "queue_split_distribution",
+      "passed": true,
+      "detail": {
+        "D_pool": 100,
+        "D_dev": 85
+      }
+    },
+    {
+      "name": "batch_matches_D_pool",
+      "passed": true,
+      "detail": {
+        "missing_from_batch": [],
+        "extra_in_batch": []
+      }
+    },
+    {
+      "name": "supplement_matches_D_dev",
+      "passed": true,
+      "detail": {
+        "missing_from_supplement": [],
+        "extra_in_supplement": []
+      }
+    },
+    {
+      "name": "human_confirmed_matches_queue",
+      "passed": true,
+      "detail": {
+        "missing_in_human_file": [],
+        "extra_in_human_file": []
+      }
+    },
+    {
+      "name": "worklist_matches_pending_queue",
+      "passed": true,
+      "detail": {
+        "missing_in_worklist": [],
+        "extra_in_worklist": []
+      }
+    },
+    {
+      "name": "all_pending_ids_in_raw_sources",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "raw_question_consistency",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "raw_ground_truth_consistency",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "v1_annotation_schema",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "source_hashes_match_inspection",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no_change_review_count",
+      "passed": true,
+      "detail": 41
+    },
+    {
+      "name": "ledger_covers_all_63",
+      "passed": true,
+      "detail": {
+        "rows": 63,
+        "ids": 63
+      }
+    },
+    {
+      "name": "candidate_supplement_count",
+      "passed": true,
+      "detail": 85
+    },
+    {
+      "name": "candidate_batch_count",
+      "passed": true,
+      "detail": 100
+    },
+    {
+      "name": "candidate_supplement_count",
+      "passed": true,
+      "detail": 85
+    },
+    {
+      "name": "candidate_total_unique",
+      "passed": true,
+      "detail": 185
+    },
+    {
+      "name": "candidate_batch_inventory_unchanged",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "candidate_supplement_inventory_unchanged",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "batch_byte_identical",
+      "passed": true,
+      "detail": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+    },
+    {
+      "name": "only_explicit_decisions_changed",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "human_confirmed_22_unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "candidate_schema_and_labels",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ledger_record_count",
+      "passed": true,
+      "detail": 63
+    },
+    {
+      "name": "review_decision_partition",
+      "passed": true,
+      "detail": {
+        "user_confirmed": 22,
+        "no_change": 41
+      }
+    },
+    {
+      "name": "candidate_directory_promoted",
+      "passed": true,
+      "detail": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\data\\gold_vnext_candidate_2026-11-16"
+    },
+    {
+      "name": "candidate_files_exist",
+      "passed": true,
+      "detail": "batch, supplement, manifest"
+    },
+    {
+      "name": "source_hashes_unchanged_after_build",
+      "passed": true,
+      "detail": {
+        "batch": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+        "supplement": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+        "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+        "raw_train": "771125f195aa72606ce2844ccbd9826e1f2cc3c0e6d4b882f7f2f5ec20fc1754",
+        "supplement_raw": "32f464e3db07fbad83928e87048cae73be18ffad1d115dca181dea6741629f0e",
+        "human_confirmed": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab"
+      }
+    }
+  ],
+  "failed_checks": [],
+  "gold_vfinal_modified": false,
+  "raw_ground_truth_modified": false,
+  "human_confirmed_modified": false,
+  "source_hashes_after_build": {
+    "batch": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+    "supplement": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "raw_train": "771125f195aa72606ce2844ccbd9826e1f2cc3c0e6d4b882f7f2f5ec20fc1754",
+    "supplement_raw": "32f464e3db07fbad83928e87048cae73be18ffad1d115dca181dea6741629f0e",
+    "human_confirmed": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab"
+  },
+  "candidate_sha256_final": {
+    "batch": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+    "supplement": "970c5d63c2f0f822a73805c0dd03a727a542d08077dcc3fbdffeb043e7f29257",
+    "manifest": "d812903f307bd2c2d81e401bfc7993038f0d5efd6d5eeaedc0d0af3d7898deae"
+  }
+}

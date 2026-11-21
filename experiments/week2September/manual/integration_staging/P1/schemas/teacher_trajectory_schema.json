@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Teacher Reasoning Trajectory",
+  "type": "object",
+  "required": [
+    "problem_id",
+    "teacher_model",
+    "trajectory_id",
+    "checkpoint",
+    "reasoning_trace",
+    "answer",
+    "capabilities",
+    "metadata"
+  ],
+  "properties": {
+    "problem_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "teacher_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trajectory_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkpoint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reasoning_trace": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "addition",
+          "subtraction",
+          "multiplication",
+          "division",
+          "percentage",
+          "fraction",
+          "ratio"
+        ]
+      },
+      "minItems": 1
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "num_steps",
+        "token_length"
+      ],
+      "properties": {
+        "num_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "token_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "generation_seed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "reasoning_structure": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "difficulty": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verification_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

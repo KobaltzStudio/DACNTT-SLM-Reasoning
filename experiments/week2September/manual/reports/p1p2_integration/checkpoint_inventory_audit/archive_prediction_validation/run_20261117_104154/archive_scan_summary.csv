@@ -1,0 +1,11 @@
+﻿archive_chain,depth,status,member_count,nested_zip_count
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip,0,OK,1204,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip -> reports/p1p2_integration/g5_preflight_audit.zip,1,OK,6,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip -> integration_staging/P1/reports/capability/p1_day14_final_2026-11-14/incoming/P1_adjudication_review_2026-11-14.zip,1,OK,4,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip -> integration_staging/P1/reports/capability/p1_day14_final_2026-11-14/incoming/P1_day14_final_2026-11-14.zip,1,OK,8,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip -> integration_staging/P1/reports/capability/p1_extractor_v3_2026-11-14/P1_extractor_v3_working_2026-11-14.zip,1,OK,15,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_1.zip -> integration_staging/P1/reports/task7/B4/seed_13/seed_13.zip,1,OK,13,5
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\manual_P2_2.zip,0,OK,230,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\runs\main\main.zip,0,OK,834,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\integration_staging.zip,0,ROOT_ARCHIVE_NOT_FOUND,0,0
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\task7\B4\seed_13\seed_13.zip,0,OK,13,0

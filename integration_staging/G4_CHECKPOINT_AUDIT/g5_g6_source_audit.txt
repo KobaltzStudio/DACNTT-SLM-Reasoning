@@ -1,0 +1,2117 @@
+﻿========== G5/G6 SOURCE AUDIT ==========
+
+========== 1. P1 GRAPH BUILDER ==========
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+
+def load_json(path: Path):
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def validate_graph(graph: dict, schema: dict):
+    required = schema["required"]
+
+    for key in required:
+        if key not in graph:
+            raise ValueError(f"Graph missing required field: {key}")
+
+    if graph["status"] not in schema["properties"]["status"]["enum"]:
+        raise ValueError("Invalid graph status")
+
+    if len(graph["nodes"]) != len(CAPABILITIES):
+        raise ValueError("Graph must contain exactly 7 nodes")
+
+    actual = [node["capability"] for node in graph["nodes"]]
+
+    if actual != CAPABILITIES:
+        raise ValueError(
+            f"Capability taxonomy mismatch: {actual}"
+        )
+
+    if len(graph["edges"]) != 0:
+        raise ValueError(
+            "Current observational evidence does not authorize graph edges"
+        )
+
+    node_schema = schema["properties"]["nodes"]["items"]
+
+    for index, node in enumerate(graph["nodes"]):
+        for key in node_schema["required"]:
+            if key not in node:
+                raise ValueError(
+                    f"Node {index} missing required field: {key}"
+                )
+
+        if node.get("capability") not in CAPABILITIES:
+            raise ValueError(
+                f"Invalid capability in node {index}"
+            )
+
+        if node_schema.get("additionalProperties") is False:
+            extra = set(node) - set(node_schema["properties"])
+            if extra:
+                raise ValueError(
+                    f"Unexpected node fields at index {index}: {extra}"
+                )
+
+    if schema.get("additionalProperties") is False:
+        extra = set(graph) - set(schema["properties"])
+        if extra:
+            raise ValueError(f"Unexpected graph fields: {extra}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manual", required=True)
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+
+    manual = Path(args.manual).resolve()
+    output_dir = Path(args.output).resolve()
+
+    protocol_path = manual / "config" / "proposal1_graph_protocol.md"
+    schema_path = manual / "schemas" / "capability_graph_schema.json"
+    curve_path = output_dir / "capability_learning_curves.csv"
+    output_path = output_dir / "capability_graph.json"
+
+    for path in (
+        protocol_path,
+        schema_path,
+        curve_path,
+    ):
+        if not path.is_file():
+            raise FileNotFoundError(f"Required input not found: {path}")
+
+    protocol = protocol_path.read_text(encoding="utf-8")
+
+    required_protocol_terms = [
+        "Capability Taxonomy",
+        "Prerequisite Edge",
+        "Transfer Edge",
+        "controlled intervention",
+        "Research Integrity Constraint",
+    ]
+
+    for term in required_protocol_terms:
+        if term.lower() not in protocol.lower():
+            raise ValueError(
+                f"Protocol does not contain expected concept: {term}"
+            )
+
+    schema = load_json(schema_path)
+
+    graph = {
+        "graph_id": "proposal1_capability_graph",
+        "student_checkpoint": "B4_seed13_ckpt003",
+        "status": "empirical",
+        "nodes": [
+            {
+                "node_id": capability,
+                "capability": capability,
+            }
+            for capability in CAPABILITIES
+        ],
+        "edges": [],
+    }
+
+    validate_graph(graph, schema)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    with output_path.open("w", encoding="utf-8", newline="\n") as f:
+        json.dump(graph, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+    print("CAPABILITY GRAPH BUILD: PASS")
+    print(f"NODES: {len(graph['nodes'])}")
+    print(f"EDGES: {len(graph['edges'])}")
+    print(f"SCHEMA: {schema_path}")
+    print(f"OUTPUT: {output_path}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print(f"CAPABILITY GRAPH BUILD: FAIL: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+========== 2. P1 GRAPH EVIDENCE LEDGER BUILDER ==========
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import sys
+from itertools import permutations
+from pathlib import Path
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+RELATIONSHIPS = [
+    "prerequisite",
+    "transfer",
+]
+
+FIELDS = [
+    "source_capability",
+    "target_capability",
+    "relationship_type",
+    "status",
+    "evidence_available",
+    "evidence_source",
+    "decision_reason",
+]
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manual", required=True)
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+
+    manual = Path(args.manual).resolve()
+    output_dir = Path(args.output).resolve()
+
+    protocol_path = manual / "config" / "proposal1_graph_protocol.md"
+    graph_path = output_dir / "capability_graph.json"
+    output_path = output_dir / "graph_evidence_ledger.csv"
+
+    for path in (protocol_path, graph_path):
+        if not path.is_file():
+            raise FileNotFoundError(f"Required input not found: {path}")
+
+    protocol = protocol_path.read_text(encoding="utf-8")
+    graph = json.loads(graph_path.read_text(encoding="utf-8"))
+
+    if len(graph.get("nodes", [])) != 7:
+        raise ValueError("Graph must contain 7 nodes")
+
+    if graph.get("edges") != []:
+        raise ValueError("Graph must have 0 edges before ledger generation")
+
+    if "controlled intervention" not in protocol.lower():
+        raise ValueError(
+            "Protocol does not document controlled intervention requirement"
+        )
+
+    rows = []
+
+    for source, target in permutations(CAPABILITIES, 2):
+        for relationship in RELATIONSHIPS:
+            if relationship == "prerequisite":
+                reason = (
+                    "Not established: no validated prerequisite evidence "
+                    "has been supplied for this directed pair."
+                )
+            else:
+                reason = (
+                    "Not established: no controlled intervention on the "
+                    "source capability with measured downstream change "
+                    "has been supplied for this directed pair."
+                )
+
+            rows.append({
+                "source_capability": source,
+                "target_capability": target,
+                "relationship_type": relationship,
+                "status": "not_established",
+                "evidence_available": "false",
+                "evidence_source": "",
+                "decision_reason": reason,
+            })
+
+    if len(rows) != 84:
+        raise ValueError(f"Expected 84 rows, got {len(rows)}")
+
+    pair_set = {
+        (row["source_capability"], row["target_capability"])
+        for row in rows
+    }
+
+    if len(pair_set) != 42:
+        raise ValueError("Expected exactly 42 directed capability pairs")
+
+    if any(
+        row["source_capability"] == row["target_capability"]
+        for row in rows
+    ):
+        raise ValueError("Self-pair detected")
+
+    if any(
+        row["status"] != "not_established"
+        or row["evidence_available"] != "false"
+        for row in rows
+    ):
+        raise ValueError("Unverified relationship incorrectly established")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    with output_path.open(
+        "w",
+        encoding="utf-8-sig",
+        newline="",
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    print("GRAPH EVIDENCE LEDGER BUILD: PASS")
+    print(f"CAPABILITIES: {len(CAPABILITIES)}")
+    print(f"DIRECTED PAIRS: {len(pair_set)}")
+    print(f"RELATIONSHIP TYPES: {len(RELATIONSHIPS)}")
+    print(f"RECORDS: {len(rows)}")
+    print(f"ESTABLISHED RELATIONSHIPS: 0")
+    print(f"OUTPUT: {output_path}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print(f"GRAPH EVIDENCE LEDGER BUILD: FAIL: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+========== 3. P1 GRAPH VALIDATOR ==========
+import json
+import sys
+from pathlib import Path
+
+
+ALLOWED_CAPABILITIES = {
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+}
+
+ALLOWED_EDGE_TYPES = {
+    "prerequisite",
+    "transfer",
+}
+
+
+def fail(message):
+    print(f"INVALID: {message}")
+    raise SystemExit(1)
+
+
+def main():
+    if len(sys.argv) != 2:
+        print(
+            "Usage: python validate_graph.py <graph.json>"
+        )
+        raise SystemExit(2)
+
+    path = Path(sys.argv[1])
+
+    if not path.exists():
+        fail(f"File not found: {path}")
+
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+    except json.JSONDecodeError as exc:
+        fail(f"Invalid JSON: {exc}")
+
+    required = {
+        "graph_id",
+        "student_checkpoint",
+        "nodes",
+        "edges",
+    }
+
+    missing = required - set(data)
+
+    if missing:
+        fail(f"Missing fields: {sorted(missing)}")
+
+    if not isinstance(data["nodes"], list):
+        fail("'nodes' must be a list")
+
+    if not isinstance(data["edges"], list):
+        fail("'edges' must be a list")
+
+    node_ids = set()
+
+    for node in data["nodes"]:
+        for field in ("node_id", "capability"):
+            if field not in node:
+                fail(f"Node missing field: {field}")
+
+        capability = node["capability"]
+
+        if capability not in ALLOWED_CAPABILITIES:
+            fail(
+                f"Unknown capability: {capability}"
+            )
+
+        node_id = node["node_id"]
+
+        if node_id in node_ids:
+            fail(f"Duplicate node_id: {node_id}")
+
+        node_ids.add(node_id)
+
+        if "mastery" in node and node["mastery"] is not None:
+            if not 0 <= node["mastery"] <= 1:
+                fail(
+                    f"Invalid mastery for {node_id}"
+                )
+
+        if "deficit" in node and node["deficit"] is not None:
+            if not 0 <= node["deficit"] <= 1:
+                fail(
+                    f"Invalid deficit for {node_id}"
+                )
+
+    for edge in data["edges"]:
+        for field in ("source", "target", "type"):
+            if field not in edge:
+                fail(f"Edge missing field: {field}")
+
+        if edge["source"] not in node_ids:
+            fail(
+                f"Unknown edge source: {edge['source']}"
+            )
+
+        if edge["target"] not in node_ids:
+            fail(
+                f"Unknown edge target: {edge['target']}"
+            )
+
+        if edge["type"] not in ALLOWED_EDGE_TYPES:
+            fail(
+                f"Unknown edge type: {edge['type']}"
+            )
+
+        if "score" in edge and edge["score"] is not None:
+            if not isinstance(edge["score"], (int, float)):
+                fail("Edge score must be numeric or null")
+
+    print(f"VALID: {path}")
+    print(f"Nodes validated: {len(data['nodes'])}")
+    print(f"Edges validated: {len(data['edges'])}")
+
+
+if __name__ == "__main__":
+    main()
+
+========== 4. P1 GRAPH SCHEMA ==========
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Student-Specific Capability Graph",
+  "type": "object",
+  "required": [
+    "graph_id",
+    "student_checkpoint",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "graph_id": {
+      "type": "string"
+    },
+    "student_checkpoint": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "synthetic",
+        "empirical"
+      ]
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id",
+          "capability"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string"
+          },
+          "capability": {
+            "type": "string",
+            "enum": [
+              "addition",
+              "subtraction",
+              "multiplication",
+              "division",
+              "percentage",
+              "fraction",
+              "ratio"
+            ]
+          },
+          "mastery": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "deficit": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "type"
+        ],
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prerequisite",
+              "transfer"
+            ]
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+
+========== 6. P1 LEARNING CURVE BUILDER ==========
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import sys
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+
+METHOD = "B4"
+SEED = 13
+ROUNDS = [0, 1, 2]
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+CONFIDENCE_LEVEL = 0.95
+WILSON_Z = 1.959963984540054
+
+MIN_SUPPORT = 5
+MIN_TOTAL_CHANGE = 0.10
+PLATEAU_THRESHOLD = 0.02
+ANOMALY_THRESHOLD = 0.20
+
+EVAL_ROOT_REL = Path("reports/capability/student_eval_2026-11-17")
+MODEL_ROOT_REL = Path("models/task7/B4/seed_13")
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def read_json(path: Path):
+    with path.open("r", encoding="utf-8-sig") as f:
+        return json.load(f)
+
+
+def read_jsonl(path: Path):
+    rows = []
+    with path.open("r", encoding="utf-8-sig") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSONL at {path}:{line_no}: {exc}"
+                ) from exc
+    return rows
+
+
+def wilson_interval(correct: int, total: int):
+    if total <= 0:
+        raise ValueError("Wilson interval requires total > 0")
+
+    p = correct / total
+    z2 = WILSON_Z ** 2
+    denominator = 1 + z2 / total
+
+    center = (p + z2 / (2 * total)) / denominator
+    margin = (
+        WILSON_Z
+        * math.sqrt((p * (1 - p) / total) + z2 / (4 * total ** 2))
+        / denominator
+    )
+
+    return max(0.0, center - margin), min(1.0, center + margin)
+
+
+def close(a, b, tolerance=1e-6):
+    return abs(float(a) - float(b)) <= tolerance
+
+
+def checkpoint_dir_name(round_index: int):
+    return f"B4_seed13_ckpt{round_index + 1:03d}"
+
+
+def checkpoint_model_name(round_index: int):
+    return f"student_ckpt_{round_index + 1:03d}"
+
+
+def expected_evaluation_checkpoint(round_index: int):
+    """
+    Return the exact checkpoint identifier stored by the evaluator.
+
+    The evaluation JSONL uses the fully-qualified identity:
+    B4_seed13_student_ckpt_001, etc.
+    """
+    return f"B4_seed13_{checkpoint_model_name(round_index)}"
+
+
+def normalize_round_metadata(
+    raw_round,
+    expected_checkpoint: str,
+    round0_lineage_verified: bool,
+):
+    """
+    Normalize evaluation round metadata without modifying source records.
+
+    round_unknown is accepted only for student_ckpt_001 and only after
+    Round 0 training lineage has been independently verified.
+    """
+    raw = str(raw_round).strip().lower()
+
+    if raw.isdigit():
+        return int(raw)
+
+    if raw.startswith("round_"):
+        suffix = raw[len("round_"):]
+
+        if suffix.isdigit():
+            return int(suffix)
+
+    if raw == "round_unknown":
+        if (
+            expected_checkpoint == "B4_seed13_student_ckpt_001"
+            and round0_lineage_verified
+        ):
+            return 0
+
+        raise ValueError(
+            "Cannot normalize round_unknown: "
+            f"checkpoint={expected_checkpoint}, "
+            f"round0_lineage_verified={round0_lineage_verified}"
+        )
+
+    raise ValueError(
+        f"Unsupported round metadata {raw_round!r} "
+        f"for checkpoint {expected_checkpoint}"
+    )
+
+
+def verify_round_zero(manual: Path):
+    checkpoint = manual / MODEL_ROOT_REL / "student_ckpt_001"
+    log_path = checkpoint / "train_log.json"
+
+    if not log_path.is_file():
+        raise FileNotFoundError(f"Missing Round 0 train log: {log_path}")
+
+    log = read_json(log_path)
+
+    if log.get("checkpoint_parent") != "student_ckpt_000":
+        raise ValueError("Round 0 checkpoint_parent mismatch")
+
+    if int(log.get("seed", -1)) != SEED:
+        raise ValueError("Round 0 seed mismatch")
+
+    if int(log.get("data_order_seed", -1)) != SEED:
+        raise ValueError("Round 0 data_order_seed mismatch")
+
+    if int(log.get("n_examples", -1)) != 186:
+        raise ValueError("Unexpected Round 0 n_examples")
+
+    if int(log.get("steps", -1)) != 24:
+        raise ValueError("Unexpected Round 0 training steps")
+
+    train_set_value = log.get("train_set")
+    expected_hash = str(log.get("train_set_sha256", "")).lower()
+
+    if not train_set_value or not expected_hash:
+        raise ValueError("Round 0 train_set path/hash missing")
+
+    train_set_path = Path(train_set_value)
+
+    if not train_set_path.is_absolute():
+        train_set_path = manual / train_set_path
+
+    if not train_set_path.is_file():
+        raise FileNotFoundError(f"Round 0 train_set missing: {train_set_path}")
+
+    actual_hash = sha256_file(train_set_path)
+
+    if actual_hash != expected_hash:
+        raise ValueError(
+            "Round 0 train_set SHA256 mismatch: "
+            f"expected={expected_hash}, actual={actual_hash}"
+        )
+
+    train_set = read_json(train_set_path)
+
+    expected_fields = {
+        "method": METHOD,
+        "round": 0,
+        "training_seed": SEED,
+        "source_checkpoint": "student_ckpt_000",
+    }
+
+    for key, expected in expected_fields.items():
+        if train_set.get(key) != expected:
+            raise ValueError(
+                f"Round 0 train_set field {key!r}: "
+                f"expected {expected!r}, got {train_set.get(key)!r}"
+            )
+
+    if train_set.get("pool_sha256") != log.get("pool_sha256"):
+        raise ValueError("Round 0 pool SHA256 differs between train_log and train_set")
+
+    adapter_path = checkpoint / "adapter_model.safetensors"
+
+    if not adapter_path.is_file():
+        raise FileNotFoundError(f"Missing adapter weights: {adapter_path}")
+
+    return {
+        "checkpoint": str(checkpoint),
+        "train_log": str(log_path),
+        "train_log_sha256": sha256_file(log_path),
+        "train_set": str(train_set_path),
+        "train_set_sha256": actual_hash,
+        "adapter_model": str(adapter_path),
+        "adapter_model_sha256": sha256_file(adapter_path),
+        "pool_sha256": log["pool_sha256"],
+        "round": 0,
+        "seed": SEED,
+        "method": METHOD,
+    }
+
+
+def load_checkpoint_metrics(manual: Path, round_index: int, round0_lineage_verified: bool = False):
+    eval_name = checkpoint_dir_name(round_index)
+    eval_dir = manual / EVAL_ROOT_REL / eval_name
+
+    jsonl_path = eval_dir / "capability_metrics.jsonl"
+    csv_path = eval_dir / "capability_metrics.csv"
+    manifest_path = eval_dir / "student_capability_evaluation_manifest.json"
+
+    for path in (jsonl_path, csv_path, manifest_path):
+        if not path.is_file():
+            raise FileNotFoundError(f"Required input missing: {path}")
+
+    records = read_jsonl(jsonl_path)
+
+    if not records:
+        raise ValueError(f"No records in {jsonl_path}")
+
+    expected_checkpoint = expected_evaluation_checkpoint(round_index)
+    result = {}
+
+    for row in records:
+        required = [
+            "method", "seed", "round", "checkpoint",
+            "capability", "n_support", "n_correct",
+        ]
+
+        missing = [key for key in required if key not in row]
+        if missing:
+            raise ValueError(
+                f"{jsonl_path}: missing fields {missing}; "
+                f"available={list(row.keys())}"
+            )
+
+        if row["method"] != METHOD:
+            raise ValueError(f"Unexpected method in {jsonl_path}: {row['method']}")
+
+        if int(row["seed"]) != SEED:
+            raise ValueError(f"Unexpected seed in {jsonl_path}: {row['seed']}")
+
+        normalized_round = normalize_round_metadata(
+            raw_round=row["round"],
+            expected_checkpoint=expected_checkpoint,
+            round0_lineage_verified=round0_lineage_verified,
+        )
+
+        if normalized_round != round_index:
+            raise ValueError(
+                f"Unexpected round in {jsonl_path}: "
+                f"raw={row['round']!r}, normalized={normalized_round}, "
+                f"expected={round_index}"
+            )
+
+        if str(row["checkpoint"]) != expected_checkpoint:
+            raise ValueError(
+                f"Unexpected checkpoint in {jsonl_path}: {row['checkpoint']}"
+            )
+
+        capability = str(row["capability"])
+
+        if capability not in CAPABILITIES:
+            raise ValueError(f"Unknown capability: {capability}")
+
+        if capability in result:
+            raise ValueError(f"Duplicate capability {capability} in {jsonl_path}")
+
+        support = int(row["n_support"])
+        correct = int(row["n_correct"])
+
+        if support <= 0 or correct < 0 or correct > support:
+            raise ValueError(
+                f"Invalid support/correct values for {capability}: "
+                f"{correct}/{support}"
+            )
+
+        mastery = correct / support
+        low, high = wilson_interval(correct, support)
+
+        if "mastery_accuracy" in row:
+            if not close(row["mastery_accuracy"], mastery):
+                raise ValueError(
+                    f"mastery_accuracy mismatch for {capability}, round {round_index}"
+                )
+
+        if "ci95_low" in row and not close(row["ci95_low"], low, 1e-5):
+            raise ValueError(
+                f"ci95_low mismatch for {capability}, round {round_index}"
+            )
+
+        if "ci95_high" in row and not close(row["ci95_high"], high, 1e-5):
+            raise ValueError(
+                f"ci95_high mismatch for {capability}, round {round_index}"
+            )
+
+        result[capability] = {
+            "n_support": support,
+            "n_correct": correct,
+            "n_incorrect": support - correct,
+            "mastery": mastery,
+            "deficit": 1.0 - mastery,
+            "ci95_low": low,
+            "ci95_high": high,
+            "ci_method": "wilson_95",
+        }
+
+    if set(result) != set(CAPABILITIES):
+        missing = sorted(set(CAPABILITIES) - set(result))
+        extra = sorted(set(result) - set(CAPABILITIES))
+        raise ValueError(
+            f"Capability coverage mismatch in {jsonl_path}; "
+            f"missing={missing}, extra={extra}"
+        )
+
+    # Cross-check the CSV against JSONL.
+    with csv_path.open("r", encoding="utf-8-sig", newline="") as f:
+        csv_rows = list(csv.DictReader(f))
+
+    csv_by_capability = {}
+
+    for row in csv_rows:
+        cap = row.get("capability")
+        if cap in csv_by_capability:
+            raise ValueError(f"Duplicate capability in CSV: {cap}")
+        csv_by_capability[cap] = row
+
+    if set(csv_by_capability) != set(CAPABILITIES):
+        raise ValueError(f"CSV capability set mismatch: {csv_path}")
+
+    for cap in CAPABILITIES:
+        csv_row = csv_by_capability[cap]
+        jsonl_row = result[cap]
+
+        # n_support and n_correct are mandatory source metrics.
+        for key in ("n_support", "n_correct"):
+            if key not in csv_row or csv_row[key] == "":
+                raise ValueError(
+                    f"Missing {key} in evaluator CSV: {csv_path}"
+                )
+
+            if int(float(csv_row[key])) != jsonl_row[key]:
+                raise ValueError(
+                    f"JSONL/CSV mismatch: {cap}/{key}/{round_index}"
+                )
+
+        # Mastery is derived from JSONL counts.
+        # Cross-check it only if the evaluator CSV provides a column.
+        mastery_column = None
+
+        if "mastery" in csv_row and csv_row["mastery"] != "":
+            mastery_column = "mastery"
+        elif (
+            "mastery_accuracy" in csv_row
+            and csv_row["mastery_accuracy"] != ""
+        ):
+            mastery_column = "mastery_accuracy"
+
+        if mastery_column is not None:
+            if not close(
+                csv_row[mastery_column],
+                jsonl_row["mastery"],
+            ):
+                raise ValueError(
+                    f"JSONL/CSV mastery mismatch: "
+                    f"{cap}/{round_index}/{mastery_column}"
+                )
+
+        # Deficit is also optional in the evaluator CSV.
+        if "deficit" in csv_row and csv_row["deficit"] != "":
+            if not close(csv_row["deficit"], jsonl_row["deficit"]):
+                raise ValueError(
+                    f"JSONL/CSV deficit mismatch: {cap}/{round_index}"
+                )
+
+    manifest = read_json(manifest_path)
+
+    return result, {
+        "eval_dir": str(eval_dir),
+        "metrics_jsonl": str(jsonl_path),
+        "metrics_jsonl_sha256": sha256_file(jsonl_path),
+        "metrics_csv": str(csv_path),
+        "metrics_csv_sha256": sha256_file(csv_path),
+        "manifest": str(manifest_path),
+        "manifest_sha256": sha256_file(manifest_path),
+        "manifest_metadata": manifest,
+    }
+
+
+def classify_transition(delta: float):
+    if delta >= ANOMALY_THRESHOLD:
+        return "sudden_gain"
+    if delta <= -ANOMALY_THRESHOLD:
+        return "sudden_drop"
+    if abs(delta) < PLATEAU_THRESHOLD:
+        return "plateau"
+    if delta > 0:
+        return "improvement"
+    if delta < 0:
+        return "regression"
+    return "plateau"
+
+
+def build_rows(checkpoints):
+    rows = []
+
+    for capability in CAPABILITIES:
+        values = [
+            checkpoints[round_index][capability]
+            for round_index in ROUNDS
+        ]
+
+        first = values[0]["mastery"]
+        last = values[-1]["mastery"]
+        total_change = last - first
+
+        if any(v["n_support"] < MIN_SUPPORT for v in values):
+            trend = "insufficient_evidence"
+        elif total_change >= MIN_TOTAL_CHANGE:
+            trend = "improving"
+        elif total_change <= -MIN_TOTAL_CHANGE:
+            trend = "regressing"
+        else:
+            trend = "plateauing"
+
+        previous = None
+
+        for round_index, value in zip(ROUNDS, values):
+            delta = None
+            delta_class = "baseline"
+
+            if previous is not None:
+                delta = value["mastery"] - previous
+                delta_class = classify_transition(delta)
+
+            rows.append({
+                "method": METHOD,
+                "seed": SEED,
+                "round": round_index,
+                "checkpoint": checkpoint_model_name(round_index),
+                "capability": capability,
+                "n_support": value["n_support"],
+                "n_correct": value["n_correct"],
+                "n_incorrect": value["n_incorrect"],
+                "mastery": value["mastery"],
+                "deficit": value["deficit"],
+                "ci95_low": value["ci95_low"],
+                "ci95_high": value["ci95_high"],
+                "ci_method": value["ci_method"],
+                "delta_vs_previous": delta,
+                "delta_classification": delta_class,
+                "total_change_round0_to_round2": total_change,
+                "trend_label": trend,
+            })
+
+            previous = value["mastery"]
+
+    return rows
+
+
+def write_csv(path: Path, rows):
+    fields = [
+        "method", "seed", "round", "checkpoint", "capability",
+        "n_support", "n_correct", "n_incorrect", "mastery", "deficit",
+        "ci95_low", "ci95_high", "ci_method",
+        "delta_vs_previous", "delta_classification",
+        "total_change_round0_to_round2", "trend_label",
+    ]
+
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+        for row in rows:
+            output = dict(row)
+            for key in (
+                "mastery", "deficit", "ci95_low", "ci95_high",
+                "delta_vs_previous", "total_change_round0_to_round2",
+            ):
+                if output[key] is not None:
+                    output[key] = f"{output[key]:.8f}"
+            writer.writerow(output)
+
+
+def plot_curves(path: Path, checkpoints):
+    # One panel per capability prevents unrelated curves and labels
+    # from visually overlapping.
+    fig, axes = plt.subplots(
+        nrows=4,
+        ncols=2,
+        figsize=(13, 13),
+        sharex=True,
+        sharey=True,
+    )
+
+    flat_axes = list(axes.flat)
+
+    for index, capability in enumerate(CAPABILITIES):
+        ax = flat_axes[index]
+
+        y = [
+            checkpoints[r][capability]["mastery"]
+            for r in ROUNDS
+        ]
+        low = [
+            checkpoints[r][capability]["ci95_low"]
+            for r in ROUNDS
+        ]
+        high = [
+            checkpoints[r][capability]["ci95_high"]
+            for r in ROUNDS
+        ]
+
+        lower_error = [
+            mastery - lower
+            for mastery, lower in zip(y, low)
+        ]
+        upper_error = [
+            upper - mastery
+            for mastery, upper in zip(y, high)
+        ]
+
+        # Mastery curve and Wilson 95% confidence intervals.
+        ax.errorbar(
+            ROUNDS,
+            y,
+            yerr=[lower_error, upper_error],
+            fmt="-o",
+            linewidth=2,
+            markersize=6,
+            capsize=4,
+            capthick=1.1,
+            elinewidth=1.2,
+            color=f"C{index}",
+            ecolor=f"C{index}",
+            alpha=0.9,
+            zorder=3,
+        )
+
+        # Annotate each checkpoint's mastery value.
+        label_offsets = [8, 8, 8]
+
+        for round_index, mastery, offset in zip(
+            ROUNDS, y, label_offsets
+        ):
+            ax.annotate(
+                f"{mastery:.2f}",
+                (round_index, mastery),
+                textcoords="offset points",
+                xytext=(0, offset),
+                ha="center",
+                fontsize=9,
+                color=f"C{index}",
+                fontweight="bold",
+            )
+
+        ax.set_title(
+            capability,
+            fontsize=11,
+            fontweight="bold",
+            pad=8,
+        )
+
+        ax.set_xticks(
+            ROUNDS,
+            ["Round 0", "Round 1", "Round 2"],
+        )
+        ax.set_xlim(-0.25, 2.25)
+        ax.set_ylim(0.0, 1.0)
+        ax.set_yticks([i / 10 for i in range(11)])
+
+        ax.grid(
+            True,
+            axis="both",
+            alpha=0.25,
+            linestyle="--",
+            linewidth=0.7,
+        )
+
+        ax.tick_params(axis="both", labelsize=8)
+
+    # Hide the unused eighth panel.
+    for unused_ax in flat_axes[len(CAPABILITIES):]:
+        unused_ax.set_visible(False)
+
+    fig.suptitle(
+        "B4 Student Capability Learning Curves (Seed 13)",
+        fontsize=15,
+        fontweight="bold",
+        y=0.995,
+    )
+
+    fig.supxlabel(
+        "Student checkpoint / training round",
+        fontsize=11,
+        y=0.025,
+    )
+    fig.supylabel(
+        "Capability mastery",
+        fontsize=11,
+        x=0.025,
+    )
+
+    fig.text(
+        0.5,
+        0.965,
+        "Points and lines: mastery | Error bars: Wilson 95% CI",
+        ha="center",
+        fontsize=9,
+        color="dimgray",
+    )
+
+    fig.tight_layout(
+        rect=[0.045, 0.045, 1.0, 0.95],
+        h_pad=2.0,
+        w_pad=1.5,
+    )
+
+    output_path = Path(path).resolve()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Render PNG in memory first. This avoids Pillow opening the
+    # destination path directly, which fails in the current environment.
+    import io
+
+    png_buffer = io.BytesIO()
+
+    try:
+        fig.savefig(
+            png_buffer,
+            format="png",
+            dpi=260,
+            bbox_inches="tight",
+        )
+
+        png_bytes = png_buffer.getvalue()
+
+        if not png_bytes.startswith(bytes.fromhex("89504e470d0a1a0a")):
+            raise RuntimeError("Matplotlib did not produce a valid PNG stream.")
+
+        output_path.write_bytes(png_bytes)
+
+    finally:
+        png_buffer.close()
+        plt.close(fig)
+
+    if not output_path.is_file() or output_path.stat().st_size == 0:
+        raise RuntimeError(f"PNG output is missing or empty: {output_path}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manual", required=True)
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+
+    manual = Path(args.manual).resolve()
+    output = Path(args.output).resolve()
+    output.mkdir(parents=True, exist_ok=True)
+
+    print("[1/4] Verifying Round 0 training lineage...")
+    round0_provenance = verify_round_zero(manual)
+    print("PASS: Round 0 train_log/train_set/hash")
+
+    print("[2/4] Loading and validating three evaluation checkpoints...")
+    checkpoints = {}
+    input_inventory = []
+
+    for round_index in ROUNDS:
+        data, inventory = load_checkpoint_metrics(manual, round_index, round0_lineage_verified=bool(round0_provenance))
+        checkpoints[round_index] = data
+        input_inventory.append(inventory)
+        print(
+            f"PASS: Round {round_index}: "
+            f"{len(data)} capabilities"
+        )
+
+    print("[3/4] Computing mastery, Wilson CI, deltas and trends...")
+    rows = build_rows(checkpoints)
+
+    csv_path = output / "capability_learning_curves.csv"
+    write_csv(csv_path, rows)
+
+    print(f"CREATED: {csv_path}")
+
+    print("[4/4] Plotting learning curves...")
+    png_path = output / "capability_learning_curves.png"
+    plot_curves(png_path, checkpoints)
+
+    if not png_path.is_file() or png_path.stat().st_size == 0:
+        raise RuntimeError("Learning curve PNG was not created")
+
+    print(f"CREATED: {png_path}")
+    print("LEARNING_CURVES_BUILD: PASS")
+    print(f"ROWS: {len(rows)}")
+    print(f"EXPECTED_ROWS: {len(CAPABILITIES) * len(ROUNDS)}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print(f"LEARNING_CURVES_BUILD: FAIL: {exc}", file=sys.stderr)
+        raise
+
+
+
+
+
+========== 7. P2 RUNNER SOURCE ==========
+#!/usr/bin/env python3
+"""
+Run one method and one training seed through the Task 7 schedule (analysis_plan.md section 3).
+
+  S_0 (shared by all runs): eval D_dev, eval D_test, NLL of the pool
+  t = 0..M-1: select B_t -> train S_t + B_t -> S_{t+1} -> eval D_dev, eval D_test -> NLL when needed
+
+NLL per method: B4, B5 and the ablation at S_1 and S_2 (selection and/or T7-6, T7-7); B2 too when
+--b2-nll is given (sensitivity analysis of T7-7); B0 and B3 never beyond S_0. S_3 is never scored.
+
+Each step is one subprocess, so GPU memory is released between steps. A finished step leaves a marker in
+<run-dir>/.done/ with its command and duration; re-running the same command skips finished steps and redoes
+the interrupted one (eval_student.py also resumes inside a step). Durations are appended to
+<runs-dir>/timing.jsonl, which is what the cost estimate of the main run comes from.
+
+B4 and B5 select the same B_0 at S_0, so with the same seed S_1 is shared (task7_decisions.md): when the
+other method's round 0 is finished and its trajectory list is identical, its adapter, evaluations and NLL
+are copied, and the marker records the source.
+
+Layout:
+  <runs-dir>/S0/{eval_dev,eval_test,nll}.jsonl
+  <runs-dir>/<method>_seed<seed>/round_NNN/{train_set.json,selection_log.jsonl}
+  <runs-dir>/<method>_seed<seed>/S<t>/{adapter/,eval_dev.jsonl,eval_test.jsonl,nll.jsonl}
+  <runs-dir>/<method>_seed<seed>/checkpoint_log.jsonl
+
+--pilot is for testing the pipeline only: --pilot-problems builds a small pool from the first problems of the
+official pool, with a smaller budget and evaluation limit. Keep --runs-dir apart from the main runs.
+
+Usage (from experiments/week2September/manual/):
+  python scripts/run_experiment.py --method B5 --seed 13 --runs-dir runs/main
+  python scripts/run_experiment.py --method B5 --seed 13 --runs-dir runs/main --dry-run
+"""
+import argparse
+import json
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from selection import METHODS as SELECTION_METHODS  # noqa: E402
+from select_round import DEFAULT_TOKENS, round_dir  # noqa: E402
+from student_common import CONFIG_PATH, POOL_VERIFIED, load_config, read_jsonl, sha256_file  # noqa: E402
+
+SCRIPTS = Path(__file__).resolve().parent
+METHODS = ("B0",) + SELECTION_METHODS
+SHARED_ROUND0 = {"B4": "B5", "B5": "B4"}
+
+
+class Runner:
+    """Runs steps once, keeps markers and timing."""
+
+    def __init__(self, runs_dir, dry_run=False):
+        self.runs_dir = Path(runs_dir)
+        self.dry_run = dry_run
+
+    def marker(self, scope_dir, step):
+        return Path(scope_dir) / ".done" / f"{step}.json"
+
+    def is_done(self, scope_dir, step):
+        return self.marker(scope_dir, step).exists()
+
+    def mark(self, scope_dir, step, info):
+        path = self.marker(scope_dir, step)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(info, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def run(self, scope_dir, step, cmd):
+        printable = " ".join(shlex.quote(str(c)) for c in cmd)
+        if self.is_done(scope_dir, step):
+            print(f"[skip] {scope_dir}/{step}")
+            return
+        print(f"[run] {scope_dir}/{step}\n      {printable}", flush=True)
+        if self.dry_run:
+            return
+        t0 = time.time()
+        subprocess.run([str(c) for c in cmd], check=True)
+        elapsed = round(time.time() - t0, 1)
+        self.mark(scope_dir, step, {"command": printable, "elapsed_seconds": elapsed})
+        self.runs_dir.mkdir(parents=True, exist_ok=True)
+        with (self.runs_dir / "timing.jsonl").open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"scope": str(scope_dir), "step": step, "elapsed_seconds": elapsed}) + "\n")
+
+
+def needs_nll_at(method, t, b2_nll):
+    """NLL at S_{t}, t >= 1 (S_0 is always scored in the shared directory)."""
+    if t not in (1, 2):
+        return False
+    return method in ("B4", "B5", "ablation_shuffled_scores") or (method == "B2" and b2_nll)
+
+
+def build_pilot_pool(args, runs_dir, model_args):
+    """Pool of the first problems of the official pool, and its token table."""
+    pool_path = runs_dir / "pilot_pool.jsonl"
+    tokens_path = runs_dir / "pilot_tokens.jsonl"
+    if args.dry_run or tokens_path.with_suffix(".summary.json").exists():
+        return pool_path, tokens_path
+    runs_dir.mkdir(parents=True, exist_ok=True)
+    keep, lines = set(), []
+    with POOL_VERIFIED.open(encoding="utf-8") as f:
+        for line in f:
+            pid = json.loads(line)["problem_id"]
+            if pid not in keep and len(keep) == args.pilot_problems:
+                break
+            keep.add(pid)
+            lines.append(line)
+    pool_path.write_text("".join(lines), encoding="utf-8")
+    subprocess.run([sys.executable, SCRIPTS / "build_pool_tokens.py", "--pool", pool_path, "--out", tokens_path,
+                    *model_args], check=True)
+    return pool_path, tokens_path
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--method", required=True, choices=METHODS)
+    ap.add_argument("--seed", required=True, type=int)
+    ap.add_argument("--runs-dir", required=True, type=Path)
+    ap.add_argument("--backend", default="vllm", choices=["hf", "vllm"], help="evaluation backend")
+    ap.add_argument("--eval-batch", type=int, default=None)
+    ap.add_argument("--nll-batch", type=int, default=16)
+    ap.add_argument("--micro-batch", type=int, default=8)
+    ap.add_argument("--b2-nll", action="store_true", help="score S_1, S_2 for B2 too (T7-7 sensitivity)")
+    ap.add_argument("--dry-run", action="store_true", help="print the steps without running them")
+    ap.add_argument("--pilot", action="store_true")
+    ap.add_argument("--pilot-problems", type=int, default=60)
+    ap.add_argument("--pilot-budget", type=int, default=2000)
+    ap.add_argument("--pilot-eval-limit", type=int, default=20)
+    ap.add_argument("--model", default=None, help="pilot only")
+    ap.add_argument("--revision", default=None, help="pilot only")
+    ap.add_argument("--dtype", default="auto", choices=["auto", "bf16", "fp32", "fp16"])
+    args = ap.parse_args()
+
+    cfg = load_config()
+    if not args.pilot:
+        if args.model:
+            raise SystemExit("--model needs --pilot")
+        if args.seed not in cfg["seeds"]["training_seeds"] + cfg["seeds"]["optional_extra_seeds"]:
+            raise SystemExit(f"seed {args.seed} is not in the config")
+
+    runs_dir = args.runs_dir.resolve()
+    model_args = (["--model", args.model] + (["--revision", args.revision] if args.revision else [])) if args.model else []
+    gpu_args = model_args + ["--dtype", args.dtype]
+    eval_args = ["--backend", args.backend] + gpu_args
+    if args.eval_batch:
+        eval_args += ["--batch-size", args.eval_batch]
+    select_args = []
+    pool, tokens = POOL_VERIFIED, DEFAULT_TOKENS
+    if args.pilot:
+        pool, tokens = build_pilot_pool(args, runs_dir, model_args)
+        eval_args += ["--limit", args.pilot_eval_limit]
+        select_args = ["--pilot", "--budget", args.pilot_budget]
+    elif not args.dry_run and not tokens.exists():
+        raise SystemExit(f"{tokens} is missing: run scripts/build_pool_tokens.py first")
+
+    runner = Runner(runs_dir, args.dry_run)
+    py = sys.executable
+    tag_run = f"{args.method}_seed{args.seed}"
+    run_dir = runs_dir / tag_run
+    s0 = runs_dir / "S0"
+    n_pool = 0 if args.dry_run else len(read_jsonl(tokens))
+    M = cfg["schedule"]["rounds_M"]
+    ckpt = cfg["schedule"]["checkpoint_name"]
+    config_hash = sha256_file(CONFIG_PATH)
+
+    def evaluate(scope, ckpt_dir, tag, adapter):
+        for split in ("dev", "test"):
+            cmd = [py, SCRIPTS / "eval_student.py", "--tag", tag, "--split", split,
+                   "--out", ckpt_dir / f"eval_{split}.jsonl", *eval_args]
+            runner.run(scope, f"eval_{split}_{tag}", cmd + (["--adapter", adapter] if adapter else []))
+
+    def score(scope, ckpt_dir, tag, adapter):
+        cmd = [py, SCRIPTS / "compute_nll.py", "--tag", tag, "--out", ckpt_dir / "nll.jsonl", "--pool", pool,
+               "--batch-size", args.nll_batch, *gpu_args]
+        runner.run(scope, f"nll_{tag}", cmd + (["--adapter", adapter] if adapter else []))
+
+    evaluate(s0, s0, "S0", None)
+    score(s0, s0, "S0", None)
+
+    if args.method == "B0":
+        print("B0 is S_0 itself: nothing to train.")
+        return
+
+    def write_checkpoint_record(t, selected, parent, cumulative_tokens, cumulative_steps):
+        row = {"record_type": "checkpoint", "checkpoint": ckpt.format(t=t), "parent_checkpoint": parent,
+               "round": t, "method": args.method, "training_seed": args.seed, "data_order_seed": args.seed,
+               "cumulative_training_tokens": cumulative_tokens, "cumulative_optimization_steps": cumulative_steps,
+               "selected_trajectory_ids": selected,
+               "beta_est_forward_passes": n_pool if t == 0 or needs_nll_at(args.method, t, args.b2_nll) else 0,
+               "config_hash": config_hash}
+        rows = [r for r in read_jsonl(log_path) if r["checkpoint"] != row["checkpoint"]] if log_path.exists() else []
+        log_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows + [row]), encoding="utf-8")
+
+    log_path = run_dir / "checkpoint_log.jsonl"
+    if not args.dry_run:
+        run_dir.mkdir(parents=True, exist_ok=True)
+        write_checkpoint_record(0, [], None, 0, 0)
+
+    def try_reuse_round0():
+        """Copy S_1 from the other of B4/B5 when its B_0 is identical. True when copied."""
+        other = SHARED_ROUND0.get(args.method)
+        if other is None or runner.is_done(run_dir, "train_0"):
+            return False
+        other_dir = runs_dir / f"{other}_seed{args.seed}"
+        other_tag = f"{other}_seed{args.seed}_S1"
+        steps = ["train_0", f"eval_dev_{other_tag}", f"eval_test_{other_tag}", f"nll_{other_tag}"]
+        if not all(runner.is_done(other_dir, s) for s in steps):
+            return False
+        own = json.loads((round_dir(run_dir, 0) / "train_set.json").read_text(encoding="utf-8"))
+        theirs = json.loads((round_dir(other_dir, 0) / "train_set.json").read_text(encoding="utf-8"))
+        if own["trajectory_ids"] != theirs["trajectory_ids"]:
+            raise RuntimeError(f"{args.method} and {other} differ at round 0: the shared S_1 assumption fails")
+        shutil.copytree(other_dir / "S1", run_dir / "S1", dirs_exist_ok=True)
+        tag = f"{tag_run}_S1"
+        info = {"reused_from": str(other_dir / "S1"), "reason": "identical B_0 and seed (task7_decisions.md)"}
+        for step in ("train_0", f"eval_dev_{tag}", f"eval_test_{tag}", f"nll_{tag}"):
+            runner.mark(run_dir, step, info)
+        print(f"[reuse] S_1 of {tag_run} copied from {other_dir.name}")
+        return True
+
+    cumulative_tokens, cumulative_steps = 0, 0
+    for t in range(M):
+        nll = s0 / "nll.jsonl" if t == 0 or args.method == "B4" else run_dir / f"S{t}" / "nll.jsonl"
+        cmd = [py, SCRIPTS / "select_round.py", "--method", args.method, "--seed", args.seed, "--round", t,
+               "--run-dir", run_dir, "--pool", pool, "--tokens", tokens, *select_args]
+        if args.method in ("B4", "B5", "ablation_shuffled_scores"):
+            cmd += ["--nll", nll]
+        runner.run(run_dir, f"select_{t}", cmd)
+        runner.run(run_dir, f"validate_log_{t}",
+                   [sys.executable, "-c",
+                    "import subprocess,sys;r=subprocess.run([sys.executable,sys.argv[1],sys.argv[2]],"
+                    "capture_output=True,text=True);print(r.stdout.splitlines()[-1]);sys.exit(r.returncode)",
+                    SCRIPTS / "validate_selection_log.py", round_dir(run_dir, t) / "selection_log.jsonl"])
+
+        ckpt_dir = run_dir / f"S{t + 1}"
+        adapter = ckpt_dir / "adapter"
+        tag = f"{tag_run}_S{t + 1}"
+        if not args.dry_run and t == 0:
+            try_reuse_round0()
+        train_cmd = [py, SCRIPTS / "train_round.py", "--seed", args.seed,
+                     "--train-set", round_dir(run_dir, t) / "train_set.json", "--adapter-dir", adapter,
+                     "--micro-batch", args.micro_batch, *gpu_args]
+        if t > 0:
+            train_cmd += ["--init-adapter", run_dir / f"S{t}" / "adapter"]
+        runner.run(run_dir, f"train_{t}", train_cmd)
+        evaluate(run_dir, ckpt_dir, tag, adapter)
+        if needs_nll_at(args.method, t + 1, args.b2_nll):
+            score(run_dir, ckpt_dir, tag, adapter)
+
+        if not args.dry_run:
+            train_log = json.loads((adapter / "train_log.json").read_text(encoding="utf-8"))
+            cumulative_tokens += train_log["cumulative_training_tokens"]
+            cumulative_steps += train_log["steps"]
+            selected = json.loads((round_dir(run_dir, t) / "train_set.json").read_text(encoding="utf-8"))["trajectory_ids"]
+            write_checkpoint_record(t + 1, selected, ckpt.format(t=t), cumulative_tokens, cumulative_steps)
+
+    print(f"{tag_run} finished -> {run_dir}")
+
+
+if __name__ == "__main__":
+    os.chdir(SCRIPTS.parent)
+    main()
+
+========== 8. P2 SELECTION METHOD DEFINITIONS ==========
+#!/usr/bin/env python3
+"""
+Selection rules of B2, B3, B4, B5 and the shuffled-scores ablation (analysis_plan.md section 5,
+task7_decisions.md T7-1, T7-2, T7-3). Pure Python: no torch, no files; select_round.py does the I/O.
+
+Budget filling (protocol section 16.1, tokens(B_t) <= beta_round): walk the order and stop at the first
+trajectory that would exceed the budget. Later, shorter trajectories are not used to top up, because that
+would favour short trajectories over the method's own order. B3 and B4 keep the stopping trajectory for
+the next round.
+
+Tokens are response tokens under the Student tokenizer without the end-of-turn token, the unit of L_bar
+and therefore of beta_round.
+
+Seeds fixed by the config: B2 random.Random(training_seed * 100 + round); B3 random.Random(training_seed).
+The ablation's seed is not in the config; ABLATION_SEED_OFFSET keeps it apart from B2.
+"""
+import random
+from collections import Counter
+
+from learnability import score_checkpoint
+
+METHODS = ("B2", "B3", "B4", "B5", "ablation_shuffled_scores")
+NEEDS_NLL = ("B4", "B5", "ablation_shuffled_scores")
+ABLATION_SEED_OFFSET = 50
+SELECTED_CRITERION = {"B2": "random", "B3": "shortest_correct", "B4": "top_score", "B5": "top_score",
+                      "ablation_shuffled_scores": "shuffled_score"}
+
+
+def fill_budget(order, problems, tokens, budget, n_cap, unavailable=()):
+    """Returns (selected ids in order, {id: reason}, tokens used, whether the budget stopped the walk)."""
+    unavailable = set(unavailable)
+    selected, reasons, per_problem = [], {}, Counter()
+    used, stopped = 0, False
+    for tid in order:
+        if tid in unavailable:
+            reasons[tid] = "already_trained"
+        elif stopped:
+            reasons[tid] = "budget_exhausted"
+        elif per_problem[problems[tid]] >= n_cap:
+            reasons[tid] = "n_cap_reached"
+        elif used + tokens[tid] > budget:
+            stopped = True
+            reasons[tid] = "budget_exhausted"
+        else:
+            selected.append(tid)
+            reasons[tid] = "selected"
+            per_problem[problems[tid]] += 1
+            used += tokens[tid]
+    return selected, reasons, used, stopped
+
+
+def rank_by_score(scores):
+    """Descending score, ties by trajectory_id ascending (decision #23)."""
+    return sorted(scores, key=lambda tid: (-scores[tid], tid))
+
+
+def random_order(ids, seed):
+    order = sorted(ids)
+    random.Random(seed).shuffle(order)
+    return order
+
+
+def shuffled_scores(scores, seed):
+    """The same score values assigned to trajectories at random."""
+    ids = sorted(scores)
+    values = [scores[tid] for tid in ids]
+    random.Random(seed).shuffle(values)
+    return dict(zip(ids, values))
+
+
+def shortest_per_problem(problems, tokens):
+    """Decision #24: per problem the shortest trajectory, ties by smallest trajectory_id."""
+    best = {}
+    for tid in sorted(problems):
+        pid = problems[tid]
+        if pid not in best or tokens[tid] < tokens[best[pid]]:
+            best[pid] = tid
+    return best
+
+
+def b3_order(problems, tokens, training_seed):
+    """B3 order: the shortest trajectory of each problem, problems shuffled once [T7-2]."""
+    best = shortest_per_problem(problems, tokens)
+    return [best[pid] for pid in random_order(best, training_seed)]
+
+
+def static_round(order, problems, tokens, budget, n_cap, round_index):
+    """
+    Round round_index of a once-computed order (B3, B4): walk it without repeating a trajectory; a
+    trajectory skipped by n_cap or by the budget stays available for later rounds [T7-1, T7-2].
+    """
+    used_before = set()
+    for r in range(round_index + 1):
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap, used_before)
+        if r < round_index:
+            used_before |= set(selected)
+    return selected, reasons, used, stopped
+
+
+def select(method, round_index, training_seed, problems, tokens, budget, n_cap, ell_by_id=None, trained_ids=()):
+    """
+    One round's selection over the eligible pool. Returns the selected ids, tokens used, band parameters
+    and one log entry per eligible trajectory (fields of selection_log_schema.json, null where unused).
+    ell_by_id: ell at S_t for B5 and the ablation, at S_0 for B4 in every round.
+    trained_ids: trained in this run before this round (reference set of B5 and the ablation [T7-3]).
+    """
+    if method not in METHODS:
+        raise ValueError(f"unknown method {method}")
+    scoring, scores = None, None
+    if method in NEEDS_NLL:
+        if ell_by_id is None or set(ell_by_id) != set(problems):
+            raise ValueError(f"{method} needs ell for exactly the eligible pool")
+        # B4 ranks at S_0, where nothing has been trained: the reference set is the whole eligible pool.
+        scoring = score_checkpoint(ell_by_id, () if method == "B4" else trained_ids)
+        scores = scoring["l_proxy"]
+
+    if method == "B2":
+        order = random_order(problems, training_seed * 100 + round_index)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    elif method == "B3":
+        order = b3_order(problems, tokens, training_seed)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    elif method == "B4":
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    else:
+        if method == "ablation_shuffled_scores":
+            scores = shuffled_scores(scores, training_seed * 100 + round_index + ABLATION_SEED_OFFSET)
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    if not stopped:
+        raise ValueError(f"{method} round {round_index}: order exhausted before the budget ({used}/{budget} tokens)")
+
+    ranks = {tid: i for i, tid in enumerate(order, start=1)}
+    has_rank = method != "B2"
+    rows = []
+    for tid in sorted(problems):
+        reason = reasons.get(tid, "not_shortest")
+        rows.append({
+            "problem_id": problems[tid],
+            "trajectory_id": tid,
+            "tokens": tokens[tid],
+            "nll": ell_by_id[tid] if scoring else None,
+            "ell_star": scoring["ell_star"] if scoring else None,
+            "sigma": scoring["sigma"] if scoring else None,
+            "l_proxy": scoring["l_proxy"][tid] if scoring else None,
+            "score": scores[tid] if scores else None,
+            "rank": ranks.get(tid) if has_rank else None,
+            "selected": reason == "selected",
+            "criterion": SELECTED_CRITERION[method] if reason == "selected" else reason,
+            "outcome": None,
+        })
+    return {
+        "selected": selected,
+        "tokens_used": used,
+        "ell_star": scoring["ell_star"] if scoring else None,
+        "sigma": scoring["sigma"] if scoring else None,
+        "n_reference": scoring["n_reference"] if scoring else None,
+        "rows": rows,
+    }
+
+
+def probe_groups(tokens, group_size, seed, n_bins=5):
+    """
+    L_emp groups (config budget.l_emp_groups): token-length quintile bins of the eligible pool, group_size
+    trajectories sampled per bin. n_cap is not applied: the rule does not ask for it.
+    """
+    ordered = sorted(tokens, key=lambda tid: (tokens[tid], tid))
+    bins = [ordered[i * len(ordered) // n_bins: (i + 1) * len(ordered) // n_bins] for i in range(n_bins)]
+    rng = random.Random(seed)
+    return [sorted(rng.sample(b, group_size)) for b in bins]
+
+========== 9. P2 EXPERIMENT CONFIG ==========
+{
+  "config_version": "v2",
+  "status": "FROZEN v2 (2026-11-01): supersedes v1 before any main-experiment run. Only selection schedules of B3/B4, the reference set of ell_star/sigma and the H-testing rules changed; budget, training, seeds, evaluation and primary comparison are unchanged. Rationale: task7_decisions.md. v1 is archived byte-identical at config/experiment_config_v1.json (used by the smoke test and Task 6 pool). I4 (probe b = 7) remains provisional until the L_emp probe check.",
+  "sources": {
+    "decisions": "task5_decisions.md (sections A-G group decisions, section I proposals with rationale)",
+    "protocol": "config/proposal2_full_protocol.md (verbatim from git show 3f7dce4^:readme.md); confirmed by the group 2026-10-14",
+    "decisions_v2": "task7_decisions.md",
+    "previous_version": "config/experiment_config_v1.json (sha256 7c5aa72d68be56de6ce0a4425635462a223ed540fd02d6e0e9806497ee382df5)"
+  },
+  "splits": {
+    "manifest": "splits/split_manifest.json",
+    "manifest_sha256": "8bac2c8d43eae6df53b63f97f353ed6006551f44d5562b74941455301fec09a3",
+    "split_seed": 363636,
+    "n_dev": 500,
+    "near_duplicate_ngram": 13
+  },
+  "teacher": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "K": 5,
+    "temperature": 0.7,
+    "max_new_tokens": 512,
+    "generation_seed_base": 20261009,
+    "generation_seed_rule": "generation_seed_base + problem_index * K + k (problem_index = row order of the input file, k = 0..K-1)",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "revision_note": "Not recorded at generation time. HF repo last modified 2024-09-25 (before generation in 2026-10), so main == this sha if the model was loaded from HF main."
+  },
+  "student": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "initial_checkpoint": "student_ckpt_000",
+    "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs."
+  },
+  "schedule": {
+    "rounds_M": 3,
+    "checkpoint_name": "student_ckpt_{t:03d}"
+  },
+  "budget": {
+    "unit": "supervised (loss-bearing) response tokens under the Student tokenizer; prompt tokens are masked from the loss and logged separately",
+    "beta_round_rule": "n_round * mean token length of verified trajectories",
+    "n_round": 200,
+    "beta_round_tokens": 45426,
+    "beta_total_tokens": 136278,
+    "probe_budget_b_steps": 7,
+    "probe_budget_note": "b = one epoch over a 50-trajectory group at effective batch 8 (= ceil(50/8) = 7 steps), same regime as one training round",
+    "l_emp_checkpoints": [
+      "student_ckpt_000"
+    ],
+    "l_emp_groups": "5 token-length quintile bins of the eligible pool at S_0; 50 trajectories sampled per bin with seed 363636",
+    "report_beta_est": true,
+    "pool_token_stats": "reports/task5/pool_token_stats.json (Student tokenizer; response mean 227.13, with prompt mean 359.6)",
+    "L_bar_response_tokens": 227.13,
+    "L_bar_source": "reports/task5/pool_token_stats.json (480 verified trajectories of the preliminary pool, Student tokenizer)",
+    "pool_requirement": "Task 6 official D_pool trajectory pool must cover >= 1000 problems (5 x n_round with n_cap = 1); otherwise revise via config v2 before training",
+    "b1_exception": "B1 trains on the full pool once per round (reference, higher cost), not budget-matched",
+    "probe_group_size": 50
+  },
+  "training": {
+    "method": "LoRA",
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.1,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "optimizer": "adamw_torch",
+    "batch_size": 8,
+    "epochs_per_round": 1,
+    "max_seq_len": 1024,
+    "tuned": false,
+    "official_runs": "cloud",
+    "local_runs": "smoke test only (QLoRA, RTX 3050 Ti 4GB)",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "lr_scheduler": "constant",
+    "warmup_steps": 0,
+    "batch_size_note": "effective batch size (per-device x gradient accumulation)",
+    "loss": "completion-only (prompt tokens masked)",
+    "precision": "bf16",
+    "adapter_across_rounds": "continue the same LoRA adapter from S_t; optimizer state re-initialized each round",
+    "hyperparameter_source": "QLoRA (Dettmers et al., 2023, arXiv 2305.14314) Appendix: LoRA on all linear layers, dropout 0.1 for models up to 13B, constant LR schedule, Adam beta2 0.999, max grad norm 0.3"
+  },
+  "seeds": {
+    "training_seeds": [
+      13,
+      42,
+      2026
+    ],
+    "data_order_seed_rule": "data_order_seed = training_seed",
+    "optional_extra_seeds": [
+      7,
+      77
+    ],
+    "optional_extra_seeds_rule": "run only if compute allows, and then for every method"
+  },
+  "learnability": {
+    "proxy": "ell = length-normalized NLL of tau under S_t; L_proxy = exp(-(ell - ell_star_t)^2 / (2 sigma_t^2))",
+    "ell_star_rule": "median of ell over the reference set at S_t",
+    "sigma_rule": "IQR of ell over the reference set at S_t / 1.349",
+    "eligible": "verified trajectories only",
+    "reference_set": "eligible trajectories not yet trained in this run (at S_0: all eligible). L_proxy is still computed for every eligible trajectory."
+  },
+  "selection": {
+    "n_cap": 1,
+    "alpha": 0.5,
+    "alpha_tuned": false,
+    "alpha_tuning_grid": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "retention_r": 0.5,
+    "retention_scope": [
+      "B6"
+    ],
+    "allow_reselect_across_rounds": true,
+    "max_total_reselect": null,
+    "tie_break": "trajectory_id ascending",
+    "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; shuffle problems once with seed; walk that order across rounds, each round continuing where the previous stopped and filling until beta_round; no trajectory repeats",
+    "b3_problem_order_seed": "training_seed",
+    "b2_seed_rule": "random.Random(training_seed * 100 + round)",
+    "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)",
+    "b4_rule": "rank all eligible trajectories once by L_proxy(tau | S_0) descending, tie_break applied; walk that ranking across rounds, each round continuing with the remaining trajectories and filling until beta_round; a trajectory skipped by n_cap in a round stays available for later rounds; no trajectory repeats; identical across training seeds",
+    "allow_reselect_note": "applies to B2, B5 and the ablation; the B3 and B4 schedules never repeat a trajectory"
+  },
+  "evaluation": {
+    "decoding": "greedy",
+    "max_new_tokens": 512,
+    "prompt_version": "v1",
+    "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+    "answer_extractor": "scripts/answer_utils.py:split_response + final_number",
+    "answer_verifier": "scripts/answer_utils.py:evaluate_output (invalid_format counts as incorrect; format compliance reported separately)",
+    "dev_checkpoints": "all",
+    "test_checkpoints": [
+      "student_ckpt_000",
+      "student_ckpt_001",
+      "student_ckpt_002",
+      "student_ckpt_003"
+    ],
+    "decisions_use": "D_dev only"
+  },
+  "methods": {
+    "required": [
+      "B0",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "recommended": [
+      "ablation_shuffled_scores"
+    ],
+    "optional": [
+      "B1",
+      "B6"
+    ]
+  },
+  "analysis": {
+    "primary_metric": "exact-match accuracy on D_test",
+    "primary_comparison": "B5 vs B4",
+    "within_seed_test": "McNemar on paired per-problem correctness",
+    "across_seed": "mean of paired differences with 95% CI",
+    "significance_alpha": 0.05,
+    "plan": "analysis_plan.md",
+    "secondary_metrics": {
+      "lenient_accuracy": "last number anywhere in the output matches ground truth, format ignored (answer_utils.answers_match, as in eval_student.py); registered secondary metric, does not replace the primary metric",
+      "report_together": [
+        "strict accuracy",
+        "lenient accuracy",
+        "format compliance"
+      ]
+    },
+    "noise": {
+      "test_retest_runs": "B4 runs of the training seeds (same selected data, different training seed); selection logs must match",
+      "analysis_set_U": "trajectories not trained in B4 up to the later checkpoint of the pair",
+      "epsilon_rule": "95th percentile of |L_proxy(tau|S_1^a) - L_proxy(tau|S_1^b)| over U and all seed pairs; also report 2.77*s_w and a bootstrap CI",
+      "epsilon_use": "report the share of U with |change| > epsilon against the 5% expected from noise; per-trajectory profiles are descriptive"
+    },
+    "h_test": {
+      "pairs": [
+        "S_0->S_1",
+        "S_1->S_2"
+      ],
+      "runs": "B4, for both rho_change and rho_noise",
+      "delta": "Delta^a = rho_noise^a - rho_change^a; rho_change^a = Spearman(L|S_t^a, L|S_{t+1}^a); rho_noise^a = mean Spearman(L|S_{t+1}^a, L|S_{t+1}^b) over b != a; on U",
+      "inference": "cluster bootstrap over problem_id, same resamples for all seeds",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 363636,
+      "supported_if": "for every training seed: one-sided 95% lower bound of Delta^a > 0 and Delta^a >= min_delta",
+      "min_delta": 0.05,
+      "min_delta_source": "group convention, no literature source",
+      "decision_scale": "L_proxy; rank of ell is reported with CI. If L_proxy meets the rule and ell does not, report only that the ranking by distance to the median changed.",
+      "descriptive_only": [
+        "Wilcoxon signed-rank with effect size"
+      ],
+      "sensitivity": [
+        "sqrt(rho_noise) benchmark at S_0->S_1",
+        "Steiger test",
+        "U without problems having a trained trajectory",
+        "B2 runs"
+      ]
+    },
+    "selection_noise_check": "Jaccard of the round-2 B5 selections between seeds, against the chance level of about 0.02"
+  }
+}
+
+========== 10. LEARNING CURVE OUTPUT FILES ==========
+
+FullName                                                                                                                                                         Length LastWriteTime        
+--------                                                                                                                                                         ------ -------------        
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\artifact_manifest.json           9536 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\capability_graph.json             712 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\capability_learning_curves.csv   3081 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\capability_learning_curves.png 343442 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\graph_evidence_ledger.csv       14714 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\input_schema_audit.txt          79022 11/15/2026 1:16:36 PM
+C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\student_learning_dynamics.md     5646 11/15/2026 1:16:36 PM
+
+
+
+
+========== 11. G5.7 CAPABILITY CSV HEADERS AND ROWS ==========
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S1\capability_metrics.csv ---
+run_id,method,seed,checkpoint,checkpoint_id,capability,n_support,n_correct,n_incorrect,mastery,deficit,ci95_low,ci95_high,ci_method,strict_metric,gold_policy
+B4_seed13_S1,B4,13,S1,S1,addition,30,18,12,0.6,0.4,0.42320360253322475,0.7540937188319815,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,subtraction,51,40,11,0.7843137254901961,0.21568627450980393,0.6537364041400255,0.8750606159176724,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,multiplication,73,59,14,0.8082191780821918,0.1917808219178082,0.7034449738686679,0.8821763910901279,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,division,47,38,9,0.8085106382978723,0.19148936170212771,0.6745599542033822,0.8958406730145774,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,percentage,29,21,8,0.7241379310344828,0.27586206896551724,0.5428286758313405,0.8530124489791204,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,fraction,31,23,8,0.7419354838709677,0.25806451612903225,0.5675386419056621,0.8629829409360625,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S1,B4,13,S1,S1,ratio,30,26,4,0.8666666666666667,0.1333333333333333,0.703186733179637,0.9469034451594526,Wilson_95_percent,status_equals_valid,approved_85_primary
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S2\capability_metrics.csv ---
+run_id,method,seed,checkpoint,checkpoint_id,capability,n_support,n_correct,n_incorrect,mastery,deficit,ci95_low,ci95_high,ci_method,strict_metric,gold_policy
+B4_seed13_S2,B4,13,S2,S2,addition,30,21,9,0.7,0.30000000000000004,0.5212421254128504,0.8333525173175619,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,subtraction,51,39,12,0.7647058823529411,0.23529411764705888,0.632377748398347,0.8599505116553716,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,multiplication,73,60,13,0.821917808219178,0.17808219178082196,0.7187827114087395,0.8928662697704473,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,division,47,37,10,0.7872340425531915,0.21276595744680848,0.6509597329080159,0.88010292001905,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,percentage,29,21,8,0.7241379310344828,0.27586206896551724,0.5428286758313405,0.8530124489791204,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,fraction,31,26,5,0.8387096774193549,0.16129032258064513,0.6736564604120674,0.9290737555663471,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S2,B4,13,S2,S2,ratio,30,25,5,0.8333333333333334,0.16666666666666663,0.6643564949358398,0.9266345762815145,Wilson_95_percent,status_equals_valid,approved_85_primary
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability_g4_validation\B4_seed13_S3\capability_metrics.csv ---
+run_id,method,seed,checkpoint,checkpoint_id,capability,n_support,n_correct,n_incorrect,mastery,deficit,ci95_low,ci95_high,ci_method,strict_metric,gold_policy
+B4_seed13_S3,B4,13,S3,S3,addition,30,19,11,0.6333333333333333,0.3666666666666667,0.4551356365479487,0.7812607919389929,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,subtraction,51,36,15,0.7058823529411765,0.2941176470588235,0.5700092442431359,0.8129127357986454,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,multiplication,73,55,18,0.7534246575342466,0.2465753424657534,0.6435555465577502,0.837955353519482,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,division,47,35,12,0.7446808510638298,0.25531914893617025,0.6049182446958253,0.8474684596494529,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,percentage,29,21,8,0.7241379310344828,0.27586206896551724,0.5428286758313405,0.8530124489791204,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,fraction,31,21,10,0.6774193548387096,0.32258064516129037,0.5014100930808565,0.8143057343364082,Wilson_95_percent,status_equals_valid,approved_85_primary
+B4_seed13_S3,B4,13,S3,S3,ratio,30,23,7,0.7666666666666667,0.23333333333333328,0.5907167384187784,0.8820761185551049,Wilson_95_percent,status_equals_valid,approved_85_primary
+
+========== 12. GRAPH JSON CANDIDATES ==========
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\graph\examples\student_ckpt_000_graph.json ---
+{
+  "graph_id": "example_student_ckpt_000",
+  "student_checkpoint": "ckpt_000",
+  "nodes": [
+    {
+      "node_id": "addition",
+      "capability": "addition",
+      "mastery": 0.80,
+      "deficit": 0.20
+    },
+    {
+      "node_id": "subtraction",
+      "capability": "subtraction",
+      "mastery": 0.65,
+      "deficit": 0.35
+    },
+    {
+      "node_id": "multiplication",
+      "capability": "multiplication",
+      "mastery": 0.42,
+      "deficit": 0.58
+    },
+    {
+      "node_id": "division",
+      "capability": "division",
+      "mastery": 0.35,
+      "deficit": 0.65
+    },
+    {
+      "node_id": "fraction",
+      "capability": "fraction",
+      "mastery": 0.25,
+      "deficit": 0.75
+    },
+    {
+      "node_id": "percentage",
+      "capability": "percentage",
+      "mastery": 0.30,
+      "deficit": 0.70
+    }
+  ],
+  "edges": [
+    {
+      "source": "multiplication",
+      "target": "fraction",
+      "type": "transfer",
+      "score": 0.31
+    },
+    {
+      "source": "fraction",
+      "target": "division",
+      "type": "prerequisite",
+      "score": null
+    },
+    {
+      "source": "fraction",
+      "target": "percentage",
+      "type": "transfer",
+      "score": 0.24
+    }
+  ]
+}
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\learning_curve\2026-11-18\capability_graph.json ---
+{
+  "graph_id": "proposal1_capability_graph",
+  "student_checkpoint": "B4_seed13_ckpt003",
+  "status": "empirical",
+  "nodes": [
+    {
+      "node_id": "addition",
+      "capability": "addition"
+    },
+    {
+      "node_id": "subtraction",
+      "capability": "subtraction"
+    },
+    {
+      "node_id": "multiplication",
+      "capability": "multiplication"
+    },
+    {
+      "node_id": "division",
+      "capability": "division"
+    },
+    {
+      "node_id": "percentage",
+      "capability": "percentage"
+    },
+    {
+      "node_id": "fraction",
+      "capability": "fraction"
+    },
+    {
+      "node_id": "ratio",
+      "capability": "ratio"
+    }
+  ],
+  "edges": []
+}
+
+--- C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\legacy_p1_seed13_b4\capability_graph.json ---
+{
+  "graph_id": "proposal1_capability_graph",
+  "student_checkpoint": "B4_seed13_ckpt003",
+  "status": "empirical",
+  "nodes": [
+    {
+      "node_id": "addition",
+      "capability": "addition"
+    },
+    {
+      "node_id": "subtraction",
+      "capability": "subtraction"
+    },
+    {
+      "node_id": "multiplication",
+      "capability": "multiplication"
+    },
+    {
+      "node_id": "division",
+      "capability": "division"
+    },
+    {
+      "node_id": "percentage",
+      "capability": "percentage"
+    },
+    {
+      "node_id": "fraction",
+      "capability": "fraction"
+    },
+    {
+      "node_id": "ratio",
+      "capability": "ratio"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,33 @@
+{
+  "total": 30,
+  "capability_counts": {
+    "addition": 16,
+    "subtraction": 15,
+    "multiplication": 19,
+    "division": 15,
+    "percentage": 5,
+    "fraction": 8,
+    "ratio": 0
+  },
+  "capability_coverage": {
+    "addition": true,
+    "subtraction": true,
+    "multiplication": true,
+    "division": true,
+    "percentage": true,
+    "fraction": true,
+    "ratio": false
+  },
+  "multi_capability": 29,
+  "difficulty_counts": {
+    "easy": 9,
+    "medium": 18,
+    "hard": 3
+  },
+  "ambiguous": 3,
+  "ambiguous_problem_ids": [
+    "gsm8k_train_00014",
+    "gsm8k_train_00023",
+    "gsm8k_train_00029"
+  ]
+}

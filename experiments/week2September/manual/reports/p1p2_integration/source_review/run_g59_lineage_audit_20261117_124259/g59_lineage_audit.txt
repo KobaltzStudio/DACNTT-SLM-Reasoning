@@ -1,0 +1,2886 @@
+﻿G5.9 CHECKPOINT / PREDICTION LINEAGE AUDIT
+Generated: 2026-11-17T12:42:59.4951950+09:00
+Repository: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+Main ZIP SHA256: A4C657E7D643D4BE6839EAF6614485AB3DD0AB26C825765D993C783E9371BE9F
+
+====================================================================================================
+1. DERIVED ADAPTER MANIFEST
+====================================================================================================
+MANIFEST_PATH: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\adapter_manifest.json
+MANIFEST_SHA256: 741BCD7A5ED19D7A3B685355910FFC59D4FF155347466A65691A02E1E794448E
+{
+    "value":  [
+                  {
+                      "checkpoint":  "student_ckpt_001",
+                      "source":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_001_dev.jsonl",
+                      "source_sha256":  "9bb9aeb1c356b7563fc3d8b1b45fe9553bc7c2ca7907e7672833fae448f9a26d",
+                      "source_sha256_after":  "9bb9aeb1c356b7563fc3d8b1b45fe9553bc7c2ca7907e7672833fae448f9a26d",
+                      "output":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_001_dev_status.jsonl",
+                      "output_sha256":  "f9262326c8207a45665b67c521a1f74a1eabe4f4dfed2e7f49a9d6d17760a4d4",
+                      "records":  500,
+                      "unique_problem_ids":  500,
+                      "status_counts":  {
+                                            "valid":  391,
+                                            "invalid_answer":  106,
+                                            "invalid_format":  3
+                                        },
+                      "source_unchanged":  true,
+                      "status_mapping_valid":  true
+                  },
+                  {
+                      "checkpoint":  "student_ckpt_002",
+                      "source":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_002_dev.jsonl",
+                      "source_sha256":  "bd1c5a1a952056beea92d982b0212eab484a9bf6ad034cbc76803d6214d7c50f",
+                      "source_sha256_after":  "bd1c5a1a952056beea92d982b0212eab484a9bf6ad034cbc76803d6214d7c50f",
+                      "output":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_002_dev_status.jsonl",
+                      "output_sha256":  "1c5a7258c83746a7af63eadb26617af6e5c3b1eaff03bcc3c2c9a9ca7b7f5b00",
+                      "records":  500,
+                      "unique_problem_ids":  500,
+                      "status_counts":  {
+                                            "valid":  407,
+                                            "invalid_answer":  88,
+                                            "invalid_format":  5
+                                        },
+                      "source_unchanged":  true,
+                      "status_mapping_valid":  true
+                  },
+                  {
+                      "checkpoint":  "student_ckpt_003",
+                      "source":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_003_dev.jsonl",
+                      "source_sha256":  "b27ecc6553c963cb8b173794b82f703aee4ebaf99461b0b051d45c06a55bf7cb",
+                      "source_sha256_after":  "b27ecc6553c963cb8b173794b82f703aee4ebaf99461b0b051d45c06a55bf7cb",
+                      "output":  "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_003_dev_status.jsonl",
+                      "output_sha256":  "3385eb54b0d6fb991728c18ac8fb53043e0ee2c5741d8f0649c6fd68997950d0",
+                      "records":  500,
+                      "unique_problem_ids":  500,
+                      "status_counts":  {
+                                            "valid":  409,
+                                            "invalid_answer":  86,
+                                            "invalid_format":  5
+                                        },
+                      "source_unchanged":  true,
+                      "status_mapping_valid":  true
+                  }
+              ],
+    "Count":  3
+}
+
+====================================================================================================
+2. DERIVED PREDICTION VS MAIN.ZIP
+====================================================================================================
+
+COMPARISON: B4 seed13 S1 / checkpoint 001
+DERIVED_PATH: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_001_dev_status.jsonl
+ARCHIVE_ENTRY: B4_seed13/S1/eval_dev.jsonl
+DERIVED_SHA256: f9262326c8207a45665b67c521a1f74a1eabe4f4dfed2e7f49a9d6d17760a4d4
+ARCHIVE_SHA256: 0788f385d387178383184450ab9b0897f1ed38a861e06ad088a1135da70b0351
+BYTE_IDENTICAL: False
+DERIVED_ROWS: 500
+DERIVED_UNIQUE: 500
+DERIVED_MALFORMED: 0
+DERIVED_DUPLICATES: 0
+ARCHIVE_ROWS: 500
+ARCHIVE_UNIQUE: 500
+ARCHIVE_MALFORMED: 0
+ARCHIVE_DUPLICATES: 0
+MISSING_IN_ARCHIVE: 0
+MISSING_IN_DERIVED: 0
+FULL_RECORD_DIFFERENCES: 500
+STATUS_DIFFERENCES: 75
+
+COMPARISON: B4 seed13 S2 / checkpoint 002
+DERIVED_PATH: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_002_dev_status.jsonl
+ARCHIVE_ENTRY: B4_seed13/S2/eval_dev.jsonl
+DERIVED_SHA256: 1c5a7258c83746a7af63eadb26617af6e5c3b1eaff03bcc3c2c9a9ca7b7f5b00
+ARCHIVE_SHA256: 8d415a351b7b0c2076fd9dbf18b1d791449b04a4276d2447ddfa9cf18cf9fb84
+BYTE_IDENTICAL: False
+DERIVED_ROWS: 500
+DERIVED_UNIQUE: 500
+DERIVED_MALFORMED: 0
+DERIVED_DUPLICATES: 0
+ARCHIVE_ROWS: 500
+ARCHIVE_UNIQUE: 500
+ARCHIVE_MALFORMED: 0
+ARCHIVE_DUPLICATES: 0
+MISSING_IN_ARCHIVE: 0
+MISSING_IN_DERIVED: 0
+FULL_RECORD_DIFFERENCES: 500
+STATUS_DIFFERENCES: 69
+
+COMPARISON: B4 seed13 S3 / checkpoint 003
+DERIVED_PATH: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\derived_predictions\B4_seed13\eval_student_ckpt_003_dev_status.jsonl
+ARCHIVE_ENTRY: B4_seed13/S3/eval_dev.jsonl
+DERIVED_SHA256: 3385eb54b0d6fb991728c18ac8fb53043e0ee2c5741d8f0649c6fd68997950d0
+ARCHIVE_SHA256: 5449e166c41741871955b937835223b487787bb03f4cde3b688126045ddd6654
+BYTE_IDENTICAL: False
+DERIVED_ROWS: 500
+DERIVED_UNIQUE: 500
+DERIVED_MALFORMED: 0
+DERIVED_DUPLICATES: 0
+ARCHIVE_ROWS: 500
+ARCHIVE_UNIQUE: 500
+ARCHIVE_MALFORMED: 0
+ARCHIVE_DUPLICATES: 0
+MISSING_IN_ARCHIVE: 0
+MISSING_IN_DERIVED: 0
+FULL_RECORD_DIFFERENCES: 500
+STATUS_DIFFERENCES: 75
+
+====================================================================================================
+3. B4 SEED13 ARCHIVE METADATA AND MARKERS
+====================================================================================================
+B4_METADATA_ENTRY_COUNT: 41
+
+ENTRY: B4_seed13/.done/
+SIZE: 0
+
+ENTRY: B4_seed13/.done/eval_dev_B4_seed13_S1.json
+SIZE: 127
+CONTENT_BEGIN
+{
+  "reused_from": "/workspace/manual/runs/main/B5_seed13/S1",
+  "reason": "identical B_0 and seed (task7_decisions.md)"
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/eval_dev_B4_seed13_S2.json
+SIZE: 300
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B4_seed13_S2 --split dev --out /workspace/manual/runs/main/B4_seed13/S2/eval_dev.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "elapsed_seconds": 716.8
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/eval_dev_B4_seed13_S3.json
+SIZE: 300
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B4_seed13_S3 --split dev --out /workspace/manual/runs/main/B4_seed13/S3/eval_dev.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B4_seed13/S3/adapter",
+  "elapsed_seconds": 620.7
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/eval_test_B4_seed13_S1.json
+SIZE: 127
+CONTENT_BEGIN
+{
+  "reused_from": "/workspace/manual/runs/main/B5_seed13/S1",
+  "reason": "identical B_0 and seed (task7_decisions.md)"
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/eval_test_B4_seed13_S2.json
+SIZE: 302
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B4_seed13_S2 --split test --out /workspace/manual/runs/main/B4_seed13/S2/eval_test.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "elapsed_seconds": 675.8
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/eval_test_B4_seed13_S3.json
+SIZE: 302
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag B4_seed13_S3 --split test --out /workspace/manual/runs/main/B4_seed13/S3/eval_test.jsonl --backend vllm --dtype auto --adapter /workspace/manual/runs/main/B4_seed13/S3/adapter",
+  "elapsed_seconds": 669.7
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/nll_B4_seed13_S1.json
+SIZE: 127
+CONTENT_BEGIN
+{
+  "reused_from": "/workspace/manual/runs/main/B5_seed13/S1",
+  "reason": "identical B_0 and seed (task7_decisions.md)"
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/nll_B4_seed13_S2.json
+SIZE: 347
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/compute_nll.py --tag B4_seed13_S2 --out /workspace/manual/runs/main/B4_seed13/S2/nll.jsonl --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --batch-size 16 --dtype auto --adapter /workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "elapsed_seconds": 488.5
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/select_0.json
+SIZE: 373
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/select_round.py --method B4 --seed 13 --round 0 --run-dir /workspace/manual/runs/main/B4_seed13 --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/manual/trajectory/pool/pool_v1_tokens.jsonl --nll /workspace/manual/runs/main/S0/nll.jsonl",
+  "elapsed_seconds": 1.1
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/select_1.json
+SIZE: 373
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/select_round.py --method B4 --seed 13 --round 1 --run-dir /workspace/manual/runs/main/B4_seed13 --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/manual/trajectory/pool/pool_v1_tokens.jsonl --nll /workspace/manual/runs/main/S0/nll.jsonl",
+  "elapsed_seconds": 0.9
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/select_2.json
+SIZE: 373
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/select_round.py --method B4 --seed 13 --round 2 --run-dir /workspace/manual/runs/main/B4_seed13 --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --tokens /workspace/manual/trajectory/pool/pool_v1_tokens.jsonl --nll /workspace/manual/runs/main/S0/nll.jsonl",
+  "elapsed_seconds": 1.1
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/train_0.json
+SIZE: 127
+CONTENT_BEGIN
+{
+  "reused_from": "/workspace/manual/runs/main/B5_seed13/S1",
+  "reason": "identical B_0 and seed (task7_decisions.md)"
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/train_1.json
+SIZE: 360
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/train_round.py --seed 13 --train-set /workspace/manual/runs/main/B4_seed13/round_001/train_set.json --adapter-dir /workspace/manual/runs/main/B4_seed13/S2/adapter --micro-batch 8 --dtype auto --init-adapter /workspace/manual/runs/main/B4_seed13/S1/adapter",
+  "elapsed_seconds": 542.1
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/train_2.json
+SIZE: 360
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/train_round.py --seed 13 --train-set /workspace/manual/runs/main/B4_seed13/round_002/train_set.json --adapter-dir /workspace/manual/runs/main/B4_seed13/S3/adapter --micro-batch 8 --dtype auto --init-adapter /workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "elapsed_seconds": 295.8
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/validate_log_0.json
+SIZE: 368
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python -c 'import subprocess,sys;r=subprocess.run([sys.executable,sys.argv[1],sys.argv[2]],capture_output=True,text=True);print(r.stdout.splitlines()[-1]);sys.exit(r.returncode)' /workspace/manual/scripts/validate_selection_log.py /workspace/manual/runs/main/B4_seed13/round_000/selection_log.jsonl",
+  "elapsed_seconds": 5.9
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/validate_log_1.json
+SIZE: 368
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python -c 'import subprocess,sys;r=subprocess.run([sys.executable,sys.argv[1],sys.argv[2]],capture_output=True,text=True);print(r.stdout.splitlines()[-1]);sys.exit(r.returncode)' /workspace/manual/scripts/validate_selection_log.py /workspace/manual/runs/main/B4_seed13/round_001/selection_log.jsonl",
+  "elapsed_seconds": 3.5
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/.done/validate_log_2.json
+SIZE: 368
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python -c 'import subprocess,sys;r=subprocess.run([sys.executable,sys.argv[1],sys.argv[2]],capture_output=True,text=True);print(r.stdout.splitlines()[-1]);sys.exit(r.returncode)' /workspace/manual/scripts/validate_selection_log.py /workspace/manual/runs/main/B4_seed13/round_002/selection_log.jsonl",
+  "elapsed_seconds": 3.5
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/checkpoint_log.jsonl
+SIZE: 18339
+CONTENT_BEGIN
+{"record_type": "checkpoint", "checkpoint": "student_ckpt_000", "parent_checkpoint": null, "round": 0, "method": "B4", "training_seed": 13, "data_order_seed": 13, "cumulative_training_tokens": 0, "cumulative_optimization_steps": 0, "selected_trajectory_ids": [], "beta_est_forward_passes": 4353, "config_hash": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee"}
+{"record_type": "checkpoint", "checkpoint": "student_ckpt_001", "parent_checkpoint": "student_ckpt_000", "round": 1, "method": "B4", "training_seed": 13, "data_order_seed": 13, "cumulative_training_tokens": 45372, "cumulative_optimization_steps": 24, "selected_trajectory_ids": ["gsm8k_train_03573_traj_002", "gsm8k_train_00222_traj_001", "gsm8k_train_06728_traj_004", "gsm8k_train_04939_traj_003", "gsm8k_train_00096_traj_001", "gsm8k_train_06926_traj_001", "gsm8k_train_05150_traj_004", "gsm8k_train_02828_traj_005", "gsm8k_train_06849_traj_005", "gsm8k_train_02083_traj_002", "gsm8k_train_05100_traj_004", "gsm8k_train_03855_traj_003", "gsm8k_train_03023_traj_001", "gsm8k_train_00496_traj_003", "gsm8k_train_04315_traj_001", "gsm8k_train_01644_traj_002", "gsm8k_train_05767_traj_005", "gsm8k_train_02160_traj_005", "gsm8k_train_06677_traj_001", "gsm8k_train_00628_traj_005", "gsm8k_train_01599_traj_004", "gsm8k_train_01110_traj_002", "gsm8k_train_05420_traj_004", "gsm8k_train_00050_traj_002", "gsm8k_train_05809_traj_004", "gsm8k_train_04771_traj_002", "gsm8k_train_02257_traj_004", "gsm8k_train_02654_traj_003", "gsm8k_train_04866_traj_001", "gsm8k_train_07115_traj_005", "gsm8k_train_03130_traj_004", "gsm8k_train_02847_traj_002", "gsm8k_train_00618_traj_001", "gsm8k_train_04776_traj_003", "gsm8k_train_00091_traj_001", "gsm8k_train_01712_traj_005", "gsm8k_train_07443_traj_005", "gsm8k_train_04813_traj_002", "gsm8k_train_06665_traj_004", "gsm8k_train_06013_traj_002", "gsm8k_train_00072_traj_002", "gsm8k_train_01043_traj_005", "gsm8k_train_01049_traj_004", "gsm8k_train_04897_traj_003", "gsm8k_train_06695_traj_005", "gsm8k_train_06974_traj_005", "gsm8k_train_01756_traj_004", "gsm8k_train_03047_traj_005", "gsm8k_train_00638_traj_004", "gsm8k_train_04796_traj_002", "gsm8k_train_02331_traj_005", "gsm8k_train_06890_traj_002", "gsm8k_train_04559_traj_001", "gsm8k_train_04220_traj_002", "gsm8k_train_05165_traj_005", "gsm8k_train_00027_traj_001", "gsm8k_train_03959_traj_005", "gsm8k_train_03858_traj_003", "gsm8k_train_03538_traj_004", "gsm8k_train_07285_traj_002", "gsm8k_train_00996_traj_001", "gsm8k_train_02249_traj_005", "gsm8k_train_04247_traj_005", "gsm8k_train_06320_traj_005", "gsm8k_train_01118_traj_001", "gsm8k_train_06994_traj_003", "gsm8k_train_00049_traj_002", "gsm8k_train_00128_traj_003", "gsm8k_train_03043_traj_003", "gsm8k_train_00973_traj_003", "gsm8k_train_06608_traj_001", "gsm8k_train_06435_traj_002", "gsm8k_train_02129_traj_002", "gsm8k_train_03322_traj_004", "gsm8k_train_00651_traj_003", "gsm8k_train_04540_traj_004", "gsm8k_train_00716_traj_005", "gsm8k_train_01958_traj_003", "gsm8k_train_04534_traj_004", "gsm8k_train_05184_traj_005", "gsm8k_train_00068_traj_001", "gsm8k_train_06831_traj_002", "gsm8k_train_01116_traj_002", "gsm8k_train_01537_traj_005", "gsm8k_train_00867_traj_001", "gsm8k_train_06735_traj_003", "gsm8k_train_00065_traj_002", "gsm8k_train_03513_traj_003", "gsm8k_train_06036_traj_003", "gsm8k_train_07128_traj_005", "gsm8k_train_03250_traj_003", "gsm8k_train_05602_traj_001", "gsm8k_train_00957_traj_003", "gsm8k_train_02150_traj_001", "gsm8k_train_03154_traj_005", "gsm8k_train_01230_traj_004", "gsm8k_train_03296_traj_005", "gsm8k_train_00025_traj_003", "gsm8k_train_03753_traj_001", "gsm8k_train_04095_traj_002", "gsm8k_train_02275_traj_003", "gsm8k_train_06050_traj_002", "gsm8k_train_03499_traj_001", "gsm8k_train_01634_traj_004", "gsm8k_train_00031_traj_004", "gsm8k_train_04607_traj_001", "gsm8k_train_00418_traj_001", "gsm8k_train_06853_traj_004", "gsm8k_train_06375_traj_002", "gsm8k_train_03459_traj_001", "gsm8k_train_00098_traj_001", "gsm8k_train_00490_traj_005", "gsm8k_train_01438_traj_004", "gsm8k_train_04687_traj_004", "gsm8k_train_06049_traj_003", "gsm8k_train_00039_traj_003", "gsm8k_train_06759_traj_004", "gsm8k_train_05699_traj_003", "gsm8k_train_03474_traj_003", "gsm8k_train_04952_traj_001", "gsm8k_train_00747_traj_002", "gsm8k_train_02258_traj_004", "gsm8k_train_03350_traj_004", "gsm8k_train_02589_traj_005", "gsm8k_train_04635_traj_002", "gsm8k_train_00946_traj_001", "gsm8k_train_07333_traj_003", "gsm8k_train_00020_traj_003", "gsm8k_train_05254_traj_004", "gsm8k_train_05921_traj_001", "gsm8k_train_06086_traj_005", "gsm8k_train_00709_traj_001", "gsm8k_train_04760_traj_001", "gsm8k_train_06137_traj_004", "gsm8k_train_05267_traj_005", "gsm8k_train_01176_traj_002", "gsm8k_train_07015_traj_002", "gsm8k_train_05936_traj_003", "gsm8k_train_03276_traj_004", "gsm8k_train_03924_traj_001", "gsm8k_train_00579_traj_004", "gsm8k_train_04514_traj_005", "gsm8k_train_06334_traj_004", "gsm8k_train_06252_traj_001", "gsm8k_train_00095_traj_004", "gsm8k_train_03218_traj_005", "gsm8k_train_00023_traj_001", "gsm8k_train_03034_traj_002", "gsm8k_train_01962_traj_004", "gsm8k_train_00582_traj_004", "gsm8k_train_04364_traj_001", "gsm8k_train_00642_traj_005", "gsm8k_train_06532_traj_003", "gsm8k_train_00448_traj_004", "gsm8k_train_00576_traj_002", "gsm8k_train_00434_traj_004", "gsm8k_train_05313_traj_005", "gsm8k_train_04005_traj_002", "gsm8k_train_01319_traj_002", "gsm8k_train_00808_traj_004", "gsm8k_train_02861_traj_004", "gsm8k_train_02303_traj_001", "gsm8k_train_00083_traj_001", "gsm8k_train_05758_traj_004", "gsm8k_train_01411_traj_003", "gsm8k_train_00965_traj_002", "gsm8k_train_03721_traj_001", "gsm8k_train_07359_traj_002", "gsm8k_train_04871_traj_002", "gsm8k_train_06905_traj_001", "gsm8k_train_05719_traj_004", "gsm8k_train_00366_traj_002", "gsm8k_train_06605_traj_003", "gsm8k_train_01777_traj_003", "gsm8k_train_01180_traj_002", "gsm8k_train_03109_traj_004", "gsm8k_train_05061_traj_004", "gsm8k_train_03029_traj_002", "gsm8k_train_04845_traj_005", "gsm8k_train_02765_traj_004", "gsm8k_train_06208_traj_001", "gsm8k_train_04123_traj_001", "gsm8k_train_06969_traj_001", "gsm8k_train_00896_traj_004", "gsm8k_train_06156_traj_001"], "beta_est_forward_passes": 4353, "config_hash": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee"}
+{"record_type": "checkpoint", "checkpoint": "student_ckpt_002", "parent_checkpoint": "student_ckpt_001", "round": 2, "method": "B4", "training_seed": 13, "data_order_seed": 13, "cumulative_training_tokens": 90896, "cumulative_optimization_steps": 48, "selected_trajectory_ids": ["gsm8k_train_04771_traj_001", "gsm8k_train_06849_traj_001", "gsm8k_train_05767_traj_003", "gsm8k_train_01756_traj_003", "gsm8k_train_03043_traj_002", "gsm8k_train_00867_traj_002", "gsm8k_train_00651_traj_004", "gsm8k_train_04866_traj_003", "gsm8k_train_05699_traj_002", "gsm8k_train_03047_traj_003", "gsm8k_train_06036_traj_005", "gsm8k_train_02847_traj_005", "gsm8k_train_03250_traj_005", "gsm8k_train_00039_traj_004", "gsm8k_train_02083_traj_004", "gsm8k_train_06695_traj_003", "gsm8k_train_00025_traj_004", "gsm8k_train_04366_traj_004", "gsm8k_train_04607_traj_002", "gsm8k_train_00005_traj_002", "gsm8k_train_00082_traj_004", "gsm8k_train_06167_traj_004", "gsm8k_train_06516_traj_001", "gsm8k_train_02456_traj_003", "gsm8k_train_03096_traj_002", "gsm8k_train_02800_traj_004", "gsm8k_train_04873_traj_001", "gsm8k_train_02153_traj_004", "gsm8k_train_01798_traj_001", "gsm8k_train_00011_traj_002", "gsm8k_train_04910_traj_003", "gsm8k_train_06283_traj_004", "gsm8k_train_02828_traj_002", "gsm8k_train_06823_traj_001", "gsm8k_train_04123_traj_005", "gsm8k_train_04324_traj_003", "gsm8k_train_06137_traj_002", "gsm8k_train_06907_traj_001", "gsm8k_train_00247_traj_005", "gsm8k_train_00946_traj_002", "gsm8k_train_02864_traj_005", "gsm8k_train_03029_traj_001", "gsm8k_train_03663_traj_002", "gsm8k_train_06626_traj_004", "gsm8k_train_06637_traj_005", "gsm8k_train_01722_traj_001", "gsm8k_train_05971_traj_001", "gsm8k_train_07390_traj_004", "gsm8k_train_05717_traj_004", "gsm8k_train_01256_traj_005", "gsm8k_train_04499_traj_003", "gsm8k_train_05693_traj_005", "gsm8k_train_06534_traj_001", "gsm8k_train_00224_traj_002", "gsm8k_train_01958_traj_002", "gsm8k_train_06078_traj_005", "gsm8k_train_00206_traj_005", "gsm8k_train_02591_traj_005", "gsm8k_train_06807_traj_002", "gsm8k_train_00063_traj_001", "gsm8k_train_05244_traj_001", "gsm8k_train_05231_traj_002", "gsm8k_train_00576_traj_001", "gsm8k_train_00940_traj_004", "gsm8k_train_01656_traj_005", "gsm8k_train_04981_traj_005", "gsm8k_train_04278_traj_003", "gsm8k_train_03733_traj_003", "gsm8k_train_00826_traj_004", "gsm8k_train_00747_traj_001", "gsm8k_train_01863_traj_005", "gsm8k_train_02465_traj_004", "gsm8k_train_04936_traj_005", "gsm8k_train_04248_traj_004", "gsm8k_train_02401_traj_003", "gsm8k_train_00022_traj_001", "gsm8k_train_06049_traj_005", "gsm8k_train_02112_traj_002", "gsm8k_train_07018_traj_003", "gsm8k_train_04590_traj_005", "gsm8k_train_00775_traj_004", "gsm8k_train_02607_traj_001", "gsm8k_train_05719_traj_005", "gsm8k_train_07268_traj_001", "gsm8k_train_02721_traj_001", "gsm8k_train_01049_traj_005", "gsm8k_train_00509_traj_004", "gsm8k_train_05772_traj_001", "gsm8k_train_04984_traj_005", "gsm8k_train_04389_traj_001", "gsm8k_train_01724_traj_005", "gsm8k_train_02597_traj_001", "gsm8k_train_03211_traj_001", "gsm8k_train_00094_traj_004", "gsm8k_train_04197_traj_002", "gsm8k_train_05842_traj_002", "gsm8k_train_06665_traj_005", "gsm8k_train_02686_traj_004", "gsm8k_train_01511_traj_002", "gsm8k_train_05735_traj_004", "gsm8k_train_03928_traj_002", "gsm8k_train_00642_traj_004", "gsm8k_train_02154_traj_002", "gsm8k_train_00446_traj_005", "gsm8k_train_01823_traj_005", "gsm8k_train_04683_traj_003", "gsm8k_train_01617_traj_005", "gsm8k_train_05268_traj_004", "gsm8k_train_06016_traj_003", "gsm8k_train_05533_traj_002", "gsm8k_train_06236_traj_003", "gsm8k_train_06026_traj_005", "gsm8k_train_02619_traj_003", "gsm8k_train_05738_traj_005", "gsm8k_train_00292_traj_004", "gsm8k_train_01510_traj_001", "gsm8k_train_06159_traj_004", "gsm8k_train_01344_traj_003", "gsm8k_train_04579_traj_004", "gsm8k_train_02258_traj_001", "gsm8k_train_02074_traj_001", "gsm8k_train_06148_traj_002", "gsm8k_train_04531_traj_005", "gsm8k_train_01105_traj_002", "gsm8k_train_03474_traj_004", "gsm8k_train_05399_traj_005", "gsm8k_train_02150_traj_002", "gsm8k_train_00190_traj_001", "gsm8k_train_01081_traj_004", "gsm8k_train_00141_traj_004", "gsm8k_train_02372_traj_003", "gsm8k_train_00257_traj_003", "gsm8k_train_00092_traj_001", "gsm8k_train_05161_traj_004", "gsm8k_train_01507_traj_001", "gsm8k_train_00347_traj_004", "gsm8k_train_04814_traj_001", "gsm8k_train_02704_traj_004", "gsm8k_train_00245_traj_003", "gsm8k_train_00083_traj_005", "gsm8k_train_05599_traj_003", "gsm8k_train_06084_traj_001", "gsm8k_train_03642_traj_003", "gsm8k_train_07352_traj_001", "gsm8k_train_01610_traj_005", "gsm8k_train_02601_traj_002", "gsm8k_train_05475_traj_003", "gsm8k_train_07333_traj_005", "gsm8k_train_04374_traj_002", "gsm8k_train_01269_traj_001", "gsm8k_train_02309_traj_005", "gsm8k_train_03045_traj_004", "gsm8k_train_03318_traj_004", "gsm8k_train_00582_traj_001", "gsm8k_train_03976_traj_001", "gsm8k_train_00069_traj_001", "gsm8k_train_06688_traj_002", "gsm8k_train_02340_traj_003", "gsm8k_train_01043_traj_003", "gsm8k_train_00521_traj_002", "gsm8k_train_04211_traj_001", "gsm8k_train_03052_traj_005", "gsm8k_train_02740_traj_002", "gsm8k_train_00026_traj_002", "gsm8k_train_05182_traj_003", "gsm8k_train_07260_traj_001", "gsm8k_train_02269_traj_001", "gsm8k_train_05921_traj_004", "gsm8k_train_03700_traj_002", "gsm8k_train_05276_traj_003", "gsm8k_train_03054_traj_005", "gsm8k_train_07468_traj_004", "gsm8k_train_06939_traj_004", "gsm8k_train_02462_traj_003", "gsm8k_train_03858_traj_002", "gsm8k_train_06367_traj_002", "gsm8k_train_01128_traj_003", "gsm8k_train_05165_traj_002", "gsm8k_train_01935_traj_005", "gsm8k_train_05343_traj_005", "gsm8k_train_00007_traj_004", "gsm8k_train_06845_traj_001", "gsm8k_train_00108_traj_005", "gsm8k_train_00733_traj_005", "gsm8k_train_05710_traj_001", "gsm8k_train_02473_traj_003", "gsm8k_train_00411_traj_005", "gsm8k_train_03499_traj_002"], "beta_est_forward_passes": 4353, "config_hash": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee"}
+{"record_type": "checkpoint", "checkpoint": "student_ckpt_003", "parent_checkpoint": "student_ckpt_002", "round": 3, "method": "B4", "training_seed": 13, "data_order_seed": 13, "cumulative_training_tokens": 136394, "cumulative_optimization_steps": 72, "selected_trajectory_ids": ["gsm8k_train_04771_traj_005", "gsm8k_train_06849_traj_003", "gsm8k_train_04366_traj_005", "gsm8k_train_02456_traj_002", "gsm8k_train_06167_traj_001", "gsm8k_train_03250_traj_002", "gsm8k_train_01656_traj_004", "gsm8k_train_05693_traj_003", "gsm8k_train_00509_traj_002", "gsm8k_train_00011_traj_003", "gsm8k_train_00446_traj_001", "gsm8k_train_04499_traj_001", "gsm8k_train_02740_traj_004", "gsm8k_train_02258_traj_002", "gsm8k_train_04590_traj_003", "gsm8k_train_03642_traj_002", "gsm8k_train_00026_traj_005", "gsm8k_train_03029_traj_004", "gsm8k_train_02379_traj_005", "gsm8k_train_05627_traj_003", "gsm8k_train_05216_traj_001", "gsm8k_train_02191_traj_004", "gsm8k_train_00496_traj_004", "gsm8k_train_04514_traj_003", "gsm8k_train_02087_traj_002", "gsm8k_train_06960_traj_003", "gsm8k_train_05644_traj_003", "gsm8k_train_04175_traj_004", "gsm8k_train_02768_traj_002", "gsm8k_train_02961_traj_005", "gsm8k_train_07464_traj_001", "gsm8k_train_01118_traj_002", "gsm8k_train_00022_traj_005", "gsm8k_train_04103_traj_003", "gsm8k_train_00105_traj_003", "gsm8k_train_01982_traj_003", "gsm8k_train_00689_traj_001", "gsm8k_train_04540_traj_005", "gsm8k_train_04813_traj_003", "gsm8k_train_00234_traj_002", "gsm8k_train_01617_traj_001", "gsm8k_train_04615_traj_003", "gsm8k_train_00058_traj_005", "gsm8k_train_06969_traj_002", "gsm8k_train_00083_traj_002", "gsm8k_train_03788_traj_004", "gsm8k_train_05708_traj_002", "gsm8k_train_01956_traj_004", "gsm8k_train_07291_traj_002", "gsm8k_train_06148_traj_004", "gsm8k_train_03034_traj_004", "gsm8k_train_02497_traj_002", "gsm8k_train_00228_traj_005", "gsm8k_train_01713_traj_004", "gsm8k_train_02008_traj_004", "gsm8k_train_00957_traj_004", "gsm8k_train_00084_traj_004", "gsm8k_train_03096_traj_005", "gsm8k_train_04972_traj_004", "gsm8k_train_06128_traj_003", "gsm8k_train_00064_traj_002", "gsm8k_train_00813_traj_002", "gsm8k_train_03105_traj_002", "gsm8k_train_05213_traj_005", "gsm8k_train_03154_traj_004", "gsm8k_train_00086_traj_004", "gsm8k_train_05101_traj_002", "gsm8k_train_06939_traj_005", "gsm8k_train_01110_traj_001", "gsm8k_train_02000_traj_002", "gsm8k_train_06532_traj_004", "gsm8k_train_05782_traj_003", "gsm8k_train_05105_traj_003", "gsm8k_train_06118_traj_005", "gsm8k_train_05100_traj_001", "gsm8k_train_00406_traj_002", "gsm8k_train_04760_traj_005", "gsm8k_train_04871_traj_004", "gsm8k_train_06375_traj_004", "gsm8k_train_04278_traj_005", "gsm8k_train_05343_traj_003", "gsm8k_train_03516_traj_001", "gsm8k_train_00043_traj_002", "gsm8k_train_00656_traj_002", "gsm8k_train_06728_traj_002", "gsm8k_train_06534_traj_002", "gsm8k_train_00053_traj_005", "gsm8k_train_02372_traj_002", "gsm8k_train_03733_traj_002", "gsm8k_train_03499_traj_005", "gsm8k_train_01288_traj_005", "gsm8k_train_01143_traj_001", "gsm8k_train_00521_traj_001", "gsm8k_train_00778_traj_005", "gsm8k_train_03955_traj_003", "gsm8k_train_00222_traj_004", "gsm8k_train_03538_traj_001", "gsm8k_train_03694_traj_004", "gsm8k_train_00054_traj_001", "gsm8k_train_00307_traj_001", "gsm8k_train_00003_traj_001", "gsm8k_train_06137_traj_003", "gsm8k_train_05182_traj_005", "gsm8k_train_04364_traj_004", "gsm8k_train_00004_traj_004", "gsm8k_train_07118_traj_001", "gsm8k_train_03841_traj_001", "gsm8k_train_05467_traj_002", "gsm8k_train_03748_traj_003", "gsm8k_train_03573_traj_003", "gsm8k_train_02959_traj_004", "gsm8k_train_01961_traj_002", "gsm8k_train_01581_traj_005", "gsm8k_train_03211_traj_003", "gsm8k_train_04371_traj_002", "gsm8k_train_00826_traj_003", "gsm8k_train_00532_traj_005", "gsm8k_train_04166_traj_002", "gsm8k_train_00598_traj_002", "gsm8k_train_00021_traj_003", "gsm8k_train_00096_traj_004", "gsm8k_train_04410_traj_002", "gsm8k_train_01628_traj_005", "gsm8k_train_06845_traj_002", "gsm8k_train_04928_traj_003", "gsm8k_train_05886_traj_001", "gsm8k_train_01177_traj_003", "gsm8k_train_03638_traj_002", "gsm8k_train_01523_traj_002", "gsm8k_train_01081_traj_001", "gsm8k_train_06209_traj_005", "gsm8k_train_05061_traj_001", "gsm8k_train_07285_traj_005", "gsm8k_train_00771_traj_003", "gsm8k_train_04220_traj_003", "gsm8k_train_06946_traj_003", "gsm8k_train_00922_traj_001", "gsm8k_train_02074_traj_002", "gsm8k_train_05964_traj_003", "gsm8k_train_04122_traj_002", "gsm8k_train_00716_traj_001", "gsm8k_train_05414_traj_003", "gsm8k_train_05045_traj_001", "gsm8k_train_04531_traj_001", "gsm8k_train_05809_traj_001", "gsm8k_train_02401_traj_001", "gsm8k_train_02295_traj_005", "gsm8k_train_00027_traj_005", "gsm8k_train_02681_traj_002", "gsm8k_train_00464_traj_001", "gsm8k_train_05738_traj_002", "gsm8k_train_05398_traj_005", "gsm8k_train_05854_traj_004", "gsm8k_train_00032_traj_005", "gsm8k_train_06365_traj_004", "gsm8k_train_03979_traj_004", "gsm8k_train_06721_traj_004", "gsm8k_train_05800_traj_001", "gsm8k_train_03855_traj_005", "gsm8k_train_06974_traj_002", "gsm8k_train_00108_traj_002", "gsm8k_train_05134_traj_004", "gsm8k_train_02188_traj_002", "gsm8k_train_00094_traj_001", "gsm8k_train_01777_traj_001", "gsm8k_train_01703_traj_004", "gsm8k_train_04010_traj_005", "gsm8k_train_06288_traj_001", "gsm8k_train_04683_traj_005", "gsm8k_train_01539_traj_004", "gsm8k_train_00247_traj_004", "gsm8k_train_03842_traj_005", "gsm8k_train_01844_traj_005", "gsm8k_train_02055_traj_004", "gsm8k_train_05982_traj_004", "gsm8k_train_04123_traj_004", "gsm8k_train_00069_traj_005", "gsm8k_train_01411_traj_005", "gsm8k_train_02652_traj_002", "gsm8k_train_07199_traj_005", "gsm8k_train_00047_traj_003", "gsm8k_train_02052_traj_005", "gsm8k_train_04100_traj_004", "gsm8k_train_03251_traj_004", "gsm8k_train_06165_traj_005", "gsm8k_train_03546_traj_005"], "beta_est_forward_passes": 0, "config_hash": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee"}
+
+CONTENT_END
+
+ENTRY: B4_seed13/round_000/train_set.json
+SIZE: 7216
+CONTENT_BEGIN
+{
+  "pilot": false,
+  "method": "B4",
+  "round": 0,
+  "training_seed": 13,
+  "source_checkpoint": "student_ckpt_000",
+  "pool": "trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "nll_file": "runs/main/S0/nll.jsonl",
+  "nll_sha256": "716af6ae476d8120642d01520a2c0684af4bfecf9f82936bef096f7621799044",
+  "ell_star": 0.2247007379484414,
+  "sigma": 0.07815681044815963,
+  "n_reference": 4353,
+  "n_eligible": 4353,
+  "n_trained_before": 0,
+  "beta_round_tokens": 45426,
+  "n_cap": 1,
+  "tokens_used": 45187,
+  "n_selected": 185,
+  "trajectory_ids": [
+    "gsm8k_train_03573_traj_002",
+    "gsm8k_train_00222_traj_001",
+    "gsm8k_train_06728_traj_004",
+    "gsm8k_train_04939_traj_003",
+    "gsm8k_train_00096_traj_001",
+    "gsm8k_train_06926_traj_001",
+    "gsm8k_train_05150_traj_004",
+    "gsm8k_train_02828_traj_005",
+    "gsm8k_train_06849_traj_005",
+    "gsm8k_train_02083_traj_002",
+    "gsm8k_train_05100_traj_004",
+    "gsm8k_train_03855_traj_003",
+    "gsm8k_train_03023_traj_001",
+    "gsm8k_train_00496_traj_003",
+    "gsm8k_train_04315_traj_001",
+    "gsm8k_train_01644_traj_002",
+    "gsm8k_train_05767_traj_005",
+    "gsm8k_train_02160_traj_005",
+    "gsm8k_train_06677_traj_001",
+    "gsm8k_train_00628_traj_005",
+    "gsm8k_train_01599_traj_004",
+    "gsm8k_train_01110_traj_002",
+    "gsm8k_train_05420_traj_004",
+    "gsm8k_train_00050_traj_002",
+    "gsm8k_train_05809_traj_004",
+    "gsm8k_train_04771_traj_002",
+    "gsm8k_train_02257_traj_004",
+    "gsm8k_train_02654_traj_003",
+    "gsm8k_train_04866_traj_001",
+    "gsm8k_train_07115_traj_005",
+    "gsm8k_train_03130_traj_004",
+    "gsm8k_train_02847_traj_002",
+    "gsm8k_train_00618_traj_001",
+    "gsm8k_train_04776_traj_003",
+    "gsm8k_train_00091_traj_001",
+    "gsm8k_train_01712_traj_005",
+    "gsm8k_train_07443_traj_005",
+    "gsm8k_train_04813_traj_002",
+    "gsm8k_train_06665_traj_004",
+    "gsm8k_train_06013_traj_002",
+    "gsm8k_train_00072_traj_002",
+    "gsm8k_train_01043_traj_005",
+    "gsm8k_train_01049_traj_004",
+    "gsm8k_train_04897_traj_003",
+    "gsm8k_train_06695_traj_005",
+    "gsm8k_train_06974_traj_005",
+    "gsm8k_train_01756_traj_004",
+    "gsm8k_train_03047_traj_005",
+    "gsm8k_train_00638_traj_004",
+    "gsm8k_train_04796_traj_002",
+    "gsm8k_train_02331_traj_005",
+    "gsm8k_train_06890_traj_002",
+    "gsm8k_train_04559_traj_001",
+    "gsm8k_train_04220_traj_002",
+    "gsm8k_train_05165_traj_005",
+    "gsm8k_train_00027_traj_001",
+    "gsm8k_train_03959_traj_005",
+    "gsm8k_train_03858_traj_003",
+    "gsm8k_train_03538_traj_004",
+    "gsm8k_train_07285_traj_002",
+    "gsm8k_train_00996_traj_001",
+    "gsm8k_train_02249_traj_005",
+    "gsm8k_train_04247_traj_005",
+    "gsm8k_train_06320_traj_005",
+    "gsm8k_train_01118_traj_001",
+    "gsm8k_train_06994_traj_003",
+    "gsm8k_train_00049_traj_002",
+    "gsm8k_train_00128_traj_003",
+    "gsm8k_train_03043_traj_003",
+    "gsm8k_train_00973_traj_003",
+    "gsm8k_train_06608_traj_001",
+    "gsm8k_train_06435_traj_002",
+    "gsm8k_train_02129_traj_002",
+    "gsm8k_train_03322_traj_004",
+    "gsm8k_train_00651_traj_003",
+    "gsm8k_train_04540_traj_004",
+    "gsm8k_train_00716_traj_005",
+    "gsm8k_train_01958_traj_003",
+    "gsm8k_train_04534_traj_004",
+    "gsm8k_train_05184_traj_005",
+    "gsm8k_train_00068_traj_001",
+    "gsm8k_train_06831_traj_002",
+    "gsm8k_train_01116_traj_002",
+    "gsm8k_train_01537_traj_005",
+    "gsm8k_train_00867_traj_001",
+    "gsm8k_train_06735_traj_003",
+    "gsm8k_train_00065_traj_002",
+    "gsm8k_train_03513_traj_003",
+    "gsm8k_train_06036_traj_003",
+    "gsm8k_train_07128_traj_005",
+    "gsm8k_train_03250_traj_003",
+    "gsm8k_train_05602_traj_001",
+    "gsm8k_train_00957_traj_003",
+    "gsm8k_train_02150_traj_001",
+    "gsm8k_train_03154_traj_005",
+    "gsm8k_train_01230_traj_004",
+    "gsm8k_train_03296_traj_005",
+    "gsm8k_train_00025_traj_003",
+    "gsm8k_train_03753_traj_001",
+    "gsm8k_train_04095_traj_002",
+    "gsm8k_train_02275_traj_003",
+    "gsm8k_train_06050_traj_002",
+    "gsm8k_train_03499_traj_001",
+    "gsm8k_train_01634_traj_004",
+    "gsm8k_train_00031_traj_004",
+    "gsm8k_train_04607_traj_001",
+    "gsm8k_train_00418_traj_001",
+    "gsm8k_train_06853_traj_004",
+    "gsm8k_train_06375_traj_002",
+    "gsm8k_train_03459_traj_001",
+    "gsm8k_train_00098_traj_001",
+    "gsm8k_train_00490_traj_005",
+    "gsm8k_train_01438_traj_004",
+    "gsm8k_train_04687_traj_004",
+    "gsm8k_train_06049_traj_003",
+    "gsm8k_train_00039_traj_003",
+    "gsm8k_train_06759_traj_004",
+    "gsm8k_train_05699_traj_003",
+    "gsm8k_train_03474_traj_003",
+    "gsm8k_train_04952_traj_001",
+    "gsm8k_train_00747_traj_002",
+    "gsm8k_train_02258_traj_004",
+    "gsm8k_train_03350_traj_004",
+    "gsm8k_train_02589_traj_005",
+    "gsm8k_train_04635_traj_002",
+    "gsm8k_train_00946_traj_001",
+    "gsm8k_train_07333_traj_003",
+    "gsm8k_train_00020_traj_003",
+    "gsm8k_train_05254_traj_004",
+    "gsm8k_train_05921_traj_001",
+    "gsm8k_train_06086_traj_005",
+    "gsm8k_train_00709_traj_001",
+    "gsm8k_train_04760_traj_001",
+    "gsm8k_train_06137_traj_004",
+    "gsm8k_train_05267_traj_005",
+    "gsm8k_train_01176_traj_002",
+    "gsm8k_train_07015_traj_002",
+    "gsm8k_train_05936_traj_003",
+    "gsm8k_train_03276_traj_004",
+    "gsm8k_train_03924_traj_001",
+    "gsm8k_train_00579_traj_004",
+    "gsm8k_train_04514_traj_005",
+    "gsm8k_train_06334_traj_004",
+    "gsm8k_train_06252_traj_001",
+    "gsm8k_train_00095_traj_004",
+    "gsm8k_train_03218_traj_005",
+    "gsm8k_train_00023_traj_001",
+    "gsm8k_train_03034_traj_002",
+    "gsm8k_train_01962_traj_004",
+    "gsm8k_train_00582_traj_004",
+    "gsm8k_train_04364_traj_001",
+    "gsm8k_train_00642_traj_005",
+    "gsm8k_train_06532_traj_003",
+    "gsm8k_train_00448_traj_004",
+    "gsm8k_train_00576_traj_002",
+    "gsm8k_train_00434_traj_004",
+    "gsm8k_train_05313_traj_005",
+    "gsm8k_train_04005_traj_002",
+    "gsm8k_train_01319_traj_002",
+    "gsm8k_train_00808_traj_004",
+    "gsm8k_train_02861_traj_004",
+    "gsm8k_train_02303_traj_001",
+    "gsm8k_train_00083_traj_001",
+    "gsm8k_train_05758_traj_004",
+    "gsm8k_train_01411_traj_003",
+    "gsm8k_train_00965_traj_002",
+    "gsm8k_train_03721_traj_001",
+    "gsm8k_train_07359_traj_002",
+    "gsm8k_train_04871_traj_002",
+    "gsm8k_train_06905_traj_001",
+    "gsm8k_train_05719_traj_004",
+    "gsm8k_train_00366_traj_002",
+    "gsm8k_train_06605_traj_003",
+    "gsm8k_train_01777_traj_003",
+    "gsm8k_train_01180_traj_002",
+    "gsm8k_train_03109_traj_004",
+    "gsm8k_train_05061_traj_004",
+    "gsm8k_train_03029_traj_002",
+    "gsm8k_train_04845_traj_005",
+    "gsm8k_train_02765_traj_004",
+    "gsm8k_train_06208_traj_001",
+    "gsm8k_train_04123_traj_001",
+    "gsm8k_train_06969_traj_001",
+    "gsm8k_train_00896_traj_004",
+    "gsm8k_train_06156_traj_001"
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/round_001/train_set.json
+SIZE: 7323
+CONTENT_BEGIN
+{
+  "pilot": false,
+  "method": "B4",
+  "round": 1,
+  "training_seed": 13,
+  "source_checkpoint": "student_ckpt_000",
+  "pool": "trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "nll_file": "runs/main/S0/nll.jsonl",
+  "nll_sha256": "716af6ae476d8120642d01520a2c0684af4bfecf9f82936bef096f7621799044",
+  "ell_star": 0.2247007379484414,
+  "sigma": 0.07815681044815963,
+  "n_reference": 4353,
+  "n_eligible": 4353,
+  "n_trained_before": 185,
+  "beta_round_tokens": 45426,
+  "n_cap": 1,
+  "tokens_used": 45336,
+  "n_selected": 188,
+  "trajectory_ids": [
+    "gsm8k_train_04771_traj_001",
+    "gsm8k_train_06849_traj_001",
+    "gsm8k_train_05767_traj_003",
+    "gsm8k_train_01756_traj_003",
+    "gsm8k_train_03043_traj_002",
+    "gsm8k_train_00867_traj_002",
+    "gsm8k_train_00651_traj_004",
+    "gsm8k_train_04866_traj_003",
+    "gsm8k_train_05699_traj_002",
+    "gsm8k_train_03047_traj_003",
+    "gsm8k_train_06036_traj_005",
+    "gsm8k_train_02847_traj_005",
+    "gsm8k_train_03250_traj_005",
+    "gsm8k_train_00039_traj_004",
+    "gsm8k_train_02083_traj_004",
+    "gsm8k_train_06695_traj_003",
+    "gsm8k_train_00025_traj_004",
+    "gsm8k_train_04366_traj_004",
+    "gsm8k_train_04607_traj_002",
+    "gsm8k_train_00005_traj_002",
+    "gsm8k_train_00082_traj_004",
+    "gsm8k_train_06167_traj_004",
+    "gsm8k_train_06516_traj_001",
+    "gsm8k_train_02456_traj_003",
+    "gsm8k_train_03096_traj_002",
+    "gsm8k_train_02800_traj_004",
+    "gsm8k_train_04873_traj_001",
+    "gsm8k_train_02153_traj_004",
+    "gsm8k_train_01798_traj_001",
+    "gsm8k_train_00011_traj_002",
+    "gsm8k_train_04910_traj_003",
+    "gsm8k_train_06283_traj_004",
+    "gsm8k_train_02828_traj_002",
+    "gsm8k_train_06823_traj_001",
+    "gsm8k_train_04123_traj_005",
+    "gsm8k_train_04324_traj_003",
+    "gsm8k_train_06137_traj_002",
+    "gsm8k_train_06907_traj_001",
+    "gsm8k_train_00247_traj_005",
+    "gsm8k_train_00946_traj_002",
+    "gsm8k_train_02864_traj_005",
+    "gsm8k_train_03029_traj_001",
+    "gsm8k_train_03663_traj_002",
+    "gsm8k_train_06626_traj_004",
+    "gsm8k_train_06637_traj_005",
+    "gsm8k_train_01722_traj_001",
+    "gsm8k_train_05971_traj_001",
+    "gsm8k_train_07390_traj_004",
+    "gsm8k_train_05717_traj_004",
+    "gsm8k_train_01256_traj_005",
+    "gsm8k_train_04499_traj_003",
+    "gsm8k_train_05693_traj_005",
+    "gsm8k_train_06534_traj_001",
+    "gsm8k_train_00224_traj_002",
+    "gsm8k_train_01958_traj_002",
+    "gsm8k_train_06078_traj_005",
+    "gsm8k_train_00206_traj_005",
+    "gsm8k_train_02591_traj_005",
+    "gsm8k_train_06807_traj_002",
+    "gsm8k_train_00063_traj_001",
+    "gsm8k_train_05244_traj_001",
+    "gsm8k_train_05231_traj_002",
+    "gsm8k_train_00576_traj_001",
+    "gsm8k_train_00940_traj_004",
+    "gsm8k_train_01656_traj_005",
+    "gsm8k_train_04981_traj_005",
+    "gsm8k_train_04278_traj_003",
+    "gsm8k_train_03733_traj_003",
+    "gsm8k_train_00826_traj_004",
+    "gsm8k_train_00747_traj_001",
+    "gsm8k_train_01863_traj_005",
+    "gsm8k_train_02465_traj_004",
+    "gsm8k_train_04936_traj_005",
+    "gsm8k_train_04248_traj_004",
+    "gsm8k_train_02401_traj_003",
+    "gsm8k_train_00022_traj_001",
+    "gsm8k_train_06049_traj_005",
+    "gsm8k_train_02112_traj_002",
+    "gsm8k_train_07018_traj_003",
+    "gsm8k_train_04590_traj_005",
+    "gsm8k_train_00775_traj_004",
+    "gsm8k_train_02607_traj_001",
+    "gsm8k_train_05719_traj_005",
+    "gsm8k_train_07268_traj_001",
+    "gsm8k_train_02721_traj_001",
+    "gsm8k_train_01049_traj_005",
+    "gsm8k_train_00509_traj_004",
+    "gsm8k_train_05772_traj_001",
+    "gsm8k_train_04984_traj_005",
+    "gsm8k_train_04389_traj_001",
+    "gsm8k_train_01724_traj_005",
+    "gsm8k_train_02597_traj_001",
+    "gsm8k_train_03211_traj_001",
+    "gsm8k_train_00094_traj_004",
+    "gsm8k_train_04197_traj_002",
+    "gsm8k_train_05842_traj_002",
+    "gsm8k_train_06665_traj_005",
+    "gsm8k_train_02686_traj_004",
+    "gsm8k_train_01511_traj_002",
+    "gsm8k_train_05735_traj_004",
+    "gsm8k_train_03928_traj_002",
+    "gsm8k_train_00642_traj_004",
+    "gsm8k_train_02154_traj_002",
+    "gsm8k_train_00446_traj_005",
+    "gsm8k_train_01823_traj_005",
+    "gsm8k_train_04683_traj_003",
+    "gsm8k_train_01617_traj_005",
+    "gsm8k_train_05268_traj_004",
+    "gsm8k_train_06016_traj_003",
+    "gsm8k_train_05533_traj_002",
+    "gsm8k_train_06236_traj_003",
+    "gsm8k_train_06026_traj_005",
+    "gsm8k_train_02619_traj_003",
+    "gsm8k_train_05738_traj_005",
+    "gsm8k_train_00292_traj_004",
+    "gsm8k_train_01510_traj_001",
+    "gsm8k_train_06159_traj_004",
+    "gsm8k_train_01344_traj_003",
+    "gsm8k_train_04579_traj_004",
+    "gsm8k_train_02258_traj_001",
+    "gsm8k_train_02074_traj_001",
+    "gsm8k_train_06148_traj_002",
+    "gsm8k_train_04531_traj_005",
+    "gsm8k_train_01105_traj_002",
+    "gsm8k_train_03474_traj_004",
+    "gsm8k_train_05399_traj_005",
+    "gsm8k_train_02150_traj_002",
+    "gsm8k_train_00190_traj_001",
+    "gsm8k_train_01081_traj_004",
+    "gsm8k_train_00141_traj_004",
+    "gsm8k_train_02372_traj_003",
+    "gsm8k_train_00257_traj_003",
+    "gsm8k_train_00092_traj_001",
+    "gsm8k_train_05161_traj_004",
+    "gsm8k_train_01507_traj_001",
+    "gsm8k_train_00347_traj_004",
+    "gsm8k_train_04814_traj_001",
+    "gsm8k_train_02704_traj_004",
+    "gsm8k_train_00245_traj_003",
+    "gsm8k_train_00083_traj_005",
+    "gsm8k_train_05599_traj_003",
+    "gsm8k_train_06084_traj_001",
+    "gsm8k_train_03642_traj_003",
+    "gsm8k_train_07352_traj_001",
+    "gsm8k_train_01610_traj_005",
+    "gsm8k_train_02601_traj_002",
+    "gsm8k_train_05475_traj_003",
+    "gsm8k_train_07333_traj_005",
+    "gsm8k_train_04374_traj_002",
+    "gsm8k_train_01269_traj_001",
+    "gsm8k_train_02309_traj_005",
+    "gsm8k_train_03045_traj_004",
+    "gsm8k_train_03318_traj_004",
+    "gsm8k_train_00582_traj_001",
+    "gsm8k_train_03976_traj_001",
+    "gsm8k_train_00069_traj_001",
+    "gsm8k_train_06688_traj_002",
+    "gsm8k_train_02340_traj_003",
+    "gsm8k_train_01043_traj_003",
+    "gsm8k_train_00521_traj_002",
+    "gsm8k_train_04211_traj_001",
+    "gsm8k_train_03052_traj_005",
+    "gsm8k_train_02740_traj_002",
+    "gsm8k_train_00026_traj_002",
+    "gsm8k_train_05182_traj_003",
+    "gsm8k_train_07260_traj_001",
+    "gsm8k_train_02269_traj_001",
+    "gsm8k_train_05921_traj_004",
+    "gsm8k_train_03700_traj_002",
+    "gsm8k_train_05276_traj_003",
+    "gsm8k_train_03054_traj_005",
+    "gsm8k_train_07468_traj_004",
+    "gsm8k_train_06939_traj_004",
+    "gsm8k_train_02462_traj_003",
+    "gsm8k_train_03858_traj_002",
+    "gsm8k_train_06367_traj_002",
+    "gsm8k_train_01128_traj_003",
+    "gsm8k_train_05165_traj_002",
+    "gsm8k_train_01935_traj_005",
+    "gsm8k_train_05343_traj_005",
+    "gsm8k_train_00007_traj_004",
+    "gsm8k_train_06845_traj_001",
+    "gsm8k_train_00108_traj_005",
+    "gsm8k_train_00733_traj_005",
+    "gsm8k_train_05710_traj_001",
+    "gsm8k_train_02473_traj_003",
+    "gsm8k_train_00411_traj_005",
+    "gsm8k_train_03499_traj_002"
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/round_002/train_set.json
+SIZE: 7253
+CONTENT_BEGIN
+{
+  "pilot": false,
+  "method": "B4",
+  "round": 2,
+  "training_seed": 13,
+  "source_checkpoint": "student_ckpt_000",
+  "pool": "trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "nll_file": "runs/main/S0/nll.jsonl",
+  "nll_sha256": "716af6ae476d8120642d01520a2c0684af4bfecf9f82936bef096f7621799044",
+  "ell_star": 0.2247007379484414,
+  "sigma": 0.07815681044815963,
+  "n_reference": 4353,
+  "n_eligible": 4353,
+  "n_trained_before": 373,
+  "beta_round_tokens": 45426,
+  "n_cap": 1,
+  "tokens_used": 45312,
+  "n_selected": 186,
+  "trajectory_ids": [
+    "gsm8k_train_04771_traj_005",
+    "gsm8k_train_06849_traj_003",
+    "gsm8k_train_04366_traj_005",
+    "gsm8k_train_02456_traj_002",
+    "gsm8k_train_06167_traj_001",
+    "gsm8k_train_03250_traj_002",
+    "gsm8k_train_01656_traj_004",
+    "gsm8k_train_05693_traj_003",
+    "gsm8k_train_00509_traj_002",
+    "gsm8k_train_00011_traj_003",
+    "gsm8k_train_00446_traj_001",
+    "gsm8k_train_04499_traj_001",
+    "gsm8k_train_02740_traj_004",
+    "gsm8k_train_02258_traj_002",
+    "gsm8k_train_04590_traj_003",
+    "gsm8k_train_03642_traj_002",
+    "gsm8k_train_00026_traj_005",
+    "gsm8k_train_03029_traj_004",
+    "gsm8k_train_02379_traj_005",
+    "gsm8k_train_05627_traj_003",
+    "gsm8k_train_05216_traj_001",
+    "gsm8k_train_02191_traj_004",
+    "gsm8k_train_00496_traj_004",
+    "gsm8k_train_04514_traj_003",
+    "gsm8k_train_02087_traj_002",
+    "gsm8k_train_06960_traj_003",
+    "gsm8k_train_05644_traj_003",
+    "gsm8k_train_04175_traj_004",
+    "gsm8k_train_02768_traj_002",
+    "gsm8k_train_02961_traj_005",
+    "gsm8k_train_07464_traj_001",
+    "gsm8k_train_01118_traj_002",
+    "gsm8k_train_00022_traj_005",
+    "gsm8k_train_04103_traj_003",
+    "gsm8k_train_00105_traj_003",
+    "gsm8k_train_01982_traj_003",
+    "gsm8k_train_00689_traj_001",
+    "gsm8k_train_04540_traj_005",
+    "gsm8k_train_04813_traj_003",
+    "gsm8k_train_00234_traj_002",
+    "gsm8k_train_01617_traj_001",
+    "gsm8k_train_04615_traj_003",
+    "gsm8k_train_00058_traj_005",
+    "gsm8k_train_06969_traj_002",
+    "gsm8k_train_00083_traj_002",
+    "gsm8k_train_03788_traj_004",
+    "gsm8k_train_05708_traj_002",
+    "gsm8k_train_01956_traj_004",
+    "gsm8k_train_07291_traj_002",
+    "gsm8k_train_06148_traj_004",
+    "gsm8k_train_03034_traj_004",
+    "gsm8k_train_02497_traj_002",
+    "gsm8k_train_00228_traj_005",
+    "gsm8k_train_01713_traj_004",
+    "gsm8k_train_02008_traj_004",
+    "gsm8k_train_00957_traj_004",
+    "gsm8k_train_00084_traj_004",
+    "gsm8k_train_03096_traj_005",
+    "gsm8k_train_04972_traj_004",
+    "gsm8k_train_06128_traj_003",
+    "gsm8k_train_00064_traj_002",
+    "gsm8k_train_00813_traj_002",
+    "gsm8k_train_03105_traj_002",
+    "gsm8k_train_05213_traj_005",
+    "gsm8k_train_03154_traj_004",
+    "gsm8k_train_00086_traj_004",
+    "gsm8k_train_05101_traj_002",
+    "gsm8k_train_06939_traj_005",
+    "gsm8k_train_01110_traj_001",
+    "gsm8k_train_02000_traj_002",
+    "gsm8k_train_06532_traj_004",
+    "gsm8k_train_05782_traj_003",
+    "gsm8k_train_05105_traj_003",
+    "gsm8k_train_06118_traj_005",
+    "gsm8k_train_05100_traj_001",
+    "gsm8k_train_00406_traj_002",
+    "gsm8k_train_04760_traj_005",
+    "gsm8k_train_04871_traj_004",
+    "gsm8k_train_06375_traj_004",
+    "gsm8k_train_04278_traj_005",
+    "gsm8k_train_05343_traj_003",
+    "gsm8k_train_03516_traj_001",
+    "gsm8k_train_00043_traj_002",
+    "gsm8k_train_00656_traj_002",
+    "gsm8k_train_06728_traj_002",
+    "gsm8k_train_06534_traj_002",
+    "gsm8k_train_00053_traj_005",
+    "gsm8k_train_02372_traj_002",
+    "gsm8k_train_03733_traj_002",
+    "gsm8k_train_03499_traj_005",
+    "gsm8k_train_01288_traj_005",
+    "gsm8k_train_01143_traj_001",
+    "gsm8k_train_00521_traj_001",
+    "gsm8k_train_00778_traj_005",
+    "gsm8k_train_03955_traj_003",
+    "gsm8k_train_00222_traj_004",
+    "gsm8k_train_03538_traj_001",
+    "gsm8k_train_03694_traj_004",
+    "gsm8k_train_00054_traj_001",
+    "gsm8k_train_00307_traj_001",
+    "gsm8k_train_00003_traj_001",
+    "gsm8k_train_06137_traj_003",
+    "gsm8k_train_05182_traj_005",
+    "gsm8k_train_04364_traj_004",
+    "gsm8k_train_00004_traj_004",
+    "gsm8k_train_07118_traj_001",
+    "gsm8k_train_03841_traj_001",
+    "gsm8k_train_05467_traj_002",
+    "gsm8k_train_03748_traj_003",
+    "gsm8k_train_03573_traj_003",
+    "gsm8k_train_02959_traj_004",
+    "gsm8k_train_01961_traj_002",
+    "gsm8k_train_01581_traj_005",
+    "gsm8k_train_03211_traj_003",
+    "gsm8k_train_04371_traj_002",
+    "gsm8k_train_00826_traj_003",
+    "gsm8k_train_00532_traj_005",
+    "gsm8k_train_04166_traj_002",
+    "gsm8k_train_00598_traj_002",
+    "gsm8k_train_00021_traj_003",
+    "gsm8k_train_00096_traj_004",
+    "gsm8k_train_04410_traj_002",
+    "gsm8k_train_01628_traj_005",
+    "gsm8k_train_06845_traj_002",
+    "gsm8k_train_04928_traj_003",
+    "gsm8k_train_05886_traj_001",
+    "gsm8k_train_01177_traj_003",
+    "gsm8k_train_03638_traj_002",
+    "gsm8k_train_01523_traj_002",
+    "gsm8k_train_01081_traj_001",
+    "gsm8k_train_06209_traj_005",
+    "gsm8k_train_05061_traj_001",
+    "gsm8k_train_07285_traj_005",
+    "gsm8k_train_00771_traj_003",
+    "gsm8k_train_04220_traj_003",
+    "gsm8k_train_06946_traj_003",
+    "gsm8k_train_00922_traj_001",
+    "gsm8k_train_02074_traj_002",
+    "gsm8k_train_05964_traj_003",
+    "gsm8k_train_04122_traj_002",
+    "gsm8k_train_00716_traj_001",
+    "gsm8k_train_05414_traj_003",
+    "gsm8k_train_05045_traj_001",
+    "gsm8k_train_04531_traj_001",
+    "gsm8k_train_05809_traj_001",
+    "gsm8k_train_02401_traj_001",
+    "gsm8k_train_02295_traj_005",
+    "gsm8k_train_00027_traj_005",
+    "gsm8k_train_02681_traj_002",
+    "gsm8k_train_00464_traj_001",
+    "gsm8k_train_05738_traj_002",
+    "gsm8k_train_05398_traj_005",
+    "gsm8k_train_05854_traj_004",
+    "gsm8k_train_00032_traj_005",
+    "gsm8k_train_06365_traj_004",
+    "gsm8k_train_03979_traj_004",
+    "gsm8k_train_06721_traj_004",
+    "gsm8k_train_05800_traj_001",
+    "gsm8k_train_03855_traj_005",
+    "gsm8k_train_06974_traj_002",
+    "gsm8k_train_00108_traj_002",
+    "gsm8k_train_05134_traj_004",
+    "gsm8k_train_02188_traj_002",
+    "gsm8k_train_00094_traj_001",
+    "gsm8k_train_01777_traj_001",
+    "gsm8k_train_01703_traj_004",
+    "gsm8k_train_04010_traj_005",
+    "gsm8k_train_06288_traj_001",
+    "gsm8k_train_04683_traj_005",
+    "gsm8k_train_01539_traj_004",
+    "gsm8k_train_00247_traj_004",
+    "gsm8k_train_03842_traj_005",
+    "gsm8k_train_01844_traj_005",
+    "gsm8k_train_02055_traj_004",
+    "gsm8k_train_05982_traj_004",
+    "gsm8k_train_04123_traj_004",
+    "gsm8k_train_00069_traj_005",
+    "gsm8k_train_01411_traj_005",
+    "gsm8k_train_02652_traj_002",
+    "gsm8k_train_07199_traj_005",
+    "gsm8k_train_00047_traj_003",
+    "gsm8k_train_02052_traj_005",
+    "gsm8k_train_04100_traj_004",
+    "gsm8k_train_03251_traj_004",
+    "gsm8k_train_06165_traj_005",
+    "gsm8k_train_03546_traj_005"
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/adapter/adapter_config.json
+SIZE: 1207
+CONTENT_BEGIN
+{
+  "alora_invocation_tokens": null,
+  "alpha_pattern": {},
+  "arrow_config": null,
+  "auto_mapping": null,
+  "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+  "bias": "none",
+  "corda_config": null,
+  "ensure_weight_tying": false,
+  "eva_config": null,
+  "exclude_modules": null,
+  "fan_in_fan_out": false,
+  "inference_mode": true,
+  "init_lora_weights": true,
+  "layer_replication": null,
+  "layers_pattern": null,
+  "layers_to_transform": null,
+  "loftq_config": {},
+  "lora_alpha": 32,
+  "lora_bias": false,
+  "lora_dropout": 0.1,
+  "lora_ga_config": null,
+  "megatron_config": null,
+  "megatron_core": "megatron.core",
+  "modules_to_save": null,
+  "monteclora_config": null,
+  "peft_type": "LORA",
+  "peft_version": "0.20.0",
+  "qalora_group_size": 16,
+  "r": 16,
+  "rank_pattern": {},
+  "revision": null,
+  "target_modules": [
+    "gate_proj",
+    "q_proj",
+    "down_proj",
+    "o_proj",
+    "up_proj",
+    "v_proj",
+    "k_proj"
+  ],
+  "target_parameters": null,
+  "task_type": "CAUSAL_LM",
+  "trainable_token_indices": null,
+  "use_bdlora": null,
+  "use_dora": false,
+  "use_qalora": false,
+  "use_rslora": false,
+  "velora_config": null
+}
+CONTENT_END
+
+ENTRY: B4_seed13/S1/adapter/tokenizer_config.json
+SIZE: 724
+CONTENT_BEGIN
+{
+  "add_prefix_space": false,
+  "backend": "tokenizers",
+  "bos_token": null,
+  "clean_up_tokenization_spaces": false,
+  "eos_token": "<|im_end|>",
+  "errors": "replace",
+  "extra_special_tokens": [
+    "<|im_start|>",
+    "<|im_end|>",
+    "<|object_ref_start|>",
+    "<|object_ref_end|>",
+    "<|box_start|>",
+    "<|box_end|>",
+    "<|quad_start|>",
+    "<|quad_end|>",
+    "<|vision_start|>",
+    "<|vision_end|>",
+    "<|vision_pad|>",
+    "<|image_pad|>",
+    "<|video_pad|>"
+  ],
+  "is_local": false,
+  "local_files_only": false,
+  "model_max_length": 131072,
+  "pad_token": "<|endoftext|>",
+  "split_special_tokens": false,
+  "tokenizer_class": "Qwen2Tokenizer",
+  "unk_token": null
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/adapter/train_log.json
+SIZE: 6999
+CONTENT_BEGIN
+{
+  "checkpoint_parent": "student_ckpt_000",
+  "seed": 13,
+  "data_order_seed": 13,
+  "train_set": "/workspace/manual/runs/main/B5_seed13/round_000/train_set.json",
+  "train_set_sha256": "4623c627e8412a856a4756b96a0503075ce7952e86ca9f2250dc563e4cd531a7",
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "n_examples": 185,
+  "epochs": 1,
+  "steps": 24,
+  "effective_batch": 8,
+  "micro_batch": 8,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "lr_from_config": true,
+  "epochs_from_config": true,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "gradient_checkpointing": true,
+  "trainable_parameters": 18464768,
+  "cumulative_training_tokens": 45372,
+  "prompt_tokens_masked": 23602,
+  "trajectory_tokens": 45187,
+  "beta_round_tokens_config": 45426,
+  "elapsed_seconds": 60.2,
+  "peak_gpu_memory_gb": 9.24,
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  },
+  "steps_log": [
+    {
+      "step": 1,
+      "epoch": 0,
+      "loss": 0.23026618661806564,
+      "grad_norm": 0.5166049003601074,
+      "n_examples": 8,
+      "supervised_tokens": 1548,
+      "lr": 0.0002,
+      "elapsed_s": 4.2
+    },
+    {
+      "step": 2,
+      "epoch": 0,
+      "loss": 0.2135877975528983,
+      "grad_norm": 0.31119000911712646,
+      "n_examples": 8,
+      "supervised_tokens": 2109,
+      "lr": 0.0002,
+      "elapsed_s": 7.0
+    },
+    {
+      "step": 3,
+      "epoch": 0,
+      "loss": 0.2131591796875,
+      "grad_norm": 0.3731159269809723,
+      "n_examples": 8,
+      "supervised_tokens": 2090,
+      "lr": 0.0002,
+      "elapsed_s": 10.0
+    },
+    {
+      "step": 4,
+      "epoch": 0,
+      "loss": 0.2172581061959201,
+      "grad_norm": 0.37604403495788574,
+      "n_examples": 8,
+      "supervised_tokens": 1813,
+      "lr": 0.0002,
+      "elapsed_s": 12.1
+    },
+    {
+      "step": 5,
+      "epoch": 0,
+      "loss": 0.20326623397152813,
+      "grad_norm": 0.25077927112579346,
+      "n_examples": 8,
+      "supervised_tokens": 1946,
+      "lr": 0.0002,
+      "elapsed_s": 14.4
+    },
+    {
+      "step": 6,
+      "epoch": 0,
+      "loss": 0.22222298930216366,
+      "grad_norm": 0.2636410593986511,
+      "n_examples": 8,
+      "supervised_tokens": 2334,
+      "lr": 0.0002,
+      "elapsed_s": 17.3
+    },
+    {
+      "step": 7,
+      "epoch": 0,
+      "loss": 0.20947228086293423,
+      "grad_norm": 0.24469336867332458,
+      "n_examples": 8,
+      "supervised_tokens": 2195,
+      "lr": 0.0002,
+      "elapsed_s": 20.6
+    },
+    {
+      "step": 8,
+      "epoch": 0,
+      "loss": 0.20235269197853661,
+      "grad_norm": 0.26401564478874207,
+      "n_examples": 8,
+      "supervised_tokens": 1860,
+      "lr": 0.0002,
+      "elapsed_s": 23.3
+    },
+    {
+      "step": 9,
+      "epoch": 0,
+      "loss": 0.20169432286631842,
+      "grad_norm": 0.28532713651657104,
+      "n_examples": 8,
+      "supervised_tokens": 1681,
+      "lr": 0.0002,
+      "elapsed_s": 25.9
+    },
+    {
+      "step": 10,
+      "epoch": 0,
+      "loss": 0.20128176324450409,
+      "grad_norm": 0.22399738430976868,
+      "n_examples": 8,
+      "supervised_tokens": 2445,
+      "lr": 0.0002,
+      "elapsed_s": 29.2
+    },
+    {
+      "step": 11,
+      "epoch": 0,
+      "loss": 0.21132687202323094,
+      "grad_norm": 0.25683945417404175,
+      "n_examples": 8,
+      "supervised_tokens": 1929,
+      "lr": 0.0002,
+      "elapsed_s": 31.9
+    },
+    {
+      "step": 12,
+      "epoch": 0,
+      "loss": 0.19982697983053302,
+      "grad_norm": 0.27700692415237427,
+      "n_examples": 8,
+      "supervised_tokens": 1726,
+      "lr": 0.0002,
+      "elapsed_s": 33.9
+    },
+    {
+      "step": 13,
+      "epoch": 0,
+      "loss": 0.22580008801118828,
+      "grad_norm": 0.272251695394516,
+      "n_examples": 8,
+      "supervised_tokens": 2025,
+      "lr": 0.0002,
+      "elapsed_s": 36.5
+    },
+    {
+      "step": 14,
+      "epoch": 0,
+      "loss": 0.20349039184024248,
+      "grad_norm": 0.22187237441539764,
+      "n_examples": 8,
+      "supervised_tokens": 2459,
+      "lr": 0.0002,
+      "elapsed_s": 39.4
+    },
+    {
+      "step": 15,
+      "epoch": 0,
+      "loss": 0.19152162275241533,
+      "grad_norm": 0.26909199357032776,
+      "n_examples": 8,
+      "supervised_tokens": 1572,
+      "lr": 0.0002,
+      "elapsed_s": 41.2
+    },
+    {
+      "step": 16,
+      "epoch": 0,
+      "loss": 0.18914180318338347,
+      "grad_norm": 0.2425094097852707,
+      "n_examples": 8,
+      "supervised_tokens": 1579,
+      "lr": 0.0002,
+      "elapsed_s": 43.0
+    },
+    {
+      "step": 17,
+      "epoch": 0,
+      "loss": 0.19331004355478454,
+      "grad_norm": 0.22959080338478088,
+      "n_examples": 8,
+      "supervised_tokens": 2013,
+      "lr": 0.0002,
+      "elapsed_s": 45.1
+    },
+    {
+      "step": 18,
+      "epoch": 0,
+      "loss": 0.19315889018539936,
+      "grad_norm": 0.2373562604188919,
+      "n_examples": 8,
+      "supervised_tokens": 1986,
+      "lr": 0.0002,
+      "elapsed_s": 47.7
+    },
+    {
+      "step": 19,
+      "epoch": 0,
+      "loss": 0.19989530535993175,
+      "grad_norm": 0.2282770723104477,
+      "n_examples": 8,
+      "supervised_tokens": 2161,
+      "lr": 0.0002,
+      "elapsed_s": 50.1
+    },
+    {
+      "step": 20,
+      "epoch": 0,
+      "loss": 0.19678148194384315,
+      "grad_norm": 0.2254580557346344,
+      "n_examples": 8,
+      "supervised_tokens": 2382,
+      "lr": 0.0002,
+      "elapsed_s": 52.7
+    },
+    {
+      "step": 21,
+      "epoch": 0,
+      "loss": 0.18852981298231852,
+      "grad_norm": 0.31740766763687134,
+      "n_examples": 8,
+      "supervised_tokens": 1474,
+      "lr": 0.0002,
+      "elapsed_s": 54.5
+    },
+    {
+      "step": 22,
+      "epoch": 0,
+      "loss": 0.19123072814941405,
+      "grad_norm": 0.23677417635917664,
+      "n_examples": 8,
+      "supervised_tokens": 2000,
+      "lr": 0.0002,
+      "elapsed_s": 56.6
+    },
+    {
+      "step": 23,
+      "epoch": 0,
+      "loss": 0.18852620660302474,
+      "grad_norm": 0.24796991050243378,
+      "n_examples": 8,
+      "supervised_tokens": 1870,
+      "lr": 0.0002,
+      "elapsed_s": 58.5
+    },
+    {
+      "step": 24,
+      "epoch": 0,
+      "loss": 0.17102774483816965,
+      "grad_norm": 0.8056201934814453,
+      "n_examples": 1,
+      "supervised_tokens": 175,
+      "lr": 0.0002,
+      "elapsed_s": 58.8
+    }
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/eval_dev.summary.json
+SIZE: 2458
+CONTENT_BEGIN
+{
+  "checkpoint": "B5_seed13_S1",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B5_seed13/S1/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.836,
+  "lenient_accuracy": 0.836,
+  "format_compliance": 0.992,
+  "lenient_accuracy_exploratory": 0.836,
+  "n_valid": 418,
+  "n_invalid_answer": 78,
+  "n_invalid_format": 4,
+  "mean_output_tokens": 231.776,
+  "n_hit_max_tokens": 4,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.7037037037037037,
+      "lenient_accuracy": 0.7037037037037037,
+      "format_compliance": 0.9259259259259259
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.8085106382978723,
+      "lenient_accuracy": 0.8085106382978723,
+      "format_compliance": 0.9361702127659575
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.7741935483870968,
+      "lenient_accuracy": 0.7741935483870968,
+      "format_compliance": 0.9032258064516129
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.8095238095238095,
+      "lenient_accuracy": 0.8095238095238095,
+      "format_compliance": 0.9642857142857143
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.7931034482758621,
+      "lenient_accuracy": 0.7931034482758621,
+      "format_compliance": 1.0
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.8333333333333334,
+      "lenient_accuracy": 0.8333333333333334,
+      "format_compliance": 0.9333333333333333
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7636363636363637,
+      "lenient_accuracy": 0.7636363636363637,
+      "format_compliance": 0.9454545454545454
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 353.3,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/eval_test.summary.json
+SIZE: 1167
+CONTENT_BEGIN
+{
+  "checkpoint": "B5_seed13_S1",
+  "split": "test",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B5_seed13/S1/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 1319,
+  "accuracy": 0.7452615617892343,
+  "lenient_accuracy": 0.7452615617892343,
+  "format_compliance": 0.9855951478392722,
+  "lenient_accuracy_exploratory": 0.7452615617892343,
+  "n_valid": 983,
+  "n_invalid_answer": 317,
+  "n_invalid_format": 19,
+  "mean_output_tokens": 233.0007581501137,
+  "n_hit_max_tokens": 21,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 488.6,
+  "problems_this_run": 1319,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/learnability.summary.json
+SIZE: 703
+CONTENT_BEGIN
+{
+  "checkpoint": "student_ckpt_001",
+  "run": "B4_seed13",
+  "nll_file": "runs/main/B4_seed13/S1/nll.jsonl",
+  "nll_sha256": "4d10fb6cd1c7b73a4556b567e02d6b444485841dae4e20a52173db0acb1b9057",
+  "n_scored": 4353,
+  "n_reference": 4168,
+  "n_trained_excluded": 185,
+  "ell_star": 0.187470808437913,
+  "q1": 0.1431249737433562,
+  "q3": 0.24921694460573857,
+  "sigma": 0.07864490056514631,
+  "quantile_method": "statistics.quantiles(n=4), exclusive",
+  "ell": {
+    "mean": 0.19831652840685524,
+    "median": 0.18405494530330643,
+    "sd": 0.07697360941736592
+  },
+  "l_proxy": {
+    "mean": 0.7321504807945437,
+    "median": 0.8128728800428877,
+    "sd": 0.2594777649516242
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S1/nll.summary.json
+SIZE: 775
+CONTENT_BEGIN
+{
+  "checkpoint": "B5_seed13_S1",
+  "adapter": "/workspace/manual/runs/main/B5_seed13/S1/adapter",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "n_trajectories": 4353,
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "forward_passes": 4353,
+  "elapsed_seconds": 234.3,
+  "peak_gpu_memory_gb": 9.68,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/adapter/adapter_config.json
+SIZE: 1207
+CONTENT_BEGIN
+{
+  "alora_invocation_tokens": null,
+  "alpha_pattern": {},
+  "arrow_config": null,
+  "auto_mapping": null,
+  "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+  "bias": "none",
+  "corda_config": null,
+  "ensure_weight_tying": false,
+  "eva_config": null,
+  "exclude_modules": null,
+  "fan_in_fan_out": false,
+  "inference_mode": true,
+  "init_lora_weights": true,
+  "layer_replication": null,
+  "layers_pattern": null,
+  "layers_to_transform": null,
+  "loftq_config": {},
+  "lora_alpha": 32,
+  "lora_bias": false,
+  "lora_dropout": 0.1,
+  "lora_ga_config": null,
+  "megatron_config": null,
+  "megatron_core": "megatron.core",
+  "modules_to_save": null,
+  "monteclora_config": null,
+  "peft_type": "LORA",
+  "peft_version": "0.20.0",
+  "qalora_group_size": 16,
+  "r": 16,
+  "rank_pattern": {},
+  "revision": null,
+  "target_modules": [
+    "down_proj",
+    "up_proj",
+    "q_proj",
+    "k_proj",
+    "o_proj",
+    "gate_proj",
+    "v_proj"
+  ],
+  "target_parameters": null,
+  "task_type": "CAUSAL_LM",
+  "trainable_token_indices": null,
+  "use_bdlora": null,
+  "use_dora": false,
+  "use_qalora": false,
+  "use_rslora": false,
+  "velora_config": null
+}
+CONTENT_END
+
+ENTRY: B4_seed13/S2/adapter/tokenizer_config.json
+SIZE: 724
+CONTENT_BEGIN
+{
+  "add_prefix_space": false,
+  "backend": "tokenizers",
+  "bos_token": null,
+  "clean_up_tokenization_spaces": false,
+  "eos_token": "<|im_end|>",
+  "errors": "replace",
+  "extra_special_tokens": [
+    "<|im_start|>",
+    "<|im_end|>",
+    "<|object_ref_start|>",
+    "<|object_ref_end|>",
+    "<|box_start|>",
+    "<|box_end|>",
+    "<|quad_start|>",
+    "<|quad_end|>",
+    "<|vision_start|>",
+    "<|vision_end|>",
+    "<|vision_pad|>",
+    "<|image_pad|>",
+    "<|video_pad|>"
+  ],
+  "is_local": false,
+  "local_files_only": false,
+  "model_max_length": 131072,
+  "pad_token": "<|endoftext|>",
+  "split_special_tokens": false,
+  "tokenizer_class": "Qwen2Tokenizer",
+  "unk_token": null
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/adapter/train_log.json
+SIZE: 7028
+CONTENT_BEGIN
+{
+  "checkpoint_parent": "/workspace/manual/runs/main/B4_seed13/S1/adapter",
+  "seed": 13,
+  "data_order_seed": 13,
+  "train_set": "/workspace/manual/runs/main/B4_seed13/round_001/train_set.json",
+  "train_set_sha256": "b618c56dcf7da65fe05778abaafc05abd04811f0a48644bb6bebd1b8d29b09c7",
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "n_examples": 188,
+  "epochs": 1,
+  "steps": 24,
+  "effective_batch": 8,
+  "micro_batch": 8,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "lr_from_config": true,
+  "epochs_from_config": true,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "gradient_checkpointing": true,
+  "trainable_parameters": 18464768,
+  "cumulative_training_tokens": 45524,
+  "prompt_tokens_masked": 24141,
+  "trajectory_tokens": 45336,
+  "beta_round_tokens_config": 45426,
+  "elapsed_seconds": 59.9,
+  "peak_gpu_memory_gb": 9.12,
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  },
+  "steps_log": [
+    {
+      "step": 1,
+      "epoch": 0,
+      "loss": 0.19754941540858437,
+      "grad_norm": 0.2355155646800995,
+      "n_examples": 8,
+      "supervised_tokens": 2249,
+      "lr": 0.0002,
+      "elapsed_s": 5.3
+    },
+    {
+      "step": 2,
+      "epoch": 0,
+      "loss": 0.19263181824615036,
+      "grad_norm": 0.22911423444747925,
+      "n_examples": 8,
+      "supervised_tokens": 2346,
+      "lr": 0.0002,
+      "elapsed_s": 7.8
+    },
+    {
+      "step": 3,
+      "epoch": 0,
+      "loss": 0.2010629736236515,
+      "grad_norm": 0.2427665889263153,
+      "n_examples": 8,
+      "supervised_tokens": 2132,
+      "lr": 0.0002,
+      "elapsed_s": 10.8
+    },
+    {
+      "step": 4,
+      "epoch": 0,
+      "loss": 0.18824158142860273,
+      "grad_norm": 0.2131640464067459,
+      "n_examples": 8,
+      "supervised_tokens": 2139,
+      "lr": 0.0002,
+      "elapsed_s": 13.9
+    },
+    {
+      "step": 5,
+      "epoch": 0,
+      "loss": 0.19400318958363078,
+      "grad_norm": 0.27650177478790283,
+      "n_examples": 8,
+      "supervised_tokens": 1751,
+      "lr": 0.0002,
+      "elapsed_s": 15.7
+    },
+    {
+      "step": 6,
+      "epoch": 0,
+      "loss": 0.18056830401656906,
+      "grad_norm": 0.2608504295349121,
+      "n_examples": 8,
+      "supervised_tokens": 1473,
+      "lr": 0.0002,
+      "elapsed_s": 17.8
+    },
+    {
+      "step": 7,
+      "epoch": 0,
+      "loss": 0.18855026966859825,
+      "grad_norm": 0.20970939099788666,
+      "n_examples": 8,
+      "supervised_tokens": 2389,
+      "lr": 0.0002,
+      "elapsed_s": 20.8
+    },
+    {
+      "step": 8,
+      "epoch": 0,
+      "loss": 0.17545209980171989,
+      "grad_norm": 0.23584029078483582,
+      "n_examples": 8,
+      "supervised_tokens": 1777,
+      "lr": 0.0002,
+      "elapsed_s": 22.9
+    },
+    {
+      "step": 9,
+      "epoch": 0,
+      "loss": 0.19081159206252024,
+      "grad_norm": 0.2588564157485962,
+      "n_examples": 8,
+      "supervised_tokens": 1544,
+      "lr": 0.0002,
+      "elapsed_s": 24.6
+    },
+    {
+      "step": 10,
+      "epoch": 0,
+      "loss": 0.19114554457907298,
+      "grad_norm": 0.22081205248832703,
+      "n_examples": 8,
+      "supervised_tokens": 1846,
+      "lr": 0.0002,
+      "elapsed_s": 26.6
+    },
+    {
+      "step": 11,
+      "epoch": 0,
+      "loss": 0.2011334328106789,
+      "grad_norm": 0.22298425436019897,
+      "n_examples": 8,
+      "supervised_tokens": 2145,
+      "lr": 0.0002,
+      "elapsed_s": 29.4
+    },
+    {
+      "step": 12,
+      "epoch": 0,
+      "loss": 0.1919783329902394,
+      "grad_norm": 0.23155054450035095,
+      "n_examples": 8,
+      "supervised_tokens": 1945,
+      "lr": 0.0002,
+      "elapsed_s": 31.9
+    },
+    {
+      "step": 13,
+      "epoch": 0,
+      "loss": 0.1975086701221955,
+      "grad_norm": 0.2604997158050537,
+      "n_examples": 8,
+      "supervised_tokens": 1755,
+      "lr": 0.0002,
+      "elapsed_s": 33.9
+    },
+    {
+      "step": 14,
+      "epoch": 0,
+      "loss": 0.1792491158062124,
+      "grad_norm": 0.2579246461391449,
+      "n_examples": 8,
+      "supervised_tokens": 1496,
+      "lr": 0.0002,
+      "elapsed_s": 35.6
+    },
+    {
+      "step": 15,
+      "epoch": 0,
+      "loss": 0.17691760618851052,
+      "grad_norm": 0.2277425080537796,
+      "n_examples": 8,
+      "supervised_tokens": 1639,
+      "lr": 0.0002,
+      "elapsed_s": 38.0
+    },
+    {
+      "step": 16,
+      "epoch": 0,
+      "loss": 0.178263037928905,
+      "grad_norm": 0.23027518391609192,
+      "n_examples": 8,
+      "supervised_tokens": 1847,
+      "lr": 0.0002,
+      "elapsed_s": 39.9
+    },
+    {
+      "step": 17,
+      "epoch": 0,
+      "loss": 0.19406791952246294,
+      "grad_norm": 0.20676830410957336,
+      "n_examples": 8,
+      "supervised_tokens": 2445,
+      "lr": 0.0002,
+      "elapsed_s": 43.0
+    },
+    {
+      "step": 18,
+      "epoch": 0,
+      "loss": 0.19073315953915837,
+      "grad_norm": 0.2796032130718231,
+      "n_examples": 8,
+      "supervised_tokens": 1630,
+      "lr": 0.0002,
+      "elapsed_s": 45.0
+    },
+    {
+      "step": 19,
+      "epoch": 0,
+      "loss": 0.1905999359434428,
+      "grad_norm": 0.2580958902835846,
+      "n_examples": 8,
+      "supervised_tokens": 1709,
+      "lr": 0.0002,
+      "elapsed_s": 47.2
+    },
+    {
+      "step": 20,
+      "epoch": 0,
+      "loss": 0.18535982394680817,
+      "grad_norm": 0.23709216713905334,
+      "n_examples": 8,
+      "supervised_tokens": 2011,
+      "lr": 0.0002,
+      "elapsed_s": 49.8
+    },
+    {
+      "step": 21,
+      "epoch": 0,
+      "loss": 0.19012255747704046,
+      "grad_norm": 0.2477317899465561,
+      "n_examples": 8,
+      "supervised_tokens": 1749,
+      "lr": 0.0002,
+      "elapsed_s": 52.0
+    },
+    {
+      "step": 22,
+      "epoch": 0,
+      "loss": 0.18274772108865212,
+      "grad_norm": 0.20355413854122162,
+      "n_examples": 8,
+      "supervised_tokens": 2452,
+      "lr": 0.0002,
+      "elapsed_s": 54.7
+    },
+    {
+      "step": 23,
+      "epoch": 0,
+      "loss": 0.18817658961591788,
+      "grad_norm": 0.22814230620861053,
+      "n_examples": 8,
+      "supervised_tokens": 2006,
+      "lr": 0.0002,
+      "elapsed_s": 57.1
+    },
+    {
+      "step": 24,
+      "epoch": 0,
+      "loss": 0.1859651025530267,
+      "grad_norm": 0.28881967067718506,
+      "n_examples": 4,
+      "supervised_tokens": 1049,
+      "lr": 0.0002,
+      "elapsed_s": 58.5
+    }
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/eval_dev.summary.json
+SIZE: 2457
+CONTENT_BEGIN
+{
+  "checkpoint": "B4_seed13_S2",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.816,
+  "lenient_accuracy": 0.816,
+  "format_compliance": 0.99,
+  "lenient_accuracy_exploratory": 0.816,
+  "n_valid": 408,
+  "n_invalid_answer": 87,
+  "n_invalid_format": 5,
+  "mean_output_tokens": 256.052,
+  "n_hit_max_tokens": 8,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.7407407407407407,
+      "lenient_accuracy": 0.7407407407407407,
+      "format_compliance": 0.9629629629629629
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.8297872340425532,
+      "lenient_accuracy": 0.8297872340425532,
+      "format_compliance": 0.9574468085106383
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.8064516129032258,
+      "lenient_accuracy": 0.8064516129032258,
+      "format_compliance": 0.9354838709677419
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.7976190476190477,
+      "lenient_accuracy": 0.7976190476190477,
+      "format_compliance": 0.9761904761904762
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.6896551724137931,
+      "lenient_accuracy": 0.6896551724137931,
+      "format_compliance": 1.0
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.8666666666666667,
+      "lenient_accuracy": 0.8666666666666667,
+      "format_compliance": 0.9666666666666667
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7272727272727273,
+      "lenient_accuracy": 0.7272727272727273,
+      "format_compliance": 0.9636363636363636
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 421.9,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/eval_test.summary.json
+SIZE: 1167
+CONTENT_BEGIN
+{
+  "checkpoint": "B4_seed13_S2",
+  "split": "test",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 1319,
+  "accuracy": 0.7270659590598939,
+  "lenient_accuracy": 0.7278241091736164,
+  "format_compliance": 0.9871114480667172,
+  "lenient_accuracy_exploratory": 0.7278241091736164,
+  "n_valid": 959,
+  "n_invalid_answer": 343,
+  "n_invalid_format": 17,
+  "mean_output_tokens": 257.9067475360121,
+  "n_hit_max_tokens": 21,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 456.8,
+  "problems_this_run": 1319,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/learnability.summary.json
+SIZE: 702
+CONTENT_BEGIN
+{
+  "checkpoint": "student_ckpt_002",
+  "run": "B4_seed13",
+  "nll_file": "runs/main/B4_seed13/S2/nll.jsonl",
+  "nll_sha256": "5d6855b40b2db6891e4c1f422c321e1ae1ac1b52a4862facf7f4bc3f3740b702",
+  "n_scored": 4353,
+  "n_reference": 3980,
+  "n_trained_excluded": 373,
+  "ell_star": 0.18611074068232736,
+  "q1": 0.13798707919713865,
+  "q3": 0.2491693141968923,
+  "sigma": 0.08241826167513244,
+  "quantile_method": "statistics.quantiles(n=4), exclusive",
+  "ell": {
+    "mean": 0.19446113362611506,
+    "median": 0.1768608646116395,
+    "sd": 0.07766582960861752
+  },
+  "l_proxy": {
+    "mean": 0.7424391599234945,
+    "median": 0.8078166856300042,
+    "sd": 0.24716618385087
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S2/nll.summary.json
+SIZE: 775
+CONTENT_BEGIN
+{
+  "checkpoint": "B4_seed13_S2",
+  "adapter": "/workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "n_trajectories": 4353,
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "forward_passes": 4353,
+  "elapsed_seconds": 236.1,
+  "peak_gpu_memory_gb": 9.68,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S3/adapter/adapter_config.json
+SIZE: 1207
+CONTENT_BEGIN
+{
+  "alora_invocation_tokens": null,
+  "alpha_pattern": {},
+  "arrow_config": null,
+  "auto_mapping": null,
+  "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+  "bias": "none",
+  "corda_config": null,
+  "ensure_weight_tying": false,
+  "eva_config": null,
+  "exclude_modules": null,
+  "fan_in_fan_out": false,
+  "inference_mode": true,
+  "init_lora_weights": true,
+  "layer_replication": null,
+  "layers_pattern": null,
+  "layers_to_transform": null,
+  "loftq_config": {},
+  "lora_alpha": 32,
+  "lora_bias": false,
+  "lora_dropout": 0.1,
+  "lora_ga_config": null,
+  "megatron_config": null,
+  "megatron_core": "megatron.core",
+  "modules_to_save": null,
+  "monteclora_config": null,
+  "peft_type": "LORA",
+  "peft_version": "0.20.0",
+  "qalora_group_size": 16,
+  "r": 16,
+  "rank_pattern": {},
+  "revision": null,
+  "target_modules": [
+    "k_proj",
+    "o_proj",
+    "q_proj",
+    "v_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "target_parameters": null,
+  "task_type": "CAUSAL_LM",
+  "trainable_token_indices": null,
+  "use_bdlora": null,
+  "use_dora": false,
+  "use_qalora": false,
+  "use_rslora": false,
+  "velora_config": null
+}
+CONTENT_END
+
+ENTRY: B4_seed13/S3/adapter/tokenizer_config.json
+SIZE: 724
+CONTENT_BEGIN
+{
+  "add_prefix_space": false,
+  "backend": "tokenizers",
+  "bos_token": null,
+  "clean_up_tokenization_spaces": false,
+  "eos_token": "<|im_end|>",
+  "errors": "replace",
+  "extra_special_tokens": [
+    "<|im_start|>",
+    "<|im_end|>",
+    "<|object_ref_start|>",
+    "<|object_ref_end|>",
+    "<|box_start|>",
+    "<|box_end|>",
+    "<|quad_start|>",
+    "<|quad_end|>",
+    "<|vision_start|>",
+    "<|vision_end|>",
+    "<|vision_pad|>",
+    "<|image_pad|>",
+    "<|video_pad|>"
+  ],
+  "is_local": false,
+  "local_files_only": false,
+  "model_max_length": 131072,
+  "pad_token": "<|endoftext|>",
+  "split_special_tokens": false,
+  "tokenizer_class": "Qwen2Tokenizer",
+  "unk_token": null
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S3/adapter/train_log.json
+SIZE: 7029
+CONTENT_BEGIN
+{
+  "checkpoint_parent": "/workspace/manual/runs/main/B4_seed13/S2/adapter",
+  "seed": 13,
+  "data_order_seed": 13,
+  "train_set": "/workspace/manual/runs/main/B4_seed13/round_002/train_set.json",
+  "train_set_sha256": "9f5f71d3ae03bbb50f643228efab65fb3d5a50ca5ccf1f9e75b006ef6271b15f",
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "n_examples": 186,
+  "epochs": 1,
+  "steps": 24,
+  "effective_batch": 8,
+  "micro_batch": 8,
+  "grad_accum": 1,
+  "learning_rate": 0.0002,
+  "lr_from_config": true,
+  "epochs_from_config": true,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "gradient_checkpointing": true,
+  "trainable_parameters": 18464768,
+  "cumulative_training_tokens": 45498,
+  "prompt_tokens_masked": 24183,
+  "trajectory_tokens": 45312,
+  "beta_round_tokens_config": 45426,
+  "elapsed_seconds": 61.0,
+  "peak_gpu_memory_gb": 9.01,
+  "config_sha256": "332b2c4849a12dcf53ddb974b4152319ec140818c2c25baf7cb238a5a8b9abee",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  },
+  "steps_log": [
+    {
+      "step": 1,
+      "epoch": 0,
+      "loss": 0.18725656507439137,
+      "grad_norm": 0.22417591512203217,
+      "n_examples": 8,
+      "supervised_tokens": 1946,
+      "lr": 0.0002,
+      "elapsed_s": 5.7
+    },
+    {
+      "step": 2,
+      "epoch": 0,
+      "loss": 0.19532523260307214,
+      "grad_norm": 0.249670147895813,
+      "n_examples": 8,
+      "supervised_tokens": 1951,
+      "lr": 0.0002,
+      "elapsed_s": 8.0
+    },
+    {
+      "step": 3,
+      "epoch": 0,
+      "loss": 0.18283090237509403,
+      "grad_norm": 0.23307745158672333,
+      "n_examples": 8,
+      "supervised_tokens": 1994,
+      "lr": 0.0002,
+      "elapsed_s": 10.2
+    },
+    {
+      "step": 4,
+      "epoch": 0,
+      "loss": 0.1792769378624105,
+      "grad_norm": 0.2586022913455963,
+      "n_examples": 8,
+      "supervised_tokens": 1606,
+      "lr": 0.0002,
+      "elapsed_s": 12.1
+    },
+    {
+      "step": 5,
+      "epoch": 0,
+      "loss": 0.2067211880169771,
+      "grad_norm": 0.22888879477977753,
+      "n_examples": 8,
+      "supervised_tokens": 2161,
+      "lr": 0.0002,
+      "elapsed_s": 14.8
+    },
+    {
+      "step": 6,
+      "epoch": 0,
+      "loss": 0.1902615525560355,
+      "grad_norm": 0.30443498492240906,
+      "n_examples": 8,
+      "supervised_tokens": 1588,
+      "lr": 0.0002,
+      "elapsed_s": 17.0
+    },
+    {
+      "step": 7,
+      "epoch": 0,
+      "loss": 0.18624083150711504,
+      "grad_norm": 0.23687274754047394,
+      "n_examples": 8,
+      "supervised_tokens": 1893,
+      "lr": 0.0002,
+      "elapsed_s": 19.5
+    },
+    {
+      "step": 8,
+      "epoch": 0,
+      "loss": 0.18266252417956244,
+      "grad_norm": 0.22276759147644043,
+      "n_examples": 8,
+      "supervised_tokens": 1874,
+      "lr": 0.0002,
+      "elapsed_s": 21.4
+    },
+    {
+      "step": 9,
+      "epoch": 0,
+      "loss": 0.20314641206891804,
+      "grad_norm": 0.20077656209468842,
+      "n_examples": 8,
+      "supervised_tokens": 2269,
+      "lr": 0.0002,
+      "elapsed_s": 23.9
+    },
+    {
+      "step": 10,
+      "epoch": 0,
+      "loss": 0.2031999590407859,
+      "grad_norm": 0.21722128987312317,
+      "n_examples": 8,
+      "supervised_tokens": 2389,
+      "lr": 0.0002,
+      "elapsed_s": 27.0
+    },
+    {
+      "step": 11,
+      "epoch": 0,
+      "loss": 0.19056790064822038,
+      "grad_norm": 0.23010095953941345,
+      "n_examples": 8,
+      "supervised_tokens": 2123,
+      "lr": 0.0002,
+      "elapsed_s": 29.8
+    },
+    {
+      "step": 12,
+      "epoch": 0,
+      "loss": 0.1800880466219141,
+      "grad_norm": 0.20043867826461792,
+      "n_examples": 8,
+      "supervised_tokens": 2238,
+      "lr": 0.0002,
+      "elapsed_s": 32.8
+    },
+    {
+      "step": 13,
+      "epoch": 0,
+      "loss": 0.19249984453309257,
+      "grad_norm": 0.2508150637149811,
+      "n_examples": 8,
+      "supervised_tokens": 1908,
+      "lr": 0.0002,
+      "elapsed_s": 35.2
+    },
+    {
+      "step": 14,
+      "epoch": 0,
+      "loss": 0.19009106755600988,
+      "grad_norm": 0.2432335615158081,
+      "n_examples": 8,
+      "supervised_tokens": 1731,
+      "lr": 0.0002,
+      "elapsed_s": 37.2
+    },
+    {
+      "step": 15,
+      "epoch": 0,
+      "loss": 0.18261848863705185,
+      "grad_norm": 0.23772281408309937,
+      "n_examples": 8,
+      "supervised_tokens": 1806,
+      "lr": 0.0002,
+      "elapsed_s": 39.5
+    },
+    {
+      "step": 16,
+      "epoch": 0,
+      "loss": 0.20131549064307977,
+      "grad_norm": 0.27645885944366455,
+      "n_examples": 8,
+      "supervised_tokens": 1534,
+      "lr": 0.0002,
+      "elapsed_s": 41.6
+    },
+    {
+      "step": 17,
+      "epoch": 0,
+      "loss": 0.19671566638882312,
+      "grad_norm": 0.1974061131477356,
+      "n_examples": 8,
+      "supervised_tokens": 2376,
+      "lr": 0.0002,
+      "elapsed_s": 44.5
+    },
+    {
+      "step": 18,
+      "epoch": 0,
+      "loss": 0.19369644275877723,
+      "grad_norm": 0.2322089672088623,
+      "n_examples": 8,
+      "supervised_tokens": 2065,
+      "lr": 0.0002,
+      "elapsed_s": 47.2
+    },
+    {
+      "step": 19,
+      "epoch": 0,
+      "loss": 0.19779638671875,
+      "grad_norm": 0.25195008516311646,
+      "n_examples": 8,
+      "supervised_tokens": 2000,
+      "lr": 0.0002,
+      "elapsed_s": 49.6
+    },
+    {
+      "step": 20,
+      "epoch": 0,
+      "loss": 0.1941195052394445,
+      "grad_norm": 0.24088110029697418,
+      "n_examples": 8,
+      "supervised_tokens": 1988,
+      "lr": 0.0002,
+      "elapsed_s": 52.1
+    },
+    {
+      "step": 21,
+      "epoch": 0,
+      "loss": 0.17902285277750776,
+      "grad_norm": 0.2038716822862625,
+      "n_examples": 8,
+      "supervised_tokens": 1929,
+      "lr": 0.0002,
+      "elapsed_s": 54.4
+    },
+    {
+      "step": 22,
+      "epoch": 0,
+      "loss": 0.19192375571040785,
+      "grad_norm": 0.21942611038684845,
+      "n_examples": 8,
+      "supervised_tokens": 2006,
+      "lr": 0.0002,
+      "elapsed_s": 57.9
+    },
+    {
+      "step": 23,
+      "epoch": 0,
+      "loss": 0.16737834782043992,
+      "grad_norm": 0.25087061524391174,
+      "n_examples": 8,
+      "supervised_tokens": 1594,
+      "lr": 0.0002,
+      "elapsed_s": 59.5
+    },
+    {
+      "step": 24,
+      "epoch": 0,
+      "loss": 0.20452200127008507,
+      "grad_norm": 0.4652688801288605,
+      "n_examples": 2,
+      "supervised_tokens": 529,
+      "lr": 0.0002,
+      "elapsed_s": 59.9
+    }
+  ]
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S3/eval_dev.summary.json
+SIZE: 2368
+CONTENT_BEGIN
+{
+  "checkpoint": "B4_seed13_S3",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B4_seed13/S3/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.814,
+  "lenient_accuracy": 0.816,
+  "format_compliance": 0.996,
+  "lenient_accuracy_exploratory": 0.816,
+  "n_valid": 407,
+  "n_invalid_answer": 91,
+  "n_invalid_format": 2,
+  "mean_output_tokens": 238.866,
+  "n_hit_max_tokens": 1,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.7777777777777778,
+      "lenient_accuracy": 0.7777777777777778,
+      "format_compliance": 1.0
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.8085106382978723,
+      "lenient_accuracy": 0.8085106382978723,
+      "format_compliance": 1.0
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.8709677419354839,
+      "lenient_accuracy": 0.8709677419354839,
+      "format_compliance": 1.0
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.8095238095238095,
+      "lenient_accuracy": 0.8095238095238095,
+      "format_compliance": 1.0
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.7241379310344828,
+      "lenient_accuracy": 0.7241379310344828,
+      "format_compliance": 1.0
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.8666666666666667,
+      "lenient_accuracy": 0.8666666666666667,
+      "format_compliance": 1.0
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7818181818181819,
+      "lenient_accuracy": 0.7818181818181819,
+      "format_compliance": 1.0
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 412.5,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: B4_seed13/S3/eval_test.summary.json
+SIZE: 1168
+CONTENT_BEGIN
+{
+  "checkpoint": "B4_seed13_S3",
+  "split": "test",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": "/workspace/manual/runs/main/B4_seed13/S3/adapter",
+  "dtype": "bfloat16",
+  "n_problems": 1319,
+  "accuracy": 0.7232752084912812,
+  "lenient_accuracy": 0.7240333586050038,
+  "format_compliance": 0.9878695981804397,
+  "lenient_accuracy_exploratory": 0.7240333586050038,
+  "n_valid": 954,
+  "n_invalid_answer": 349,
+  "n_invalid_format": 16,
+  "mean_output_tokens": 239.20242608036392,
+  "n_hit_max_tokens": 17,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 480.3,
+  "problems_this_run": 1319,
+  "peak_gpu_memory_gb": 18.28,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+====================================================================================================
+4. S0 EVALUATION METADATA
+====================================================================================================
+S0_METADATA_ENTRY_COUNT: 8
+
+ENTRY: S0/.done/
+SIZE: 0
+CONTENT_BEGIN
+
+CONTENT_END
+
+ENTRY: S0/.done/eval_dev_S0.json
+SIZE: 221
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag S0 --split dev --out /workspace/manual/runs/main/S0/eval_dev.jsonl --backend vllm --dtype auto",
+  "elapsed_seconds": 558.4
+}
+
+CONTENT_END
+
+ENTRY: S0/.done/eval_test_S0.json
+SIZE: 223
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/eval_student.py --tag S0 --split test --out /workspace/manual/runs/main/S0/eval_test.jsonl --backend vllm --dtype auto",
+  "elapsed_seconds": 684.6
+}
+
+CONTENT_END
+
+ENTRY: S0/.done/nll_S0.json
+SIZE: 268
+CONTENT_BEGIN
+{
+  "command": "/workspace/venv/bin/python /workspace/manual/scripts/compute_nll.py --tag S0 --out /workspace/manual/runs/main/S0/nll.jsonl --pool /workspace/manual/trajectory/pool/pool_v1_verified.jsonl --batch-size 16 --dtype auto",
+  "elapsed_seconds": 524.6
+}
+
+CONTENT_END
+
+ENTRY: S0/eval_dev.summary.json
+SIZE: 2402
+CONTENT_BEGIN
+{
+  "checkpoint": "S0",
+  "split": "dev",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": null,
+  "dtype": "bfloat16",
+  "n_problems": 500,
+  "accuracy": 0.714,
+  "lenient_accuracy": 0.764,
+  "format_compliance": 0.916,
+  "lenient_accuracy_exploratory": 0.764,
+  "n_valid": 357,
+  "n_invalid_answer": 101,
+  "n_invalid_format": 42,
+  "mean_output_tokens": 239.046,
+  "n_hit_max_tokens": 7,
+  "n_problems_with_capability_labels": 85,
+  "by_capability": {
+    "addition": {
+      "n_problems": 27,
+      "accuracy": 0.5925925925925926,
+      "lenient_accuracy": 0.7407407407407407,
+      "format_compliance": 0.8148148148148148
+    },
+    "division": {
+      "n_problems": 47,
+      "accuracy": 0.723404255319149,
+      "lenient_accuracy": 0.8723404255319149,
+      "format_compliance": 0.8085106382978723
+    },
+    "fraction": {
+      "n_problems": 31,
+      "accuracy": 0.7741935483870968,
+      "lenient_accuracy": 0.9032258064516129,
+      "format_compliance": 0.8387096774193549
+    },
+    "multiplication": {
+      "n_problems": 84,
+      "accuracy": 0.7380952380952381,
+      "lenient_accuracy": 0.8571428571428571,
+      "format_compliance": 0.8571428571428571
+    },
+    "percentage": {
+      "n_problems": 29,
+      "accuracy": 0.6551724137931034,
+      "lenient_accuracy": 0.7586206896551724,
+      "format_compliance": 0.896551724137931
+    },
+    "ratio": {
+      "n_problems": 30,
+      "accuracy": 0.7333333333333333,
+      "lenient_accuracy": 0.8666666666666667,
+      "format_compliance": 0.8
+    },
+    "subtraction": {
+      "n_problems": 55,
+      "accuracy": 0.7090909090909091,
+      "lenient_accuracy": 0.8181818181818182,
+      "format_compliance": 0.8545454545454545
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 360.9,
+  "problems_this_run": 500,
+  "peak_gpu_memory_gb": 18.29,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: S0/eval_test.summary.json
+SIZE: 1108
+CONTENT_BEGIN
+{
+  "checkpoint": "S0",
+  "split": "test",
+  "backend": "vllm",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "adapter": null,
+  "dtype": "bfloat16",
+  "n_problems": 1319,
+  "accuracy": 0.621683093252464,
+  "lenient_accuracy": 0.66868840030326,
+  "format_compliance": 0.9037149355572404,
+  "lenient_accuracy_exploratory": 0.66868840030326,
+  "n_valid": 820,
+  "n_invalid_answer": 372,
+  "n_invalid_format": 127,
+  "mean_output_tokens": 238.17437452615619,
+  "n_hit_max_tokens": 29,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "repetition_penalty": 1.0,
+    "prompt_version": "v1"
+  },
+  "batch_size": 200,
+  "limit": null,
+  "elapsed_seconds_this_run": 440.9,
+  "problems_this_run": 1319,
+  "peak_gpu_memory_gb": 18.29,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+ENTRY: S0/learnability.summary.json
+SIZE: 684
+CONTENT_BEGIN
+{
+  "checkpoint": "student_ckpt_000",
+  "run": "S0",
+  "nll_file": "runs/main/S0/nll.jsonl",
+  "nll_sha256": "716af6ae476d8120642d01520a2c0684af4bfecf9f82936bef096f7621799044",
+  "n_scored": 4353,
+  "n_reference": 4353,
+  "n_trained_excluded": 0,
+  "ell_star": 0.2247007379484414,
+  "q1": 0.17737262937892734,
+  "q3": 0.2828061666734947,
+  "sigma": 0.07815681044815963,
+  "quantile_method": "statistics.quantiles(n=4), exclusive",
+  "ell": {
+    "mean": 0.23472893844133536,
+    "median": 0.2247007379484414,
+    "sd": 0.07789145374714508
+  },
+  "l_proxy": {
+    "mean": 0.7217753953669086,
+    "median": 0.8021907300427694,
+    "sd": 0.2675564530706924
+  }
+}
+
+CONTENT_END
+
+ENTRY: S0/nll.summary.json
+SIZE: 719
+CONTENT_BEGIN
+{
+  "checkpoint": "S0",
+  "adapter": null,
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "dtype": "bfloat16",
+  "n_trajectories": 4353,
+  "pool": "/workspace/manual/trajectory/pool/pool_v1_verified.jsonl",
+  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "forward_passes": 4353,
+  "elapsed_seconds": 234.1,
+  "peak_gpu_memory_gb": 9.68,
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.19.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4",
+    "bf16_supported": true,
+    "peft": "0.20.0"
+  }
+}
+
+CONTENT_END
+
+S0 PREDICTION COVERAGE
+D_DEV_UNIQUE: 500
+S0_ROWS: 500
+S0_UNIQUE: 500
+S0_MALFORMED: 0
+S0_MISSING_ID: 0
+S0_DUPLICATES: 0
+S0_MISSING_DDEV: 0
+S0_UNEXPECTED: 0
+
+====================================================================================================
+5. LOCAL B4 SEED13 PHYSICAL CHECKPOINT CANDIDATES
+====================================================================================================
+MODEL_ROOT_MISSING: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\models\task7
+
+6. AUDIT LIMITATIONS
+This audit compares prediction records and inspects available metadata.
+A matching hash does not alone prove model/checkpoint provenance.
+No model training was executed.
+No capability sidecar was executed.
+No protected source artifact was modified.

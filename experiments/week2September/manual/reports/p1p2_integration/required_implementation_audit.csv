@@ -1,0 +1,6 @@
+﻿"Type","Name","InStaging","InP2","StageBytes","P2Bytes"
+"SCHEMA","capability_eval_input.schema.json","False","False","0","0"
+"SCHEMA","capability_eval_manifest.schema.json","False","False","0","0"
+"SCHEMA","capability_graph_v2.schema.json","False","False","0","0"
+"SCHEMA","prerequisite_annotation_v1.schema.json","False","False","0","0"
+"SCHEMA","transfer_probe_result_v1.schema.json","False","False","0","0"

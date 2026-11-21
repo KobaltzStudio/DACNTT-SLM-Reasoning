@@ -1,0 +1,346 @@
+{
+  "created_at_utc": "2026-11-17T06:02:55.600499+00:00",
+  "manual_root": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual",
+  "p2_root": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2",
+  "approval": {
+    "expected_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\capability\\p1_day14_final_2026-11-14\\approved\\gold_supplement_85_approved_review.csv",
+    "expected_exists": false,
+    "expected_sha256": null,
+    "repository_candidates": [
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_releases\\vFinal_2026-11-16\\gold_supplement_85_approved_review.csv",
+        "size_bytes": 76734,
+        "sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300"
+      },
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\capability\\p1_day14_final_2026-11-14\\approved\\gold_supplement_85_approved_review.csv",
+        "size_bytes": 76734,
+        "sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300"
+      },
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\capability\\p1_day14_final_2026-11-14\\approved\\priority_error_review_170_approved.csv",
+        "size_bytes": 349775,
+        "sha256": "23a5381958b356415111e628f95f9f29ab9c2c56ed1f5ca444ff1eec1ea32a2e"
+      },
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\capability\\p1_extractor_v3_1_2026-11-14\\prediction_changes_detailed_review_approved.csv",
+        "size_bytes": 22961,
+        "sha256": "8aa728a2cf150de7885e0dc6394366f6911a8d1bdea932ab0a99c5c40fb46fc9"
+      },
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\capability\\p1_extractor_v3_2026-11-14\\source\\reports\\capability\\p1_day14_final_2026-11-14\\approved\\priority_error_review_170_approved.csv",
+        "size_bytes": 349775,
+        "sha256": "23a5381958b356415111e628f95f9f29ab9c2c56ed1f5ca444ff1eec1ea32a2e"
+      },
+      {
+        "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\gold_review\\approval_records_requiring_review.csv",
+        "size_bytes": 55412,
+        "sha256": "62ba9db5f85d98c3c961d5654ca5e6b6baa4bd9cf8295ef4d5a643001f45280a"
+      }
+    ]
+  },
+  "pool": {
+    "exists": true,
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\trajectory\\pool\\pool_v1_verified.jsonl",
+    "size_bytes": 10690884,
+    "sha256": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
+    "records": 4353,
+    "jsonl_errors": [],
+    "jsonl_error_count": 0,
+    "unique_trajectory_ids": 4353,
+    "empty_trajectory_ids": 0,
+    "unique_problem_ids": 1032,
+    "empty_problem_ids": 0,
+    "first_record_keys": [
+      "answer",
+      "capabilities",
+      "checkpoint",
+      "ground_truth",
+      "metadata",
+      "problem_id",
+      "question",
+      "raw_generation",
+      "reasoning_trace",
+      "teacher_model",
+      "trajectory_id"
+    ],
+    "capability_value_types": {
+      "list": 4353
+    },
+    "capability_counts": {
+      "addition": 2800,
+      "division": 1775,
+      "fraction": 829,
+      "multiplication": 3483,
+      "percentage": 525,
+      "ratio": 37,
+      "subtraction": 2202
+    },
+    "rows_with_non_list_capabilities": 0,
+    "verification_status_counts": {
+      "valid": 4353
+    },
+    "capability_extractor_counts": {
+      "rules_v2/raw_generation": 4353
+    },
+    "split_comparison": {
+      "d_pool_count": 6968,
+      "pool_problem_count": 1032,
+      "d_pool_minus_pool_problem_count": 5936,
+      "pool_problem_minus_d_pool_count": 0,
+      "pool_intersect_d_dev": 0,
+      "pool_intersect_d_test": 0
+    },
+    "sample": [
+      {
+        "problem_id": "gsm8k_train_00000",
+        "trajectory_id": "gsm8k_train_00000_traj_001",
+        "capabilities": [
+          "multiplication",
+          "division",
+          "fraction"
+        ],
+        "verification_status": "valid"
+      },
+      {
+        "problem_id": "gsm8k_train_00000",
+        "trajectory_id": "gsm8k_train_00000_traj_002",
+        "capabilities": [
+          "multiplication",
+          "fraction"
+        ],
+        "verification_status": "valid"
+      },
+      {
+        "problem_id": "gsm8k_train_00000",
+        "trajectory_id": "gsm8k_train_00000_traj_003",
+        "capabilities": [
+          "multiplication",
+          "division",
+          "fraction"
+        ],
+        "verification_status": "valid"
+      },
+      {
+        "problem_id": "gsm8k_train_00000",
+        "trajectory_id": "gsm8k_train_00000_traj_004",
+        "capabilities": [
+          "multiplication",
+          "division",
+          "fraction"
+        ],
+        "verification_status": "valid"
+      },
+      {
+        "problem_id": "gsm8k_train_00000",
+        "trajectory_id": "gsm8k_train_00000_traj_005",
+        "capabilities": [
+          "multiplication",
+          "fraction"
+        ],
+        "verification_status": "valid"
+      }
+    ]
+  },
+  "config": {
+    "exists": true,
+    "path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\config\\experiment_config.json",
+    "sha256": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+    "config_version": "v2",
+    "student": {
+      "model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "initial_checkpoint": "student_ckpt_000",
+      "revision_note": "HF main as of 2026-10-14 (repo last modified 2024-09-25); pinned for all runs."
+    },
+    "teacher": {
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "K": 5,
+      "temperature": 0.7,
+      "max_new_tokens": 512,
+      "generation_seed_base": 20261009,
+      "generation_seed_rule": "generation_seed_base + problem_index * K + k (problem_index = row order of the input file, k = 0..K-1)",
+      "prompt_source": "scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE",
+      "revision_note": "Not recorded at generation time. HF repo last modified 2024-09-25 (before generation in 2026-10), so main == this sha if the model was loaded from HF main."
+    },
+    "seeds": {
+      "training_seeds": [
+        13,
+        42,
+        2026
+      ],
+      "data_order_seed_rule": "data_order_seed = training_seed",
+      "optional_extra_seeds": [
+        7,
+        77
+      ],
+      "optional_extra_seeds_rule": "run only if compute allows, and then for every method"
+    },
+    "schedule": {
+      "rounds_M": 3,
+      "checkpoint_name": "student_ckpt_{t:03d}"
+    },
+    "budget": {
+      "unit": "supervised (loss-bearing) response tokens under the Student tokenizer; prompt tokens are masked from the loss and logged separately",
+      "beta_round_rule": "n_round * mean token length of verified trajectories",
+      "n_round": 200,
+      "beta_round_tokens": 45426,
+      "beta_total_tokens": 136278,
+      "probe_budget_b_steps": 7,
+      "probe_budget_note": "b = one epoch over a 50-trajectory group at effective batch 8 (= ceil(50/8) = 7 steps), same regime as one training round",
+      "l_emp_checkpoints": [
+        "student_ckpt_000"
+      ],
+      "l_emp_groups": "5 token-length quintile bins of the eligible pool at S_0; 50 trajectories sampled per bin with seed 363636",
+      "report_beta_est": true,
+      "pool_token_stats": "reports/task5/pool_token_stats.json (Student tokenizer; response mean 227.13, with prompt mean 359.6)",
+      "L_bar_response_tokens": 227.13,
+      "L_bar_source": "reports/task5/pool_token_stats.json (480 verified trajectories of the preliminary pool, Student tokenizer)",
+      "pool_requirement": "Task 6 official D_pool trajectory pool must cover >= 1000 problems (5 x n_round with n_cap = 1); otherwise revise via config v2 before training",
+      "b1_exception": "B1 trains on the full pool once per round (reference, higher cost), not budget-matched",
+      "probe_group_size": 50
+    },
+    "selection": {
+      "n_cap": 1,
+      "alpha": 0.5,
+      "alpha_tuned": false,
+      "alpha_tuning_grid": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "retention_r": 0.5,
+      "retention_scope": [
+        "B6"
+      ],
+      "allow_reselect_across_rounds": true,
+      "max_total_reselect": null,
+      "tie_break": "trajectory_id ascending",
+      "b3_rule": "per problem: shortest correct trajectory (Student tokenizer), tie -> smallest trajectory_id; shuffle problems once with seed; walk that order across rounds, each round continuing where the previous stopped and filling until beta_round; no trajectory repeats",
+      "b3_problem_order_seed": "training_seed",
+      "b2_seed_rule": "random.Random(training_seed * 100 + round)",
+      "retention_r_source": "TiC-LM (ACL 2025, arXiv 2504.02107) Sec. 5-6.1: alpha_t = 1/2 recommended (half budget current data, half replay)",
+      "b4_rule": "rank all eligible trajectories once by L_proxy(tau | S_0) descending, tie_break applied; walk that ranking across rounds, each round continuing with the remaining trajectories and filling until beta_round; a trajectory skipped by n_cap in a round stays available for later rounds; no trajectory repeats; identical across training seeds",
+      "allow_reselect_note": "applies to B2, B5 and the ablation; the B3 and B4 schedules never repeat a trajectory"
+    },
+    "training": {
+      "method": "LoRA",
+      "lora_r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.1,
+      "lora_target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ],
+      "learning_rate": 0.0002,
+      "optimizer": "adamw_torch",
+      "batch_size": 8,
+      "epochs_per_round": 1,
+      "max_seq_len": 1024,
+      "tuned": false,
+      "official_runs": "cloud",
+      "local_runs": "smoke test only (QLoRA, RTX 3050 Ti 4GB)",
+      "adam_beta1": 0.9,
+      "adam_beta2": 0.999,
+      "weight_decay": 0.0,
+      "max_grad_norm": 0.3,
+      "lr_scheduler": "constant",
+      "warmup_steps": 0,
+      "batch_size_note": "effective batch size (per-device x gradient accumulation)",
+      "loss": "completion-only (prompt tokens masked)",
+      "precision": "bf16",
+      "adapter_across_rounds": "continue the same LoRA adapter from S_t; optimizer state re-initialized each round",
+      "hyperparameter_source": "QLoRA (Dettmers et al., 2023, arXiv 2305.14314) Appendix: LoRA on all linear layers, dropout 0.1 for models up to 13B, constant LR schedule, Adam beta2 0.999, max grad norm 0.3"
+    }
+  },
+  "source_files": [
+    {
+      "path": "scripts/run_experiments.py",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "scripts/run_experiment.py",
+      "exists": true,
+      "sha256": "2e2df28b627f7fdf30127b5e7312537fa048be49575d24fc3760f97147dac451"
+    },
+    {
+      "path": "scripts/train_round.py",
+      "exists": true,
+      "sha256": "d78e7e329ba49e7c17e16265ee49b40e113f6b9efcb65bef9bf574c50bef95fe"
+    },
+    {
+      "path": "scripts/select_round.py",
+      "exists": true,
+      "sha256": "06ced4de235c2e22223810e8c52c14e02b943223e02c5b0712b1f45303de8281"
+    },
+    {
+      "path": "scripts/selection.py",
+      "exists": true,
+      "sha256": "586b36254a10b5a144abb0559d90057a56dfc59c33b7fca6c233502b4f10deae"
+    },
+    {
+      "path": "scripts/learnability.py",
+      "exists": true,
+      "sha256": "a97f44c5905bf3779ba1909c28174c4cf96e31e06c83c4ffefe1858c7420e4c3"
+    },
+    {
+      "path": "scripts/eval_student.py",
+      "exists": true,
+      "sha256": "52a653f64d8ec720bf340f3f258b6c779bafea63b9e1a333539675dfec31a5f8"
+    },
+    {
+      "path": "scripts/student_common.py",
+      "exists": true,
+      "sha256": "c3bf2dfcdf0525b481cf25f467e39a09748b4fd48dc905dc3edd3c03ac8983fb"
+    },
+    {
+      "path": "scripts/capability_eval.py",
+      "exists": true,
+      "sha256": "db62d84497eda50baf73025387db6db7be6dc314ee8cc1b5c0346a1150cfa47d"
+    },
+    {
+      "path": "integration_staging/P1/scripts/run_b4_b5.py",
+      "exists": true,
+      "sha256": "41039c9d674c8d93d799432a112cd54497ac71f507437d75e223b729b580cbb9"
+    },
+    {
+      "path": "integration_staging/P1/scripts/train_round.py",
+      "exists": true,
+      "sha256": "b85041545f504d67aed80029f5431605d6a4ebe4bf0070cda3814460354812ad"
+    },
+    {
+      "path": "integration_staging/P1/scripts/selection_common.py",
+      "exists": true,
+      "sha256": "804123fe99df2da7d393b8c7b43a59f2e4fe026cc066d12da30c6e5def2d54dc"
+    },
+    {
+      "path": "integration_staging/P1/scripts/evaluate_student_capabilities.py",
+      "exists": true,
+      "sha256": "87e2e5c9b1fd3002dc77ea56e47cdc25f08ff9d25358819e6d6f887acab81f2b"
+    },
+    {
+      "path": "integration_staging/P1/scripts/build_capability_learning_curves.py",
+      "exists": true,
+      "sha256": "bbabadfc6d140598ff129124e3fb3f877cdde96b9b2ba61061830aac5bc7316b"
+    },
+    {
+      "path": "integration_staging/P1/scripts/build_capability_graph.py",
+      "exists": true,
+      "sha256": "3dfcba62598768e8df4ecce261bfd1d840846cd4dd0a92e7f73cc0caa4a5f664"
+    },
+    {
+      "path": "integration_staging/P1/scripts/build_graph_evidence_ledger.py",
+      "exists": true,
+      "sha256": "08e64675e8be0a100369c20a2b6762466af556e329036bec3e55f26ed2f63c2d"
+    }
+  ],
+  "read_only": true,
+  "protected_artifacts_modified": false
+}

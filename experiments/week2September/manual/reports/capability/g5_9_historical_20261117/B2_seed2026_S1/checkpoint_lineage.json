@@ -1,0 +1,20 @@
+{
+  "run_id": "B2_seed2026_S1",
+  "method": "B2",
+  "seed": 2026,
+  "round": 1,
+  "checkpoint_id": "B2_seed2026_S1.json",
+  "checkpoint_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\checkpoint_references\\B2_seed2026_S1.json",
+  "checkpoint_sha256": "94a215b1655674fd04ce24ca9a00049bbb8b5984666deb8ab5d98a75ad9a9a28",
+  "shared_checkpoint_group": null,
+  "train_set": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\train_set.json",
+  "selection_log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\selection_log.jsonl",
+  "train_log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\train_log.json",
+  "checkpoint_log": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\historical_g59_inputs\\run_20261117_073550_117070\\lineage\\B2_seed2026_S1\\checkpoint_log.jsonl",
+  "config_sha256": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+  "prediction_sha256": "e80db4ee9d914c1b8d84284bb81921d40b26e2f945533f465bcf03d2d76d2be3",
+  "gold_manifest_sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+  "gold_labels_sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+  "approval_csv_sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+  "dev_ids_sha256": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30"
+}

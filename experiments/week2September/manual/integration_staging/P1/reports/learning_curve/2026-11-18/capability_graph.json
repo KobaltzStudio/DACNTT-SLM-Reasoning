@@ -1,0 +1,36 @@
+{
+  "graph_id": "proposal1_capability_graph",
+  "student_checkpoint": "B4_seed13_ckpt003",
+  "status": "empirical",
+  "nodes": [
+    {
+      "node_id": "addition",
+      "capability": "addition"
+    },
+    {
+      "node_id": "subtraction",
+      "capability": "subtraction"
+    },
+    {
+      "node_id": "multiplication",
+      "capability": "multiplication"
+    },
+    {
+      "node_id": "division",
+      "capability": "division"
+    },
+    {
+      "node_id": "percentage",
+      "capability": "percentage"
+    },
+    {
+      "node_id": "fraction",
+      "capability": "fraction"
+    },
+    {
+      "node_id": "ratio",
+      "capability": "ratio"
+    }
+  ],
+  "edges": []
+}

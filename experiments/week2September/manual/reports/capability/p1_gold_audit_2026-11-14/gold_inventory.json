@@ -1,18 +1,18 @@
 {
   "audit_date": "2026-11-14",
-  "project_root": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual",
+  "project_root": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual",
   "source_files": {
     "gold_batch": {
       "path": "data/gold_vfinal/batch_100_annotations_vfinal.jsonl",
       "records": 100,
       "unique_ids": 100,
-      "sha256": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+      "sha256": "76f1f08193a36282df2dce6fb44554f77d2778d362fee6f4e1606aa02a760181"
     },
     "gold_supplement": {
       "path": "data/gold_vfinal/supplement_annotations_vfinal.jsonl",
       "records": 85,
       "unique_ids": 85,
-      "sha256": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654"
+      "sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44"
     },
     "gold_manifest": {
       "path": "data/gold_vfinal/gold_vfinal_manifest.json",
@@ -153,21 +153,21 @@
       "records": 25,
       "unique_nonempty_problem_ids": 25,
       "blank_problem_ids": 0,
-      "sha256": "4a8782934aa05888f857a3ff4b2c6675c508d3cec2670feacabedfda5767b175"
+      "sha256": "67caf6c38bd66f9b428aeea792d5da57fddc4839157f1f027d298cb5e0942399"
     },
     {
       "path": "data/annotation/a2_supplement_annotations_template.jsonl",
       "records": 25,
       "unique_nonempty_problem_ids": 25,
       "blank_problem_ids": 0,
-      "sha256": "b169fb10b4539fd1f143e7e7aa5851c2a153e42b7883ffdc04cdff0baee54b3e"
+      "sha256": "85e786db603a34faa2ba165c2ea1e902afcee1c165d744341ae0c49d72fb422a"
     },
     {
       "path": "data/annotation/a2_supplement_tasks.jsonl",
       "records": 25,
       "unique_nonempty_problem_ids": 25,
       "blank_problem_ids": 0,
-      "sha256": "ab68f38656cd9fe2d15bde2930a6ad8fab55397dfa6cd27d1f137cdfb3123adf"
+      "sha256": "4c53033ba2929398b554f7afbd217cb5b8fef6cbcf7ed25abfe154969b13af7f"
     },
     {
       "path": "data/batch_100/batch_100.jsonl",
@@ -209,14 +209,14 @@
       "records": 100,
       "unique_nonempty_problem_ids": 100,
       "blank_problem_ids": 0,
-      "sha256": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f"
+      "sha256": "76f1f08193a36282df2dce6fb44554f77d2778d362fee6f4e1606aa02a760181"
     },
     {
       "path": "data/gold_vfinal/supplement_annotations_vfinal.jsonl",
       "records": 85,
       "unique_nonempty_problem_ids": 85,
       "blank_problem_ids": 0,
-      "sha256": "a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654"
+      "sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44"
     },
     {
       "path": "data/gold_vnext/batch_100_annotations_vnext.jsonl",

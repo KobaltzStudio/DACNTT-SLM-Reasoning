@@ -69,8 +69,8 @@ The row-level review queue is in `gold_review_queue.csv`.
 
 ## Source file hashes
 
-- `data/gold_vfinal/batch_100_annotations_vfinal.jsonl` — SHA-256 `5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f`
-- `data/gold_vfinal/supplement_annotations_vfinal.jsonl` — SHA-256 `a8f78e516c0640c1d30e5f64f22241e5a4a79bfc36be168fdf61c54ed4338654`
+- `data/gold_vfinal/batch_100_annotations_vfinal.jsonl` — SHA-256 `76f1f08193a36282df2dce6fb44554f77d2778d362fee6f4e1606aa02a760181`
+- `data/gold_vfinal/supplement_annotations_vfinal.jsonl` — SHA-256 `0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44`
 - `data/gold_vfinal/gold_vfinal_manifest.json` — SHA-256 `498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04`
 - `data/gold_vnext/gold_vnext_manifest.json` — SHA-256 `bba75f1400c4a2903fc792078d84e39ce85addefc819d6487ccb220bd19aeea6`
 - `reports/capability/d3_final_regression/priority_error_review_annotated.csv` — SHA-256 `92554e8061cbb7a6dc55875b471f4b4ae4571bf959583fc4abb923dd263ff8a2`

@@ -1,0 +1,275 @@
+{
+  "stages": {
+    "S1": {
+      "adapter_weights_sha256": "8f50d3ab6772c7c01d0c244fd661348a0f61164916cf5396d4f916d7c38c6398",
+      "train_set_sha256": "614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006",
+      "checkpoint": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1",
+      "prediction": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_001_dev_status.jsonl",
+      "train_set": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S1\\train_set.json",
+      "parent": "student_ckpt_000",
+      "train_set_hash_from_log": "614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006",
+      "config_hash_from_log": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5",
+      "prediction_rows": 500,
+      "prediction_unique_ids": 500,
+      "prediction_errors": []
+    },
+    "S2": {
+      "adapter_weights_sha256": "759ea14d7a3953b609a70b06b14515d2b309ee209f00843bff6d70c8508a71fc",
+      "train_set_sha256": "cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a",
+      "checkpoint": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2",
+      "prediction": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_002_dev_status.jsonl",
+      "train_set": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S2\\train_set.json",
+      "parent": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_001",
+      "train_set_hash_from_log": "cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a",
+      "config_hash_from_log": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5",
+      "prediction_rows": 500,
+      "prediction_unique_ids": 500,
+      "prediction_errors": []
+    },
+    "S3": {
+      "adapter_weights_sha256": "22d99c60743ed2897586ff22601ff7e8491dbf6495bbac8e0edd5c88880b7106",
+      "train_set_sha256": "f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e",
+      "checkpoint": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3",
+      "prediction": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_003_dev_status.jsonl",
+      "train_set": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S3\\train_set.json",
+      "parent": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_002",
+      "train_set_hash_from_log": "f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e",
+      "config_hash_from_log": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5",
+      "prediction_rows": 500,
+      "prediction_unique_ids": 500,
+      "prediction_errors": []
+    }
+  },
+  "paths": {
+    "capability_eval.py": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\capability_eval.py",
+    "experiment_config.json": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\config\\experiment_config.json",
+    "gold_vfinal_manifest.json": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\gold_vfinal_manifest.json",
+    "supplement_annotations_vfinal.jsonl": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\supplement_annotations_vfinal.jsonl",
+    "gold_supplement_85_approved_review.csv": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_releases\\vFinal_2026-11-16\\gold_supplement_85_approved_review.csv",
+    "d_dev_ids.txt": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\splits\\d_dev_ids.txt"
+  },
+  "checks": [
+    {
+      "name": "FILE_capability_eval.py",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\scripts\\capability_eval.py"
+    },
+    {
+      "name": "FILE_experiment_config.json",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\config\\experiment_config.json"
+    },
+    {
+      "name": "FILE_gold_vfinal_manifest.json",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\gold_vfinal_manifest.json"
+    },
+    {
+      "name": "FILE_supplement_annotations_vfinal.jsonl",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_vfinal\\supplement_annotations_vfinal.jsonl"
+    },
+    {
+      "name": "FILE_gold_supplement_85_approved_review.csv",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\data\\gold_releases\\vFinal_2026-11-16\\gold_supplement_85_approved_review.csv"
+    },
+    {
+      "name": "FILE_d_dev_ids.txt",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\splits\\d_dev_ids.txt"
+    },
+    {
+      "name": "CONFIG_SHA256_MATCH",
+      "passed": true,
+      "detail": "actual=17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5; expected=17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5"
+    },
+    {
+      "name": "GOLD_VERSION_VFINAL",
+      "passed": true,
+      "detail": "vFinal"
+    },
+    {
+      "name": "GOLD_SUPPLEMENT_COUNT_85",
+      "passed": true,
+      "detail": "85"
+    },
+    {
+      "name": "D_DEV_COUNT_500",
+      "passed": true,
+      "detail": "rows=500 unique=500"
+    },
+    {
+      "name": "GOLD_LABELS_85",
+      "passed": true,
+      "detail": "rows=85 errors=0"
+    },
+    {
+      "name": "APPROVAL_ROWS_85",
+      "passed": true,
+      "detail": "rows=85"
+    },
+    {
+      "name": "S1_CHECKPOINT_DIR",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1"
+    },
+    {
+      "name": "S1_WEIGHTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1\\adapter_model.safetensors"
+    },
+    {
+      "name": "S1_ADAPTER_CONFIG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1\\adapter_config.json"
+    },
+    {
+      "name": "S1_TRAIN_LOG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S1\\train_log.json"
+    },
+    {
+      "name": "S1_PARENT_METADATA",
+      "passed": true,
+      "detail": "student_ckpt_000"
+    },
+    {
+      "name": "S1_PARENT_EXPECTED",
+      "passed": true,
+      "detail": "actual=student_ckpt_000; expected_contains=student_ckpt_000"
+    },
+    {
+      "name": "S1_TRAIN_SET_EXISTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S1\\train_set.json"
+    },
+    {
+      "name": "S1_TRAIN_SET_HASH",
+      "passed": true,
+      "detail": "file=614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006; log=614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006"
+    },
+    {
+      "name": "S1_CONFIG_HASH",
+      "passed": true,
+      "detail": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5"
+    },
+    {
+      "name": "S1_PREDICTION_COVERAGE",
+      "passed": true,
+      "detail": "exists=True rows=500 unique=500 errors=0"
+    },
+    {
+      "name": "S2_CHECKPOINT_DIR",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2"
+    },
+    {
+      "name": "S2_WEIGHTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2\\adapter_model.safetensors"
+    },
+    {
+      "name": "S2_ADAPTER_CONFIG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2\\adapter_config.json"
+    },
+    {
+      "name": "S2_TRAIN_LOG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S2\\train_log.json"
+    },
+    {
+      "name": "S2_PARENT_METADATA",
+      "passed": true,
+      "detail": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_001"
+    },
+    {
+      "name": "S2_PARENT_EXPECTED",
+      "passed": true,
+      "detail": "actual=C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_001; expected_contains=student_ckpt_001"
+    },
+    {
+      "name": "S2_TRAIN_SET_EXISTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S2\\train_set.json"
+    },
+    {
+      "name": "S2_TRAIN_SET_HASH",
+      "passed": true,
+      "detail": "file=cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a; log=cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a"
+    },
+    {
+      "name": "S2_CONFIG_HASH",
+      "passed": true,
+      "detail": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5"
+    },
+    {
+      "name": "S2_PREDICTION_COVERAGE",
+      "passed": true,
+      "detail": "exists=True rows=500 unique=500 errors=0"
+    },
+    {
+      "name": "S3_CHECKPOINT_DIR",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3"
+    },
+    {
+      "name": "S3_WEIGHTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3\\adapter_model.safetensors"
+    },
+    {
+      "name": "S3_ADAPTER_CONFIG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3\\adapter_config.json"
+    },
+    {
+      "name": "S3_TRAIN_LOG",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\extracted_checkpoints\\B4_seed13\\S3\\train_log.json"
+    },
+    {
+      "name": "S3_PARENT_METADATA",
+      "passed": true,
+      "detail": "C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_002"
+    },
+    {
+      "name": "S3_PARENT_EXPECTED",
+      "passed": true,
+      "detail": "actual=C:\\KLTN-SLM-Reasoning\\experiments\\week2September\\manual\\models\\task7\\B4\\seed_13\\student_ckpt_002; expected_contains=student_ckpt_002"
+    },
+    {
+      "name": "S3_TRAIN_SET_EXISTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\integration_staging\\G4_CHECKPOINT_AUDIT\\original_train_sets\\S3\\train_set.json"
+    },
+    {
+      "name": "S3_TRAIN_SET_HASH",
+      "passed": true,
+      "detail": "file=f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e; log=f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e"
+    },
+    {
+      "name": "S3_CONFIG_HASH",
+      "passed": true,
+      "detail": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5"
+    },
+    {
+      "name": "S3_PREDICTION_COVERAGE",
+      "passed": true,
+      "detail": "exists=True rows=500 unique=500 errors=0"
+    },
+    {
+      "name": "OUTPUT_ROOT_NOT_EXISTS",
+      "passed": true,
+      "detail": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\capability_g4_validation"
+    }
+  ],
+  "config_sha256": "17cf4b837dc42ac5145aea762847ca5dfba4bae58d253560b3b0dd6a254b73c5",
+  "dev_id_count": 500,
+  "gold_label_count": 85,
+  "approval_row_count": 85,
+  "status": "PASS",
+  "all_checks_pass": true,
+  "output_root": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\capability_g4_validation"
+}

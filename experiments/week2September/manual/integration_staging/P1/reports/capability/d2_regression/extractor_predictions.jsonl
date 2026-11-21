@@ -1,0 +1,185 @@
+{"problem_id": "gsm8k_train_00000", "predicted_capabilities": ["fraction", "multiplication"]}
+{"problem_id": "gsm8k_train_00001", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00002", "predicted_capabilities": ["multiplication", "subtraction"]}
+{"problem_id": "gsm8k_train_00003", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00004", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00005", "predicted_capabilities": ["multiplication", "subtraction"]}
+{"problem_id": "gsm8k_train_00006", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00007", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_00008", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00009", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00010", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00011", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00012", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00013", "predicted_capabilities": ["addition"]}
+{"problem_id": "gsm8k_train_00014", "predicted_capabilities": ["addition", "percentage"]}
+{"problem_id": "gsm8k_train_00015", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00016", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00017", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00018", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00019", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00020", "predicted_capabilities": ["division", "multiplication"]}
+{"problem_id": "gsm8k_train_00021", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00022", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00023", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00024", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00025", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00026", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00027", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00028", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00029", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00030", "predicted_capabilities": ["fraction", "percentage"]}
+{"problem_id": "gsm8k_train_00031", "predicted_capabilities": ["addition", "multiplication"]}
+{"problem_id": "gsm8k_train_00032", "predicted_capabilities": ["addition", "percentage"]}
+{"problem_id": "gsm8k_train_00033", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00034", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00035", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00036", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00037", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00038", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00039", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00040", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00041", "predicted_capabilities": ["addition", "fraction"]}
+{"problem_id": "gsm8k_train_00042", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00043", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00044", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00045", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00046", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00047", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00048", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00049", "predicted_capabilities": ["fraction", "multiplication"]}
+{"problem_id": "gsm8k_train_00050", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00051", "predicted_capabilities": ["division"]}
+{"problem_id": "gsm8k_train_00052", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00053", "predicted_capabilities": ["multiplication", "subtraction"]}
+{"problem_id": "gsm8k_train_00054", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00055", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00056", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00057", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00058", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00059", "predicted_capabilities": ["division", "fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00060", "predicted_capabilities": ["addition"]}
+{"problem_id": "gsm8k_train_00061", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00062", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00063", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00064", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00065", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00066", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00067", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00068", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00069", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00070", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00071", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00072", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00073", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00074", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00075", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00076", "predicted_capabilities": ["division", "percentage"]}
+{"problem_id": "gsm8k_train_00077", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00078", "predicted_capabilities": ["fraction", "multiplication"]}
+{"problem_id": "gsm8k_train_00079", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00080", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00081", "predicted_capabilities": ["addition", "multiplication"]}
+{"problem_id": "gsm8k_train_00082", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00083", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00084", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00085", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00086", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00087", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00088", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00089", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00090", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00091", "predicted_capabilities": ["subtraction"]}
+{"problem_id": "gsm8k_train_00092", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00093", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00094", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00095", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00096", "predicted_capabilities": ["division", "percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_00097", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00098", "predicted_capabilities": ["multiplication"]}
+{"problem_id": "gsm8k_train_00099", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00116", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_00155", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00166", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00239", "predicted_capabilities": ["addition", "percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_00293", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_00325", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00342", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_00563", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00666", "predicted_capabilities": ["fraction", "multiplication"]}
+{"problem_id": "gsm8k_train_00678", "predicted_capabilities": ["addition", "fraction"]}
+{"problem_id": "gsm8k_train_00713", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00724", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_00761", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_00769", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_00779", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_00818", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_00830", "predicted_capabilities": ["percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_00840", "predicted_capabilities": ["addition", "ratio"]}
+{"problem_id": "gsm8k_train_00934", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_00942", "predicted_capabilities": ["fraction", "multiplication"]}
+{"problem_id": "gsm8k_train_01013", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_01200", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_01280", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_01334", "predicted_capabilities": ["addition", "division", "ratio"]}
+{"problem_id": "gsm8k_train_01377", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_01384", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_01600", "predicted_capabilities": ["division"]}
+{"problem_id": "gsm8k_train_01869", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_02039", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_02059", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_02327", "predicted_capabilities": ["addition", "division", "fraction"]}
+{"problem_id": "gsm8k_train_02342", "predicted_capabilities": ["multiplication", "percentage"]}
+{"problem_id": "gsm8k_train_02359", "predicted_capabilities": ["division", "fraction", "ratio"]}
+{"problem_id": "gsm8k_train_02376", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_02486", "predicted_capabilities": ["multiplication", "percentage"]}
+{"problem_id": "gsm8k_train_02508", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_02634", "predicted_capabilities": ["addition", "multiplication", "ratio"]}
+{"problem_id": "gsm8k_train_02713", "predicted_capabilities": ["ratio", "subtraction"]}
+{"problem_id": "gsm8k_train_02754", "predicted_capabilities": ["addition", "fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_02837", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_02858", "predicted_capabilities": ["multiplication", "percentage"]}
+{"problem_id": "gsm8k_train_02871", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_02893", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_02919", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_02960", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_02997", "predicted_capabilities": ["fraction"]}
+{"problem_id": "gsm8k_train_03016", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_03048", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_03116", "predicted_capabilities": ["percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_03125", "predicted_capabilities": ["addition", "percentage"]}
+{"problem_id": "gsm8k_train_03140", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_03263", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_03289", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_03316", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_03355", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_03360", "predicted_capabilities": ["percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_03390", "predicted_capabilities": ["fraction", "ratio"]}
+{"problem_id": "gsm8k_train_03439", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_03734", "predicted_capabilities": ["division", "fraction"]}
+{"problem_id": "gsm8k_train_03879", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_03882", "predicted_capabilities": ["fraction", "subtraction"]}
+{"problem_id": "gsm8k_train_03999", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_04046", "predicted_capabilities": ["ratio", "subtraction"]}
+{"problem_id": "gsm8k_train_04231", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_04426", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_04470", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_04617", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_04862", "predicted_capabilities": ["percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_05030", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_05194", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_05287", "predicted_capabilities": ["percentage", "subtraction"]}
+{"problem_id": "gsm8k_train_05356", "predicted_capabilities": ["addition", "ratio"]}
+{"problem_id": "gsm8k_train_05451", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_05463", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_05486", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_05565", "predicted_capabilities": []}
+{"problem_id": "gsm8k_train_05585", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_05715", "predicted_capabilities": ["fraction", "percentage"]}
+{"problem_id": "gsm8k_train_06274", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_06506", "predicted_capabilities": ["division", "ratio"]}
+{"problem_id": "gsm8k_train_06921", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_07080", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_07117", "predicted_capabilities": ["percentage"]}
+{"problem_id": "gsm8k_train_07158", "predicted_capabilities": ["ratio"]}
+{"problem_id": "gsm8k_train_07349", "predicted_capabilities": ["ratio"]}

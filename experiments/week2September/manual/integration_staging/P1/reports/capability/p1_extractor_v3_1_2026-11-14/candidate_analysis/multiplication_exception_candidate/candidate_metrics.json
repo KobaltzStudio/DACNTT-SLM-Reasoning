@@ -1,0 +1,123 @@
+{
+  "experiment": "multiplication_exception_candidate",
+  "candidate_negative_pattern": "(?s)\\b\\d+(?:\\.\\d+)?\\s*%\\s+of\\s+them\\b(?=.*\\b\\d+(?:\\.\\d+)?\\s+of\\s+them\\s+(?:are|is|were|was)\\b)(?=.*\\bhow\\s+many\\b)",
+  "official_config_modified": false,
+  "baseline": {
+    "samples": 170,
+    "exact_match": 8,
+    "exact_match_rate": 0.047058823529411764,
+    "micro": {
+      "tp": 194,
+      "fp": 18,
+      "fn": 309,
+      "precision": 0.9150943396226415,
+      "recall": 0.3856858846918489,
+      "f1": 0.5426573426573427
+    },
+    "per_capability": {
+      "addition": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 68,
+        "tn": 91
+      },
+      "subtraction": {
+        "tp": 28,
+        "fp": 1,
+        "fn": 63,
+        "tn": 78
+      },
+      "multiplication": {
+        "tp": 38,
+        "fp": 4,
+        "fn": 102,
+        "tn": 26
+      },
+      "division": {
+        "tp": 18,
+        "fp": 8,
+        "fn": 70,
+        "tn": 74
+      },
+      "percentage": {
+        "tp": 38,
+        "fp": 0,
+        "fn": 0,
+        "tn": 132
+      },
+      "fraction": {
+        "tp": 40,
+        "fp": 2,
+        "fn": 0,
+        "tn": 128
+      },
+      "ratio": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 6,
+        "tn": 140
+      }
+    }
+  },
+  "candidate": {
+    "samples": 170,
+    "exact_match": 8,
+    "exact_match_rate": 0.047058823529411764,
+    "micro": {
+      "tp": 194,
+      "fp": 17,
+      "fn": 309,
+      "precision": 0.919431279620853,
+      "recall": 0.3856858846918489,
+      "f1": 0.5434173669467787
+    },
+    "per_capability": {
+      "addition": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 68,
+        "tn": 91
+      },
+      "subtraction": {
+        "tp": 28,
+        "fp": 1,
+        "fn": 63,
+        "tn": 78
+      },
+      "multiplication": {
+        "tp": 38,
+        "fp": 3,
+        "fn": 102,
+        "tn": 27
+      },
+      "division": {
+        "tp": 18,
+        "fp": 8,
+        "fn": 70,
+        "tn": 74
+      },
+      "percentage": {
+        "tp": 38,
+        "fp": 0,
+        "fn": 0,
+        "tn": 132
+      },
+      "fraction": {
+        "tp": 40,
+        "fp": 2,
+        "fn": 0,
+        "tn": 128
+      },
+      "ratio": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 6,
+        "tn": 140
+      }
+    }
+  },
+  "changed_rows": 1,
+  "changed_problem_ids": [
+    "gsm8k_train_00011"
+  ]
+}

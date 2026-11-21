@@ -1,0 +1,53 @@
+[
+  {
+    "checkpoint": "student_ckpt_001",
+    "source": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_001_dev.jsonl",
+    "source_sha256": "9bb9aeb1c356b7563fc3d8b1b45fe9553bc7c2ca7907e7672833fae448f9a26d",
+    "source_sha256_after": "9bb9aeb1c356b7563fc3d8b1b45fe9553bc7c2ca7907e7672833fae448f9a26d",
+    "output": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_001_dev_status.jsonl",
+    "output_sha256": "f9262326c8207a45665b67c521a1f74a1eabe4f4dfed2e7f49a9d6d17760a4d4",
+    "records": 500,
+    "unique_problem_ids": 500,
+    "status_counts": {
+      "valid": 391,
+      "invalid_answer": 106,
+      "invalid_format": 3
+    },
+    "source_unchanged": true,
+    "status_mapping_valid": true
+  },
+  {
+    "checkpoint": "student_ckpt_002",
+    "source": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_002_dev.jsonl",
+    "source_sha256": "bd1c5a1a952056beea92d982b0212eab484a9bf6ad034cbc76803d6214d7c50f",
+    "source_sha256_after": "bd1c5a1a952056beea92d982b0212eab484a9bf6ad034cbc76803d6214d7c50f",
+    "output": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_002_dev_status.jsonl",
+    "output_sha256": "1c5a7258c83746a7af63eadb26617af6e5c3b1eaff03bcc3c2c9a9ca7b7f5b00",
+    "records": 500,
+    "unique_problem_ids": 500,
+    "status_counts": {
+      "valid": 407,
+      "invalid_answer": 88,
+      "invalid_format": 5
+    },
+    "source_unchanged": true,
+    "status_mapping_valid": true
+  },
+  {
+    "checkpoint": "student_ckpt_003",
+    "source": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\integration_staging\\P1\\reports\\task7\\B4\\seed_13\\eval_student_ckpt_003_dev.jsonl",
+    "source_sha256": "b27ecc6553c963cb8b173794b82f703aee4ebaf99461b0b051d45c06a55bf7cb",
+    "source_sha256_after": "b27ecc6553c963cb8b173794b82f703aee4ebaf99461b0b051d45c06a55bf7cb",
+    "output": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\derived_predictions\\B4_seed13\\eval_student_ckpt_003_dev_status.jsonl",
+    "output_sha256": "3385eb54b0d6fb991728c18ac8fb53043e0ee2c5741d8f0649c6fd68997950d0",
+    "records": 500,
+    "unique_problem_ids": 500,
+    "status_counts": {
+      "valid": 409,
+      "invalid_answer": 86,
+      "invalid_format": 5
+    },
+    "source_unchanged": true,
+    "status_mapping_valid": true
+  }
+]

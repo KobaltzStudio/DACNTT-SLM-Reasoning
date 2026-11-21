@@ -1,0 +1,271 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+from scripts import p1p2_capability_state as state_module
+
+
+CAPABILITIES = {
+    "addition": 30,
+    "subtraction": 51,
+    "multiplication": 73,
+    "division": 47,
+    "percentage": 29,
+    "fraction": 31,
+    "ratio": 30,
+}
+
+CHECKPOINT_SHA256 = "a" * 64
+
+
+def canonical_sha256(value):
+    payload = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def write_json(path, value):
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def file_metadata(path):
+    return {
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "size_bytes": path.stat().st_size,
+    }
+
+
+class CapabilityStateTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(
+            prefix="p1p2_capability_state_test_"
+        )
+        self.root = Path(self.temp.name)
+        self.sidecar = self.root / "sidecar"
+        self.sidecar.mkdir(parents=True)
+
+        self.out = self.root / "state" / "S0_state.json"
+
+        self._build_valid_sidecar()
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def _build_valid_sidecar(self):
+        metrics_path = self.sidecar / "capability_metrics.jsonl"
+
+        metric_rows = []
+        for capability, support in CAPABILITIES.items():
+            correct = support // 2
+            incorrect = support - correct
+
+            metric_rows.append({
+                "capability": capability,
+                "n_support": support,
+                "n_correct": correct,
+                "n_incorrect": incorrect,
+                "mastery": correct / support,
+                "deficit": 1.0 - correct / support,
+                "strict_metric": "status_equals_valid",
+                "gold_policy": "approved_85_primary",
+                "ci95_low": 0.0,
+                "ci95_high": 1.0,
+            })
+
+        metrics_path.write_text(
+            "".join(
+                json.dumps(row, ensure_ascii=False) + "\n"
+                for row in metric_rows
+            ),
+            encoding="utf-8",
+        )
+
+        csv_path = self.sidecar / "capability_metrics.csv"
+        csv_path.write_text(
+            "capability,n_support,n_correct,n_incorrect\n"
+            "synthetic,1,1,0\n",
+            encoding="utf-8",
+        )
+
+        coverage = {
+            "status": "PASS",
+            "split": "D_dev",
+            "prediction_records": 500,
+            "prediction_unique_ids": 500,
+            "gold_records": 85,
+            "gold_unique_ids": 85,
+            "gold_matched_prediction_ids": 85,
+            "lenient_correct_excluded": True,
+        }
+        write_json(
+            self.sidecar / "prediction_coverage_report.json",
+            coverage,
+        )
+
+        lineage = {
+            "run_id": "SHARED_seed0_S0",
+            "method": "SHARED",
+            "seed": 0,
+            "round": 0,
+            "checkpoint_id": "S0_BASE_MODEL",
+            "checkpoint_sha256": CHECKPOINT_SHA256,
+        }
+        write_json(
+            self.sidecar / "checkpoint_lineage.json",
+            lineage,
+        )
+
+        fingerprint_inputs = {
+            "checkpoint": CHECKPOINT_SHA256,
+            "prediction": "b" * 64,
+            "config": "c" * 64,
+        }
+        fingerprint = {
+            "fingerprint": canonical_sha256(fingerprint_inputs),
+            "inputs": fingerprint_inputs,
+        }
+        write_json(
+            self.sidecar / "input_fingerprint.json",
+            fingerprint,
+        )
+
+        output_names = (
+            "capability_metrics.csv",
+            "capability_metrics.jsonl",
+            "prediction_coverage_report.json",
+            "checkpoint_lineage.json",
+            "input_fingerprint.json",
+        )
+
+        outputs = {}
+        for name in output_names:
+            outputs[name] = file_metadata(self.sidecar / name)
+
+        manifest = {
+            "schema_version": "p1p2.capability-manifest.v1",
+            "run_id": "SHARED_seed0_S0",
+            "method": "SHARED",
+            "seed": 0,
+            "round": 0,
+            "checkpoint": "S0",
+            "gold_policy": "approved_85_primary",
+            "strict_metric": "status == valid",
+            "input_hashes": fingerprint_inputs,
+            "outputs": outputs,
+        }
+
+        write_json(
+            self.sidecar / "student_capability_evaluation_manifest.json",
+            manifest,
+        )
+
+    def _run_cli(self, target_seed=13):
+        argv = [
+            "p1p2_capability_state.py",
+            "--sidecar-dir",
+            str(self.sidecar),
+            "--target-method",
+            "P1P2",
+            "--target-seed",
+            str(target_seed),
+            "--out",
+            str(self.out),
+        ]
+
+        with patch.object(sys, "argv", argv):
+            return state_module.main()
+
+    def _refresh_manifest_output(self, filename):
+        manifest_path = (
+            self.sidecar / "student_capability_evaluation_manifest.json"
+        )
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["outputs"][filename] = file_metadata(
+            self.sidecar / filename
+        )
+        write_json(manifest_path, manifest)
+
+    def test_valid_sidecar_creates_state(self):
+        result = self._run_cli()
+
+        self.assertEqual(result, 0)
+        self.assertTrue(self.out.is_file())
+
+        state = json.loads(self.out.read_text(encoding="utf-8"))
+        self.assertEqual(
+            state["schema_version"],
+            "p1p2.capability-state.v1",
+        )
+        self.assertEqual(state["target"]["method"], "P1P2")
+        self.assertEqual(state["target"]["seed"], 13)
+        self.assertEqual(state["target"]["selection_round"], 1)
+        self.assertEqual(len(state["capabilities"]), 7)
+
+    def test_manifest_lineage_seed_mismatch_is_rejected(self):
+        lineage_path = self.sidecar / "checkpoint_lineage.json"
+        lineage = json.loads(lineage_path.read_text(encoding="utf-8"))
+        lineage["seed"] = 99
+        write_json(lineage_path, lineage)
+        self._refresh_manifest_output("checkpoint_lineage.json")
+
+        with self.assertRaisesRegex(ValueError, "PROVENANCE_MISMATCH seed"):
+            self._run_cli()
+
+        self.assertFalse(self.out.exists())
+
+    def test_fingerprint_inputs_mismatch_is_rejected(self):
+        fingerprint_path = self.sidecar / "input_fingerprint.json"
+        fingerprint = json.loads(
+            fingerprint_path.read_text(encoding="utf-8")
+        )
+        fingerprint["inputs"]["prediction"] = "d" * 64
+        fingerprint["fingerprint"] = canonical_sha256(
+            fingerprint["inputs"]
+        )
+        write_json(fingerprint_path, fingerprint)
+        self._refresh_manifest_output("input_fingerprint.json")
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "Manifest input_hashes do not match fingerprint inputs",
+        ):
+            self._run_cli()
+
+        self.assertFalse(self.out.exists())
+
+    def test_exact_existing_state_is_reused(self):
+        self._run_cli()
+        first_bytes = self.out.read_bytes()
+
+        self._run_cli()
+        second_bytes = self.out.read_bytes()
+
+        self.assertEqual(first_bytes, second_bytes)
+
+    def test_different_existing_state_is_not_overwritten(self):
+        self._run_cli(target_seed=13)
+        original_bytes = self.out.read_bytes()
+
+        with self.assertRaisesRegex(
+            FileExistsError,
+            "refusing overwrite",
+        ):
+            self._run_cli(target_seed=42)
+
+        self.assertEqual(self.out.read_bytes(), original_bytes)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

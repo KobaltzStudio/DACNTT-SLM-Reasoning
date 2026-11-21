@@ -1,0 +1,23 @@
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\config\experiment_config.json
+SIZE=10235
+SHA256=e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461
+
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\capability_eval.py
+SIZE=20403
+SHA256=db62d84497eda50baf73025387db6db7be6dc314ee8cc1b5c0346a1150cfa47d
+
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\run_experiment.py
+SIZE=13450
+SHA256=2e2df28b627f7fdf30127b5e7312537fa048be49575d24fc3760f97147dac451
+
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\select_round.py
+SIZE=6305
+SHA256=06ced4de235c2e22223810e8c52c14e02b943223e02c5b0712b1f45303de8281
+
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\student_common.py
+SIZE=10359
+SHA256=c3bf2dfcdf0525b481cf25f467e39a09748b4fd48dc905dc3edd3c03ac8983fb
+
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\train_round.py
+SIZE=9895
+SHA256=d78e7e329ba49e7c17e16265ee49b40e113f6b9efcb65bef9bf574c50bef95fe

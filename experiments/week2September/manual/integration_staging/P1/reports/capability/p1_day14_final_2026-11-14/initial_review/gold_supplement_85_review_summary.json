@@ -1,0 +1,24 @@
+{
+  "review_date": "2026-11-14",
+  "review_type": "AI-assisted semantic review proposal",
+  "source": "P1_adjudication_source_2026-11-14.zip",
+  "records_reviewed": 85,
+  "unique_problem_ids": 85,
+  "statuses": {
+    "AI_REVIEW_NO_CHANGE": 84,
+    "NEEDS_MANUAL_ADJUDICATION": 1
+  },
+  "records_with_solution_trace": 0,
+  "records_with_final_answer_only": 85,
+  "vfinal_vs_vnext_record_identical_count": 85,
+  "a1_a2_overlap_count": 25,
+  "a1_a2_label_exact_match_count": 2,
+  "important_limitations": [
+    "gsm8k_train.jsonl provides question and final answer only; no worked solution/reference reasoning trace.",
+    "The uploaded ZIP does not include guideline_v3.md, capability_config.json, priority_error_review.csv, or priority_error_review_annotated.csv.",
+    "The 170-row extractor error queue therefore cannot be reviewed/fill-completed from this ZIP alone.",
+    "The 100-record batch Gold set is in the ZIP but belongs to D_pool; this deliverable reviews the 85-record supplement D_dev set as planned."
+  ],
+  "approval": "PENDING_USER_REVIEW",
+  "provenance_note": "No AI recommendation is represented as human-confirmed adjudication."
+}

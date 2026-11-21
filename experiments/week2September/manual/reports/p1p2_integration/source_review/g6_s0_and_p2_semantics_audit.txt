@@ -1,0 +1,1400 @@
+﻿G6 S0 AND P2 SEMANTICS AUDIT
+ROOT=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+S0_DIR=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0
+
+=== S0 DIRECTORY INVENTORY ===
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\capability_metrics.csv
+SIZE=1636
+SHA256=2DEB7E3E2A3A5B8967170E9A3C49835626C216C08E62D7601C4702B0FEBEFA4E
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\capability_metrics.jsonl
+SIZE=3147
+SHA256=E0796B01F43061D26EB6A52EC45C8A76A606E237454544311FD5F3FA151991B8
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\checkpoint_lineage.json
+SIZE=1095
+SHA256=9D1CAA51388E0755499572280B3D5E656654854D52573468D79C01380AA1FFB1
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\input_fingerprint.json
+SIZE=724
+SHA256=6E07EFD2AC0C23394689741B0360F2149B885D9B45B70B5087C701760E8F4CC3
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\prediction_coverage_report.json
+SIZE=574
+SHA256=F40E36BA8EF93776DF9C5CE6ABC05A18EC94852AAFDE3B1F735802B7BC60C08A
+FILE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\capability\g5_9_real_data_s0\SHARED_seed0_S0\student_capability_evaluation_manifest.json
+SIZE=1976
+SHA256=89AC7781206737479545003C2185AB1F4C185EA172F6F81B8DB1B3BAFC01BF13
+
+=== S0 MANIFEST ===
+{
+  "schema_version": "p1p2.capability-manifest.v1",
+  "created_at_utc": "2026-11-17T06:26:13.357337+00:00",
+  "run_id": "SHARED_seed0_S0",
+  "method": "SHARED",
+  "seed": 0,
+  "round": 0,
+  "checkpoint": "S0",
+  "gold_policy": "approved_85_primary",
+  "strict_metric": "status == valid",
+  "capabilities": [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio"
+  ],
+  "n_capability_rows": 7,
+  "input_hashes": {
+    "checkpoint": "77cc61ad0f35586c6ad0a688b9515a84ad79912bd149aa4e9fe9be5c37d6548e",
+    "dev_predictions": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "gold_labels": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+    "approval_csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "config": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461"
+  },
+  "outputs": {
+    "capability_metrics.csv": {
+      "sha256": "2deb7e3e2a3a5b8967170e9a3c49835626c216c08e62d7601c4702b0febefa4e",
+      "size_bytes": 1636
+    },
+    "capability_metrics.jsonl": {
+      "sha256": "e0796b01f43061d26eb6a52ec45c8a76a606e237454544311fd5f3fa151991b8",
+      "size_bytes": 3147
+    },
+    "prediction_coverage_report.json": {
+      "sha256": "f40e36ba8ef93776df9c5ce6abc05a18ec94852aafde3b1f735802b7bc60c08a",
+      "size_bytes": 574
+    },
+    "checkpoint_lineage.json": {
+      "sha256": "9d1caa51388e0755499572280b3d5e656654854d52573468d79c01380aa1ffb1",
+      "size_bytes": 1095
+    },
+    "input_fingerprint.json": {
+      "sha256": "6e07efd2ac0c23394689741b0360f2149b885d9b45b70b5087c701760e8f4cc3",
+      "size_bytes": 724
+    }
+  },
+  "overwrite_policy": "immutable_exact_fingerprint_reuse_only"
+}
+
+
+=== S0 MANIFEST KEY SUMMARY ===
+schema_version=p1p2.capability-manifest.v1
+created_at_utc=2026-11-17T06:26:13.357337+00:00
+run_id=SHARED_seed0_S0
+method=SHARED
+seed=0
+round=0
+checkpoint=S0
+gold_policy=approved_85_primary
+strict_metric=status == valid
+capabilities=ARRAY_COUNT=7
+n_capability_rows=7
+input_hashes=OBJECT_KEYS=checkpoint,dev_predictions,gold_manifest,gold_labels,approval_csv,dev_ids,config
+outputs=OBJECT_KEYS=capability_metrics.csv,capability_metrics.jsonl,prediction_coverage_report.json,checkpoint_lineage.json,input_fingerprint.json
+overwrite_policy=immutable_exact_fingerprint_reuse_only
+
+=== S0 METRICS CSV ===
+METRICS_CSV_SHA256=2DEB7E3E2A3A5B8967170E9A3C49835626C216C08E62D7601C4702B0FEBEFA4E
+run_id,method,seed,checkpoint,checkpoint_id,capability,n_support,n_correct,n_incorrect,mastery,deficit,ci95_low,ci95_high,ci_method,strict_metric,gold_policy
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,addition,30,19,11,0.6333333333333333,0.3666666666666667,0.4551356365479487,0.7812607919389929,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,subtraction,51,37,14,0.7254901960784313,0.27450980392156865,0.5905334923922092,0.8288572476535512,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,multiplication,73,53,20,0.726027397260274,0.273972602739726,0.6143701175830993,0.8150855500533509,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,division,47,35,12,0.7446808510638298,0.25531914893617025,0.6049182446958253,0.8474684596494529,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,percentage,29,19,10,0.6551724137931034,0.3448275862068966,0.47345104090476137,0.80059281473325,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,fraction,31,24,7,0.7741935483870968,0.22580645161290325,0.6018758161665794,0.886048644387375,Wilson_95_percent,status_equals_valid,approved_85_primary
+SHARED_seed0_S0,SHARED,0,S0,s0_base_model_reference.json,ratio,30,22,8,0.7333333333333333,0.2666666666666667,0.555520383048111,0.8581733668040368,Wilson_95_percent,status_equals_valid,approved_85_primary
+
+
+=== S0 METRICS JSONL ===
+METRICS_JSONL_SHA256=E0796B01F43061D26EB6A52EC45C8A76A606E237454544311FD5F3FA151991B8
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "addition", "n_support": 30, "n_correct": 19, "n_incorrect": 11, "mastery": 0.6333333333333333, "deficit": 0.3666666666666667, "ci95_low": 0.4551356365479487, "ci95_high": 0.7812607919389929, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "subtraction", "n_support": 51, "n_correct": 37, "n_incorrect": 14, "mastery": 0.7254901960784313, "deficit": 0.27450980392156865, "ci95_low": 0.5905334923922092, "ci95_high": 0.8288572476535512, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "multiplication", "n_support": 73, "n_correct": 53, "n_incorrect": 20, "mastery": 0.726027397260274, "deficit": 0.273972602739726, "ci95_low": 0.6143701175830993, "ci95_high": 0.8150855500533509, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "division", "n_support": 47, "n_correct": 35, "n_incorrect": 12, "mastery": 0.7446808510638298, "deficit": 0.25531914893617025, "ci95_low": 0.6049182446958253, "ci95_high": 0.8474684596494529, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "percentage", "n_support": 29, "n_correct": 19, "n_incorrect": 10, "mastery": 0.6551724137931034, "deficit": 0.3448275862068966, "ci95_low": 0.47345104090476137, "ci95_high": 0.80059281473325, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "fraction", "n_support": 31, "n_correct": 24, "n_incorrect": 7, "mastery": 0.7741935483870968, "deficit": 0.22580645161290325, "ci95_low": 0.6018758161665794, "ci95_high": 0.886048644387375, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+{"run_id": "SHARED_seed0_S0", "method": "SHARED", "seed": 0, "checkpoint": "S0", "checkpoint_id": "s0_base_model_reference.json", "capability": "ratio", "n_support": 30, "n_correct": 22, "n_incorrect": 8, "mastery": 0.7333333333333333, "deficit": 0.2666666666666667, "ci95_low": 0.555520383048111, "ci95_high": 0.8581733668040368, "ci_method": "Wilson_95_percent", "strict_metric": "status_equals_valid", "gold_policy": "approved_85_primary"}
+
+
+=== S0 CHECKPOINT LINEAGE ===
+{
+  "run_id": "SHARED_seed0_S0",
+  "method": "SHARED",
+  "seed": 0,
+  "round": 0,
+  "checkpoint_id": "s0_base_model_reference.json",
+  "checkpoint_path": "C:\\Users\\PC - NGHI\\Desktop\\Pipeline\\P2\\experiments\\week2September\\manual\\reports\\p1p2_integration\\source_review\\s0_base_model_reference.json",
+  "checkpoint_sha256": "77cc61ad0f35586c6ad0a688b9515a84ad79912bd149aa4e9fe9be5c37d6548e",
+  "shared_checkpoint_group": null,
+  "train_set": null,
+  "selection_log": null,
+  "train_log": null,
+  "checkpoint_log": null,
+  "config_sha256": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461",
+  "prediction_sha256": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+  "gold_manifest_sha256": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+  "gold_labels_sha256": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+  "approval_csv_sha256": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+  "dev_ids_sha256": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30"
+}
+
+
+=== S0 INPUT FINGERPRINT ===
+{
+  "fingerprint": "af3ce2a684db803f0b4136b3bae24c884229bf517c672904ab4af23ab56be7cc",
+  "inputs": {
+    "checkpoint": "77cc61ad0f35586c6ad0a688b9515a84ad79912bd149aa4e9fe9be5c37d6548e",
+    "dev_predictions": "49eb7c7f0d76bbb707b62446a265387f6ca5f0418572953f02383de7eb9ca77c",
+    "gold_manifest": "498707d205252109b7a6e97f848f6bc4204bda6bea64575547e8e012c13d2d04",
+    "gold_labels": "0f9733007f0fe7e53a2a22faeb3c0c55670e872378ae74f2062677143d98be44",
+    "approval_csv": "d522a7dac7eb969bd9f8c4dd638d89db0710b66d65ab16bef3faad94694c2300",
+    "dev_ids": "007b9e8dd9ce7458e2ea20682beca9a19bd2552784d956c2fd990ce15d76cd30",
+    "config": "e27fcf0ae16ec9b391a85757e0cc8ffa5630e29129f805d9dca495e2fdd2c461"
+  }
+}
+
+
+=== SOURCE: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\learnability.py ===
+SOURCE_SHA256=A97F44C5905BF3779BA1909C28174C4CF96E31E06C83C4FFEFE1858C7420E4C3
+#!/usr/bin/env python3
+"""
+L_proxy (analysis_plan.md section 4, config "learnability"). Pure Python: no torch, no files.
+
+  ell*_t  = median of ell over the reference set at S_t
+  sigma_t = IQR of ell over the reference set at S_t / 1.349
+  L_proxy = exp(-(ell - ell*_t)^2 / (2 sigma_t^2)), computed for every eligible trajectory
+
+Reference set [T7-3]: eligible trajectories not yet trained in this run (at S_0: all eligible).
+
+Quartiles use statistics.quantiles(n=4) (method "exclusive"), the same call as the Task 5 smoke analysis
+(analyze_smoke_test.py). The choice cannot change the ranking: L_proxy order depends only on |ell - ell*_t|.
+"""
+import math
+import statistics
+
+
+def band_parameters(ells):
+    """(ell_star, sigma) of a list of ell values."""
+    if len(ells) < 2:
+        raise ValueError(f"reference set too small: {len(ells)}")
+    if not all(math.isfinite(x) for x in ells):
+        raise ValueError("non-finite ell in the reference set")
+    q = statistics.quantiles(ells, n=4)
+    sigma = (q[2] - q[0]) / 1.349
+    if sigma <= 0:
+        raise ValueError("IQR of ell is zero: L_proxy is undefined")
+    return statistics.median(ells), sigma
+
+
+def l_proxy(ell, ell_star, sigma):
+    return math.exp(-((ell - ell_star) ** 2) / (2 * sigma ** 2))
+
+
+def score_checkpoint(ell_by_id, trained_ids=()):
+    """
+    L_proxy of every trajectory in ell_by_id (the whole eligible pool at one checkpoint).
+    trained_ids: trajectories already trained in this run; excluded from the reference set only.
+    """
+    unknown = set(trained_ids) - set(ell_by_id)
+    if unknown:
+        raise ValueError(f"trained trajectories missing from the scored pool: {sorted(unknown)[:3]}")
+    trained = set(trained_ids)
+    reference = [ell for tid, ell in ell_by_id.items() if tid not in trained]
+    ell_star, sigma = band_parameters(reference)
+    return {
+        "ell_star": ell_star,
+        "sigma": sigma,
+        "n_reference": len(reference),
+        "l_proxy": {tid: l_proxy(ell, ell_star, sigma) for tid, ell in ell_by_id.items()},
+    }
+
+
+=== SOURCE: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\selection.py ===
+SOURCE_SHA256=586B36254A10B5A144ABB0559D90057A56DFC59C33B7FCA6C233502B4F10DEAE
+#!/usr/bin/env python3
+"""
+Selection rules of B2, B3, B4, B5 and the shuffled-scores ablation (analysis_plan.md section 5,
+task7_decisions.md T7-1, T7-2, T7-3). Pure Python: no torch, no files; select_round.py does the I/O.
+
+Budget filling (protocol section 16.1, tokens(B_t) <= beta_round): walk the order and stop at the first
+trajectory that would exceed the budget. Later, shorter trajectories are not used to top up, because that
+would favour short trajectories over the method's own order. B3 and B4 keep the stopping trajectory for
+the next round.
+
+Tokens are response tokens under the Student tokenizer without the end-of-turn token, the unit of L_bar
+and therefore of beta_round.
+
+Seeds fixed by the config: B2 random.Random(training_seed * 100 + round); B3 random.Random(training_seed).
+The ablation's seed is not in the config; ABLATION_SEED_OFFSET keeps it apart from B2.
+"""
+import random
+from collections import Counter
+
+from learnability import score_checkpoint
+
+METHODS = ("B2", "B3", "B4", "B5", "ablation_shuffled_scores")
+NEEDS_NLL = ("B4", "B5", "ablation_shuffled_scores")
+ABLATION_SEED_OFFSET = 50
+SELECTED_CRITERION = {"B2": "random", "B3": "shortest_correct", "B4": "top_score", "B5": "top_score",
+                      "ablation_shuffled_scores": "shuffled_score"}
+
+
+def fill_budget(order, problems, tokens, budget, n_cap, unavailable=()):
+    """Returns (selected ids in order, {id: reason}, tokens used, whether the budget stopped the walk)."""
+    unavailable = set(unavailable)
+    selected, reasons, per_problem = [], {}, Counter()
+    used, stopped = 0, False
+    for tid in order:
+        if tid in unavailable:
+            reasons[tid] = "already_trained"
+        elif stopped:
+            reasons[tid] = "budget_exhausted"
+        elif per_problem[problems[tid]] >= n_cap:
+            reasons[tid] = "n_cap_reached"
+        elif used + tokens[tid] > budget:
+            stopped = True
+            reasons[tid] = "budget_exhausted"
+        else:
+            selected.append(tid)
+            reasons[tid] = "selected"
+            per_problem[problems[tid]] += 1
+            used += tokens[tid]
+    return selected, reasons, used, stopped
+
+
+def rank_by_score(scores):
+    """Descending score, ties by trajectory_id ascending (decision #23)."""
+    return sorted(scores, key=lambda tid: (-scores[tid], tid))
+
+
+def random_order(ids, seed):
+    order = sorted(ids)
+    random.Random(seed).shuffle(order)
+    return order
+
+
+def shuffled_scores(scores, seed):
+    """The same score values assigned to trajectories at random."""
+    ids = sorted(scores)
+    values = [scores[tid] for tid in ids]
+    random.Random(seed).shuffle(values)
+    return dict(zip(ids, values))
+
+
+def shortest_per_problem(problems, tokens):
+    """Decision #24: per problem the shortest trajectory, ties by smallest trajectory_id."""
+    best = {}
+    for tid in sorted(problems):
+        pid = problems[tid]
+        if pid not in best or tokens[tid] < tokens[best[pid]]:
+            best[pid] = tid
+    return best
+
+
+def b3_order(problems, tokens, training_seed):
+    """B3 order: the shortest trajectory of each problem, problems shuffled once [T7-2]."""
+    best = shortest_per_problem(problems, tokens)
+    return [best[pid] for pid in random_order(best, training_seed)]
+
+
+def static_round(order, problems, tokens, budget, n_cap, round_index):
+    """
+    Round round_index of a once-computed order (B3, B4): walk it without repeating a trajectory; a
+    trajectory skipped by n_cap or by the budget stays available for later rounds [T7-1, T7-2].
+    """
+    used_before = set()
+    for r in range(round_index + 1):
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap, used_before)
+        if r < round_index:
+            used_before |= set(selected)
+    return selected, reasons, used, stopped
+
+
+def select(method, round_index, training_seed, problems, tokens, budget, n_cap, ell_by_id=None, trained_ids=()):
+    """
+    One round's selection over the eligible pool. Returns the selected ids, tokens used, band parameters
+    and one log entry per eligible trajectory (fields of selection_log_schema.json, null where unused).
+    ell_by_id: ell at S_t for B5 and the ablation, at S_0 for B4 in every round.
+    trained_ids: trained in this run before this round (reference set of B5 and the ablation [T7-3]).
+    """
+    if method not in METHODS:
+        raise ValueError(f"unknown method {method}")
+    scoring, scores = None, None
+    if method in NEEDS_NLL:
+        if ell_by_id is None or set(ell_by_id) != set(problems):
+            raise ValueError(f"{method} needs ell for exactly the eligible pool")
+        # B4 ranks at S_0, where nothing has been trained: the reference set is the whole eligible pool.
+        scoring = score_checkpoint(ell_by_id, () if method == "B4" else trained_ids)
+        scores = scoring["l_proxy"]
+
+    if method == "B2":
+        order = random_order(problems, training_seed * 100 + round_index)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    elif method == "B3":
+        order = b3_order(problems, tokens, training_seed)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    elif method == "B4":
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = static_round(order, problems, tokens, budget, n_cap, round_index)
+    else:
+        if method == "ablation_shuffled_scores":
+            scores = shuffled_scores(scores, training_seed * 100 + round_index + ABLATION_SEED_OFFSET)
+        order = rank_by_score(scores)
+        selected, reasons, used, stopped = fill_budget(order, problems, tokens, budget, n_cap)
+    if not stopped:
+        raise ValueError(f"{method} round {round_index}: order exhausted before the budget ({used}/{budget} tokens)")
+
+    ranks = {tid: i for i, tid in enumerate(order, start=1)}
+    has_rank = method != "B2"
+    rows = []
+    for tid in sorted(problems):
+        reason = reasons.get(tid, "not_shortest")
+        rows.append({
+            "problem_id": problems[tid],
+            "trajectory_id": tid,
+            "tokens": tokens[tid],
+            "nll": ell_by_id[tid] if scoring else None,
+            "ell_star": scoring["ell_star"] if scoring else None,
+            "sigma": scoring["sigma"] if scoring else None,
+            "l_proxy": scoring["l_proxy"][tid] if scoring else None,
+            "score": scores[tid] if scores else None,
+            "rank": ranks.get(tid) if has_rank else None,
+            "selected": reason == "selected",
+            "criterion": SELECTED_CRITERION[method] if reason == "selected" else reason,
+            "outcome": None,
+        })
+    return {
+        "selected": selected,
+        "tokens_used": used,
+        "ell_star": scoring["ell_star"] if scoring else None,
+        "sigma": scoring["sigma"] if scoring else None,
+        "n_reference": scoring["n_reference"] if scoring else None,
+        "rows": rows,
+    }
+
+
+def probe_groups(tokens, group_size, seed, n_bins=5):
+    """
+    L_emp groups (config budget.l_emp_groups): token-length quintile bins of the eligible pool, group_size
+    trajectories sampled per bin. n_cap is not applied: the rule does not ask for it.
+    """
+    ordered = sorted(tokens, key=lambda tid: (tokens[tid], tid))
+    bins = [ordered[i * len(ordered) // n_bins: (i + 1) * len(ordered) // n_bins] for i in range(n_bins)]
+    rng = random.Random(seed)
+    return [sorted(rng.sample(b, group_size)) for b in bins]
+
+
+=== SOURCE: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\scripts\p1p2_capability_state.py ===
+SOURCE_SHA256=3EB7F833E8545E8B1289678F67D73169387C1167C5D1310E370EE9C6D61126B7
+#!/usr/bin/env python3
+"""Build an immutable P1 capability state from a validated sidecar."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+CAPABILITIES = (
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+)
+
+EXPECTED_SUPPORT = {
+    "addition": 30,
+    "subtraction": 51,
+    "multiplication": 73,
+    "division": 47,
+    "fraction": 31,
+    "percentage": 29,
+    "ratio": 30,
+}
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def read_json(path: Path) -> dict:
+    value = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(value, dict):
+        raise ValueError(f"Expected JSON object: {path}")
+    return value
+
+
+def stable_state(value: dict) -> dict:
+    """Remove creation time; compare all scientific/provenance fields."""
+    return {
+        key: item
+        for key, item in value.items()
+        if key != "created_at_utc"
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Create immutable capability state from a sidecar"
+    )
+    parser.add_argument("--sidecar-dir", required=True)
+    parser.add_argument(
+        "--target-method",
+        required=True,
+        choices=["P1-DEFICIT", "P1P2"],
+    )
+    parser.add_argument("--target-seed", required=True, type=int)
+    parser.add_argument("--out", required=True)
+    args = parser.parse_args()
+
+    sidecar = Path(args.sidecar_dir).resolve()
+    required = {
+        "metrics": sidecar / "capability_metrics.jsonl",
+        "coverage": sidecar / "prediction_coverage_report.json",
+        "lineage": sidecar / "checkpoint_lineage.json",
+        "fingerprint": sidecar / "input_fingerprint.json",
+        "manifest": sidecar / "student_capability_evaluation_manifest.json",
+    }
+
+    for label, path in required.items():
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing sidecar {label}: {path}")
+
+    manifest = read_json(required["manifest"])
+    coverage = read_json(required["coverage"])
+    lineage = read_json(required["lineage"])
+    fingerprint = read_json(required["fingerprint"])
+
+    if manifest.get("schema_version") != "p1p2.capability-manifest.v1":
+        raise ValueError("Unexpected capability sidecar schema")
+    if manifest.get("gold_policy") != "approved_85_primary":
+        raise ValueError("Sidecar does not use approved 85 Gold policy")
+    if manifest.get("strict_metric") != "status == valid":
+        raise ValueError("Sidecar does not use strict status==valid metric")
+
+    if coverage.get("status") != "PASS":
+        raise ValueError("Prediction coverage report is not PASS")
+    if coverage.get("prediction_records") != 500:
+        raise ValueError("Expected exactly 500 D_dev prediction records")
+    if coverage.get("prediction_unique_ids") != 500:
+        raise ValueError("Expected 500 unique D_dev prediction IDs")
+    if coverage.get("gold_records") != 85:
+        raise ValueError("Expected exactly 85 approved Gold records")
+    if coverage.get("lenient_correct_excluded") is not True:
+        raise ValueError("lenient_correct must be excluded")
+
+    output_metadata = manifest.get("outputs", {})
+    expected_output_names = {
+        "capability_metrics.csv",
+        "capability_metrics.jsonl",
+        "prediction_coverage_report.json",
+        "checkpoint_lineage.json",
+        "input_fingerprint.json",
+    }
+    if set(output_metadata) != expected_output_names:
+        raise ValueError(
+            "Sidecar manifest output inventory mismatch: "
+            f"{sorted(output_metadata)}"
+        )
+
+    for name, metadata in output_metadata.items():
+        output_path = sidecar / name
+        if not output_path.is_file():
+            raise FileNotFoundError(
+                f"Manifest output is missing: {output_path}"
+            )
+        if sha256_file(output_path) != metadata.get("sha256"):
+            raise ValueError(f"Sidecar output hash mismatch: {name}")
+
+    source_fingerprint = fingerprint.get("fingerprint")
+    if not isinstance(source_fingerprint, str) or not source_fingerprint:
+        raise ValueError("Missing input fingerprint")
+
+    metrics = []
+    with required["metrics"].open(
+        "r", encoding="utf-8-sig"
+    ) as stream:
+        for line_no, line in enumerate(stream, 1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                raise ValueError(f"Invalid metric row at line {line_no}")
+            metrics.append(row)
+
+    if len(metrics) != 7:
+        raise ValueError(f"Expected 7 capability rows, got {len(metrics)}")
+
+    by_capability = {}
+    for row in metrics:
+        capability = row.get("capability")
+        if capability not in CAPABILITIES:
+            raise ValueError(f"Unknown capability: {capability!r}")
+        if capability in by_capability:
+            raise ValueError(f"Duplicate capability row: {capability}")
+        if row.get("strict_metric") != "status_equals_valid":
+            raise ValueError("Capability row does not use strict metric")
+        if row.get("gold_policy") != "approved_85_primary":
+            raise ValueError("Capability row does not use approved Gold policy")
+
+        support = int(row["n_support"])
+        correct = int(row["n_correct"])
+        incorrect = int(row["n_incorrect"])
+
+        if support != EXPECTED_SUPPORT[capability]:
+            raise ValueError(
+                f"Support mismatch for {capability}: "
+                f"{support} != {EXPECTED_SUPPORT[capability]}"
+            )
+        if correct < 0 or incorrect < 0 or correct + incorrect != support:
+            raise ValueError(f"Invalid counts for {capability}")
+
+        mastery = correct / support
+        deficit = 1.0 - mastery
+
+        if abs(float(row["mastery"]) - mastery) > 1e-12:
+            raise ValueError(f"Mastery mismatch for {capability}")
+        if abs(float(row["deficit"]) - deficit) > 1e-12:
+            raise ValueError(f"Deficit mismatch for {capability}")
+
+        by_capability[capability] = {
+            "n_support": support,
+            "n_correct": correct,
+            "n_incorrect": incorrect,
+            "mastery": mastery,
+            "deficit": deficit,
+            "ci95_low": row.get("ci95_low"),
+            "ci95_high": row.get("ci95_high"),
+        }
+
+    if set(by_capability) != set(CAPABILITIES):
+        raise ValueError("Capability coverage is incomplete")
+
+    source_round = int(lineage["round"])
+    source_method = str(lineage["method"])
+    source_seed = int(lineage["seed"])
+
+    if source_round not in (0, 1, 2, 3):
+        raise ValueError(f"Invalid source round: {source_round}")
+    if source_round == 0 and source_method != "SHARED":
+        raise ValueError("S0 capability state must originate from SHARED")
+    if source_round > 0 and source_method not in (
+        "B2", "B3", "B4", "B5", "P1-DEFICIT", "P1P2"
+    ):
+        raise ValueError(f"Unsupported source method: {source_method}")
+
+    state = {
+        "schema_version": "p1p2.capability-state.v1",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "target": {
+            "method": args.target_method,
+            "seed": args.target_seed,
+            "selection_round": source_round + 1,
+        },
+        "source": {
+            "run_id": manifest["run_id"],
+            "method": source_method,
+            "seed": source_seed,
+            "round": source_round,
+            "checkpoint": manifest["checkpoint"],
+            "checkpoint_id": lineage["checkpoint_id"],
+            "checkpoint_sha256": lineage["checkpoint_sha256"],
+            "sidecar_manifest_sha256": sha256_file(required["manifest"]),
+            "input_fingerprint": source_fingerprint,
+        },
+        "metric_policy": {
+            "correctness": "status == valid",
+            "gold_policy": "approved_85_primary",
+            "lenient_correct_used": False,
+            "mastery": "n_correct / n_support",
+            "deficit": "1 - mastery",
+        },
+        "capabilities": by_capability,
+    }
+
+    output = Path(args.out).resolve()
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    if output.exists():
+        existing = read_json(output)
+        if stable_state(existing) != stable_state(state):
+            raise FileExistsError(
+                "Existing capability state has different provenance or "
+                "metrics; refusing overwrite: " + str(output)
+            )
+        print("CAPABILITY_STATE=EXACT_REUSE")
+    else:
+        content = (
+            json.dumps(state, ensure_ascii=False, indent=2) + "\n"
+        ).encode("utf-8")
+        output.write_bytes(content)
+        print("CAPABILITY_STATE=CREATED")
+
+    print(f"SOURCE_RUN_ID={manifest['run_id']}")
+    print(f"SOURCE_ROUND={source_round}")
+    print(f"TARGET_METHOD={args.target_method}")
+    print(f"TARGET_SEED={args.target_seed}")
+    print(f"SELECTION_ROUND={source_round + 1}")
+    print(f"CAPABILITY_COUNT={len(by_capability)}")
+    print(f"STATE_SHA256={sha256_file(output)}")
+    print(f"STATE_PATH={output}")
+    print("CAPABILITY_STATE_VALIDATION=PASS")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+=== SOURCE: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\scripts\build_capability_learning_curves.py ===
+SOURCE_SHA256=BBABADFC6D140598FF129124E3FB3F877CDDE96B9B2BA61061830AAC5BC7316B
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import sys
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+
+METHOD = "B4"
+SEED = 13
+ROUNDS = [0, 1, 2]
+
+CAPABILITIES = [
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "percentage",
+    "fraction",
+    "ratio",
+]
+
+CONFIDENCE_LEVEL = 0.95
+WILSON_Z = 1.959963984540054
+
+MIN_SUPPORT = 5
+MIN_TOTAL_CHANGE = 0.10
+PLATEAU_THRESHOLD = 0.02
+ANOMALY_THRESHOLD = 0.20
+
+EVAL_ROOT_REL = Path("reports/capability/student_eval_2026-11-17")
+MODEL_ROOT_REL = Path("models/task7/B4/seed_13")
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def read_json(path: Path):
+    with path.open("r", encoding="utf-8-sig") as f:
+        return json.load(f)
+
+
+def read_jsonl(path: Path):
+    rows = []
+    with path.open("r", encoding="utf-8-sig") as f:
+        for line_no, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"Invalid JSONL at {path}:{line_no}: {exc}"
+                ) from exc
+    return rows
+
+
+def wilson_interval(correct: int, total: int):
+    if total <= 0:
+        raise ValueError("Wilson interval requires total > 0")
+
+    p = correct / total
+    z2 = WILSON_Z ** 2
+    denominator = 1 + z2 / total
+
+    center = (p + z2 / (2 * total)) / denominator
+    margin = (
+        WILSON_Z
+        * math.sqrt((p * (1 - p) / total) + z2 / (4 * total ** 2))
+        / denominator
+    )
+
+    return max(0.0, center - margin), min(1.0, center + margin)
+
+
+def close(a, b, tolerance=1e-6):
+    return abs(float(a) - float(b)) <= tolerance
+
+
+def checkpoint_dir_name(round_index: int):
+    return f"B4_seed13_ckpt{round_index + 1:03d}"
+
+
+def checkpoint_model_name(round_index: int):
+    return f"student_ckpt_{round_index + 1:03d}"
+
+
+def expected_evaluation_checkpoint(round_index: int):
+    """
+    Return the exact checkpoint identifier stored by the evaluator.
+
+    The evaluation JSONL uses the fully-qualified identity:
+    B4_seed13_student_ckpt_001, etc.
+    """
+    return f"B4_seed13_{checkpoint_model_name(round_index)}"
+
+
+def normalize_round_metadata(
+    raw_round,
+    expected_checkpoint: str,
+    round0_lineage_verified: bool,
+):
+    """
+    Normalize evaluation round metadata without modifying source records.
+
+    round_unknown is accepted only for student_ckpt_001 and only after
+    Round 0 training lineage has been independently verified.
+    """
+    raw = str(raw_round).strip().lower()
+
+    if raw.isdigit():
+        return int(raw)
+
+    if raw.startswith("round_"):
+        suffix = raw[len("round_"):]
+
+        if suffix.isdigit():
+            return int(suffix)
+
+    if raw == "round_unknown":
+        if (
+            expected_checkpoint == "B4_seed13_student_ckpt_001"
+            and round0_lineage_verified
+        ):
+            return 0
+
+        raise ValueError(
+            "Cannot normalize round_unknown: "
+            f"checkpoint={expected_checkpoint}, "
+            f"round0_lineage_verified={round0_lineage_verified}"
+        )
+
+    raise ValueError(
+        f"Unsupported round metadata {raw_round!r} "
+        f"for checkpoint {expected_checkpoint}"
+    )
+
+
+def verify_round_zero(manual: Path):
+    checkpoint = manual / MODEL_ROOT_REL / "student_ckpt_001"
+    log_path = checkpoint / "train_log.json"
+
+    if not log_path.is_file():
+        raise FileNotFoundError(f"Missing Round 0 train log: {log_path}")
+
+    log = read_json(log_path)
+
+    if log.get("checkpoint_parent") != "student_ckpt_000":
+        raise ValueError("Round 0 checkpoint_parent mismatch")
+
+    if int(log.get("seed", -1)) != SEED:
+        raise ValueError("Round 0 seed mismatch")
+
+    if int(log.get("data_order_seed", -1)) != SEED:
+        raise ValueError("Round 0 data_order_seed mismatch")
+
+    if int(log.get("n_examples", -1)) != 186:
+        raise ValueError("Unexpected Round 0 n_examples")
+
+    if int(log.get("steps", -1)) != 24:
+        raise ValueError("Unexpected Round 0 training steps")
+
+    train_set_value = log.get("train_set")
+    expected_hash = str(log.get("train_set_sha256", "")).lower()
+
+    if not train_set_value or not expected_hash:
+        raise ValueError("Round 0 train_set path/hash missing")
+
+    train_set_path = Path(train_set_value)
+
+    if not train_set_path.is_absolute():
+        train_set_path = manual / train_set_path
+
+    if not train_set_path.is_file():
+        raise FileNotFoundError(f"Round 0 train_set missing: {train_set_path}")
+
+    actual_hash = sha256_file(train_set_path)
+
+    if actual_hash != expected_hash:
+        raise ValueError(
+            "Round 0 train_set SHA256 mismatch: "
+            f"expected={expected_hash}, actual={actual_hash}"
+        )
+
+    train_set = read_json(train_set_path)
+
+    expected_fields = {
+        "method": METHOD,
+        "round": 0,
+        "training_seed": SEED,
+        "source_checkpoint": "student_ckpt_000",
+    }
+
+    for key, expected in expected_fields.items():
+        if train_set.get(key) != expected:
+            raise ValueError(
+                f"Round 0 train_set field {key!r}: "
+                f"expected {expected!r}, got {train_set.get(key)!r}"
+            )
+
+    if train_set.get("pool_sha256") != log.get("pool_sha256"):
+        raise ValueError("Round 0 pool SHA256 differs between train_log and train_set")
+
+    adapter_path = checkpoint / "adapter_model.safetensors"
+
+    if not adapter_path.is_file():
+        raise FileNotFoundError(f"Missing adapter weights: {adapter_path}")
+
+    return {
+        "checkpoint": str(checkpoint),
+        "train_log": str(log_path),
+        "train_log_sha256": sha256_file(log_path),
+        "train_set": str(train_set_path),
+        "train_set_sha256": actual_hash,
+        "adapter_model": str(adapter_path),
+        "adapter_model_sha256": sha256_file(adapter_path),
+        "pool_sha256": log["pool_sha256"],
+        "round": 0,
+        "seed": SEED,
+        "method": METHOD,
+    }
+
+
+def load_checkpoint_metrics(manual: Path, round_index: int, round0_lineage_verified: bool = False):
+    eval_name = checkpoint_dir_name(round_index)
+    eval_dir = manual / EVAL_ROOT_REL / eval_name
+
+    jsonl_path = eval_dir / "capability_metrics.jsonl"
+    csv_path = eval_dir / "capability_metrics.csv"
+    manifest_path = eval_dir / "student_capability_evaluation_manifest.json"
+
+    for path in (jsonl_path, csv_path, manifest_path):
+        if not path.is_file():
+            raise FileNotFoundError(f"Required input missing: {path}")
+
+    records = read_jsonl(jsonl_path)
+
+    if not records:
+        raise ValueError(f"No records in {jsonl_path}")
+
+    expected_checkpoint = expected_evaluation_checkpoint(round_index)
+    result = {}
+
+    for row in records:
+        required = [
+            "method", "seed", "round", "checkpoint",
+            "capability", "n_support", "n_correct",
+        ]
+
+        missing = [key for key in required if key not in row]
+        if missing:
+            raise ValueError(
+                f"{jsonl_path}: missing fields {missing}; "
+                f"available={list(row.keys())}"
+            )
+
+        if row["method"] != METHOD:
+            raise ValueError(f"Unexpected method in {jsonl_path}: {row['method']}")
+
+        if int(row["seed"]) != SEED:
+            raise ValueError(f"Unexpected seed in {jsonl_path}: {row['seed']}")
+
+        normalized_round = normalize_round_metadata(
+            raw_round=row["round"],
+            expected_checkpoint=expected_checkpoint,
+            round0_lineage_verified=round0_lineage_verified,
+        )
+
+        if normalized_round != round_index:
+            raise ValueError(
+                f"Unexpected round in {jsonl_path}: "
+                f"raw={row['round']!r}, normalized={normalized_round}, "
+                f"expected={round_index}"
+            )
+
+        if str(row["checkpoint"]) != expected_checkpoint:
+            raise ValueError(
+                f"Unexpected checkpoint in {jsonl_path}: {row['checkpoint']}"
+            )
+
+        capability = str(row["capability"])
+
+        if capability not in CAPABILITIES:
+            raise ValueError(f"Unknown capability: {capability}")
+
+        if capability in result:
+            raise ValueError(f"Duplicate capability {capability} in {jsonl_path}")
+
+        support = int(row["n_support"])
+        correct = int(row["n_correct"])
+
+        if support <= 0 or correct < 0 or correct > support:
+            raise ValueError(
+                f"Invalid support/correct values for {capability}: "
+                f"{correct}/{support}"
+            )
+
+        mastery = correct / support
+        low, high = wilson_interval(correct, support)
+
+        if "mastery_accuracy" in row:
+            if not close(row["mastery_accuracy"], mastery):
+                raise ValueError(
+                    f"mastery_accuracy mismatch for {capability}, round {round_index}"
+                )
+
+        if "ci95_low" in row and not close(row["ci95_low"], low, 1e-5):
+            raise ValueError(
+                f"ci95_low mismatch for {capability}, round {round_index}"
+            )
+
+        if "ci95_high" in row and not close(row["ci95_high"], high, 1e-5):
+            raise ValueError(
+                f"ci95_high mismatch for {capability}, round {round_index}"
+            )
+
+        result[capability] = {
+            "n_support": support,
+            "n_correct": correct,
+            "n_incorrect": support - correct,
+            "mastery": mastery,
+            "deficit": 1.0 - mastery,
+            "ci95_low": low,
+            "ci95_high": high,
+            "ci_method": "wilson_95",
+        }
+
+    if set(result) != set(CAPABILITIES):
+        missing = sorted(set(CAPABILITIES) - set(result))
+        extra = sorted(set(result) - set(CAPABILITIES))
+        raise ValueError(
+            f"Capability coverage mismatch in {jsonl_path}; "
+            f"missing={missing}, extra={extra}"
+        )
+
+    # Cross-check the CSV against JSONL.
+    with csv_path.open("r", encoding="utf-8-sig", newline="") as f:
+        csv_rows = list(csv.DictReader(f))
+
+    csv_by_capability = {}
+
+    for row in csv_rows:
+        cap = row.get("capability")
+        if cap in csv_by_capability:
+            raise ValueError(f"Duplicate capability in CSV: {cap}")
+        csv_by_capability[cap] = row
+
+    if set(csv_by_capability) != set(CAPABILITIES):
+        raise ValueError(f"CSV capability set mismatch: {csv_path}")
+
+    for cap in CAPABILITIES:
+        csv_row = csv_by_capability[cap]
+        jsonl_row = result[cap]
+
+        # n_support and n_correct are mandatory source metrics.
+        for key in ("n_support", "n_correct"):
+            if key not in csv_row or csv_row[key] == "":
+                raise ValueError(
+                    f"Missing {key} in evaluator CSV: {csv_path}"
+                )
+
+            if int(float(csv_row[key])) != jsonl_row[key]:
+                raise ValueError(
+                    f"JSONL/CSV mismatch: {cap}/{key}/{round_index}"
+                )
+
+        # Mastery is derived from JSONL counts.
+        # Cross-check it only if the evaluator CSV provides a column.
+        mastery_column = None
+
+        if "mastery" in csv_row and csv_row["mastery"] != "":
+            mastery_column = "mastery"
+        elif (
+            "mastery_accuracy" in csv_row
+            and csv_row["mastery_accuracy"] != ""
+        ):
+            mastery_column = "mastery_accuracy"
+
+        if mastery_column is not None:
+            if not close(
+                csv_row[mastery_column],
+                jsonl_row["mastery"],
+            ):
+                raise ValueError(
+                    f"JSONL/CSV mastery mismatch: "
+                    f"{cap}/{round_index}/{mastery_column}"
+                )
+
+        # Deficit is also optional in the evaluator CSV.
+        if "deficit" in csv_row and csv_row["deficit"] != "":
+            if not close(csv_row["deficit"], jsonl_row["deficit"]):
+                raise ValueError(
+                    f"JSONL/CSV deficit mismatch: {cap}/{round_index}"
+                )
+
+    manifest = read_json(manifest_path)
+
+    return result, {
+        "eval_dir": str(eval_dir),
+        "metrics_jsonl": str(jsonl_path),
+        "metrics_jsonl_sha256": sha256_file(jsonl_path),
+        "metrics_csv": str(csv_path),
+        "metrics_csv_sha256": sha256_file(csv_path),
+        "manifest": str(manifest_path),
+        "manifest_sha256": sha256_file(manifest_path),
+        "manifest_metadata": manifest,
+    }
+
+
+def classify_transition(delta: float):
+    if delta >= ANOMALY_THRESHOLD:
+        return "sudden_gain"
+    if delta <= -ANOMALY_THRESHOLD:
+        return "sudden_drop"
+    if abs(delta) < PLATEAU_THRESHOLD:
+        return "plateau"
+    if delta > 0:
+        return "improvement"
+    if delta < 0:
+        return "regression"
+    return "plateau"
+
+
+def build_rows(checkpoints):
+    rows = []
+
+    for capability in CAPABILITIES:
+        values = [
+            checkpoints[round_index][capability]
+            for round_index in ROUNDS
+        ]
+
+        first = values[0]["mastery"]
+        last = values[-1]["mastery"]
+        total_change = last - first
+
+        if any(v["n_support"] < MIN_SUPPORT for v in values):
+            trend = "insufficient_evidence"
+        elif total_change >= MIN_TOTAL_CHANGE:
+            trend = "improving"
+        elif total_change <= -MIN_TOTAL_CHANGE:
+            trend = "regressing"
+        else:
+            trend = "plateauing"
+
+        previous = None
+
+        for round_index, value in zip(ROUNDS, values):
+            delta = None
+            delta_class = "baseline"
+
+            if previous is not None:
+                delta = value["mastery"] - previous
+                delta_class = classify_transition(delta)
+
+            rows.append({
+                "method": METHOD,
+                "seed": SEED,
+                "round": round_index,
+                "checkpoint": checkpoint_model_name(round_index),
+                "capability": capability,
+                "n_support": value["n_support"],
+                "n_correct": value["n_correct"],
+                "n_incorrect": value["n_incorrect"],
+                "mastery": value["mastery"],
+                "deficit": value["deficit"],
+                "ci95_low": value["ci95_low"],
+                "ci95_high": value["ci95_high"],
+                "ci_method": value["ci_method"],
+                "delta_vs_previous": delta,
+                "delta_classification": delta_class,
+                "total_change_round0_to_round2": total_change,
+                "trend_label": trend,
+            })
+
+            previous = value["mastery"]
+
+    return rows
+
+
+def write_csv(path: Path, rows):
+    fields = [
+        "method", "seed", "round", "checkpoint", "capability",
+        "n_support", "n_correct", "n_incorrect", "mastery", "deficit",
+        "ci95_low", "ci95_high", "ci_method",
+        "delta_vs_previous", "delta_classification",
+        "total_change_round0_to_round2", "trend_label",
+    ]
+
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+        for row in rows:
+            output = dict(row)
+            for key in (
+                "mastery", "deficit", "ci95_low", "ci95_high",
+                "delta_vs_previous", "total_change_round0_to_round2",
+            ):
+                if output[key] is not None:
+                    output[key] = f"{output[key]:.8f}"
+            writer.writerow(output)
+
+
+def plot_curves(path: Path, checkpoints):
+    # One panel per capability prevents unrelated curves and labels
+    # from visually overlapping.
+    fig, axes = plt.subplots(
+        nrows=4,
+        ncols=2,
+        figsize=(13, 13),
+        sharex=True,
+        sharey=True,
+    )
+
+    flat_axes = list(axes.flat)
+
+    for index, capability in enumerate(CAPABILITIES):
+        ax = flat_axes[index]
+
+        y = [
+            checkpoints[r][capability]["mastery"]
+            for r in ROUNDS
+        ]
+        low = [
+            checkpoints[r][capability]["ci95_low"]
+            for r in ROUNDS
+        ]
+        high = [
+            checkpoints[r][capability]["ci95_high"]
+            for r in ROUNDS
+        ]
+
+        lower_error = [
+            mastery - lower
+            for mastery, lower in zip(y, low)
+        ]
+        upper_error = [
+            upper - mastery
+            for mastery, upper in zip(y, high)
+        ]
+
+        # Mastery curve and Wilson 95% confidence intervals.
+        ax.errorbar(
+            ROUNDS,
+            y,
+            yerr=[lower_error, upper_error],
+            fmt="-o",
+            linewidth=2,
+            markersize=6,
+            capsize=4,
+            capthick=1.1,
+            elinewidth=1.2,
+            color=f"C{index}",
+            ecolor=f"C{index}",
+            alpha=0.9,
+            zorder=3,
+        )
+
+        # Annotate each checkpoint's mastery value.
+        label_offsets = [8, 8, 8]
+
+        for round_index, mastery, offset in zip(
+            ROUNDS, y, label_offsets
+        ):
+            ax.annotate(
+                f"{mastery:.2f}",
+                (round_index, mastery),
+                textcoords="offset points",
+                xytext=(0, offset),
+                ha="center",
+                fontsize=9,
+                color=f"C{index}",
+                fontweight="bold",
+            )
+
+        ax.set_title(
+            capability,
+            fontsize=11,
+            fontweight="bold",
+            pad=8,
+        )
+
+        ax.set_xticks(
+            ROUNDS,
+            ["Round 0", "Round 1", "Round 2"],
+        )
+        ax.set_xlim(-0.25, 2.25)
+        ax.set_ylim(0.0, 1.0)
+        ax.set_yticks([i / 10 for i in range(11)])
+
+        ax.grid(
+            True,
+            axis="both",
+            alpha=0.25,
+            linestyle="--",
+            linewidth=0.7,
+        )
+
+        ax.tick_params(axis="both", labelsize=8)
+
+    # Hide the unused eighth panel.
+    for unused_ax in flat_axes[len(CAPABILITIES):]:
+        unused_ax.set_visible(False)
+
+    fig.suptitle(
+        "B4 Student Capability Learning Curves (Seed 13)",
+        fontsize=15,
+        fontweight="bold",
+        y=0.995,
+    )
+
+    fig.supxlabel(
+        "Student checkpoint / training round",
+        fontsize=11,
+        y=0.025,
+    )
+    fig.supylabel(
+        "Capability mastery",
+        fontsize=11,
+        x=0.025,
+    )
+
+    fig.text(
+        0.5,
+        0.965,
+        "Points and lines: mastery | Error bars: Wilson 95% CI",
+        ha="center",
+        fontsize=9,
+        color="dimgray",
+    )
+
+    fig.tight_layout(
+        rect=[0.045, 0.045, 1.0, 0.95],
+        h_pad=2.0,
+        w_pad=1.5,
+    )
+
+    output_path = Path(path).resolve()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Render PNG in memory first. This avoids Pillow opening the
+    # destination path directly, which fails in the current environment.
+    import io
+
+    png_buffer = io.BytesIO()
+
+    try:
+        fig.savefig(
+            png_buffer,
+            format="png",
+            dpi=260,
+            bbox_inches="tight",
+        )
+
+        png_bytes = png_buffer.getvalue()
+
+        if not png_bytes.startswith(bytes.fromhex("89504e470d0a1a0a")):
+            raise RuntimeError("Matplotlib did not produce a valid PNG stream.")
+
+        output_path.write_bytes(png_bytes)
+
+    finally:
+        png_buffer.close()
+        plt.close(fig)
+
+    if not output_path.is_file() or output_path.stat().st_size == 0:
+        raise RuntimeError(f"PNG output is missing or empty: {output_path}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manual", required=True)
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
+
+    manual = Path(args.manual).resolve()
+    output = Path(args.output).resolve()
+    output.mkdir(parents=True, exist_ok=True)
+
+    print("[1/4] Verifying Round 0 training lineage...")
+    round0_provenance = verify_round_zero(manual)
+    print("PASS: Round 0 train_log/train_set/hash")
+
+    print("[2/4] Loading and validating three evaluation checkpoints...")
+    checkpoints = {}
+    input_inventory = []
+
+    for round_index in ROUNDS:
+        data, inventory = load_checkpoint_metrics(manual, round_index, round0_lineage_verified=bool(round0_provenance))
+        checkpoints[round_index] = data
+        input_inventory.append(inventory)
+        print(
+            f"PASS: Round {round_index}: "
+            f"{len(data)} capabilities"
+        )
+
+    print("[3/4] Computing mastery, Wilson CI, deltas and trends...")
+    rows = build_rows(checkpoints)
+
+    csv_path = output / "capability_learning_curves.csv"
+    write_csv(csv_path, rows)
+
+    print(f"CREATED: {csv_path}")
+
+    print("[4/4] Plotting learning curves...")
+    png_path = output / "capability_learning_curves.png"
+    plot_curves(png_path, checkpoints)
+
+    if not png_path.is_file() or png_path.stat().st_size == 0:
+        raise RuntimeError("Learning curve PNG was not created")
+
+    print(f"CREATED: {png_path}")
+    print("LEARNING_CURVES_BUILD: PASS")
+    print(f"ROWS: {len(rows)}")
+    print(f"EXPECTED_ROWS: {len(CAPABILITIES) * len(ROUNDS)}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        print(f"LEARNING_CURVES_BUILD: FAIL: {exc}", file=sys.stderr)
+        raise
+
+
+
+
+

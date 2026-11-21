@@ -1,0 +1,3 @@
+﻿problem_id,issue,action,status
+gsm8k_train_00029,Ambiguous floor-transition and gate-count convention,Review expected counting convention before classifying trajectories,needs_review
+gsm8k_train_00056,Ground truth 50 conflicts with question specifying 200 dozen cookies,Verify against the original dataset source before changing any label,needs_review

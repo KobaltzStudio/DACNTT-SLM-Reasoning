@@ -1,0 +1,376 @@
+﻿        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            train, log = root / "nested" / "train_set.json", root / "nested" / "selection_log.jsonl"
+            selector.publish_pair_no_overwrite(train, log, b'{"ok":true}', b'{"row":1}\n')
+            self.assertEqual(train.read_bytes(), b'{"ok":true}')
+            self.assertEqual(log.read_bytes(), b'{"row":1}\n')
+
+    def test_cli_does_not_expose_alpha_override(self):
+        options = [action.option_strings for action in selector.build_parser()._actions]
+        self.assertNotIn(["--alpha"], options)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+
+============================================================
+FILE: tests\test_p1p2_method_registry.py
+============================================================
+from pathlib import Path
+import unittest
+
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY_PATH = ROOT / "config" / "p1p2_method_registry.yaml"
+
+
+class MethodRegistryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with REGISTRY_PATH.open("r", encoding="utf-8") as handle:
+            cls.registry = yaml.safe_load(handle)
+
+    def test_registry_schema_and_version(self):
+        self.assertEqual(self.registry["schema_version"], "p1p2.method-registry.v1")
+        self.assertEqual(self.registry["registry_version"], 1)
+
+    def test_registered_seeds_are_frozen(self):
+        self.assertEqual(self.registry["registered_seeds"], [13, 42, 2026])
+
+    def test_required_methods_exist(self):
+        required = {"B2", "B3", "B4", "B5", "P1-DEFICIT", "P1P2", "P1-GRAPH"}
+        self.assertTrue(required.issubset(self.registry["methods"]))
+
+    def test_p2_methods_delegate_to_frozen_config(self):
+        for method in ("B2", "B3", "B4", "B5"):
+            entry = self.registry["methods"][method]
+            self.assertEqual(entry["implementation"], "existing_p2")
+            self.assertEqual(entry["source_config"], "config/experiment_config.json")
+
+    def test_b4_b5_nll_policies_are_distinct_and_explicit(self):
+        methods = self.registry["methods"]
+        self.assertEqual(methods["B4"]["nll_checkpoint_policy"], "S0")
+        self.assertEqual(methods["B5"]["nll_checkpoint_policy"], "current_checkpoint")
+
+    def test_p1_deficit_does_not_require_nll_or_graph(self):
+        entry = self.registry["methods"]["P1-DEFICIT"]
+        self.assertTrue(entry["requires_capability_state"])
+        self.assertFalse(entry["requires_nll"])
+        self.assertFalse(entry["graph_evidence_required"])
+
+    def test_p1p2_policy_is_frozen_at_alpha_half(self):
+        policy = self.registry["methods"]["P1P2"]["priority_policy"]
+        self.assertEqual(policy["policy_id"], "p1p2_alpha_050_v1")
+        self.assertEqual(policy["alpha"], 0.5)
+        self.assertFalse(policy["alpha_tuned"])
+        self.assertEqual(
+            policy["formula"],
+            "alpha * p1_deficit + (1 - alpha) * percentile_rank_l_proxy",
+        )
+
+    def test_p1_graph_is_disabled_without_evidence(self):
+        entry = self.registry["methods"]["P1-GRAPH"]
+        self.assertFalse(entry["enabled"])
+        self.assertTrue(entry["graph_evidence_required"])
+        self.assertGreaterEqual(len(entry["enablement_requirements"]), 4)
+
+    def test_round_mapping_and_dev_only_evaluation(self):
+        protocol = self.registry["checkpoint_protocol"]
+        self.assertEqual(protocol["baseline"], "S0")
+        self.assertEqual(protocol["rounds"], {1: "S1", 2: "S2", 3: "S3"})
+        self.assertEqual(protocol["p2_round_index_offset"], -1)
+        self.assertEqual(protocol["evaluation_split"], "dev")
+        self.assertFalse(protocol["test_evaluation_during_rounds"])
+
+    def test_custom_seed_namespace_is_separate(self):
+        custom = self.registry["custom_seed_policy"]
+        self.assertTrue(custom["enabled"])
+        self.assertEqual(custom["registered_namespace"], "p1p2_integration")
+        self.assertEqual(custom["custom_namespace"], "p1p2_integration_custom")
+
+    def test_forbidden_namespace_is_runs_main(self):
+        self.assertIn("runs/main", self.registry["output_namespaces"]["forbidden"])
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+============================================================
+FILE: tests\test_p1p2_unified_config.py
+============================================================
+\
+import json
+import unittest
+from pathlib import Path
+
+import yaml
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG_PATH = ROOT / "config" / "p1p2_unified_run.yaml"
+REGISTRY_PATH = ROOT / "config" / "p1p2_method_registry.yaml"
+P2_CONFIG_PATH = ROOT / "config" / "experiment_config.json"
+
+
+class UnifiedRunConfigTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with CONFIG_PATH.open("r", encoding="utf-8") as handle:
+            cls.config = yaml.safe_load(handle)
+        with REGISTRY_PATH.open("r", encoding="utf-8") as handle:
+            cls.registry = yaml.safe_load(handle)
+        with P2_CONFIG_PATH.open("r", encoding="utf-8") as handle:
+            cls.p2 = json.load(handle)
+
+    def test_schema_and_version(self):
+        self.assertEqual(self.config["schema_version"], "p1p2.unified-run.v1")
+        self.assertEqual(self.config["config_version"], 1)
+
+    def test_registered_seeds_match_registry(self):
+        self.assertEqual(
+            self.config["execution"]["default_seeds"],
+            self.registry["registered_seeds"],
+        )
+
+    def test_default_methods_are_registered_and_enabled(self):
+        methods = self.config["execution"]["default_methods"]
+        for method in methods:
+            self.assertIn(method, self.registry["methods"])
+            self.assertTrue(self.registry["methods"][method]["enabled"])
+
+    def test_round_and_checkpoint_mapping(self):
+        rounds = self.config["execution"]["rounds"]
+        self.assertEqual(rounds["checkpoint_by_round"][0], "S0")
+        self.assertEqual(rounds["checkpoint_by_round"][1], "S1")
+        self.assertEqual(rounds["checkpoint_by_round"][2], "S2")
+        self.assertEqual(rounds["checkpoint_by_round"][3], "S3")
+        self.assertEqual(rounds["p2_round_index_offset"], -1)
+
+    def test_model_revisions_match_frozen_p2_config(self):
+        models = self.config["models"]
+        self.assertEqual(models["teacher"]["model_id"], self.p2["teacher"]["model"])
+        self.assertEqual(models["teacher"]["revision"], self.p2["teacher"]["revision"])
+        self.assertEqual(models["student"]["model_id"], self.p2["student"]["model"])
+        self.assertEqual(models["student"]["revision"], self.p2["student"]["revision"])
+
+    def test_budget_and_selector_constants_match_p2(self):
+        selection = self.config["selection"]
+        self.assertEqual(selection["budget"]["beta_round_tokens"], self.p2["budget"]["beta_round_tokens"])
+        self.assertEqual(selection["budget"]["beta_total_tokens"], self.p2["budget"]["beta_total_tokens"])
+        self.assertEqual(selection["n_cap"], self.p2["selection"]["n_cap"])
+        self.assertEqual(selection["tie_break"], self.p2["selection"]["tie_break"])
+        self.assertEqual(selection["allow_reselect_across_rounds"], self.p2["selection"]["allow_reselect_across_rounds"])
+
+    def test_p1p2_alpha_is_frozen(self):
+        policy = self.config["selection"]["p1p2_priority"]
+        self.assertEqual(policy["alpha"], 0.5)
+        self.assertFalse(policy["alpha_tuned"])
+        self.assertEqual(self.p2["selection"]["alpha"], 0.5)
+        self.assertFalse(self.p2["selection"]["alpha_tuned"])
+
+    def test_nll_policies_match_registry(self):
+        runtime = self.config["method_runtime"]
+        registry_methods = self.registry["methods"]
+        for method in ("B2", "B3", "B4", "B5", "P1-DEFICIT", "P1P2"):
+            expected = registry_methods[method].get("nll_checkpoint_policy", "none")
+            self.assertEqual(runtime[method]["nll_policy"], expected)
+
+    def test_dev_and_test_protocol(self):
+        data = self.config["data"]
+        self.assertEqual(data["dev"]["expected_count"], 500)
+        self.assertEqual(data["dev_select"]["expected_count"], 415)
+        self.assertEqual(data["dev_graph"]["expected_count"], 85)
+        self.assertFalse(data["test"]["allowed_during_training_rounds"])
+        self.assertFalse(data["test"]["allowed_for_checkpoint_selection_or_tuning"])
+        self.assertEqual(self.config["round_protocol"]["evaluation_split"], "dev")
+        self.assertFalse(self.config["round_protocol"]["checkpoint_selection"]["d_test_allowed"])
+
+    def test_graph_method_remains_disabled(self):
+        self.assertFalse(self.config["selection"]["p1_graph"]["enabled"])
+        self.assertFalse(self.config["method_runtime"]["P1-GRAPH"]["enabled"])
+        self.assertFalse(self.registry["methods"]["P1-GRAPH"]["enabled"])
+
+    def test_namespace_separation_and_protected_paths(self):
+        artifacts = self.config["artifacts"]
+        self.assertEqual(artifacts["registered"]["runs_root"], self.registry["output_namespaces"]["registered"]["runs"])
+        self.assertEqual(artifacts["custom"]["runs_root"], self.registry["output_namespaces"]["custom"]["runs"])
+        self.assertIn("runs/main", artifacts["forbidden_write_roots"])
+        self.assertIn("runs/main", self.registry["output_namespaces"]["forbidden"])
+
+    def test_post_eval_cli_contract(self):
+        hook = self.config["post_evaluation_hook"]
+        required = {"method", "seed", "round", "prediction", "checkpoint", "output_dir"}
+        self.assertEqual(set(hook["required_cli_inputs"]), required)
+        self.assertEqual(hook["supported_round_values"], [0, 1, 2, 3])
+        self.assertFalse(hook["p1_graph_allowed"])
+
+    def test_pool_fingerprint_and_verified_filter(self):
+        pool = self.config["data"]["verified_pool"]
+        self.assertEqual(pool["expected_records"], 4353)
+        self.assertEqual(pool["expected_sha256"], "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04")
+        self.assertEqual(pool["required_verification_status"], "valid")
+
+    def test_training_parameters_are_not_duplicated(self):
+        training = self.config["training"]
+        self.assertEqual(training["configuration_source"], "config/experiment_config.json")
+        self.assertTrue(training["do_not_duplicate_hyperparameters"])
+
+    def test_dry_run_and_resume_safety(self):
+        execution = self.config["execution"]
+        self.assertTrue(execution["dry_run"]["must_not_train"])
+        self.assertTrue(execution["dry_run"]["must_not_write_model_checkpoints"])
+        self.assertTrue(execution["resume"]["require_valid_parent_checkpoint"])
+        self.assertTrue(execution["resume"]["never_overwrite_completed_round"])
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+============================================================
+FILE: tests\test_capability_eval_publication.py
+============================================================
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import capability_eval as evaluator
+
+
+class EvaluatorPublicationTests(unittest.TestCase):
+    def test_publish_directory(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            (stage / "payload.txt").write_text("ok", encoding="utf-8")
+            evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(target.is_dir())
+            self.assertFalse(stage.exists())
+
+    def test_collision_preserves_stage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            target.mkdir()
+            marker = stage / "marker"
+            marker.write_text("preserve", encoding="utf-8")
+            with self.assertRaisesRegex(FileExistsError, "OUTPUT_COLLISION"):
+                evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(marker.is_file())
+
+    def test_transient_permission_error_retries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            real_rename = evaluator.os.rename
+            calls = {"n": 0}
+
+            def flaky(src, dst):
+                calls["n"] += 1
+                if calls["n"] == 1:
+                    raise PermissionError(5, "transient")
+                return real_rename(src, dst)
+
+            with patch.object(evaluator.os, "rename", side_effect=flaky):
+                with patch.object(evaluator.time, "sleep", return_value=None):
+                    evaluator.publish_staged_directory(stage, target)
+            self.assertEqual(calls["n"], 2)
+            self.assertTrue(target.is_dir())
+
+    def test_persistent_permission_error_keeps_stage(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            stage, target = root / ".stage", root / "final"
+            stage.mkdir()
+            marker = stage / "marker"
+            marker.write_text("preserve", encoding="utf-8")
+            with patch.object(
+                evaluator.os, "rename",
+                side_effect=PermissionError(5, "persistent"),
+            ):
+                with patch.object(evaluator.time, "sleep", return_value=None):
+                    with self.assertRaisesRegex(
+                        RuntimeError, "PUBLICATION_FAILED_AFTER_RETRIES"
+                    ):
+                        evaluator.publish_staged_directory(stage, target)
+            self.assertTrue(marker.is_file())
+            self.assertFalse(target.exists())
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "`n=== TRAIN ROUND CLI ==="
+
+=== TRAIN ROUND CLI ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python scripts\train_round.py --help
+
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "TRAIN_ROUND_HELP_EXIT=$LASTEXITCODE"
+TRAIN_ROUND_HELP_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "`n=== EVALUATION CLI ==="
+
+=== EVALUATION CLI ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python scripts\eval_student.py --help
+
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "EVAL_STUDENT_HELP_EXIT=$LASTEXITCODE"
+EVAL_STUDENT_HELP_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "`n=== NLL CLI ==="
+
+=== NLL CLI ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python scripts\compute_nll.py --help
+
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "COMPUTE_NLL_HELP_EXIT=$LASTEXITCODE"
+COMPUTE_NLL_HELP_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "`n=== CONTROLLER AND ENTRY POINT EXISTENCE ==="
+
+=== CONTROLLER AND ENTRY POINT EXISTENCE ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) $CandidateFiles = @(
+    "scripts\p1p2_controller.py",
+    "scripts\run_p1_p2.py",
+    "tests\test_p1p2_integration.py"
+)
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) foreach ($RelativePath in $CandidateFiles) {
+    $FullPath = Join-Path $ProjectRoot $RelativePath
+    $Exists = Test-Path -LiteralPath $FullPath -PathType Leaf
+
+    Write-Host "$RelativePath : EXISTS=$Exists"
+
+    if ($Exists) {
+        Get-FileHash -LiteralPath $FullPath -Algorithm SHA256
+    }
+}
+scripts\p1p2_controller.py : EXISTS=False
+scripts\run_p1_p2.py : EXISTS=False
+tests\test_p1p2_integration.py : EXISTS=False
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20261117220024
+**********************

@@ -1,0 +1,1204 @@
+
+
+==================================================
+FILE: scripts\compute_nll.py
+==================================================
+#!/usr/bin/env python3
+"""
+Score every verified pool trajectory under a Student checkpoint (one forward pass, no backward).
+
+Per trajectory tau (trajectory tokens only, the end-of-turn token excluded):
+  nll_sum    = sum_t -log p(tau_t | x, tau_<t)
+  ell        = nll_sum / n_tokens            (length-normalized NLL; input of L_proxy, config "learnability")
+  brier_sum  = sum_t || pi_t - onehot(tau_t) ||^2
+               (Brier residual; stored so the LARK score, arXiv 2605.30651 Eq. 7, can be computed
+                later without another pass. Exploratory, not part of the frozen L_proxy.)
+
+L_proxy itself is not computed here: it needs ell over the whole pool (median / IQR rule) and
+is derived in the analysis step.
+
+--pool defaults to the official pool v1 (trajectory/pool/pool_v1_verified.jsonl). The Task 5 smoke test
+scored the preliminary pool; reproduce it with --pool trajectory/pool/batch_100_teacher_verified.jsonl.
+
+Usage (from experiments/week2September/manual/):
+  python scripts/compute_nll.py --tag S0 --out reports/task5/smoke_test/nll_pool_S0.jsonl \
+      --pool trajectory/pool/batch_100_teacher_verified.jsonl
+  python scripts/compute_nll.py --tag S1_seed13 --adapter <adapter_dir> \
+      --out reports/task5/smoke_test/nll_pool_S1_seed13.jsonl --pool trajectory/pool/batch_100_teacher_verified.jsonl
+"""
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    IGNORE_INDEX, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example, environment_info,
+    load_config, load_model, load_pool, load_tokenizer, pick_dtype, sha256_file, student_from_args, write_json,
+)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--tag", required=True)
+    ap.add_argument("--adapter", default=None)
+    ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--batch-size", type=int, default=4)
+    ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--pool", type=Path, default=POOL_VERIFIED, help="verified pool to score (default: pool v1)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+    pool = sorted(load_pool(args.pool), key=lambda r: r["trajectory_id"])
+    if args.limit:
+        pool = pool[: args.limit]
+
+    tok = load_tokenizer(model_name, revision)
+    model = load_model(model_name, revision, dtype, adapter=args.adapter)
+    examples = [encode_example(tok, r["question"], r["raw_generation"], add_eos=False) for r in pool]
+
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    t0 = time.time()
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    with args.out.open("w", encoding="utf-8") as f:
+        for i in range(0, len(examples), args.batch_size):
+            batch = examples[i: i + args.batch_size]
+            width = max(len(e["input_ids"]) for e in batch)
+            ids = torch.tensor([e["input_ids"] + [tok.pad_token_id] * (width - len(e["input_ids"])) for e in batch])
+            mask = torch.tensor([[1] * len(e["input_ids"]) + [0] * (width - len(e["input_ids"])) for e in batch])
+            labels = torch.tensor([e["labels"] + [IGNORE_INDEX] * (width - len(e["labels"])) for e in batch])
+            ids, mask, labels = ids.to(model.device), mask.to(model.device), labels.to(model.device)
+            with torch.no_grad():
+                logits = model(input_ids=ids, attention_mask=mask).logits[:, :-1]
+            tgt = labels[:, 1:]
+            for b, e in enumerate(batch):
+                sel = tgt[b] != IGNORE_INDEX
+                lp = torch.log_softmax(logits[b][sel].float(), dim=-1)
+                y = tgt[b][sel]
+                lp_y = lp.gather(1, y[:, None]).squeeze(1)
+                p = lp.exp()
+                brier = (p.pow(2).sum(-1) - 2 * lp_y.exp() + 1).sum().item()
+                nll_sum = -lp_y.sum().item()
+                r = pool[i + b]
+                f.write(json.dumps({
+                    "trajectory_id": r["trajectory_id"], "problem_id": r["problem_id"], "checkpoint": args.tag,
+                    "n_tokens": int(sel.sum()), "nll_sum": nll_sum, "ell": nll_sum / int(sel.sum()),
+                    "brier_sum": brier,
+                }) + "\n")
+            print(f"[{args.tag}] {min(i + args.batch_size, len(examples))}/{len(examples)}  {time.time() - t0:.0f}s",
+                  flush=True)
+    elapsed = time.time() - t0
+    write_json(args.out.with_suffix(".summary.json"), {
+        "checkpoint": args.tag, "adapter": args.adapter, "model": model_name, "revision": revision,
+        "dtype": str(dtype).replace("torch.", ""), "n_trajectories": len(examples),
+        "pool": str(args.pool), "pool_sha256": sha256_file(args.pool),
+        "forward_passes": len(examples), "elapsed_seconds": round(elapsed, 1),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "environment": environment_info(torch),
+    })
+    print(f"[{args.tag}] scored {len(examples)} trajectories in {elapsed:.0f}s -> {args.out}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+==================================================
+FILE: scripts\compute_learnability.py
+==================================================
+import argparse, json, math, statistics
+from pathlib import Path
+from student_common import write_json, sha256_file, load_config
+
+def read_jsonl(path):
+    rows = []
+    with Path(path).open(encoding="utf-8") as f:
+        for i, line in enumerate(f, 1):
+            if line.strip():
+                try: rows.append(json.loads(line))
+                except json.JSONDecodeError as e: raise ValueError(f"{path}:{i}: {e}") from e
+    return rows
+
+def derive(rows, checkpoint, eligible_ids=None):
+    by_id = {}
+    for r in rows:
+        tid = r["trajectory_id"]
+        if tid in by_id: raise ValueError(f"duplicate trajectory_id: {tid}")
+        if int(r["n_tokens"]) <= 0 or not math.isfinite(float(r["ell"])):
+            raise ValueError(f"invalid NLL record: {tid}")
+        by_id[tid] = r
+    if eligible_ids is not None:
+        unknown = sorted(eligible_ids - set(by_id))
+        if unknown: raise ValueError(f"eligible IDs absent from NLL input: {unknown[:5]}")
+    ref = [float(r["ell"]) for tid, r in by_id.items() if eligible_ids is None or tid in eligible_ids]
+    if len(ref) < 2: raise ValueError("reference set must contain at least two trajectories")
+    q = statistics.quantiles(sorted(ref), n=4, method="inclusive")
+    median, q1, q3 = statistics.median(ref), q[0], q[2]
+    sigma = (q3 - q1) / 1.349
+    if not math.isfinite(sigma) or sigma <= 0:
+        raise ValueError(f"IQR/1.349 must be positive; got {sigma}. Inspect reference set; do not silently change formula.")
+    out = []
+    for tid, r in sorted(by_id.items()):
+        ell = float(r["ell"])
+        out.append({
+            "trajectory_id": tid, "problem_id": r["problem_id"], "checkpoint": checkpoint,
+            "tokens": int(r["n_tokens"]), "nll": ell, "ell_star": median, "sigma": sigma,
+            "l_proxy": math.exp(-((ell - median) ** 2) / (2 * sigma ** 2)),
+            "brier_sum": r.get("brier_sum"),
+        })
+    return out, {"checkpoint": checkpoint, "n_scored": len(out), "n_reference": len(ref),
+                 "ell_star": median, "q1": q1, "q3": q3, "sigma": sigma}
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--nll", required=True, type=Path)
+    p.add_argument("--out", required=True, type=Path)
+    p.add_argument("--checkpoint", required=True)
+    p.add_argument("--eligible-ids", type=Path)
+    a = p.parse_args()
+    rows = read_jsonl(a.nll)
+    if not rows: raise ValueError("NLL input is empty")
+    if any(r.get("checkpoint") != a.checkpoint for r in rows):
+        raise ValueError("NLL records do not all match --checkpoint")
+    eligible = set(a.eligible_ids.read_text(encoding="utf-8").split()) if a.eligible_ids else None
+    out, summary = derive(rows, a.checkpoint, eligible)
+    a.out.parent.mkdir(parents=True, exist_ok=True)
+    with a.out.open("w", encoding="utf-8") as f:
+        for r in out: f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    summary.update({"nll_file": str(a.nll), "nll_sha256": sha256_file(a.nll),
+                    "student_revision": load_config()["student"]["revision"],
+                    "eligible_ids_file": str(a.eligible_ids) if a.eligible_ids else None})
+    write_json(a.out.with_suffix(".summary.json"), summary)
+    print(f"[PASS] scored={len(out)} reference={summary['n_reference']} ell_star={summary['ell_star']:.6f} sigma={summary['sigma']:.6f}")
+
+if __name__ == "__main__": main()
+
+
+==================================================
+FILE: scripts\selection_common.py
+==================================================
+import argparse, json, random, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import MANUAL_DIR, POOL_VERIFIED, CONFIG_PATH, load_config, load_pool, load_tokenizer, encode_example, sha256_file
+
+def read_jsonl(path):
+    if not path or not Path(path).exists(): return []
+    out=[]
+    with Path(path).open(encoding="utf-8") as f:
+        for i,line in enumerate(f,1):
+            if line.strip():
+                try: out.append(json.loads(line))
+                except json.JSONDecodeError as e: raise ValueError(f"{path}:{i}: {e}") from e
+    return out
+
+def parser_for(method):
+    p=argparse.ArgumentParser(description=f"Select one round for {method}")
+    p.add_argument("--round",type=int,required=True)
+    p.add_argument("--seed",type=int,required=True)
+    p.add_argument("--out",type=Path,required=True)
+    p.add_argument("--log",type=Path,required=True)
+    p.add_argument("--pool",type=Path,default=POOL_VERIFIED)
+    p.add_argument("--config",type=Path,default=CONFIG_PATH)
+    p.add_argument("--scores",type=Path)
+    p.add_argument("--source-checkpoint")
+    p.add_argument("--budget",type=int,help="reduced budget for smoke tests only")
+    return p
+
+def run(method, strategy, a):
+    cfg=json.loads(a.config.read_text(encoding="utf-8"))
+    if not 0 <= a.round < int(cfg["schedule"]["rounds_M"]): raise ValueError("round outside configured schedule")
+    budget=int(a.budget if a.budget is not None else cfg["budget"]["beta_round_tokens"])
+    pool=load_pool(a.pool)
+    byid={r["trajectory_id"]:r for r in pool}
+    if len(byid)!=len(pool): raise ValueError("duplicate trajectory_id in pool")
+    tok=load_tokenizer(cfg["student"]["model"],cfg["student"]["revision"])
+    lengths = {
+        r["trajectory_id"]: int(
+            encode_example(
+                tok,
+                r["question"],
+                r["raw_generation"],
+                add_eos=True
+            )["n_supervised"]
+        )
+        for r in pool
+    }
+    scores={}
+    if a.scores:
+        for r in read_jsonl(a.scores):
+            if r["trajectory_id"] in scores: raise ValueError("duplicate ID in scores")
+            scores[r["trajectory_id"]]=r
+    if method in ("B4","B5"):
+        missing=set(byid)-set(scores)
+        if missing: raise ValueError(f"score file missing {len(missing)} pool records")
+    source=a.source_checkpoint or (f"student_ckpt_{a.round:03d}" if method=="B5" else "student_ckpt_000")
+    if method in ("B4","B5"):
+        wrong=[tid for tid in byid if scores[tid].get("checkpoint") != source]
+        if wrong: raise ValueError(f"{len(wrong)} score records are not from {source}; first={wrong[:3]}")
+        invalid=[tid for tid in byid if not 0.0 <= float(scores[tid]["l_proxy"]) <= 1.0]
+        if invalid: raise ValueError(f"invalid L_proxy values; first={invalid[:3]}")
+    if method=="B4" and source!="student_ckpt_000": raise ValueError("B4 must use S0 scores")
+    if method=="B5" and source!=f"student_ckpt_{a.round:03d}": raise ValueError("B5 source checkpoint must match round")
+    hist=read_jsonl(a.log)
+    hist=[r for r in hist if r.get("record_type")=="selection" and r.get("method")==method and int(r.get("training_seed",-1))==a.seed]
+    prev={r["trajectory_id"] for r in hist if r.get("selected")} if method in ("B3","B4") else set()
+    used={r["problem_id"] for r in hist if int(r.get("round",-1))==a.round and r.get("selected")}
+    if strategy=="random":
+        candidates=list(pool); random.Random(a.seed*100+a.round).shuffle(candidates)
+    elif strategy=="shortest":
+        best={}
+        for r in pool:
+            k=(lengths[r["trajectory_id"]],r["trajectory_id"])
+            if r["problem_id"] not in best or k<best[r["problem_id"]][0]: best[r["problem_id"]]=(k,r)
+        candidates=[v[1] for v in best.values()]
+        random.Random(a.seed).shuffle(candidates)
+    elif strategy=="static":
+        candidates=sorted(pool,key=lambda r:(-float(scores[r["trajectory_id"]]["l_proxy"]),r["trajectory_id"]))
+    else:
+        candidates=sorted(pool,key=lambda r:(-float(scores[r["trajectory_id"]]["l_proxy"]),r["trajectory_id"]))
+    selected=[]; spent=0; logrows=[]
+    for rank,r in enumerate(candidates,1):
+        tid,pid=r["trajectory_id"],r["problem_id"]; nt=lengths[tid]; sc=scores.get(tid,{})
+        choose=False
+        if pid in used: reason="n_cap_reached"
+        elif method in ("B3","B4") and tid in prev: reason="already_selected_in_previous_round"
+        elif spent+nt>budget: reason="budget_exhausted"
+        else:
+            choose=True; reason={"B2":"random","B3":"shortest_correct","B4":"top_l_proxy_static","B5":"top_l_proxy_dynamic"}[method]
+            selected.append(r); used.add(pid); spent+=nt
+        logrows.append({
+            "record_type":"selection","method":method,"round":a.round,"source_checkpoint":source,
+            "training_seed":a.seed,"problem_id":pid,"trajectory_id":tid,"tokens":nt,
+            "nll":sc.get("nll"),"ell_star":sc.get("ell_star"),"sigma":sc.get("sigma"),
+            "l_proxy":sc.get("l_proxy"),"score":sc.get("l_proxy") if method in ("B4","B5") else None,
+            "rank":rank if method in ("B3","B4","B5") else None,"selected":choose,
+            "criterion":reason,"outcome":None,"config_hash":sha256_file(a.config)
+        })
+    if not selected: raise RuntimeError("empty selection; check budget and history")
+    try: pool_rel=str(a.pool.resolve().relative_to(MANUAL_DIR.resolve())).replace("\\","/")
+    except ValueError: raise ValueError("pool must be located inside manual/ for train_round.py")
+    train={
+        "method":method,"round":a.round,"training_seed":a.seed,"source_checkpoint":source,
+        "pool":pool_rel,"pool_sha256":sha256_file(a.pool),
+        "trajectory_ids":[r["trajectory_id"] for r in selected],"n_trajectories":len(selected),
+        "trajectory_tokens":spent,"trajectory_token_budget":budget,
+        "budget_unit": "Student-tokenized supervised response tokens; includes end-of-turn token",
+        "config_sha256":sha256_file(a.config)
+    }
+    a.out.parent.mkdir(parents=True,exist_ok=True)
+    a.out.write_text(json.dumps(train,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    a.log.parent.mkdir(parents=True,exist_ok=True)
+    with a.log.open("a",encoding="utf-8") as f:
+        for r in logrows: f.write(json.dumps(r,ensure_ascii=False)+"\n")
+    print(f"[PASS] {method} round={a.round} seed={a.seed}: {len(selected)} trajectories, {spent}/{budget} trajectory tokens")
+    print(f"[OUT] {a.out}")
+
+
+==================================================
+FILE: scripts\train_round.py
+==================================================
+#!/usr/bin/env python3
+"""
+Train one round of the Student with LoRA: S_t + B_t -> S_{t+1}.
+
+Hyperparameters come from config/experiment_config.json "training" (LoRA r/alpha/dropout/targets,
+AdamW, constant lr, no warmup, max_grad_norm, effective batch, 1 epoch, max_seq_len,
+completion-only loss). Effective batch = --micro-batch x gradient accumulation.
+
+Loss: token-level mean over all supervised (response) tokens of the effective batch;
+prompt tokens are masked. Seeds: torch seed (LoRA init, dropout) = data order seed = --seed.
+
+Pool: the trajectories are looked up in the pool named by the train set ("pool", checked against
+"pool_sha256"), so the Task 5 smoke-test train sets still resolve to the preliminary pool; train sets
+without that field use --pool (default: official pool v1).
+
+Outputs:
+  <adapter-dir>/                 LoRA adapter (safetensors) + tokenizer files
+  <adapter-dir>/train_log.json   per-step loss, tokens, time; totals; config used
+
+Usage (from experiments/week2September/manual/):
+  python scripts/train_round.py --seed 13 \
+      --train-set reports/task5/smoke_test/train_set_seed13.json \
+      --adapter-dir models/smoke/student_ckpt_001_smoke_seed13
+"""
+import argparse
+import json
+import math
+import random
+import sys
+import time
+from pathlib import Path
+
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from student_common import (  # noqa: E402
+    CONFIG_PATH, IGNORE_INDEX, MANUAL_DIR, POOL_VERIFIED, add_model_args, check_prompt_template, encode_example,
+    environment_info, load_config, load_pool, pick_dtype, sha256_file, student_from_args, write_json,
+)
+
+
+def collate(examples, pad_id):
+    width = max(len(e["input_ids"]) for e in examples)
+    ids, labels, mask = [], [], []
+    for e in examples:
+        pad = width - len(e["input_ids"])
+        ids.append(e["input_ids"] + [pad_id] * pad)          # right padding for training
+        labels.append(e["labels"] + [IGNORE_INDEX] * pad)
+        mask.append([1] * len(e["input_ids"]) + [0] * pad)
+    return torch.tensor(ids), torch.tensor(labels), torch.tensor(mask)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--seed", type=int, required=True)
+    ap.add_argument("--train-set", required=True, type=Path, help="JSON with trajectory_ids (select_smoke_train_set.py)")
+    ap.add_argument("--adapter-dir", required=True, type=Path)
+    ap.add_argument("--init-adapter", default=None, help="continue from an existing adapter (round t > 0)")
+    ap.add_argument("--micro-batch", type=int, default=4)
+    ap.add_argument("--epochs", type=int, default=None, help="default: config training.epochs_per_round")
+    ap.add_argument("--lr", type=float, default=None, help="default: config training.learning_rate")
+    ap.add_argument("--no-gradient-checkpointing", action="store_true")
+    ap.add_argument("--pool", type=Path, default=None,
+                    help="pool for train sets without a 'pool' field (default: official pool v1)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    tc = cfg["training"]
+    if tc["loss"].split()[0] != "completion-only" or tc["lr_scheduler"] != "constant" or tc["warmup_steps"] != 0:
+        raise ValueError("config training block differs from what this script implements")
+    eff_batch = tc["batch_size"]
+    if eff_batch % args.micro_batch:
+        raise ValueError(f"--micro-batch must divide the effective batch {eff_batch}")
+    accum = eff_batch // args.micro_batch
+    epochs = args.epochs or tc["epochs_per_round"]
+    lr = args.lr or tc["learning_rate"]
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+
+    from peft import LoraConfig, PeftModel, get_peft_model
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    train_set = json.loads(args.train_set.read_text(encoding="utf-8"))
+    if "pool" in train_set:
+        pool_path = MANUAL_DIR / train_set["pool"]
+        if args.pool and args.pool.resolve() != pool_path.resolve():
+            raise ValueError(f"--pool {args.pool} differs from the train set's pool {train_set['pool']}")
+        if "pool_sha256" in train_set and sha256_file(pool_path) != train_set["pool_sha256"]:
+            raise ValueError(f"{pool_path} changed since the train set was drawn")
+    else:
+        pool_path = args.pool or POOL_VERIFIED
+    by_id = {r["trajectory_id"]: r for r in load_pool(pool_path)}
+    rows = [by_id[t] for t in train_set["trajectory_ids"]]
+
+    tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
+    examples = [encode_example(tok, r["question"], r["raw_generation"]) for r in rows]
+    too_long = [r["trajectory_id"] for r, e in zip(rows, examples) if len(e["input_ids"]) > tc["max_seq_len"]]
+    if too_long:
+        raise ValueError(f"{len(too_long)} examples exceed max_seq_len {tc['max_seq_len']}: {too_long[:3]}")
+
+    torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    model = AutoModelForCausalLM.from_pretrained(model_name, revision=revision, dtype=dtype)
+    if not args.no_gradient_checkpointing:
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        model.enable_input_require_grads()
+    if args.init_adapter:
+        model = PeftModel.from_pretrained(model, args.init_adapter, is_trainable=True)
+    else:
+        model = get_peft_model(model, LoraConfig(
+            r=tc["lora_r"], lora_alpha=tc["lora_alpha"], lora_dropout=tc["lora_dropout"],
+            target_modules=tc["lora_target_modules"], bias="none", task_type="CAUSAL_LM",
+        ))
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device)
+    model.train()
+    trainable = [p for p in model.parameters() if p.requires_grad]
+    n_trainable = sum(p.numel() for p in trainable)
+    opt = torch.optim.AdamW(trainable, lr=lr, betas=(tc["adam_beta1"], tc["adam_beta2"]),
+                            weight_decay=tc["weight_decay"])  # fresh optimizer state each round (config)
+
+    order_rng = random.Random(args.seed)  # data_order_seed = training_seed
+    log, step, t0 = [], 0, time.time()
+    total_sup, total_prompt = 0, 0
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    for epoch in range(epochs):
+        order = list(range(len(examples)))
+        order_rng.shuffle(order)
+        for start in range(0, len(order), eff_batch):
+            eff = [examples[i] for i in order[start: start + eff_batch]]
+            n_sup = sum(e["n_supervised"] for e in eff)
+            loss_sum = 0.0
+            opt.zero_grad(set_to_none=True)
+            for m in range(0, len(eff), args.micro_batch):
+                ids, labels, mask = (x.to(device) for x in collate(eff[m: m + args.micro_batch], tok.pad_token_id))
+                logits = model(input_ids=ids, attention_mask=mask).logits[:, :-1]
+                tgt = labels[:, 1:]
+                sel = tgt != IGNORE_INDEX  # upcast only supervised positions (saves memory)
+                tok_loss = torch.nn.functional.cross_entropy(logits[sel].float(), tgt[sel], reduction="sum")
+                (tok_loss / n_sup).backward()
+                loss_sum += tok_loss.item()
+            grad_norm = torch.nn.utils.clip_grad_norm_(trainable, tc["max_grad_norm"]).item()
+            opt.step()
+            step += 1
+            total_sup += n_sup
+            total_prompt += sum(e["n_prompt"] for e in eff)
+            log.append({"step": step, "epoch": epoch, "loss": loss_sum / n_sup, "grad_norm": grad_norm,
+                        "n_examples": len(eff), "supervised_tokens": n_sup, "lr": lr,
+                        "elapsed_s": round(time.time() - t0, 1)})
+            print(f"step {step:3d}  loss {loss_sum / n_sup:.4f}  grad_norm {grad_norm:.3f}  "
+                  f"tokens {n_sup}  {time.time() - t0:.0f}s", flush=True)
+            if not math.isfinite(loss_sum):
+                raise RuntimeError("non-finite loss")
+
+    args.adapter_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(args.adapter_dir)
+    tok.save_pretrained(args.adapter_dir)
+    write_json(args.adapter_dir / "train_log.json", {
+        "checkpoint_parent": args.init_adapter or "student_ckpt_000",
+        "seed": args.seed, "data_order_seed": args.seed,
+        "train_set": str(args.train_set), "train_set_sha256": sha256_file(args.train_set),
+        "pool": str(pool_path), "pool_sha256": sha256_file(pool_path),
+        "n_examples": len(examples), "epochs": epochs, "steps": step,
+        "effective_batch": eff_batch, "micro_batch": args.micro_batch, "grad_accum": accum,
+        "learning_rate": lr, "lr_from_config": lr == tc["learning_rate"],
+        "epochs_from_config": epochs == tc["epochs_per_round"],
+        "model": model_name, "revision": revision, "dtype": str(dtype).replace("torch.", ""),
+        "gradient_checkpointing": not args.no_gradient_checkpointing,
+        "trainable_parameters": n_trainable,
+        "cumulative_training_tokens": total_sup,
+        "prompt_tokens_masked": total_prompt,
+        "trajectory_tokens": sum(e["n_traj"] for e in examples) * epochs,
+        "beta_round_tokens_config": cfg["budget"]["beta_round_tokens"],
+        "elapsed_seconds": round(time.time() - t0, 1),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "config_sha256": sha256_file(CONFIG_PATH),
+        "environment": environment_info(torch),
+        "steps_log": log,
+    })
+    print(f"saved adapter -> {args.adapter_dir}  ({step} steps, {total_sup} supervised tokens)")
+
+
+if __name__ == "__main__":
+    main()
+
+
+==================================================
+FILE: scripts\validate_train_set.py
+==================================================
+import argparse, json, sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from student_common import MANUAL_DIR, POOL_VERIFIED, load_config, load_pool, load_tokenizer, encode_example, sha256_file, DEV_IDS, TEST_IDS
+
+def main():
+    p=argparse.ArgumentParser()
+    p.add_argument("train_set",type=Path)
+    p.add_argument("--pool",type=Path)
+    p.add_argument("--budget",type=int)
+    p.add_argument("--skip-tokenizer",action="store_true")
+    a=p.parse_args()
+    ts=json.loads(a.train_set.read_text(encoding="utf-8"))
+    pp=a.pool or (MANUAL_DIR/ts.get("pool",str(POOL_VERIFIED)))
+    if not pp.is_absolute(): pp=MANUAL_DIR/pp
+    if ts.get("pool_sha256") and sha256_file(pp)!=ts["pool_sha256"]: raise ValueError("pool SHA256 mismatch")
+    pool=load_pool(pp); byid={r["trajectory_id"]:r for r in pool}; ids=ts.get("trajectory_ids",[])
+    if not ids: raise ValueError("empty trajectory_ids")
+    if len(ids)!=len(set(ids)): raise ValueError("duplicate trajectory IDs")
+    missing=[x for x in ids if x not in byid]
+    if missing: raise ValueError(f"IDs missing from pool: {missing[:5]}")
+    rows=[byid[x] for x in ids]
+    held=set(DEV_IDS.read_text(encoding="utf-8").split())|set(TEST_IDS.read_text(encoding="utf-8").split())
+    leak=sorted({r["problem_id"] for r in rows}&held)
+    if leak: raise ValueError(f"D_dev/D_test leakage: {leak[:5]}")
+    cap=int(load_config()["selection"]["n_cap"]); counts={}
+    for r in rows: counts[r["problem_id"]]=counts.get(r["problem_id"],0)+1
+    if any(v>cap for v in counts.values()): raise ValueError(f"n_cap={cap} violated")
+    if a.skip_tokenizer:
+        raise ValueError("--skip-tokenizer is disabled for this validator; use exact tokenizer validation")
+    cfg=load_config(); tok=load_tokenizer(cfg["student"]["model"],cfg["student"]["revision"])
+    total = sum(
+        int(
+            encode_example(
+                tok,
+                r["question"],
+                r["raw_generation"],
+                add_eos=True
+            )["n_supervised"]
+        )
+        for r in rows
+    )
+    budget=int(a.budget if a.budget is not None else cfg["budget"]["beta_round_tokens"])
+    if total>budget: raise ValueError(f"budget exceeded: {total}>{budget}")
+    if "trajectory_tokens" in ts and int(ts["trajectory_tokens"])!=total:
+        raise ValueError(f"stored trajectory_tokens={ts['trajectory_tokens']} but recomputed={total}")
+    print(
+        f"[PASS] {len(rows)} trajectories; "
+        f"{total}/{budget} supervised response tokens; "
+        "pool, leakage, n_cap checks passed"
+    )
+
+if __name__=="__main__": main()
+
+
+==================================================
+FILE: scripts\eval_student.py
+==================================================
+#!/usr/bin/env python3
+"""
+Evaluate a Student checkpoint on D_dev or D_test with the frozen evaluation protocol.
+
+Protocol (config/experiment_config.json "evaluation"): prompt v1, greedy decoding,
+max_new_tokens 512, answers scored by answer_utils.evaluate_output
+(invalid_format counts as incorrect; format compliance reported separately).
+
+Greedy is enforced explicitly: the Qwen generation_config ships sampling defaults and
+repetition_penalty 1.05, which would otherwise still apply under do_sample=False.
+
+Also records lenient_correct (last number anywhere in the output, format ignored): the registered
+secondary metric of T7-5, always reported with strict accuracy and format compliance. Accuracy per
+capability is added on D_dev, over the problems with manual labels.
+
+Backends:
+  hf    transformers generate (default; used by the Task 5 smoke test)
+  vllm  vLLM with the same greedy settings; needs a bf16 GPU (L4/A100). A LoRA adapter is merged into a
+        temporary model directory first, exactly as the hf backend merges it before generating.
+
+Output (resumable: problem_ids already in --out are skipped):
+  --out           one JSON line per problem
+  --summary       accuracy, format compliance, output length, timing, memory
+
+Usage (from experiments/week2September/manual/):
+  python scripts/eval_student.py --tag S0 --out reports/task5/smoke_test/eval_S0_dev.jsonl
+  python scripts/eval_student.py --tag S1_seed13 --adapter <adapter_dir> \
+      --out reports/task5/smoke_test/eval_S1_dev_seed13.jsonl
+  python scripts/eval_student.py --split test --backend vllm --tag S1 --adapter <adapter_dir> --out <out.jsonl>
+"""
+import argparse
+import gc
+import os
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+# Deterministic scheduling in offline mode (vLLM docs, Reproducibility); must be set before importing vllm.
+os.environ.setdefault("VLLM_ENABLE_V1_MULTIPROCESSING", "0")
+
+import torch  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_metrics import score_output, summarize  # noqa: E402
+from student_common import (  # noqa: E402
+    add_model_args, append_jsonl, build_prompt, check_prompt_template, end_of_turn_id,
+    environment_info, load_capability_labels, load_config, load_dev_rows, load_model, load_test_rows,
+    load_tokenizer, pick_dtype, read_jsonl_resumable, student_from_args, write_json,
+)
+
+
+def generate_hf(todo, tok, model_name, revision, dtype, adapter, max_new_tokens, batch_size):
+    """Yields lists of (row, text, n_output_tokens), one list per batch."""
+    from transformers import GenerationConfig
+    model = load_model(model_name, revision, dtype, adapter=adapter)
+    gen_cfg = GenerationConfig(
+        do_sample=False,
+        max_new_tokens=max_new_tokens,
+        repetition_penalty=1.0,
+        eos_token_id=[end_of_turn_id(tok), tok.eos_token_id],
+        pad_token_id=tok.pad_token_id,
+    )
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i: i + batch_size]
+        prompts = [build_prompt(tok, r["question"]) for r in batch]
+        enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
+        with torch.no_grad():
+            out = model.generate(**enc, generation_config=gen_cfg)
+        results = []
+        for r, ids in zip(batch, out[:, enc["input_ids"].shape[1]:]):
+            ids = ids.tolist()
+            n_out = len(ids)
+            while n_out and ids[n_out - 1] == tok.pad_token_id:
+                n_out -= 1
+            results.append((r, tok.decode(ids[:n_out], skip_special_tokens=True), n_out))
+        yield results
+
+
+def generate_vllm(todo, tok, model_name, revision, adapter, max_new_tokens, batch_size, gpu_memory_utilization):
+    """Same contract as generate_hf. batch_size here is the number of problems per generate() call."""
+    from vllm import LLM, SamplingParams
+    if not torch.cuda.is_available() or not torch.cuda.is_bf16_supported():
+        raise SystemExit("the vllm backend needs a GPU with bf16 (T6-5)")
+    stop_ids = sorted({end_of_turn_id(tok), tok.eos_token_id})
+    params = SamplingParams(n=1, temperature=0.0, top_p=1.0, repetition_penalty=1.0,
+                            max_tokens=max_new_tokens, stop_token_ids=stop_ids)
+    with tempfile.TemporaryDirectory(prefix="merged_student_") as merged:
+        if adapter:
+            model = load_model(model_name, revision, torch.bfloat16, adapter=adapter)
+            model.save_pretrained(merged)
+            tok.save_pretrained(merged)
+            del model
+            gc.collect()
+            torch.cuda.empty_cache()
+            llm = LLM(model=merged, dtype="bfloat16", generation_config="vllm",
+                      gpu_memory_utilization=gpu_memory_utilization)
+        else:
+            llm = LLM(model=model_name, revision=revision, tokenizer_revision=revision, dtype="bfloat16",
+                      generation_config="vllm", gpu_memory_utilization=gpu_memory_utilization)
+        for i in range(0, len(todo), batch_size):
+            batch = todo[i: i + batch_size]
+            outputs = llm.generate([build_prompt(tok, r["question"]) for r in batch], params, use_tqdm=False)
+            yield [(r, o.outputs[0].text, len(o.outputs[0].token_ids)) for r, o in zip(batch, outputs)]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--tag", required=True, help="checkpoint label, e.g. S0 or S1_seed13")
+    ap.add_argument("--adapter", default=None, help="LoRA adapter directory (omit for S_0)")
+    ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--summary", type=Path, default=None, help="default: <out>.summary.json")
+    ap.add_argument("--split", default="dev", choices=["dev", "test"])
+    ap.add_argument("--backend", default="hf", choices=["hf", "vllm"])
+    ap.add_argument("--batch-size", type=int, default=None, help="default: 16 for hf, 200 for vllm")
+    ap.add_argument("--gpu-memory-utilization", type=float, default=0.85, help="vllm backend only")
+    ap.add_argument("--limit", type=int, default=None, help="first N problems only (pipeline tests)")
+    add_model_args(ap)
+    args = ap.parse_args()
+
+    check_prompt_template()
+    cfg = load_config()
+    ev = cfg["evaluation"]
+    if ev["decoding"] != "greedy":
+        raise ValueError("config evaluation.decoding is not greedy")
+    model_name, revision = student_from_args(args, cfg)
+    dtype = pick_dtype(torch, args.dtype)
+    batch_size = args.batch_size or (200 if args.backend == "vllm" else 16)
+
+    rows = load_dev_rows() if args.split == "dev" else load_test_rows()
+    if args.limit:
+        rows = rows[: args.limit]
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    done = {r["problem_id"] for r in read_jsonl_resumable(args.out)}
+    todo = [r for r in rows if r["problem_id"] not in done]
+    print(f"[{args.tag}] {args.split}: {len(rows)} problems, {len(done)} already done, {len(todo)} to run, "
+          f"backend={args.backend}, dtype={dtype}")
+
+    tok = load_tokenizer(model_name, revision)
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+    t0 = time.time()
+    n_done = 0
+    if todo:
+        if args.backend == "vllm":
+            batches = generate_vllm(todo, tok, model_name, revision, args.adapter, ev["max_new_tokens"], batch_size,
+                                    args.gpu_memory_utilization)
+        else:
+            batches = generate_hf(todo, tok, model_name, revision, dtype, args.adapter, ev["max_new_tokens"], batch_size)
+        for batch in batches:
+            for r, text, n_out in batch:
+                append_jsonl(args.out, score_output(r, args.tag, text, n_out, ev["max_new_tokens"]))
+            n_done += len(batch)
+            print(f"[{args.tag}] {n_done}/{len(todo)}  {time.time() - t0:.0f}s", flush=True)
+    elapsed = time.time() - t0
+
+    wanted = {x["problem_id"] for x in rows}
+    results = [r for r in read_jsonl_resumable(args.out) if r["problem_id"] in wanted]
+    if len(results) != len(rows):
+        raise RuntimeError(f"{args.out} has {len(results)} of {len(rows)} problems")
+    labels = load_capability_labels() if args.split == "dev" else None
+    summary = {
+        "checkpoint": args.tag,
+        "split": args.split,
+        "backend": args.backend,
+        "model": model_name,
+        "revision": revision,
+        "adapter": args.adapter,
+        "dtype": "bfloat16" if args.backend == "vllm" else str(dtype).replace("torch.", ""),
+        **summarize(results, labels),
+        "decoding": {"do_sample": False, "max_new_tokens": ev["max_new_tokens"], "repetition_penalty": 1.0,
+                     "prompt_version": ev["prompt_version"]},
+        "batch_size": batch_size,
+        "limit": args.limit,
+        "elapsed_seconds_this_run": round(elapsed, 1),
+        "problems_this_run": len(todo),
+        "peak_gpu_memory_gb": round(torch.cuda.max_memory_allocated() / 2**30, 2) if torch.cuda.is_available() else None,
+        "environment": environment_info(torch),
+    }
+    summary_path = args.summary or args.out.with_suffix(".summary.json")
+    write_json(summary_path, summary)
+    print(f"[{args.tag}] accuracy {summary['accuracy']:.4f}  lenient {summary['lenient_accuracy']:.4f}  "
+          f"format {summary['format_compliance']:.4f}  mean_len {summary['mean_output_tokens']:.1f}  -> {summary_path}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+==================================================
+FILE: scripts\select_b2_random.py
+==================================================
+from selection_common import parser_for, run
+
+def main():
+    p=parser_for("B2")
+    a=p.parse_args()
+    if False and not a.scores: p.error("--scores is required")
+    run("B2","random",a)
+
+if __name__=="__main__": main()
+
+
+==================================================
+FILE: scripts\select_b3_heuristic.py
+==================================================
+from selection_common import parser_for, run
+
+def main():
+    p=parser_for("B3")
+    a=p.parse_args()
+    if False and not a.scores: p.error("--scores is required")
+    run("B3","shortest",a)
+
+if __name__=="__main__": main()
+
+
+==================================================
+FILE: scripts\select_b4_static.py
+==================================================
+from selection_common import parser_for, run
+
+def main():
+    p=parser_for("B4")
+    a=p.parse_args()
+    if True and not a.scores: p.error("--scores is required")
+    run("B4","static",a)
+
+if __name__=="__main__": main()
+
+
+==================================================
+FILE: scripts\select_b5_dynamic.py
+==================================================
+from selection_common import parser_for, run
+
+def main():
+    p=parser_for("B5")
+    a=p.parse_args()
+    if True and not a.scores: p.error("--scores is required")
+    run("B5","dynamic",a)
+
+if __name__=="__main__": main()
+
+
+==================================================
+FILE: scripts\validate_selection_log.py
+==================================================
+"""
+Validate a selection log (JSONL) against schemas/selection_log_schema.json.
+
+Extra checks beyond the schema:
+  - selection records: problem_id must be in D_pool (if --pool is given or splits/d_pool_ids.txt exists)
+  - selection records: trajectory_id must start with problem_id
+
+Usage:
+  python3 scripts/validate_selection_log.py LOG.jsonl [--pool splits/d_pool_ids.txt]
+
+Exit code 0 if every line is valid, 1 otherwise.
+"""
+
+from pathlib import Path
+import argparse
+import json
+import sys
+
+from jsonschema import Draft202012Validator
+
+
+BASE = Path(__file__).resolve().parents[1]
+SCHEMA_FILE = BASE / "schemas" / "selection_log_schema.json"
+DEFAULT_POOL = BASE / "splits" / "d_pool_ids.txt"
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("log", type=Path)
+    parser.add_argument("--pool", type=Path, default=None)
+    args = parser.parse_args()
+
+    schema = json.loads(SCHEMA_FILE.read_text(encoding="utf-8"))
+    Draft202012Validator.check_schema(schema)
+    validator = Draft202012Validator(schema)
+
+    pool_file = args.pool or (DEFAULT_POOL if DEFAULT_POOL.exists() else None)
+    pool = set(pool_file.read_text(encoding="utf-8").split()) if pool_file else None
+    if pool is None:
+        print("[WARN] No D_pool file; skipping D_pool membership check")
+
+    n_errors = 0
+    n_lines = 0
+
+    with args.log.open("r", encoding="utf-8") as f:
+        for line_no, line in enumerate(f, start=1):
+            if not line.strip():
+                continue
+            n_lines += 1
+            errors = []
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError as e:
+                errors.append(f"invalid JSON: {e}")
+                record = None
+
+            if record is not None:
+                schema_errors = list(validator.iter_errors(record))
+                if schema_errors:
+                    # oneOf errors are noisy; report the branch matching record_type
+                    branch = {"selection": "selection", "checkpoint": "checkpoint"}.get(record.get("record_type"))
+                    if branch:
+                        sub = Draft202012Validator({**schema["$defs"][branch], "$defs": schema["$defs"]})
+                        errors += [f"{'/'.join(map(str, e.path)) or '<root>'}: {e.message}" for e in sub.iter_errors(record)]
+                    else:
+                        errors.append(f"record_type must be 'selection' or 'checkpoint', got {record.get('record_type')!r}")
+
+                if record.get("record_type") == "selection":
+                    pid, tid = record.get("problem_id"), record.get("trajectory_id")
+                    if pool is not None and pid not in pool:
+                        errors.append(f"problem_id {pid} not in D_pool")
+                    if isinstance(tid, str) and isinstance(pid, str) and not tid.startswith(pid):
+                        errors.append(f"trajectory_id {tid} does not start with problem_id {pid}")
+
+            if errors:
+                n_errors += 1
+                for e in errors:
+                    print(f"[FAIL] line {line_no}: {e}")
+            else:
+                print(f"[PASS] line {line_no}")
+
+    print()
+    print(f"Lines: {n_lines}  invalid: {n_errors}")
+    sys.exit(1 if n_errors else 0)
+
+
+if __name__ == "__main__":
+    main()
+
+
+==================================================
+FILE: scripts\student_common.py
+==================================================
+"""
+Shared helpers for Student evaluation, training and NLL scoring (Task 5 smoke test, reused in Task 7).
+
+Everything that must be identical across scripts lives here:
+  - paths and frozen values read from config/experiment_config.json;
+  - prompt construction (prompt v1, Qwen chat template), shared with Teacher generation;
+  - tokenization of (prompt, response) pairs with the response-only loss mask;
+  - model loading (base model at the pinned revision, optional LoRA adapter) and dtype policy.
+
+Run all scripts from experiments/week2September/manual/.
+"""
+
+import ast
+import hashlib
+import json
+import platform
+import sys
+from pathlib import Path
+
+MANUAL_DIR = Path(__file__).resolve().parent.parent
+CONFIG_PATH = MANUAL_DIR / "config" / "experiment_config.json"
+GSM8K_TRAIN = MANUAL_DIR / "data" / "raw" / "gsm8k_train.jsonl"
+GSM8K_TEST = MANUAL_DIR / "data" / "raw" / "gsm8k_test.jsonl"
+CAPABILITY_LABELS = MANUAL_DIR / "data" / "supplement" / "supplement_annotations_v2.jsonl"
+DEV_IDS = MANUAL_DIR / "splits" / "d_dev_ids.txt"
+TEST_IDS = MANUAL_DIR / "splits" / "d_test_ids.txt"
+# Official pool (Task 6, task6_decisions.md): default for Task 7 onwards.
+POOL_VERIFIED = MANUAL_DIR / "trajectory" / "pool" / "pool_v1_verified.jsonl"
+# Preliminary pool (batch_100, HF): used by the Task 5 smoke test only; pass it explicitly to reproduce it.
+POOL_PRELIMINARY = MANUAL_DIR / "trajectory" / "pool" / "batch_100_teacher_verified.jsonl"
+SMOKE_DIR = MANUAL_DIR / "reports" / "task5" / "smoke_test"
+
+# Same template the Teacher was prompted with (prompt v1). Copied verbatim from
+# scripts/generate_teacher_trajectories_batch.py:PROMPT_TEMPLATE; check_prompt_template() guards drift.
+PROMPT_TEMPLATE = """Solve the following math problem.
+
+Provide a concise but complete reasoning trace followed by the final answer.
+
+Problem:
+{question}
+
+Return exactly:
+
+REASONING:
+<step-by-step reasoning>
+
+ANSWER:
+<final answer>"""
+
+IGNORE_INDEX = -100
+
+
+def check_prompt_template():
+    """Fail if the Teacher generation script's template differs from ours."""
+    src = (MANUAL_DIR / "scripts" / "generate_teacher_trajectories_batch.py").read_text(encoding="utf-8")
+    if 'PROMPT_TEMPLATE = """' + PROMPT_TEMPLATE + '"""' not in src:
+        raise RuntimeError("PROMPT_TEMPLATE differs from generate_teacher_trajectories_batch.py")
+
+
+def load_config():
+    with CONFIG_PATH.open(encoding="utf-8") as f:
+        return json.load(f)
+
+
+def sha256_file(path):
+    h = hashlib.sha256()
+    with Path(path).open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def read_jsonl(path):
+    with Path(path).open(encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def append_jsonl(path, row):
+    with Path(path).open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def write_json(path, obj):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    with Path(path).open("w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+
+def load_dev_rows():
+    """D_dev problems in d_dev_ids.txt order: problem_id, question, ground_truth."""
+    ids = [x.strip() for x in DEV_IDS.read_text(encoding="utf-8").splitlines() if x.strip()]
+    by_id = {r["problem_id"]: r for r in read_jsonl(GSM8K_TRAIN)}
+    missing = [i for i in ids if i not in by_id]
+    if missing:
+        raise ValueError(f"{len(missing)} D_dev ids not found in {GSM8K_TRAIN}")
+    return [by_id[i] for i in ids]
+
+
+def load_test_rows():
+    """D_test problems in d_test_ids.txt order. Reporting only: never for selection, tuning or any design decision."""
+    ids = [x.strip() for x in TEST_IDS.read_text(encoding="utf-8").splitlines() if x.strip()]
+    by_id = {r["problem_id"]: r for r in read_jsonl(GSM8K_TEST)}
+    missing = [i for i in ids if i not in by_id]
+    if missing:
+        raise ValueError(f"{len(missing)} D_test ids not found in {GSM8K_TEST}")
+    return [by_id[i] for i in ids]
+
+
+def load_capability_labels():
+    """Manual capability labels of D_dev: {problem_id: [capability]}, supplement problems only."""
+    dev = set(DEV_IDS.read_text(encoding="utf-8").split())
+    rows = read_jsonl(CAPABILITY_LABELS)
+    if any(r["problem_id"] not in dev for r in rows):
+        raise ValueError(f"{CAPABILITY_LABELS} has problems outside D_dev")
+    return {r["problem_id"]: r["capabilities_manual"] for r in rows}
+
+
+def read_jsonl_resumable(path):
+    """Rows of an append-only file; a line cut off by an interrupted run is dropped from the file."""
+    path = Path(path)
+    if not path.exists():
+        return []
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+    rows = []
+    for i, line in enumerate(lines):
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            if i != len(lines) - 1:
+                raise
+            path.write_text("".join(lines[:-1]), encoding="utf-8")
+            print(f"[resume] dropped a truncated last line of {path}")
+    return rows
+
+
+def load_pool(path=POOL_VERIFIED):
+    """Verified pool (default: official pool v1); every row must be verification_status == valid."""
+    rows = read_jsonl(path)
+    for r in rows:
+        meta = r["metadata"]
+        if isinstance(meta, str):  # some preliminary-pool rows store metadata as a Python-repr string
+            meta = ast.literal_eval(meta)
+            r["metadata"] = meta
+        if meta.get("verification_status") != "valid":
+            raise ValueError(f"non-valid trajectory in pool: {r['trajectory_id']}")
+    held_out = set(DEV_IDS.read_text(encoding="utf-8").split()) | set(TEST_IDS.read_text(encoding="utf-8").split())
+    leaked = sorted({r["problem_id"] for r in rows} & held_out)
+    if leaked:
+        raise ValueError(f"pool problems found in D_dev/D_test: {leaked[:5]}")
+    return rows
+
+
+def build_prompt(tokenizer, question):
+    """Chat-formatted prompt v1, ending with the assistant generation header."""
+    messages = [{"role": "user", "content": PROMPT_TEMPLATE.format(question=question)}]
+    return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+
+
+def response_text(raw_generation):
+    """Training/scoring target: the Teacher's raw output (REASONING: ... ANSWER: ...)."""
+    return raw_generation.strip()
+
+
+def encode_example(tokenizer, question, raw_generation, add_eos=True):
+    """
+    Token ids for prompt + response, labels masked (-100) on the prompt.
+
+    Prompt and response are tokenized separately, which is exactly what the model sees at
+    generation time. The end-of-turn token is appended to the supervised part when add_eos,
+    so the Student learns to stop. n_traj counts only the trajectory tokens (no end-of-turn),
+    matching L_bar in the config.
+    """
+    prompt_ids = tokenizer(build_prompt(tokenizer, question), add_special_tokens=False)["input_ids"]
+    traj_ids = tokenizer(response_text(raw_generation), add_special_tokens=False)["input_ids"]
+    resp_ids = traj_ids + ([end_of_turn_id(tokenizer)] if add_eos else [])
+    input_ids = prompt_ids + resp_ids
+    labels = [IGNORE_INDEX] * len(prompt_ids) + resp_ids
+    return {
+        "input_ids": input_ids,
+        "labels": labels,
+        "n_prompt": len(prompt_ids),
+        "n_traj": len(traj_ids),
+        "n_supervised": len(resp_ids),
+    }
+
+
+def end_of_turn_id(tokenizer):
+    tid = tokenizer.convert_tokens_to_ids("<|im_end|>")
+    if tid is None or tid == tokenizer.unk_token_id:
+        raise ValueError("tokenizer has no <|im_end|> token")
+    return tid
+
+
+def pick_dtype(torch, requested="auto"):
+    """bf16 when the GPU supports it (config), otherwise fp32 (fp16 is avoided: Qwen2.5 can overflow)."""
+    if requested != "auto":
+        return {"bf16": torch.bfloat16, "fp32": torch.float32, "fp16": torch.float16}[requested]
+    if torch.cuda.is_available() and torch.cuda.is_bf16_supported():
+        return torch.bfloat16
+    return torch.float32
+
+
+def load_tokenizer(model_name, revision):
+    from transformers import AutoTokenizer
+    tok = AutoTokenizer.from_pretrained(model_name, revision=revision)
+    tok.padding_side = "left"
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
+    return tok
+
+
+def load_model(model_name, revision, dtype, adapter=None, merge=True):
+    """Base Student at the pinned revision, optionally with a LoRA adapter (merged for speed)."""
+    import torch
+    from transformers import AutoModelForCausalLM
+    model = AutoModelForCausalLM.from_pretrained(model_name, revision=revision, dtype=dtype)
+    if adapter:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, adapter)
+        if merge:
+            model = model.merge_and_unload()
+    model.to("cuda" if torch.cuda.is_available() else "cpu")
+    model.eval()
+    return model
+
+
+def student_from_args(args, cfg):
+    """(model_name, revision) honouring --model overrides used only for pipeline tests."""
+    if args.model:
+        return args.model, args.revision
+    return cfg["student"]["model"], cfg["student"]["revision"]
+
+
+def environment_info(torch):
+    import transformers
+    info = {
+        "python": sys.version.split()[0],
+        "platform": platform.platform(),
+        "torch": torch.__version__,
+        "transformers": transformers.__version__,
+        "cuda": torch.version.cuda,
+        "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+        "bf16_supported": bool(torch.cuda.is_available() and torch.cuda.is_bf16_supported()),
+    }
+    try:
+        import peft
+        info["peft"] = peft.__version__
+    except ImportError:
+        pass
+    return info
+
+
+def add_model_args(parser):
+    parser.add_argument("--model", default=None,
+                        help="override the Student model (pipeline tests only; default: config student.model)")
+    parser.add_argument("--revision", default=None, help="revision for --model")
+    parser.add_argument("--dtype", default="auto", choices=["auto", "bf16", "fp32", "fp16"])
+
+
+==================================================
+FILE: scripts\eval_metrics.py
+==================================================
+import sys
+from pathlib import Path
+from collections import defaultdict
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from answer_utils import evaluate_output, split_response, answers_match
+
+def score_output(row, tag, raw_output, n_output_tokens, max_new_tokens=None):
+    _, answer, parse_status = split_response(raw_output)
+    status = evaluate_output(raw_output, row["ground_truth"])
+    return {
+        "problem_id": row["problem_id"], "checkpoint": tag,
+        "ground_truth": str(row["ground_truth"]), "raw_output": raw_output,
+        "parsed_answer": answer, "verification_status": status,
+        "correct": status == "valid",
+        "lenient_correct": bool(answers_match(raw_output, row["ground_truth"])),
+        "format_compliant": parse_status == "parsed",
+        "output_tokens": int(n_output_tokens),
+        "hit_max_new_tokens": bool(max_new_tokens is not None and int(n_output_tokens) >= int(max_new_tokens)),
+    }
+
+def summarize(results, capability_labels=None):
+    if not results:
+        raise ValueError("Cannot summarize an empty evaluation set")
+    n = len(results)
+    correct = [bool(r.get("correct", r.get("verification_status") == "valid")) for r in results]
+    out = {
+        "n_problems": n,
+        "accuracy": sum(correct) / n,
+        "lenient_accuracy": sum(bool(r.get("lenient_correct", False)) for r in results) / n,
+        "format_compliance": sum(bool(r.get("format_compliant", False)) for r in results) / n,
+        "mean_output_tokens": sum(int(r.get("output_tokens", 0)) for r in results) / n,
+    }
+    buckets = defaultdict(list)
+    if capability_labels:
+        for r, ok in zip(results, correct):
+            for cap in capability_labels.get(r["problem_id"], []):
+                buckets[cap].append(ok)
+    out["capability_accuracy"] = {
+        k: {"n": len(v), "accuracy": sum(v) / len(v)}
+        for k, v in sorted(buckets.items()) if v
+    }
+    return out

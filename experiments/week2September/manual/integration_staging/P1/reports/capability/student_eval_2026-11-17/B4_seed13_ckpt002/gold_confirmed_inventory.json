@@ -1,0 +1,308 @@
+{
+  "annotation_version": "vNext-candidate-2026-11-16-r1",
+  "split": "D_dev",
+  "records": [
+    {
+      "problem_id": "gsm8k_train_00325",
+      "capabilities": [
+        "division",
+        "fraction",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_00761",
+      "capabilities": [
+        "division",
+        "fraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_00769",
+      "capabilities": [
+        "multiplication",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_01013",
+      "capabilities": [
+        "addition",
+        "fraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_01280",
+      "capabilities": [
+        "addition",
+        "fraction",
+        "subtraction"
+      ],
+      "difficulty": "easy",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_01334",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "ratio",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_01600",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "ratio"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_02342",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "hard",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_02754",
+      "capabilities": [
+        "addition",
+        "fraction",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_02858",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_02919",
+      "capabilities": [
+        "fraction",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_02997",
+      "capabilities": [
+        "addition",
+        "fraction",
+        "subtraction"
+      ],
+      "difficulty": "easy",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_03016",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "percentage"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_03125",
+      "capabilities": [
+        "addition",
+        "percentage"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_03140",
+      "capabilities": [
+        "addition",
+        "division",
+        "percentage"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_03263",
+      "capabilities": [
+        "addition",
+        "division",
+        "fraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_03390",
+      "capabilities": [
+        "addition",
+        "division",
+        "fraction",
+        "multiplication",
+        "ratio"
+      ],
+      "difficulty": "hard",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_04426",
+      "capabilities": [
+        "division",
+        "multiplication",
+        "ratio",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_04617",
+      "capabilities": [
+        "addition",
+        "division",
+        "multiplication",
+        "ratio"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_04862",
+      "capabilities": [
+        "addition",
+        "multiplication",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_05194",
+      "capabilities": [
+        "addition",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "easy",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    },
+    {
+      "problem_id": "gsm8k_train_05715",
+      "capabilities": [
+        "addition",
+        "fraction",
+        "multiplication",
+        "percentage",
+        "subtraction"
+      ],
+      "difficulty": "medium",
+      "human_review_status": "CONFIRMED",
+      "human_reviewer": "Project team (chat confirmation)",
+      "gold_source": "gold_vnext_frozen_2026-11-16_r1/supplement_annotations_vnext.jsonl",
+      "annotation_version": "vNext-candidate-2026-11-16-r1"
+    }
+  ],
+  "source": {
+    "gold_batch_records": 100,
+    "gold_supplement_records": 85,
+    "adjudication_csv_records": 22,
+    "human_confirmed_d_dev_records": 22,
+    "excluded_adjudication_status_counts": {},
+    "gold_batch_sha256": "5b655ab6705fa8d6178871d35f30712b90058354a29952b9e51e88e0108c8a9f",
+    "gold_supplement_sha256": "8c41bc4e5c237a289dfcda92fcc691bf84b0ff5552ea8c8249c3947d3725ae26",
+    "adjudication_csv_sha256": "f9a8d55f5079ec94ad31cb0c933a6a0d00409cce0815e47fbefd80c1354224ab"
+  }
+}

@@ -1,0 +1,86 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261117215334
+Username: KOBALTZ\PC - NGHI
+RunAs User: KOBALTZ\PC - NGHI
+Configuration Name: 
+Machine: KOBALTZ (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 35292
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\reports\p1p2_integration\integration_tests\existing_module_tests_20261117.txt
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "=== P1P2 MODULE TESTS ==="
+=== P1P2 MODULE TESTS ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python -m unittest discover -s tests -p "test_p1p2_*.py" -v
+test_registered_seeds_match_registry (test_p1p2_unified_config.UnifiedRunConfigTests.test_registered_seeds_match_registry) ... ok
+test_round_and_checkpoint_mapping (test_p1p2_unified_config.UnifiedRunConfigTests.test_round_and_checkpoint_mapping) ... ok
+test_schema_and_version (test_p1p2_unified_config.UnifiedRunConfigTests.test_schema_and_version) ... ok
+test_training_parameters_are_not_duplicated (test_p1p2_unified_config.UnifiedRunConfigTests.test_training_parameters_are_not_duplicated) ... ok
+
+----------------------------------------------------------------------
+Ran 55 tests in 0.516s
+
+OK
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) $P1P2TestExit = $LASTEXITCODE
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "P1P2_MODULE_TEST_EXIT=$P1P2TestExit"
+P1P2_MODULE_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "=== CAPABILITY EVALUATOR PUBLICATION TEST ==="
+=== CAPABILITY EVALUATOR PUBLICATION TEST ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python -m unittest discover -s tests -p "test_capability_eval_publication.py" -v
+
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) $CapabilityTestExit = $LASTEXITCODE
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "CAPABILITY_PUBLICATION_TEST_EXIT=$CapabilityTestExit"
+CAPABILITY_PUBLICATION_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "=== LEGACY CAPABILITY EVALUATOR TEST ==="
+=== LEGACY CAPABILITY EVALUATOR TEST ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) python scripts\test_capability_eval.py
+
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) $LegacyTestExit = $LASTEXITCODE
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "CAPABILITY_EVALUATOR_TEST_EXIT=$LegacyTestExit"
+CAPABILITY_EVALUATOR_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "=== TEST SUMMARY ==="
+=== TEST SUMMARY ===
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "P1P2_MODULE_TEST_EXIT=$P1P2TestExit"
+P1P2_MODULE_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "CAPABILITY_PUBLICATION_TEST_EXIT=$CapabilityTestExit"
+CAPABILITY_PUBLICATION_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Write-Host "CAPABILITY_EVALUATOR_TEST_EXIT=$LegacyTestExit"
+CAPABILITY_EVALUATOR_TEST_EXIT=0
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+PS C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual>
+(.venv) Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20261117215337
+**********************

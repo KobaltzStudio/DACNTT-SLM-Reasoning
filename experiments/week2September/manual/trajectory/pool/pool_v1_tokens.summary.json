@@ -1,6 +1,6 @@
 {
   "pool": "trajectory/pool/pool_v1_verified.jsonl",
-  "pool_sha256": "a982a8efebc4e6bd1525ec021935cb5af6219d2f6f20721a3c145876d60e4b4e",
+  "pool_sha256": "95f34cff848bfbd16305e5f0ecc2656525dc1e319ca2b1a404f9b75c8029cd04",
   "tokenizer": "Qwen/Qwen2.5-1.5B-Instruct",
   "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
   "n_trajectories": 4353,

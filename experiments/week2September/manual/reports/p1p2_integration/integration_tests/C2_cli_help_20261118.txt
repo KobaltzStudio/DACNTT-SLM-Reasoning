@@ -1,0 +1,31 @@
+usage: run_p1_p2.py [-h]
+                    (--method {B2,B3,B4,B5,P1-DEFICIT,P1P2} | --methods {B2,B3,B4,B5,P1-DEFICIT,P1P2} [{B2,B3,B4,B5,P1-DEFICIT,P1P2} ...])
+                    (--seed SEED | --seeds SEEDS [SEEDS ...])
+                    [--round {1,2,3} | --rounds ROUNDS [ROUNDS ...] |
+                    --from-checkpoint {S0,S1,S2}] [--to-checkpoint {S1,S2,S3}]
+                    [--resume] [--dry-run] [--manual-root MANUAL_ROOT]
+                    [--backend {hf,vllm}] [--micro-batch MICRO_BATCH]
+                    [--nll-batch NLL_BATCH] [--eval-batch EVAL_BATCH]
+                    [--dtype {auto,bf16,fp32,fp16}]
+
+Unified P1/P2 pipeline controller; user rounds identify target checkpoints
+S1-S3.
+
+options:
+  -h, --help            show this help message and exit
+  --method {B2,B3,B4,B5,P1-DEFICIT,P1P2}
+  --methods {B2,B3,B4,B5,P1-DEFICIT,P1P2} [{B2,B3,B4,B5,P1-DEFICIT,P1P2} ...]
+  --seed SEED
+  --seeds SEEDS [SEEDS ...]
+  --round {1,2,3}
+  --rounds ROUNDS [ROUNDS ...]
+  --from-checkpoint {S0,S1,S2}
+  --to-checkpoint {S1,S2,S3}
+  --resume
+  --dry-run
+  --manual-root MANUAL_ROOT
+  --backend {hf,vllm}
+  --micro-batch MICRO_BATCH
+  --nll-batch NLL_BATCH
+  --eval-batch EVAL_BATCH
+  --dtype {auto,bf16,fp32,fp16}

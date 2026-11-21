@@ -1,0 +1,44 @@
+﻿B4 SEED 13 CHECKPOINT PROVENANCE AUDIT
+CREATED: 2026-11-18T10:06:46.6350027+09:00
+MANUAL_ROOT: C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual
+STAGE_ROOT: C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1
+
+CHECKPOINT=S1
+STATUS=PASS
+ARCHIVE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_001\student_ckpt_001.zip
+ARCHIVE_SHA256=851742C95CDC1DBA0333112F35F2F32D7E8CFE2E4235AE2C5DDC535BC2955615
+ZIP_ENTRIES_VALID=True
+SEED=13
+MODEL=Qwen/Qwen2.5-1.5B-Instruct
+REVISION=989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+PARENT=student_ckpt_000
+TRAIN_SET_SHA256=614816f15b980f9958dd1747a3c0773171d8112ad167e116b7a7651d9623a006
+TRAIN_SET_MATCHES=1
+TRAIN_SET_PATHS=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\task7\B4\seed_13\round_000\train_set.json
+
+CHECKPOINT=S2
+STATUS=PASS
+ARCHIVE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_002\student_ckpt_002.zip
+ARCHIVE_SHA256=8AE764306B33F9456FFD18B09B4824784A87B1E827D15178E8B26BDCBE307F6F
+ZIP_ENTRIES_VALID=True
+SEED=13
+MODEL=Qwen/Qwen2.5-1.5B-Instruct
+REVISION=989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+PARENT=C:\KLTN-SLM-Reasoning\experiments\week2September\manual\models\task7\B4\seed_13\student_ckpt_001
+TRAIN_SET_SHA256=cb82cb58ed58a92a8fd0dd33b09322e99191ecd048daf63a36b5ea4182898e1a
+TRAIN_SET_MATCHES=1
+TRAIN_SET_PATHS=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\task7\B4\seed_13\round_001\train_set.json
+
+CHECKPOINT=S3
+STATUS=PASS
+ARCHIVE=C:\Users\PC - NGHI\Desktop\Pipeline\P2\integration_staging\P1\models\task7\B4\seed_13\student_ckpt_003\student_ckpt_003.zip
+ARCHIVE_SHA256=CB55D9D34244F24964882F71A5654744D3D7CAC8CA2ED6D7EBE77DEB36C968DF
+ZIP_ENTRIES_VALID=True
+SEED=13
+MODEL=Qwen/Qwen2.5-1.5B-Instruct
+REVISION=989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+PARENT=C:\KLTN-SLM-Reasoning\experiments\week2September\manual\models\task7\B4\seed_13\student_ckpt_002
+TRAIN_SET_SHA256=f16cb78cbdaf4ce5280d79c552adab5ec57f56ca26a3796b02995f0de2441e0e
+TRAIN_SET_MATCHES=1
+TRAIN_SET_PATHS=C:\Users\PC - NGHI\Desktop\Pipeline\P2\experiments\week2September\manual\integration_staging\P1\reports\task7\B4\seed_13\round_002\train_set.json
+
