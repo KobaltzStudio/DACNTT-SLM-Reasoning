@@ -1,56 +1,42 @@
-#!/usr/bin/env python3
-"""
-Per-problem scoring and summary metrics of a Student evaluation (analysis_plan.md section 6). No torch.
+import sys
+from pathlib import Path
+from collections import defaultdict
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from answer_utils import evaluate_output, split_response, answers_match
 
-Strict accuracy (primary), lenient accuracy (registered secondary, T7-5) and format compliance are always
-reported together. Accuracy per capability uses the manual labels, which exist only for the 85 supplement
-problems of D_dev (task5_decisions.md, consequence of #7).
-"""
-from answer_utils import answers_match, evaluate_output
-
-
-def score_output(problem, tag, text, n_output_tokens, max_new_tokens):
+def score_output(row, tag, raw_output, n_output_tokens, max_new_tokens=None):
+    _, answer, parse_status = split_response(raw_output)
+    status = evaluate_output(raw_output, row["ground_truth"])
     return {
-        "problem_id": problem["problem_id"],
-        "checkpoint": tag,
-        "status": evaluate_output(text, problem["ground_truth"]),
-        "lenient_correct": answers_match(text, problem["ground_truth"]),
-        "ground_truth": problem["ground_truth"],
-        "n_output_tokens": n_output_tokens,
-        "hit_max_tokens": n_output_tokens >= max_new_tokens,
-        "raw_output": text,
+        "problem_id": row["problem_id"], "checkpoint": tag,
+        "ground_truth": str(row["ground_truth"]), "raw_output": raw_output,
+        "parsed_answer": answer, "verification_status": status,
+        "correct": status == "valid",
+        "lenient_correct": bool(answers_match(raw_output, row["ground_truth"])),
+        "format_compliant": parse_status == "parsed",
+        "output_tokens": int(n_output_tokens),
+        "hit_max_new_tokens": bool(max_new_tokens is not None and int(n_output_tokens) >= int(max_new_tokens)),
     }
-
-
-def _rates(results):
-    n = len(results)
-    return {
-        "n_problems": n,
-        "accuracy": sum(r["status"] == "valid" for r in results) / n,
-        "lenient_accuracy": sum(r["lenient_correct"] for r in results) / n,
-        "format_compliance": sum(r["status"] != "invalid_format" for r in results) / n,
-    }
-
 
 def summarize(results, capability_labels=None):
     if not results:
-        raise ValueError("no results to summarize")
+        raise ValueError("Cannot summarize an empty evaluation set")
     n = len(results)
-    summary = {
-        **_rates(results),
-        # same value as lenient_accuracy, under the key the Task 5 smoke summaries use
-        "lenient_accuracy_exploratory": sum(r["lenient_correct"] for r in results) / n,
-        "n_valid": sum(r["status"] == "valid" for r in results),
-        "n_invalid_answer": sum(r["status"] == "invalid_answer" for r in results),
-        "n_invalid_format": sum(r["status"] == "invalid_format" for r in results),
-        "mean_output_tokens": sum(r["n_output_tokens"] for r in results) / n,
-        "n_hit_max_tokens": sum(r["hit_max_tokens"] for r in results),
+    correct = [bool(r.get("correct", r.get("verification_status") == "valid")) for r in results]
+    out = {
+        "n_problems": n,
+        "accuracy": sum(correct) / n,
+        "lenient_accuracy": sum(bool(r.get("lenient_correct", False)) for r in results) / n,
+        "format_compliance": sum(bool(r.get("format_compliant", False)) for r in results) / n,
+        "mean_output_tokens": sum(int(r.get("output_tokens", 0)) for r in results) / n,
     }
+    buckets = defaultdict(list)
     if capability_labels:
-        labelled = [r for r in results if r["problem_id"] in capability_labels]
-        capabilities = sorted({c for r in labelled for c in capability_labels[r["problem_id"]]})
-        summary["n_problems_with_capability_labels"] = len(labelled)
-        summary["by_capability"] = {
-            c: _rates([r for r in labelled if c in capability_labels[r["problem_id"]]]) for c in capabilities
-        }
-    return summary
+        for r, ok in zip(results, correct):
+            for cap in capability_labels.get(r["problem_id"], []):
+                buckets[cap].append(ok)
+    out["capability_accuracy"] = {
+        k: {"n": len(v), "accuracy": sum(v) / len(v)}
+        for k, v in sorted(buckets.items()) if v
+    }
+    return out

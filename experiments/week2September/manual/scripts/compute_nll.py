@@ -47,6 +47,9 @@ def main():
     add_model_args(ap)
     args = ap.parse_args()
 
+    summary_path = args.out.with_suffix(".summary.json")
+    if args.out.exists() or summary_path.exists():
+        raise FileExistsError(f"refusing to overwrite NLL artifact: {args.out} or {summary_path}")
     check_prompt_template()
     cfg = load_config()
     model_name, revision = student_from_args(args, cfg)
