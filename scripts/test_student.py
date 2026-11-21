@@ -1,10 +1,10 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
+MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
 
 print("=" * 60)
-print("QWEN2.5-0.5B-INSTRUCT STUDENT TEST")
+print("QWEN2.5-1.5B-INSTRUCT STUDENT TEST")
 print("=" * 60)
 
 print("PyTorch:", torch.__version__)

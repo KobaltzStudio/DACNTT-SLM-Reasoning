@@ -1,0 +1,69 @@
+@"
+WEEK 2 EXPERIMENTAL SNAPSHOT
+Date: 2026-09-16
+
+MODELS
+Teacher: Qwen2.5-3B-Instruct
+Student: Qwen2.5-1.5B-Instruct
+Dataset: GSM8K
+
+BASELINE
+Teacher accuracy: 87/100 = 87.00%
+Student accuracy: 71/100 = 71.00%
+Teacher-Student accuracy gap: 16.00 percentage points
+
+TEACHER-CORRECT / STUDENT-WRONG
+Questions: 17/100
+Candidate trajectories: 60
+Candidate questions: 12
+
+MULTI-TRAJECTORY
+Questions: 50
+Trajectories per question: 5
+Total trajectories: 250
+Teacher trajectory correct: 161/250 = 64.40%
+Teacher trajectory incorrect: 89/250 = 35.60%
+Null answers: 39/250 = 15.60%
+Best-of-5: 9/50 = 18.00%
+Majority vote: 9/50 = 18.00%
+
+CANDIDATE POOL
+Total: 60
+Correct: 28
+Incorrect: 32
+Null: 11
+
+CANDIDATE DIFFICULTY
+Easy: 50
+Medium: 10
+Hard: 0
+
+ALL TRAJECTORY DIFFICULTY
+Easy: 180
+Medium: 65
+Hard: 5
+
+STUDENT SKILL GAP
+Division: score=10, normalized_gap=0.5882
+Addition: score=7, normalized_gap=0.4118
+Multiplication: score=4, normalized_gap=0.2353
+Percentage: score=3, normalized_gap=0.1765
+Subtraction: score=1, normalized_gap=0.0588
+
+VALIDATION
+Duplicate trajectory keys: 0
+Duplicate candidate keys: 0
+Candidate IDs missing from baseline: 0
+Trajectory question IDs missing from baseline: 0
+
+STATUS
+Automatic trace selection: DEFERRED
+Automatic curriculum: DEFERRED
+SFT smoke test: DEFERRED
+Final experiment summary: DEFERRED
+Reason: method definition, evaluation function, manual selection protocol, paper direction,
+and literature review are not finalized yet.
+
+BACKUP
+experiments/week2September_backup_2026-09-16
+"@ | Set-Content experiments\week2September\results\week2_experimental_snapshot.txt -Encoding UTF8
